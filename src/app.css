@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face { 
+    font-family: "Josefin"; 
+    src: url("../public/assets/JosefinSans-Regular.ttf"); 
+} 
+@font-face { 
+    font-family: "K2D"; 
+    src: url("../public/assets/K2D-Bold.ttf"); 
+}
+
+#base {
+    @apply font-Josefin text-fg-black-15;
+}
+
+#rightSpace {
+    @apply bg-fg-white-95;
+    flex-basis: 26%
+}
+
+#middleSpace {
+    @apply bg-fg-white-95;
+    flex-basis: 48%
+}
+
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden
+}

@@ -1,0 +1,20 @@
+#leftSpace {
+    @apply bg-fg-white-95;
+    flex-basis: 26%
+}
+
+#leftSpaceContent.h-full {
+    height:calc(100% - 3rem)!important;
+}
+
+#individualRecContent.h-full {
+    height:calc(100% - 2.25rem)!important;
+}
+
+#individualCardsContainer.max-h-full {
+    max-height:calc(100% - 2.25rem)!important;
+}
+
+#individualRecContent {
+    height: inherit;
+}
