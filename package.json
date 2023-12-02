@@ -31,6 +31,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-lifecycles-compat": "^3.0.4",
+    "react-split": "^2.0.14",
     "react-split-pane": "^0.1.92",
     "react-style-proptype": "^3.2.2",
     "style-loader": "^3.3.3"
