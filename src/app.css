@@ -21,12 +21,6 @@ html, body {
     @apply font-Josefin text-fg-black-15;
 }
 
-#rightSpace {
-    @apply bg-fg-white-95;
-    flex-basis: 26%
-}
-
-#middleSpace {
-    @apply bg-fg-white-95;
+#middleSpaceContainer {
     flex-basis: 48%
 }

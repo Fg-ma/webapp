@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./leftSpace.css";
-
-import { useState, useEffect } from 'react';
 
 export default function LeftSpace() {
     return (
-        <div id="leftSpace" className="rounded-xl overflow-hidden">
+        <div id="leftSpace" className="rounded-xl overflow-hidden h-4/5">
             <LeftSpaceNav />
             <div id="leftSpaceContentContainer" style={{ height: `calc(100% - 3rem)` }}>
                 <CustomVerticalSplitPane />
@@ -93,13 +91,13 @@ function LeftSpaceNav() {
     return (
         <nav id="leftSelectionBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
             <div className="flex divide-x-2 divide-fg-white-70 h-full">
-                <div className="w-1/3 my-auto grid place-items-center">
+                <div className="w-1/3 my-auto flex justify-center items-center">
                     <button className="text-lg underline-offset-8 underline decoration-fg-primary decoration-2">Individuals</button>
                 </div>
-                <div className="w-1/3 my-auto grid place-items-center">
+                <div className="w-1/3 my-auto flex justify-center items-center">
                     <button className="text-lg">Groups</button>
                 </div>
-                <div className="w-1/3 my-auto grid place-items-center">
+                <div className="w-1/3 my-auto flex justify-center items-center">
                     <button className="text-lg">Organizations</button>
                 </div>
             </div>
@@ -110,76 +108,76 @@ function LeftSpaceNav() {
 function IndividualRecs() {
     return (
         <div id="individualRecs" className="mr-3 h-full overflow-scroll">
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p  className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Jameson Friday</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">Fights Abroad, but are they Our Fight?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Jameson Friday</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Fights Abroad, but are they Our Fight?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Jimmy Page</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">Capital Hill or Crap-ital Hill?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Jimmy Page</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Capital Hill or Crap-ital Hill?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Johnson Black</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">What Should Public Schools be Allowed to Teach?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Johnson Black</p>
+                    <p className="font-K2D text-xs text-fg-black-30">What Should Public Schools be Allowed to Teach?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Sara Goodman</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">How will the New Pope Handle the Growing Schism?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Sara Goodman</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How will the New Pope Handle the Growing Schism?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Pearson Wright</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">Is Partisan-ism Tearing America Apart?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Pearson Wright</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Is Partisan-ism Tearing America Apart?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Wayne Yorick</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">Are Reporters Dangerous or Working with the Government?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Wayne Yorick</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Are Reporters Dangerous or Working with the Government?</p>
                 </div>
             </div>
-            <div class="individualRecCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualRecFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualRecInfo" className="m-2">
-                    <p class="individualRecName" className="font-Josefin text-xl">Sasha Kain</p>
-                    <p class="individualRecCurrentIssue" className="font-K2D text-xs text-fg-black-30">Should America send Relief to Japan?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Sasha Kain</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Should America send Relief to Japan?</p>
                 </div>
             </div>
         </div>
@@ -189,112 +187,112 @@ function IndividualRecs() {
 function IndividualCards() {
     return (
         <div id="individualCards" className="h-full mr-3 overflow-scroll">
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Jameson Friday</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">Fights Abroad, but are they Our Fight?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Jameson Friday</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Fights Abroad, but are they Our Fight?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Jimmy Page</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">Capital Hill or Crap-ital Hill?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Jimmy Page</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Capital Hill or Crap-ital Hill?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Johnson Black</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">What Should Public Schools be Allowed to Teach?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Johnson Black</p>
+                    <p className="font-K2D text-xs text-fg-black-30">What Should Public Schools be Allowed to Teach?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Sara Goodman</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How will the New Pope Handle the Growing Schism?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Sara Goodman</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How will the New Pope Handle the Growing Schism?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Pearson Wright</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">Is Partisan-ism Tearing America Apart?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Pearson Wright</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Is Partisan-ism Tearing America Apart?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Wayne Yorick</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">Are Reporters Dangerous or Working with the Government?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Wayne Yorick</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Are Reporters Dangerous or Working with the Government?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Sasha Kain</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">Should America send Relief to Japan?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Sasha Kain</p>
+                    <p className="font-K2D text-xs text-fg-black-30">Should America send Relief to Japan?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
-            <div class="individualCard" className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
-                <div class="individualFilePic" className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
+            <div className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md">
+                <div className="w-14 h-14 bg-fg-white-85 ml-4 mr-6 rounded-full grid place-items-center">
                     <p>pic</p>
                 </div>
-                <div class="individualInfo" className="m-2">
-                    <p class="individualName" className="font-Josefin text-xl">Paula Anderson</p>
-                    <p class="individualCurrentIssue" className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
+                <div className="m-2">
+                    <p className="font-Josefin text-xl">Paula Anderson</p>
+                    <p className="font-K2D text-xs text-fg-black-30">How do we Address the World Burning?</p>
                 </div>
             </div>
         </div>
