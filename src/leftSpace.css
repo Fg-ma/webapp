@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #leftSpace {
     @apply bg-fg-white-95;
     flex-basis: 26%

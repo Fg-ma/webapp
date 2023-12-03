@@ -4,11 +4,11 @@
 
 @font-face { 
     font-family: "Josefin"; 
-    src: url("../public/assets/JosefinSans-Regular.ttf"); 
+    src: url("../public/assets/fonts/JosefinSans-Regular.ttf"); 
 } 
 @font-face { 
     font-family: "K2D"; 
-    src: url("../public/assets/K2D-Bold.ttf"); 
+    src: url("../public/assets/fonts/K2D-Bold.ttf"); 
 }
 
 html, body {

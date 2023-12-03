@@ -9,6 +9,7 @@ module.exports = {
                 'fg-white-85': '#D9D9D9',
                 'fg-white-70': '#B3B3B3',
                 'fg-black-30': '#4D4D4D',
+                'fg-black-25': '#404040',
                 'fg-black-20': '#333333',
                 'fg-black-15': '#262626'
             },

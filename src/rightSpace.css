@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.newsAffliliateResponses {
+    font-size: 8px;
+    line-height: 12px;
+}
+
+.newsAffResponses {
+    @apply font-K2D text-base text-fg-black-30;
+    font-size: 0.5rem/* 8px */;
+    line-height: 0.75rem/* 12px */;
+}
