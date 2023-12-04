@@ -4,6 +4,7 @@ module.exports = {
         extend: {
             colors: {
                 'fg-primary': '#F56114',
+                'fg-secondary': '#2C92F5',
                 'fg-white-95': '#F3F3F3',
                 'fg-white-90': '#E6E6E6',
                 'fg-white-85': '#D9D9D9',

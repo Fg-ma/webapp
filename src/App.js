@@ -1,7 +1,7 @@
 import React from "react";
-import LeftSpace from "./leftSpace";
-import MiddleSpace from "./middleSpace";
-import RightSpace from "./rightSpace";
+import LeftSpace from "./left/leftSpace";
+import MiddleSpace from "./middle/middleSpace";
+import RightSpace from "./right/rightSpace";
 import PageNav from "./pageNav";
 import './app.css';
 import "./scrollbar.css";
