@@ -1,8 +1,8 @@
 import React from "react";
-import LeftSpace from "./left/leftSpace";
-import MiddleSpace from "./middle/middleSpace";
-import RightSpace from "./right/rightSpace";
-import PageNav from "./middle/pageNav";
+import LeftSpace from "./left/LeftSpace";
+import MiddleSpace from "./middle/MiddleSpace";
+import RightSpace from "./right/RightSpace";
+import PageNav from "./middle/PageNav";
 import './app.css';
 import "./scrollbar.css";
 
