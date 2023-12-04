@@ -4,25 +4,25 @@
 
 #homeButton {
     @apply w-6 h-6 bg-no-repeat bg-center bg-cover;
-    background-image: url("../public/assets/icons/home.svg");
+    background-image: url("../../public/assets/icons/home.svg");
 }
 
 #messagesButton {
     @apply w-6 h-6 bg-no-repeat bg-center bg-cover;
-    background-image: url("../public/assets/icons/messages.svg");
+    background-image: url("../../public/assets/icons/messages.svg");
 }
 
 #dogEarsButton {
     @apply w-6 h-6 bg-no-repeat bg-center bg-cover;
-    background-image: url("../public/assets/icons/dogEars.svg");
+    background-image: url("../../public/assets/icons/dogEars.svg");
 }
 
 #notificationsButton {
     @apply w-6 h-6 bg-no-repeat bg-center bg-cover;
-    background-image: url("../public/assets/icons/notifications.svg");
+    background-image: url("../../public/assets/icons/notifications.svg");
 }
 
 #settingsButton {
     @apply w-6 h-6 bg-no-repeat bg-center bg-cover;
-    background-image: url("../public/assets/icons/settings.svg");
+    background-image: url("../../public/assets/icons/settings.svg");
 }
