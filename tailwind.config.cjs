@@ -17,8 +17,17 @@ module.exports = {
             fontFamily: {
                 Josefin: ["Josefin","sans"],
                 K2D: ["K2D", "sans"]
-            }
+            },
+            backgroundSize: {
+                '125': '125%',
+                '150': '150%',
+                '175': '175%',
+                '200': '200%',
+                '225': '225%',
+                '250': '250%',
+                '350': '350%',
+            },
         },
     },
-    plugins: [],
+    plugins: ["prettier-plugin-tailwindcss"],
 };
