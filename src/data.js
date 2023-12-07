@@ -245,9 +245,9 @@ export const organizations = [
     },
     {
         id: 4,
-        name: "GOP",
+        name: "POTUS",
         currentIssue: "Should the Border be Closed?",
-        stances: "Support 2nd Amendment, Tough on Crime...",
+        stances: "Economic growth, Upholding the constitution...",
     },
     {
         id: 5,
@@ -460,5 +460,142 @@ export const issues = [
         title: "Ensuring Ethical Practices in Artificial Intelligence",
         issueQuestions: "What ethical considerations should be addressed in the development and deployment of artificial intelligence? How can we prevent biases and ensure responsible AI?",
         affResponses: "Alex Mitchell, AI Ethics Committee, Ethical Technology Initiative...",
+    },
+]
+
+export const explore = [
+    {
+        id: 1,
+        cardType: "issue",
+        title: "Global Warmings Affects on Gazelles in Africa",
+        issueQuestions: "What is the real affects of the recent heat wave on gazelles in Africa? Are the receding watering holes a cause for concern?",
+        affResponses: "John Smith, GOP, PETA..."
+    },
+    {
+        id: 2,
+        cardType: "issue",
+        title: "The Divide on Capital Hill",
+        issueQuestions: "Is the growing partisan-ism good for the country? Or are we growing to be a country divide and doomed to fall?",
+        affResponses: "Owen Wilson, GOP, Democratic Party..."
+    },
+    {
+        id: 3,
+        cardType: "individual",
+        name: "Paula Anderson",
+        currentIssue: "How do we Address the World Burning?",
+    },
+    {
+        id: 4,
+        cardType: "issue",
+        title: "Journalism the Problem or the Solution",
+        issueQuestions: "Is freedom of the press tearing the country apart and sowing mistrust among the populace or is it exposing the muck clogging the pipes of America?",
+        affResponses: "Riley O’Neil, Women on the 1st Amendment..."
+    },
+    {
+        id: 5,
+        cardType: "organization",
+        name: "The Ford Motor Company",
+        currentIssue: "Emission Laws, Needed or a Buzzkill?",
+        stances: "Reliable Manufacturing, Forward Thinking...",
+    },
+    {
+        id: 6,
+        cardType: "individual",
+        name: "Sydney Chang",
+        currentIssue: "The Impact of Social Media on Mental Health: Navigating the Digital Landscape",
+    },
+    {
+        id: 7,
+        cardType: "individual",
+        name: "Charlie Adams",
+        currentIssue: "The Future of Artificial Intelligence: Ethical Considerations and Responsible Development",
+    },
+    {
+        id: 8,
+        cardType: "group",
+        name: "UNESCO",
+        currentIssue: "Preserving cultural heritage",
+        affInCommon: "Prof. Isabella Martinez, Dr. Michael Lee, Sofia Hernandez..."
+    },
+    {
+        id: 9,
+        cardType: "group",
+        name: "The City of Seattle",
+        currentIssue: "Addressing homelessness",
+        affInCommon: "John Swanson, Jimmy Page, Sara Lowe..."
+    },
+    {
+        id: 10,
+        cardType: "issue",
+        title: "Education in the Digital Era",
+        issueQuestions: "How is digital technology transforming education? What challenges and opportunities does it present for students and educators?",
+        affResponses: "Emma Thompson, EdTech Enthusiasts, Teachers Union...",
+    },
+    {
+        id: 11,
+        cardType: "issue",
+        title: "Healthcare Accessibility in Rural Areas",
+        issueQuestions: "What steps are being taken to improve healthcare access in rural communities? How can we address disparities in healthcare services?",
+        affResponses: "Dr. Raj Patel, Rural Healthcare Advocacy, Medical Professionals Alliance...",
+    },
+    {
+        id: 12,
+        cardType: "individual",
+        name: "Alexis Ramirez",
+        currentIssue: "Global Health Pandemics: Strengthening Preparedness and Response",
+    },
+    {
+        id: 13,
+        cardType: "issue",
+        title: "Criminal Justice Reform: Balancing Punishment and Rehabilitation",
+        issueQuestions: "What reforms are needed to create a more balanced criminal justice system? How can society address issues of punishment and rehabilitation?",
+        affResponses: "Malik Johnson, Criminal Justice Advocates, Legal Professionals Association...",
+    },
+    {
+        id: 14,
+        cardType: "organization",
+        name: "Google",
+        currentIssue: "Tech Giants Clash over Digital Privacy Regulations",
+        stances: "Data Security, Innovation...",
+    },
+    {
+        id: 15,
+        cardType: "issue",
+        title: "Space Exploration and its Societal Benefits",
+        issueQuestions: "What are the potential societal benefits of continued space exploration? How can space technology contribute to solving global challenges?",
+        affResponses: "Dr. Alan Foster, Space Enthusiasts Society, Aerospace Engineers Association...",
+    },
+    {
+        id: 16,
+        cardType: "individual",
+        name: "Evelyn Martinez",
+        currentIssue: "The Future of Autonomous Vehicles: A Boon or a Bane?",
+    },
+    {
+        id: 17,
+        cardType: "issue",
+        title: "Preserving Indigenous Cultures in a Globalized World",
+        issueQuestions: "How can societies preserve and promote indigenous cultures in the face of globalization? What policies can support cultural diversity?",
+        affResponses: "Elena Rodriguez, Indigenous Rights Coalition, Cultural Preservationists Alliance...",
+    },
+    {
+        id: 18,
+        cardType: "issue",
+        title: "The Role of Technology in Environmental Conservation",
+        issueQuestions: "How can technology contribute to environmental conservation efforts? What innovations are being developed to address climate change?",
+        affResponses: "David Chen, Tech for Conservation, Environmental Innovators Network...",
+    },
+    {
+        id: 19,
+        cardType: "group",
+        name: "Amazon Rainforest Preservation Foundation",
+        currentIssue: "Protecting the Amazon rainforest",
+        affInCommon: "Carlos Silva, Maria da Silva, John Anderson..."
+    },
+    {
+        id: 20,
+        cardType: "individual",
+        name: "Pearson Wright",
+        currentIssue: "Is Partisan-ism Tearing America Apart?",
     },
 ]

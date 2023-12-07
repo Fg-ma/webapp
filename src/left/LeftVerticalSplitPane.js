@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import IndividualRecHeader from "./content/IndividualRecHeader";
+import RecHeader from "./content/RecHeader";
 import IndividualCards from "./content/IndividualCards";
 import GroupCards from "./content/GroupCards";
 import OrganizationCards from "./content/OrganizationCards";
 import IndividualRecs from "./content/IndividualRecs";
 import GroupRecs from "./content/GroupRecs";
+import OrganizationRecs from "./content/OrganizationRecs";
 
 
 export default function LeftVerticalSplitPane() {
@@ -77,7 +78,7 @@ export default function LeftVerticalSplitPane() {
             case "groups":
                 return <GroupRecs />;
             case "organizations":
-                return <h1>Recs for Organizations</h1>;
+                return <OrganizationRecs />;
             default:
                 return <IndividualRecs />;
         }
@@ -89,7 +90,7 @@ export default function LeftVerticalSplitPane() {
                 {renderContent()}
             </div>
             <div className="resizer" onMouseDown={handleMouseDown}>
-                <IndividualRecHeader />
+                <RecHeader />
             </div>
             <div className="pane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
                 {renderRecs()}

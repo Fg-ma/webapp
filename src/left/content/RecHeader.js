@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function IndividualRecHeader () {
+export default function RecHeader () {
     return (
-        <div id="individualRecHeader" className="h-9 bg-fg-white-90 flex drop-shadow-md">
+        <div id="recHeader" className="h-9 bg-fg-white-90 flex drop-shadow-md">
             <div className="grow my-auto grid place-items-start ml-5 text-lg pt-1">
                 <p>Recommendations...</p>
             </div>
