@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function RightNav() {
-    const [rightState, setRightState] = useState("news");
-
     const deactiveStyles = {};
     const activeStyles = {
         textDecorationLine: "underline",
@@ -11,20 +10,32 @@ export default function RightNav() {
         textDecorationThickness: "2px",
     };
 
+    const dispatch = useDispatch();
+
+    const rightPage = useSelector((state) => state.rightNav?.rightPage || "news");
+
     const rightStyles = {
-        individuals: deactiveStyles,
-        groups: deactiveStyles,
-        organizations: deactiveStyles,
+        news: deactiveStyles,
+        explore: deactiveStyles,
+        messages: deactiveStyles,
+        dogEars: deactiveStyles,
     };
 
-    rightStyles[rightState] = activeStyles;
+    // Activate the style for the current leftPage
+    rightStyles[rightPage] = { ...activeStyles };
+
 
     function swapRightState(state) {
-        setRightState(state);
-    };
+        dispatch({
+            type: "rightNav",
+            payload: {
+                rightPage: state,
+            },
+        });
+    }
 
     return (
-        <nav id="rightSelectionBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
+        <nav id="rightNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
             <div className="flex divide-x-2 divide-fg-white-70 h-full">
                 <div className="h-7 w-1/4 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
                     <button className="w-full" style={rightStyles["news"]} onClick={() => swapRightState('news')}>News</button>
@@ -40,5 +51,5 @@ export default function RightNav() {
                 </div>
             </div>
         </nav>
-    )
+    );
 }

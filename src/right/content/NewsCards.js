@@ -1,5 +1,5 @@
 import React from "react";
-import issues from "../../issues"
+import { issues } from "../../data"
 
 export default function NewsCards() {
     const newsCards = issues.map(newsCardInfo => {

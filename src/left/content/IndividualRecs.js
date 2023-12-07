@@ -1,5 +1,5 @@
 import React from "react";
-import individuals from "../../individuals";
+import { individuals } from "../../data";
 
 export default function IndividualRecs() {
     const recs = individuals.map(indInfo => {

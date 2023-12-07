@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function LeftNav() {
-    const [leftState, setLeftState] = useState("individuals");
-
     const deactiveStyles = {};
     const activeStyles = {
         textDecorationLine: "underline",
@@ -11,17 +10,28 @@ export default function LeftNav() {
         textDecorationThickness: "2px",
     };
 
+    const dispatch = useDispatch();
+
+    const leftPage = useSelector((state) => state.leftNav?.leftPage || "individuals");
+
     const leftStyles = {
         individuals: deactiveStyles,
         groups: deactiveStyles,
         organizations: deactiveStyles,
     };
 
-    leftStyles[leftState] = activeStyles;
+    // Activate the style for the current leftPage
+    leftStyles[leftPage] = { ...activeStyles };
+
 
     function swapLeftState(state) {
-        setLeftState(state);
-    };
+        dispatch({
+            type: "leftNav",
+            payload: {
+                leftPage: state,
+            },
+        });
+    }
 
     return (
         <nav id="leftNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
@@ -37,5 +47,5 @@ export default function LeftNav() {
                 </div>
             </div>
         </nav>
-    )
+    );
 }

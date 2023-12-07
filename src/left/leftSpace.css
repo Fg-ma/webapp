@@ -7,6 +7,12 @@
     flex-basis: 26%
 }
 
+.groupAffliliates {
+    @apply font-K2D text-fg-black-30;
+    font-size: 10px;
+    line-height: 16px;
+}
+
 /* Split pane section */
 .vertical-split-pane {
     display: flex;

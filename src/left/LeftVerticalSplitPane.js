@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import IndividualRecHeader from "./content/IndividualRecHeader";
 import IndividualRecs from "./content/IndividualRecs";
 import IndividualCards from "./content/IndividualCards";
+import GroupCards from "./content/GroupCards";
 
 export default function LeftVerticalSplitPane() {
+    const leftPage = useSelector(state => state.leftNav.leftPage);
+
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);
@@ -50,10 +54,24 @@ export default function LeftVerticalSplitPane() {
         setInitialPaneHeight(parseFloat(paneHeight) || 0);
     };
 
+    // Conditionally render different components based on leftPage value
+    const renderContent = () => {
+        switch (leftPage) {
+            case "individuals":
+                return <IndividualCards />;
+            case "groups":
+                return <GroupCards />;
+            case "organizations":
+                return <h1>Content for Organizations</h1>;
+            default:
+                return <IndividualCards />
+        }
+    };
+
     return (
         <div className="vertical-split-pane">
             <div className="pane" style={{ height: paneHeight }}>
-                <IndividualCards />
+                {renderContent()}
             </div>
             <div className="resizer" onMouseDown={handleMouseDown}>
                 <IndividualRecHeader />
