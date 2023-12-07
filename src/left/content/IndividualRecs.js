@@ -2,13 +2,13 @@ import React from "react";
 import { individuals } from "../../data";
 
 export default function IndividualRecs() {
-    const recs = individuals.map(indInfo => {
+    const indRecs = individuals.map(indInfo => {
         return <IndividualRec key={indInfo.id} name={indInfo.name} currentIssue={indInfo.currentIssue} />
     })
 
     return (
         <div id="individualRecs" className="mr-3 h-full overflow-scroll">
-            {recs}
+            {indRecs}
         </div>
     )
 }

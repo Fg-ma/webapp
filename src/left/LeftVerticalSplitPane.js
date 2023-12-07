@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import IndividualRecHeader from "./content/IndividualRecHeader";
-import IndividualRecs from "./content/IndividualRecs";
 import IndividualCards from "./content/IndividualCards";
 import GroupCards from "./content/GroupCards";
+import OrganizationCards from "./content/OrganizationCards";
+import IndividualRecs from "./content/IndividualRecs";
+import GroupRecs from "./content/GroupRecs";
+
 
 export default function LeftVerticalSplitPane() {
     const leftPage = useSelector(state => state.leftNav.leftPage);
@@ -54,7 +57,6 @@ export default function LeftVerticalSplitPane() {
         setInitialPaneHeight(parseFloat(paneHeight) || 0);
     };
 
-    // Conditionally render different components based on leftPage value
     const renderContent = () => {
         switch (leftPage) {
             case "individuals":
@@ -62,9 +64,22 @@ export default function LeftVerticalSplitPane() {
             case "groups":
                 return <GroupCards />;
             case "organizations":
-                return <h1>Content for Organizations</h1>;
+                return <OrganizationCards />;
             default:
-                return <IndividualCards />
+                return <IndividualCards />;
+        }
+    };
+
+    const renderRecs = () => {
+        switch (leftPage) {
+            case "individuals":
+                return <IndividualRecs />;
+            case "groups":
+                return <GroupRecs />;
+            case "organizations":
+                return <h1>Recs for Organizations</h1>;
+            default:
+                return <IndividualRecs />;
         }
     };
 
@@ -77,7 +92,7 @@ export default function LeftVerticalSplitPane() {
                 <IndividualRecHeader />
             </div>
             <div className="pane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
-                <IndividualRecs />
+                {renderRecs()}
             </div>
         </div>
   );
