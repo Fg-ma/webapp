@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RelatedIssuesHeader () {
     return (
-        <div id="relatedIssuesHeader" className="h-9 bg-fg-white-90 flex drop-shadow-md">
+        <div id="relatedIssuesHeader" className="h-9 bg-fg-primary-desat flex drop-shadow-md">
             <div className="grow my-auto grid place-items-start ml-5 text-lg pt-1">
                 <p>Related Issues</p>
             </div>

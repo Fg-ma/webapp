@@ -4,7 +4,9 @@ import "./rightSpace.css";
 import RightSearchBar from "./RightSearchBar";
 import RightNav from "./RightNav";
 import NewsCards from "./content/NewsCards";
-import ExploreCards from "./content/ExploreCard";
+import ExploreCards from "./content/ExploreCards";
+import MessagesCards from "./content/MessagesCards";
+import DogEarCards from "./content/DogEarCards";
 
 export default function RightSpace() {
     const rightPage = useSelector(state => state.rightNav.rightPage);
@@ -16,9 +18,9 @@ export default function RightSpace() {
             case "explore":
                 return <ExploreCards />;
             case "messages":
-                return <p>Content for messages</p>;
+                return <MessagesCards />;
             case "dogEars":
-                return <p>Content for Dog-Ears</p>
+                return <DogEarCards />
             default:
                 return <NewsCards />
         }

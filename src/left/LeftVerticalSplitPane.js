@@ -16,25 +16,31 @@ export default function LeftVerticalSplitPane() {
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);
     const [paneHeight, setPaneHeight] = useState('60%');
+    const [recHeaderLightness, setRecHeaderLightness] = useState(80)
 
     const handleMouseMove = (event) => {
         if (isResizing) {
             const containerHeight = document.getElementById("leftSpaceContentContainer").offsetHeight;
             const mouseY = event.clientY;
             const mouseYDelta = mouseY - initialMousePosition;
-
-            // Adjust the speed by fiddling with the sensetivity factor
+    
+            // Adjust the speed by fiddling with the sensitivity factor
             const sensitivityFactor = 1;
             let newPaneHeight = initialPaneHeight + (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
-
+    
             // Cap the newPaneHeight to a maximum value
             const maxPaneHeight = 100;
             newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
-
+    
             const minPaneHeight = 15;
             newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
-
+    
+            // Calculate lightness based on the percentage of newPaneHeight
+            let lightness = Math.max(52, 100 - (newPaneHeight*.75));
+            lightness = Math.min(82, lightness);
+    
             setPaneHeight(`${newPaneHeight}%`);
+            setRecHeaderLightness(lightness); // Add this line to set the lightness dynamically
         }
     };
 
@@ -42,6 +48,7 @@ export default function LeftVerticalSplitPane() {
         setIsResizing(false);
     };
 
+    // Handles resizing event listeners
     useEffect(() => {
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
@@ -51,6 +58,18 @@ export default function LeftVerticalSplitPane() {
             document.removeEventListener('mouseup', handleMouseUp);
         };
     }, [isResizing]);
+
+    // Gets initial lightness value
+    useEffect(() => {
+        // Get the initial height of the leftPane when the component mounts
+        const initialHeight = parseFloat(paneHeight) || 0;
+    
+        // Set the initial lightness based on the initial height
+        let initialLightness = Math.max(52, 100 - (initialHeight * 0.75));
+        initialLightness = Math.min(82, initialLightness);
+    
+        setRecHeaderLightness(initialLightness);
+    }, []);
 
     const handleMouseDown = (event) => {
         setIsResizing(true);
@@ -85,14 +104,14 @@ export default function LeftVerticalSplitPane() {
     };
 
     return (
-        <div className="vertical-split-pane">
-            <div className="pane" style={{ height: paneHeight }}>
+        <div className="leftVerticalSplitPane">
+            <div className="leftPane" style={{ height: paneHeight }}>
                 {renderContent()}
             </div>
-            <div className="resizer" onMouseDown={handleMouseDown}>
-                <RecHeader />
+            <div className="leftResizer" onMouseDown={handleMouseDown}>
+                <RecHeader lightness={recHeaderLightness} />
             </div>
-            <div className="pane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
+            <div id="leftBottomPane" className="leftPane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
                 {renderRecs()}
             </div>
         </div>

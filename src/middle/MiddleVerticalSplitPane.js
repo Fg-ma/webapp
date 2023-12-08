@@ -50,14 +50,14 @@ export default function MiddleVerticalSplitPane() {
     };
 
     return (
-        <div className="vertical-split-pane">
-            <div className="pane" style={{ height: paneHeight }}>
+        <div className="middleVerticalSplitPane">
+            <div className="middlePane" style={{ height: paneHeight }}>
                 hi
             </div>
-            <div className="resizer" onMouseDown={handleMouseDown}>
+            <div className="middleResizer" onMouseDown={handleMouseDown}>
                 <RelatedIssuesHeader />
             </div>
-            <div className="pane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
+            <div id="middleBottomPane" className="middlePane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
                 <RelatedIssues />
             </div>
         </div>

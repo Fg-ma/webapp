@@ -20,7 +20,7 @@
 }
 
 /* Split pane section */
-.vertical-split-pane {
+.leftVerticalSplitPane {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -28,12 +28,16 @@
     height: 100%;
 }
   
-.pane {
+.leftPane {
     overflow: auto;
     box-sizing: border-box;
 }
   
-.resizer {
+.leftResizer {
     cursor: ns-resize;
     user-select: none;
+}
+
+#leftBottomPane {
+    @apply bg-fg-white-95;
 }
