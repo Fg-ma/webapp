@@ -28,3 +28,62 @@
 #middleBottomPane {
     @apply bg-fg-white-95;
 }
+
+/* Filter switches */
+/* The switch - the box around the slider */
+.switch {
+    @apply h-6 w-32;
+    position: relative;
+    display: inline-block;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    @apply bg-fg-white-95;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    @apply h-6 w-16 bg-fg-black-25;
+    position: absolute;
+    content: "";
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    @apply bg-fg-white-95;
+}
+
+input:focus + .slider {
+    @apply shadow;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(64px);
+    -ms-transform: translateX(64px);
+    transform: translateX(64px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    @apply rounded-xl;
+}
+
+.slider.round:before {
+    @apply rounded-xl;
+}

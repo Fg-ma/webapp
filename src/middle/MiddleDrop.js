@@ -8,7 +8,7 @@ export default function MiddleDrop() {
         setDropped(!dropped)
     }
 
-    const getDropIcon = () => {
+    const getDropIconRotation = () => {
         if (dropped) {
             return 180;
         } else {
@@ -18,7 +18,11 @@ export default function MiddleDrop() {
 
     return (
         <div id="dropContainer" className="flex flex-col justify-center items-center">
-            <button className="relative h-12 aspect-square bg-225 bg-no-repeat bg-center mb-2" style={{ backgroundImage: "url('assets/icons/dropDown.svg')", transform: `rotate(${getDropIcon()}deg)`,  }} onClick={handleDrop}></button>
+            <button 
+                className="relative h-12 aspect-square bg-225 bg-no-repeat bg-center mb-2" 
+                style={{ backgroundImage: "url('assets/icons/dropDown.svg')", transform: `rotate(${getDropIconRotation()}deg)`  }} 
+                onClick={handleDrop}>
+            </button>
             {dropped ? <MiddleSearchBar /> : null}
         </div>
     )
