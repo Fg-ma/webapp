@@ -31,7 +31,7 @@ export default function RightSearchBar() {
                     id="rightSearchSubmit"
                     type="submit"
                     value=""
-                    className="w-6 h-6 bg-cover bg-no-repeat ml-2"
+                    className="w-6 h-6 bg-cover bg-no-repeat ml-2 cursor-pointer"
                     style={{ backgroundImage: `url("assets/icons/${getSearchIcon()}")` }}
                 />
                 <input
@@ -47,7 +47,7 @@ export default function RightSearchBar() {
                 <input
                     id="rightFilterButton"
                     type="button"
-                    className="w-8 h-8 bg-cover bg-no-repeat mr-2"
+                    className="w-8 h-8 bg-cover bg-no-repeat mr-2 cursor-pointer"
                     style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
                 />
             </form>

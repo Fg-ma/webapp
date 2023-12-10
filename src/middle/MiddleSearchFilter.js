@@ -31,33 +31,33 @@ export default function MiddleSearchFilter() {
                             type="checkbox"
                             id="isWhatsCurrent"
                             name="isWhatsCurrent"
-                            className="w-5 aspect-square"
+                            className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isWhatsCurrent}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isWhatsCurrent" className="text-base ml-2 font-K2D">What's Current</label>
+                        <label htmlFor="isWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
                     </div>
                     <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAffiliateActivity"
                             name="isAffiliateActivity"
-                            className="w-5 aspect-square"
+                            className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isAffiliateActivity}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isAffiliateActivity" className="text-base ml-2 font-K2D">Affiliate Activity</label>
+                        <label htmlFor="isAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
                     </div>
                     <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAllTimeGreats"
                             name="isAllTimeGreats"
-                            className="w-5 aspect-square"
+                            className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isAllTimeGreats}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D">All Time Greats</label>
+                        <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
                     </div>
                     <div className="flex items-center w-4/5 justify-between">
                         <div className="flex items-center">
@@ -65,15 +65,23 @@ export default function MiddleSearchFilter() {
                                 type="checkbox"
                                 id="isDatePosted"
                                 name="isDatePosted"
-                                className="w-5 aspect-square"
+                                className="w-5 aspect-square cursor-pointer"
                                 checked={filterFormData.isDatePosted}
                                 onChange={handleFilterFormChange}
                             />
-                            <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D">Date Posted</label>
+                            <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" />
+                            <input id="datePostedCheckBox" type="checkbox" />
                             <span class="slider round"></span>
+                            <div className="inline w-40">
+                                <div className="inline-block w-1/2 text-center">
+                                    <span class="labelText newest">Newest</span>
+                                </div>
+                                <div className="inline-block w-1/2 text-center">
+                                    <span class="labelText oldest">Oldest</span>
+                                </div>
+                            </div>
                         </label>
                     </div>
                     <div className="flex items-center w-4/5 justify-between">
@@ -82,37 +90,52 @@ export default function MiddleSearchFilter() {
                                 type="checkbox"
                                 id="isPopularity"
                                 name="isPopularity"
-                                className="w-5 aspect-square"
+                                className="w-5 aspect-square cursor-pointer"
                                 checked={filterFormData.isPopularity}
                                 onChange={handleFilterFormChange}
                             />
-                            <label htmlFor="isPopularity" className="text-base ml-2 font-K2D">Popularity</label>
+                            <label htmlFor="isPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" />
+                            <input id="popularityCheckBox" type="checkbox" />
                             <span class="slider round"></span>
+                            <div className="inline w-40">
+                                <div className="inline-block w-1/2 text-center">
+                                    <span class="labelText upVotes">Up Votes</span>
+                                </div>
+                                <div className="inline-block w-1/2 text-center">
+                                    <span class="labelText downVotes">Down Votes</span>
+                                </div>
+                            </div>
                         </label>
                     </div>
                     <div>
                         <input 
                             type="button" 
                             value="Apply" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-primary text-white" 
+                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-primary text-white cursor-pointer" 
                         />
                         <input 
                             type="button" 
                             value="Clear" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white mx-4" 
+                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white mx-4 cursor-pointer" 
                         />
                         <input 
                             type="button" 
                             value="Cancel" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white"
+                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white cursor-pointer"
                             />
                     </div>
                 </div>
-                <div className="w-1/3 flex flex-col justify-end items-end">
-                    <input type="button" value="Advanced Search..." />
+                <div className="w-1/3 flex justify-end items-end">
+                    <div className="mb-1 mr-3 flex items-center">
+                        <input
+                            type="button"
+                            className="w-6 h-6 bg-cover bg-no-repeat mr-1 cursor-pointer"
+                            style={{ backgroundImage: `url("assets/icons/addAdvancedFilters.svg")` }}
+                        />
+                        <input type="button" className="text-sm align-text-bottom cursor-pointer" value="Advanced Search..." />
+                    </div>
                 </div>
             </form>
         </div>

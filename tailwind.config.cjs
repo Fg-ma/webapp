@@ -1,5 +1,11 @@
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    darkMode: false,
+    mode: 'jit',
+    purge: [
+        './public/**/*.html',
+        './src/**/*.{js,jsx,ts,tsx}',
+    ],
     theme: {
         extend: {
             colors: {
