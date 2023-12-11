@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setLeftNav } from "../redux/pageState/pageStateActions";
 
 export default function LeftNav() {
     const deactiveStyles = {};
@@ -12,7 +13,7 @@ export default function LeftNav() {
 
     const dispatch = useDispatch();
 
-    const leftPage = useSelector((state) => state.leftNav?.leftPage || "individuals");
+    const leftPage = useSelector((state) => state.page.leftPagePayload.leftPageState);
 
     const leftStyles = {
         individuals: deactiveStyles,
@@ -25,12 +26,7 @@ export default function LeftNav() {
 
 
     function swapLeftState(state) {
-        dispatch({
-            type: "leftNav",
-            payload: {
-                leftPage: state,
-            },
-        });
+        dispatch(setLeftNav(state));
     }
 
     return (

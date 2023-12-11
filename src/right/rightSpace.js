@@ -9,7 +9,7 @@ import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 
 export default function RightSpace() {
-    const rightPage = useSelector(state => state.rightNav.rightPage);
+    const rightPage = useSelector(state => state.page.rightPagePayload.rightPageState);
 
     const renderContent = () => {
         switch (rightPage) {

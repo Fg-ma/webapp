@@ -10,7 +10,7 @@ import OrganizationRecs from "./content/OrganizationRecs";
 
 
 export default function LeftVerticalSplitPane() {
-    const leftPage = useSelector(state => state.leftNav.leftPage);
+    const leftPage = useSelector(state => state.page.leftPagePayload.leftPageState);
 
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);

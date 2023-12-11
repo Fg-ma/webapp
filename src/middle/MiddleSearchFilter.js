@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilterOption, toggleAdvancedSearch } from "../redux/middleFilter/middleFilterActions";
 
 export default function MiddleSearchFilter() {
-    const [filterFormData, setFilterFormData] = useState(
-        {
-            isWhatsCurrent: false,
-            isAffiliateActivity: false,
-            isAllTimeGreats: false,
-            isDatePosted: false,
-            isPopularity: false,
-        }
-    )
+    const dispatch = useDispatch();
+    const filterFormData = useSelector(state => state.middleFilter.filterPayload);
 
-    function handleFilterFormChange(event) {
-        setFilterFormData(prevFilterFormData => {
-            const {name, type, checked} = event.target
-            return {
-                ...prevFilterFormData,
-                [name]: type === "checkbox" ? checked : value
-            }
-        })
-    }
+    const handleFilterFormChange = event => {
+        const { name, type, checked, value } = event.target;
+        dispatch(setFilterOption(name, type === 'checkbox' ? checked : value));
+    };
+
+    const handleAdvancedFilter = () => {
+        dispatch(toggleAdvancedSearch());
+    };
 
     return (
         <div className="w-full bg-white rounded-md mt-2">
@@ -131,13 +125,41 @@ export default function MiddleSearchFilter() {
                     <div className="mb-1 mr-3 flex items-center">
                         <input
                             type="button"
+                            name="isAdvancedSearch"
                             className="w-6 h-6 bg-cover bg-no-repeat mr-1 cursor-pointer"
                             style={{ backgroundImage: `url("assets/icons/addAdvancedFilters.svg")` }}
+                            onClick={handleAdvancedFilter}
                         />
-                        <input type="button" className="text-sm align-text-bottom cursor-pointer" value="Advanced Search..." />
+                        <input 
+                            type="button" 
+                            className="text-sm align-text-bottom cursor-pointer" 
+                            value="Advanced Search..."
+                            onClick={handleAdvancedFilter}
+                        />
+                        {filterFormData.isAdvancedSearch ? <AdvancedSearchFilter /> : null}
                     </div>
                 </div>
             </form>
+        </div>
+    )
+}
+
+function AdvancedSearchFilter() {
+    return (
+        <div>
+            <input
+                type="button"
+                name="isAdvancedSearch"
+                className="w-6 h-6 bg-cover bg-no-repeat mr-1 cursor-pointer"
+                style={{ backgroundImage: `url("assets/icons/addAdvancedFilters.svg")` }}
+                onClick={handleAdvancedFilter}
+            />
+            <input 
+                type="button" 
+                className="text-sm align-text-bottom cursor-pointer" 
+                value="Advanced Search..."
+                onClick={handleAdvancedFilter}
+            />
         </div>
     )
 }

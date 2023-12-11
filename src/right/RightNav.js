@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setRightNav } from "../redux/pageState/pageStateActions";
 
 export default function RightNav() {
     const deactiveStyles = {};
@@ -12,7 +13,7 @@ export default function RightNav() {
 
     const dispatch = useDispatch();
 
-    const rightPage = useSelector((state) => state.rightNav?.rightPage || "news");
+    const rightPage = useSelector((state) => state.page.rightPagePayload.rightPageState);
 
     const rightStyles = {
         news: deactiveStyles,
@@ -21,17 +22,12 @@ export default function RightNav() {
         dogEars: deactiveStyles,
     };
 
-    // Activate the style for the current leftPage
+    // Activate the style for the current rightPage
     rightStyles[rightPage] = { ...activeStyles };
 
 
     function swapRightState(state) {
-        dispatch({
-            type: "rightNav",
-            payload: {
-                rightPage: state,
-            },
-        });
+        dispatch(setRightNav(state));
     }
 
     return (
