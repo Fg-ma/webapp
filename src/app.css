@@ -20,7 +20,3 @@ html, body {
 #base {
     @apply font-Josefin text-fg-black-15;
 }
-
-#middleSpaceContainer {
-    flex-basis: 48%
-}

@@ -28,10 +28,20 @@ export default function MiddleSearchBar() {
 
     const handleFilterDrop = () => {
         setDropFilter(!dropFilter)
+    };
+
+    // Set width of search bar to by 80% of middleSpaceContainer
+    const getSearchBarWidth = () => {
+        const middleSpaceContainer = document.getElementById('middleSpaceContainer');
+
+        const middleSpaceContainerWidth = middleSpaceContainer.offsetWidth;
+        const newWidth = `${middleSpaceContainerWidth * 0.8}px`;
+
+        return newWidth;
     }
   
     return (
-        <div className="w-4/5 flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center" style={{ width: getSearchBarWidth() }}>
             <form className="w-full h-10 bg-fg-white-85 rounded-md overflow-clip flex items-center">
                 <input
                     id="middleSearchSubmit"

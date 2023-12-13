@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilterOption, toggleAdvancedSearch } from "../redux/middleFilter/middleFilterActions";
+import { setFilterOption } from "../../redux/middleFilter/middleFilterActions";
+import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
+import AdvancedMiddleSearchFilter from "./AdvancedMiddleSearchFilter";
 
 export default function MiddleSearchFilter() {
     const dispatch = useDispatch();
@@ -11,14 +13,10 @@ export default function MiddleSearchFilter() {
         dispatch(setFilterOption(name, type === 'checkbox' ? checked : value));
     };
 
-    const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch());
-    };
-
     return (
-        <div className="w-full bg-white rounded-md mt-2">
+        <div className="w-full bg-white rounded-md mt-2 shadow-md">
             <form className="flex h-full">
-                <div className="w-2/3 bg-white flex flex-col m-4 space-y-3">
+                <div className="w-3/5 bg-white flex flex-col m-4 space-y-3">
                     <p className="text-2xl">Filter by</p>
                     <div className="flex items-center">
                         <input 
@@ -65,15 +63,15 @@ export default function MiddleSearchFilter() {
                             />
                             <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
                         </div>
-                        <label class="switch">
+                        <label className="switch">
                             <input id="datePostedCheckBox" type="checkbox" />
-                            <span class="slider round"></span>
+                            <span className="slider round"></span>
                             <div className="inline w-40">
                                 <div className="inline-block w-1/2 text-center">
-                                    <span class="labelText newest">Newest</span>
+                                    <span className="labelText newest">Newest</span>
                                 </div>
                                 <div className="inline-block w-1/2 text-center">
-                                    <span class="labelText oldest">Oldest</span>
+                                    <span className="labelText oldest">Oldest</span>
                                 </div>
                             </div>
                         </label>
@@ -90,15 +88,15 @@ export default function MiddleSearchFilter() {
                             />
                             <label htmlFor="isPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
                         </div>
-                        <label class="switch">
+                        <label className="switch">
                             <input id="popularityCheckBox" type="checkbox" />
-                            <span class="slider round"></span>
+                            <span className="slider round"></span>
                             <div className="inline w-40">
                                 <div className="inline-block w-1/2 text-center">
-                                    <span class="labelText upVotes">Up Votes</span>
+                                    <span className="labelText upVotes">Up Votes</span>
                                 </div>
                                 <div className="inline-block w-1/2 text-center">
-                                    <span class="labelText downVotes">Down Votes</span>
+                                    <span className="labelText downVotes">Down Votes</span>
                                 </div>
                             </div>
                         </label>
@@ -121,45 +119,10 @@ export default function MiddleSearchFilter() {
                             />
                     </div>
                 </div>
-                <div className="w-1/3 flex justify-end items-end">
-                    <div className="mb-1 mr-3 flex items-center">
-                        <input
-                            type="button"
-                            name="isAdvancedSearch"
-                            className="w-6 h-6 bg-cover bg-no-repeat mr-1 cursor-pointer"
-                            style={{ backgroundImage: `url("assets/icons/addAdvancedFilters.svg")` }}
-                            onClick={handleAdvancedFilter}
-                        />
-                        <input 
-                            type="button" 
-                            className="text-sm align-text-bottom cursor-pointer" 
-                            value="Advanced Search..."
-                            onClick={handleAdvancedFilter}
-                        />
-                        {filterFormData.isAdvancedSearch ? <AdvancedSearchFilter /> : null}
-                    </div>
+                <div className="w-2/5 flex justify-end items-end my-4 mx-6">
+                    {filterFormData.isAdvancedSearch ? <AdvancedMiddleSearchFilter /> : <AddAdvancedSearchFilter />}
                 </div>
             </form>
-        </div>
-    )
-}
-
-function AdvancedSearchFilter() {
-    return (
-        <div>
-            <input
-                type="button"
-                name="isAdvancedSearch"
-                className="w-6 h-6 bg-cover bg-no-repeat mr-1 cursor-pointer"
-                style={{ backgroundImage: `url("assets/icons/addAdvancedFilters.svg")` }}
-                onClick={handleAdvancedFilter}
-            />
-            <input 
-                type="button" 
-                className="text-sm align-text-bottom cursor-pointer" 
-                value="Advanced Search..."
-                onClick={handleAdvancedFilter}
-            />
         </div>
     )
 }
