@@ -15,8 +15,8 @@ export default function MiddleSearchFilter() {
 
     return (
         <div className="w-full bg-white rounded-md mt-2 shadow-md">
-            <form className="flex h-full">
-                <div className="w-3/5 bg-white flex flex-col m-4 space-y-3">
+            <form className="flex h-full m-4">
+                <div className="w-3/5 bg-white flex flex-col space-y-3">
                     <p className="text-2xl">Filter by</p>
                     <div className="flex items-center">
                         <input 
@@ -51,7 +51,7 @@ export default function MiddleSearchFilter() {
                         />
                         <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
                     </div>
-                    <div className="flex items-center w-4/5 justify-between">
+                    <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
@@ -76,7 +76,7 @@ export default function MiddleSearchFilter() {
                             </div>
                         </label>
                     </div>
-                    <div className="flex items-center w-4/5 justify-between">
+                    <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
@@ -119,7 +119,7 @@ export default function MiddleSearchFilter() {
                             />
                     </div>
                 </div>
-                <div className="w-2/5 flex justify-end items-end my-4 mx-6">
+                <div className="w-2/5 flex justify-center items-center">
                     {filterFormData.isAdvancedSearch ? <AdvancedMiddleSearchFilter /> : <AddAdvancedSearchFilter />}
                 </div>
             </form>

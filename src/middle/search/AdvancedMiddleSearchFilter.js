@@ -13,9 +13,9 @@ export default function AdvancedMiddleSearchFilter() {
     return (
         <div className="h-full w-full bg-fg-white-95 rounded-lg">
             <p className="text-lg ml-2 mt-2">Filter by</p>
-            <div className="bg-fg-white-85 m-2 p-2 rounded-md">
+            <div className="bg-fg-white-85 m-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
                 <p className="text-base">Affiliated...</p>
-                <div className="flex items-center justify-center">
+                <div className="w-full flex items-center justify-center">
                     <IndividualAdvancedFilterDropdown />
                     <button
                         type="button"
