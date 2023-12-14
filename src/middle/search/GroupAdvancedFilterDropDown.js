@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import IndividualFilterCard from "./IndividualFilterCard";
-import { individuals } from "../../data";
+import GroupFilterCard from "./GroupFilterCard";
+import { groups } from "../../data";
 
-export default function IndividualAdvancedFilterDropdown() {
+export default function GroupAdvancedFilterDropdown() {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
 
-    const indFilterCards = individuals.map(indFilterInfo => {
-        return <IndividualFilterCard key={indFilterInfo.id} name={indFilterInfo.name} />
+    const groupFilterCards = groups.map(groupFilterInfo => {
+        return <GroupFilterCard key={groupFilterInfo.id} identify={groupFilterInfo.id} name={groupFilterInfo.name} />
     })
 
-    const advIndFilters = useSelector((state) => state.middleFilter.filterPayload.individualFilters);
+    const advGrpFilters = useSelector((state) => state.middleFilter.filterPayload.groupFilters);
 
     return (
         <div className="relative inline-block text-left w-5/6">
@@ -24,10 +24,10 @@ export default function IndividualAdvancedFilterDropdown() {
                 className="w-full h-8 border border-fg-white-70 bg-white rounded-md inline-flex items-center justify-between"
             >
                 <span
-                    className="flex-grow overflow-hidden"
+                    className="flex-grow overflow-hidden pl-2"
                     style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                 >
-                    {advIndFilters[0] ? advIndFilters.join(', ') : "--Individuals--"}
+                    {advGrpFilters[0] ? advGrpFilters.join(', ') : "--Groups--"}
                 </span>
                 <span className="w-4 aspect-square mr-1">
                     <svg
@@ -47,9 +47,9 @@ export default function IndividualAdvancedFilterDropdown() {
                 </span>
             </button>
             {isOpen && (
-                <div className="py-1 px-3 origin-top-right absolute left-1/2 transform -translate-x-1/2 mt-2 w-max rounded-md shadow-md bg-white z-50">
-                    <div className="overflow-scroll max-h-80">
-                        {indFilterCards}
+                <div className="py-1 px-3 origin-top-right absolute left-1/2 transform -translate-x-1/2 mt-2 rounded-md shadow-md bg-white z-10">
+                    <div id="groupFilterCardsContainer" className="overflow-y-scroll overflow-x-visible max-h-80 max-w-xs w-80 h-80">
+                        {groupFilterCards}
                     </div>
                 </div>
             )}

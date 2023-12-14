@@ -1,13 +1,18 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
 import IndividualAdvancedFilterDropdown from "./IndividualAdvancedFilterDropdown";
-import { removeAdvancedIndividualFilter } from "../../redux/middleFilter/middleFilterActions";
+import { clearAdvancedIndividualFilter, clearAdvancedGroupFilter } from "../../redux/middleFilter/middleFilterActions";
+import GroupAdvancedFilterDropdown from "./GroupAdvancedFilterDropDown";
 
 export default function AdvancedMiddleSearchFilter() {
     const dispatch = useDispatch();
 
     function emptyAdvIndFilter() {
-        dispatch(removeAdvancedIndividualFilter());
+        dispatch(clearAdvancedIndividualFilter());
+    };
+
+    function emptyAdvGrpFilter() {
+        dispatch(clearAdvancedGroupFilter());
     };
 
     return (
@@ -20,6 +25,15 @@ export default function AdvancedMiddleSearchFilter() {
                     <button
                         type="button"
                         onClick={emptyAdvIndFilter}
+                        className="w-1/6 aspect-square bg-no-repeat bg-center"
+                        style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
+                    ></button>
+                </div>
+                <div className="w-full flex items-center justify-center">
+                    <GroupAdvancedFilterDropdown />
+                    <button
+                        type="button"
+                        onClick={emptyAdvGrpFilter}
                         className="w-1/6 aspect-square bg-no-repeat bg-center"
                         style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
                     ></button>

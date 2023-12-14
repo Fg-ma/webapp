@@ -6,10 +6,12 @@ export function NewsCard(props) {
             <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
                 <p>pic</p>
             </div>
-            <div className="m-2 w-2/3">
-                <p className="font-Josefin text-base font-bold">{props.title}</p>
-                <p className="font-Josefin text-xs">{props.issueQuestions}</p>
-                <p className="newsAffResponses">Affiliates' responses: {props.affResponses}</p>
+            <div className="m-2 w-2/3 space-y-1">
+                <p className="font-Josefin text-lg font-bold line-clamp-2">{props.title}</p>
+                <div>
+                    <p className="font-Josefin text-base text-fg-black-30 line-clamp-2">{props.issueQuestions}</p>
+                    <p className="font-K2D text-xs text-fg-black-30 truncate">Affiliates' responses: {props.affResponses}</p>
+                </div>
             </div>
         </div>
     )
@@ -23,7 +25,7 @@ export function MessagesCard(props) {
             </div>
             <div className="m-2">
                 <p className="font-Josefin text-xl">{props.name}</p>
-                <p className="font-K2D text-xs text-fg-black-30">{props.lastMessage}</p>
+                <p className="font-K2D text-sm text-fg-black-30">{props.lastMessage}</p>
             </div>
         </div>
     )
@@ -35,10 +37,12 @@ export function DogEarCard(props) {
             <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
                 <p>pic</p>
             </div>
-            <div className="m-2 w-2/3">
-                <p className="font-Josefin text-base font-bold">{props.title}</p>
-                <p className="font-Josefin text-xs">{props.issueQuestions}</p>
-                <p className="newsAffResponses">Affiliates' responses: {props.affResponses}</p>
+            <div className="m-2 w-2/3 space-y-1">
+                <p className="font-Josefin text-lg font-bold line-clamp-2">{props.title}</p>
+                <div>
+                    <p className="font-Josefin text-base text-fg-black-30 line-clamp-2">{props.issueQuestions}</p>
+                    <p className="font-K2D text-xs text-fg-black-30 truncate">Affiliates' responses: {props.affResponses}</p>
+                </div>
             </div>
         </div>
     )

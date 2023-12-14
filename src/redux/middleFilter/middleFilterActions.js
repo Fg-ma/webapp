@@ -1,4 +1,4 @@
-import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER } from './middleFilterTypes';
+import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER } from './middleFilterTypes';
 
 
 export const setFilterOption = (option, value) => {
@@ -19,8 +19,29 @@ export const addAdvancedIndividualFilter = (advIndFilter) => ({
     payload: { advIndFilter },
 });
 
-export const removeAdvancedIndividualFilter = () => {
+export const removeAdvancedIndividualFilter = (advIndFilter) => ({
+    type: REMOVE_ADVANCED_INDIVIDUAL_FILTER,
+    payload: { advIndFilter },
+});
+
+export const clearAdvancedIndividualFilter = () => {
     return {
-        type: REMOVE_ADVANCED_INDIVIDUAL_FILTER,
+        type: CLEAR_ADVANCED_INDIVIDUAL_FILTER,
+    };
+};
+
+export const addAdvancedGroupFilter = (advGrpFilter) => ({
+    type: ADD_ADVANCED_GROUP_FILTER,
+    payload: { advGrpFilter },
+});
+
+export const removeAdvancedGroupFilter = (advGrpFilter) => ({
+    type: REMOVE_ADVANCED_GROUP_FILTER,
+    payload: { advGrpFilter },
+});
+
+export const clearAdvancedGroupFilter = () => {
+    return {
+        type: CLEAR_ADVANCED_GROUP_FILTER,
     };
 };

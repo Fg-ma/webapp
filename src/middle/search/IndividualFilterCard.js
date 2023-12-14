@@ -20,9 +20,9 @@ export default function IndividualFilterCard(props) {
             <div className="w-10 aspect-square bg-fg-white-85 mr-2 rounded-full grid place-items-center flex-shrink-0">
                 <p className="select-none">pic</p>
             </div>
-            <div className="m-2">
-                <p className="font-Josefin text-lg select-none">{props.name}</p>
-            </div>
+            <span className="m-2 truncate font-Josefin text-lg select-none">
+                {props.name}
+            </span>
         </div>
     )
 }
