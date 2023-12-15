@@ -1,4 +1,4 @@
-import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER } from './middleFilterTypes';
+import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER, ADD_HOVER_GROUP_FILTER, CLEAR_HOVER_GROUP_FILTER } from './middleFilterTypes';
 
 const initialState = {
     filterPayload: {
@@ -10,6 +10,7 @@ const initialState = {
         isAdvancedSearch: false,
         individualFilters: [],
         groupFilters: [],
+        groupFiltersHover: '',
     },
 };
 
@@ -116,6 +117,24 @@ export default function middleFilterReducer(state = initialState, action) {
                 filterPayload: {
                     ...state.filterPayload,
                     groupFilters: [],
+                },
+            };
+
+        case ADD_HOVER_GROUP_FILTER:
+            return {
+                ...state,
+                filterPayload: {
+                    ...state.filterPayload,
+                    groupFiltersHover: action.payload.advHvrGrpFilter,
+                },
+            };
+
+        case CLEAR_HOVER_GROUP_FILTER:
+            return {
+                ...state,
+                filterPayload: {
+                    ...state.filterPayload,
+                    groupFiltersHover: '',
                 },
             };
     

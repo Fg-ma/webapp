@@ -1,4 +1,4 @@
-import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER } from './middleFilterTypes';
+import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER, ADD_HOVER_GROUP_FILTER, CLEAR_HOVER_GROUP_FILTER } from './middleFilterTypes';
 
 
 export const setFilterOption = (option, value) => {
@@ -40,8 +40,15 @@ export const removeAdvancedGroupFilter = (advGrpFilter) => ({
     payload: { advGrpFilter },
 });
 
-export const clearAdvancedGroupFilter = () => {
-    return {
+export const clearAdvancedGroupFilter = () => ({
         type: CLEAR_ADVANCED_GROUP_FILTER,
-    };
-};
+});
+
+export const addHoverGroupFilter = (advHvrGrpFilter) => ({
+    type: ADD_HOVER_GROUP_FILTER,
+    payload: { advHvrGrpFilter },
+});
+
+export const clearHoverGroupFilter = () => ({
+        type: CLEAR_HOVER_GROUP_FILTER,
+});
