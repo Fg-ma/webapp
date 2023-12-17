@@ -41,4 +41,4 @@ export default function AdvancedMiddleSearchFilter() {
             </div>
         </div>
     );
-}
+};

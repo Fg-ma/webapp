@@ -28,7 +28,7 @@ export default function ExpandedGroupFilterCard(props) {
             id={`groupPopup ${props.identify}`}
             className={`bg-fg-primary relative my-1 ml-2 mr-3 h-14 py-1 px-2 w-max overflow-visible cursor-pointer flex items-center rounded-md hover:bg-fg-secondary decoration-2 underline-offset-8 underline 
             ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
-            ${visible ? "visible" : "hidden"}
+            ${visible ? "opacity-100" : "opacity-100 pointer-events-none"}
             `}
             onClick={addGrpFilter}
         >

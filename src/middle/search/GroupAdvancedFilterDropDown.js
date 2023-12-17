@@ -55,7 +55,6 @@ export default function GroupAdvancedFilterDropdown() {
                 <div className="py-1 px-3 origin-top-right absolute left-1/2 transform -translate-x-1/2 mt-2 rounded-md shadow-md bg-white z-10">
                     <div id="groupFilterCardsContainer" className="overflow-y-scroll overflow-x-visible max-h-80 max-w-xs w-80 h-80">
                         {groupFilterCards}
-                        {expandedGroupFilterCards}
                     </div>
                 </div>
             )}
