@@ -21,7 +21,7 @@ export default function AddAdvancedSearchFilter() {
                 />
                 <input 
                     type="button" 
-                    className="text-sm align-text-bottom cursor-pointer" 
+                    className="text-sm cursor-pointer mt-1" 
                     value="Advanced Search..."
                     onClick={handleAdvancedFilter}
                 />

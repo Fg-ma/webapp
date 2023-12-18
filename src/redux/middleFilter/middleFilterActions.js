@@ -1,4 +1,4 @@
-import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_INDIVIDUAL_FILTER, REMOVE_ADVANCED_INDIVIDUAL_FILTER, CLEAR_ADVANCED_INDIVIDUAL_FILTER, ADD_ADVANCED_GROUP_FILTER, REMOVE_ADVANCED_GROUP_FILTER, CLEAR_ADVANCED_GROUP_FILTER } from './middleFilterTypes';
+import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER } from './middleFilterTypes';
 
 
 export const setFilterOption = (option, value) => {
@@ -14,32 +14,17 @@ export const toggleAdvancedSearch = () => {
     };
 };
 
-export const addAdvancedIndividualFilter = (advIndFilter) => ({
-    type: ADD_ADVANCED_INDIVIDUAL_FILTER,
-    payload: { advIndFilter },
+export const addAdvancedAffiliateFilter = (addAdvancedAffiliateFilter, addSubcategory) => ({
+    type: ADD_ADVANCED_AFFILIATED_FILTER,
+    payload: { addAdvancedAffiliateFilter, addSubcategory },
 });
 
-export const removeAdvancedIndividualFilter = (advIndFilter) => ({
-    type: REMOVE_ADVANCED_INDIVIDUAL_FILTER,
-    payload: { advIndFilter },
+export const removeAdvancedAffiliateFilter = (removeAdvancedAffiliateFilter, removeSubcategory) => ({
+    type: REMOVE_ADVANCED_AFFILIATED_FILTER,
+    payload: { removeAdvancedAffiliateFilter, removeSubcategory },
 });
 
-export const clearAdvancedIndividualFilter = () => {
-    return {
-        type: CLEAR_ADVANCED_INDIVIDUAL_FILTER,
-    };
-};
-
-export const addAdvancedGroupFilter = (advGrpFilter) => ({
-    type: ADD_ADVANCED_GROUP_FILTER,
-    payload: { advGrpFilter },
-});
-
-export const removeAdvancedGroupFilter = (advGrpFilter) => ({
-    type: REMOVE_ADVANCED_GROUP_FILTER,
-    payload: { advGrpFilter },
-});
-
-export const clearAdvancedGroupFilter = () => ({
-        type: CLEAR_ADVANCED_GROUP_FILTER,
+export const clearAdvancedAffiliateFilter = ( clearSubcategory ) => ({
+    type: CLEAR_ADVANCED_AFFILIATED_FILTER,
+    payload: { clearSubcategory },
 });

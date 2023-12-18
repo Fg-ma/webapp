@@ -16,7 +16,7 @@ export default function MiddleSearchFilter() {
     return (
         <div className="w-full bg-white rounded-md mt-2 shadow-md">
             <form className="flex h-full m-4">
-                <div className="w-3/5 bg-white flex flex-col space-y-3">
+                <div className="w-3/5 bg-white flex flex-col space-y-3 pr-6">
                     <p className="text-2xl">Filter by</p>
                     <div className="flex items-center">
                         <input 

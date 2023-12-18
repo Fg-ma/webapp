@@ -1,27 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
-import { addAdvancedGroupFilter, removeAdvancedGroupFilter } from '../../redux/middleFilter/middleFilterActions';
+import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/middleFilter/middleFilterActions';
 
-const Popup = ({ name, position, dispatch, onMouseEnter, onMouseLeave, popupRef, isFilterSelected }) => {
-    const handlePopupClick = () => {
-        if (!isFilterSelected) {
-          dispatch(addAdvancedGroupFilter(name));
-        } else {
-          dispatch(removeAdvancedGroupFilter(name));
-        }
-    };
-    
+function Popup({ name, position, onMouseEnter, onMouseLeave, popupRef, isFilterSelected, subcategory }) {   
     return createPortal(
         <div
-            id={`groupPopup_${name}`}
+            id={`${subcategory}Popup_${name}`}
             className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max fixed z-10 overflow-visible cursor-pointer flex items-center rounded-md decoration-2 underline-offset-8 underline
             ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
             `}
             style={{ top: `${position.top}px`, left: `${position.left}px` }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            onClick={handlePopupClick}
             ref={popupRef}
         >
             <div className="w-12 aspect-square bg-fg-white-85 mr-2 rounded-md grid place-items-center flex-shrink-0">
@@ -33,10 +24,11 @@ const Popup = ({ name, position, dispatch, onMouseEnter, onMouseLeave, popupRef,
     );
 };
 
-const GroupFilterCard = (props) => {
+export default function FilterCard(props) {
     const dispatch = useDispatch();
-    const advGrpFilters = useSelector((state) => state.middleFilter.filterPayload.groupFilters);
-    const isFilterSelected = advGrpFilters.includes(props.name);
+    const subcategory = props.subcategory;
+    const advFilters = useSelector((state) => state.middleFilter.filterPayload.affiliatedFilters[subcategory]);
+    const isFilterSelected = advFilters.includes(props.name);
 
     const [popupState, setPopupState] = useState({
         visible: false,
@@ -47,6 +39,9 @@ const GroupFilterCard = (props) => {
     const isMouseInsidePopup = useRef(false);
     const hoverTimeout = useRef(null);
     const popupRef = useRef(null);
+    const nameSpanRef = useRef(null);
+
+    const isOverflowing = nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth;
 
     const calculatePopupPosition = (event) => {
         const boundingBox = event.target.getBoundingClientRect();
@@ -102,7 +97,7 @@ const GroupFilterCard = (props) => {
 
     const handlePopupMouseLeave = (event) => {
         const toElement = event.toElement || event.relatedTarget;
-        const isLeavingToOriginal = toElement && toElement.id === `group ${props.identify}`;
+        const isLeavingToOriginal = toElement && toElement.id === `${subcategory}_${props.identify}`;
 
         isMouseInsidePopup.current = false;
 
@@ -117,7 +112,7 @@ const GroupFilterCard = (props) => {
     };
   
     useEffect(() => {
-        const element = document.getElementById(`group ${props.identify}`);
+        const element = document.getElementById(`${subcategory}_${props.identify}`);
     
         if (element) {
             element.addEventListener('mouseenter', handleMouseEnter);
@@ -134,41 +129,47 @@ const GroupFilterCard = (props) => {
         return () => {};
     }, [dispatch, props.identify, props.name]);
 
-    function addGrpFilter() {
+    function handleFilterClick() {
         if (!isFilterSelected) {
-            dispatch(addAdvancedGroupFilter(props.name));
+            dispatch(addAdvancedAffiliateFilter(props.name, subcategory));
         } else {
-            dispatch(removeAdvancedGroupFilter(props.name));
+            dispatch(removeAdvancedAffiliateFilter(props.name, subcategory));
         }
     }
 
     return (
         <div
-            id={`group ${props.identify}`}
+            id={`${subcategory}_${props.identify}`}
             className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md hover:bg-fg-secondary decoration-2 underline-offset-8 underline 
                 ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
                 `}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={addGrpFilter}
-        >
-            <div className="w-12 aspect-square bg-fg-white-85 mr-2 rounded-md grid place-items-center flex-shrink-0">
+            onClick={handleFilterClick}
+        >   
+            
+            <div className={`w-12 aspect-square bg-fg-white-85 mr-2 grid place-items-center flex-shrink-0
+                ${subcategory === "ind" ? 'rounded-full' : 'rounded-md'}
+                `}>
                 <p className="select-none">pic</p>
             </div>
-            <span className={'m-2 font-Josefin text-lg select-none truncate'}>{props.name}</span>
-            {popupState.visible && (
+            <span
+                ref={nameSpanRef}
+                className={'m-2 font-Josefin text-lg select-none truncate'}
+            >
+                {props.name}
+            </span>
+            {popupState.visible && isOverflowing && (
                 <Popup
                     name={props.name}
                     position={popupState.position}
-                    dispatch={dispatch}
                     onMouseEnter={handlePopupMouseEnter}
                     onMouseLeave={handlePopupMouseLeave}
                     popupRef={popupRef}
                     isFilterSelected={isFilterSelected}
+                    subcategory={subcategory}
                 />
             )}
         </div>
     );
 };
-
-export default GroupFilterCard;
