@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import FilterCard from "./FilterCard";
 import { individuals, groups, organizations } from "../../data";
 
 export default function AdvancedFilterDropdown(props) {
-    const subcategory = props.subcategory;
+    const { subcategory } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
+
+    const closeDropdown = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("click", closeDropdown);
+    
+        return () => {
+            window.removeEventListener("click", closeDropdown);
+        };
+    }, []);
     
     let data;
     let placeholder;
@@ -32,7 +47,7 @@ export default function AdvancedFilterDropdown(props) {
     const advFilters = useSelector((state) => state.middleFilter.filterPayload.affiliatedFilters[subcategory]);
 
     return (
-        <div className="relative inline-block text-left w-5/6">
+        <div className="relative inline-block text-left w-5/6" ref={dropdownRef}>
             <button
                 onClick={toggleDropdown}
                 type="button"

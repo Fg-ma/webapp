@@ -6,14 +6,17 @@ const initialState = {
         isAffiliateActivity: false,
         isAllTimeGreats: false,
         isDatePosted: false,
+        isDatePostedSwitched: false,
         isPopularity: false,
+        isPopularitySwitched: false,
         isAdvancedSearch: false,
-        individualFilters: [],
         affiliatedFilters: {
             ind: [],
             grp: [],
             org: [],
         },
+        author: '',
+        dateRange: '',
     },
 };
 
