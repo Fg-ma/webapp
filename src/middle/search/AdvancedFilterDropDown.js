@@ -14,21 +14,29 @@ export default function AdvancedFilterDropdown(props) {
             for a short duration in order to creat a portal that appears over top the 
             original card. The portal expands as necessary to show the full text of a car. 
             The portal functions excatly the same as a regular card except that the background 
-            doesn't turn fg-secondary when hovered over.
+            doesn't turn fg-secondary when hovered over. (Also note, that while I don't like it, 
+            the simplest way to prevent the drop from closing when there is a click inside the popup 
+            the popupref must be drilled down into the popup form this component)
     */
 
     const { subcategory } = props;
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const popupRef = useRef(null);
 
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
 
     const closeDropdown = (event) => {        
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target) &&
+            popupRef.current &&
+            !popupRef.current.contains(event.target)
+          ) {
             setIsOpen(false);
-        }
+          }
     };
 
     useEffect(() => {
@@ -54,7 +62,7 @@ export default function AdvancedFilterDropdown(props) {
     }
 
     const filterCards = data.map(filterInfo => {
-        return <FilterCard key={filterInfo.id} identify={filterInfo.id} name={filterInfo.name} subcategory={subcategory}/>
+        return <FilterCard key={filterInfo.id} identify={filterInfo.id} name={filterInfo.name} subcategory={subcategory} popupRef={popupRef} />
     })
 
     const advFilters = useSelector((state) => state.middleFilter.filterPayload.affiliatedFilters[subcategory]);

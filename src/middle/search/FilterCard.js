@@ -58,7 +58,7 @@ export default function FilterCard(props) {
     const isMouseInsideOriginal = useRef(false);
     const isMouseInsidePopup = useRef(false);
     const hoverTimeout = useRef(null);
-    const popupRef = useRef(null);
+    const popupRef = props.popupRef;
     const nameSpanRef = useRef(null);
 
     const isOverflowing = nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth;

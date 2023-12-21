@@ -39,7 +39,7 @@ export default function LeftNav() {
     }
 
     return (
-        <nav id="leftNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
+        <nav id="leftNavbarBarSpace" className="relative z-50 block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
             <div className="flex divide-x-2 divide-fg-white-70 h-full drop-shadow-md">
                 <div className="h-7 w-1/3 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
                     <button className="w-full" style={leftStyles["individuals"]} onClick={() => swapLeftState('individuals')}>Individuals</button>

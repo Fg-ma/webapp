@@ -117,7 +117,8 @@ export default function AdvancedMiddleSearchFilter(props) {
                             type="button"
                             className="h-8 aspect-square bg-no-repeat bg-center"
                             style={{ backgroundImage: "url('assets/icons/dateRangeCalendar.svg')"}}
-                        ></button>
+                        >
+                        </button>
                     </div>
                     <button
                             type="button"
@@ -126,9 +127,10 @@ export default function AdvancedMiddleSearchFilter(props) {
                             style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
                             onClick={handleFilterFormChange}
                             value=""
-                    ></button>
+                    >
+                    </button>
                 </div>
             </div>
         </div>
     );
-};
+}
