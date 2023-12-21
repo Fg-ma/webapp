@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import "./pageNav.css";
 
 export default function PageNav() {
+
+    /* 
+        Description:   
+            Creates the page navbar that appears at the bottom of the middle space
+            section. Most of the state changes here will appear to chane the content 
+            in the middle space rather than side spaces.
+        Unique Properties:
+            N/A
+    */
+
     const [pageState, setPageState] = useState("home");
 
     const deactiveStyles = {};

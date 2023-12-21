@@ -4,6 +4,14 @@ import AdvancedFilterDropdown from "./AdvancedFilterDropDown";
 import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/middleFilter/middleFilterActions";
 
 export default function AdvancedMiddleSearchFilter(props) {
+
+    /* 
+        Description:   
+            Creates the card for the advanced middle search filter.
+        Unique Properties:
+            N/A
+    */
+
     const dispatch = useDispatch();
     const { handleFilterFormChange } = props;
     const formAuthor = useSelector(state => state.middleFilter.filterPayload.author);
@@ -69,13 +77,14 @@ export default function AdvancedMiddleSearchFilter(props) {
                 </div>
             </div>
             <div className="w-full">
-                <p className="text-base ml-2 mt-2 -mb-1">Author</p>
+                <label htmlFor="author" className="text-base ml-3 cursor-pointer">Author</label>
                 <div className="h-fit flex items-center justify-center mx-2">
                     <input
                         type="text" 
                         placeholder="Author..."
                         name="author" 
-                        className="grow bg-white h-8 rounded-md text-sm px-1"
+                        id="author"
+                        className="grow bg-white h-8 rounded-md text-sm px-1 -mt-2"
                         onChange={handleFilterFormChange}                 
                         value={formAuthor}
                     >
@@ -91,14 +100,15 @@ export default function AdvancedMiddleSearchFilter(props) {
                 </div>
             </div>
             <div className="w-full mb-3">
-                <p className="text-base ml-2 mt-2 -mb-1">Date Range</p>
+                <label htmlFor="dateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
                 <div className="flex items-center justify-center mx-2">
-                    <div className="grow bg-white rounded-md flex items-center justify-center">
+                    <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden -mt-2">
                         <input 
                             type="text" 
                             placeholder="mm.dd.yyyy - mm.dd.yyyy" 
                             name="dateRange"
-                            className="grow bg-white h-8 text-sm px-1"
+                            id="dateRange"
+                            className="grow bg-white h-8 text-sm px-1 cursor-pointer"
                             onChange={handleFilterFormChange}                 
                             value={formDateRange}
                         >

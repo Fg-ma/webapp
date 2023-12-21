@@ -9,6 +9,15 @@ import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 
 export default function RightSpace() {
+
+    /* 
+        Description:   
+            Container for everything that happens in the right space section including 
+            RightNav, RightSearchBar, conditionally rendered content.
+        Unique Properties:
+            N/A
+    */
+
     const rightPage = useSelector(state => state.page.rightPagePayload.rightPageState);
 
     const renderContent = () => {

@@ -4,6 +4,19 @@ import FilterCard from "./FilterCard";
 import { individuals, groups, organizations } from "../../data";
 
 export default function AdvancedFilterDropdown(props) {
+
+    /* 
+        Description:   
+            Creates the dropdown for adding affiliates filters, by querying a database
+            and gets the need values based on the type of dropdown it is(ind, grp, org).
+        Unique Properties:
+            If the text of a card in the dropdown is overflowing it can be hovered over 
+            for a short duration in order to creat a portal that appears over top the 
+            original card. The portal expands as necessary to show the full text of a car. 
+            The portal functions excatly the same as a regular card except that the background 
+            doesn't turn fg-secondary when hovered over.
+    */
+
     const { subcategory } = props;
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -12,7 +25,7 @@ export default function AdvancedFilterDropdown(props) {
       setIsOpen(!isOpen);
     };
 
-    const closeDropdown = (event) => {
+    const closeDropdown = (event) => {        
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsOpen(false);
         }

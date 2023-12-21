@@ -3,6 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { setRightNav } from "../redux/pageState/pageStateActions";
 
 export default function RightNav() {
+
+    /* 
+        Description:   
+            A navbar that cycles between news, explore, messages, and dog ears. The currently 
+            selected item is underlined in fg-primary. It also sets the state in redux to 
+            determine what should be displayed in the rightSpaceContentContainer.
+        Unique Properties:
+            N/A
+    */
+
     const deactiveStyles = {};
     const activeStyles = {
         textDecorationLine: "underline",

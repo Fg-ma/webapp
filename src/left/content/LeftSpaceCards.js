@@ -1,5 +1,13 @@
 import React from "react";
 
+/* 
+    Description:   
+        Templates for all of the left side cards that data from the database gets mapped to. 
+        Formats the data into something visually appealing.
+    Unique Properties:
+        N/A
+*/
+
 export function IndividualCard(props) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md">

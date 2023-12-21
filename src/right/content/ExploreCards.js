@@ -4,6 +4,15 @@ import { IndividualCard, GroupCard, OrganizationCard } from "../../left/content/
 import { NewsCard } from "./RightSpaceCards"
 
 export default function ExploreCards() {
+
+    /* 
+        Description:   
+            Gets expolore data from a database then extracts the necessary data to be mapped
+            into cards.
+        Unique Properties:
+            N/A
+    */
+
     const exploreCards = explore.map(exploreInfo => {
         switch (exploreInfo.cardType) {
             case "issue":

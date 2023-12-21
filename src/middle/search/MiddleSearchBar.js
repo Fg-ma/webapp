@@ -1,10 +1,27 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleDrop } from "../../redux/middleFilter/middleFilterActions";;
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
-export default function MiddleSearchBar() {
+export default function MiddleSearchBar(props) {
+
+    /* 
+        Description:   
+            Creates the MiddleSearchBar with a submit button, text input, and filter button.
+        Unique Properties:
+            Switches the search icon to an arrow icon as the background of the 
+            submit button when the text input is hover or there is text in it.
+    */
+
+    const { middleSpaceContainerRef } = props;
+    const middleSpaceContainerWidth = middleSpaceContainerRef.current.offsetWidth;
+    const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
+    
+    const dispatch = useDispatch();
+    const dropFilter = useSelector(state => state.middleFilter.isDropFilter);
+
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const [dropFilter, setDropFilter] = useState(false)
   
     const handleInputFocus = () => {
         setIsInputFocused(true);
@@ -27,22 +44,12 @@ export default function MiddleSearchBar() {
     };
 
     const handleFilterDrop = () => {
-        setDropFilter(!dropFilter)
+        dispatch(toggleDrop("isDropFilter"))
     };
 
-    // Set width of search bar to by 80% of middleSpaceContainer
-    const getSearchBarWidth = () => {
-        const middleSpaceContainer = document.getElementById('middleSpaceContainer');
-
-        const middleSpaceContainerWidth = middleSpaceContainer.offsetWidth;
-        const newWidth = `${middleSpaceContainerWidth * 0.8}px`;
-
-        return newWidth;
-    }
-  
     return (
-        <div className="flex flex-col justify-center items-center" style={{ width: getSearchBarWidth() }}>
-            <form className="w-full h-10 bg-fg-white-85 rounded-md overflow-clip flex items-center">
+        <div className="flex flex-col justify-center items-center" style={{ width: middleSearchWidth }}>
+            <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
                     id="middleSearchSubmit"
                     type="submit"
@@ -54,19 +61,20 @@ export default function MiddleSearchBar() {
                     id="middleSearchArea"
                     type="text"
                     placeholder="Search..."
-                    className="grow h-full outline-none bg-fg-white-85 placeholder-fg-black-25 text-lg mx-1"
+                    className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1"
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
                     onChange={handleInputChange}
                     value={inputValue}
                 />
-                <input
-                    id="middleFilterButton"
-                    type="button"
-                    className="w-8 h-8 bg-cover bg-no-repeat mr-2 cursor-pointer"
-                    style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
-                    onClick={handleFilterDrop}
-                />
+                <div className="w-16 h-full bg-fg-white-90 flex justify-center items-center">
+                    <input
+                        type="button"
+                        className="w-8 h-8 bg-cover bg-no-repeat cursor-pointer"
+                        style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
+                        onClick={handleFilterDrop}
+                    />
+                </div>
             </form>
             {dropFilter ? <MiddleSearchFilter /> : null}
         </div>

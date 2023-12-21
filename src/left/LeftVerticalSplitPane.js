@@ -10,8 +10,19 @@ import OrganizationRecs from "./content/OrganizationRecs";
 
 
 export default function LeftVerticalSplitPane() {
-    const leftPage = useSelector(state => state.page.leftPagePayload.leftPageState);
 
+    /*
+        Description:   
+            Creates 3 panes of which the top and bottom are used to display context
+            (individuals/groups/organizations and recommendations respectively).
+            The middle panel is a dragable panel that resizes the top and bottom panes,
+            importantly this middle pane can be any div(the contents of which dont matter).
+        Unique Properties:
+            Depending on the height that the middle pane is dragged to the bg-color changes
+            from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
+    */
+   
+    const leftPage = useSelector(state => state.page.leftPagePayload.leftPageState);
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);

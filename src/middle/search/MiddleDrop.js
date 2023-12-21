@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDrop } from "../../redux/middleFilter/middleFilterActions";
 import MiddleSearchBar from "./MiddleSearchBar"
 
-export default function MiddleDrop() {
-    const [dropped, setDropped] = useState(false)
+export default function MiddleDrop(props) {
+
+    /* 
+        Description:   
+            Creates the arrow button for opening the MiddleSearchBar.
+        Unique Properties:
+            N/A
+    */
+
+    const { middleSpaceContainerRef } = props;
+    const dispatch = useDispatch();
+    const dropped = useSelector(state => state.middleFilter.isDrop);
 
     function handleDrop() {
-        setDropped(!dropped)
+        dispatch(toggleDrop("isDrop"));
     }
 
     const getDropIconRotation = () => {
@@ -23,7 +35,7 @@ export default function MiddleDrop() {
                 style={{ backgroundImage: "url('assets/icons/dropDown.svg')", transform: `rotate(${getDropIconRotation()}deg)`  }} 
                 onClick={handleDrop}>
             </button>
-            {dropped ? <MiddleSearchBar /> : null}
+            {dropped ? <MiddleSearchBar middleSpaceContainerRef={ middleSpaceContainerRef } /> : null}
         </div>
     )
 }

@@ -3,13 +3,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
 import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/middleFilter/middleFilterActions';
 
-function Popup({ name, position, onMouseEnter, onMouseLeave, popupRef, isFilterSelected, subcategory }) {   
+function Popup(props) {
+    
+    /* 
+        Description:   
+            The popup is the portal that is created when the mouse hovers over a FilterCard that has 
+            text overflowing.
+        Unique Properties:
+            Acts the same as a filter card except that it can go beyond the boundaries of the container 
+            and doesn't switch to fg-secondary as the background when hovered over.
+    */
+
+    const { name, position, onMouseEnter, onMouseLeave, popupRef, isFilterSelected, subcategory } = props;
+
     return createPortal(
         <div
             id={`${subcategory}Popup_${name}`}
             className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max fixed z-10 overflow-visible cursor-pointer flex items-center rounded-md decoration-2 underline-offset-8 underline
-            ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
-            `}
+                ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
+                `}
             style={{ top: `${position.top}px`, left: `${position.left}px` }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -25,6 +37,14 @@ function Popup({ name, position, onMouseEnter, onMouseLeave, popupRef, isFilterS
 };
 
 export default function FilterCard(props) {
+
+    /* 
+        Description:   
+            Creates the cards that appear in the AdvancedFilterDropDowns.
+        Unique Properties:
+            Determines when, how, and where to display popups(portals).
+    */
+
     const dispatch = useDispatch();
     const subcategory = props.subcategory;
     const advFilters = useSelector((state) => state.middleFilter.filterPayload.affiliatedFilters[subcategory]);

@@ -1,16 +1,40 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilterOption } from "../../redux/middleFilter/middleFilterActions";
+import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/middleFilter/middleFilterActions";
 import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
 import AdvancedMiddleSearchFilter from "./AdvancedMiddleSearchFilter";
 
 export default function MiddleSearchFilter() {
+
+    /* 
+        Description:   
+            Creates the middle search filter form and sets the state using redux.
+        Unique Properties:
+            Only applied filters will save.
+    */
+
     const dispatch = useDispatch();
     const filterFormData = useSelector(state => state.middleFilter.filterPayload);
 
     function handleFilterFormChange (event) {
         const { name, type, checked, value } = event.target;
         dispatch(setFilterOption(name, type === 'checkbox' ? checked : value));
+    };
+
+    function handleApplyFilterOptions () {
+        dispatch(applyFilterOptions(filterFormData));
+    };
+
+    function handleClearFilterForm () {
+        dispatch(clearFilterOptions());
+    };
+
+    function handleCancelFilterChanges () {
+        dispatch(cancelFilterChanges());
+    };
+
+    function handleDrop () {
+        dispatch(toggleDrop("isDropFilter"));
     };
 
     return (
@@ -123,18 +147,21 @@ export default function MiddleSearchFilter() {
                         <input 
                             type="button" 
                             value="Apply" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-primary text-white cursor-pointer" 
+                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-primary text-white cursor-pointer"
+                            onClick={() => { handleApplyFilterOptions(); handleDrop(); }}
                         />
                         <input 
                             type="button" 
                             value="Clear" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white mx-4 cursor-pointer" 
+                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white mx-4 cursor-pointer"
+                            onClick={handleClearFilterForm}
                         />
                         <input 
                             type="button" 
                             value="Cancel" 
                             className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white cursor-pointer"
-                            />
+                            onClick={() => { handleCancelFilterChanges(); handleDrop(); }}
+                        />
                     </div>
                 </div>
                 <div className="w-2/5 flex justify-center items-center">

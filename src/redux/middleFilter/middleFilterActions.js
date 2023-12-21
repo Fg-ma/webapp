@@ -1,18 +1,36 @@
-import { SET_FILTER_OPTION, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER } from './middleFilterTypes';
+import { SET_MIDDLE_SPACE_CONTAINER_WIDTH, TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER } from './middleFilterTypes';
 
+export const setMiddleSpaceContainerWidth = (width) => ({
+    type: SET_MIDDLE_SPACE_CONTAINER_WIDTH,
+    payload: { width }
+});
 
-export const setFilterOption = (option, value) => {
-    return {
-        type: SET_FILTER_OPTION,
-        payload: { option, value },
-    };
-};
+export const toggleDrop = (dropType) => ({
+    type: TOGGLE_DROP,
+    payload: { dropType },
+});
 
-export const toggleAdvancedSearch = () => {
-    return {
-        type: TOGGLE_ADVANCED_SEARCH,
-    };
-};
+export const setFilterOption = (option, value) => ({
+    type: SET_FILTER_OPTION,
+    payload: { option, value },
+});
+
+export const applyFilterOptions = (filterOptions) => ({
+    type: APPLY_FILTER_OPTIONS,
+    payload: { filterOptions },
+});
+
+export const clearFilterOptions = () => ({
+    type: CLEAR_FILTER_OPTIONS,
+});
+
+export const cancelFilterChanges = () => ({
+    type: CANCEL_FILTER_CHANGES,
+});
+
+export const toggleAdvancedSearch = () => ({
+    type: TOGGLE_ADVANCED_SEARCH,
+});
 
 export const addAdvancedAffiliateFilter = (addAdvancedAffiliateFilter, addSubcategory) => ({
     type: ADD_ADVANCED_AFFILIATED_FILTER,

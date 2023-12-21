@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 
 export default function RightSearchBar() {
+
+    /* 
+        Description:   
+            Creates the RightSearchBar with a submit button, text input, and filter button.
+        Unique Properties:
+            Switches the search icon to an arrow icon as the background of the 
+            submit button when the text input is hover or there is text in it.
+    */
+
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
   
@@ -26,7 +35,7 @@ export default function RightSearchBar() {
   
     return (
         <div id="rightSpaceSearchBar" className="h-16 w-full bg-fg-white-90 flex justify-center items-center">
-            <form className="w-4/5 h-10 bg-fg-white-85 rounded-md overflow-clip flex items-center">
+            <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
                     id="rightSearchSubmit"
                     type="submit"
@@ -38,18 +47,20 @@ export default function RightSearchBar() {
                     id="rightSearchArea"
                     type="text"
                     placeholder="Search..."
-                    className="grow h-full outline-none bg-fg-white-85 placeholder-fg-black-25 text-lg mx-1"
+                    className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1"
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
                     onChange={handleInputChange}
                     value={inputValue}
                 />
-                <input
-                    id="rightFilterButton"
-                    type="button"
-                    className="w-8 h-8 bg-cover bg-no-repeat mr-2 cursor-pointer"
-                    style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
-                />
+                <div className="w-16 h-full bg-fg-white-95 flex justify-center items-center">
+                    <input
+                        id="rightFilterButton"
+                        type="button"
+                        className="h-8 aspect-square bg-cover bg-no-repeat cursor-pointer"
+                        style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
+                    />
+                </div>
             </form>
         </div>
     );

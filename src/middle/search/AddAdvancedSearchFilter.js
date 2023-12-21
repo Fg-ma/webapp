@@ -3,6 +3,14 @@ import { useDispatch } from 'react-redux';
 import { toggleAdvancedSearch } from "../../redux/middleFilter/middleFilterActions";
 
 export default function AddAdvancedSearchFilter() {
+
+    /* 
+        Description:   
+            Creates the button for adding an advanced search filter.
+        Unique Properties:
+            N/A
+    */
+
     const dispatch = useDispatch();
 
     const handleAdvancedFilter = () => {

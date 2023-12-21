@@ -1,6 +1,15 @@
 import React from "react";
 
 export function NewsCard(props) {
+
+    /* 
+    Description:   
+        Templates for all of the right side cards that data from the database gets mapped to. 
+        Formats the data into something visually appealing.
+    Unique Properties:
+        N/A
+    */
+
     return (
         <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md">
             <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
