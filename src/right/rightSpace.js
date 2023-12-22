@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./rightSpace.css";
-import RightSearchBar from "./RightSearchBar";
+import RightSearchBar from "./search/RightSearchBar";
 import RightNav from "./RightNav";
 import NewsCards from "./content/NewsCards";
 import ExploreCards from "./content/ExploreCards";

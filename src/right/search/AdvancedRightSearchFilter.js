@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/rightFilter/rightFilterActions";
 import AdvancedFilterDropdown from "./AdvancedFilterDropDown";
-import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/middleFilter/middleFilterActions";
-import AdvancedDateRange from "./AdvancedDateRange";
 
-export default function AdvancedMiddleSearchFilter(props) {
+export default function AdvancedRightSearchFilter(props) {
 
     /* 
         Description:   
-            Creates the card for the advanced middle search filter.
+            Creates the card for the advanced right search filter.
         Unique Properties:
             Creates date range portal and calculates the portal position to be centered 
             below the dateRangeContainer.
@@ -16,12 +15,8 @@ export default function AdvancedMiddleSearchFilter(props) {
 
     const dispatch = useDispatch();
     const { handleFilterFormChange } = props;
-    const formAuthor = useSelector(state => state.middleFilter.filterPayload.author);
-    const formDateRange = useSelector(state => state.middleFilter.filterPayload.dateRange);
-    const [isDateRange, setIsDateRange] = useState(false);
-    const dateRangeContainerRef = useRef(null);
-    const dateRangeRef = useRef(null);
-    const [position, setPosition] = useState(null);
+    const formAuthor = useSelector(state => state.rightFilter.filterPayload.author);
+    const formDateRange = useSelector(state => state.rightFilter.filterPayload.dateRange);
 
     const handleAdvancedFilter = () => {
         dispatch(toggleAdvancedSearch());
@@ -32,27 +27,6 @@ export default function AdvancedMiddleSearchFilter(props) {
 
     function emptyAdvAffFilter(subcategory) {
         dispatch(clearAdvancedAffiliateFilter(subcategory));
-    };
-
-    const handleDateRange = () => {
-        setIsDateRange(prev => !prev);
-    };
-
-    useEffect(() => {
-        calculateDateRangePosition();
-    }, [isDateRange]);
-    
-    const calculateDateRangePosition = () => {
-        if (dateRangeContainerRef.current && dateRangeRef.current) {
-            const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
-            const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
-            console.log(containerBoundingBox)
-
-            setPosition({
-                top: containerBoundingBox.top + 40,
-                left: containerBoundingBox.left - (Math.abs(containerBoundingBox.width - dateRangeBoundingBox.width) / 2),
-            });
-        }
     };
 
     return (
@@ -128,7 +102,7 @@ export default function AdvancedMiddleSearchFilter(props) {
             </div>
             <div className="w-full mb-3">
                 <label htmlFor="dateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
-                <div ref={dateRangeContainerRef} className="flex items-center justify-center mx-2">
+                <div className="flex items-center justify-center mx-2">
                     <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden -mt-2">
                         <input 
                             type="text" 
@@ -144,7 +118,6 @@ export default function AdvancedMiddleSearchFilter(props) {
                             type="button"
                             className="h-8 aspect-square bg-no-repeat bg-center"
                             style={{ backgroundImage: "url('assets/icons/dateRangeCalendar.svg')"}}
-                            onClick={handleDateRange}
                         >
                         </button>
                     </div>
@@ -158,7 +131,6 @@ export default function AdvancedMiddleSearchFilter(props) {
                     >
                     </button>
                 </div>
-                {isDateRange && <AdvancedDateRange position={position} dateRangeRef={dateRangeRef} />}
             </div>
         </div>
     );

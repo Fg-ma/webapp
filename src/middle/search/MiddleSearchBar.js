@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleDrop } from "../../redux/middleFilter/middleFilterActions";;
+import { toggleDrop } from "../../redux/middleFilter/middleFilterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
 export default function MiddleSearchBar(props) {

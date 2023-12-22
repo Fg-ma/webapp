@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import RightSearchFilter from "./RightSearchFilter";
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleDrop } from "../../redux/rightFilter/rightFilterActions";
 
 export default function RightSearchBar() {
 
@@ -12,6 +15,8 @@ export default function RightSearchBar() {
 
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
+    const dropFilter = useSelector(state => state.rightFilter.isDropFilter);
   
     const handleInputFocus = () => {
         setIsInputFocused(true);
@@ -31,6 +36,10 @@ export default function RightSearchBar() {
         } else {
             return 'search.svg';
         }
+    };
+
+    const handleFilterDrop = () => {
+        dispatch(toggleDrop("isDropFilter"))
     };
   
     return (
@@ -59,9 +68,11 @@ export default function RightSearchBar() {
                         type="button"
                         className="h-8 aspect-square bg-cover bg-no-repeat cursor-pointer"
                         style={{ backgroundImage: `url("assets/icons/filter.svg")` }}
+                        onClick={handleFilterDrop}
                     />
                 </div>
             </form>
+            {dropFilter ? <RightSearchFilter /> : null}
         </div>
     );
 }
