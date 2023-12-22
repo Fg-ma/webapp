@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
-import { toggleAdvancedSearch } from "../../redux/middleFilter/middleFilterActions";
+import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
 
 export default function AddAdvancedSearchFilter() {
 
@@ -14,7 +14,7 @@ export default function AddAdvancedSearchFilter() {
     const dispatch = useDispatch();
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch());
+        dispatch(toggleAdvancedSearch("middle"));
     };
 
     return (

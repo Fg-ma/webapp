@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleDrop } from "../../redux/middleFilter/middleFilterActions";
+import { toggleDrop } from "../../redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
 export default function MiddleSearchBar(props) {
@@ -18,7 +18,7 @@ export default function MiddleSearchBar(props) {
     const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
     
     const dispatch = useDispatch();
-    const dropFilter = useSelector(state => state.middleFilter.isDropFilter);
+    const dropFilter = useSelector(state => state.filters.middle.isDropFilter);
 
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -44,7 +44,7 @@ export default function MiddleSearchBar(props) {
     };
 
     const handleFilterDrop = () => {
-        dispatch(toggleDrop("isDropFilter"))
+        dispatch(toggleDrop('middle', 'isDropFilter'))
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
-import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/middleFilter/middleFilterActions';
+import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/filters/filterActions';
 
 function Popup(props) {
     
@@ -47,7 +47,7 @@ export default function FilterCard(props) {
 
     const dispatch = useDispatch();
     const subcategory = props.subcategory;
-    const advFilters = useSelector((state) => state.middleFilter.filterPayload.affiliatedFilters[subcategory]);
+    const advFilters = useSelector((state) => state.filters.middle.filterPayload.affiliatedFilters[subcategory]);
     const isFilterSelected = advFilters.includes(props.name);
 
     const [popupState, setPopupState] = useState({
@@ -151,9 +151,9 @@ export default function FilterCard(props) {
 
     function handleFilterClick() {
         if (!isFilterSelected) {
-            dispatch(addAdvancedAffiliateFilter(props.name, subcategory));
+            dispatch(addAdvancedAffiliateFilter('middle', props.name, subcategory));
         } else {
-            dispatch(removeAdvancedAffiliateFilter(props.name, subcategory));
+            dispatch(removeAdvancedAffiliateFilter('middle', props.name, subcategory));
         }
     }
 

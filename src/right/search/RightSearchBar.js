@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import RightSearchFilter from "./RightSearchFilter";
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleDrop } from "../../redux/rightFilter/rightFilterActions";
+import { toggleDrop } from "../../redux/filters/filterActions";
 
 export default function RightSearchBar() {
 
@@ -16,7 +16,38 @@ export default function RightSearchBar() {
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
-    const dropFilter = useSelector(state => state.rightFilter.isDropFilter);
+    const dropFilter = useSelector(state => state.filters.news.isDropFilter);
+    const isAdvancedSearch = useSelector(state => state.filters.news.isAdvancedSearch);
+    const rightSpaceSearchBarRef = useRef(null);
+    const rightSpaceFilterRef = useRef(null);
+    const [rightSpaceFilterGeometry, setRightSpaceFilterGeometry] = useState({
+        width: null,
+        position: {
+            top: null,
+            left: null,
+        },
+    });
+
+    const calculateRightSpaceFilterGeometry = () => {
+        if (rightSpaceSearchBarRef.current && rightSpaceFilterRef.current) {
+            const rightSpaceSearchBarBoundingBox = rightSpaceSearchBarRef.current.getBoundingClientRect();
+            const rightSpaceFilterBoundingBox = rightSpaceFilterRef.current.getBoundingClientRect();
+            const rightSpaceWidth = rightSpaceSearchBarBoundingBox.width * .85;
+
+            setRightSpaceFilterGeometry(prevState => ({
+                ...prevState,
+                width: rightSpaceWidth,
+                position: {
+                    top: rightSpaceSearchBarBoundingBox.top - rightSpaceFilterBoundingBox.height - 20,
+                    left: rightSpaceSearchBarBoundingBox.left + (Math.abs(rightSpaceSearchBarBoundingBox.width - rightSpaceWidth) / 2),
+                },
+            }));
+        }
+    };
+
+    useEffect(() => {
+        calculateRightSpaceFilterGeometry()
+    }, [dropFilter, isAdvancedSearch]);
   
     const handleInputFocus = () => {
         setIsInputFocused(true);
@@ -39,11 +70,11 @@ export default function RightSearchBar() {
     };
 
     const handleFilterDrop = () => {
-        dispatch(toggleDrop("isDropFilter"))
+        dispatch(toggleDrop('news', 'isDropFilter'))
     };
   
     return (
-        <div id="rightSpaceSearchBar" className="h-16 w-full bg-fg-white-90 flex justify-center items-center">
+        <div ref={rightSpaceSearchBarRef} className="h-16 w-full bg-fg-white-90 flex justify-center items-center">
             <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
                     id="rightSearchSubmit"
@@ -72,7 +103,7 @@ export default function RightSearchBar() {
                     />
                 </div>
             </form>
-            {dropFilter ? <RightSearchFilter /> : null}
+            {dropFilter ? <RightSearchFilter rightSpaceFilterRef={rightSpaceFilterRef} rightSpaceFilterGeometry={rightSpaceFilterGeometry} /> : null}
         </div>
     );
 }

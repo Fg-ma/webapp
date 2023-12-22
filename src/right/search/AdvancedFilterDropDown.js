@@ -65,7 +65,7 @@ export default function AdvancedFilterDropdown(props) {
         return <FilterCard key={filterInfo.id} identify={filterInfo.id} name={filterInfo.name} subcategory={subcategory} popupRef={popupRef} />
     })
 
-    const advFilters = useSelector((state) => state.rightFilter.filterPayload.affiliatedFilters[subcategory]);
+    const advFilters = useSelector((state) => state.filters.news.filterPayload.affiliatedFilters[subcategory]);
 
     return (
         <div className="relative inline-block text-left w-5/6" ref={dropdownRef}>

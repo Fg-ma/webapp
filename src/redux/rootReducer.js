@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
 import pageStateReducer from './pageState/pageStateReducer';
-import middleFilterReducer from './middleFilter/middleFilterReducer';
-import rightFilterReducer from './rightFilter/rightFilterReducer';
+import filterReducer from './filters/filterReducer';
 
 export const rootReducer = combineReducers({
   page: pageStateReducer,
-  middleFilter: middleFilterReducer,
-  rightFilter: rightFilterReducer,
+  filters: filterReducer,
 })

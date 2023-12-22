@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/rightFilter/rightFilterActions";
+import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/filters/filterActions";
 import AdvancedFilterDropdown from "./AdvancedFilterDropDown";
 
 export default function AdvancedRightSearchFilter(props) {
@@ -15,18 +15,18 @@ export default function AdvancedRightSearchFilter(props) {
 
     const dispatch = useDispatch();
     const { handleFilterFormChange } = props;
-    const formAuthor = useSelector(state => state.rightFilter.filterPayload.author);
-    const formDateRange = useSelector(state => state.rightFilter.filterPayload.dateRange);
+    const formAuthor = useSelector(state => state.filters.news.filterPayload.author);
+    const formDateRange = useSelector(state => state.filters.news.filterPayload.dateRange);
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch());
-        dispatch(clearAdvancedAffiliateFilter('ind'));
-        dispatch(clearAdvancedAffiliateFilter('grp'));
-        dispatch(clearAdvancedAffiliateFilter('org'));
+        dispatch(toggleAdvancedSearch('news'));
+        dispatch(clearAdvancedAffiliateFilter('news', 'ind'));
+        dispatch(clearAdvancedAffiliateFilter('news', 'grp'));
+        dispatch(clearAdvancedAffiliateFilter('news', 'org'));
     };
 
     function emptyAdvAffFilter(subcategory) {
-        dispatch(clearAdvancedAffiliateFilter(subcategory));
+        dispatch(clearAdvancedAffiliateFilter('news', subcategory));
     };
 
     return (

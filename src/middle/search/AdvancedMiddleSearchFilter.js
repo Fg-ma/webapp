@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import AdvancedFilterDropdown from "./AdvancedFilterDropDown";
-import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/middleFilter/middleFilterActions";
+import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/filters/filterActions";
 import AdvancedDateRange from "./AdvancedDateRange";
 
 export default function AdvancedMiddleSearchFilter(props) {
@@ -16,22 +16,22 @@ export default function AdvancedMiddleSearchFilter(props) {
 
     const dispatch = useDispatch();
     const { handleFilterFormChange } = props;
-    const formAuthor = useSelector(state => state.middleFilter.filterPayload.author);
-    const formDateRange = useSelector(state => state.middleFilter.filterPayload.dateRange);
+    const formAuthor = useSelector(state => state.filters.middle.filterPayload.author);
+    const formDateRange = useSelector(state => state.filters.middle.filterPayload.dateRange);
     const [isDateRange, setIsDateRange] = useState(false);
     const dateRangeContainerRef = useRef(null);
     const dateRangeRef = useRef(null);
     const [position, setPosition] = useState(null);
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch());
-        dispatch(clearAdvancedAffiliateFilter('ind'));
-        dispatch(clearAdvancedAffiliateFilter('grp'));
-        dispatch(clearAdvancedAffiliateFilter('org'));
+        dispatch(toggleAdvancedSearch('middle'));
+        dispatch(clearAdvancedAffiliateFilter('middle', 'ind'));
+        dispatch(clearAdvancedAffiliateFilter('middle', 'grp'));
+        dispatch(clearAdvancedAffiliateFilter('middle', 'org'));
     };
 
     function emptyAdvAffFilter(subcategory) {
-        dispatch(clearAdvancedAffiliateFilter(subcategory));
+        dispatch(clearAdvancedAffiliateFilter('middle', subcategory));
     };
 
     const handleDateRange = () => {
@@ -46,7 +46,6 @@ export default function AdvancedMiddleSearchFilter(props) {
         if (dateRangeContainerRef.current && dateRangeRef.current) {
             const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
             const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
-            console.log(containerBoundingBox)
 
             setPosition({
                 top: containerBoundingBox.top + 40,

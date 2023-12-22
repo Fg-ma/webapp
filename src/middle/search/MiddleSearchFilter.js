@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/middleFilter/middleFilterActions";
+import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
 import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
 import AdvancedMiddleSearchFilter from "./AdvancedMiddleSearchFilter";
 
@@ -14,27 +14,27 @@ export default function MiddleSearchFilter() {
     */
 
     const dispatch = useDispatch();
-    const filterFormData = useSelector(state => state.middleFilter.filterPayload);
+    const filterFormData = useSelector(state => state.filters.middle.filterPayload);
 
     function handleFilterFormChange (event) {
         const { name, type, checked, value } = event.target;
-        dispatch(setFilterOption(name, type === 'checkbox' ? checked : value));
+        dispatch(setFilterOption('middle', name, type === 'checkbox' ? checked : value));
     };
 
     function handleApplyFilterOptions () {
-        dispatch(applyFilterOptions(filterFormData));
+        dispatch(applyFilterOptions('middle', filterFormData));
     };
 
     function handleClearFilterForm () {
-        dispatch(clearFilterOptions());
+        dispatch(clearFilterOptions('middle'));
     };
 
     function handleCancelFilterChanges () {
-        dispatch(cancelFilterChanges());
+        dispatch(cancelFilterChanges('middle'));
     };
 
     function handleDrop () {
-        dispatch(toggleDrop("isDropFilter"));
+        dispatch(toggleDrop('middle', 'isDropFilter'));
     };
 
     return (

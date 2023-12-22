@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/rightFilter/rightFilterActions";
+import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
 import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
 import AdvancedRightSearchFilter from "./AdvancedRightSearchFilter";
 import { createPortal } from "react-dom";
 
-export default function RightSearchFilter() {
+export default function RightSearchFilter(props) {
 
     /* 
         Description:   
@@ -14,34 +14,43 @@ export default function RightSearchFilter() {
             Only applied filters will save.
     */
 
+    const { rightSpaceFilterRef, rightSpaceFilterGeometry} = props;
     const dispatch = useDispatch();
-    const filterFormData = useSelector(state => state.rightFilter.filterPayload);
+    const filterFormData = useSelector(state => state.filters.news.filterPayload);
 
     function handleFilterFormChange (event) {
         const { name, type, checked, value } = event.target;
-        dispatch(setFilterOption(name, type === 'checkbox' ? checked : value));
+        dispatch(setFilterOption('news',name, type === 'checkbox' ? checked : value));
     };
 
     function handleApplyFilterOptions () {
-        dispatch(applyFilterOptions(filterFormData));
+        dispatch(applyFilterOptions('news', filterFormData));
     };
 
     function handleClearFilterForm () {
-        dispatch(clearFilterOptions());
+        dispatch(clearFilterOptions('news'));
     };
 
     function handleCancelFilterChanges () {
-        dispatch(cancelFilterChanges());
+        dispatch(cancelFilterChanges('news'));
     };
 
     function handleDrop () {
-        dispatch(toggleDrop("isDropFilter"));
+        dispatch(toggleDrop('news', 'isDropFilter'));
     };
 
     return createPortal(
-        <div className="fixed top-0 left-0 bg-white rounded-md mt-2 shadow-md">
-            <form className="flex h-full m-4">
-                <div className="w-3/5 bg-white flex flex-col pr-6 justify-between">
+        <div 
+            className="fixed bg-white rounded-md mt-2 shadow-md"
+            style={rightSpaceFilterGeometry.position !== null && rightSpaceFilterGeometry.width !== null ? { 
+                top: `${rightSpaceFilterGeometry.position.top}px`, 
+                left: `${rightSpaceFilterGeometry.position.left}px`,
+                width: `${rightSpaceFilterGeometry.width}px`
+            } : null}
+            ref={rightSpaceFilterRef}
+        >
+            <form className="flex flex-col h-full m-4">
+                <div className="bg-white flex flex-col pr-6 justify-between">
                     <div className="flex flex-col space-y-3 pr-6">
                         <p className="text-2xl">Filter by</p>
                         <div className="flex items-center my-4">
@@ -144,6 +153,9 @@ export default function RightSearchFilter() {
                         }
                         </div>
                     </div>
+                    <div className="flex justify-center items-center">
+                        {filterFormData.isAdvancedSearch ? <AdvancedRightSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <AddAdvancedSearchFilter />}
+                    </div>
                     <div className="mt-4">
                         <input 
                             type="button" 
@@ -164,9 +176,6 @@ export default function RightSearchFilter() {
                             onClick={() => { handleCancelFilterChanges(); handleDrop(); }}
                         />
                     </div>
-                </div>
-                <div className="w-2/5 flex justify-center items-center">
-                    {filterFormData.isAdvancedSearch ? <AdvancedRightSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <AddAdvancedSearchFilter />}
                 </div>
             </form>
         </div>,
