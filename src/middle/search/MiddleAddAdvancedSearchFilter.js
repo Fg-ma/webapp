@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
 
-export default function AddAdvancedSearchFilter() {
+export default function MiddleAddAdvancedSearchFilter() {
 
     /* 
         Description:   

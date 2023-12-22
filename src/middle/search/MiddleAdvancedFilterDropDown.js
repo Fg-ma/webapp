@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import FilterCard from "./FilterCard";
+import MiddleFilterCard from "./MiddleFilterCard";
 import { individuals, groups, organizations } from "../../data";
 
-export default function AdvancedFilterDropdown(props) {
+export default function MiddleAdvancedFilterDropdown(props) {
 
     /* 
         Description:   
@@ -25,15 +25,14 @@ export default function AdvancedFilterDropdown(props) {
     const popupRef = useRef(null);
 
     const toggleDropdown = () => {
-      setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
     };
 
     const closeDropdown = (event) => {        
         if (
             dropdownRef.current &&
             !dropdownRef.current.contains(event.target) &&
-            popupRef.current &&
-            !popupRef.current.contains(event.target)
+            (!popupRef.current || !popupRef.current.contains(event.target))
           ) {
             setIsOpen(false);
           }
@@ -62,7 +61,13 @@ export default function AdvancedFilterDropdown(props) {
     }
 
     const filterCards = data.map(filterInfo => {
-        return <FilterCard key={filterInfo.id} identify={filterInfo.id} name={filterInfo.name} subcategory={subcategory} popupRef={popupRef} />
+        return <MiddleFilterCard 
+                    key={filterInfo.id}
+                    identify={filterInfo.id}
+                    name={filterInfo.name}
+                    subcategory={subcategory}
+                    popupRef={popupRef}
+                />
     })
 
     const advFilters = useSelector((state) => state.filters.middle.filterPayload.affiliatedFilters[subcategory]);

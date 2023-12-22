@@ -6,6 +6,7 @@ import MiddleDrop from "./search/MiddleDrop";
 export default function MiddleSpace(props) {
 
     /* 
+    
         Description:   
             Container for everything that happens in the middle space section including 
             MiddleDrop and MiddleVerticalSplitPane.

@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
-import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
-import AdvancedMiddleSearchFilter from "./AdvancedMiddleSearchFilter";
+import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
+import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
 
 export default function MiddleSearchFilter() {
 
@@ -165,7 +165,7 @@ export default function MiddleSearchFilter() {
                     </div>
                 </div>
                 <div className="w-2/5 flex justify-center items-center">
-                    {filterFormData.isAdvancedSearch ? <AdvancedMiddleSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <AddAdvancedSearchFilter />}
+                    {filterFormData.isAdvancedSearch ? <MiddleAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <MiddleAddAdvancedSearchFilter />}
                 </div>
             </form>
         </div>

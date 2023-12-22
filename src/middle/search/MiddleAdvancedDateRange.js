@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-export default function AdvancedDateRange(props) {
+export default function MiddleAdvancedDateRange(props) {
     const { position, dateRangeRef } = props;
     const [selectedRange, setSelectedRange] = useState({ from: null, to: null });
 

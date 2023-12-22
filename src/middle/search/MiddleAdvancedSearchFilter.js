@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import AdvancedFilterDropdown from "./AdvancedFilterDropDown";
+import MiddleAdvancedFilterDropdown from "./MiddleAdvancedFilterDropDown";
 import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/filters/filterActions";
-import AdvancedDateRange from "./AdvancedDateRange";
+import MiddleAdvancedDateRange from "./MiddleAdvancedDateRange";
 
-export default function AdvancedMiddleSearchFilter(props) {
+export default function MiddleAdvancedSearchFilter(props) {
 
     /* 
         Description:   
@@ -75,7 +75,7 @@ export default function AdvancedMiddleSearchFilter(props) {
             <div className="bg-fg-white-85 mx-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
                 <p className="text-base">Affiliated...</p>
                 <div className="w-full flex items-center justify-center">
-                    <AdvancedFilterDropdown subcategory={"ind"} />
+                    <MiddleAdvancedFilterDropdown subcategory={"ind"} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter("ind")}
@@ -84,7 +84,7 @@ export default function AdvancedMiddleSearchFilter(props) {
                     ></button>
                 </div>
                 <div className="w-full flex items-center justify-center">
-                    <AdvancedFilterDropdown subcategory={"grp"} />
+                    <MiddleAdvancedFilterDropdown subcategory={"grp"} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter('grp')}
@@ -93,7 +93,7 @@ export default function AdvancedMiddleSearchFilter(props) {
                     ></button>
                 </div>
                 <div className="w-full flex items-center justify-center">
-                    <AdvancedFilterDropdown subcategory={"org"} />
+                    <MiddleAdvancedFilterDropdown subcategory={"org"} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter('org')}
@@ -102,15 +102,15 @@ export default function AdvancedMiddleSearchFilter(props) {
                     ></button>
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-2">
                 <label htmlFor="author" className="text-base ml-3 cursor-pointer">Author</label>
-                <div className="h-fit flex items-center justify-center mx-2">
+                <div className="h-fit flex items-center justify-center mx-2 -mt-1">
                     <input
                         type="text" 
                         placeholder="Author..."
                         name="author" 
                         id="author"
-                        className="grow bg-white h-8 rounded-md text-sm px-1 -mt-2"
+                        className="grow bg-white h-8 rounded-md text-sm px-1"
                         onChange={handleFilterFormChange}                 
                         value={formAuthor}
                     >
@@ -125,10 +125,10 @@ export default function AdvancedMiddleSearchFilter(props) {
                     ></button>
                 </div>
             </div>
-            <div className="w-full mb-3">
+            <div className="w-full mb-3 mt-2">
                 <label htmlFor="dateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
                 <div ref={dateRangeContainerRef} className="flex items-center justify-center mx-2">
-                    <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden -mt-2">
+                    <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden -mt-1">
                         <input 
                             type="text" 
                             placeholder="mm.dd.yyyy - mm.dd.yyyy" 
@@ -157,7 +157,7 @@ export default function AdvancedMiddleSearchFilter(props) {
                     >
                     </button>
                 </div>
-                {isDateRange && <AdvancedDateRange position={position} dateRangeRef={dateRangeRef} />}
+                {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} />}
             </div>
         </div>
     );

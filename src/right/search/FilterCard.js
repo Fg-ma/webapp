@@ -44,11 +44,10 @@ export default function FilterCard(props) {
         Unique Properties:
             Determines when, how, and where to display popups(portals).
     */
-
+    const { identify, name, subcategory, popupRef } = props;
     const dispatch = useDispatch();
-    const subcategory = props.subcategory;
     const advFilters = useSelector((state) => state.filters.news.filterPayload.affiliatedFilters[subcategory]);
-    const isFilterSelected = advFilters.includes(props.name);
+    const isFilterSelected = advFilters.includes(name);
 
     const [popupState, setPopupState] = useState({
         visible: false,
@@ -58,7 +57,6 @@ export default function FilterCard(props) {
     const isMouseInsideOriginal = useRef(false);
     const isMouseInsidePopup = useRef(false);
     const hoverTimeout = useRef(null);
-    const popupRef = props.popupRef;
     const nameSpanRef = useRef(null);
 
     const isOverflowing = nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth;
@@ -117,7 +115,7 @@ export default function FilterCard(props) {
 
     const handlePopupMouseLeave = (event) => {
         const toElement = event.toElement || event.relatedTarget;
-        const isLeavingToOriginal = toElement && toElement.id === `${subcategory}_${props.identify}`;
+        const isLeavingToOriginal = toElement && toElement.id === `${subcategory}_${identify}`;
 
         isMouseInsidePopup.current = false;
 
@@ -132,7 +130,7 @@ export default function FilterCard(props) {
     };
   
     useEffect(() => {
-        const element = document.getElementById(`${subcategory}_${props.identify}`);
+        const element = document.getElementById(`${subcategory}_${identify}`);
     
         if (element) {
             element.addEventListener('mouseenter', handleMouseEnter);
@@ -147,19 +145,19 @@ export default function FilterCard(props) {
     
         // Return a cleanup function that does nothing if the element is not found
         return () => {};
-    }, [dispatch, props.identify, props.name]);
+    }, [dispatch, identify, name]);
 
     function handleFilterClick() {
         if (!isFilterSelected) {
-            dispatch(addAdvancedAffiliateFilter('news', props.name, subcategory));
+            dispatch(addAdvancedAffiliateFilter('news', name, subcategory));
         } else {
-            dispatch(removeAdvancedAffiliateFilter('news', props.name, subcategory));
+            dispatch(removeAdvancedAffiliateFilter('news', name, subcategory));
         }
     }
 
     return (
         <div
-            id={`${subcategory}_${props.identify}`}
+            id={`${subcategory}_${identify}`}
             className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md hover:bg-fg-secondary decoration-2 underline-offset-8 underline 
                 ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
                 `}
@@ -177,11 +175,11 @@ export default function FilterCard(props) {
                 ref={nameSpanRef}
                 className={'m-2 font-Josefin text-lg select-none truncate'}
             >
-                {props.name}
+                {name}
             </span>
             {popupState.visible && isOverflowing && (
                 <Popup
-                    name={props.name}
+                    name={name}
                     position={popupState.position}
                     onMouseEnter={handlePopupMouseEnter}
                     onMouseLeave={handlePopupMouseLeave}

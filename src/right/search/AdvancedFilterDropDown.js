@@ -32,8 +32,7 @@ export default function AdvancedFilterDropdown(props) {
         if (
             dropdownRef.current &&
             !dropdownRef.current.contains(event.target) &&
-            popupRef.current &&
-            !popupRef.current.contains(event.target)
+            (!popupRef.current || !popupRef.current.contains(event.target))
           ) {
             setIsOpen(false);
           }
@@ -62,7 +61,13 @@ export default function AdvancedFilterDropdown(props) {
     }
 
     const filterCards = data.map(filterInfo => {
-        return <FilterCard key={filterInfo.id} identify={filterInfo.id} name={filterInfo.name} subcategory={subcategory} popupRef={popupRef} />
+        return <FilterCard 
+                    key={filterInfo.id}
+                    identify={filterInfo.id}
+                    name={filterInfo.name}
+                    subcategory={subcategory}
+                    popupRef={popupRef}
+                />
     })
 
     const advFilters = useSelector((state) => state.filters.news.filterPayload.affiliatedFilters[subcategory]);

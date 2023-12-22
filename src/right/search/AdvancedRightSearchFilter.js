@@ -77,15 +77,15 @@ export default function AdvancedRightSearchFilter(props) {
                     ></button>
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-2">
                 <label htmlFor="author" className="text-base ml-3 cursor-pointer">Author</label>
-                <div className="h-fit flex items-center justify-center mx-2">
+                <div className="h-fit flex items-center justify-center mx-2 -mt-1">
                     <input
                         type="text" 
                         placeholder="Author..."
                         name="author" 
                         id="author"
-                        className="grow bg-white h-8 rounded-md text-sm px-1 -mt-2"
+                        className="grow bg-white h-8 rounded-md text-sm px-1"
                         onChange={handleFilterFormChange}                 
                         value={formAuthor}
                     >
@@ -100,10 +100,10 @@ export default function AdvancedRightSearchFilter(props) {
                     ></button>
                 </div>
             </div>
-            <div className="w-full mb-3">
+            <div className="w-full mb-3 mt-2">
                 <label htmlFor="dateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
-                <div className="flex items-center justify-center mx-2">
-                    <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden -mt-2">
+                <div className="flex items-center justify-center mx-2 -mt-1">
+                    <div className="grow bg-white rounded-md flex items-center justify-center overflow-hidden">
                         <input 
                             type="text" 
                             placeholder="mm.dd.yyyy - mm.dd.yyyy" 
