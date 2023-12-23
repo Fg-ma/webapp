@@ -17,7 +17,6 @@ export default function RightSearchBar() {
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
     const dropFilter = useSelector(state => state.filters.news.isDropFilter);
-    const isAdvancedSearch = useSelector(state => state.filters.news.isAdvancedSearch);
     const rightSpaceSearchBarRef = useRef(null);
     const rightSpaceFilterRef = useRef(null);
     const [rightSpaceFilterGeometry, setRightSpaceFilterGeometry] = useState({
@@ -31,23 +30,22 @@ export default function RightSearchBar() {
     const calculateRightSpaceFilterGeometry = () => {
         if (rightSpaceSearchBarRef.current && rightSpaceFilterRef.current) {
             const rightSpaceSearchBarBoundingBox = rightSpaceSearchBarRef.current.getBoundingClientRect();
-            const rightSpaceFilterBoundingBox = rightSpaceFilterRef.current.getBoundingClientRect();
-            const rightSpaceWidth = rightSpaceSearchBarBoundingBox.width * .85;
+            const windowHeight = window.innerHeight;
+            const rightSpaceWidth = rightSpaceSearchBarBoundingBox.width * 0.85;
 
-            setRightSpaceFilterGeometry(prevState => ({
-                ...prevState,
+            setRightSpaceFilterGeometry({
                 width: rightSpaceWidth,
                 position: {
-                    top: rightSpaceSearchBarBoundingBox.top - rightSpaceFilterBoundingBox.height - 20,
+                    bottom: windowHeight - rightSpaceSearchBarBoundingBox.top + 10,
                     left: rightSpaceSearchBarBoundingBox.left + (Math.abs(rightSpaceSearchBarBoundingBox.width - rightSpaceWidth) / 2),
                 },
-            }));
+            });
         }
     };
 
     useEffect(() => {
-        calculateRightSpaceFilterGeometry()
-    }, [dropFilter, isAdvancedSearch]);
+        calculateRightSpaceFilterGeometry();
+    }, [dropFilter]);
   
     const handleInputFocus = () => {
         setIsInputFocused(true);

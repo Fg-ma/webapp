@@ -40,10 +40,11 @@ export default function MiddleSearchFilter() {
     return (
         <div className="w-full bg-white rounded-md mt-2 shadow-md">
             <form className="flex h-full m-4">
-                <div className="w-3/5 bg-white flex flex-col pr-6 justify-between">
-                    <div className="flex flex-col space-y-3 pr-6">
-                        <p className="text-2xl">Filter by</p>
-                        <div className="flex items-center my-4">
+                <div className="bg-white flex flex-col pr-6 justify-between" style={{ width: "55%" }}>
+                    <div>
+                        <p className="text-2xl mb-1">Filter by</p>
+                        <div className="flex flex-col space-y-3">
+                            <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isWhatsCurrent"
@@ -53,8 +54,8 @@ export default function MiddleSearchFilter() {
                             onChange={handleFilterFormChange}
                         />
                         <label htmlFor="isWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
-                        </div>
-                        <div className="flex items-center my-4">
+                            </div>
+                            <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAffiliateActivity"
@@ -64,8 +65,8 @@ export default function MiddleSearchFilter() {
                             onChange={handleFilterFormChange}
                         />
                         <label htmlFor="isAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
-                        </div>
-                        <div className="flex items-center my-4">
+                            </div>
+                            <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAllTimeGreats"
@@ -75,72 +76,73 @@ export default function MiddleSearchFilter() {
                             onChange={handleFilterFormChange}
                         />
                         <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
-                        </div>
-                        <div className="flex items-center justify-between my-4">
-                        <div className="flex items-center">
-                            <input 
-                                type="checkbox"
-                                id="isDatePosted"
-                                name="isDatePosted"
-                                className="w-5 aspect-square cursor-pointer"
-                                checked={filterFormData.isDatePosted}
-                                onChange={handleFilterFormChange}
-                            />
-                            <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
-                        </div>
-                        {filterFormData.isDatePosted && 
-                            <label className="switch">
+                            </div>
+                            <div className="flex items-center justify-between">
+                            <div className="flex items-center">
                                 <input 
-                                    type="checkbox" 
-                                    id="datePostedCheckBox" 
-                                    name="isDatePostedSwitched" 
-                                    checked={filterFormData.isDatePostedSwitched}
+                                    type="checkbox"
+                                    id="isDatePosted"
+                                    name="isDatePosted"
+                                    className="w-5 aspect-square cursor-pointer"
+                                    checked={filterFormData.isDatePosted}
                                     onChange={handleFilterFormChange}
                                 />
-                                <span className="slider round"></span>
-                                <div className="inline w-40">
-                                    <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText newest">Newest</span>
+                                <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
+                            </div>
+                            {filterFormData.isDatePosted && 
+                                <label className="switch">
+                                    <input 
+                                        type="checkbox" 
+                                        id="datePostedCheckBox" 
+                                        name="isDatePostedSwitched" 
+                                        checked={filterFormData.isDatePostedSwitched}
+                                        onChange={handleFilterFormChange}
+                                    />
+                                    <span className="slider round"></span>
+                                    <div className="inline w-40">
+                                        <div className="inline-block w-1/2 text-center">
+                                            <span className="labelText newest">Newest</span>
+                                        </div>
+                                        <div className="inline-block w-1/2 text-center">
+                                            <span className="labelText oldest">Oldest</span>
+                                        </div>
                                     </div>
-                                    <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText oldest">Oldest</span>
-                                    </div>
-                                </div>
-                            </label>
-                        }
-                        </div>
-                        <div className="flex items-center justify-between my-4">
-                        <div className="flex items-center">
-                            <input 
-                                type="checkbox"
-                                id="isPopularity"
-                                name="isPopularity"
-                                className="w-5 aspect-square cursor-pointer"
-                                checked={filterFormData.isPopularity}
-                                onChange={handleFilterFormChange}
-                            />
-                            <label htmlFor="isPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
-                        </div>
-                        {filterFormData.isPopularity &&
-                            <label className="switch">
+                                </label>
+                            }
+                            </div>
+                            <div className="flex items-center justify-between">
+                            <div className="flex items-center">
                                 <input 
-                                    type="checkbox" 
-                                    id="popularityCheckBox"
-                                    name="isPopularitySwitched" 
-                                    checked={filterFormData.isPopularitySwitched}
+                                    type="checkbox"
+                                    id="isPopularity"
+                                    name="isPopularity"
+                                    className="w-5 aspect-square cursor-pointer"
+                                    checked={filterFormData.isPopularity}
                                     onChange={handleFilterFormChange}
                                 />
-                                <span className="slider round"></span>
-                                <div className="inline w-40">
-                                    <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText upVotes">Up Votes</span>
+                                <label htmlFor="isPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
+                            </div>
+                            {filterFormData.isPopularity &&
+                                <label className="switch">
+                                    <input 
+                                        type="checkbox" 
+                                        id="popularityCheckBox"
+                                        name="isPopularitySwitched" 
+                                        checked={filterFormData.isPopularitySwitched}
+                                        onChange={handleFilterFormChange}
+                                    />
+                                    <span className="slider round"></span>
+                                    <div className="inline w-40">
+                                        <div className="inline-block w-1/2 text-center">
+                                            <span className="labelText upVotes">Up Votes</span>
+                                        </div>
+                                        <div className="inline-block w-1/2 text-center">
+                                            <span className="labelText downVotes">Down Votes</span>
+                                        </div>
                                     </div>
-                                    <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText downVotes">Down Votes</span>
-                                    </div>
-                                </div>
-                            </label>
-                        }
+                                </label>
+                            }
+                            </div>
                         </div>
                     </div>
                     <div className="mt-4">
@@ -164,7 +166,7 @@ export default function MiddleSearchFilter() {
                         />
                     </div>
                 </div>
-                <div className="w-2/5 flex justify-center items-center">
+                <div className="flex justify-center items-center" style={{ width: "45%" }}>
                     {filterFormData.isAdvancedSearch ? <MiddleAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <MiddleAddAdvancedSearchFilter />}
                 </div>
             </form>

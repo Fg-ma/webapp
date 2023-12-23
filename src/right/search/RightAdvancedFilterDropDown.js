@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import FilterCard from "./FilterCard";
+import RightFilterCard from "./RightFilterCard";
 import { individuals, groups, organizations } from "../../data";
 
-export default function AdvancedFilterDropdown(props) {
+export default function RightAdvancedFilterDropdown(props) {
 
     /* 
         Description:   
@@ -61,7 +61,7 @@ export default function AdvancedFilterDropdown(props) {
     }
 
     const filterCards = data.map(filterInfo => {
-        return <FilterCard 
+        return <RightFilterCard 
                     key={filterInfo.id}
                     identify={filterInfo.id}
                     name={filterInfo.name}

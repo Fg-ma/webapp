@@ -208,7 +208,7 @@ export default function filterReducer(state = initialState, action) {
                 ...state,
                 [filter]: {
                     ...state[filter],
-                    filterPayload: {
+                    searchFilterHeight: {
                         ...state[filter].filterPayload,
                         affiliatedFilters: {
                             ...state[filter].filterPayload.affiliatedFilters,

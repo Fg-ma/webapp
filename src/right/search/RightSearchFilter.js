@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
-import AddAdvancedSearchFilter from "./AddAdvancedSearchFilter";
-import AdvancedRightSearchFilter from "./AdvancedRightSearchFilter";
+import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
+import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import { createPortal } from "react-dom";
 
 export default function RightSearchFilter(props) {
@@ -14,7 +14,7 @@ export default function RightSearchFilter(props) {
             Only applied filters will save.
     */
 
-    const { rightSpaceFilterRef, rightSpaceFilterGeometry} = props;
+    const { rightSpaceFilterRef, rightSpaceFilterGeometry } = props;
     const dispatch = useDispatch();
     const filterFormData = useSelector(state => state.filters.news.filterPayload);
 
@@ -41,19 +41,19 @@ export default function RightSearchFilter(props) {
 
     return createPortal(
         <div 
-            className="fixed bg-white rounded-md mt-2 shadow-md"
+            className="fixed bg-white rounded-md shadow-md"
             style={rightSpaceFilterGeometry.position !== null && rightSpaceFilterGeometry.width !== null ? { 
-                top: `${rightSpaceFilterGeometry.position.top}px`, 
+                bottom: `${rightSpaceFilterGeometry.position.bottom}px`, 
                 left: `${rightSpaceFilterGeometry.position.left}px`,
                 width: `${rightSpaceFilterGeometry.width}px`
             } : null}
             ref={rightSpaceFilterRef}
         >
             <form className="flex flex-col h-full m-4">
-                <div className="bg-white flex flex-col pr-6 justify-between">
-                    <div className="flex flex-col space-y-3 pr-6">
-                        <p className="text-2xl">Filter by</p>
-                        <div className="flex items-center my-4">
+                <div className="bg-white flex flex-col justify-between">
+                    <div className="flex flex-col space-y-2">
+                        <p className="text-2xl leading-6">Filter by</p>
+                        <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isWhatsCurrent"
@@ -64,7 +64,7 @@ export default function RightSearchFilter(props) {
                         />
                         <label htmlFor="isWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
                         </div>
-                        <div className="flex items-center my-4">
+                        <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAffiliateActivity"
@@ -75,7 +75,7 @@ export default function RightSearchFilter(props) {
                         />
                         <label htmlFor="isAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
                         </div>
-                        <div className="flex items-center my-4">
+                        <div className="flex items-center">
                         <input 
                             type="checkbox"
                             id="isAllTimeGreats"
@@ -86,7 +86,7 @@ export default function RightSearchFilter(props) {
                         />
                         <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
                         </div>
-                        <div className="flex items-center justify-between my-4">
+                        <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
@@ -119,7 +119,7 @@ export default function RightSearchFilter(props) {
                             </label>
                         }
                         </div>
-                        <div className="flex items-center justify-between my-4">
+                        <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
@@ -153,8 +153,8 @@ export default function RightSearchFilter(props) {
                         }
                         </div>
                     </div>
-                    <div className="flex justify-center items-center">
-                        {filterFormData.isAdvancedSearch ? <AdvancedRightSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <AddAdvancedSearchFilter />}
+                    <div className="flex justify-center items-center mt-3">
+                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} rightSpaceFilterRef={rightSpaceFilterRef} /> : <RightAddAdvancedSearchFilter />}
                     </div>
                     <div className="mt-4">
                         <input 

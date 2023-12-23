@@ -36,7 +36,7 @@ function Popup(props) {
     );
 };
 
-export default function FilterCard(props) {
+export default function RightFilterCard(props) {
 
     /* 
         Description:   
