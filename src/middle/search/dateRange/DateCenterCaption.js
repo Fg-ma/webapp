@@ -12,12 +12,14 @@ export default function DateCenteredCaption(props) {
     const [selectedYear, setSelectedYear] = useState(props.displayMonth.getFullYear());
 
     const handleDropMonthChange = (newMonthIndex) => {
+        props.updateRangeStyles();
         setSelectedMonth(newMonthIndex);
         const newDate = new Date(selectedYear, newMonthIndex);
         goToMonth(newDate);
     };
 
     const handleDropYearChange = (newYearIndex) => {
+        props.updateRangeStyles();
         const newYear = years[newYearIndex];
         setSelectedYear(newYear);
         const newDate = new Date(newYear, selectedMonth);
@@ -25,6 +27,7 @@ export default function DateCenteredCaption(props) {
     };
 
     const handleBackMonth = () => {
+        props.updateRangeStyles();
         const previousMonthDate = new Date(props.displayMonth);
         previousMonthDate.setMonth(previousMonthDate.getMonth() - 1);
         setSelectedMonth(previousMonthDate.getMonth());
@@ -33,6 +36,7 @@ export default function DateCenteredCaption(props) {
     };
 
     const handleForwardMonth = () => {
+        props.updateRangeStyles();
         const previousMonthDate = new Date(props.displayMonth);
         previousMonthDate.setMonth(previousMonthDate.getMonth() + 1);
         setSelectedMonth(previousMonthDate.getMonth());

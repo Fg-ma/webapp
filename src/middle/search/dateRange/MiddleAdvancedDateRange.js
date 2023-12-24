@@ -31,7 +31,7 @@ const css = `
     }
 `;
 
-export default function MiddleAdvancedDateRange({ position, dateRangeRef, selectedRange, setSelectedRange, dropdownRef, dropdownDropRef }) {
+export default function MiddleAdvancedDateRange({ position, dateRangeRef, selectedRange, setSelectedRange, dropdownDropRef, updateRangeStyles }) {
     const dispatch = useDispatch()
 
     const toDateString = (date) => {
@@ -82,7 +82,7 @@ export default function MiddleAdvancedDateRange({ position, dateRangeRef, select
                 selected={selectedRange}
                 components={{
                     Caption: ({  ...props }) => (
-                        <DateCenteredCaption dropdownDropRef={dropdownDropRef} {...props} />
+                        <DateCenteredCaption dropdownDropRef={dropdownDropRef} updateRangeStyles={updateRangeStyles} {...props} />
                     ),
                 }}
                 mode="range"

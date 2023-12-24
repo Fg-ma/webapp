@@ -68,51 +68,48 @@ export default function MiddleAdvancedSearchFilter(props) {
     };
 
     useEffect(() => {
+        updateRangeStyles();
         if (typed) {
             setTyped(false);
-            const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
-            let validFrom = regex.test(formDateRange.from);
-            let validTo = regex.test(formDateRange.to);
-            updateFormDateRange(validFrom, validTo);
-            findDateRangeButton(validFrom, validTo);
-        }
-    }, [formDateRange]);
+            updateFormDateRange();
+        };
+    }, [formDateRange, isDateRange]);
 
-    const findDateRangeButton = (validFrom, validTo) => {
+    const updateRangeStyles = () => {
+        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+        let validFrom = regex.test(formDateRange.from);
+        let validTo = regex.test(formDateRange.to);
         if (validFrom && validTo) {
             if (dateRangeRef.current) {
                 setTimeout(() => {
                     const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+                    console.log(buttons);
+                    if (buttons.length) {
+                        console.log("backgr")
+                        const buttonArray = Array.from(buttons);
 
-                    const from = parseInt(formDateRange.from.substring(3, 5), 10).toString();
-                    const to = parseInt(formDateRange.to.substring(3, 5), 10).toString();
+                        buttonArray.forEach((button) => {
+                            button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle");
+                        });
+                        buttonArray[0].classList.add("rdp-day_range_start");
+                        buttonArray[buttons.length - 1].classList.add("rdp-day_range_end");
 
-                    if (parseInt(to, 10) > parseInt(from, 10)) {
-                        buttons.forEach(button => {
-                            if (String(button.innerText) === from) {
-                                button.classList.add("rdp-day_range_start");
-                            } else if (String(button.innerText) === to) {
-                                button.classList.add("rdp-day_range_end");
-                            };
+                        const middleButtons = Array.from(buttons).slice(1, buttons.length - 1);
+
+                        middleButtons.forEach((button) => {
+                            button.classList.add("rdp-day_range_middle")
                         });
-                    } else if (parseInt(to, 10) < parseInt(from, 10)) {
-                        buttons.forEach(button => {
-                            if (String(button.innerText) === from) {
-                                button.classList.add("rdp-day_range_end");
-                            } else if (String(button.innerText) === to) {
-                                button.classList.add("rdp-day_range_start");
-                            } else {
-                                button.classList.add("rdp-day_range_middle")
-                            };
-                        });
-                    };
-                }, 100);
+                    }
+                }, 0);
             }
         };
-      };
+    };
       
 
-    const updateFormDateRange = (validFrom, validTo) => {
+    const updateFormDateRange = () => {
+        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+        let validFrom = regex.test(formDateRange.from);
+        let validTo = regex.test(formDateRange.to);
         if (validFrom && validTo) {
             setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
         } else if (validFrom && !validTo) {
@@ -259,6 +256,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                                         selectedRange={selectedRange} 
                                         setSelectedRange={setSelectedRange} 
                                         dropdownDropRef={dropdownDropRef} 
+                                        updateRangeStyles={updateRangeStyles}
                                     />
                     }
                 </div>
