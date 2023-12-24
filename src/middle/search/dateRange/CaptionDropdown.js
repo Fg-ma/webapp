@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function CaptionDropdown({ options, value, onChange, type }) {
+export default function CaptionDropdown({ options, value, onChange, type, dropdownDropRef }) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -35,7 +35,7 @@ export default function CaptionDropdown({ options, value, onChange, type }) {
                 {type === 'month' ? options[value] : value}
             </button>
             {isOpen && (
-                <div className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
+                <div ref={dropdownDropRef} className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
                     <div className="h-48 overflow-scroll">
                         <ul className="py-1">
                             {options.map((option, index) => (

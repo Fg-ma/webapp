@@ -21,7 +21,10 @@ export default function MiddleAdvancedSearchFilter(props) {
     const [isDateRange, setIsDateRange] = useState(false);
     const dateRangeContainerRef = useRef(null);
     const dateRangeRef = useRef(null);
+    const dropdownDropRef = useRef(null);
     const [position, setPosition] = useState(null);
+    const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
+    const [typed, setTyped] = useState(false);
 
     const handleAdvancedFilter = () => {
         dispatch(toggleAdvancedSearch('middle'));
@@ -54,10 +57,6 @@ export default function MiddleAdvancedSearchFilter(props) {
         }
     };
 
-    
-    const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
-    const [typed, setTyped] = useState(false);
-
     const handleDateRangeChange = (event) => {
         const { name, value } = event.target;  
         if (name == 'from') {
@@ -71,38 +70,49 @@ export default function MiddleAdvancedSearchFilter(props) {
     useEffect(() => {
         if (typed) {
             setTyped(false);
-            updateFormDateRange();
-            findDateRangeButton();
+            const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+            let validFrom = regex.test(formDateRange.from);
+            let validTo = regex.test(formDateRange.to);
+            updateFormDateRange(validFrom, validTo);
+            findDateRangeButton(validFrom, validTo);
         }
     }, [formDateRange]);
 
-    const findDateRangeButton = () => {
-        if (dateRangeRef.current) {
-            const buttons = dateRangeRef.current.querySelectorAll('button[name="day"]');
-    
-            const from = parseInt(formDateRange.from.substring(3, 5), 10).toString();
-            const to = parseInt(formDateRange.to.substring(3, 5), 10).toString();
-            console.log(from, to);
-            console.log(buttons);
-            buttons.forEach(button => {
-                console.log(button.innerText, from, to);
-                if (String(button.innerText) === from) {
-                    console.log("start");
-                    button.classList.add("rdp-day_range_start");
-                } else if (String(button.innerText) === to) {
-                    console.log("end");
-                    button.classList.add("rdp-day_range_end");
-                }
-            });
-        }
-    };
+    const findDateRangeButton = (validFrom, validTo) => {
+        if (validFrom && validTo) {
+            if (dateRangeRef.current) {
+                setTimeout(() => {
+                    const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
 
-    const updateFormDateRange = () => {
-        // Check if formDateRange.from && formDateRange.To is a valid date
-        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
-        let validFrom = regex.test(formDateRange.from);
-        let validTo = regex.test(formDateRange.to);
+                    const from = parseInt(formDateRange.from.substring(3, 5), 10).toString();
+                    const to = parseInt(formDateRange.to.substring(3, 5), 10).toString();
 
+                    if (parseInt(to, 10) > parseInt(from, 10)) {
+                        buttons.forEach(button => {
+                            if (String(button.innerText) === from) {
+                                button.classList.add("rdp-day_range_start");
+                            } else if (String(button.innerText) === to) {
+                                button.classList.add("rdp-day_range_end");
+                            };
+                        });
+                    } else if (parseInt(to, 10) < parseInt(from, 10)) {
+                        buttons.forEach(button => {
+                            if (String(button.innerText) === from) {
+                                button.classList.add("rdp-day_range_end");
+                            } else if (String(button.innerText) === to) {
+                                button.classList.add("rdp-day_range_start");
+                            } else {
+                                button.classList.add("rdp-day_range_middle")
+                            };
+                        });
+                    };
+                }, 100);
+            }
+        };
+      };
+      
+
+    const updateFormDateRange = (validFrom, validTo) => {
         if (validFrom && validTo) {
             setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
         } else if (validFrom && !validTo) {
@@ -113,7 +123,10 @@ export default function MiddleAdvancedSearchFilter(props) {
     };
 
     const handleClickOutside = (event) => {
-        if (dateRangeRef.current && !dateRangeRef.current.contains(event.target) && dateRangeContainerRef.current && !dateRangeContainerRef.current.contains(event.target)) {
+        if (dateRangeRef.current && !dateRangeRef.current.contains(event.target) && 
+            dateRangeContainerRef.current && !dateRangeContainerRef.current.contains(event.target) &&
+            dropdownDropRef.current && !dropdownDropRef.current.contains(event.target)
+            ) {
             setIsDateRange(false);
         }
     }
@@ -240,7 +253,14 @@ export default function MiddleAdvancedSearchFilter(props) {
                         >
                         </button>
                     </div>
-                    {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} selectedRange={selectedRange} setSelectedRange={setSelectedRange} setIsDateRange={setIsDateRange} />}
+                    {isDateRange && <MiddleAdvancedDateRange 
+                                        position={position} 
+                                        dateRangeRef={dateRangeRef} 
+                                        selectedRange={selectedRange} 
+                                        setSelectedRange={setSelectedRange} 
+                                        dropdownDropRef={dropdownDropRef} 
+                                    />
+                    }
                 </div>
             </div>
         </div>

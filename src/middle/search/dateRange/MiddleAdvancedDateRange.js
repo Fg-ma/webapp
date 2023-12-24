@@ -31,7 +31,7 @@ const css = `
     }
 `;
 
-export default function MiddleAdvancedDateRange({ position, dateRangeRef, selectedRange, setSelectedRange, setIsDateRange }) {
+export default function MiddleAdvancedDateRange({ position, dateRangeRef, selectedRange, setSelectedRange, dropdownRef, dropdownDropRef }) {
     const dispatch = useDispatch()
 
     const toDateString = (date) => {
@@ -81,7 +81,9 @@ export default function MiddleAdvancedDateRange({ position, dateRangeRef, select
             <DayPicker
                 selected={selectedRange}
                 components={{
-                    Caption: DateCenteredCaption,
+                    Caption: ({  ...props }) => (
+                        <DateCenteredCaption dropdownDropRef={dropdownDropRef} {...props} />
+                    ),
                 }}
                 mode="range"
                 onDayClick={handleDayClick}
