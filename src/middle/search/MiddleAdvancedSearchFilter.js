@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import MiddleAdvancedFilterDropdown from "./MiddleAdvancedFilterDropDown";
 import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from "../../redux/filters/filterActions";
-import MiddleAdvancedDateRange from "./MiddleAdvancedDateRange";
+import MiddleAdvancedFilterDropdown from "./MiddleAdvancedFilterDropDown";
+import MiddleAdvancedDateRange from "./dateRange/MiddleAdvancedDateRange";
 
 export default function MiddleAdvancedSearchFilter(props) {
 
@@ -72,8 +72,30 @@ export default function MiddleAdvancedSearchFilter(props) {
         if (typed) {
             setTyped(false);
             updateFormDateRange();
+            findDateRangeButton();
         }
     }, [formDateRange]);
+
+    const findDateRangeButton = () => {
+        if (dateRangeRef.current) {
+            const buttons = dateRangeRef.current.querySelectorAll('button[name="day"]');
+    
+            const from = parseInt(formDateRange.from.substring(3, 5), 10).toString();
+            const to = parseInt(formDateRange.to.substring(3, 5), 10).toString();
+            console.log(from, to);
+            console.log(buttons);
+            buttons.forEach(button => {
+                console.log(button.innerText, from, to);
+                if (String(button.innerText) === from) {
+                    console.log("start");
+                    button.classList.add("rdp-day_range_start");
+                } else if (String(button.innerText) === to) {
+                    console.log("end");
+                    button.classList.add("rdp-day_range_end");
+                }
+            });
+        }
+    };
 
     const updateFormDateRange = () => {
         // Check if formDateRange.from && formDateRange.To is a valid date
@@ -89,6 +111,19 @@ export default function MiddleAdvancedSearchFilter(props) {
             setSelectedRange({ ...selectedRange, to: formDateRange.to });
         }
     };
+
+    const handleClickOutside = (event) => {
+        if (dateRangeRef.current && !dateRangeRef.current.contains(event.target) && dateRangeContainerRef.current && !dateRangeContainerRef.current.contains(event.target)) {
+            setIsDateRange(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="h-full w-full bg-fg-white-95 rounded-lg">
@@ -205,7 +240,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                         >
                         </button>
                     </div>
-                    {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} selectedRange={selectedRange} setSelectedRange={setSelectedRange} />}
+                    {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} selectedRange={selectedRange} setSelectedRange={setSelectedRange} setIsDateRange={setIsDateRange} />}
                 </div>
             </div>
         </div>
