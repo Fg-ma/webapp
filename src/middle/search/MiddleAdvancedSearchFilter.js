@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import MiddleAdvancedFilterDropdown from "./MiddleAdvancedFilterDropDown";
-import { toggleAdvancedSearch, clearAdvancedAffiliateFilter } from "../../redux/filters/filterActions";
+import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from "../../redux/filters/filterActions";
 import MiddleAdvancedDateRange from "./MiddleAdvancedDateRange";
 
 export default function MiddleAdvancedSearchFilter(props) {
@@ -51,6 +51,42 @@ export default function MiddleAdvancedSearchFilter(props) {
                 top: containerBoundingBox.top + 40,
                 left: containerBoundingBox.left - (Math.abs(containerBoundingBox.width - dateRangeBoundingBox.width) / 2),
             });
+        }
+    };
+
+    
+    const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
+    const [typed, setTyped] = useState(false);
+
+    const handleDateRangeChange = (event) => {
+        const { name, value } = event.target;  
+        if (name == 'from') {
+            dispatch(setDateRange('middle', value, formDateRange.to));
+        } else if (name == 'to') {
+            dispatch(setDateRange('middle', formDateRange.from, value));
+        }
+        setTyped(true);
+    };
+
+    useEffect(() => {
+        if (typed) {
+            setTyped(false);
+            updateFormDateRange();
+        }
+    }, [formDateRange]);
+
+    const updateFormDateRange = () => {
+        // Check if formDateRange.from && formDateRange.To is a valid date
+        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+        let validFrom = regex.test(formDateRange.from);
+        let validTo = regex.test(formDateRange.to);
+
+        if (validFrom && validTo) {
+            setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
+        } else if (validFrom && !validTo) {
+            setSelectedRange({ ...selectedRange, from: formDateRange.from });
+        } else if (!validFrom && validTo) {
+            setSelectedRange({ ...selectedRange, to: formDateRange.to });
         }
     };
 
@@ -111,7 +147,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                             placeholder="Author..."
                             name="author" 
                             id="author"
-                            className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D"
+                            className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                             onChange={handleFilterFormChange}                 
                             value={formAuthor}
                         >
@@ -132,12 +168,23 @@ export default function MiddleAdvancedSearchFilter(props) {
                         <div className="grow bg-white rounded-md flex items-center justify-start">
                             <input 
                                 type="text" 
-                                placeholder="mm.dd.yyyy - mm.dd.yyyy" 
-                                name="dateRange"
+                                placeholder="mm.dd.yyyy" 
+                                name="from"
                                 id="dateRange"
-                                className="grow bg-white h-8 text-sm px-1 cursor-pointer rounded-md font-K2D"
-                                onChange={handleFilterFormChange}                 
-                                value={formDateRange}
+                                className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
+                                onChange={handleDateRangeChange}                 
+                                value={formDateRange.from}
+                            >
+                            </input>
+                            <p className="grow text-center text-sm font-K2D">to</p>
+                            <input 
+                                type="text" 
+                                placeholder="mm.dd.yyyy" 
+                                name="to"
+                                id="dateRange"
+                                className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
+                                onChange={handleDateRangeChange}                 
+                                value={formDateRange.to}
                             >
                             </input>
                             <button
@@ -158,7 +205,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                         >
                         </button>
                     </div>
-                    {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} />}
+                    {isDateRange && <MiddleAdvancedDateRange position={position} dateRangeRef={dateRangeRef} selectedRange={selectedRange} setSelectedRange={setSelectedRange} />}
                 </div>
             </div>
         </div>

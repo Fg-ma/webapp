@@ -1,4 +1,4 @@
-import { TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, UPDATE_SEARCH_FILTER_HEIGHT } from './filterTypes';
+import { TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, SET_DATE_RANGE } from './filterTypes';
 
 export const toggleDrop = (filter, dropType) => ({
     type: TOGGLE_DROP,
@@ -43,4 +43,9 @@ export const removeAdvancedAffiliateFilter = (filter, removeAdvancedAffiliateFil
 export const clearAdvancedAffiliateFilter = ( filter, clearSubcategory ) => ({
     type: CLEAR_ADVANCED_AFFILIATED_FILTER,
     payload: { filter, clearSubcategory },
+});
+
+export const setDateRange = ( filter, from, to ) => ({
+    type: SET_DATE_RANGE,
+    payload: { filter, from, to },
 });

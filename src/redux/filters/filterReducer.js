@@ -1,4 +1,4 @@
-import { TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER } from './filterTypes';
+import { TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, SET_DATE_RANGE } from './filterTypes';
 
 const initialState = {
     middle: {
@@ -19,7 +19,10 @@ const initialState = {
                 org: [],
             },
             author: '',
-            dateRange: '',
+            dateRange: {
+                from: '',
+                to: '',
+            },
         },
         appliedFilterOptions: null,
     },
@@ -230,6 +233,24 @@ export default function filterReducer(state = initialState, action) {
                         affiliatedFilters: {
                             ...state[filter].filterPayload.affiliatedFilters,
                             [clearSubcategory]: [],
+                        },
+                    },
+                },
+            };
+        }
+
+        case SET_DATE_RANGE: {
+            const { filter, from, to } = action.payload;       
+            return {
+                ...state,
+                [filter]: {
+                    ...state[filter],
+                    filterPayload: {
+                        ...state[filter].filterPayload,
+                        dateRange: {
+                            ...state[filter].filterPayload.dateRange,
+                            from: from,
+                            to, to,
                         },
                     },
                 },
