@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function CaptionDropdown({ options, value, onChange, type, dropdownDropRef }) {
-    const [isOpen, setIsOpen] = useState(false);
+export default function CaptionDropdown({ options, value, onChange, type }) {
+    const [isCaptionDropOpen, setIsCaptionDropOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     const handleToggle = () => {
-        setIsOpen(!isOpen);
+        setIsCaptionDropOpen(!isCaptionDropOpen);
     };
 
     const handleSelect = (option) => {
         onChange(option);
-        setIsOpen(false);
+        setIsCaptionDropOpen(false);
     };
 
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setIsOpen(false);
+            setIsCaptionDropOpen(false);
         }
     };
 
@@ -34,8 +34,8 @@ export default function CaptionDropdown({ options, value, onChange, type, dropdo
             >
                 {type === 'month' ? options[value] : value}
             </button>
-            {isOpen && (
-                <div ref={dropdownDropRef} className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
+            {isCaptionDropOpen && (
+                <div className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
                     <div className="h-48 overflow-scroll">
                         <ul className="py-1">
                             {options.map((option, index) => (

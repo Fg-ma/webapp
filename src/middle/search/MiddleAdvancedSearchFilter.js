@@ -21,7 +21,6 @@ export default function MiddleAdvancedSearchFilter(props) {
     const [isDateRange, setIsDateRange] = useState(false);
     const dateRangeContainerRef = useRef(null);
     const dateRangeRef = useRef(null);
-    const dropdownDropRef = useRef(null);
     const [position, setPosition] = useState(null);
     const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
     const [typed, setTyped] = useState(false);
@@ -37,7 +36,7 @@ export default function MiddleAdvancedSearchFilter(props) {
         dispatch(clearAdvancedAffiliateFilter('middle', subcategory));
     };
 
-    const handleDateRange = () => {
+    const toggleDateRange = () => {
         setIsDateRange(prev => !prev);
     };
 
@@ -63,6 +62,8 @@ export default function MiddleAdvancedSearchFilter(props) {
             dispatch(setDateRange('middle', value, formDateRange.to));
         } else if (name == 'to') {
             dispatch(setDateRange('middle', formDateRange.from, value));
+        } else if (name == "clearDateRange") {
+            dispatch(setDateRange('middle', '', ''));
         }
         setTyped(true);
     };
@@ -83,9 +84,8 @@ export default function MiddleAdvancedSearchFilter(props) {
             if (dateRangeRef.current) {
                 setTimeout(() => {
                     const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
-                    console.log(buttons);
+                    
                     if (buttons.length) {
-                        console.log("backgr")
                         const buttonArray = Array.from(buttons);
 
                         buttonArray.forEach((button) => {
@@ -103,8 +103,33 @@ export default function MiddleAdvancedSearchFilter(props) {
                 }, 0);
             }
         };
-    };
-      
+        if (!formDateRange.from && !formDateRange.to) {
+        
+            if (dateRangeRef.current) {
+                const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+
+                if (buttons.length) {
+                    const buttonArray = Array.from(buttons);
+
+                    buttonArray.forEach((button) => {
+                        button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle", "selected");
+                    });
+                };
+            };
+        } else if (formDateRange.from && !formDateRange.to) {
+            if (dateRangeRef.current) {
+                const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+
+                if (buttons.length) {
+                    const buttonArray = Array.from(buttons);
+
+                    buttonArray.forEach((button) => {
+                        button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle", "selected");
+                    });
+                };
+            };
+        }
+    };      
 
     const updateFormDateRange = () => {
         const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
@@ -119,21 +144,43 @@ export default function MiddleAdvancedSearchFilter(props) {
         }
     };
 
-    const handleClickOutside = (event) => {
-        if (dateRangeRef.current && !dateRangeRef.current.contains(event.target) && 
-            dateRangeContainerRef.current && !dateRangeContainerRef.current.contains(event.target) &&
-            dropdownDropRef.current && !dropdownDropRef.current.contains(event.target)
-            ) {
-            setIsDateRange(false);
-        }
-    }
-
     useEffect(() => {
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
+        const handleClickOutside = (event) => {
+            if (isDateRange) {
+                const parentElement = dateRangeRef.current;
+                
+                if (
+                    parentElement &&
+                    !parentElement.contains(event.target) &&
+                    !isDescendantOf(parentElement, event.target) &&
+                    dateRangeContainerRef.current &&
+                    !dateRangeContainerRef.current.contains(event.target)
+                ) {
+                    setIsDateRange(false);
+                }
+            }
         };
-    }, []);
+      
+        const isDescendantOf = (parent, child) => {
+            let node = child;
+            while (node !== null) {
+                if (node === parent) {
+                    return true;
+                }
+                node = node.parentElement;
+            }
+            return false;
+        };
+      
+        // Attach the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+      
+        // Detach the event listener when the component is unmounted
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDateRange]);
+  
 
     return (
         <div className="h-full w-full bg-fg-white-95 rounded-lg">
@@ -236,16 +283,16 @@ export default function MiddleAdvancedSearchFilter(props) {
                                 type="button"
                                 className="h-8 aspect-square bg-no-repeat bg-center"
                                 style={{ backgroundImage: "url('assets/icons/dateRangeCalendar.svg')"}}
-                                onClick={handleDateRange}
+                                onClick={toggleDateRange}
                             >
                             </button>
                         </div>
                         <button
                                 type="button"
-                                name="dateRange"
+                                name="clearDateRange"
                                 className="h-8 aspect-square bg-no-repeat bg-center ml-1"
                                 style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                                onClick={handleFilterFormChange}
+                                onClick={handleDateRangeChange}
                                 value=""
                         >
                         </button>
@@ -255,7 +302,6 @@ export default function MiddleAdvancedSearchFilter(props) {
                                         dateRangeRef={dateRangeRef} 
                                         selectedRange={selectedRange} 
                                         setSelectedRange={setSelectedRange} 
-                                        dropdownDropRef={dropdownDropRef} 
                                         updateRangeStyles={updateRangeStyles}
                                     />
                     }
