@@ -3,7 +3,7 @@ import "./middleSpace.css";
 import MiddleVerticalSplitPane from "./MiddleVerticalSplitPane";
 import MiddleDrop from "./search/MiddleDrop";
 
-export default function MiddleSpace(props) {
+export default function MiddleSpace({ middleSpaceContainerRef }) {
 
     /* 
     
@@ -13,8 +13,6 @@ export default function MiddleSpace(props) {
         Unique Properties:
             N/A
     */
-
-    const { middleSpaceContainerRef } = props;
 
     return (
         <div id="middleSpace" className="rounded-xl h-4/5 relative">

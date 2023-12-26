@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from "../../redux/filters/filterActions";
-import MiddleAdvancedFilterDropdown from "./MiddleAdvancedFilterDropDown";
-import MiddleAdvancedDateRange from "./dateRange/MiddleAdvancedDateRange";
+import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
+import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
-export default function MiddleAdvancedSearchFilter(props) {
+export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
 
     /* 
         Description:   
@@ -15,7 +15,6 @@ export default function MiddleAdvancedSearchFilter(props) {
     */
 
     const dispatch = useDispatch();
-    const { handleFilterFormChange } = props;
     const formAuthor = useSelector(state => state.filters.middle.filterPayload.author);
     const formDateRange = useSelector(state => state.filters.middle.filterPayload.dateRange);
     const [isDateRange, setIsDateRange] = useState(false);
@@ -25,6 +24,7 @@ export default function MiddleAdvancedSearchFilter(props) {
     const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
     const [typed, setTyped] = useState(false);
 
+    // Handles closeing the advanced search filter
     const handleAdvancedFilter = () => {
         dispatch(toggleAdvancedSearch('middle'));
         dispatch(clearAdvancedAffiliateFilter('middle', 'ind'));
@@ -32,19 +32,16 @@ export default function MiddleAdvancedSearchFilter(props) {
         dispatch(clearAdvancedAffiliateFilter('middle', 'org'));
     };
 
-    function emptyAdvAffFilter(subcategory) {
+    // Handles clearing the values of the dropdowns depending on what subcategory is passed in
+    const emptyAdvAffFilter = (subcategory) => {
         dispatch(clearAdvancedAffiliateFilter('middle', subcategory));
     };
 
-    const toggleDateRange = () => {
-        setIsDateRange(prev => !prev);
-    };
-
+    /* 
+        Calculates what position the date range create portal should appear in and sets the position 
+        state which is then passed down to the date range component
+    */
     useEffect(() => {
-        calculateDateRangePosition();
-    }, [isDateRange]);
-    
-    const calculateDateRangePosition = () => {
         if (dateRangeContainerRef.current && dateRangeRef.current) {
             const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
             const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
@@ -54,8 +51,27 @@ export default function MiddleAdvancedSearchFilter(props) {
                 left: containerBoundingBox.left - (Math.abs(containerBoundingBox.width - dateRangeBoundingBox.width) / 2),
             });
         }
+    }, [isDateRange]);
+
+    const toggleDateRange = () => {
+        setIsDateRange(prev => !prev);
     };
 
+    // Handles any typed changes to the date range and dispatches as necessary to the local state
+    const updateFormDateRange = () => {
+        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+        let validFrom = regex.test(formDateRange.from);
+        let validTo = regex.test(formDateRange.to);
+        if (validFrom && validTo) {
+            setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
+        } else if (validFrom && !validTo) {
+            setSelectedRange({ ...selectedRange, from: formDateRange.from });
+        } else if (!validFrom && validTo) {
+            setSelectedRange({ ...selectedRange, to: formDateRange.to });
+        }
+    };
+
+    // Handles any typed changes to the date range and dispatches as necessary to the redux state
     const handleDateRangeChange = (event) => {
         const { name, value } = event.target;  
         if (name == 'from') {
@@ -68,14 +84,10 @@ export default function MiddleAdvancedSearchFilter(props) {
         setTyped(true);
     };
 
-    useEffect(() => {
-        updateRangeStyles();
-        if (typed) {
-            setTyped(false);
-            updateFormDateRange();
-        };
-    }, [formDateRange, isDateRange]);
-
+    /* 
+        If a valid range is in state then it will ensure that the correct classes are applied to 
+        the correct elements it is also passed down to elements in the drop down
+    */
     const updateRangeStyles = () => {
         const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
         let validFrom = regex.test(formDateRange.from);
@@ -116,34 +128,18 @@ export default function MiddleAdvancedSearchFilter(props) {
                     });
                 };
             };
-        } else if (formDateRange.from && !formDateRange.to) {
-            if (dateRangeRef.current) {
-                const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+        } 
+    };   
+    
+    useEffect(() => {
+        updateRangeStyles();
+        if (typed) {
+            setTyped(false);
+            updateFormDateRange();
+        };
+    }, [formDateRange, isDateRange]);
 
-                if (buttons.length) {
-                    const buttonArray = Array.from(buttons);
-
-                    buttonArray.forEach((button) => {
-                        button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle", "selected");
-                    });
-                };
-            };
-        }
-    };      
-
-    const updateFormDateRange = () => {
-        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
-        let validFrom = regex.test(formDateRange.from);
-        let validTo = regex.test(formDateRange.to);
-        if (validFrom && validTo) {
-            setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
-        } else if (validFrom && !validTo) {
-            setSelectedRange({ ...selectedRange, from: formDateRange.from });
-        } else if (!validFrom && validTo) {
-            setSelectedRange({ ...selectedRange, to: formDateRange.to });
-        }
-    };
-
+    // Handles closing the date range dropdown when the mouse clicks out of it
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (isDateRange) {
@@ -172,16 +168,13 @@ export default function MiddleAdvancedSearchFilter(props) {
             return false;
         };
       
-        // Attach the event listener
         document.addEventListener("mousedown", handleClickOutside);
-      
-        // Detach the event listener when the component is unmounted
+
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isDateRange]);
   
-
     return (
         <div className="h-full w-full bg-fg-white-95 rounded-lg">
             <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
@@ -204,7 +197,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                 <div className="bg-fg-white-85 p-2 rounded-md w-full">
                     <p className="text-base">Affiliated...</p>
                     <div className="w-full flex items-center justify-start mb-2">
-                        <MiddleAdvancedFilterDropdown subcategory={"ind"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter("ind")}
@@ -213,7 +206,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                         ></button>
                     </div>
                     <div className="w-full flex items-center justify-start my-2">
-                        <MiddleAdvancedFilterDropdown subcategory={"grp"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter('grp')}
@@ -222,7 +215,7 @@ export default function MiddleAdvancedSearchFilter(props) {
                         ></button>
                     </div>
                     <div className="w-full flex items-center justify-start mt-2">
-                        <MiddleAdvancedFilterDropdown subcategory={"org"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter('org')}
@@ -297,7 +290,8 @@ export default function MiddleAdvancedSearchFilter(props) {
                         >
                         </button>
                     </div>
-                    {isDateRange && <MiddleAdvancedDateRange 
+                    {isDateRange && <AdvancedDateRange 
+                                        filter={'middle'}
                                         position={position} 
                                         dateRangeRef={dateRangeRef} 
                                         selectedRange={selectedRange} 

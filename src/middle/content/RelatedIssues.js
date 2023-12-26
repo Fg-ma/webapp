@@ -22,15 +22,15 @@ export default function RelatedIssues() {
     )
 }
 
-function RelatedIssuesCard(props) {
+function RelatedIssuesCard({ title, affResponses }) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-24 flex items-center rounded-md">
             <div className="w-16 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
                 <p>pic</p>
             </div>
             <div className="m-5 w-full truncate">
-                <p className="font-Josefin text-xl font- truncate">{props.title}</p>
-                <p className="font-K2D text-sm text-fg-black-30 truncate">Affiliates' responses: {props.affResponses}</p>
+                <p className="font-Josefin text-xl font- truncate">{title}</p>
+                <p className="font-K2D text-sm text-fg-black-30 truncate">Affiliates' responses: {affResponses}</p>
             </div>
         </div>
     )

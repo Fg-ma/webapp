@@ -4,9 +4,18 @@ import { useNavigation } from 'react-day-picker';
 import CaptionDropdown from "./CaptionDropdown";
 
 const months = Array.from({ length: 12 }, (_, i) => format(new Date(0, i), "MMMM"));
-const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - 25 + i);
+const years = Array.from({ length: new Date().getFullYear() - 1999 + 1 }, (_, i) => 1999 + i);
 
 export default function DateCenteredCaption(props) {
+
+    /* 
+        Description:   
+            Creates the caption for the caption for the date range dropdown. Places the date centered 
+            between the forward and back arrows.
+        Unique Properties:
+            Utilizes the month and year arrays for option choices.
+    */
+
     const { goToMonth, nextMonth, previousMonth } = useNavigation();
     const [selectedMonth, setSelectedMonth] = useState(props.displayMonth.getMonth());
     const [selectedYear, setSelectedYear] = useState(props.displayMonth.getFullYear());

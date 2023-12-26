@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
 import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/filters/filterActions';
 
-function Popup(props) {
+function Popup({ name, position, onMouseEnter, onMouseLeave, handleFilterClick, popupRef, isFilterSelected, subcategory }) {
     
     /* 
         Description:   
@@ -14,8 +14,6 @@ function Popup(props) {
             and doesn't switch to fg-secondary as the background when hovered over.
     */
 
-    const { name, position, onMouseEnter, onMouseLeave, popupRef, isFilterSelected, subcategory } = props;
-
     return createPortal(
         <div
             id={`${subcategory}Popup_${name}`}
@@ -25,6 +23,7 @@ function Popup(props) {
             style={{ top: `${position.top}px`, left: `${position.left}px` }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            onClick={handleFilterClick}
             ref={popupRef}
         >
             <div className="w-12 aspect-square bg-fg-white-85 mr-2 rounded-md grid place-items-center flex-shrink-0">
@@ -36,7 +35,7 @@ function Popup(props) {
     );
 };
 
-export default function RightFilterCard(props) {
+export default function FilterCard({ filter, identify, name, subcategory, popupRef }) {
 
     /* 
         Description:   
@@ -44,21 +43,18 @@ export default function RightFilterCard(props) {
         Unique Properties:
             Determines when, how, and where to display popups(portals).
     */
-    const { identify, name, subcategory, popupRef } = props;
+   
     const dispatch = useDispatch();
-    const advFilters = useSelector((state) => state.filters.news.filterPayload.affiliatedFilters[subcategory]);
+    const advFilters = useSelector((state) => state.filters[filter].filterPayload.affiliatedFilters[subcategory]);
     const isFilterSelected = advFilters.includes(name);
-
     const [popupState, setPopupState] = useState({
         visible: false,
         position: { top: 0, left: 0 },
     });
-
-    const isMouseInsideOriginal = useRef(false);
-    const isMouseInsidePopup = useRef(false);
+    const isMouseInsideCard = useRef(true);
+    const [isMouseInsidePopup, setIsMouseInsidePopup] = useState(false);
     const hoverTimeout = useRef(null);
     const nameSpanRef = useRef(null);
-
     const isOverflowing = nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth;
 
     const calculatePopupPosition = (event) => {
@@ -69,14 +65,13 @@ export default function RightFilterCard(props) {
         };
     };
 
+    // Handles the mouse entering a card and waits 1.5 seconds to set the popup state to visible
     const handleMouseEnter = (event) => {
-        isMouseInsideOriginal.current = true;
-
-        // Clear the previous timeout (if any)
+        isMouseInsideCard.current = true;
         clearTimeout(hoverTimeout.current);
-        if (!isMouseInsidePopup.current) {
+        if (!isMouseInsidePopup) {
             hoverTimeout.current = setTimeout(() => {
-                if (isMouseInsideOriginal.current) {
+                if (isMouseInsideCard.current) {
                     setPopupState({
                         visible: true,
                         position: calculatePopupPosition(event),
@@ -84,7 +79,7 @@ export default function RightFilterCard(props) {
                 }
             }, 1500);
         } else {
-            if (isMouseInsideOriginal.current) {
+            if (isMouseInsideCard.current) {
                 setPopupState({
                     visible: true,
                     position: calculatePopupPosition(event),
@@ -93,41 +88,29 @@ export default function RightFilterCard(props) {
         }
     };
 
-    const handleMouseLeave = (event) => {
-        const toElement = event.toElement || event.relatedTarget;
-    
-        isMouseInsideOriginal.current = false;
+    const handleMouseLeave = () => {
+        isMouseInsideCard.current = false;
         clearTimeout(hoverTimeout.current);
-    
-        // Check if toElement is a valid Node and popupRef.current exists and toElement is not null
-        if (toElement instanceof Node && popupRef.current && !isMouseInsidePopup.current && !popupRef.current.contains(toElement)) {
-            setPopupState({
-                visible: false,
-                position: { top: 0, left: 0 },
-            });
-        }
     };
 
     const handlePopupMouseEnter = () => {
-        isMouseInsidePopup.current = true;
+        setIsMouseInsidePopup(true);
         clearTimeout(hoverTimeout.current);
     };
 
-    const handlePopupMouseLeave = (event) => {
-        const toElement = event.toElement || event.relatedTarget;
-        const isLeavingToOriginal = toElement && toElement.id === `${subcategory}_${identify}`;
-
-        isMouseInsidePopup.current = false;
-
+    const handlePopupMouseLeave = () => {
+        setIsMouseInsidePopup(false);
         clearTimeout(hoverTimeout.current);
+    };
 
-        if (!isMouseInsideOriginal.current && !isMouseInsidePopup.current && !isLeavingToOriginal) {
+    useEffect(() => {
+        if (!isMouseInsidePopup) {
             setPopupState({
                 visible: false,
                 position: { top: 0, left: 0 },
             });
         }
-    };
+    }, [isMouseInsidePopup]);
   
     useEffect(() => {
         const element = document.getElementById(`${subcategory}_${identify}`);
@@ -142,16 +125,15 @@ export default function RightFilterCard(props) {
                 element.removeEventListener('mouseleave', handleMouseLeave);
             };
         }
-    
-        // Return a cleanup function that does nothing if the element is not found
+        
         return () => {};
-    }, [dispatch, identify, name]);
+    }, [identify, name]);
 
     function handleFilterClick() {
         if (!isFilterSelected) {
-            dispatch(addAdvancedAffiliateFilter('news', name, subcategory));
+            dispatch(addAdvancedAffiliateFilter(filter, name, subcategory));
         } else {
-            dispatch(removeAdvancedAffiliateFilter('news', name, subcategory));
+            dispatch(removeAdvancedAffiliateFilter(filter, name, subcategory));
         }
     }
 
@@ -163,7 +145,7 @@ export default function RightFilterCard(props) {
                 `}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleFilterClick}
+            onClick={!popupState.visible ? handleFilterClick : () => {}}
         >   
             
             <div className={`w-12 aspect-square bg-fg-white-85 mr-2 grid place-items-center flex-shrink-0
@@ -183,6 +165,7 @@ export default function RightFilterCard(props) {
                     position={popupState.position}
                     onMouseEnter={handlePopupMouseEnter}
                     onMouseLeave={handlePopupMouseLeave}
+                    handleFilterClick={handleFilterClick}
                     popupRef={popupRef}
                     isFilterSelected={isFilterSelected}
                     subcategory={subcategory}

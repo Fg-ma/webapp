@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createPortal } from 'react-dom';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { setDateRange } from "../../../redux/filters/filterActions";
+import { setDateRange } from "../../redux/filters/filterActions";
 import { useDispatch } from "react-redux";
 import DateCenteredCaption from "./DateCenterCaption";
 
@@ -31,7 +31,15 @@ const css = `
     }
 `;
 
-export default function MiddleAdvancedDateRange({ position, dateRangeRef, selectedRange, setSelectedRange, updateRangeStyles, isCaptionDropOpen, setIsCaptionDropOpen, dropdownRef }) {
+export default function AdvancedDateRange({ filter, position, dateRangeRef, selectedRange, setSelectedRange, updateRangeStyles }) {
+    
+    /* 
+        Description:   
+            Creates the date range dropdown via create portal with the date range picker in it.
+        Unique Properties:
+            I don't know why but the only way to apply css styles was by using the style element.
+    */
+
     const dispatch = useDispatch()
 
     const toDateString = (date) => {
@@ -59,16 +67,16 @@ export default function MiddleAdvancedDateRange({ position, dateRangeRef, select
     const handleDayClick = (day) => {
         if (!selectedRange.from || (selectedRange.from && selectedRange.to)) {
             setSelectedRange({ from: day, to: '' });
-            dispatch(setDateRange('middle', toDateString(day), ''))
+            dispatch(setDateRange(filter, toDateString(day), ''))
         } else {
             if (day < selectedRange.from) {
                 setSelectedRange({ from: day, to: selectedRange.from });
-                dispatch(setDateRange('middle', toDateString(day), toDateString(selectedRange.from)))
+                dispatch(setDateRange(filter, toDateString(day), toDateString(selectedRange.from)))
             } else {
                 setSelectedRange({ ...selectedRange, to: day });
-                dispatch(setDateRange('middle', toDateString(selectedRange.from), toDateString(day)))
+                dispatch(setDateRange(filter, toDateString(selectedRange.from), toDateString(day)))
             }
-        }
+        };
     };
 
     return createPortal(

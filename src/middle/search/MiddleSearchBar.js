@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleDrop } from "../../redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
-export default function MiddleSearchBar(props) {
+export default function MiddleSearchBar({ middleSpaceContainerRef }) {
 
     /* 
         Description:   
@@ -12,8 +12,7 @@ export default function MiddleSearchBar(props) {
             Switches the search icon to an arrow icon as the background of the 
             submit button when the text input is hover or there is text in it.
     */
-
-    const { middleSpaceContainerRef } = props;
+   
     const middleSpaceContainerWidth = middleSpaceContainerRef.current.offsetWidth;
     const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
     

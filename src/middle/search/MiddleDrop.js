@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleDrop } from "../../redux/filters/filterActions";
 import MiddleSearchBar from "./MiddleSearchBar"
 
-export default function MiddleDrop(props) {
+export default function MiddleDrop({ middleSpaceContainerRef }) {
 
     /* 
         Description:   
@@ -12,7 +12,6 @@ export default function MiddleDrop(props) {
             N/A
     */
 
-    const { middleSpaceContainerRef } = props;
     const dispatch = useDispatch();
     const dropped = useSelector(state => state.filters.middle.isDrop);
 

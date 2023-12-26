@@ -5,7 +5,7 @@ import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import { createPortal } from "react-dom";
 
-export default function RightSearchFilter(props) {
+export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilterGeometry }) {
 
     /* 
         Description:   
@@ -14,7 +14,6 @@ export default function RightSearchFilter(props) {
             Only applied filters will save.
     */
 
-    const { rightSpaceFilterRef, rightSpaceFilterGeometry } = props;
     const dispatch = useDispatch();
     const filterFormData = useSelector(state => state.filters.news.filterPayload);
 
@@ -154,7 +153,7 @@ export default function RightSearchFilter(props) {
                         </div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} rightSpaceFilterRef={rightSpaceFilterRef} /> : <RightAddAdvancedSearchFilter />}
+                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <RightAddAdvancedSearchFilter />}
                     </div>
                     <div className="mt-4">
                         <input 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import MiddleFilterCard from "./MiddleFilterCard";
+import FilterCard from "./FilterCard";
 import { individuals, groups, organizations } from "../../data";
 
-export default function MiddleAdvancedFilterDropdown(props) {
+export default function AdvancedFilterDropdown({ filter, subcategory }) {
 
     /* 
         Description:   
@@ -19,7 +19,6 @@ export default function MiddleAdvancedFilterDropdown(props) {
             the popupref must be drilled down into the popup form this component)
     */
 
-    const { subcategory } = props;
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const popupRef = useRef(null);
@@ -61,8 +60,9 @@ export default function MiddleAdvancedFilterDropdown(props) {
     }
 
     const filterCards = data.map(filterInfo => {
-        return <MiddleFilterCard 
+        return <FilterCard 
                     key={filterInfo.id}
+                    filter={filter}
                     identify={filterInfo.id}
                     name={filterInfo.name}
                     subcategory={subcategory}
@@ -70,7 +70,7 @@ export default function MiddleAdvancedFilterDropdown(props) {
                 />
     })
 
-    const advFilters = useSelector((state) => state.filters.middle.filterPayload.affiliatedFilters[subcategory]);
+    const advFilters = useSelector((state) => state.filters[filter].filterPayload.affiliatedFilters[subcategory]);
 
     return (
         <div className="relative inline-block text-left w-5/6" ref={dropdownRef}>

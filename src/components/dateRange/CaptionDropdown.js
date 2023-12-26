@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
 export default function CaptionDropdown({ options, value, onChange, type }) {
+
+    /* 
+        Description:   
+            Creates the month and year dropdowns for the caption of the date range dropdown.
+        Unique Properties:
+            Closes the month and year dropdowns if the mosue clicks outside.
+    */
+
     const [isCaptionDropOpen, setIsCaptionDropOpen] = useState(false);
     const dropdownRef = useRef(null);
 
