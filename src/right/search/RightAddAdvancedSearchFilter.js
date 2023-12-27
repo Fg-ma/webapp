@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
 
-export default function RightAddAdvancedSearchFilter() {
+export default function RightAddAdvancedSearchFilter({ rightAddAdvancedSearchFilterRef }) {
 
     /* 
         Description:   
@@ -18,7 +18,7 @@ export default function RightAddAdvancedSearchFilter() {
     };
 
     return (
-        <div className="w-full h-full flex items-center">
+        <div ref={rightAddAdvancedSearchFilterRef} className="w-full h-full flex items-center">
             <input
                 type="button"
                 name="isAdvancedSearch"

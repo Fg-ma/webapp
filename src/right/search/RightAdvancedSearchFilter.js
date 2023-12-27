@@ -4,7 +4,7 @@ import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
-export default function RightAdvancedSearchFilter({ handleFilterFormChange }) {
+export default function RightAdvancedSearchFilter({ handleFilterFormChange, rightAdvancedSearchFilterRef }) {
 
     /* 
         Description:   
@@ -43,10 +43,11 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange }) {
     useEffect(() => {
         if (dateRangeContainerRef.current && dateRangeRef.current) {
             const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
             const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
 
             setPosition({
-                top: containerBoundingBox.top + 40,
+                bottom: windowHeight - containerBoundingBox.top + 10,
                 left: containerBoundingBox.left - (Math.abs(containerBoundingBox.width - dateRangeBoundingBox.width) / 2),
             });
         }
@@ -167,15 +168,15 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange }) {
             return false;
         };
       
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, [isDateRange]);
 
     return (
-        <div className="h-full w-full bg-fg-white-95 rounded-lg">
+        <div ref={rightAdvancedSearchFilterRef} className="h-full w-full bg-fg-white-95 rounded-lg">
             <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
                 <input
                     type="button"
@@ -223,13 +224,13 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange }) {
                 </div>
             </div>
             <div className="w-full mt-2">
-                <label htmlFor="author" className="text-base ml-3 cursor-pointer">Author</label>
+                <label htmlFor="rightAuthor" className="text-base ml-3 cursor-pointer">Author</label>
                 <div className="h-fit flex items-center justify-center mx-2">
                     <input
                         type="text" 
                         placeholder="Author..."
                         name="author" 
-                        id="author"
+                        id="rightAuthor"
                         className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d"
                         onChange={handleFilterFormChange}                 
                         value={formAuthor}
@@ -246,14 +247,14 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange }) {
                 </div>
             </div>
             <div className="w-full mt-2 mb-3">
-                <label htmlFor="dateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
+                <label htmlFor="rightDateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
                 <div ref={dateRangeContainerRef} className="flex items-center justify-center mx-2">
                     <div className="grow bg-white rounded-md flex items-center justify-start">
                         <input 
                             type="text" 
                             placeholder="mm.dd.yyyy" 
                             name="from"
-                            id="dateRange"
+                            id="rightDateRange"
                             className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                             onChange={handleDateRangeChange}                 
                             value={formDateRange.from}

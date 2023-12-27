@@ -5,7 +5,7 @@ import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import { createPortal } from "react-dom";
 
-export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilterGeometry }) {
+export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilterGeometry, rightAddAdvancedSearchFilterRef, rightAdvancedSearchFilterRef }) {
 
     /* 
         Description:   
@@ -19,7 +19,7 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
 
     function handleFilterFormChange (event) {
         const { name, type, checked, value } = event.target;
-        dispatch(setFilterOption('news',name, type === 'checkbox' ? checked : value));
+        dispatch(setFilterOption('news', name, type === 'checkbox' ? checked : value));
     };
 
     function handleApplyFilterOptions () {
@@ -55,53 +55,53 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                         <div className="flex items-center">
                         <input 
                             type="checkbox"
-                            id="isWhatsCurrent"
+                            id="rightIsWhatsCurrent"
                             name="isWhatsCurrent"
                             className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isWhatsCurrent}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
+                        <label htmlFor="rightIsWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
                         </div>
                         <div className="flex items-center">
                         <input 
                             type="checkbox"
-                            id="isAffiliateActivity"
+                            id="rightIsAffiliateActivity"
                             name="isAffiliateActivity"
                             className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isAffiliateActivity}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
+                        <label htmlFor="rightIsAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
                         </div>
                         <div className="flex items-center">
                         <input 
                             type="checkbox"
-                            id="isAllTimeGreats"
+                            id="rightIsAllTimeGreats"
                             name="isAllTimeGreats"
                             className="w-5 aspect-square cursor-pointer"
                             checked={filterFormData.isAllTimeGreats}
                             onChange={handleFilterFormChange}
                         />
-                        <label htmlFor="isAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
+                        <label htmlFor="rightIsAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
                         </div>
                         <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
-                                id="isDatePosted"
+                                id="rightIsDatePosted"
                                 name="isDatePosted"
                                 className="w-5 aspect-square cursor-pointer"
                                 checked={filterFormData.isDatePosted}
                                 onChange={handleFilterFormChange}
                             />
-                            <label htmlFor="isDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
+                            <label htmlFor="rightIsDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
                         </div>
                         {filterFormData.isDatePosted && 
                             <label className="switch">
                                 <input 
                                     type="checkbox" 
-                                    id="datePostedCheckBox" 
+                                    className="datePostedCheckBox" 
                                     name="isDatePostedSwitched" 
                                     checked={filterFormData.isDatePostedSwitched}
                                     onChange={handleFilterFormChange}
@@ -109,10 +109,10 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                                 <span className="slider round"></span>
                                 <div className="inline w-40">
                                     <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText newest">Newest</span>
+                                        <span className="rightLabelText newest">Newest</span>
                                     </div>
                                     <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText oldest">Oldest</span>
+                                        <span className="rightLabelText oldest">Oldest</span>
                                     </div>
                                 </div>
                             </label>
@@ -122,19 +122,19 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                         <div className="flex items-center">
                             <input 
                                 type="checkbox"
-                                id="isPopularity"
+                                id="rightIsPopularity"
                                 name="isPopularity"
                                 className="w-5 aspect-square cursor-pointer"
                                 checked={filterFormData.isPopularity}
                                 onChange={handleFilterFormChange}
                             />
-                            <label htmlFor="isPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
+                            <label htmlFor="rightIsPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
                         </div>
                         {filterFormData.isPopularity &&
                             <label className="switch">
                                 <input 
                                     type="checkbox" 
-                                    id="popularityCheckBox"
+                                    className="popularityCheckBox"
                                     name="isPopularitySwitched" 
                                     checked={filterFormData.isPopularitySwitched}
                                     onChange={handleFilterFormChange}
@@ -142,10 +142,10 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                                 <span className="slider round"></span>
                                 <div className="inline w-40">
                                     <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText upVotes">Up Votes</span>
+                                        <span className="rightLabelText upVotes">Up Votes</span>
                                     </div>
                                     <div className="inline-block w-1/2 text-center">
-                                        <span className="labelText downVotes">Down Votes</span>
+                                        <span className="rightLabelText downVotes">Down Votes</span>
                                     </div>
                                 </div>
                             </label>
@@ -153,7 +153,7 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                         </div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <RightAddAdvancedSearchFilter />}
+                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} rightAdvancedSearchFilterRef={rightAdvancedSearchFilterRef} /> : <RightAddAdvancedSearchFilter rightAddAdvancedSearchFilterRef={rightAddAdvancedSearchFilterRef} />}
                     </div>
                     <div className="mt-4">
                         <input 

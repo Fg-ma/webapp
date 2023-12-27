@@ -46,6 +46,18 @@ export default function RightSearchBar() {
     useEffect(() => {
         calculateRightSpaceFilterGeometry();
     }, [dropFilter]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            calculateRightSpaceFilterGeometry();
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
   
     const handleInputFocus = () => {
         setIsInputFocused(true);
@@ -70,6 +82,50 @@ export default function RightSearchBar() {
     const handleFilterDrop = () => {
         dispatch(toggleDrop('news', 'isDropFilter'))
     };
+
+    const rightAddAdvancedSearchFilterRef = useRef(null);
+    const rightAdvancedSearchFilterRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (dropFilter) {
+            const clickedOutsideDropdown =
+                rightSpaceFilterRef.current &&
+                !rightSpaceFilterRef.current.contains(event.target) &&
+                !isDescendantOf(rightSpaceFilterRef.current, event.target);
+    
+            const clickedOutsideSearchBar = rightSpaceSearchBarRef.current && !rightSpaceSearchBarRef.current.contains(event.target);
+            
+            if (rightAddAdvancedSearchFilterRef.current) {
+                if (clickedOutsideDropdown && clickedOutsideSearchBar && !rightAddAdvancedSearchFilterRef.current.contains(event.target)) {
+                    dispatch(toggleDrop('news', 'isDropFilter'));
+                }
+            } else if (rightAdvancedSearchFilterRef.current) {
+                if (clickedOutsideDropdown && clickedOutsideSearchBar && !rightAdvancedSearchFilterRef.current.contains(event.target)) {
+                    dispatch(toggleDrop('news', 'isDropFilter'));
+                }
+            }
+        }
+    }; 
+
+    const isDescendantOf = (parent, child) => {
+        let node = child;
+        while (node !== null) {
+            if (node === parent) {
+                return true;
+            }
+            node = node.parentElement;
+        }
+        return false;
+    };
+
+    // Handles closing the date range dropdown when the mouse clicks out of it
+    useEffect(() => {       
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, [dropFilter]);
   
     return (
         <div ref={rightSpaceSearchBarRef} className="h-16 w-full bg-fg-white-90 flex justify-center items-center">
@@ -101,7 +157,7 @@ export default function RightSearchBar() {
                     />
                 </div>
             </form>
-            {dropFilter ? <RightSearchFilter rightSpaceFilterRef={rightSpaceFilterRef} rightSpaceFilterGeometry={rightSpaceFilterGeometry} /> : null}
+            {dropFilter ? <RightSearchFilter rightSpaceFilterRef={rightSpaceFilterRef} rightSpaceFilterGeometry={rightSpaceFilterGeometry} rightAddAdvancedSearchFilterRef={rightAddAdvancedSearchFilterRef} rightAdvancedSearchFilterRef={rightAdvancedSearchFilterRef} /> : null}
         </div>
     );
 }

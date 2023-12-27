@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
+import { toggleDrop } from "../redux/filters/filterActions";
 
 export default function MiddleVerticalSplitPane() {
     
@@ -94,26 +96,19 @@ export default function MiddleVerticalSplitPane() {
         };
     }, [isResizing]);
 
-    // Gets initial conditions
     useEffect(() => {
-        // Get the initial height of the leftPane when the component mounts
         const initialHeight = parseFloat(paneHeight) || 0;
     
-        // Set the initial lightness based on the initial height
         let initialLightness = getLightness(initialHeight)
     
         setHeaderLightness(initialLightness);
     }, []);
 
     const togglePaneHeight = () => {
-        // Check if the current pane height is greater than 0
-        console.log(parseFloat(paneHeight))
         const newHeight = parseFloat(paneHeight) < 100 ? '100%' : '79%';
         
-        // Set the new pane height
         setPaneHeight(newHeight);
     
-        // Update lightness based on the new pane height
         let newLightness = getLightness(parseFloat(newHeight))
         setHeaderLightness(newLightness);
     };

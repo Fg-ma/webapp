@@ -168,10 +168,10 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
             return false;
         };
       
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, [isDateRange]);
   
@@ -225,13 +225,13 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                     </div>
                 </div>
                 <div className="w-full mt-2">
-                    <label htmlFor="author" className="text-base ml-1 cursor-pointer">Author</label>
+                    <label htmlFor="middleAuthor" className="text-base ml-1 cursor-pointer">Author</label>
                     <div className="h-fit flex items-center justify-center -mt-1">
                         <input
                             type="text" 
                             placeholder="Author..."
                             name="author" 
-                            id="author"
+                            id="middleAuthor"
                             className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                             onChange={handleFilterFormChange}                 
                             value={formAuthor}
@@ -248,14 +248,14 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                     </div>
                 </div>
                 <div className="w-full mt-2">
-                    <label htmlFor="dateRange" className="text-base ml-1 cursor-pointer">Date Range</label>
+                    <label htmlFor="middleDateRange" className="text-base ml-1 cursor-pointer">Date Range</label>
                     <div ref={dateRangeContainerRef} className="w-full flex items-center justify-start -mt-1">
                         <div className="grow bg-white rounded-md flex items-center justify-start">
                             <input 
                                 type="text" 
                                 placeholder="mm.dd.yyyy" 
                                 name="from"
-                                id="dateRange"
+                                id="middleDateRange"
                                 className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                                 onChange={handleDateRangeChange}                 
                                 value={formDateRange.from}

@@ -34,7 +34,7 @@ export default function MiddleDrop({ middleSpaceContainerRef }) {
                 style={{ backgroundImage: "url('assets/icons/dropDown.svg')", transform: `rotate(${getDropIconRotation()}deg)`  }} 
                 onClick={handleDrop}>
             </button>
-            {dropped ? <MiddleSearchBar middleSpaceContainerRef={ middleSpaceContainerRef } /> : null}
+            {dropped ? <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} /> : null}
         </div>
     )
 }

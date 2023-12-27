@@ -81,8 +81,8 @@ export default function AdvancedDateRange({ filter, position, dateRangeRef, sele
 
     return createPortal(
         <div 
-            className="bg-white absolute z-50" 
-            style={position !== null ? { top: `${position.top}px`, left: `${position.left}px` } : null}
+            className="bg-white absolute z-50 rounded-md" 
+            style={position !== null ? (filter == "middle") ? { top: `${position.top}px`, left: `${position.left}px` } : { bottom: `${position.bottom}px`, left: `${position.left}px` } : null}
             ref={dateRangeRef}
         >
             <style>{css}</style>
