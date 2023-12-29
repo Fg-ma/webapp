@@ -4,7 +4,7 @@ import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
-export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
+export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, refs }) {
 
     /* 
         Description:   
@@ -18,18 +18,19 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
     const formAuthor = useSelector(state => state.filters.middle.filterPayload.author);
     const formDateRange = useSelector(state => state.filters.middle.filterPayload.dateRange);
     const [isDateRange, setIsDateRange] = useState(false);
-    const dateRangeContainerRef = useRef(null);
-    const dateRangeRef = useRef(null);
     const [position, setPosition] = useState(null);
     const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
     const [typed, setTyped] = useState(false);
+    refs.middleDateRangeContainer = useRef(null);
 
     // Handles closeing the advanced search filter
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch('middle'));
-        dispatch(clearAdvancedAffiliateFilter('middle', 'ind'));
-        dispatch(clearAdvancedAffiliateFilter('middle', 'grp'));
-        dispatch(clearAdvancedAffiliateFilter('middle', 'org'));
+        setTimeout(() => {
+            dispatch(toggleAdvancedSearch('middle'));
+            dispatch(clearAdvancedAffiliateFilter('middle', 'ind'));
+            dispatch(clearAdvancedAffiliateFilter('middle', 'grp'));
+            dispatch(clearAdvancedAffiliateFilter('middle', 'org'));
+        });
     };
 
     // Handles clearing the values of the dropdowns depending on what subcategory is passed in
@@ -42,9 +43,9 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
         state which is then passed down to the date range component
     */
     useEffect(() => {
-        if (dateRangeContainerRef.current && dateRangeRef.current) {
-            const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
-            const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
+        if (refs.middleDateRangeContainer.current && refs.middleDateRange.current) {
+            const containerBoundingBox = refs.middleDateRangeContainer.current.getBoundingClientRect();
+            const dateRangeBoundingBox = refs.middleDateRange.current.getBoundingClientRect();
 
             setPosition({
                 top: containerBoundingBox.top + 40,
@@ -93,32 +94,32 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
         let validFrom = regex.test(formDateRange.from);
         let validTo = regex.test(formDateRange.to);
         if (validFrom && validTo) {
-            if (dateRangeRef.current) {
                 setTimeout(() => {
-                    const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
-                    
-                    if (buttons.length) {
-                        const buttonArray = Array.from(buttons);
+                    if (refs.middleDateRange.current) {
+                        const buttons = refs.middleDateRange.current.querySelectorAll('button[name="day"].selected');
+                        
+                        if (buttons.length) {
+                            const buttonArray = Array.from(buttons);
 
-                        buttonArray.forEach((button) => {
-                            button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle");
-                        });
-                        buttonArray[0].classList.add("rdp-day_range_start");
-                        buttonArray[buttons.length - 1].classList.add("rdp-day_range_end");
+                            buttonArray.forEach((button) => {
+                                button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle");
+                            });
+                            buttonArray[0].classList.add("rdp-day_range_start");
+                            buttonArray[buttons.length - 1].classList.add("rdp-day_range_end");
 
-                        const middleButtons = Array.from(buttons).slice(1, buttons.length - 1);
+                            const middleButtons = Array.from(buttons).slice(1, buttons.length - 1);
 
-                        middleButtons.forEach((button) => {
-                            button.classList.add("rdp-day_range_middle")
-                        });
-                    }
+                            middleButtons.forEach((button) => {
+                                button.classList.add("rdp-day_range_middle")
+                            });
+                        };
+                    };
                 }, 0);
-            }
         };
         if (!formDateRange.from && !formDateRange.to) {
         
-            if (dateRangeRef.current) {
-                const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+            if (refs.middleDateRange.current) {
+                const buttons = refs.middleDateRange.current.querySelectorAll('button[name="day"].selected');
 
                 if (buttons.length) {
                     const buttonArray = Array.from(buttons);
@@ -139,35 +140,23 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
         };
     }, [formDateRange, isDateRange]);
 
+    // Handles logic for outside clicks and when to close the date range picker
+    const handleClickOutside = (event) => {
+        if (!isDateRange) {
+            return;
+        }
+    
+        const isOutsideDateRange = !refs.middleDateRange.current || !refs.middleDateRange.current.contains(event.target);
+        const isOutsideDateRangeContainer = !refs.middleDateRangeContainer.current || !refs.middleDateRangeContainer.current.contains(event.target);
+        const isOutsideCaptionDropdown = !refs.middleDateRangeCaptionDropdown.current || !refs.middleDateRangeCaptionDropdown.current.contains(event.target);
+    
+        if (isOutsideDateRange && isOutsideDateRangeContainer && (isOutsideCaptionDropdown || !refs.middleDateRangeCaptionDropdown.current)) {
+            setIsDateRange(false);
+        }
+    };
+
     // Handles closing the date range dropdown when the mouse clicks out of it
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (isDateRange) {
-                const parentElement = dateRangeRef.current;
-                
-                if (
-                    parentElement &&
-                    !parentElement.contains(event.target) &&
-                    !isDescendantOf(parentElement, event.target) &&
-                    dateRangeContainerRef.current &&
-                    !dateRangeContainerRef.current.contains(event.target)
-                ) {
-                    setIsDateRange(false);
-                }
-            }
-        };
-      
-        const isDescendantOf = (parent, child) => {
-            let node = child;
-            while (node !== null) {
-                if (node === parent) {
-                    return true;
-                }
-                node = node.parentElement;
-            }
-            return false;
-        };
-      
+    useEffect(() => {      
         document.addEventListener("click", handleClickOutside);
 
         return () => {
@@ -176,7 +165,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
     }, [isDateRange]);
   
     return (
-        <div className="h-full w-full bg-fg-white-95 rounded-lg">
+        <div ref={refs.middleAdvancedSearchFilter} className="h-full w-full bg-fg-white-95 rounded-lg">
             <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
                 <input
                     type="button"
@@ -197,7 +186,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                 <div className="bg-fg-white-85 p-2 rounded-md w-full">
                     <p className="text-base">Affiliated...</p>
                     <div className="w-full flex items-center justify-start mb-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter("ind")}
@@ -206,7 +195,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                         ></button>
                     </div>
                     <div className="w-full flex items-center justify-start my-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter('grp')}
@@ -215,7 +204,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                         ></button>
                     </div>
                     <div className="w-full flex items-center justify-start mt-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
                         <button
                             type="button"
                             onClick={() => emptyAdvAffFilter('org')}
@@ -249,7 +238,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                 </div>
                 <div className="w-full mt-2">
                     <label htmlFor="middleDateRange" className="text-base ml-1 cursor-pointer">Date Range</label>
-                    <div ref={dateRangeContainerRef} className="w-full flex items-center justify-start -mt-1">
+                    <div ref={refs.middleDateRangeContainer} className="w-full flex items-center justify-start -mt-1">
                         <div className="grow bg-white rounded-md flex items-center justify-start">
                             <input 
                                 type="text" 
@@ -290,15 +279,19 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange }) {
                         >
                         </button>
                     </div>
-                    {isDateRange && <AdvancedDateRange 
-                                        filter={'middle'}
-                                        position={position} 
-                                        dateRangeRef={dateRangeRef} 
-                                        selectedRange={selectedRange} 
-                                        setSelectedRange={setSelectedRange} 
-                                        updateRangeStyles={updateRangeStyles}
-                                    />
-                    }
+                    {isDateRange && (
+                        <AdvancedDateRange
+                            filter={'middle'}
+                            position={position}
+                            selectedRange={selectedRange}
+                            setSelectedRange={setSelectedRange}
+                            updateRangeStyles={updateRangeStyles}
+                            refs={{
+                                dateRange: refs.middleDateRange,
+                                dateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                            }}
+                        />
+                    )}
                 </div>
             </div>
         </div>

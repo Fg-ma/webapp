@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
 
-export default function MiddleAddAdvancedSearchFilter() {
+export default function MiddleAddAdvancedSearchFilter({ middleAddAdvancedSearchFilterRef }) {
 
     /* 
         Description:   
@@ -14,11 +14,13 @@ export default function MiddleAddAdvancedSearchFilter() {
     const dispatch = useDispatch();
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch("middle"));
+        setTimeout(() => {
+            dispatch(toggleAdvancedSearch("middle"));
+        })
     };
 
     return (
-        <div className="w-full h-full flex justify-end items-end">
+        <div ref={middleAddAdvancedSearchFilterRef} className="w-full h-full flex justify-end items-end">
             <div className="flex items-center">
                 <input
                     type="button"

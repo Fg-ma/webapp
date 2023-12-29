@@ -5,7 +5,7 @@ import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import { createPortal } from "react-dom";
 
-export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilterGeometry, rightAddAdvancedSearchFilterRef, rightAdvancedSearchFilterRef }) {
+export default function RightSearchFilter({ rightSpaceFilterGeometry, refs }) {
 
     /* 
         Description:   
@@ -46,7 +46,7 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                 left: `${rightSpaceFilterGeometry.position.left}px`,
                 width: `${rightSpaceFilterGeometry.width}px`
             } : null}
-            ref={rightSpaceFilterRef}
+            ref={refs.rightSpaceFilter}
         >
             <form className="flex flex-col h-full m-4">
                 <div className="bg-white flex flex-col justify-between">
@@ -153,7 +153,21 @@ export default function RightSearchFilter({ rightSpaceFilterRef, rightSpaceFilte
                         </div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                        {filterFormData.isAdvancedSearch ? <RightAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} rightAdvancedSearchFilterRef={rightAdvancedSearchFilterRef} /> : <RightAddAdvancedSearchFilter rightAddAdvancedSearchFilterRef={rightAddAdvancedSearchFilterRef} />}
+                        {filterFormData.isAdvancedSearch ? (
+                            <RightAdvancedSearchFilter
+                                handleFilterFormChange={handleFilterFormChange}
+                                refs={{
+                                    rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
+                                    rightDateRange: refs.rightDateRange,
+                                    rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
+                                    rightAdvancedFilterDropdownDrop: refs.rightAdvancedFilterDropdownDrop,
+                                }}
+                            />
+                        ) : (
+                            <RightAddAdvancedSearchFilter
+                                rightAddAdvancedSearchFilterRef={refs.rightAddAdvancedSearchFilter}
+                            />
+                        )}
                     </div>
                     <div className="mt-4">
                         <input 

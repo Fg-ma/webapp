@@ -31,7 +31,7 @@ const css = `
     }
 `;
 
-export default function AdvancedDateRange({ filter, position, dateRangeRef, selectedRange, setSelectedRange, updateRangeStyles }) {
+export default function AdvancedDateRange({ filter, position, selectedRange, setSelectedRange, updateRangeStyles, refs }) {
     
     /* 
         Description:   
@@ -81,16 +81,16 @@ export default function AdvancedDateRange({ filter, position, dateRangeRef, sele
 
     return createPortal(
         <div 
-            className="bg-white absolute z-50 rounded-md" 
+            className="bg-white absolute z-50 rounded-md select-none" 
             style={position !== null ? (filter == "middle") ? { top: `${position.top}px`, left: `${position.left}px` } : { bottom: `${position.bottom}px`, left: `${position.left}px` } : null}
-            ref={dateRangeRef}
+            ref={refs.dateRange}
         >
             <style>{css}</style>
             <DayPicker
                 selected={selectedRange}
                 components={{
                     Caption: ({  ...props }) => (
-                        <DateCenteredCaption updateRangeStyles={updateRangeStyles} {...props} />
+                        <DateCenteredCaption {...props} updateRangeStyles={updateRangeStyles} dateRangeCaptionDropdownRef={refs.dateRangeCaptionDropdown} />
                     ),
                 }}
                 mode="range"

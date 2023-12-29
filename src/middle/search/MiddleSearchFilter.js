@@ -4,7 +4,7 @@ import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, ca
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
 
-export default function MiddleSearchFilter() {
+export default function MiddleSearchFilter({ refs }) {
 
     /* 
         Description:   
@@ -38,7 +38,7 @@ export default function MiddleSearchFilter() {
     };
 
     return (
-        <div className="w-full bg-white rounded-md mt-2 shadow-md">
+        <div ref={refs.middleSpaceFilter} className="w-full bg-white rounded-md mt-2 shadow-md">
             <form className="flex h-full m-4">
                 <div className="bg-white flex flex-col pr-6 justify-between" style={{ width: "55%" }}>
                     <div>
@@ -167,7 +167,21 @@ export default function MiddleSearchFilter() {
                     </div>
                 </div>
                 <div className="flex justify-center items-center" style={{ width: "45%" }}>
-                    {filterFormData.isAdvancedSearch ? <MiddleAdvancedSearchFilter handleFilterFormChange={handleFilterFormChange} /> : <MiddleAddAdvancedSearchFilter />}
+                    {filterFormData.isAdvancedSearch ? (
+                        <MiddleAdvancedSearchFilter
+                            handleFilterFormChange={handleFilterFormChange}
+                            refs={{
+                                middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
+                                middleDateRange: refs.middleDateRange,
+                                middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                                middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
+                            }}
+                        />
+                    ) : (
+                        <MiddleAddAdvancedSearchFilter
+                            middleAddAdvancedSearchFilterRef={refs.middleAddAdvancedSearchFilter}
+                        />
+                    )}
                 </div>
             </form>
         </div>

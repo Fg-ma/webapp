@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleDrop } from "../../redux/filters/filterActions";
+import { toggleDrop, cancelFilterChanges } from "../../redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
 export default function MiddleSearchBar({ middleSpaceContainerRef }) {
@@ -13,14 +13,22 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
             submit button when the text input is hover or there is text in it.
     */
    
-    const middleSpaceContainerWidth = middleSpaceContainerRef.current.offsetWidth;
-    const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
-    
     const dispatch = useDispatch();
     const dropFilter = useSelector(state => state.filters.middle.isDropFilter);
-
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const refs = {
+        middleAddAdvancedSearchFilter: useRef(null),
+        middleAdvancedSearchFilter: useRef(null),
+        middleDateRange: useRef(null),
+        middleDateRangeCaptionDropdown: useRef(null),
+        middleSpaceFilter: useRef(null),
+        middleSpaceSearchBar: useRef(null),
+        middleAdvancedFilterDropdownDropRef: useRef(null),
+    };
+    const middleSpaceContainerWidth = middleSpaceContainerRef.current.offsetWidth;
+    const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
+
   
     const handleInputFocus = () => {
         setIsInputFocused(true);
@@ -46,8 +54,43 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
         dispatch(toggleDrop('middle', 'isDropFilter'))
     };
 
+    // Handles logic for outside clicks and when to close the filter
+    const handleClickOutside = (event) => {
+        if (!dropFilter) {
+            return;
+        }
+
+        const isOutsideElement = (elementRef) =>
+            elementRef.current && !elementRef.current.contains(event.target);
+      
+        const isOutsideFilter = isOutsideElement(refs.middleSpaceFilter);
+        const isOutsideSearchBar = isOutsideElement(refs.middleSpaceSearchBar);
+        const isOutsideDateRange =
+            isOutsideElement(refs.middleDateRange) &&
+            isOutsideElement(refs.middleDateRangeCaptionDropdown);
+            
+        const shouldToggleDrop =
+            (refs.middleAddAdvancedSearchFilter.current  && !refs.middleAddAdvancedSearchFilter.current.contains(event.target) && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
+            (refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && !refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
+            (refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar && isOutsideDateRange);
+        
+        if (shouldToggleDrop) {
+            dispatch(toggleDrop('middle', 'isDropFilter'));
+            dispatch(cancelFilterChanges('middle'));
+        };
+    };
+
+    // Handles closing the dropdown when the mouse clicks out of it
+    useEffect(() => {       
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, [dropFilter]);
+
     return (
-        <div className="flex flex-col justify-center items-center" style={{ width: middleSearchWidth }}>
+        <div ref={refs.middleSpaceSearchBar} className="flex flex-col justify-center items-center" style={{ width: middleSearchWidth }}>
             <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
                     id="middleSearchSubmit"
@@ -75,7 +118,18 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
                     />
                 </div>
             </form>
-            {dropFilter ? <MiddleSearchFilter /> : null}
+            {dropFilter && (
+                <MiddleSearchFilter
+                    refs={{
+                        middleSpaceFilter: refs.middleSpaceFilter,
+                        middleAddAdvancedSearchFilter: refs.middleAddAdvancedSearchFilter,
+                        middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
+                        middleDateRange: refs.middleDateRange,
+                        middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                        middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
+                    }}
+                />
+            )}
         </div>
     );
 }

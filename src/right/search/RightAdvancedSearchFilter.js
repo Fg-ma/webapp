@@ -4,7 +4,7 @@ import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
-export default function RightAdvancedSearchFilter({ handleFilterFormChange, rightAdvancedSearchFilterRef }) {
+export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs }) {
 
     /* 
         Description:   
@@ -18,18 +18,18 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
     const formAuthor = useSelector(state => state.filters.news.filterPayload.author);
     const formDateRange = useSelector(state => state.filters.news.filterPayload.dateRange);
     const [isDateRange, setIsDateRange] = useState(false);
-    const dateRangeContainerRef = useRef(null);
-    const dateRangeRef = useRef(null);
     const [position, setPosition] = useState(null);
     const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
     const [typed, setTyped] = useState(false);
-        
+    refs.rightDateRangeContainer = useRef(null);
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch('news'));
-        dispatch(clearAdvancedAffiliateFilter('news', 'ind'));
-        dispatch(clearAdvancedAffiliateFilter('news', 'grp'));
-        dispatch(clearAdvancedAffiliateFilter('news', 'org'));
+        setTimeout(() => {
+            dispatch(toggleAdvancedSearch('news'));
+            dispatch(clearAdvancedAffiliateFilter('news', 'ind'));
+            dispatch(clearAdvancedAffiliateFilter('news', 'grp'));
+            dispatch(clearAdvancedAffiliateFilter('news', 'org'));
+        }, 0);
     };
 
     function emptyAdvAffFilter(subcategory) {
@@ -41,10 +41,10 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
         state which is then passed down to the date range component
     */
     useEffect(() => {
-        if (dateRangeContainerRef.current && dateRangeRef.current) {
-            const containerBoundingBox = dateRangeContainerRef.current.getBoundingClientRect();
+        if (refs.rightDateRangeContainer.current && refs.rightDateRange.current) {
+            const containerBoundingBox = refs.rightDateRangeContainer.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            const dateRangeBoundingBox = dateRangeRef.current.getBoundingClientRect();
+            const dateRangeBoundingBox = refs.rightDateRange.current.getBoundingClientRect();
 
             setPosition({
                 bottom: windowHeight - containerBoundingBox.top + 10,
@@ -57,7 +57,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
         setIsDateRange(prev => !prev);
     };
     
-        // Handles any typed changes to the date range and dispatches as necessary to the local state
+    // Handles any typed changes to the date range and dispatches as necessary to the local state
     const updateFormDateRange = () => {
         const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
         let validFrom = regex.test(formDateRange.from);
@@ -93,10 +93,10 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
         let validFrom = regex.test(formDateRange.from);
         let validTo = regex.test(formDateRange.to);
         if (validFrom && validTo) {
-            if (dateRangeRef.current) {
-                setTimeout(() => {
-                    const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
-                    
+            setTimeout(() => {
+                if (refs.rightDateRange.current) {
+                    const buttons = refs.rightDateRange.current.querySelectorAll('button[name="day"].selected');
+                        
                     if (buttons.length) {
                         const buttonArray = Array.from(buttons);
 
@@ -112,13 +112,12 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
                             button.classList.add("rdp-day_range_middle")
                         });
                     }
-                }, 0);
-            }
+                }
+            }, 0);
         };
         if (!formDateRange.from && !formDateRange.to) {
-        
-            if (dateRangeRef.current) {
-                const buttons = dateRangeRef.current.querySelectorAll('button[name="day"].selected');
+            if (refs.rightDateRange.current) {
+                const buttons = refs.rightDateRange.current.querySelectorAll('button[name="day"].selected');
 
                 if (buttons.length) {
                     const buttonArray = Array.from(buttons);
@@ -139,35 +138,23 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
         };
     }, [formDateRange, isDateRange]);
     
+    // Handles logic for outside clicks and when to close the date range picker
+    const handleClickOutside = (event) => {
+        if (!isDateRange) {
+            return;
+        }
+    
+        const isOutsideDateRange = !refs.rightDateRange.current || !refs.rightDateRange.current.contains(event.target);
+        const isOutsideDateRangeContainer = !refs.rightDateRangeContainer.current || !refs.rightDateRangeContainer.current.contains(event.target);
+        const isOutsideCaptionDropdown = !refs.rightDateRangeCaptionDropdown.current || !refs.rightDateRangeCaptionDropdown.current.contains(event.target);
+    
+        if (isOutsideDateRange && isOutsideDateRangeContainer && (isOutsideCaptionDropdown || !refs.rightDateRangeCaptionDropdown.current)) {
+            setIsDateRange(false);
+        }
+    };
+
     // Handles closing the date range dropdown when the mouse clicks out of it
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (isDateRange) {
-                const parentElement = dateRangeRef.current;
-                
-                if (
-                    parentElement &&
-                    !parentElement.contains(event.target) &&
-                    !isDescendantOf(parentElement, event.target) &&
-                    dateRangeContainerRef.current &&
-                    !dateRangeContainerRef.current.contains(event.target)
-                ) {
-                    setIsDateRange(false);
-                }
-            }
-        };
-      
-        const isDescendantOf = (parent, child) => {
-            let node = child;
-            while (node !== null) {
-                if (node === parent) {
-                    return true;
-                }
-                node = node.parentElement;
-            }
-            return false;
-        };
-      
+    useEffect(() => {      
         document.addEventListener("click", handleClickOutside);
 
         return () => {
@@ -176,7 +163,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
     }, [isDateRange]);
 
     return (
-        <div ref={rightAdvancedSearchFilterRef} className="h-full w-full bg-fg-white-95 rounded-lg">
+        <div ref={refs.rightAdvancedSearchFilter} className="h-full w-full bg-fg-white-95 rounded-lg">
             <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
                 <input
                     type="button"
@@ -196,7 +183,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
             <div className="bg-fg-white-85 mx-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
                 <p className="text-base">Affiliated...</p>
                 <div className="w-full flex items-center justify-start mb-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'ind'} />
+                    <AdvancedFilterDropdown filter={'news'} subcategory={'ind'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter("ind")}
@@ -205,7 +192,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
                     ></button>
                 </div>
                 <div className="w-full flex items-center justify-start my-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'grp'} />
+                    <AdvancedFilterDropdown filter={'news'} subcategory={'grp'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter('grp')}
@@ -214,7 +201,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
                     ></button>
                 </div>
                 <div className="w-full flex items-center justify-start mt-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'org'} />
+                    <AdvancedFilterDropdown filter={'news'} subcategory={'org'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
                     <button
                         type="button"
                         onClick={() => emptyAdvAffFilter('org')}
@@ -248,7 +235,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
             </div>
             <div className="w-full mt-2 mb-3">
                 <label htmlFor="rightDateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
-                <div ref={dateRangeContainerRef} className="flex items-center justify-center mx-2">
+                <div ref={refs.rightDateRangeContainer} className="flex items-center justify-center mx-2">
                     <div className="grow bg-white rounded-md flex items-center justify-start">
                         <input 
                             type="text" 
@@ -289,15 +276,19 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, righ
                     >
                     </button>
                 </div>
-                {isDateRange && <AdvancedDateRange 
-                                        filter={'news'}
-                                        position={position} 
-                                        dateRangeRef={dateRangeRef} 
-                                        selectedRange={selectedRange} 
-                                        setSelectedRange={setSelectedRange} 
-                                        updateRangeStyles={updateRangeStyles}
-                                    />
-                }
+                {isDateRange && (
+                    <AdvancedDateRange
+                        filter={'news'}
+                        position={position}
+                        selectedRange={selectedRange}
+                        setSelectedRange={setSelectedRange}
+                        updateRangeStyles={updateRangeStyles}
+                        refs={{
+                            dateRange: refs.rightDateRange,
+                            dateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
+                        }}
+                    />
+                )}
             </div>
         </div>
     );

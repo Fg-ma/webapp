@@ -14,7 +14,9 @@ export default function RightAddAdvancedSearchFilter({ rightAddAdvancedSearchFil
     const dispatch = useDispatch();
 
     const handleAdvancedFilter = () => {
-        dispatch(toggleAdvancedSearch('news'));
+        setTimeout(() => {
+            dispatch(toggleAdvancedSearch('news'));
+        }, 0);
     };
 
     return (

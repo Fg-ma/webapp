@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import FilterCard from "./FilterCard";
 import { individuals, groups, organizations } from "../../data";
 
-export default function AdvancedFilterDropdown({ filter, subcategory }) {
+export default function AdvancedFilterDropdown({ filter, subcategory, advancedFilterDropdownDropRef}) {
 
     /* 
         Description:   
@@ -14,9 +14,7 @@ export default function AdvancedFilterDropdown({ filter, subcategory }) {
             for a short duration in order to creat a portal that appears over top the 
             original card. The portal expands as necessary to show the full text of a car. 
             The portal functions excatly the same as a regular card except that the background 
-            doesn't turn fg-secondary when hovered over. (Also note, that while I don't like it, 
-            the simplest way to prevent the drop from closing when there is a click inside the popup 
-            the popupref must be drilled down into the popup form this component)
+            doesn't turn fg-secondary when hovered over.
     */
 
     const [isOpen, setIsOpen] = useState(false);
@@ -27,21 +25,21 @@ export default function AdvancedFilterDropdown({ filter, subcategory }) {
         setIsOpen(!isOpen);
     };
 
-    const closeDropdown = (event) => {        
+    const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
             !dropdownRef.current.contains(event.target) &&
             (!popupRef.current || !popupRef.current.contains(event.target))
           ) {
             setIsOpen(false);
-          }
+        }
     };
 
     useEffect(() => {
-        window.addEventListener("click", closeDropdown);
+        window.addEventListener("click", handleClickOutside);
     
         return () => {
-            window.removeEventListener("click", closeDropdown);
+            window.removeEventListener("click", handleClickOutside);
         };
     }, []);
     
@@ -73,7 +71,7 @@ export default function AdvancedFilterDropdown({ filter, subcategory }) {
     const advFilters = useSelector((state) => state.filters[filter].filterPayload.affiliatedFilters[subcategory]);
 
     return (
-        <div className="relative inline-block text-left w-5/6" ref={dropdownRef}>
+        <div ref={dropdownRef} className="relative inline-block text-left w-5/6">
             <button
                 onClick={toggleDropdown}
                 type="button"
@@ -103,7 +101,7 @@ export default function AdvancedFilterDropdown({ filter, subcategory }) {
                 </span>
             </button>
             {isOpen && (
-                <div className="py-1 px-3 origin-top-right absolute left-1/2 transform -translate-x-1/2 mt-2 rounded-md shadow-md bg-white z-10">
+                <div ref={advancedFilterDropdownDropRef} className="py-1 px-3 origin-top-right absolute left-1/2 transform -translate-x-1/2 mt-2 rounded-md shadow-md bg-white z-10">
                     <div className="overflow-y-scroll overflow-x-visible max-h-80 max-w-xs w-80 h-80">
                         {filterCards}
                     </div>

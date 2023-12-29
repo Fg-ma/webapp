@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function CaptionDropdown({ options, value, onChange, type }) {
+export default function CaptionDropdown({ options, value, onChange, type, dateRangeCaptionDropdownRef }) {
 
     /* 
         Description:   
@@ -17,14 +17,16 @@ export default function CaptionDropdown({ options, value, onChange, type }) {
     };
 
     const handleSelect = (option) => {
-        onChange(option);
-        setIsCaptionDropOpen(false);
+        setTimeout(() => {
+            onChange(option);
+            setIsCaptionDropOpen(false);
+        }, 0)
     };
 
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsCaptionDropOpen(false);
-        }
+        };
     };
 
     useEffect(() => {
@@ -43,7 +45,7 @@ export default function CaptionDropdown({ options, value, onChange, type }) {
                 {type === 'month' ? options[value] : value}
             </button>
             {isCaptionDropOpen && (
-                <div className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
+                <div ref={dateRangeCaptionDropdownRef} className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
                     <div className="h-48 overflow-scroll">
                         <ul className="py-1">
                             {options.map((option, index) => (

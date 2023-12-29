@@ -67,12 +67,14 @@ export default function DateCenteredCaption(props) {
                     value={selectedMonth}
                     onChange={handleDropMonthChange}
                     type={'month'}
+                    dateRangeCaptionDropdownRef={props.dateRangeCaptionDropdownRef}
                 />
                 <CaptionDropdown
                     options={years}
                     value={selectedYear}
                     onChange={handleDropYearChange}
                     type={'year'}
+                    dateRangeCaptionDropdownRef={props.dateRangeCaptionDropdownRef}
                 />
             </div>
             <button
