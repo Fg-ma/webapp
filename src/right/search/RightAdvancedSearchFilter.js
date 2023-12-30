@@ -4,7 +4,7 @@ import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
-export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs }) {
+export default function RightAdvancedSearchFilter({ page, handleFilterFormChange, refs }) {
 
     /* 
         Description:   
@@ -15,8 +15,8 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs
     */
 
     const dispatch = useDispatch();
-    const formAuthor = useSelector(state => state.filters.news.filterPayload.author);
-    const formDateRange = useSelector(state => state.filters.news.filterPayload.dateRange);
+    const formAuthor = useSelector(state => state.filters[page].filterPayload.author);
+    const formDateRange = useSelector(state => state.filters[page].filterPayload.dateRange);
     const [isDateRange, setIsDateRange] = useState(false);
     const [position, setPosition] = useState(null);
     const [selectedRange, setSelectedRange] = useState({ from: '', to: '' });
@@ -25,15 +25,15 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs
 
     const handleAdvancedFilter = () => {
         setTimeout(() => {
-            dispatch(toggleAdvancedSearch('news'));
-            dispatch(clearAdvancedAffiliateFilter('news', 'ind'));
-            dispatch(clearAdvancedAffiliateFilter('news', 'grp'));
-            dispatch(clearAdvancedAffiliateFilter('news', 'org'));
+            dispatch(toggleAdvancedSearch(page));
+            dispatch(clearAdvancedAffiliateFilter(page, 'ind'));
+            dispatch(clearAdvancedAffiliateFilter(page, 'grp'));
+            dispatch(clearAdvancedAffiliateFilter(page, 'org'));
         }, 0);
     };
 
     function emptyAdvAffFilter(subcategory) {
-        dispatch(clearAdvancedAffiliateFilter('news', subcategory));
+        dispatch(clearAdvancedAffiliateFilter(page, subcategory));
     };
 
     /* 
@@ -75,11 +75,11 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs
     const handleDateRangeChange = (event) => {
             const { name, value } = event.target;  
             if (name == 'from') {
-                dispatch(setDateRange('news', value, formDateRange.to));
+                dispatch(setDateRange(page, value, formDateRange.to));
             } else if (name == 'to') {
-                dispatch(setDateRange('news', formDateRange.from, value));
+                dispatch(setDateRange(page, formDateRange.from, value));
             } else if (name == "clearDateRange") {
-                dispatch(setDateRange('news', '', ''));
+                dispatch(setDateRange(page, '', ''));
             }
             setTyped(true);
     };
@@ -164,76 +164,80 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs
 
     return (
         <div ref={refs.rightAdvancedSearchFilter} className="h-full w-full bg-fg-white-95 rounded-lg">
-            <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
-                <input
-                    type="button"
-                    name="isAdvancedSearch"
-                    className="w-6 h-6 bg-cover bg-no-repeat mx-1 cursor-pointer"
-                    style={{ backgroundImage: `url("assets/icons/whiteClose.svg")`}}
-                    onClick={handleAdvancedFilter}
-                />
-                <input 
-                    type="button" 
-                    className="text-base cursor-pointer text-white"
-                    value="Remove Advanced Search"
-                    onClick={handleAdvancedFilter}
-                />
-            </div>
-            <p className="text-lg ml-2 my-1">Filter by</p>
-            <div className="bg-fg-white-85 mx-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
-                <p className="text-base">Affiliated...</p>
-                <div className="w-full flex items-center justify-start mb-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'ind'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
-                    <button
-                        type="button"
-                        onClick={() => emptyAdvAffFilter("ind")}
-                        className="h-8 aspect-square bg-no-repeat bg-center"
-                        style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                    ></button>
-                </div>
-                <div className="w-full flex items-center justify-start my-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'grp'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
-                    <button
-                        type="button"
-                        onClick={() => emptyAdvAffFilter('grp')}
-                        className="h-8 aspect-square bg-no-repeat bg-center"
-                        style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                    ></button>
-                </div>
-                <div className="w-full flex items-center justify-start mt-2">
-                    <AdvancedFilterDropdown filter={'news'} subcategory={'org'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
-                    <button
-                        type="button"
-                        onClick={() => emptyAdvAffFilter('org')}
-                        className="h-8 aspect-square bg-no-repeat bg-center"
-                        style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                    ></button>
-                </div>
-            </div>
-            <div className="w-full mt-2">
-                <label htmlFor="rightAuthor" className="text-base ml-3 cursor-pointer">Author</label>
-                <div className="h-fit flex items-center justify-center mx-2">
-                    <input
-                        type="text" 
-                        placeholder="Author..."
-                        name="author" 
-                        id="rightAuthor"
-                        className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d"
-                        onChange={handleFilterFormChange}                 
-                        value={formAuthor}
-                    >
-                    </input>
-                    <button
+            {page !== 'messages' && (
+                <div>
+                    <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
+                        <input
                             type="button"
-                            name="author"
-                            className="h-8 aspect-square bg-no-repeat bg-center ml-1"
-                            style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                            onClick={handleFilterFormChange}
-                            value=""
-                    ></button>
+                            name="isAdvancedSearch"
+                            className="w-6 h-6 bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            style={{ backgroundImage: `url("assets/icons/whiteClose.svg")`}}
+                            onClick={handleAdvancedFilter}
+                        />
+                        <input 
+                            type="button" 
+                            className="text-base cursor-pointer text-white"
+                            value="Remove Advanced Search"
+                            onClick={handleAdvancedFilter}
+                        />
+                    </div>
+                    <p className="text-lg ml-2 my-1">Filter by</p>
+                    <div className="bg-fg-white-85 mx-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
+                        <p className="text-base">Affiliated...</p>
+                        <div className="w-full flex items-center justify-start mb-2">
+                            <AdvancedFilterDropdown filter={page} subcategory={'ind'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <button
+                                type="button"
+                                onClick={() => emptyAdvAffFilter("ind")}
+                                className="h-8 aspect-square bg-no-repeat bg-center"
+                                style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
+                            ></button>
+                        </div>
+                        <div className="w-full flex items-center justify-start my-2">
+                            <AdvancedFilterDropdown filter={page} subcategory={'grp'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <button
+                                type="button"
+                                onClick={() => emptyAdvAffFilter('grp')}
+                                className="h-8 aspect-square bg-no-repeat bg-center"
+                                style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
+                            ></button>
+                        </div>
+                        <div className="w-full flex items-center justify-start mt-2">
+                            <AdvancedFilterDropdown filter={page} subcategory={'org'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <button
+                                type="button"
+                                onClick={() => emptyAdvAffFilter('org')}
+                                className="h-8 aspect-square bg-no-repeat bg-center"
+                                style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
+                            ></button>
+                        </div>
+                    </div>
+                    <div className="w-full mt-2">
+                        <label htmlFor="rightAuthor" className="text-base ml-3 cursor-pointer">Author</label>
+                        <div className="h-fit flex items-center justify-center mx-2">
+                            <input
+                                type="text" 
+                                placeholder="Author..."
+                                name="author" 
+                                id="rightAuthor"
+                                className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d"
+                                onChange={handleFilterFormChange}                 
+                                value={formAuthor}
+                            >
+                            </input>
+                            <button
+                                    type="button"
+                                    name="author"
+                                    className="h-8 aspect-square bg-no-repeat bg-center ml-1"
+                                    style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
+                                    onClick={handleFilterFormChange}
+                                    value=""
+                            ></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="w-full mt-2 mb-3">
+            )}
+            <div className="w-full pt-2 pb-3">
                 <label htmlFor="rightDateRange" className="text-base ml-3 cursor-pointer">Date Range</label>
                 <div ref={refs.rightDateRangeContainer} className="flex items-center justify-center mx-2">
                     <div className="grow bg-white rounded-md flex items-center justify-start">
@@ -278,7 +282,7 @@ export default function RightAdvancedSearchFilter({ handleFilterFormChange, refs
                 </div>
                 {isDateRange && (
                     <AdvancedDateRange
-                        filter={'news'}
+                        filter={page}
                         position={position}
                         selectedRange={selectedRange}
                         setSelectedRange={setSelectedRange}

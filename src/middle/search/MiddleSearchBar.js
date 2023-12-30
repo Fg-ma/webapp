@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleDrop, cancelFilterChanges } from "../../redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
-export default function MiddleSearchBar({ middleSpaceContainerRef }) {
+export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRef }) {
 
     /* 
         Description:   
@@ -12,12 +12,14 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
             Switches the search icon to an arrow icon as the background of the 
             submit button when the text input is hover or there is text in it.
     */
-   
+
     const dispatch = useDispatch();
     const dropFilter = useSelector(state => state.filters.middle.isDropFilter);
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const refs = {
+        middleSpaceContainer: middleSpaceContainerRef,
+        middleSpace: middleSpaceRef,
         middleAddAdvancedSearchFilter: useRef(null),
         middleAdvancedSearchFilter: useRef(null),
         middleDateRange: useRef(null),
@@ -26,7 +28,7 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
         middleSpaceSearchBar: useRef(null),
         middleAdvancedFilterDropdownDropRef: useRef(null),
     };
-    const middleSpaceContainerWidth = middleSpaceContainerRef.current.offsetWidth;
+    const middleSpaceContainerWidth = refs.middleSpaceContainer.current.offsetWidth;
     const middleSearchWidth = `${middleSpaceContainerWidth * 0.8}px`;
 
   
@@ -68,12 +70,13 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
         const isOutsideDateRange =
             isOutsideElement(refs.middleDateRange) &&
             isOutsideElement(refs.middleDateRangeCaptionDropdown);
-            
-        const shouldToggleDrop =
-            (refs.middleAddAdvancedSearchFilter.current  && !refs.middleAddAdvancedSearchFilter.current.contains(event.target) && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
-            (refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && !refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
-            (refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar && isOutsideDateRange);
         
+        const shouldToggleDrop =
+            (refs.middleSpace.current && refs.middleSpace.current.contains(event.target) && refs.middleAddAdvancedSearchFilter.current  && !refs.middleAddAdvancedSearchFilter.current.contains(event.target) && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
+            (refs.middleSpace.current && refs.middleSpace.current.contains(event.target) && refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && !refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar) ||
+            (refs.middleSpace.current && refs.middleSpace.current.contains(event.target) && refs.middleAdvancedSearchFilter.current && !refs.middleAdvancedSearchFilter.current.contains(event.target) && refs.middleDateRange.current && !refs.middleAdvancedFilterDropdownDropRef.current && isOutsideFilter && isOutsideSearchBar && isOutsideDateRange);
+        
+
         if (shouldToggleDrop) {
             dispatch(toggleDrop('middle', 'isDropFilter'));
             dispatch(cancelFilterChanges('middle'));
@@ -90,7 +93,11 @@ export default function MiddleSearchBar({ middleSpaceContainerRef }) {
     }, [dropFilter]);
 
     return (
-        <div ref={refs.middleSpaceSearchBar} className="flex flex-col justify-center items-center" style={{ width: middleSearchWidth }}>
+        <div 
+            ref={refs.middleSpaceSearchBar} 
+            className="flex flex-col justify-center items-center" 
+            style={{ width: middleSearchWidth }}
+        >
             <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
                     id="middleSearchSubmit"

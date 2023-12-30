@@ -3,7 +3,7 @@ import RightSearchFilter from "./RightSearchFilter";
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleDrop, cancelFilterChanges } from "../../redux/filters/filterActions";
 
-export default function RightSearchBar() {
+export default function RightSearchBar({ page }) {
 
     /* 
         Description:   
@@ -14,7 +14,7 @@ export default function RightSearchBar() {
     */
 
     const dispatch = useDispatch();
-    const dropFilter = useSelector(state => state.filters.news.isDropFilter);
+    const dropFilter = useSelector(state => state.filters[page].isDropFilter);
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [rightSpaceFilterGeometry, setRightSpaceFilterGeometry] = useState({
@@ -87,7 +87,7 @@ export default function RightSearchBar() {
     };
 
     const handleFilterDrop = () => {
-        dispatch(toggleDrop('news', 'isDropFilter'))
+        dispatch(toggleDrop(page, 'isDropFilter'))
     };
 
     // Handles logic for outside clicks and when to close the filter
@@ -111,8 +111,8 @@ export default function RightSearchBar() {
             (refs.rightAdvancedSearchFilter.current && !refs.rightAdvancedSearchFilter.current.contains(event.target) && refs.rightDateRange.current && !refs.rightAdvancedFilterDropdownDrop.current && isOutsideFilter && isOutsideSearchBar && isOutsideDateRange);
       
         if (shouldToggleDrop) {
-            dispatch(toggleDrop('news', 'isDropFilter'));
-            dispatch(cancelFilterChanges('news'));
+            dispatch(toggleDrop(page, 'isDropFilter'));
+            dispatch(cancelFilterChanges(page));
         }
     };
 
@@ -157,6 +157,7 @@ export default function RightSearchBar() {
             </form>
             {dropFilter && (
                 <RightSearchFilter
+                    page={page}
                     rightSpaceFilterGeometry={rightSpaceFilterGeometry}
                     refs={{
                         rightSpaceFilter: refs.rightSpaceFilter,

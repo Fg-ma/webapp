@@ -1,4 +1,4 @@
-import { TOGGLE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, SET_DATE_RANGE } from './filterTypes';
+import { TOGGLE_DROP, CLOSE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, SET_DATE_RANGE } from './filterTypes';
 
 const initialState = {
     middle: {
@@ -77,20 +77,13 @@ const initialState = {
     messages: {
         isDropFilter: false,
         filterPayload: {
-            isWhatsCurrent: false,
-            isAffiliateActivity: false,
-            isAllTimeGreats: false,
-            isDatePosted: false,
-            isDatePostedSwitched: false,
-            isPopularity: false,
-            isPopularitySwitched: false,
-            isAdvancedSearch: false,
-            affiliatedFilters: {
-                ind: [],
-                grp: [],
-                org: [],
-            },
-            author: '',
+            isIndividuals: false,
+            isGroups: false,
+            isOrganizations: false,
+            isNewestMessages: false,
+            isOldestMessages: false,
+            isNewestAffiliate: false,
+            isOldestAffiliate: false,
             dateRange: {
                 from: '',
                 to: '',
@@ -101,9 +94,7 @@ const initialState = {
     dogEars: {
         isDropFilter: false,
         filterPayload: {
-            isWhatsCurrent: false,
             isAffiliateActivity: false,
-            isAllTimeGreats: false,
             isDatePosted: false,
             isDatePostedSwitched: false,
             isPopularity: false,
@@ -133,6 +124,17 @@ export default function filterReducer(state = initialState, action) {
                 [action.payload.filter]: {
                     ...state[filter],
                     [dropType]: !state[filter][dropType],
+                },
+            };
+        }
+
+        case CLOSE_DROP: {
+            const { filter, dropType } = action.payload;
+            return {
+                ...state,
+                [action.payload.filter]: {
+                    ...state[filter],
+                    [dropType]: false,
                 },
             };
         }

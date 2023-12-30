@@ -33,8 +33,8 @@ export function MessagesCard({ name, lastMessage }) {
                 <p>pic</p>
             </div>
             <div className="m-2">
-                <p className="font-Josefin text-xl">{name}</p>
-                <p className="font-K2D text-sm text-fg-black-30">{lastMessage}</p>
+                <p className="font-Josefin text-xl truncate">{name}</p>
+                <p className="font-K2D text-sm text-fg-black-30 line-clamp-2">{lastMessage}</p>
             </div>
         </div>
     )

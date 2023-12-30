@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
 
-export default function RightAddAdvancedSearchFilter({ rightAddAdvancedSearchFilterRef }) {
+export default function RightAddAdvancedSearchFilter({ page, rightAddAdvancedSearchFilterRef }) {
 
     /* 
         Description:   
@@ -15,7 +15,7 @@ export default function RightAddAdvancedSearchFilter({ rightAddAdvancedSearchFil
 
     const handleAdvancedFilter = () => {
         setTimeout(() => {
-            dispatch(toggleAdvancedSearch('news'));
+            dispatch(toggleAdvancedSearch(page));
         }, 0);
     };
 

@@ -34,14 +34,14 @@ export default function RightSpace() {
                 return <NewsCards />
         }
     };
-
+    
     return (
         <div id="rightSpace" className="rounded-xl overflow-hidden h-4/5 shadow-md">
             <RightNav />
             <div id="rightSpaceContentContainer" style={{ height: `calc(100% - 7rem)` }}>
                 {renderContent()}
             </div>
-            <RightSearchBar />
+            <RightSearchBar page={rightPage} />
         </div>
     )
 }

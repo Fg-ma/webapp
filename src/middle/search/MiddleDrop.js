@@ -1,40 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDrop } from "../../redux/filters/filterActions";
 import MiddleSearchBar from "./MiddleSearchBar"
 
-export default function MiddleDrop({ middleSpaceContainerRef }) {
+export default function MiddleDrop({ middleSpaceContainerRef, middleSpaceRef }) {
 
     /* 
         Description:   
             Creates the arrow button for opening the MiddleSearchBar.
         Unique Properties:
-            N/A
+            Fancy stuff done to the drop button and the reveal of the search bar, but done quickly.
     */
 
     const dispatch = useDispatch();
-    const dropped = useSelector(state => state.filters.middle.isDrop);
+    const dropped = useSelector(state => state.filters.middle.isDrop)    
+    const [showSearchBar, setShowSearchBar] = useState(false);
 
-    function handleDrop() {
+    const handleDrop = () => {
         dispatch(toggleDrop('middle', 'isDrop'));
-    }
-
-    const getDropIconRotation = () => {
         if (dropped) {
-            return 180;
+            setTimeout(() => {
+                setShowSearchBar(!dropped);
+            }, 50);
         } else {
-            return 0;
+            setTimeout(() => {
+                setShowSearchBar(!dropped);
+            }, 275);
         }
+    };
+
+    const getButtonTransform = () => {
+        return dropped ? 'scaleY(-1)' : 'none';
     };
 
     return (
         <div id="dropContainer" className="flex flex-col justify-center items-center">
             <button 
                 className="relative h-12 aspect-square bg-225 bg-no-repeat bg-center mb-2" 
-                style={{ backgroundImage: "url('assets/icons/dropDown.svg')", transform: `rotate(${getDropIconRotation()}deg)`  }} 
+                style={{ 
+                    backgroundImage: "url('assets/icons/dropDown.svg')", 
+                    transform: `${getButtonTransform()}`,
+                    opacity: dropped ? 1 : 0.90,
+                    transformOrigin: 'center',
+                    transition: 'transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s cubic-bezier(0.42, 0, 1, 1)'
+                }} 
                 onClick={handleDrop}>
             </button>
-            {dropped ? <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} /> : null}
+            {showSearchBar ? <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} /> : null}
         </div>
-    )
-}
+    );
+};

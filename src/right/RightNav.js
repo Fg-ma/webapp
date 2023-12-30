@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setRightNav } from "../redux/pageState/pageStateActions";
+import { closeDrop } from "../redux/filters/filterActions";
 
 export default function RightNav() {
 
@@ -35,8 +36,8 @@ export default function RightNav() {
     // Activate the style for the current rightPage
     rightStyles[rightPage] = { ...activeStyles };
 
-
     function swapRightState(state) {
+        dispatch(closeDrop(state, 'isDropFilter'))
         dispatch(setRightNav(state));
     }
 
