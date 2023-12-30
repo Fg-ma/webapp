@@ -1,7 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux'
+import { motion, AnimatePresence } from 'framer-motion';
 import { toggleDrop, cancelFilterChanges } from "../../redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
+
+const middleSearchFilterVar = {
+    init: {
+        opacity: 0, 
+        y: "-2vh" 
+    },
+    animate: { 
+        opacity: 1, 
+        y: 0 
+    },
+    exit: { 
+        opacity: 0, 
+        y: "-2vh" 
+    },
+    transition: { 
+        duration: 0.25, 
+        ease: "easeOut",
+    }
+};
 
 export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRef }) {
 
@@ -125,18 +145,29 @@ export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRe
                     />
                 </div>
             </form>
-            {dropFilter && (
-                <MiddleSearchFilter
-                    refs={{
-                        middleSpaceFilter: refs.middleSpaceFilter,
-                        middleAddAdvancedSearchFilter: refs.middleAddAdvancedSearchFilter,
-                        middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
-                        middleDateRange: refs.middleDateRange,
-                        middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
-                        middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
-                    }}
-                />
-            )}
+            <AnimatePresence>
+                {dropFilter && (
+                    <motion.div
+                        className="w-full"
+                        variants={middleSearchFilterVar}
+                        initial="init"
+                        animate="animate"
+                        exit="exit"
+                        transition="transition"
+                    >
+                        <MiddleSearchFilter
+                            refs={{
+                                middleSpaceFilter: refs.middleSpaceFilter,
+                                middleAddAdvancedSearchFilter: refs.middleAddAdvancedSearchFilter,
+                                middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
+                                middleDateRange: refs.middleDateRange,
+                                middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                                middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
+                            }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence, useAnimation, animate } from "framer-motion";
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
+
+const middleAdvancedSearchFilterVar = {
+    init: { x: "150%", opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    transition: { duration: 0.75, ease: "easeOut" },
+};
 
 export default function MiddleSearchFilter({ refs }) {
 
@@ -37,9 +44,16 @@ export default function MiddleSearchFilter({ refs }) {
         dispatch(toggleDrop('middle', 'isDropFilter'));
     };
 
+    const [middleAdvancedSearchFilter, setMiddleAdvancedSearchFilter] = useState(false);
+    useEffect(() => {
+        if (filterFormData.isAdvancedSearch) {
+            setMiddleAdvancedSearchFilter(filterFormData.isAdvancedSearch);
+        }
+    }, [filterFormData.isAdvancedSearch]);
+
     return (
         <div ref={refs.middleSpaceFilter} className="w-full bg-white rounded-md mt-2 shadow-md">
-            <form className="flex h-full m-4">
+            <form className="flex h-full p-4">
                 <div className="bg-white flex flex-col pr-6 justify-between" style={{ width: "55%" }}>
                     <div>
                         <p className="text-2xl mb-1">Filter by</p>
@@ -166,20 +180,33 @@ export default function MiddleSearchFilter({ refs }) {
                         />
                     </div>
                 </div>
-                <div className="flex justify-center items-center" style={{ width: "45%" }}>
-                    {filterFormData.isAdvancedSearch ? (
-                        <MiddleAdvancedSearchFilter
-                            handleFilterFormChange={handleFilterFormChange}
-                            refs={{
-                                middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
-                                middleDateRange: refs.middleDateRange,
-                                middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
-                                middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
-                            }}
-                        />
-                    ) : (
+                <div className="flex justify-center items-center overflow-hidden" style={{ width: "45%" }}>
+                    <AnimatePresence onExitComplete={() => {setMiddleAdvancedSearchFilter(false)}}>
+                        {filterFormData.isAdvancedSearch && (
+                            <motion.div
+                                variants={middleAdvancedSearchFilterVar}
+                                initial="init"
+                                animate="animate"
+                                transition="transition"
+                                exit="init"
+                            >
+                                <MiddleAdvancedSearchFilter
+                                    handleFilterFormChange={handleFilterFormChange}
+                                    refs={{
+                                        middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
+                                        middleDateRange: refs.middleDateRange,
+                                        middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                                        middleAdvancedFilterDropdownDropRef: refs.middleAdvancedFilterDropdownDropRef,
+                                    }}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {!filterFormData.isAdvancedSearch && !middleAdvancedSearchFilter && (
                         <MiddleAddAdvancedSearchFilter
-                            middleAddAdvancedSearchFilterRef={refs.middleAddAdvancedSearchFilter}
+                            middleAddAdvancedSearchFilterRef={
+                                refs.middleAddAdvancedSearchFilter
+                            }
                         />
                     )}
                 </div>

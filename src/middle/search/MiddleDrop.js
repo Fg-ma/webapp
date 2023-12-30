@@ -1,7 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toggleDrop } from "../../redux/filters/filterActions";
 import MiddleSearchBar from "./MiddleSearchBar"
+
+const dropButtonVar = {
+    init: { 
+        opacity: 0.9, 
+        rotateX: 0 
+    },
+    animate: { 
+        opacity: 1,
+        rotateX: 180
+    },
+    transition: {
+        duration: 0.45,
+        ease: "easeOut",
+        opacity: { duration: 0.6, ease: [0.42, 0, 1, 1] },
+    }
+};
+
+const middleSearchBarVar = {
+    init: {
+        opacity: 0, 
+        y: "-2vh" 
+    },
+    animate: { 
+        opacity: 1, 
+        y: 0 
+    },
+    exit: { 
+        opacity: 0, 
+        y: "-2vh" 
+    },
+    transition: { 
+        duration: 0.25, 
+        ease: "easeOut", 
+        delay: 0.275 
+    }
+};
 
 export default function MiddleDrop({ middleSpaceContainerRef, middleSpaceRef }) {
 
@@ -13,40 +50,37 @@ export default function MiddleDrop({ middleSpaceContainerRef, middleSpaceRef }) 
     */
 
     const dispatch = useDispatch();
-    const dropped = useSelector(state => state.filters.middle.isDrop)    
-    const [showSearchBar, setShowSearchBar] = useState(false);
+    const dropped = useSelector(state => state.filters.middle.isDrop)
 
     const handleDrop = () => {
         dispatch(toggleDrop('middle', 'isDrop'));
-        if (dropped) {
-            setTimeout(() => {
-                setShowSearchBar(!dropped);
-            }, 50);
-        } else {
-            setTimeout(() => {
-                setShowSearchBar(!dropped);
-            }, 275);
-        }
-    };
-
-    const getButtonTransform = () => {
-        return dropped ? 'scaleY(-1)' : 'none';
     };
 
     return (
         <div id="dropContainer" className="flex flex-col justify-center items-center">
-            <button 
-                className="relative h-12 aspect-square bg-225 bg-no-repeat bg-center mb-2" 
-                style={{ 
-                    backgroundImage: "url('assets/icons/dropDown.svg')", 
-                    transform: `${getButtonTransform()}`,
-                    opacity: dropped ? 1 : 0.90,
-                    transformOrigin: 'center',
-                    transition: 'transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s cubic-bezier(0.42, 0, 1, 1)'
-                }} 
-                onClick={handleDrop}>
-            </button>
-            {showSearchBar ? <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} /> : null}
+            <motion.button
+                className="relative h-12 aspect-square bg-225 bg-no-repeat bg-center mb-2"
+                style={{ backgroundImage: "url('assets/icons/dropDown.svg')" }}
+                variants={dropButtonVar}
+                initial="init"
+                animate={dropped ? "animate" : "init"}
+                transition="transition"
+                onClick={handleDrop}
+            >
+            </motion.button>
+            <AnimatePresence>
+                {dropped && (
+                    <motion.div
+                        variants={middleSearchBarVar}
+                        initial="init"
+                        animate="animate"
+                        exit="exit"
+                        transition="transition"
+                    >
+                        <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
