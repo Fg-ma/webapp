@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { motion, AnimatePresence, useAnimation, animate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
 
 const middleAdvancedSearchFilterVar = {
-    init: { x: "150%", opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    transition: { duration: 0.75, ease: "easeOut" },
+    init: { y: "150%", opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.85, ease: "easeOut" },
 };
 
 export default function MiddleSearchFilter({ refs }) {
@@ -22,6 +22,14 @@ export default function MiddleSearchFilter({ refs }) {
 
     const dispatch = useDispatch();
     const filterFormData = useSelector(state => state.filters.middle.filterPayload);
+    const [middleAdvancedSearchFilterVisible, setMiddleAdvancedSearchFilterVisible] = useState(false);
+
+    // Used to stop MiddleAddAdvancedSearchFilter from rendering before MiddleAdvancedSearchFilter has had a chance to exit
+    useEffect(() => {
+        if (filterFormData.isAdvancedSearch) {
+            setMiddleAdvancedSearchFilterVisible(filterFormData.isAdvancedSearch);
+        }
+    }, [filterFormData.isAdvancedSearch]);
 
     function handleFilterFormChange (event) {
         const { name, type, checked, value } = event.target;
@@ -43,13 +51,6 @@ export default function MiddleSearchFilter({ refs }) {
     function handleDrop () {
         dispatch(toggleDrop('middle', 'isDropFilter'));
     };
-
-    const [middleAdvancedSearchFilter, setMiddleAdvancedSearchFilter] = useState(false);
-    useEffect(() => {
-        if (filterFormData.isAdvancedSearch) {
-            setMiddleAdvancedSearchFilter(filterFormData.isAdvancedSearch);
-        }
-    }, [filterFormData.isAdvancedSearch]);
 
     return (
         <div ref={refs.middleSpaceFilter} className="w-full bg-white rounded-md mt-2 shadow-md">
@@ -181,7 +182,7 @@ export default function MiddleSearchFilter({ refs }) {
                     </div>
                 </div>
                 <div className="flex justify-center items-center overflow-hidden" style={{ width: "45%" }}>
-                    <AnimatePresence onExitComplete={() => {setMiddleAdvancedSearchFilter(false)}}>
+                    <AnimatePresence onExitComplete={() => {setMiddleAdvancedSearchFilterVisible(false)}}>
                         {filterFormData.isAdvancedSearch && (
                             <motion.div
                                 variants={middleAdvancedSearchFilterVar}
@@ -202,7 +203,7 @@ export default function MiddleSearchFilter({ refs }) {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    {!filterFormData.isAdvancedSearch && !middleAdvancedSearchFilter && (
+                    {!filterFormData.isAdvancedSearch && !middleAdvancedSearchFilterVisible && (
                         <MiddleAddAdvancedSearchFilter
                             middleAddAdvancedSearchFilterRef={
                                 refs.middleAddAdvancedSearchFilter

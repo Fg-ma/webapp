@@ -29,6 +29,30 @@ export default function LeftVerticalSplitPane() {
     const [paneHeight, setPaneHeight] = useState('60%');
     const [headerLightness, setHeaderLightness] = useState(80)
 
+    // Handles softly lowering and raising the pane height when togglePaneHeight is called 
+    const animateTogglePaneHeight = (targetHeight, duration = 500) => {
+        const start = Date.now();
+        const initialHeight = parseFloat(paneHeight) || 0;
+        
+        const animate = () => {
+            const now = Date.now();
+            const progress = Math.min(1, (now - start) / duration);
+            
+            const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
+            
+            const newPaneHeight = initialHeight + (targetHeight - initialHeight) * easedProgress;
+            
+            setPaneHeight(`${newPaneHeight}%`);
+            setHeaderLightness(getLightness(newPaneHeight));
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+      
+        requestAnimationFrame(animate);
+    };
+
     const handleMove = (clientY) => {
         if (isResizing) {
             const containerHeight = document.getElementById("leftSpaceContentContainer").offsetHeight;
@@ -61,14 +85,6 @@ export default function LeftVerticalSplitPane() {
         setIsResizing(true);
         setInitialMousePosition(clientY);
         setInitialPaneHeight(parseFloat(paneHeight) || 0);
-    };
-    
-    const handleMouseDown = (event) => {
-        handleStart(event.clientY);
-    };
-    
-    const handleTouchStart = (event) => {
-        handleStart(event.touches[0].clientY);
     };
     
     const handleMouseMove = (event) => {
@@ -113,17 +129,10 @@ export default function LeftVerticalSplitPane() {
         setHeaderLightness(initialLightness);
     }, []);
 
+    // Controls the toggle pane height controlled by the button in RelatedIssuesHeader
     const togglePaneHeight = () => {
-        // Check if the current pane height is greater than 0
-        console.log(parseFloat(paneHeight))
-        const newHeight = parseFloat(paneHeight) < 100 ? '100%' : '60%';
-        
-        // Set the new pane height
-        setPaneHeight(newHeight);
-    
-        // Update lightness based on the new pane height
-        let newLightness = getLightness(parseFloat(newHeight))
-        setHeaderLightness(newLightness);
+        const newHeight = parseFloat(paneHeight) < 100 ? "100%" : "79%";
+        animateTogglePaneHeight(parseFloat(newHeight));
     };
 
     const getLightness = (height) => {
@@ -163,7 +172,17 @@ export default function LeftVerticalSplitPane() {
             <div className="leftPane" style={{ height: paneHeight }}>
                 {renderContent()}
             </div>
-            <div className="leftResizer" onMouseDown={handleMouseDown} onTouchStart={(e) => handleTouchStart(e)}>
+            <div 
+                className="leftResizer" 
+                onMouseDown={(e) => {
+                    handleStart(e.clientY);
+                }}
+                onTouchStart={(e) => {
+                    handleStart(e.touches[0].clientY);
+                }}
+                onMouseUp={handleMouseUp}
+                onTouchEnd={handleTouchEnd}
+            >
                 <RecHeader lightness={headerLightness} togglePaneHeight={togglePaneHeight} />
             </div>
             <div id="leftBottomPane" className="leftPane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>

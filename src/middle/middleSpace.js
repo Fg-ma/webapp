@@ -17,7 +17,7 @@ export default function MiddleSpace({ middleSpaceContainerRef }) {
     const middleSpaceRef = useRef(null);
     
     return (
-        <div ref={middleSpaceRef} id="middleSpace" className="rounded-xl h-4/5 relative">
+        <div ref={middleSpaceRef} id="middleSpace" className="rounded-xl h-4/5 relative drop-shadow-md">
             <div className="absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit">
                 <MiddleDrop middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} />
             </div>

@@ -74,6 +74,7 @@ export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRe
 
     const handleFilterDrop = () => {
         dispatch(toggleDrop('middle', 'isDropFilter'))
+        dispatch(cancelFilterChanges('middle'));
     };
 
     // Handles logic for outside clicks and when to close the filter

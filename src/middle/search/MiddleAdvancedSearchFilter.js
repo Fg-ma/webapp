@@ -181,7 +181,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                     onClick={handleAdvancedFilter}
                 />
             </div>
-            <div className="m-2">
+            <div className="p-2">
                 <p className="text-lg">Filter by</p>
                 <div className="bg-fg-white-85 p-2 rounded-md w-full">
                     <p className="text-base">Affiliated...</p>

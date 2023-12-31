@@ -1,7 +1,30 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from 'framer-motion';
 import { setRightNav } from "../redux/pageState/pageStateActions";
 import { closeDrop } from "../redux/filters/filterActions";
+
+const navButtonsVar = {
+    init: {
+        fontSize: "1.125rem",
+        lineHeight: "1.75rem",
+        paddingTop: "0.25rem",
+        textDecorationLine: "underline",
+        textDecorationColor: "rgba(44, 146, 245, 0)",
+        textDecorationThickness: "2px",
+        textUnderlineOffset: "8px",
+    },
+    hover: {
+        textDecorationColor: "rgba(44, 146, 245, 1)",
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+        paddingTop: "0rem",
+    },
+    transition: { 
+        ease: "easeOut", 
+        duration: 0.1,
+    },
+};
 
 export default function RightNav() {
 
@@ -11,8 +34,11 @@ export default function RightNav() {
             selected item is underlined in fg-primary. It also sets the state in redux to 
             determine what should be displayed in the rightSpaceContentContainer.
         Unique Properties:
-            N/A
+            framer-motion used to control hover styles.
     */
+
+    const dispatch = useDispatch();
+    const rightPage = useSelector((state) => state.page.rightPagePayload.rightPageState);
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -20,12 +46,8 @@ export default function RightNav() {
         textDecorationColor: "#F56114",
         textUnderlineOffset: "8px",
         textDecorationThickness: "2px",
+        paddingBottom: "0.25rem",
     };
-
-    const dispatch = useDispatch();
-
-    const rightPage = useSelector((state) => state.page.rightPagePayload.rightPageState);
-
     const rightStyles = {
         news: deactiveStyles,
         explore: deactiveStyles,
@@ -33,7 +55,6 @@ export default function RightNav() {
         dogEars: deactiveStyles,
     };
 
-    // Activate the style for the current rightPage
     rightStyles[rightPage] = { ...activeStyles };
 
     function swapRightState(state) {
@@ -44,18 +65,46 @@ export default function RightNav() {
     return (
         <nav id="rightNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
             <div className="flex divide-x-2 divide-fg-white-70 h-full">
-                <div className="h-7 w-1/4 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
-                    <button className="w-full" style={rightStyles["news"]} onClick={() => swapRightState('news')}>News</button>
-                </div>
-                <div className="h-7 w-1/4 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
-                    <button className="w-full" style={rightStyles["explore"]} onClick={() => swapRightState('explore')}>Explore</button>
-                </div>
-                <div className="h-7 w-1/4 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
-                    <button className="w-full" style={rightStyles["messages"]} onClick={() => swapRightState('messages')}>Messages</button>
-                </div>
-                <div className="h-7 w-1/4 my-auto flex justify-center items-center text-lg hover:underline hover:decoration-fg-secondary hover:decoration-2 hover:underline-offset-8 hover:text-base transition">
-                    <button className="w-full" style={rightStyles["dogEars"]} onClick={() => swapRightState('dogEars')}>Dog-Ears</button>
-                </div>
+                <motion.div 
+                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                    variants={navButtonsVar}
+                    initial="init"
+                    whileHover="hover"
+                    transition={navButtonsVar.transition}
+                    onClick={() => swapRightState('news')}
+                >
+                    <button className="w-full" style={rightStyles["news"]}>News</button>
+                </motion.div>
+                <motion.div 
+                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                    variants={navButtonsVar}
+                    initial="init"
+                    whileHover="hover"
+                    transition={navButtonsVar.transition}
+                    onClick={() => swapRightState('explore')}
+                >
+                    <button className="w-full" style={rightStyles["explore"]}>Explore</button>
+                </motion.div>
+                <motion.div 
+                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                    variants={navButtonsVar}
+                    initial="init"
+                    whileHover="hover"
+                    transition={navButtonsVar.transition}
+                    onClick={() => swapRightState('messages')}
+                >
+                    <button className="w-full" style={rightStyles["messages"]}>Messages</button>
+                </motion.div>
+                <motion.div 
+                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                    variants={navButtonsVar}
+                    initial="init"
+                    whileHover="hover"
+                    transition={navButtonsVar.transition}
+                    onClick={() => swapRightState('dogEars')}
+                >
+                    <button className="w-full" style={rightStyles["dogEars"]}>Dog-Ears</button>
+                </motion.div>
             </div>
         </nav>
     );
