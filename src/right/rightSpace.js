@@ -18,7 +18,7 @@ export default function RightSpace() {
             N/A
     */
 
-    const rightPage = useSelector(state => state.page.rightPagePayload.rightPageState);
+    const rightPage = useSelector(state => state.page.right.pagePayload.pageState);
 
     const renderContent = () => {
         switch (rightPage) {

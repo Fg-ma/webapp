@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from "framer-motion";
 import { toggleAdvancedSearch, clearAdvancedAffiliateFilter, setDateRange } from "../../redux/filters/filterActions";
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
@@ -83,6 +84,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
             dispatch(setDateRange('middle', '', ''));
         }
         setTyped(true);
+        updateRangeStyles();
     };
 
     /* 
@@ -90,14 +92,15 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
         the correct elements it is also passed down to elements in the drop down
     */
     const updateRangeStyles = () => {
-        const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
-        let validFrom = regex.test(formDateRange.from);
-        let validTo = regex.test(formDateRange.to);
-        if (validFrom && validTo) {
+        setTimeout(() => {
+            const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
+            let validFrom = regex.test(formDateRange.from);
+            let validTo = regex.test(formDateRange.to);
+            if (validFrom && validTo) {
                 setTimeout(() => {
                     if (refs.middleDateRange.current) {
                         const buttons = refs.middleDateRange.current.querySelectorAll('button[name="day"].selected');
-                        
+
                         if (buttons.length) {
                             const buttonArray = Array.from(buttons);
 
@@ -115,21 +118,22 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                         };
                     };
                 }, 0);
-        };
-        if (!formDateRange.from && !formDateRange.to) {
-        
-            if (refs.middleDateRange.current) {
-                const buttons = refs.middleDateRange.current.querySelectorAll('button[name="day"].selected');
+            };
+            if (!formDateRange.from && !formDateRange.to) {
+            
+                if (refs.middleDateRange.current) {
+                    const buttons = refs.middleDateRange.current.querySelectorAll('button[name="day"].selected');
 
-                if (buttons.length) {
-                    const buttonArray = Array.from(buttons);
+                    if (buttons.length) {
+                        const buttonArray = Array.from(buttons);
 
-                    buttonArray.forEach((button) => {
-                        button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle", "selected");
-                    });
+                        buttonArray.forEach((button) => {
+                            button.classList.remove("rdp-day_range_start", "rdp-day_range_end", "rdp-day_range_middle", "selected");
+                        });
+                    };
                 };
             };
-        } 
+        }, 0);
     };   
     
     useEffect(() => {
@@ -187,30 +191,36 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                     <p className="text-base">Affiliated...</p>
                     <div className="w-full flex items-center justify-start mb-2">
                         <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
-                        <button
+                        <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter("ind")}
                             className="h-8 aspect-square bg-no-repeat bg-center"
                             style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                        ></button>
+                            whileTap={{ scale: 1.075 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                        ></motion.button>
                     </div>
                     <div className="w-full flex items-center justify-start my-2">
                         <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
-                        <button
+                        <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter('grp')}
                             className="h-8 aspect-square bg-no-repeat bg-center"
                             style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                        ></button>
+                            whileTap={{ scale: 1.075 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                        ></motion.button>
                     </div>
                     <div className="w-full flex items-center justify-start mt-2">
                         <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
-                        <button
+                        <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter('org')}
                             className="h-8 aspect-square bg-no-repeat bg-center"
                             style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
-                        ></button>
+                            whileTap={{ scale: 1.075 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                        ></motion.button>
                     </div>
                 </div>
                 <div className="w-full mt-2">
@@ -226,14 +236,16 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                             value={formAuthor}
                         >
                         </input>
-                        <button
+                        <motion.button
                                 type="button"
                                 name="author"
                                 className="h-8 aspect-square bg-no-repeat bg-center ml-1"
                                 style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
                                 onClick={handleFilterFormChange}
                                 value=""
-                        ></button>
+                                whileTap={{ scale: 1.075 }}
+                                transition={{ duration: 0.25, ease: "easeOut" }}
+                        ></motion.button>
                     </div>
                 </div>
                 <div className="w-full mt-2">
@@ -269,29 +281,33 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                             >
                             </button>
                         </div>
-                        <button
+                        <motion.button
                                 type="button"
                                 name="clearDateRange"
                                 className="h-8 aspect-square bg-no-repeat bg-center ml-1"
                                 style={{ backgroundImage: "url('assets/icons/trashCan.svg')"}}
                                 onClick={handleDateRangeChange}
                                 value=""
+                                whileTap={{ scale: 1.075 }}
+                                transition={{ duration: 0.25, ease: "easeOut" }}
                         >
-                        </button>
+                        </motion.button>
                     </div>
-                    {isDateRange && (
-                        <AdvancedDateRange
-                            filter={'middle'}
-                            position={position}
-                            selectedRange={selectedRange}
-                            setSelectedRange={setSelectedRange}
-                            updateRangeStyles={updateRangeStyles}
-                            refs={{
-                                dateRange: refs.middleDateRange,
-                                dateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
-                            }}
-                        />
-                    )}
+                    <AnimatePresence>
+                        {isDateRange && (
+                                <AdvancedDateRange
+                                filter={'middle'}
+                                position={position}
+                                selectedRange={selectedRange}
+                                setSelectedRange={setSelectedRange}
+                                updateRangeStyles={updateRangeStyles}
+                                refs={{
+                                    dateRange: refs.middleDateRange,
+                                    dateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,
+                                }}
+                            />
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
         </div>

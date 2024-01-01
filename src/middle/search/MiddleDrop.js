@@ -29,10 +29,6 @@ const middleSearchBarVar = {
         opacity: 1, 
         y: 0 
     },
-    exit: { 
-        opacity: 0, 
-        y: "-2vh" 
-    },
     transition: { 
         duration: 0.25, 
         ease: "easeOut", 
@@ -74,7 +70,7 @@ export default function MiddleDrop({ middleSpaceContainerRef, middleSpaceRef }) 
                         variants={middleSearchBarVar}
                         initial="init"
                         animate="animate"
-                        exit="exit"
+                        exit="init"
                         transition="transition"
                     >
                         <MiddleSearchBar middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} />

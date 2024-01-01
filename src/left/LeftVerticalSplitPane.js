@@ -22,7 +22,7 @@ export default function LeftVerticalSplitPane() {
             from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
     */
    
-    const leftPage = useSelector(state => state.page.leftPagePayload.leftPageState);
+    const leftPage = useSelector(state => state.page.left.pagePayload.pageState);
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);

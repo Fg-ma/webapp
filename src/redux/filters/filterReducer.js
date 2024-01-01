@@ -121,7 +121,7 @@ export default function filterReducer(state = initialState, action) {
             const { filter, dropType } = action.payload;
             return {
                 ...state,
-                [action.payload.filter]: {
+                [filter]: {
                     ...state[filter],
                     [dropType]: !state[filter][dropType],
                 },
@@ -132,7 +132,7 @@ export default function filterReducer(state = initialState, action) {
             const { filter, dropType } = action.payload;
             return {
                 ...state,
-                [action.payload.filter]: {
+                [filter]: {
                     ...state[filter],
                     [dropType]: false,
                 },

@@ -1,39 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
 import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../../redux/filters/filterActions';
-
-function Popup({ name, position, onMouseEnter, onMouseLeave, handleFilterClick, popupRef, isFilterSelected, subcategory }) {
-    
-    /* 
-        Description:   
-            The popup is the portal that is created when the mouse hovers over a FilterCard that has 
-            text overflowing.
-        Unique Properties:
-            Acts the same as a filter card except that it can go beyond the boundaries of the container 
-            and doesn't switch to fg-secondary as the background when hovered over.
-    */
-
-    return createPortal(
-        <div
-            id={`${subcategory}Popup_${name}`}
-            className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max fixed z-10 overflow-visible cursor-pointer flex items-center rounded-md decoration-2 underline-offset-8 underline
-                ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
-                `}
-            style={{ top: `${position.top}px`, left: `${position.left}px` }}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={handleFilterClick}
-            ref={popupRef}
-        >
-            <div className="w-12 aspect-square bg-fg-white-85 mr-2 rounded-md grid place-items-center flex-shrink-0">
-                <p className="select-none">pic</p>
-            </div>
-            <span className={'m-2 font-Josefin text-lg select-none'}>{name}</span>
-        </div>,
-        document.body
-    );
-};
+import Popup from './Popup';
 
 export default function FilterCard({ filter, identify, name, subcategory, popupRef }) {
 
@@ -55,7 +24,6 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
     const [isMouseInsidePopup, setIsMouseInsidePopup] = useState(false);
     const hoverTimeout = useRef(null);
     const nameSpanRef = useRef(null);
-    const isOverflowing = nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth;
 
     const calculatePopupPosition = (event) => {
         const boundingBox = event.target.getBoundingClientRect();
@@ -71,12 +39,12 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
         clearTimeout(hoverTimeout.current);
         if (!isMouseInsidePopup) {
             hoverTimeout.current = setTimeout(() => {
-                if (isMouseInsideCard.current) {
+                if (isMouseInsideCard.current && (nameSpanRef.current && nameSpanRef.current.scrollWidth > nameSpanRef.current.offsetWidth)) {
                     setPopupState({
                         visible: true,
                         position: calculatePopupPosition(event),
                     });
-                }
+                };
             }, 1500);
         } else {
             if (isMouseInsideCard.current) {
@@ -138,14 +106,14 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
     }
 
     return (
-        <div
+        <motion.div
             id={`${subcategory}_${identify}`}
-            className={`bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md hover:bg-fg-secondary decoration-2 underline-offset-8 underline 
-                ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
-                `}
+            className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={!popupState.visible ? handleFilterClick : () => {}}
+            whileHover={{ backgroundColor: "rgb(44, 146, 245)" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
         >   
             
             <div className={`w-12 aspect-square bg-fg-white-85 mr-2 grid place-items-center flex-shrink-0
@@ -155,11 +123,14 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
             </div>
             <span
                 ref={nameSpanRef}
-                className={'m-2 font-Josefin text-lg select-none truncate'}
+                className={`
+                    m-2 font-Josefin text-lg select-none truncate underline decoration-2 underline-offset-8
+                    ${isFilterSelected ? 'decoration-fg-primary' : 'decoration-transparent'}
+                `}
             >
                 {name}
             </span>
-            {popupState.visible && isOverflowing && (
+            {popupState.visible && (
                 <Popup
                     name={name}
                     position={popupState.position}
@@ -171,6 +142,6 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
                     subcategory={subcategory}
                 />
             )}
-        </div>
+        </motion.div>
     );
 };

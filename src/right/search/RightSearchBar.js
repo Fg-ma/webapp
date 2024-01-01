@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence } from "framer-motion";
 import RightSearchFilter from "./RightSearchFilter";
-import { useDispatch, useSelector } from 'react-redux'
 import { toggleDrop, cancelFilterChanges } from "../../redux/filters/filterActions";
 
 export default function RightSearchBar({ page }) {
@@ -77,17 +78,10 @@ export default function RightSearchBar({ page }) {
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
     };
-  
-    const getSearchIcon = () => {
-        if (isInputFocused || inputValue.trim() !== '') {
-            return 'searchArrow.svg';
-        } else {
-            return 'search.svg';
-        }
-    };
 
     const handleFilterDrop = () => {
         dispatch(toggleDrop(page, 'isDropFilter'))
+        dispatch(cancelFilterChanges(page))
     };
 
     // Handles logic for outside clicks and when to close the filter
@@ -129,17 +123,21 @@ export default function RightSearchBar({ page }) {
         <div ref={refs.rightSpaceSearchBar} className="h-16 w-full bg-fg-white-90 flex justify-center items-center">
             <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center">
                 <input
-                    id="rightSearchSubmit"
+                    key="searchArrow"
                     type="submit"
                     value=""
                     className="w-6 h-6 bg-cover bg-no-repeat ml-2 cursor-pointer"
-                    style={{ backgroundImage: `url("assets/icons/${getSearchIcon()}")` }}
+                    style={{ 
+                        backgroundImage: isInputFocused || inputValue.trim() !== '' 
+                        ? 'url("assets/icons/searchArrow.svg")' 
+                        : 'url("assets/icons/search.svg")' 
+                    }}
                 />
                 <input
                     id="rightSearchArea"
                     type="text"
                     placeholder="Search..."
-                    className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1"
+                    className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1 mt-0.5"
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
                     onChange={handleInputChange}
@@ -155,20 +153,22 @@ export default function RightSearchBar({ page }) {
                     />
                 </div>
             </form>
-            {dropFilter && (
-                <RightSearchFilter
-                    page={page}
-                    rightSpaceFilterGeometry={rightSpaceFilterGeometry}
-                    refs={{
-                        rightSpaceFilter: refs.rightSpaceFilter,
-                        rightAddAdvancedSearchFilter: refs.rightAddAdvancedSearchFilter,
-                        rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
-                        rightDateRange: refs.rightDateRange,
-                        rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
-                        rightAdvancedFilterDropdownDrop: refs.rightAdvancedFilterDropdownDrop,
-                    }}
-                />
-            )}
+            <AnimatePresence>
+                {dropFilter && (
+                    <RightSearchFilter
+                        page={page}
+                        rightSpaceFilterGeometry={rightSpaceFilterGeometry}
+                        refs={{
+                            rightSpaceFilter: refs.rightSpaceFilter,
+                            rightAddAdvancedSearchFilter: refs.rightAddAdvancedSearchFilter,
+                            rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
+                            rightDateRange: refs.rightDateRange,
+                            rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
+                            rightAdvancedFilterDropdownDrop: refs.rightAdvancedFilterDropdownDrop,
+                        }}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

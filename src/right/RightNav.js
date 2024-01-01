@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from 'framer-motion';
-import { setRightNav } from "../redux/pageState/pageStateActions";
+import { setPageState } from "../redux/pageState/pageStateActions";
 import { closeDrop } from "../redux/filters/filterActions";
 
 const navButtonsVar = {
@@ -38,7 +38,7 @@ export default function RightNav() {
     */
 
     const dispatch = useDispatch();
-    const rightPage = useSelector((state) => state.page.rightPagePayload.rightPageState);
+    const rightPage = useSelector((state) => state.page.right.pagePayload.pageState);
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -54,12 +54,12 @@ export default function RightNav() {
         messages: deactiveStyles,
         dogEars: deactiveStyles,
     };
-
+    
     rightStyles[rightPage] = { ...activeStyles };
 
     function swapRightState(state) {
         dispatch(closeDrop(state, 'isDropFilter'))
-        dispatch(setRightNav(state));
+        dispatch(setPageState('right', state));
     }
 
     return (

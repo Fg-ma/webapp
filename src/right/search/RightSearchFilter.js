@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence } from "framer-motion";
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
 import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
-import { createPortal } from "react-dom";
+import Checkbox from "../../components/checkbox/Checkbox";
+
+const rightSearchFilterVar = {
+    init: {
+        opacity: 0,
+        y: "1vh",
+    },
+    animate: {
+        opacity: 1,
+        y: 0,
+    },
+    transition: {
+        duration: 0.25,
+        ease: "easeOut",
+    },
+};
+
+const rightAdvancedSearchFilterVar = {
+    init: { 
+        y: "25%", 
+        opacity: 0,
+    },
+    animate: { 
+        y: 0, 
+        opacity: 1,
+     },
+    transition: { 
+        duration: 0.85, 
+        ease: "easeOut",
+    },
+};
 
 export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs }) {
 
@@ -16,6 +48,14 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
 
     const dispatch = useDispatch();
     const filterFormData = useSelector(state => state.filters[page].filterPayload);
+    const [rightAdvancedSearchFilterVisible, setRightAdvancedSearchFilterVisible] = useState(false);
+
+    // Used to stop RightAddAdvancedSearchFilter from rendering before RightAdvancedSearchFilter has had a chance to exit
+    useEffect(() => {
+        if (filterFormData.isAdvancedSearch) {
+            setRightAdvancedSearchFilterVisible(filterFormData.isAdvancedSearch);
+        }
+    }, [filterFormData.isAdvancedSearch]);
 
     function handleFilterFormChange(event) {
         const { name, type, checked, value } = event.target;
@@ -50,15 +90,43 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
         dispatch(toggleDrop(page, 'isDropFilter'));
     };
 
+    const [hovering, setHovering] = useState({
+        rightIsWhatsCurrent: false,
+        rightIsAffiliateActivity: false,
+        rightIsAllTimeGreats: false,
+        rightIsDatePosted: false,
+        rightIsPopularity: false,
+    })
+
+    const handleCheckboxStartHover = (event) => {
+        const { id } = event.target;
+        setHovering(prev => ({
+            ...prev,
+            [id]: true,
+        }));
+    };
+
+    const handleCheckboxEndHover = (event) => {
+        const { id } = event.target;
+        setHovering(prev => ({
+            ...prev,
+            [id]: false,
+        }));
+    };
+
     return createPortal(
-        <div 
+        <motion.div 
+            ref={refs.rightSpaceFilter}
             className="fixed bg-white rounded-md shadow-md"
             style={rightSpaceFilterGeometry.position !== null && rightSpaceFilterGeometry.width !== null ? { 
                 bottom: `${rightSpaceFilterGeometry.position.bottom}px`, 
                 left: `${rightSpaceFilterGeometry.position.left}px`,
                 width: `${rightSpaceFilterGeometry.width}px`
             } : null}
-            ref={refs.rightSpaceFilter}
+            variants={rightSearchFilterVar}
+            initial="init"
+            animate="animate"
+            exit="init"
         >
             <form className="flex flex-col h-full m-4">
                 <div className="bg-white flex flex-col justify-between">
@@ -70,50 +138,86 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"
-                                            id="rightIsWhatsCurrent"
+                                            id="rightIsWhatsCurrentInput"
                                             name="isWhatsCurrent"
-                                            className="w-5 aspect-square cursor-pointer"
+                                            className="hidden"
                                             checked={filterFormData.isWhatsCurrent}
                                             onChange={handleFilterFormChange}
                                         />
-                                        <label htmlFor="rightIsWhatsCurrent" className="text-base ml-2 font-K2D cursor-pointer">What's Current</label>
+                                        <motion.label 
+                                            id="rightIsWhatsCurrent"
+                                            htmlFor="rightIsWhatsCurrentInput"
+                                            className="relative flex items-center cursor-pointer"
+                                            onHoverStart={handleCheckboxStartHover}
+                                            onHoverEnd={handleCheckboxEndHover}
+                                        >
+                                            <Checkbox checked={filterFormData.isWhatsCurrent} hovering={hovering.rightIsWhatsCurrent} />
+                                            <span className="text-base ml-2 font-K2D">What's Current</span>
+                                        </motion.label>
                                     </div>
                                 ) : null}
                                 <div className="flex items-center">
                                     <input 
                                         type="checkbox"
-                                        id="rightIsAffiliateActivity"
+                                        id="rightIsAffiliateActivityInput"
                                         name="isAffiliateActivity"
-                                        className="w-5 aspect-square cursor-pointer"
+                                        className="hidden"
                                         checked={filterFormData.isAffiliateActivity}
                                         onChange={handleFilterFormChange}
                                     />
-                                    <label htmlFor="rightIsAffiliateActivity" className="text-base ml-2 font-K2D cursor-pointer">Affiliate Activity</label>
+                                    <motion.label 
+                                        id="rightIsAffiliateActivity"
+                                        htmlFor="rightIsAffiliateActivityInput"
+                                        className="relative flex items-center cursor-pointer"
+                                        onHoverStart={handleCheckboxStartHover}
+                                        onHoverEnd={handleCheckboxEndHover}
+                                    >
+                                        <Checkbox checked={filterFormData.isAffiliateActivity} hovering={hovering.rightIsAffiliateActivity} />
+                                        <span className="text-base ml-2 font-K2D">Affiliate Activity</span>
+                                    </motion.label>
                                 </div>
                                 {page === 'news' || page === 'explore' ? (
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"
-                                            id="rightIsAllTimeGreats"
+                                            id="rightIsAllTimeGreatsInput"
                                             name="isAllTimeGreats"
-                                            className="w-5 aspect-square cursor-pointer"
+                                            className="hidden"
                                             checked={filterFormData.isAllTimeGreats}
                                             onChange={handleFilterFormChange}
                                         />
-                                        <label htmlFor="rightIsAllTimeGreats" className="text-base ml-2 font-K2D cursor-pointer">All Time Greats</label>
+                                        <motion.label 
+                                            id="rightIsAllTimeGreats"
+                                            htmlFor="rightIsAllTimeGreatsInput"
+                                            className="relative flex items-center cursor-pointer"
+                                            onHoverStart={handleCheckboxStartHover}
+                                            onHoverEnd={handleCheckboxEndHover}
+                                        >
+                                            <Checkbox checked={filterFormData.isAllTimeGreats} hovering={hovering.rightIsAllTimeGreats} />
+                                            <span className="text-base ml-2 font-K2D">All Time Greats</span>
+                                        </motion.label>
                                     </div>
                                 ) : null}
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"
-                                            id="rightIsDatePosted"
+                                            id="rightIsDatePostedInput"
                                             name="isDatePosted"
-                                            className="w-5 aspect-square cursor-pointer"
+                                            className="hidden"
                                             checked={filterFormData.isDatePosted}
                                             onChange={handleFilterFormChange}
                                         />
-                                        <label htmlFor="rightIsDatePosted" className="text-base ml-2 font-K2D cursor-pointer">Date Posted</label>
+                                        <motion.label 
+                                            id="rightIsDatePosted"
+                                            htmlFor="rightIsDatePostedInput"
+                                            className="relative flex items-center cursor-pointer"
+                                            onHoverStart={handleCheckboxStartHover}
+                                            onHoverEnd={handleCheckboxEndHover}
+                                        >
+                                            <Checkbox checked={filterFormData.isDatePosted} hovering={hovering.rightIsDatePosted} />
+                                            <span className="text-base ml-2 font-K2D">Date Posted</span>
+                                        </motion.label>
                                     </div>
                                     {filterFormData.isDatePosted && 
                                         <label className="switch">
@@ -140,13 +244,22 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"
-                                            id="rightIsPopularity"
+                                            id="rightIsPopularityInput"
                                             name="isPopularity"
-                                            className="w-5 aspect-square cursor-pointer"
+                                            className="hidden"
                                             checked={filterFormData.isPopularity}
                                             onChange={handleFilterFormChange}
                                         />
-                                        <label htmlFor="rightIsPopularity" className="text-base ml-2 font-K2D cursor-pointer">Popularity</label>
+                                        <motion.label 
+                                            id="rightIsPopularity"
+                                            htmlFor="rightIsPopularityInput"
+                                            className="relative flex items-center cursor-pointer"
+                                            onHoverStart={handleCheckboxStartHover}
+                                            onHoverEnd={handleCheckboxEndHover}
+                                        >
+                                            <Checkbox checked={filterFormData.isPopularity} hovering={hovering.rightIsPopularity} />
+                                            <span className="text-base ml-2 font-K2D">Popularity</span>
+                                        </motion.label>
                                     </div>
                                     {filterFormData.isPopularity &&
                                         <label className="switch">
@@ -171,18 +284,29 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                                 </div>
                             </div>
                             <div className="flex justify-center items-center mt-3">
-                                {filterFormData.isAdvancedSearch ? (
-                                    <RightAdvancedSearchFilter
-                                        page={page}
-                                        handleFilterFormChange={handleFilterFormChange}
-                                        refs={{
-                                            rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
-                                            rightDateRange: refs.rightDateRange,
-                                            rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
-                                            rightAdvancedFilterDropdownDrop: refs.rightAdvancedFilterDropdownDrop,
-                                        }}
-                                    />
-                                ) : (
+                                <AnimatePresence onExitComplete={() => {setRightAdvancedSearchFilterVisible(false)}}>
+                                    {filterFormData.isAdvancedSearch && (
+                                        <motion.div
+                                            variants={rightAdvancedSearchFilterVar}
+                                            initial="init"
+                                            animate="animate"
+                                            transition="transition"
+                                            exit="init"
+                                        >
+                                            <RightAdvancedSearchFilter
+                                                page={page}
+                                                handleFilterFormChange={handleFilterFormChange}
+                                                refs={{
+                                                    rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
+                                                    rightDateRange: refs.rightDateRange,
+                                                    rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
+                                                    rightAdvancedFilterDropdownDrop: refs.rightAdvancedFilterDropdownDrop,
+                                                }}
+                                            />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                                {!filterFormData.isAdvancedSearch && !rightAdvancedSearchFilterVisible && (
                                     <RightAddAdvancedSearchFilter
                                         page={page}
                                         rightAddAdvancedSearchFilterRef={refs.rightAddAdvancedSearchFilter}
@@ -331,29 +455,41 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                             />
                         </div>
                     )}
-                    <div className="mt-4">
-                        <input 
-                            type="button" 
-                            value="Apply" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-primary text-white cursor-pointer"
-                            onClick={() => { handleApplyFilterOptions(); handleDrop(); }}
-                        />
-                        <input 
-                            type="button" 
-                            value="Clear" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white mx-4 cursor-pointer"
-                            onClick={handleClearFilterForm}
-                        />
-                        <input 
-                            type="button" 
-                            value="Cancel" 
-                            className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white cursor-pointer"
-                            onClick={() => { handleCancelFilterChanges(); handleDrop(); }}
-                        />
+                    <div className="mt-3 flex space-x-3">
+                        <div className="flex justify-center items-center" style={{ width: "5.25rem", height: "2.25rem" }}>
+                            <motion.input 
+                                type="button" 
+                                value="Apply" 
+                                className="text-sm font-K2D w-20 h-8 rounded-full bg-fg-primary text-white cursor-pointer"
+                                onClick={() => { handleApplyFilterOptions(); handleDrop(); }}
+                                whileHover={{ width: "5.25rem", height: "2.25rem" }}
+                                transition={{ duration: 0.1, }}
+                            />
+                        </div>
+                        <div className="flex justify-center items-center" style={{ width: "5.25rem", height: "2.25rem" }}>
+                            <motion.input 
+                                type="button" 
+                                value="Clear" 
+                                className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white cursor-pointer"
+                                onClick={handleClearFilterForm}
+                                whileHover={{ width: "5.25rem", height: "2.25rem" }}
+                                transition={{ duration: 0.1, }}
+                            />
+                        </div>
+                        <div className="flex justify-center items-center" style={{ width: "5.25rem", height: "2.25rem" }}>
+                            <motion.input 
+                                type="button" 
+                                value="Cancel" 
+                                className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white cursor-pointer"
+                                onClick={() => { handleCancelFilterChanges(); handleDrop(); }}
+                                whileHover={{ width: "5.25rem", height: "2.25rem" }}
+                                transition={{ duration: 0.1, }}
+                            />
+                        </div>
                     </div>
                 </div>
             </form>
-        </div>,
+        </motion.div>,
         document.body
     )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { createPortal } from 'react-dom';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import { motion } from "framer-motion";
 import { setDateRange } from "../../redux/filters/filterActions";
 import { useDispatch } from "react-redux";
 import DateCenteredCaption from "./DateCenterCaption";
@@ -30,6 +31,26 @@ const css = `
         border: 1px solid white;
     }
 `;
+
+const dateRangeVar = {
+    middleInit: {
+        opacity: 0, 
+        y: "-1vh" 
+    },
+    rightInit: {
+        opacity: 0, 
+        y: "1vh" 
+    },
+    animate: { 
+        opacity: 1, 
+        y: 0 
+    },
+    transition: { 
+        duration: 0.25, 
+        ease: "easeOut", 
+        delay: 0.275 
+    }
+};
 
 export default function AdvancedDateRange({ filter, position, selectedRange, setSelectedRange, updateRangeStyles, refs }) {
     
@@ -80,10 +101,15 @@ export default function AdvancedDateRange({ filter, position, selectedRange, set
     };
 
     return createPortal(
-        <div 
+        <motion.div 
             className="bg-white absolute z-50 rounded-md select-none" 
             style={position !== null ? (filter == "middle") ? { top: `${position.top}px`, left: `${position.left}px` } : { bottom: `${position.bottom}px`, left: `${position.left}px` } : null}
             ref={refs.dateRange}
+            variants={dateRangeVar}
+            initial={filter === "middle" ? "middleInit" : "rightInit"}
+            animate="animate"
+            exit={filter === "middle" ? "middleInit" : "rightInit"}
+            transition="transition"
         >
             <style>{css}</style>
             <DayPicker
@@ -101,7 +127,7 @@ export default function AdvancedDateRange({ filter, position, selectedRange, set
                     today: 'today',
                 }}
             />
-        </div>,
+        </motion.div>,
         document.body
     );
 }

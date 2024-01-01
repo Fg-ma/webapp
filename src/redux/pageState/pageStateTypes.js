@@ -1,2 +1,1 @@
-export const LEFT_NAV = "LEFT_NAV";
-export const RIGHT_NAV = "RIGHT_NAV";
+export const SET_PAGE_STATE = "SET_PAGE_STATE";

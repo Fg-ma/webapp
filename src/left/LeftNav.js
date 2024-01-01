@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from 'framer-motion';
-import { setLeftNav } from "../redux/pageState/pageStateActions";
+import { setPageState } from "../redux/pageState/pageStateActions";
 
 const navButtonsVar = {
     init: {
@@ -37,7 +37,7 @@ export default function LeftNav() {
     */
 
     const dispatch = useDispatch();
-    const leftPage = useSelector((state) => state.page.leftPagePayload.leftPageState);
+    const leftPage = useSelector((state) => state.page.left.pagePayload.pageState);
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -52,11 +52,12 @@ export default function LeftNav() {
         groups: deactiveStyles,
         organizations: deactiveStyles,
     };
+    
     leftStyles[leftPage] = { ...activeStyles };
 
 
-    function swapLeftState(state) {
-        dispatch(setLeftNav(state));
+    function swapLeftState(newState) {
+        dispatch(setPageState('left', newState));
     }
 
     return (

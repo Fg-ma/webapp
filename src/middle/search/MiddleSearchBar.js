@@ -13,10 +13,6 @@ const middleSearchFilterVar = {
         opacity: 1, 
         y: 0 
     },
-    exit: { 
-        opacity: 0, 
-        y: "-2vh" 
-    },
     transition: { 
         duration: 0.25, 
         ease: "easeOut",
@@ -62,14 +58,6 @@ export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRe
   
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
-    };
-  
-    const getSearchIcon = () => {
-        if (isInputFocused || inputValue.trim() !== '') {
-            return 'searchArrow.svg';
-        } else {
-            return 'search.svg';
-        }
     };
 
     const handleFilterDrop = () => {
@@ -125,7 +113,11 @@ export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRe
                     type="submit"
                     value=""
                     className="w-6 h-6 bg-cover bg-no-repeat ml-2 cursor-pointer"
-                    style={{ backgroundImage: `url("assets/icons/${getSearchIcon()}")` }}
+                    style={{ 
+                        backgroundImage: isInputFocused || inputValue.trim() !== '' 
+                        ? 'url("assets/icons/searchArrow.svg")' 
+                        : 'url("assets/icons/search.svg")' 
+                    }}
                 />
                 <input
                     id="middleSearchArea"
@@ -153,7 +145,7 @@ export default function MiddleSearchBar({ middleSpaceContainerRef, middleSpaceRe
                         variants={middleSearchFilterVar}
                         initial="init"
                         animate="animate"
-                        exit="exit"
+                        exit="init"
                         transition="transition"
                     >
                         <MiddleSearchFilter
