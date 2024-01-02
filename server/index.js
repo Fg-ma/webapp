@@ -44,6 +44,16 @@ app.get("/organizations", (req, res) => {
     });
 });
 
+app.get("/sheets", (req, res) => {
+    db.query("SELECT * FROM sheets;", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 app.listen(5042, () => {
   console.log("Server running on port 5042");
 });

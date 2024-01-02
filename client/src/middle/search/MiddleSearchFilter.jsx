@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { toggleDrop, setFilterOption, applyFilterOptions, clearFilterOptions, cancelFilterChanges } from "../../redux/filters/filterActions";
@@ -40,6 +40,8 @@ export default function MiddleSearchFilter({ refs }) {
         middleIsDatePosted: false,
         middleIsPopularity: false,
     });
+    const middleAdvancedSearchFilterContainerRef = useRef(null);
+    refs.middleAdvancedSearchFilterContainer = middleAdvancedSearchFilterContainerRef;
 
     // Used to stop MiddleAddAdvancedSearchFilter from rendering before MiddleAdvancedSearchFilter has had a chance to exit
     useEffect(() => {
@@ -272,7 +274,7 @@ export default function MiddleSearchFilter({ refs }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center" style={{ width: "45%"}}>
+                <div ref={middleAdvancedSearchFilterContainerRef} className="flex justify-center items-center" style={{ width: "45%", maxWidth: "45%"}}>
                     <AnimatePresence onExitComplete={() => {setMiddleAdvancedSearchFilterVisible(false)}}>
                         {filterFormData.isAdvancedSearch && (
                             <motion.div
@@ -285,6 +287,7 @@ export default function MiddleSearchFilter({ refs }) {
                                 <MiddleAdvancedSearchFilter
                                     handleFilterFormChange={handleFilterFormChange}
                                     refs={{
+                                        middleAdvancedSearchFilterContainer: refs.middleAdvancedSearchFilterContainer,
                                         middleAdvancedSearchFilter: refs.middleAdvancedSearchFilter,
                                         middleDateRange: refs.middleDateRange,
                                         middleDateRangeCaptionDropdown: refs.middleDateRangeCaptionDropdown,

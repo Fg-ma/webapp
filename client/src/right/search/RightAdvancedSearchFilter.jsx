@@ -189,7 +189,7 @@ export default function RightAdvancedSearchFilter({ page, handleFilterFormChange
                     <div className="bg-fg-white-85 mx-2 p-2 rounded-md" style={{ width: `calc(100% - 1rem)` }}>
                         <p className="text-base">Affiliated...</p>
                         <div className="w-full flex items-center justify-start mb-2">
-                            <AdvancedFilterDropdown filter={page} subcategory={'ind'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <AdvancedFilterDropdown filter={page} subcategory={'ind'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} searchFilterRef={refs.rightSpaceFilter} />
                             <motion.button
                                 type="button"
                                 onClick={() => emptyAdvAffFilter("ind")}
@@ -200,7 +200,7 @@ export default function RightAdvancedSearchFilter({ page, handleFilterFormChange
                             ></motion.button>
                         </div>
                         <div className="w-full flex items-center justify-start my-2">
-                            <AdvancedFilterDropdown filter={page} subcategory={'grp'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <AdvancedFilterDropdown filter={page} subcategory={'grp'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} searchFilterRef={refs.rightSpaceFilter} />
                             <motion.button
                                 type="button"
                                 onClick={() => emptyAdvAffFilter('grp')}
@@ -211,7 +211,7 @@ export default function RightAdvancedSearchFilter({ page, handleFilterFormChange
                             ></motion.button>
                         </div>
                         <div className="w-full flex items-center justify-start mt-2">
-                            <AdvancedFilterDropdown filter={page} subcategory={'org'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} />
+                            <AdvancedFilterDropdown filter={page} subcategory={'org'} advancedFilterDropdownDropRef={refs.rightAdvancedFilterDropdownDrop} searchFilterRef={refs.rightSpaceFilter} />
                             <motion.button
                                 type="button"
                                 onClick={() => emptyAdvAffFilter('org')}

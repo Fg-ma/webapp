@@ -5,7 +5,6 @@ import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../..
 import Popup from './Popup';
 
 export default function FilterCard({ filter, identify, name, subcategory, popupRef }) {
-    console.log(name)
 
     /* 
         Description:   
@@ -21,8 +20,8 @@ export default function FilterCard({ filter, identify, name, subcategory, popupR
         visible: false,
         position: { top: 0, left: 0 },
     });
-    const isMouseInsideCard = useRef(true);
     const [isMouseInsidePopup, setIsMouseInsidePopup] = useState(false);
+    const isMouseInsideCard = useRef(true);
     const hoverTimeout = useRef(null);
     const nameSpanRef = useRef(null);
 

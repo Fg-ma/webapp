@@ -14,7 +14,7 @@ export default function LeftSpace() {
     */
    
     return (
-        <div id="leftSpace" className="rounded-xl overflow-hidden h-4/5 drop-shadow-md">
+        <div className="bg-fg-white-95 rounded-xl overflow-hidden h-4/5 drop-shadow-md" style={{ width: "26%" }}>
             <LeftNav />
             <div id="leftSpaceContentContainer" style={{ height: `calc(100% - 3rem)` }}>
                 <LeftVerticalSplitPane />

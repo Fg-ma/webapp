@@ -297,6 +297,7 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                                                 page={page}
                                                 handleFilterFormChange={handleFilterFormChange}
                                                 refs={{
+                                                    rightSpaceFilter: refs.rightSpaceFilter,
                                                     rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
                                                     rightDateRange: refs.rightDateRange,
                                                     rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,

@@ -14,7 +14,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
             Creates date range portal and calculates the portal position to be centered 
             below the dateRangeContainer.
     */
-
+    
     const dispatch = useDispatch();
     const formAuthor = useSelector(state => state.filters.middle.filterPayload.author);
     const formDateRange = useSelector(state => state.filters.middle.filterPayload.dateRange);
@@ -190,7 +190,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                 <div className="bg-fg-white-85 p-2 rounded-md w-full">
                     <p className="text-base">Affiliated...</p>
                     <div className="w-full flex items-center justify-start mb-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"ind"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} searchFilterRef={refs.middleAdvancedSearchFilterContainer} />
                         <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter("ind")}
@@ -201,7 +201,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                         ></motion.button>
                     </div>
                     <div className="w-full flex items-center justify-start my-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"grp"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} searchFilterRef={refs.middleAdvancedSearchFilterContainer} />
                         <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter('grp')}
@@ -212,7 +212,7 @@ export default function MiddleAdvancedSearchFilter({ handleFilterFormChange, ref
                         ></motion.button>
                     </div>
                     <div className="w-full flex items-center justify-start mt-2">
-                        <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} />
+                        <AdvancedFilterDropdown filter={"middle"} subcategory={"org"} advancedFilterDropdownDropRef={refs.middleAdvancedFilterDropdownDropRef} searchFilterRef={refs.middleAdvancedSearchFilterContainer} />
                         <motion.button
                             type="button"
                             onClick={() => emptyAdvAffFilter('org')}

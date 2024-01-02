@@ -36,7 +36,7 @@ export default function RightSpace() {
     };
     
     return (
-        <div id="rightSpace" className="rounded-xl overflow-hidden h-4/5 shadow-md">
+        <div className="bg-fg-white-95 rounded-xl overflow-hidden h-4/5 shadow-md" style={{ width: "26%" }}>
             <RightNav />
             <div id="rightSpaceContentContainer" style={{ height: `calc(100% - 7rem)` }}>
                 {renderContent()}

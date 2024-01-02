@@ -33,7 +33,7 @@ const dropdownVar = {
     }
 };
 
-export default function AdvancedFilterDropdown({ filter, subcategory, advancedFilterDropdownDropRef}) {
+export default function AdvancedFilterDropdown({ filter, subcategory, advancedFilterDropdownDropRef, searchFilterRef }) {
 
     /* 
         Description:   
@@ -57,25 +57,26 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
     const advFilters = useSelector((state) => state.filters[filter].filterPayload.affiliatedFilters[subcategory]);  
     const uniqueId = useRef(`advanced-filter-${Math.random().toString(36).substring(7)}`);
 
+    // Gets the data for the filter cards
     useEffect(() => {
         if (subcategory == "ind") {
             Axios.get("http://localhost:5042/individuals").then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Individuals--");
-            setExpandedFilter("individuals");
+            setExpandedFilter("individual");
         } else if (subcategory == "grp") {
             Axios.get("http://localhost:5042/groups").then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Groups--");
-            setExpandedFilter("groups");
+            setExpandedFilter("group");
         } else if (subcategory == "org") {
             Axios.get("http://localhost:5042/organizations").then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Organizations--");
-            setExpandedFilter("organizations");
+            setExpandedFilter("organization");
         };
     }, []);
 
@@ -92,7 +93,7 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
                     subcategory={subcategory}
                     popupRef={popupRef}
                 />
-    })
+    });
 
     const handleClickOutside = (event) => {
         if (
@@ -101,14 +102,19 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
             (!popupRef.current || !popupRef.current.contains(event.target))
           ) {
             setIsOpen(false);
-        }
+        };
     };
 
     // Set up event listeners and set width of dropdown button span
     useEffect(() => {
         const updateMaxWidth = () => {
-            const dropdownSpanWidth = dropdownRef.current.getBoundingClientRect().width;
-            const maxWidth = dropdownSpanWidth - 22;
+            const dropdownSpanWidth = searchFilterRef.current.getBoundingClientRect().width;
+            let maxWidth;
+            if (filter === "middle") {
+                maxWidth = dropdownSpanWidth - 100;
+            } else if (filter === "news" || filter === "explore" || filter === "messages" || filter === "dogEars") {
+                maxWidth = dropdownSpanWidth - 120;
+            }
             
             document.documentElement.style.setProperty(`--max-width-${uniqueId.current}`, `${parseInt(maxWidth)}px`);
         };

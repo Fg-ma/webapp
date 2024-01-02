@@ -11,12 +11,14 @@ export default function RelatedIssuesHeader ({ lightness, togglePaneHeight}) {
     */
 
     return (
-        <div id="relatedIssuesHeader" className="h-9 flex drop-shadow-md" style={{ backgroundColor: `hsl(21, 92%, ${lightness}%)` }}>
-            <div className="grow my-auto grid place-items-start ml-5 text-xl text-white pt-1">
+        <div id="relatedIssuesHeader" className="h-9 flex items-center drop-shadow-md" style={{ backgroundColor: `hsl(21, 92%, ${lightness}%)` }}>
+            <div className="grow my-auto flex justify-start items-center ml-5 text-xl text-white pt-1">
                 <p>Related Issues</p>
             </div>
-            <div className="grow my-auto grid place-items-end mr-5">
-                <button className="bg-fg-black-25 h-2 w-10 rounded" onClick={togglePaneHeight}></button>
+            <div className="flex items-center mr-5">
+                <div className="flex items-center h-5 cursor-pointer" onClick={togglePaneHeight}>
+                    <button className="bg-fg-black-25 h-2 w-10 rounded"></button>
+                </div>
             </div>
         </div>
     )

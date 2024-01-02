@@ -1,5 +1,5 @@
-import React from "react";
-import { issues } from "../../data"
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
 export default function RelatedIssues() {
     
@@ -11,9 +11,20 @@ export default function RelatedIssues() {
             It queries for any affiliates responses to the related issue.
     */
 
-    const relIssues = issues.map(relIssuesInfo => {
-        return <RelatedIssuesCard key={relIssuesInfo.id} title={relIssuesInfo.title} affResponses={relIssuesInfo.affResponses} />
-    })
+    const [coverSheet, setCoverSheet] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:5042/sheets").then((response) => {
+            setCoverSheet(response.data);
+        });
+    }, []);
+        
+    const relIssues = coverSheet.map(relIssuesInfo => {
+        return <RelatedIssuesCard 
+                    key={relIssuesInfo.sheet_id} 
+                    title={relIssuesInfo.sheet_title} 
+                /> //affResponses={issueInfo.affResponses} />
+    });
 
     return (
         <div id="individualRecs" className="mr-3 h-full overflow-scroll">
@@ -22,7 +33,7 @@ export default function RelatedIssues() {
     )
 }
 
-function RelatedIssuesCard({ title, affResponses }) {
+function RelatedIssuesCard({ title, affResponses = null }) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-24 flex items-center rounded-md">
             <div className="w-16 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">

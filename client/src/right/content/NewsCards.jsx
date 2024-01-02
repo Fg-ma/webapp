@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NewsCard } from "./RightSpaceCards";
-import { issues } from "../../data"
+import Axios from "axios";
 
 export default function NewsCards() {
 
@@ -12,9 +12,21 @@ export default function NewsCards() {
             It queries for any affiliate responses.
     */
 
-    const newsCards = issues.map(issueInfo => {
-        return <NewsCard key={issueInfo.id} title={issueInfo.title} issueQuestions={issueInfo.issueQuestions} affResponses={issueInfo.affResponses} />
-    })
+    const [coverSheet, setCoverSheet] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:5042/sheets").then((response) => {
+            setCoverSheet(response.data);
+        });
+    }, []);
+
+    const newsCards = coverSheet.map(issueInfo => {
+        return <NewsCard 
+                    key={issueInfo.sheet_id} 
+                    title={issueInfo.sheet_title} 
+                    subject={issueInfo.sheet_subject} 
+                /> //affResponses={issueInfo.affResponses} />
+    });
 
     return (
         <div id="newsCards" className="h-full mr-3 overflow-scroll">

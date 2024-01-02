@@ -25,7 +25,7 @@ const App = () => {
                 
                 <LeftSpace />
 
-                <div ref={middleSpaceContainerRef} id="middleSpaceContainer">
+                <div ref={middleSpaceContainerRef} style={{width: "48%"}}>
                     <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
                     <PageNav />
                 </div>

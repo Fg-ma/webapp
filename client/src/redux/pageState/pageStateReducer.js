@@ -6,6 +6,11 @@ const intialState = {
             pageState: "home",
         },
     },
+    middle: {
+        pagePayload: {
+            pageState: "home",
+        },
+    },
     left: {
         pagePayload: {
             pageState: "individuals",

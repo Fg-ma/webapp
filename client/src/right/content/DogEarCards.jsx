@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { DogEarCard } from "./RightSpaceCards";
-import { dogEars } from "../../data"
+import Axios from "axios";
 
 export default function DogEarCards() {
 
@@ -12,9 +12,22 @@ export default function DogEarCards() {
             It queries for any affiliate responses.
     */
 
-    const dogEarCards = dogEars.map(deInfo => {
-        return <DogEarCard key={deInfo.id} title={deInfo.title} issueQuestions={deInfo.issueQuestions} affResponses={deInfo.affResponses} />
-    })
+
+    const [coverSheet, setCoverSheet] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:5042/sheets").then((response) => {
+            setCoverSheet(response.data);
+        });
+    }, []);
+    
+    const dogEarCards = coverSheet.map(issueInfo => {
+        return <DogEarCard 
+                    key={issueInfo.sheet_id} 
+                    title={issueInfo.sheet_title} 
+                    subject={issueInfo.sheet_subject} 
+                /> //affResponses={issueInfo.affResponses} />
+    });
 
     return (
         <div id="dogEarCards" className="h-full mr-3 overflow-scroll">
