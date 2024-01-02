@@ -8,7 +8,7 @@ import React from "react";
         N/A
 */
 
-export function IndividualCard({ name, currentIssue }) {
+export function IndividualCard({ name, currentIssue = null }) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md">
             <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
@@ -22,7 +22,7 @@ export function IndividualCard({ name, currentIssue }) {
     )
 }
 
-export function GroupCard({ name, currentIssue, affInCommon }) {
+export function GroupCard({ name, currentIssue = null, affInCommon = null }) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md">
             <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">
@@ -37,7 +37,7 @@ export function GroupCard({ name, currentIssue, affInCommon }) {
     )
 }
 
-export function OrganizationCard({ name, currentIssue, stances }) {
+export function OrganizationCard({ name, currentIssue = null, stances = null }) {
     return (
         <div className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md">
             <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { OrganizationCard } from "./LeftSpaceCards";
-import { organizations } from "../../data";
+import Axios from "axios";
 
 export default function OrganizationCards() {
 
@@ -12,9 +12,23 @@ export default function OrganizationCards() {
             N/A
     */
    
+
+    const [organizations, setOrganizations] = useState([]);
+    
+    useEffect(() => {
+        Axios.get("http://localhost:5042/organizations").then((response) => {
+            setOrganizations(response.data);
+        });
+    }, []); 
+
     const orgCards = organizations.map(orgInfo => {
-        return <OrganizationCard key={orgInfo.id} name={orgInfo.name} currentIssue={orgInfo.currentIssue} stances={orgInfo.stances} />
-    })
+        return <OrganizationCard 
+                    key={orgInfo.organization_id} 
+                    name={orgInfo.organization_name} 
+                    currentIssue={orgInfo.organization_currentIssue} 
+                    stances={orgInfo.organization_stances} 
+                />
+    });
 
     return (
         <div id="organizationCards" className="h-full mr-3 overflow-scroll">

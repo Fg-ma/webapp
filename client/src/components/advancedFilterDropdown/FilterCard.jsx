@@ -5,6 +5,7 @@ import { addAdvancedAffiliateFilter, removeAdvancedAffiliateFilter } from '../..
 import Popup from './Popup';
 
 export default function FilterCard({ filter, identify, name, subcategory, popupRef }) {
+    console.log(name)
 
     /* 
         Description:   

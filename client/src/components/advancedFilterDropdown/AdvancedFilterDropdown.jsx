@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import FilterCard from "./FilterCard";
-import { individuals, groups, organizations } from "../../data";
+import Axios from "axios";
 
 const dropIconVar = {
     init: { 
@@ -49,23 +49,35 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
     */
 
     const [isOpen, setIsOpen] = useState(false);
+    const [data, setData] = useState([]);
+    const [placeholder, setPlaceholder] = useState('');
+    const [expandedFilter, setExpandedFilter] = useState('');
     const dropdownRef = useRef(null);
     const popupRef = useRef(null);
     const advFilters = useSelector((state) => state.filters[filter].filterPayload.affiliatedFilters[subcategory]);  
-    let data;
-    let placeholder;
     const uniqueId = useRef(`advanced-filter-${Math.random().toString(36).substring(7)}`);
 
-    if (subcategory == "ind") {
-        data = individuals;
-        placeholder = "--Individuals--";
-    } else if (subcategory == "grp") {
-        data = groups;
-        placeholder = "--Groups--"
-    } else if (subcategory == "org") {
-        data = organizations;
-        placeholder = "--Organizations--"
-    };
+    useEffect(() => {
+        if (subcategory == "ind") {
+            Axios.get("http://localhost:5042/individuals").then((response) => {
+                setData(response.data);
+            });
+            setPlaceholder("--Individuals--");
+            setExpandedFilter("individuals");
+        } else if (subcategory == "grp") {
+            Axios.get("http://localhost:5042/groups").then((response) => {
+                setData(response.data);
+            });
+            setPlaceholder("--Groups--");
+            setExpandedFilter("groups");
+        } else if (subcategory == "org") {
+            Axios.get("http://localhost:5042/organizations").then((response) => {
+                setData(response.data);
+            });
+            setPlaceholder("--Organizations--");
+            setExpandedFilter("organizations");
+        };
+    }, []);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -73,10 +85,10 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
 
     const filterCards = data.map(filterInfo => {
         return <FilterCard 
-                    key={filterInfo.id}
+                    key={filterInfo[`${expandedFilter}_id`]}
                     filter={filter}
-                    identify={filterInfo.id}
-                    name={filterInfo.name}
+                    identify={filterInfo[`${expandedFilter}_id`]}
+                    name={filterInfo[`${expandedFilter}_name`]}
                     subcategory={subcategory}
                     popupRef={popupRef}
                 />

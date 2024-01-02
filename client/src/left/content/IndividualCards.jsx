@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IndividualCard } from "./LeftSpaceCards";
-import { individuals } from "../../data";
+import Axios from "axios";
 
 export default function IndividualCards() {
 
@@ -12,9 +12,21 @@ export default function IndividualCards() {
             N/A
     */
    
+    const [individuals, setIndividuals] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:5042/individuals").then((response) => {
+            setIndividuals(response.data);
+        });
+    }, []);
+
     const indCards = individuals.map(indInfo => {
-        return <IndividualCard key={indInfo.id} name={indInfo.name} currentIssue={indInfo.currentIssue} />
-    })
+        return <IndividualCard 
+                    key={indInfo.individual_id} 
+                    name={indInfo.individual_name} 
+                    currentIssue={indInfo.individual_currentIssue} 
+                />
+    });
 
     return (
         <div id="individualCards" className="h-full mr-3 overflow-scroll">
