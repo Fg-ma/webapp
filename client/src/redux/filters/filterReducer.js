@@ -273,5 +273,5 @@ export default function filterReducer(state = initialState, action) {
 
         default:
           return state;
-    }
+    };
 };

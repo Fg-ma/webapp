@@ -23,6 +23,7 @@ export default function IndividualCards() {
     const indCards = individuals.map(indInfo => {
         return <IndividualCard 
                     key={indInfo.individual_id} 
+                    id={indInfo.individual_id}
                     name={indInfo.individual_name} 
                     currentIssue={indInfo.individual_currentIssue} 
                 />

@@ -471,7 +471,7 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                             <motion.input 
                                 type="button" 
                                 value="Clear" 
-                                className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-secondary text-white cursor-pointer"
+                                className="text-sm font-K2D w-20 h-8 rounded-full bg-fg-secondary text-white cursor-pointer"
                                 onClick={handleClearFilterForm}
                                 whileHover={{ width: "5.25rem", height: "2.25rem" }}
                                 transition={{ duration: 0.1, }}
@@ -481,7 +481,7 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                             <motion.input 
                                 type="button" 
                                 value="Cancel" 
-                                className="text-sm font-K2D w-20 h-8 rounded-2xl bg-fg-black-25 text-white cursor-pointer"
+                                className="text-sm font-K2D w-20 h-8 rounded-full bg-fg-black-25 text-white cursor-pointer"
                                 onClick={() => { handleCancelFilterChanges(); handleDrop(); }}
                                 whileHover={{ width: "5.25rem", height: "2.25rem" }}
                                 transition={{ duration: 0.1, }}

@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
 
 /* 
     Description:   
@@ -8,9 +10,16 @@ import React from "react";
         N/A
 */
 
-export function IndividualCard({ name, currentIssue = null }) {
+export function IndividualCard({ id, name, currentIssue = null }) {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setPageState('main', 'individuals'));
+        dispatch(setIds('main', 'individual_id', id));
+    };
+
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md">
+        <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md" onClick={handleClick}>
             <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
                 <p>pic</p>
             </div>
@@ -19,8 +28,8 @@ export function IndividualCard({ name, currentIssue = null }) {
                 <p className="font-K2D text-sm text-fg-black-30 truncate">{currentIssue}</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export function GroupCard({ name, currentIssue = null, affInCommon = null }) {
     return (
@@ -34,8 +43,8 @@ export function GroupCard({ name, currentIssue = null, affInCommon = null }) {
                 <p className="font-K2D text-sm text-fg-black-30 truncate">Affiliates in this group: {affInCommon}</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export function OrganizationCard({ name, currentIssue = null, stances = null }) {
     return (
@@ -49,5 +58,5 @@ export function OrganizationCard({ name, currentIssue = null, stances = null }) 
                 <p className="font-K2D text-sm text-fg-black-30 truncate">Stances: {stances}</p>
             </div>
         </div>
-    )
-}
+    );
+};

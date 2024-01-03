@@ -1,14 +1,14 @@
-import { SET_PAGE_STATE } from "./pageStateTypes";
+import { SET_PAGE_STATE, SET_IDS } from "./pageStateTypes";
 
 const intialState = {
     main: {
         pagePayload: {
             pageState: "home",
-        },
-    },
-    middle: {
-        pagePayload: {
-            pageState: "home",
+            ids: {
+                individual_id: null,
+                group_id: null,
+                organization: null,
+            },
         },
     },
     left: {
@@ -19,6 +19,11 @@ const intialState = {
     right: {
         pagePayload: {
             pageState: "news"
+        },
+    },
+    individuals: {
+        pagePayload: {
+            pageState: "articles"
         },
     },
 }
@@ -38,7 +43,25 @@ export default function pageStateReducer(state = intialState, action) {
                 },
             };
         }
+
+        case SET_IDS: {
+            const { page, id, value} = action.payload;
+            return {
+                ...state,
+                [page]: {
+                    ...state[page],
+                    pagePayload: {
+                        ...state[page].pagePayload,
+                        ids: {
+                            ...intialState[page].pagePayload.ids,
+                            [id]: value,
+                        },
+                    },
+                },
+            };
+        }
+
         default:
             return state;
-    }
-}
+    };
+};
