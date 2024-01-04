@@ -54,6 +54,72 @@ app.get("/sheets", (req, res) => {
     });
 });
 
+app.get("/sheet/:sheet_id", (req, res) => {
+    const sheet_id = req.params.sheet_id;
+    db.query("SELECT * FROM sheets WHERE sheet_id = ?", sheet_id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+app.get("/individual/:individual_id", (req, res) => {
+    const individual_id = req.params.individual_id;
+    db.query("SELECT * FROM individuals WHERE individual_id = ?", individual_id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+app.get("/references/:individual_id", (req, res) => {
+    const individual_id = req.params.individual_id;
+    db.query("SELECT * FROM individuals_references WHERE individual_id = ?", individual_id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+app.get("/individuals_sheets/:id", (req, res) => {
+    const id = req.params.id;
+    db.query("SELECT * FROM individuals_sheets WHERE individual_id = ?", id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+app.get("/individuals_videos/:id", (req, res) => {
+    const id = req.params.id;
+    db.query("SELECT * FROM individuals_videos WHERE individual_id = ?", id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+app.get("/video/:video_id", (req, res) => {
+    const video_id = req.params.video_id;
+    db.query("SELECT * FROM videos WHERE sheet_id = ?", video_id, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
 app.listen(5042, () => {
   console.log("Server running on port 5042");
 });
