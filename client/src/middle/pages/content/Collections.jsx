@@ -19,7 +19,7 @@ export default function Sheets({ entity_id, collection_id }) {
             .then((response) => {
                 // Convert date strings to Date objects and sort the collectionData by date_added in descending order
                 const sortedCollectionData = response.data.slice().sort((a, b) => {
-                    const dateA = a.date_added.split('.').reverse().join('-'); // Convert "dd.mm.yyyy" to "yyyy-mm-dd"
+                    const dateA = a.date_added.split('.').reverse().join('-');
                     const dateB = b.date_added.split('.').reverse().join('-');
     
                     return new Date(dateB) - new Date(dateA);
