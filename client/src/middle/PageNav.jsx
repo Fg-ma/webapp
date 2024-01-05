@@ -63,7 +63,11 @@ export default function PageNav() {
     };
 
     return (
-        <nav id="pageNav" className="bg-fg-white-95 h-16  w-full rounded-xl mt-8 drop-shadow-md">
+        <nav
+            id="pageNav"
+            className="bg-fg-white-95 h-16  w-full rounded-xl mt-8" 
+            style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}
+        >
             <div className="flex divide-x-2 divide-fg-white-70 h-full">
                 <motion.div 
                     className="h-11 w-1/6 my-auto flex justify-center items-center cursor-pointer"

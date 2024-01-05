@@ -15,6 +15,7 @@ export function IndividualCard({ id, name, currentIssue = null }) {
 
     const handleClick = () => {
         dispatch(setPageState('main', 'individuals'));
+        dispatch(setPageState('individuals', 'sheets'));
         dispatch(setIds('main', 'individual_id', id));
     };
 

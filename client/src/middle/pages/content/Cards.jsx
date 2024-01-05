@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 
-export function Article({ sheet_id, entity_id}) {
+/* 
+    Description:   
+        Creates all article, video, and image cards used on proile pages
+    Unique Properties:
+        N/A
+*/
+
+export function Sheet({ sheet_id, entity_id}) {
 
     const [sheet, setSheet] = useState([]);
     const isAuthor = useRef(null);
@@ -57,13 +65,129 @@ export function Video({ video_id }) {
     );
 };
 
-export function Image() {
+const popupContentVar = {
+    init: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+    },
+    transition: {
+        duration: 0.25,
+        ease: "easeOut",
+    },
+};
+
+const profileVar = {
+    init: {
+        opacity: 0.6,
+        scale: 0.9,
+    },
+    animate: {
+        opacity: 1,
+        scale: 1,
+    },
+    transition: {
+        duration: 0.25,
+        ease: "easeOut",
+    },
+};
+
+export function Image({ image_id }) {
+
+    const [image, setImage] = useState([]);
+    const [popupContent, setPopupContent] = useState(null);
+    const [showCreator, setShowCreator] = useState(false);
+    const primaryHoverTimeout = useRef(null);
+    const secondaryHoverTimeout = useRef(null);
+    const mousePosition = useRef(null);
+
+    useEffect(() => {
+        Axios.get(`http://localhost:5042/image/${image_id}`).then((response) => {
+            setImage(response.data);
+        });
+    }, [image_id]);
+
+    const showPopup = () => {
+        if (image[0]) {
+            setPopupContent(
+                <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs">
+                    <p className="text-lg font-bold line-clamp-2">{image[0].image_title}</p> 
+                    <p className="text-base font-K2D line-clamp-4">{image[0].image_description}</p>
+                </div>
+            );
+        };
+    };
+
+    const startHoverTimer = (e) => {
+        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
+        primaryHoverTimeout.current = setTimeout(() => {
+            showPopup(); updatePopupPosition(e);
+        }, 3000);
+        secondaryHoverTimeout.current = setTimeout(() => {
+            setShowCreator(true);
+        }, 1000)
+    };
+
+    const updateMousePosition = (e) => {
+        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
+    }
+
+    const updatePopupPosition = (e) => {
+        setPopupContent(prevPopupContent => {
+            if (prevPopupContent) {
+                return (
+                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
+                        {prevPopupContent.props.children}
+                    </div>
+                );
+            }
+            return null;
+        });
+    };
+
+    const cancelHoverTimer = () => {
+        if (primaryHoverTimeout.current) {
+            clearTimeout(primaryHoverTimeout.current);
+        };
+        if (secondaryHoverTimeout.current) {
+            clearTimeout(secondaryHoverTimeout.current);
+        };
+        setShowCreator(false);
+        setPopupContent(null);
+    };
+
     return (
-        <div className="rounded flex flex-col justify-center">
-            <div className="bg-fg-white-85 w-full aspect-square rounded-md mb-3 relative mx-2" style={{ width: 'calc(100% - 1rem)'}}>
-                <div className="bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3"></div>
+        <div className="flex flex-col justify-center">
+            <div 
+                className="bg-fg-white-85 w-full aspect-square rounded mb-3 relative mx-2"
+                style={{ width: 'calc(100% - 1rem)'}}
+                onMouseEnter={(e) => startHoverTimer(e)} 
+                onMouseLeave={() => cancelHoverTimer()} 
+                onMouseMove={(e) => {updateMousePosition(e); updatePopupPosition(e)}}
+            >
+                {showCreator && 
+                    <motion.div 
+                        className="bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3"
+                        variants={profileVar}
+                        initial="init"
+                        animate="animate"
+                        transition="transition"
+                    >
+                    </motion.div>
+                }
             </div>
-            <p className="text-base font-bold leading-5 text-left h-[3.75rem] line-clamp-3 mb-1">Global Warming’s Affects on Gazelles in Africa things things things things things things things things</p>
+            {popupContent && (
+                <motion.div
+                    className="z-50"
+                    variants={popupContentVar}
+                    initial="init"
+                    animate="animate"
+                    transition="transition"
+                >
+                    {popupContent}
+                </motion.div>
+            )}
         </div>
     );
 };

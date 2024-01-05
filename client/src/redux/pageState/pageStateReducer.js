@@ -7,7 +7,7 @@ const intialState = {
             ids: {
                 individual_id: null,
                 group_id: null,
-                organization: null,
+                organization_id: null,
             },
         },
     },
@@ -18,12 +18,15 @@ const intialState = {
     },
     right: {
         pagePayload: {
-            pageState: "news"
+            pageState: "news",
         },
     },
     individuals: {
         pagePayload: {
-            pageState: "articles"
+            pageState: "articles",
+            ids: {
+                collection_id: null,
+            },
         },
     },
 }

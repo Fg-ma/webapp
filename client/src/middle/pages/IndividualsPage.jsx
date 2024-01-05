@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
-import Articles from "./content/Articles";
+import Sheets from "./content/Sheets";
 import Videos from "./content/Videos";
 import Images from "./content/Images";
+import Collections from "./content/Collections";
 import IndividualsPageHeader from "./IndividualsPageHeader";
-import IndividualContentNav from "./IndividualContentNav";
+import IndividualsContentNav from "./IndividualsContentNav";
+import IndividualsPageFooter from "./IndividualsPageFooter";
 
 export default function IndividualsPage() {
 
@@ -20,6 +22,7 @@ export default function IndividualsPage() {
 
     const individualsPageState = useSelector((state) => state.page.individuals.pagePayload.pageState);
     const individual_id = useSelector((state) => state.page.main.pagePayload.ids.individual_id);
+    const individual_collection_id = useSelector((state) => state.page.individuals.pagePayload.ids.collection_id);
     const [individual, setIndividual] = useState([]);
     const [individualReferences, setIndividualReferences] = useState([]);
     
@@ -34,40 +37,34 @@ export default function IndividualsPage() {
     }, [individual_id]);
 
     const renderContent = (individual) => {
-        switch (individualsPageState) {
-            case "articles":
-                if (individual[0]) {
-                    return <Articles id={individual[0].individual_id} />;
-                }
-                return;
-            case "videos":
-                if (individual[0]) {
+        if (individual[0]) {
+            switch (individualsPageState) {
+                case "sheets":
+                    return <Sheets id={individual[0].individual_id} />;
+                case "videos":
                     return <Videos id={individual[0].individual_id} />;
-                }
-                return;
-            case "images":
-                return <Images />;
-            default:
-                return <></>;
-        }
+                case "images":
+                    return <Images id={individual[0].individual_id} />;
+                case "collections":
+                    return <Collections entity_id={individual[0].individual_id} collection_id={individual_collection_id} />;
+                default:
+                    return <></>;
+            };
+        };
     };
 
     return (
         <div className="h-full w-full rounded-xl overflow-hidden">
             <div className="mr-3" style={{ height: `calc(100% - 2.5rem)`}}>
-                <div className="overflow-y-scroll h-full w-full">
-                    <div className="ml-8 mr-4 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
+                <div className="overflow-y-auto h-full w-full">
+                    <div className="ml-8 mr-5 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
                         <IndividualsPageHeader individual={individual} individualReferences={individualReferences} />
-                        <IndividualContentNav />
+                        <IndividualsContentNav individual={individual} />
                         {renderContent(individual)}
                     </div>
                 </div>
             </div>
-            <div className="h-10 bg-fg-white-85 flex items-center justify-between">
-                <button className="h-10 aspect-square bg-cover bg-no-repeat ml-2" style={{ backgroundImage: 'url("/assets/icons/navigateBack.svg")' }}></button>
-                <p className="text-3xl mt-2">{individual[0] && individual[0].individual_name}</p>
-                <button className="h-8 aspect-square bg-cover bg-no-repeat mr-4" style={{ backgroundImage: 'url("/assets/icons/moreHorizontal.svg")' }}></button>
-            </div>
+            <IndividualsPageFooter individual={individual} />
         </div>
     );
 };

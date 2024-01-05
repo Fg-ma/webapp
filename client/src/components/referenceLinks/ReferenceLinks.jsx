@@ -1,4 +1,18 @@
+import { motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
+
+const popupContentVar = {
+    init: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+    },
+    transition: {
+        duration: 0.25,
+        ease: "easeOut",
+    },
+};
 
 export default function ReferenceLinks({ references }) {
 
@@ -41,10 +55,10 @@ export default function ReferenceLinks({ references }) {
 
     const showPopup = (reference) => {
         setPopupContent(
-            <div className="p-3 absolute bg-fg-white-95 rounded w-max">
-                <p><strong>Title:</strong> {reference.title}</p>
-                <p><strong>Author:</strong> {reference.author}</p>
-                <p><strong>URL:</strong> {reference.url}</p>
+            <div className="p-3 absolute bg-white drop-shadow-md rounded w-max">
+                <p className="text-lg font-bold">Title: {reference.title}</p>
+                <p className="text-base font-K2D">Author: {reference.author}</p>
+                <p className="text-base font-K2D">URL: {reference.url}</p>
             </div>
         );
     };
@@ -71,7 +85,7 @@ export default function ReferenceLinks({ references }) {
         setPopupContent(prevPopupContent => {
             if (prevPopupContent) {
                 return (
-                    <div className="p-3 absolute bg-fg-white-95 rounded w-max" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
+                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
                         {prevPopupContent.props.children}
                     </div>
                 );
@@ -79,6 +93,7 @@ export default function ReferenceLinks({ references }) {
             return null;
         });
     };
+    
     return (
         <div>
             {referencesLinks && 
@@ -86,7 +101,17 @@ export default function ReferenceLinks({ references }) {
                     <div className="text-base font-K2D mt-4 italic flex flex-wrap line-clamp-2">
                         {referencesLinks}
                     </div>
-                    {popupContent && <div className="popup-container">{popupContent}</div>}
+                    {popupContent && (
+                            <motion.div 
+                                variants={popupContentVar}
+                                initial="init"
+                                animate="animate"
+                                transition="transition"
+                            >
+                                {popupContent}
+                            </motion.div>
+                        )
+                    }
                 </div>
             }
         </div>

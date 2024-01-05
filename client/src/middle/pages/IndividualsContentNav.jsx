@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { setPageState } from "../../redux/pageState/pageStateActions";
+import Collections from "./CollectionButtons";
 
 const indNavButtonsVar = {
     init: {
@@ -25,21 +26,11 @@ const indNavButtonsVar = {
     },
 };
 
-const collectionsButtonsVar = {
-    hover: {
-        textDecorationColor: "rgba(44, 146, 245, 1)",
-    },
-    transition: { 
-        ease: "easeOut", 
-        duration: 0.1,
-    },
-};
-
-export default function IndividualContentNav() {
+export default function IndividualsContentNav({ individual }) {
 
     /* 
         Description:   
-            Creates the content nav containing the articles, videos, and images buttons
+            Creates the content nav containing the sheets, videos, and images buttons
             to swtich the individualsPageState and the individual's collections.
         Unique Properties:
             N/A
@@ -53,7 +44,7 @@ export default function IndividualContentNav() {
         textDecorationColor: "#F56114",
     };
     const individualsPageStyles = {
-        articles: deactiveStyles,
+        sheets: deactiveStyles,
         videos: deactiveStyles,
         images: deactiveStyles,
     };
@@ -74,9 +65,9 @@ export default function IndividualContentNav() {
                         initial="init"
                         whileHover="hover"
                         transition={indNavButtonsVar.transition}
-                        onClick={() => swapPageState('articles')}
+                        onClick={() => swapPageState('sheets')}
                     >
-                        <button style={individualsPageStyles["articles"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Articles</button>
+                        <button style={individualsPageStyles["sheets"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Sheets</button>
                     </motion.div>
                 </div>
                 <div className="w-1/3 flex items-center justify-center font-bold">
@@ -105,36 +96,9 @@ export default function IndividualContentNav() {
                 </div>
             </div>
             <div className="h-0.5 w-full bg-fg-black-25 rounded-full"></div>
-            <div className="h-10 mt-2 mb-4 space-x-6 flex items-center justify-start">
-                <button className="h-7 aspect-square bg-fg-white-90 rounded bg-cover bg-no-repeat" style={{ backgroundImage: 'url("/assets/icons/plus.svg")' }}></button>
-                <motion.button 
-                    className="font-K2D text-lg underline decoration-2 mb-2" 
-                    style={{ textUnderlineOffset: '6px' }}
-                    variants={collectionsButtonsVar}
-                    whileHover="hover"
-                    transition={collectionsButtonsVar.transition}
-                >
-                    Proper Pet Care
-                </motion.button>
-                <motion.button 
-                    className="font-K2D text-lg underline decoration-2 mb-2" 
-                    style={{ textUnderlineOffset: '6px' }}
-                    variants={collectionsButtonsVar}
-                    whileHover="hover"
-                    transition={collectionsButtonsVar.transition}
-                >
-                    Overflowing Pounds in San Fran
-                </motion.button>
-                <motion.button 
-                    className="font-K2D text-lg underline decoration-2 mb-2" 
-                    style={{ textUnderlineOffset: '6px' }}
-                    variants={collectionsButtonsVar}
-                    whileHover="hover"
-                    transition={collectionsButtonsVar.transition}
-                >
-                    Puppy Pics
-                </motion.button>
-            </div>
+            {individual[0] && (
+                <Collections individual_id={individual[0].individual_id} />
+            )}
         </>
     )
 }
