@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const http = require("http");
+const { Server } = require("socket.io");
 
 app.use(cors());
 app.use(express.json());
@@ -12,6 +14,31 @@ const db = mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
+});
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:5000"],
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+    console.log(`User Connected: ${socket.id}`);
+
+    socket.on("togglePinned", (relation, relation_id, pinned, date_pinned) => {
+        io.emit("pinnedUpdated", { relation, relation_id, pinned, date_pinned });
+    });
+
+    socket.on("disconnect", () => {
+        console.log("User Disconnected", socket.id);
+    });
+});
+  
+server.listen(5041, () => {
+    console.log("Server running on port 5041");
 });
 
 app.get("/individuals", (req, res) => {
@@ -161,12 +188,17 @@ app.get("/collections/:collection_id", (req, res) => {
             collections.collection_id,
             collections.collection_name,
 	        collections_images.date_added AS 'date_added',
+            collections_images.pinned AS 'pinned',
+            collections_images.date_pinned AS 'date_pinned',
+            collections_images.collections_images_id,
             images.image_id,
             images.image_title,
             images.image_description,
+            NULL AS collections_videos_id,
             NULL AS video_id,
             NULL AS video_title,
             NULL AS video_creator_id,
+            NULL AS collections_sheets_id,
             NULL AS sheet_id,
             NULL AS sheet_author_id,
             NULL AS sheet_title,
@@ -182,12 +214,17 @@ app.get("/collections/:collection_id", (req, res) => {
             collections.collection_id,
             collections.collection_name,
 	        collections_videos.date_added AS 'date_added',
+            collections_videos.pinned AS 'pinned',
+            collections_videos.date_pinned AS 'date_pinned',
+            NULL AS collections_images_id,
             NULL AS image_id,
             NULL AS image_title,
             NULL AS image_description,
+            collections_videos.collections_videos_id,
             videos.video_id,
             videos.video_title,
             videos.video_creator_id,
+            NULL AS collections_sheets_id,
             NULL AS sheet_id,
             NULL AS sheet_author_id,
             NULL AS sheet_title,
@@ -203,12 +240,17 @@ app.get("/collections/:collection_id", (req, res) => {
             collections.collection_id,
             collections.collection_name,
 	        collections_sheets.date_added AS 'date_added',
+            collections_sheets.pinned AS 'pinned',
+            collections_sheets.date_pinned AS 'date_pinned',
+            NULL AS collections_images_id,
             NULL AS image_id,
             NULL AS image_title,
             NULL AS image_description,
+            NULL AS collections_videos_id,
             NULL AS video_id,
             NULL AS video_title,
             NULL AS video_creator_id,
+            collections_sheets.collections_sheets_id,
             sheets.sheet_id,
             sheets.sheet_author_id,
             sheets.sheet_title,
@@ -228,53 +270,60 @@ app.get("/collections/:collection_id", (req, res) => {
     );
 });
 
+app.put("/collections_sheets_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE collections_sheets SET pinned = ?, date_pinned = ? WHERE collections_sheets_id = ?",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.put("/collections_videos_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE collections_videos SET pinned = ?, date_pinned = ? WHERE collections_videos_id = ?",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.put("/collections_images_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE collections_images SET pinned = ?, date_pinned = ? WHERE collections_images_id = ?",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
 app.listen(5042, () => {
     console.log("Server running on port 5042");
 });
-
-//app.post("/create", (req, res) => {
-//    const name = req.body.name;
-//    const age = req.body.age;
-//    const country = req.body.country;
-//    const position = req.body.position;
-//    const wage = req.body.wage;
-//
-//    db.query(
-//        "INSERT INTO employees (name, age, country, position, wage) VALUES (?,?,?,?,?)",
-//        [name, age, country, position, wage],
-//        (err, result) => {
-//            if (err) {
-//                console.log(err);
-//            } else {
-//                res.send("Values Inserted");
-//            }
-//        }
-//    );
-//});
-
-//app.put("/update", (req, res) => {
-//    const id = req.body.id;
-//    const wage = req.body.wage;
-//    db.query(
-//        "UPDATE employees SET wage = ? WHERE id = ?",
-//        [wage, id],
-//        (err, result) => {
-//            if (err) {
-//                console.log(err);
-//            } else {
-//                res.send(result);
-//            }
-//        }
-//    );
-//});
-
-//app.delete("/delete/:id", (req, res) => {
-//    const id = req.params.id;
-//    db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
-//        if (err) {
-//            console.log(err);
-//        } else {
-//            res.send(result);
-//        }
-//    });
-//});

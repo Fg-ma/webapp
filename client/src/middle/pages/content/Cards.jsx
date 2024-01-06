@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 /* 
     Description:   
@@ -9,27 +9,66 @@ import { motion, AnimatePresence } from "framer-motion";
         N/A
 */
 
-export function Sheet({ sheet_id, entity_id}) {
+export function Sheet({ sheet_id, entity_id, pinned = 0, relation_id, socket }) {
 
-    const [sheet, setSheet] = useState([]);
+    const [sheetData, setSheetData] = useState([]);
+    const [hover, setHover] = useState(false);
     const isAuthor = useRef(null);
 
+    // Gets sheet data from a given sheet_id
     useEffect(() => {
         Axios.get(`http://localhost:5042/sheet/${sheet_id}`).then((response) => {
-            setSheet(response.data);
+            setSheetData(response.data);
         });
     }, [sheet_id]);
 
-    if (sheet[0] && sheet[0].sheet_author_id === entity_id) {
+    // Checks if the entity is the author of the sheet
+    if (sheetData[0] && sheetData[0].sheet_author_id === entity_id) {
         isAuthor.current = true;
+    };
+
+    // Toggles if a sheet is pinned by updating the db and then emitting togglePinned to the socket
+    const togglePinned = () => {
+        let newPinned;
+        let date_pinned;
+        if (pinned) {
+            newPinned = 0;
+            date_pinned = null;
+        } else {
+            newPinned = 1;
+            const currentDate = new Date();
+            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
+        }
+
+        Axios.put(
+            `http://localhost:5042/collections_sheets_pinned`,
+            {
+                relation_id: relation_id,
+                pinned: newPinned,
+                date_pinned: date_pinned,
+            }
+        );
+
+        socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
     };
 
     return (
         <div className="shadow-md rounded flex flex-col justify-center">
-            <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3"></div>
-            {sheet[0] && 
+            <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
+                <button 
+                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+                    style={{
+                        backgroundImage: pinned || hover ? 'url("/assets/icons/pin.svg")' : 'none',
+                    }}
+                    onClick={togglePinned}
+                    onMouseEnter={() => {setHover(true)}}
+                    onMouseLeave={() => {setHover(false)}}
+                >
+                </button>
+            </div>
+            {sheetData[0] && 
                 <p className="text-base font-bold leading-5 text-center mx-4 h-[3.75rem] line-clamp-3 mb-1">
-                    {sheet[0].sheet_title}
+                    {sheetData[0].sheet_title}
                 </p>
             }
             <p className="text-sm font-K2D text-center mb-3">{isAuthor.current ? "Creator" : "Responseded to"}</p>
@@ -37,27 +76,65 @@ export function Sheet({ sheet_id, entity_id}) {
     );
 };
 
-export function Video({ video_id }) {
+export function Video({ video_id, pinned = 0, relation_id, socket }) {
 
-    const [video, setVideo] = useState([]);
+    const [videoData, setVideoData] = useState([]);
+    const [hover, setHover] = useState(false);
 
+    // Gets video data from a given video_id
     useEffect(() => {
         Axios.get(`http://localhost:5042/video/${video_id}`).then((response) => {
-            setVideo(response.data);
+            setVideoData(response.data);
         });
     }, [video_id]);
 
+    // Toggles if a video is pinned by updating the db and then emitting togglePinned to the socket
+    const togglePinned = () => {
+        let newPinned;
+        let date_pinned;
+        if (pinned) {
+            newPinned = 0;
+            date_pinned = null;
+        } else {
+            newPinned = 1;
+            const currentDate = new Date();
+            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
+        }
+
+        Axios.put(
+            `http://localhost:5042/collections_videos_pinned`,
+            {
+                relation_id: relation_id,
+                pinned: newPinned,
+                date_pinned: date_pinned,
+            }
+        );
+
+        socket.emit("togglePinned", "video", relation_id, newPinned, date_pinned);
+    };
+
     return (
         <div className="flex flex-col justify-center">
-            <div className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3"></div>
+            <div className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative">
+                <button 
+                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+                    style={{
+                        backgroundImage: pinned || hover ? 'url("/assets/icons/pin.svg")' : 'none',
+                    }}
+                    onClick={togglePinned}
+                    onMouseEnter={() => {setHover(true)}}
+                    onMouseLeave={() => {setHover(false)}}
+                >
+                </button>
+            </div>
             <div className="flex justify-start items-center mb-2">
                 <div className="bg-fg-white-85 w-8 aspect-square rounded-full"></div>
-                {video[0] && 
+                {videoData[0] && 
                     <p 
                         className="text-sm font-bold leading-4 text-left h-[2] line-clamp-2 ml-2" 
                         style={{ width: 'calc(100% - 2.5rem)' }}
                     >
-                        {video[0].video_title}
+                        {videoData[0].video_title}
                     </p>
                 }
             </div>
@@ -93,27 +170,54 @@ const profileVar = {
     },
 };
 
-export function Image({ image_id }) {
+export function Image({ image_id, pinned = 0, relation_id, socket }) {
 
-    const [image, setImage] = useState([]);
+    const [imageData, setImageData] = useState([]);
     const [popupContent, setPopupContent] = useState(null);
     const [showCreator, setShowCreator] = useState(false);
     const primaryHoverTimeout = useRef(null);
     const secondaryHoverTimeout = useRef(null);
     const mousePosition = useRef(null);
+    const [pinHover, setPinHover] = useState(false);
 
+    // Gets image data from a given image_id
     useEffect(() => {
         Axios.get(`http://localhost:5042/image/${image_id}`).then((response) => {
-            setImage(response.data);
+            setImageData(response.data);
         });
     }, [image_id]);
 
+    // Toggles if a image is pinned by updating the db and then emitting togglePinned to the socket
+    const togglePinned = () => {
+        let newPinned;
+        let date_pinned;
+        if (pinned) {
+            newPinned = 0;
+            date_pinned = null;
+        } else {
+            newPinned = 1;
+            const currentDate = new Date();
+            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
+        }
+
+        Axios.put(
+            `http://localhost:5042/collections_images_pinned`,
+            {
+                relation_id: relation_id,
+                pinned: newPinned,
+                date_pinned: date_pinned,
+            }
+        );
+
+        socket.emit("togglePinned", "image", relation_id, newPinned, date_pinned);
+    };
+
     const showPopup = () => {
-        if (image[0]) {
+        if (imageData[0]) {
             setPopupContent(
                 <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs">
-                    <p className="text-lg font-bold line-clamp-2">{image[0].image_title}</p> 
-                    <p className="text-base font-K2D line-clamp-4">{image[0].image_description}</p>
+                    <p className="text-lg font-bold line-clamp-2">{imageData[0].image_title}</p> 
+                    <p className="text-base font-K2D line-clamp-4">{imageData[0].image_description}</p>
                 </div>
             );
         };
@@ -160,12 +264,22 @@ export function Image({ image_id }) {
     return (
         <div className="flex flex-col justify-center">
             <div 
-                className="bg-fg-white-85 w-full aspect-square rounded mb-3 relative mx-2"
+                className="bg-fg-white-85 w-full aspect-square rounded mb-3 relative"
                 style={{ width: 'calc(100% - 1rem)'}}
                 onMouseEnter={(e) => startHoverTimer(e)} 
                 onMouseLeave={() => cancelHoverTimer()} 
                 onMouseMove={(e) => {updateMousePosition(e); updatePopupPosition(e)}}
             >
+                <button 
+                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+                    style={{
+                        backgroundImage: pinned || pinHover ? 'url("/assets/icons/pin.svg")' : 'none',
+                    }}
+                    onClick={togglePinned}
+                    onMouseEnter={() => {setPinHover(true)}}
+                    onMouseLeave={() => {setPinHover(false)}}
+                >
+                </button>
                 {showCreator && 
                     <motion.div 
                         className="bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3"

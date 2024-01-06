@@ -17,6 +17,7 @@ export function IndividualCard({ id, name, currentIssue = null }) {
         dispatch(setPageState('main', 'individuals'));
         dispatch(setPageState('individuals', 'sheets'));
         dispatch(setIds('main', 'individual_id', id));
+        dispatch(setIds('individuals', 'collection_id', null));
     };
 
     return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { setPageState } from "../../redux/pageState/pageStateActions";
-import Collections from "./CollectionButtons";
+import { setPageState, setIds } from "../../redux/pageState/pageStateActions";
+import CollectionButtons from "./CollectionButtons";
 
 const indNavButtonsVar = {
     init: {
@@ -53,6 +53,7 @@ export default function IndividualsContentNav({ individual }) {
 
     function swapPageState(newState) {
         dispatch(setPageState('individuals', newState));
+        dispatch(setIds('individuals', 'collection_id', null));
     };
 
     return (
@@ -97,7 +98,7 @@ export default function IndividualsContentNav({ individual }) {
             </div>
             <div className="h-0.5 w-full bg-fg-black-25 rounded-full"></div>
             {individual[0] && (
-                <Collections individual_id={individual[0].individual_id} />
+                <CollectionButtons individual_id={individual[0].individual_id} />
             )}
         </>
     )
