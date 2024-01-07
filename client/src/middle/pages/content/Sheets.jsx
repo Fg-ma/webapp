@@ -75,7 +75,7 @@ export default function Sheets({ entity_id, author_id}) {
     });
 
     return (
-        <div className="grid grid-cols-3 gap-6">
+        <div className="mt-4 grid grid-cols-3 gap-6">
             {sheets}
         </div>
     );

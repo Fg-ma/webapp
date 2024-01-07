@@ -74,7 +74,7 @@ export default function Videos({ entity_id }) {
     });
     
     return (
-        <div className="grid grid-cols-3 gap-6">
+        <div className="mt-4 grid grid-cols-3 gap-6">
             {videos}
         </div>
     );

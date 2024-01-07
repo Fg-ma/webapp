@@ -83,7 +83,8 @@ app.get("/sheets", (req, res) => {
 
 app.get("/individual/:individual_id", (req, res) => {
     const individual_id = req.params.individual_id;
-    db.query("SELECT * FROM individuals WHERE individual_id = ?;", individual_id, (err, result) => {
+
+    db.query("SELECT * FROM individuals WHERE individual_id = ?;", [individual_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -94,7 +95,7 @@ app.get("/individual/:individual_id", (req, res) => {
 
 app.get("/group/:group_id", (req, res) => {
     const group_id = req.params.group_id;
-    
+
     db.query("SELECT * FROM `groups` WHERE group_id = ?;", [group_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
@@ -106,7 +107,8 @@ app.get("/group/:group_id", (req, res) => {
 
 app.get("/organization/:organization_id", (req, res) => {
     const organization_id = req.params.organization_id;
-    db.query("SELECT * FROM organizations WHERE organization_id = ?;", organization_id, (err, result) => {
+
+    db.query("SELECT * FROM organizations WHERE organization_id = ?;", [organization_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -115,9 +117,20 @@ app.get("/organization/:organization_id", (req, res) => {
     });
 });
 
-app.get("/references/:individual_id", (req, res) => {
-    const individual_id = req.params.individual_id;
-    db.query("SELECT * FROM individuals_references WHERE individual_id = ?;", individual_id, (err, result) => {
+app.get("/references", (req, res) => {
+    const entity_id = req.query.entity_id;
+    const type = req.query.type;
+
+    let query;
+    if (type === "individuals") {
+        query = "SELECT * FROM entities_references WHERE individual_id = ?;";
+    } else if (type === "groups") {
+        query = "SELECT * FROM entities_references WHERE group_id = ?;";
+    } else if (type === "organizations") {
+        query = "SELECT * FROM entities_references WHERE organization_id = ?;";
+    };
+
+    db.query(query, [entity_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -128,7 +141,8 @@ app.get("/references/:individual_id", (req, res) => {
 
 app.get("/sheet/:sheet_id", (req, res) => {
     const sheet_id = req.params.sheet_id;
-    db.query("SELECT * FROM sheets WHERE sheet_id = ?;", sheet_id, (err, result) => {
+
+    db.query("SELECT * FROM sheets WHERE sheet_id = ?;", [sheet_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -139,7 +153,8 @@ app.get("/sheet/:sheet_id", (req, res) => {
 
 app.get("/video/:video_id", (req, res) => {
     const video_id = req.params.video_id;
-    db.query("SELECT * FROM videos WHERE video_id = ?;", video_id, (err, result) => {
+
+    db.query("SELECT * FROM videos WHERE video_id = ?;", [video_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -150,7 +165,8 @@ app.get("/video/:video_id", (req, res) => {
 
 app.get("/image/:image_id", (req, res) => {
     const image_id = req.params.image_id;
-    db.query("SELECT * FROM images WHERE image_id = ?;", image_id, (err, result) => {
+
+    db.query("SELECT * FROM images WHERE image_id = ?;", [image_id], (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -159,15 +175,28 @@ app.get("/image/:image_id", (req, res) => {
     });
 });
 
-app.get("/collections_names/:individual_id", (req, res) => {
-    const individual_id = req.params.individual_id;
-    db.query("SELECT DISTINCT collection_id, collection_name FROM collections WHERE individual_id = ?;", individual_id, (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+app.get("/collections_names", (req, res) => {
+    const id = req.query.id;
+    const type = req.query.type;
+
+    let query;
+    if (type === "individuals") {
+        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE individual_id = ?;";
+    } else if (type === "groups") {
+        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE group_id = ?;";
+    } else if (type === "organizations") {
+        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE organization_id = ?;";
+    };
+
+    if (id && type && query) {
+        db.query(query, [id], (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            };
+        });
+    };
 });
 
 app.get("/collections/:collection_id", (req, res) => {
@@ -318,52 +347,22 @@ app.get("/entity", (req, res) => {
     const id = req.query.id;
     const type = req.query.type;
 
+    let query;
     if (type === "individuals") {
-        db.query(
-            `SELECT 
-                entities.entity_id
-            FROM entities
-            WHERE entities.individual_id = ?;`,
-            [id],
-            (err, result) => {
-                if (err) {
-                  res.status(500).send("Internal Server Error");
-                } else {
-                  res.send(result);
-                };
-            }
-        );
+        query = "SELECT entities.entity_id FROM entities WHERE entities.individual_id = ?;";
     } else if (type === "groups") {
-        db.query(
-            `SELECT 
-                entities.entity_id
-            FROM entities
-            WHERE entities.group_id = ?;`,
-            [id],
-            (err, result) => {
-                if (err) {
-                  res.status(500).send("Internal Server Error");
-                } else {
-                  res.send(result);
-                };
-            }
-        );
+        query = "SELECT entities.entity_id FROM entities WHERE entities.group_id = ?;";
     } else if (type === "organizations") {
-        db.query(
-            `SELECT 
-                entities.entity_id
-            FROM entities
-            WHERE entities.organization_id = ?;`,
-            [id],
-            (err, result) => {
-                if (err) {
-                  res.status(500).send("Internal Server Error");
-                } else {
-                  res.send(result);
-                };
-            }
-        );
+        query = "SELECT entities.entity_id FROM entities WHERE entities.organization_id = ?;";
     };
+
+    db.query(query, [id], (err, result) => {
+        if (err) {
+          res.status(500).send("Internal Server Error");
+        } else {
+          res.send(result);
+        };
+    });
 });
 
 app.get("/entities_sheets/:entity_id", (req, res) => {

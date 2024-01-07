@@ -31,7 +31,7 @@ export default function EntityPage({ entityType }) {
         entity_id = useSelector((state) => state.page.main.pagePayload.ids.organization_id);
     };
     const [entityData, setEntityData] = useState([]);
-    const [individualReferences, setIndividualReferences] = useState([]);
+    const [entityReferences, setEntityReferences] = useState([]);
     const [entity, setEntity] = useState([]);
     
     // Get data from database
@@ -59,9 +59,16 @@ export default function EntityPage({ entityType }) {
             setEntity(response.data);
         });
 
-        Axios.get(`http://localhost:5042/references/${entity_id}`).then((response) => {
-            setIndividualReferences(response.data);
-        });
+        if (entity_id) {
+            Axios.get(`http://localhost:5042/references`, {
+                params: {
+                    entity_id: entity_id,
+                    type: entityType,
+                }
+            }).then((response) => {
+                setEntityReferences(response.data);
+            });
+        }
     }, [entity_id]);
 
     const renderContent = (entityData) => {
@@ -138,7 +145,7 @@ export default function EntityPage({ entityType }) {
             <div className="mr-3" style={{ height: `calc(100% - 2.5rem)`}}>
                 <div className="overflow-y-auto h-full w-full">
                     <div className="ml-8 mr-5 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
-                        <EntityPageHeader entityType={entityType} entity={entityData} individualReferences={individualReferences} />
+                        <EntityPageHeader entityType={entityType} entity={entityData} entityReferences={entityReferences} />
                         <EntityContentNav entityType={entityType} entity={entityData} />
                         {renderContent(entityData)}
                     </div>

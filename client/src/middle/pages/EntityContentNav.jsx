@@ -96,7 +96,7 @@ export default function EntityContentNav({ entityType, entity }) {
                     </motion.div>
                 </div>
             </div>
-            <div className="h-0.5 w-full bg-fg-black-25 rounded-full"></div>
+            <div className="h-0.5 w-full bg-fg-black-25 rounded-full mb-2"></div>
             {entity[0] && (
                 <CollectionButtons entityType={entityType} entity_id={entity[0][`${entityType.slice(0, -1)}_id`]} />
             )}

@@ -74,7 +74,7 @@ export default function Images({ entity_id }) {
     });
 
     return (
-        <div className="grid grid-cols-3 gap-x-1 gap-y-2">
+        <div className="mt-4 grid grid-cols-3 gap-x-1 gap-y-2">
             {images}
         </div>
     );

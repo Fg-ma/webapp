@@ -1,7 +1,7 @@
 import React from "react";
 import ReferenceLinks from "../../components/referenceLinks/ReferenceLinks";
 
-export default function EntityPageHeader({ entityType, entity, individualReferences }) {
+export default function EntityPageHeader({ entityType, entity, entityReferences }) {
 
     /* 
         Description:   
@@ -30,7 +30,7 @@ export default function EntityPageHeader({ entityType, entity, individualReferen
                     </div>
                 </div>
             </div>
-            <p className="text-xl mt-4">
+            <div className="text-xl mt-4">
                 {entity[0]?.[`${entityType.slice(0, -1)}_userName`]}
                 {entity[0]?.[`${entityType.slice(0, -1)}_handle`] && (
                   <div className="flex items-center justify-start">
@@ -38,7 +38,7 @@ export default function EntityPageHeader({ entityType, entity, individualReferen
                     <p>{entity[0][`${entityType.slice(0, -1)}_handle`]}</p>
                   </div>
                 )}
-            </p>
+            </div>
             <p className="text-2xl font-bold mt-2">
                 {entity[0]?.[`${entityType.slice(0, -1)}_currentIssue`]}
             </p>
@@ -57,7 +57,7 @@ export default function EntityPageHeader({ entityType, entity, individualReferen
                     {entity[0][`${entityType.slice(0, -1)}_description`]}
                 </p>
             }
-            <ReferenceLinks references={individualReferences} />
+            {entityReferences && (<ReferenceLinks references={entityReferences} />)}
             <div className="space-x-6 font-K2D mt-6 flex items-center justify-center">
                 <button className="w-1/5 h-9 rounded-md bg-fg-primary text-white">Affiliate with</button>
                 <button className="w-1/5 h-9 rounded-md bg-fg-white-95">Message</button>
