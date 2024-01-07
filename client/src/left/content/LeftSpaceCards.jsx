@@ -11,6 +11,7 @@ import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
 */
 
 export function IndividualCard({ id, name, currentIssue = null }) {
+
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -21,7 +22,10 @@ export function IndividualCard({ id, name, currentIssue = null }) {
     };
 
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md" onClick={handleClick}>
+        <div 
+            className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md cursor-pointer" 
+            onClick={handleClick}
+        >
             <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
                 <p>pic</p>
             </div>
@@ -33,9 +37,22 @@ export function IndividualCard({ id, name, currentIssue = null }) {
     );
 };
 
-export function GroupCard({ name, currentIssue = null, affInCommon = null }) {
+export function GroupCard({ id, name, currentIssue = null, affInCommon = null }) {
+
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setPageState('main', 'groups'));
+        dispatch(setPageState('groups', 'sheets'));
+        dispatch(setIds('main', 'group_id', id));
+        dispatch(setIds('groups', 'collection_id', null));
+    };
+
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md">
+        <div 
+            className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
+            onClick={handleClick}
+        >
             <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">
                 <p>pic</p>
             </div>
@@ -48,9 +65,22 @@ export function GroupCard({ name, currentIssue = null, affInCommon = null }) {
     );
 };
 
-export function OrganizationCard({ name, currentIssue = null, stances = null }) {
+export function OrganizationCard({ id, name, currentIssue = null, stances = null }) {
+
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setPageState('main', 'organizations'));
+        dispatch(setPageState('organizations', 'sheets'));
+        dispatch(setIds('main', 'organization_id', id));
+        dispatch(setIds('organizations', 'collection_id', null));
+    };
+
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md">
+        <div 
+            className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
+            onClick={handleClick}
+        >
             <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">
                 <p>pic</p>
             </div>

@@ -29,7 +29,23 @@ const intialState = {
             },
         },
     },
-}
+    groups: {
+        pagePayload: {
+            pageState: "articles",
+            ids: {
+                collection_id: null,
+            },
+        },
+    },
+    organizations: {
+        pagePayload: {
+            pageState: "articles",
+            ids: {
+                collection_id: null,
+            },
+        },
+    },
+};
 
 export default function pageStateReducer(state = intialState, action) {
     switch (action.type) {

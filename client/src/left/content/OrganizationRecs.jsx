@@ -23,6 +23,7 @@ export default function OrganizationRecs() {
     const orgRecs = organizations.map(orgInfo => {
         return <OrganizationCard 
                     key={orgInfo.organization_id} 
+                    id={orgInfo.organization_id}
                     name={orgInfo.organization_name} 
                     currentIssue={orgInfo.organization_currentIssue} 
                     stances={orgInfo.organization_stances} 

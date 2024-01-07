@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
-import { Sheet, Video, Image } from "./Cards";
 import io from "socket.io-client";
+import { Sheet, Video, Image } from "./Cards";
+
 
 export default function Collections({ entity_id, collection_id }) {
 
@@ -50,7 +51,7 @@ export default function Collections({ entity_id, collection_id }) {
                         return { ...item, pinned: pinned, date_pinned: date_pinned };
                     } else if (relation === "image" && item.collections_images_id === relation_id) {
                         return { ...item, pinned: pinned, date_pinned: date_pinned };
-                    }
+                    };
                     return item;
                 });
     
@@ -71,8 +72,9 @@ export default function Collections({ entity_id, collection_id }) {
         if (socketRef.current && item.sheet_id) {
             return <Sheet 
                 key={`collectionSheet_${item.sheet_id}`}  
+                type={"collection"}
                 sheet_id={item.sheet_id} 
-                entity_id={entity_id}
+                author_id={entity_id}
                 pinned={item.pinned}
                 relation_id={item.collections_sheets_id}
                 socket={socketRef.current}
@@ -80,6 +82,7 @@ export default function Collections({ entity_id, collection_id }) {
         } else if (socketRef.current && item.image_id) {
             return <Image 
                 key={`collectionImage_${item.image_id}`}  
+                type={"collection"}
                 image_id={item.image_id}
                 pinned={item.pinned}
                 relation_id={item.collections_images_id}
@@ -88,6 +91,7 @@ export default function Collections({ entity_id, collection_id }) {
         } else if (socketRef.current && item.video_id) {
             return <Video 
                 key={`collectionVideo_${item.video_id}`} 
+                type={"collection"}
                 video_id={item.video_id}
                 pinned={item.pinned}
                 relation_id={item.collections_videos_id}

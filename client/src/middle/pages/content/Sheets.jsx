@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
+import io from "socket.io-client";
 import { Sheet } from "./Cards";
 
-export default function Sheets({ id }) {
+export default function Sheets({ entity_id, author_id}) {
 
     /* 
         Description:   
@@ -37,37 +38,38 @@ export default function Sheets({ id }) {
         return [...pinnedRows, ...notPinnedRows];
     };
 
-    // Gets collection data and connects to socket
+    // Gets sheet data and connects to socket
     useEffect(() => {   
         // Connects to the socket to get the new data when pinned is updated
         sheetSocketRef.current.on("pinnedUpdated", ({ relation, relation_id, pinned, date_pinned }) => {
             setSheetsData((prevData) => {
                 const updatedData = prevData.map((sheet) => {
-                    if ( sheet.sheets_id === relation_id) {
+                    if (sheet.entities_sheets_id === relation_id) {
                         return { ...sheet, pinned: pinned, date_pinned: date_pinned };
                     }
-                    return item;
+                    return sheet;
                 });
     
                 const sortedData = sortData(updatedData);
-    
+                
                 return sortedData;
             });
         });
 
-        // Gets original collection data
-        Axios.get(`http://localhost:5042/individuals_sheets/${id}`).then((response) => {
-            setSheetsData(response.data);
+        // Gets original sheet data
+        Axios.get(`http://localhost:5042/entities_sheets/${entity_id}`).then((response) => {
+            setSheetsData(sortData(response.data));
         });
-    }, [id]);
+    }, [entity_id]);
 
     const sheets = sheetsData.map(sheet => {
         return <Sheet 
-            key={`sheet_${sheet.sheet_id}`}  
+            key={`sheet_${sheet.sheet_id}`} 
+            type={"entity"} 
             sheet_id={sheet.sheet_id} 
-            entity_id={id}
+            author_id={author_id}
             pinned={sheet.pinned}
-            relation_id={sheet.collections_sheets_id}
+            relation_id={sheet.entities_sheets_id}
             socket={sheetSocketRef.current}
         />
     });

@@ -17,14 +17,23 @@ const collectionsStyles = {
     },
 };
 
-export default function CollectionButton({ collection_id, collection_name }) {
+export default function CollectionButton({ entityType, collection_id, collection_name }) {
+
+    /* 
+        Description:   
+            Creates each collection button which can be clicked inorder to switch the page state 
+            to the clicked collection.
+        Unique Properties:
+            N/A
+    */
+
     const dispatch = useDispatch();
-    const collectionID = useSelector((state) => state.page.individuals.pagePayload.ids.collection_id);
+    const collectionID = useSelector((state) => state.page[entityType].pagePayload.ids.collection_id);
     const [isHovered, setIsHovered] = useState(false);
 
     function swapPageState(newState) {
-        dispatch(setPageState('individuals', newState));
-        dispatch(setIds('individuals', 'collection_id', collection_id));
+        dispatch(setPageState(entityType, newState));
+        dispatch(setIds(entityType, 'collection_id', collection_id));
     };
 
     return (

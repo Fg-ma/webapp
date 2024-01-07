@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
         N/A
 */
 
-export function Sheet({ sheet_id, entity_id, pinned = 0, relation_id, socket }) {
+export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, socket }) {
 
     const [sheetData, setSheetData] = useState([]);
     const [hover, setHover] = useState(false);
@@ -23,7 +23,7 @@ export function Sheet({ sheet_id, entity_id, pinned = 0, relation_id, socket }) 
     }, [sheet_id]);
 
     // Checks if the entity is the author of the sheet
-    if (sheetData[0] && sheetData[0].sheet_author_id === entity_id) {
+    if (sheetData[0] && sheetData[0].sheet_author_id === author_id) {
         isAuthor.current = true;
     };
 
@@ -40,14 +40,25 @@ export function Sheet({ sheet_id, entity_id, pinned = 0, relation_id, socket }) 
             date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
         }
 
-        Axios.put(
-            `http://localhost:5042/collections_sheets_pinned`,
-            {
-                relation_id: relation_id,
-                pinned: newPinned,
-                date_pinned: date_pinned,
-            }
-        );
+        if (type === "collection") {
+            Axios.put(
+                `http://localhost:5042/collections_sheets_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        } else if (type === "entity") {
+            Axios.put(
+                `http://localhost:5042/entities_sheets_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        };
 
         socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
     };
@@ -76,7 +87,7 @@ export function Sheet({ sheet_id, entity_id, pinned = 0, relation_id, socket }) 
     );
 };
 
-export function Video({ video_id, pinned = 0, relation_id, socket }) {
+export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
 
     const [videoData, setVideoData] = useState([]);
     const [hover, setHover] = useState(false);
@@ -101,14 +112,25 @@ export function Video({ video_id, pinned = 0, relation_id, socket }) {
             date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
         }
 
-        Axios.put(
-            `http://localhost:5042/collections_videos_pinned`,
-            {
-                relation_id: relation_id,
-                pinned: newPinned,
-                date_pinned: date_pinned,
-            }
-        );
+        if (type === "collection") {
+            Axios.put(
+                `http://localhost:5042/collections_videos_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        } else if (type === "entity") {
+            Axios.put(
+                `http://localhost:5042/entities_videos_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        };
 
         socket.emit("togglePinned", "video", relation_id, newPinned, date_pinned);
     };
@@ -170,7 +192,7 @@ const profileVar = {
     },
 };
 
-export function Image({ image_id, pinned = 0, relation_id, socket }) {
+export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
 
     const [imageData, setImageData] = useState([]);
     const [popupContent, setPopupContent] = useState(null);
@@ -200,14 +222,25 @@ export function Image({ image_id, pinned = 0, relation_id, socket }) {
             date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
         }
 
-        Axios.put(
-            `http://localhost:5042/collections_images_pinned`,
-            {
-                relation_id: relation_id,
-                pinned: newPinned,
-                date_pinned: date_pinned,
-            }
-        );
+        if (type === "collection") {
+            Axios.put(
+                `http://localhost:5042/collections_images_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        } else if (type === "entity") {
+            Axios.put(
+                `http://localhost:5042/entities_images_pinned`,
+                {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                }
+            );
+        };
 
         socket.emit("togglePinned", "image", relation_id, newPinned, date_pinned);
     };

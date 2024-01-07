@@ -26,34 +26,34 @@ const indNavButtonsVar = {
     },
 };
 
-export default function IndividualsContentNav({ individual }) {
+export default function EntityContentNav({ entityType, entity }) {
 
     /* 
         Description:   
             Creates the content nav containing the sheets, videos, and images buttons
-            to swtich the individualsPageState and the individual's collections.
+            to swtich the entities's pageState and the entity's collections.
         Unique Properties:
             N/A
     */
 
     const dispatch = useDispatch();
-    const individualsPageState = useSelector((state) => state.page.individuals.pagePayload.pageState);
+    const pageState = useSelector((state) => state.page[entityType].pagePayload.pageState);
     
     const deactiveStyles = {};
     const activeStyles = {
         textDecorationColor: "#F56114",
     };
-    const individualsPageStyles = {
+    const pageStyles = {
         sheets: deactiveStyles,
         videos: deactiveStyles,
         images: deactiveStyles,
     };
 
-    individualsPageStyles[individualsPageState] = { ...activeStyles };
+    pageStyles[pageState] = { ...activeStyles };
 
     function swapPageState(newState) {
-        dispatch(setPageState('individuals', newState));
-        dispatch(setIds('individuals', 'collection_id', null));
+        dispatch(setPageState(entityType, newState));
+        dispatch(setIds(entityType, 'collection_id', null));
     };
 
     return (
@@ -68,7 +68,7 @@ export default function IndividualsContentNav({ individual }) {
                         transition={indNavButtonsVar.transition}
                         onClick={() => swapPageState('sheets')}
                     >
-                        <button style={individualsPageStyles["sheets"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Sheets</button>
+                        <button style={pageStyles["sheets"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Sheets</button>
                     </motion.div>
                 </div>
                 <div className="w-1/3 flex items-center justify-center font-bold">
@@ -80,7 +80,7 @@ export default function IndividualsContentNav({ individual }) {
                         transition={indNavButtonsVar.transition}
                         onClick={() => swapPageState('videos')}
                     >
-                        <button style={individualsPageStyles["videos"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Videos</button>
+                        <button style={pageStyles["videos"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Videos</button>
                     </motion.div>
                 </div>
                 <div className="w-1/3 flex items-center justify-center font-bold">
@@ -92,13 +92,13 @@ export default function IndividualsContentNav({ individual }) {
                         transition={indNavButtonsVar.transition}
                         onClick={() => swapPageState('images')}
                     >
-                        <button style={individualsPageStyles["images"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Images</button>
+                        <button style={pageStyles["images"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Images</button>
                     </motion.div>
                 </div>
             </div>
             <div className="h-0.5 w-full bg-fg-black-25 rounded-full"></div>
-            {individual[0] && (
-                <CollectionButtons individual_id={individual[0].individual_id} />
+            {entity[0] && (
+                <CollectionButtons entityType={entityType} entity_id={entity[0][`${entityType.slice(0, -1)}_id`]} />
             )}
         </>
     )

@@ -81,9 +81,9 @@ app.get("/sheets", (req, res) => {
     });
 });
 
-app.get("/sheet/:sheet_id", (req, res) => {
-    const sheet_id = req.params.sheet_id;
-    db.query("SELECT * FROM sheets WHERE sheet_id = ?", sheet_id, (err, result) => {
+app.get("/individual/:individual_id", (req, res) => {
+    const individual_id = req.params.individual_id;
+    db.query("SELECT * FROM individuals WHERE individual_id = ?;", individual_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -92,9 +92,21 @@ app.get("/sheet/:sheet_id", (req, res) => {
     });
 });
 
-app.get("/individual/:individual_id", (req, res) => {
-    const individual_id = req.params.individual_id;
-    db.query("SELECT * FROM individuals WHERE individual_id = ?", individual_id, (err, result) => {
+app.get("/group/:group_id", (req, res) => {
+    const group_id = req.params.group_id;
+    
+    db.query("SELECT * FROM `groups` WHERE group_id = ?;", [group_id], (err, result) => {
+        if (err) {
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        };
+    });
+});
+
+app.get("/organization/:organization_id", (req, res) => {
+    const organization_id = req.params.organization_id;
+    db.query("SELECT * FROM organizations WHERE organization_id = ?;", organization_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -105,7 +117,7 @@ app.get("/individual/:individual_id", (req, res) => {
 
 app.get("/references/:individual_id", (req, res) => {
     const individual_id = req.params.individual_id;
-    db.query("SELECT * FROM individuals_references WHERE individual_id = ?", individual_id, (err, result) => {
+    db.query("SELECT * FROM individuals_references WHERE individual_id = ?;", individual_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -114,20 +126,9 @@ app.get("/references/:individual_id", (req, res) => {
     });
 });
 
-app.get("/individuals_sheets/:id", (req, res) => {
-    const id = req.params.id;
-    db.query("SELECT * FROM individuals_sheets WHERE individual_id = ?", id, (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
-});
-
-app.get("/individuals_videos/:id", (req, res) => {
-    const id = req.params.id;
-    db.query("SELECT * FROM individuals_videos WHERE individual_id = ?", id, (err, result) => {
+app.get("/sheet/:sheet_id", (req, res) => {
+    const sheet_id = req.params.sheet_id;
+    db.query("SELECT * FROM sheets WHERE sheet_id = ?;", sheet_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -138,18 +139,7 @@ app.get("/individuals_videos/:id", (req, res) => {
 
 app.get("/video/:video_id", (req, res) => {
     const video_id = req.params.video_id;
-    db.query("SELECT * FROM videos WHERE video_id = ?", video_id, (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
-});
-
-app.get("/individuals_images/:id", (req, res) => {
-    const id = req.params.id;
-    db.query("SELECT * FROM individuals_images WHERE individual_id = ?", id, (err, result) => {
+    db.query("SELECT * FROM videos WHERE video_id = ?;", video_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -160,7 +150,7 @@ app.get("/individuals_images/:id", (req, res) => {
 
 app.get("/image/:image_id", (req, res) => {
     const image_id = req.params.image_id;
-    db.query("SELECT * FROM images WHERE image_id = ?", image_id, (err, result) => {
+    db.query("SELECT * FROM images WHERE image_id = ?;", image_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -171,7 +161,7 @@ app.get("/image/:image_id", (req, res) => {
 
 app.get("/collections_names/:individual_id", (req, res) => {
     const individual_id = req.params.individual_id;
-    db.query("SELECT DISTINCT collection_id, collection_name FROM collections WHERE individual_id = ?", individual_id, (err, result) => {
+    db.query("SELECT DISTINCT collection_id, collection_name FROM collections WHERE individual_id = ?;", individual_id, (err, result) => {
         if (err) {
             res.status(500).send("Internal Server Error");
         } else {
@@ -258,7 +248,7 @@ app.get("/collections/:collection_id", (req, res) => {
         FROM collections
         LEFT JOIN collections_sheets ON collections.collection_id = collections_sheets.collection_id
         LEFT JOIN sheets ON collections_sheets.sheet_id = sheets.sheet_id
-        WHERE collections.collection_id = ?`,
+        WHERE collections.collection_id = ?;`,
         [collection_id, collection_id, collection_id],
         (err, result) => {
             if (err) {
@@ -276,7 +266,7 @@ app.put("/collections_sheets_pinned", (req, res) => {
     const date_pinned = req.body.date_pinned;
 
     db.query(
-        "UPDATE collections_sheets SET pinned = ?, date_pinned = ? WHERE collections_sheets_id = ?",
+        "UPDATE collections_sheets SET pinned = ?, date_pinned = ? WHERE collections_sheets_id = ?;",
         [pinned, date_pinned, relation_id],
         (err, result) => {
             if (err) {
@@ -294,7 +284,7 @@ app.put("/collections_videos_pinned", (req, res) => {
     const date_pinned = req.body.date_pinned;
 
     db.query(
-        "UPDATE collections_videos SET pinned = ?, date_pinned = ? WHERE collections_videos_id = ?",
+        "UPDATE collections_videos SET pinned = ?, date_pinned = ? WHERE collections_videos_id = ?;",
         [pinned, date_pinned, relation_id],
         (err, result) => {
             if (err) {
@@ -312,7 +302,198 @@ app.put("/collections_images_pinned", (req, res) => {
     const date_pinned = req.body.date_pinned;
 
     db.query(
-        "UPDATE collections_images SET pinned = ?, date_pinned = ? WHERE collections_images_id = ?",
+        "UPDATE collections_images SET pinned = ?, date_pinned = ? WHERE collections_images_id = ?;",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.get("/entity", (req, res) => {
+    const id = req.query.id;
+    const type = req.query.type;
+
+    if (type === "individuals") {
+        db.query(
+            `SELECT 
+                entities.entity_id
+            FROM entities
+            WHERE entities.individual_id = ?;`,
+            [id],
+            (err, result) => {
+                if (err) {
+                  res.status(500).send("Internal Server Error");
+                } else {
+                  res.send(result);
+                };
+            }
+        );
+    } else if (type === "groups") {
+        db.query(
+            `SELECT 
+                entities.entity_id
+            FROM entities
+            WHERE entities.group_id = ?;`,
+            [id],
+            (err, result) => {
+                if (err) {
+                  res.status(500).send("Internal Server Error");
+                } else {
+                  res.send(result);
+                };
+            }
+        );
+    } else if (type === "organizations") {
+        db.query(
+            `SELECT 
+                entities.entity_id
+            FROM entities
+            WHERE entities.organization_id = ?;`,
+            [id],
+            (err, result) => {
+                if (err) {
+                  res.status(500).send("Internal Server Error");
+                } else {
+                  res.send(result);
+                };
+            }
+        );
+    };
+});
+
+app.get("/entities_sheets/:entity_id", (req, res) => {
+    const entity_id = req.params.entity_id;
+  
+    db.query(
+        `SELECT 
+            entities.entity_id,
+	        entities_sheets.date_added AS 'date_added',
+            CAST(entities_sheets.pinned AS SIGNED) AS 'pinned',
+            entities_sheets.date_pinned AS 'date_pinned',
+            entities_sheets.entities_sheets_id,
+            sheets.sheet_id,
+            sheets.sheet_author_id,
+            sheets.sheet_title,
+            sheets.sheet_subject
+        FROM entities
+        LEFT JOIN entities_sheets ON entities.entity_id = entities_sheets.entity_id
+        LEFT JOIN sheets ON entities_sheets.sheet_id = sheets.sheet_id
+        WHERE entities.entity_id = ?;`,
+        [entity_id],
+        (err, result) => {
+            if (err) {
+              res.status(500).send("Internal Server Error");
+            } else {
+              res.send(result);
+            };
+        }
+    );
+});
+
+app.get("/entities_videos/:entity_id", (req, res) => {
+    const entity_id = req.params.entity_id;
+  
+    db.query(
+        `SELECT 
+            entities.entity_id,
+	        entities_videos.date_added AS 'date_added',
+            CAST(entities_videos.pinned AS SIGNED) AS 'pinned',
+            entities_videos.date_pinned AS 'date_pinned',
+            entities_videos.entities_videos_id,
+            videos.video_id,
+            videos.video_title,
+            videos.video_creator_id
+        FROM entities
+        LEFT JOIN entities_videos ON entities.entity_id = entities_videos.entity_id
+        LEFT JOIN videos ON entities_videos.video_id = videos.video_id
+        WHERE entities.entity_id = ?;`,
+        [entity_id],
+        (err, result) => {
+            if (err) {
+              res.status(500).send("Internal Server Error");
+            } else {
+              res.send(result);
+            };
+        }
+    );
+});
+
+app.get("/entities_images/:entity_id", (req, res) => {
+    const entity_id = req.params.entity_id;
+  
+    db.query(
+        `SELECT 
+            entities.entity_id,
+	        entities_images.date_added AS 'date_added',
+            CAST(entities_images.pinned AS SIGNED) AS 'pinned',
+            entities_images.date_pinned AS 'date_pinned',
+            entities_images.entities_images_id,
+            images.image_id,
+            images.image_title,
+            images.image_description
+        FROM entities
+        LEFT JOIN entities_images ON entities.entity_id = entities_images.entity_id
+        LEFT JOIN images ON entities_images.image_id = images.image_id
+        WHERE entities.entity_id = ?;`,
+        [entity_id],
+        (err, result) => {
+            if (err) {
+              res.status(500).send("Internal Server Error");
+            } else {
+              res.send(result);
+            };
+        }
+    );
+});
+
+app.put("/entities_sheets_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE entities_sheets SET pinned = ?, date_pinned = ? WHERE entities_sheets_id = ?;",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.put("/entities_videos_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE entities_videos SET pinned = ?, date_pinned = ? WHERE entities_videos_id = ?;",
+        [pinned, date_pinned, relation_id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.put("/entities_images_pinned", (req, res) => {
+    const relation_id = req.body.relation_id;
+    const pinned = req.body.pinned;
+    const date_pinned = req.body.date_pinned;
+
+    db.query(
+        "UPDATE entities_images SET pinned = ?, date_pinned = ? WHERE entities_images_id = ?;",
         [pinned, date_pinned, relation_id],
         (err, result) => {
             if (err) {
