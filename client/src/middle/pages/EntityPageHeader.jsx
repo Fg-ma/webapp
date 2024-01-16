@@ -59,10 +59,13 @@ export default function EntityPageHeader({ entityType, entity, entityReferences 
             }
             {entityReferences && (<ReferenceLinks references={entityReferences} />)}
             <div className="space-x-6 font-K2D mt-6 flex items-center justify-center">
-                <button className="w-1/5 h-9 rounded-md bg-fg-primary text-white">Affiliate with</button>
-                <button className="w-1/5 h-9 rounded-md bg-fg-white-95">Message</button>
-                <button className="w-1/5 h-9 rounded-md bg-fg-white-95">Email</button>
-                <button className="w-1/5 h-9 rounded-md bg-fg-white-95">Contact</button>
+                <button className="w-1/4 h-9 rounded-md bg-fg-primary text-white">Affiliate with</button>
+                <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Message</button>
+                <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
+                <button className="w-1/4 h-9 rounded-md bg-fg-white-95 relative">
+                    Contact
+                    <svg class="w-6 aspect-square absolute right-1.5 top-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
             </div>
         </>
     )

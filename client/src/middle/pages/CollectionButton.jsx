@@ -38,7 +38,7 @@ export default function CollectionButton({ entityType, collection_id, collection
 
     return (
         <button 
-            className="font-K2D text-lg underline decoration-2 mb-2" 
+            className="font-K2D text-lg underline decoration-2 min-w-max bg-fg-white-95 rounded px-5 pb-2" 
             style={collectionID === collection_id ? (
                         collectionsStyles.selected 
                         ) : (

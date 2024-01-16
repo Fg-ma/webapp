@@ -20,12 +20,12 @@ const App = () => {
     const middleSpaceContainerRef = useRef(null);
 
     return (
-        <div id="base" className="h-screen">
-            <div id="pageSpace" className="flex space-x-14 mx-12 mt-16 h-full">
+        <div id="base" className="h-screen w-screen">
+            <div id="pageSpace" className="flex justify-between mx-12 mt-16 h-full">
                 
                 <LeftSpace />
 
-                <div ref={middleSpaceContainerRef} style={{width: "48%"}}>
+                <div ref={middleSpaceContainerRef} style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}>
                     <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
                     <PageNav />
                 </div>
