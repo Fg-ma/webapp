@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
+import PDFViewer from "../components/pdfViewer/PDFViewer";
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -118,7 +119,7 @@ export default function MiddleVerticalSplitPane() {
     return (
         <div className="middleVerticalSplitPane">
             <div className="middlePane" style={{ height: paneHeight }}>
-              hi
+                <PDFViewer />
             </div>
             <div
               className="middleResizer"

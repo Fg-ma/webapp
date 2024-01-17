@@ -13,7 +13,7 @@ module.exports = {
     port: '5000',
     static: {
       directory: path.join(__dirname, 'public')
-},
+    },
     open: true,
     hot: true,
     liveReload: true,
@@ -31,6 +31,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.pdf$/,
+        type: 'asset/resource',
       },
     ],
   },
