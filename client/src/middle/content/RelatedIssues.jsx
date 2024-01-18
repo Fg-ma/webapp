@@ -35,7 +35,7 @@ export default function RelatedIssues() {
 
 function RelatedIssuesCard({ title, affResponses = null }) {
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-24 flex items-center rounded-md">
+        <div className="bg-white w-fill my-4 mr-5 ml-8 h-24 flex items-center rounded-md">
             <div className="w-16 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
                 <p>pic</p>
             </div>

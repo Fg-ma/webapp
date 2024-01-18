@@ -31,7 +31,7 @@ export default function MiddleSpace({ middleSpaceContainerRef }) {
     }, [mainPageState]);
     
     return (
-        <div ref={middleSpaceRef} id="middleSpace" className="rounded-xl h-4/5 w-full max-w-full relative" style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}>
+        <div ref={middleSpaceRef} id="middleSpace" className="bg-fg-white-95 rounded-xl h-4/5 w-full max-w-full relative" style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}>
             {middleSpaceContent}
         </div>
     )

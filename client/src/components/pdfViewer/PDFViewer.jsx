@@ -1,6 +1,5 @@
 import React from 'react'
 import { pdfjs } from 'react-pdf';
-import pdf from "../../../public/L11.pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -10,13 +9,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 import { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
-export default function PDFViewer() {
-    const [numPages, setNumPages] = useState();
+export default function PDFViewer({ pdf, numPages, onDocumentLoadSuccess }) {
     const [pageNumber, setPageNumber] = useState(1);
-
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    };
 
     return (
         <div>
@@ -34,9 +28,6 @@ export default function PDFViewer() {
                     })
                 }
             </Document>
-            <p>
-                Page {pageNumber} of {numPages}
-            </p>
         </div>
     );
 }

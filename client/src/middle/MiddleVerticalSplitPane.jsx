@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
 import PDFViewer from "../components/pdfViewer/PDFViewer";
+import pdf from "../../public/testing1.pdf";
+import Axios from "axios";
+import { pdfjs } from 'react-pdf';
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -115,26 +118,65 @@ export default function MiddleVerticalSplitPane() {
         lightness = Math.min(60, lightness);
         return lightness;
     };
+    
+    const [numPages, setNumPages] = useState();
+    const onDocumentLoadSuccess = () => {
+        setNumPages(numPages);
+    };
+    //const onDocumentLoadSuccess = ({ numPages, pdf }) => {
+    //    setNumPages(numPages);
+    //
+    //    // Manually iterate through pages and extract text content
+    //    const textPromises = [];
+    //    for (let i = 1; i <= numPages; i++) {
+    //      textPromises.push(
+    //        pdf.getPage(i).then(page => {
+    //          return page.getTextContent().then(textContent => {
+    //            return textContent.items.map(item => item.str).join(' ');
+    //          });
+    //        })
+    //      );
+    //    }
+    //
+    //    // Wait for all text promises to resolve
+    //    Promise.all(textPromises).then(extractedTextArray => {
+    //      const extractedText = extractedTextArray.join(' ');
+    //
+    //      // Make the Axios request after the text extraction is complete
+    //      Axios.put(`http://localhost:5042/sheets_update`, {
+    //        params: {
+    //          sheet_id: 1,
+    //          filename: "testing1.pdf",
+    //          data: extractedText,
+    //        }
+    //      }).then((response) => {
+    //        // Handle the response as needed
+    //        console.log(response.data);
+    //      });
+    //    });
+    //  };
 
     return (
-        <div className="middleVerticalSplitPane">
-            <div className="middlePane" style={{ height: paneHeight }}>
-                <PDFViewer />
+        <div className="flex flex-col w-full h-full relative">
+            <div className="mr-3 overflow-auto box-border" style={{ height: paneHeight }}>
+                <div className="ml-8 mr-5 my-8 bg-white rounded-lg overflow-hidden">
+                    <PDFViewer pdf={pdf} numPages={numPages} onDocumentLoadSuccess={onDocumentLoadSuccess} />
+                </div>
             </div>
             <div
-              className="middleResizer"
-              onMouseDown={(e) => {
-                handleStart(e.clientY);
-              }}
-              onTouchStart={(e) => {
-                handleStart(e.touches[0].clientY);
-              }}
-              onMouseUp={handleMouseUp}
-              onTouchEnd={handleTouchEnd}
+                className="cursor-ns-resize select-none"
+                onMouseDown={(e) => {
+                    handleStart(e.clientY);
+                }}
+                onTouchStart={(e) => {
+                    handleStart(e.touches[0].clientY);
+                }}
+                onMouseUp={handleMouseUp}
+                onTouchEnd={handleTouchEnd}
             >
                 <RelatedIssuesHeader lightness={headerLightness} togglePaneHeight={togglePaneHeight} />
             </div>
-            <div id="middleBottomPane" className="middlePane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
+            <div className="overflow-auto box-border bg-fg-white-95" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
                 <RelatedIssues />
             </div>
         </div>
