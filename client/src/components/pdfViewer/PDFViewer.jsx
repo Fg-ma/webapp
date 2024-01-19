@@ -9,8 +9,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 import { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
-export default function PDFViewer({ pdf, numPages, onDocumentLoadSuccess }) {
+export default function PDFViewer({ pdf }) {
     const [pageNumber, setPageNumber] = useState(1);
+    const [numPages, setNumPages] = useState();
+
+    const onDocumentLoadSuccess = () => {
+        setNumPages(numPages);
+    };
 
     return (
         <div>

@@ -3,8 +3,6 @@ import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
 import PDFViewer from "../components/pdfViewer/PDFViewer";
 import pdf from "../../public/testing1.pdf";
-import Axios from "axios";
-import { pdfjs } from 'react-pdf';
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -118,43 +116,6 @@ export default function MiddleVerticalSplitPane() {
         lightness = Math.min(60, lightness);
         return lightness;
     };
-    
-    const [numPages, setNumPages] = useState();
-    const onDocumentLoadSuccess = () => {
-        setNumPages(numPages);
-    };
-    //const onDocumentLoadSuccess = ({ numPages, pdf }) => {
-    //    setNumPages(numPages);
-    //
-    //    // Manually iterate through pages and extract text content
-    //    const textPromises = [];
-    //    for (let i = 1; i <= numPages; i++) {
-    //      textPromises.push(
-    //        pdf.getPage(i).then(page => {
-    //          return page.getTextContent().then(textContent => {
-    //            return textContent.items.map(item => item.str).join(' ');
-    //          });
-    //        })
-    //      );
-    //    }
-    //
-    //    // Wait for all text promises to resolve
-    //    Promise.all(textPromises).then(extractedTextArray => {
-    //      const extractedText = extractedTextArray.join(' ');
-    //
-    //      // Make the Axios request after the text extraction is complete
-    //      Axios.put(`http://localhost:5042/sheets_update`, {
-    //        params: {
-    //          sheet_id: 1,
-    //          filename: "testing1.pdf",
-    //          data: extractedText,
-    //        }
-    //      }).then((response) => {
-    //        // Handle the response as needed
-    //        console.log(response.data);
-    //      });
-    //    });
-    //  };
 
     return (
         <div className="flex flex-col w-full h-full relative">

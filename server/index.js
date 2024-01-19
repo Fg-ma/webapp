@@ -5,6 +5,7 @@ const mysql = require("mysql");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
+const multer = require('multer');
 
 app.use(cors());
 app.use(express.json());
@@ -494,28 +495,6 @@ app.put("/entities_images_pinned", (req, res) => {
     db.query(
         "UPDATE entities_images SET pinned = ?, date_pinned = ? WHERE entities_images_id = ?;",
         [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
-});
-
-app.put("/sheets_update", (req, res) => {
-    const sheet_id = req.body.sheet_id;
-    const filename = req.body.filename;
-    const data = req.body.data;
-
-    db.query(
-        `
-        UPDATE sheets
-        SET sheet_filename = ?, sheet_data = ?
-        WHERE sheet_id = ?;
-        `,
-        [filename, data, sheet_id],
         (err, result) => {
             if (err) {
                 res.status(500).send("Internal Server Error");
