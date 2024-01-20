@@ -8,6 +8,7 @@ const intialState = {
                 individual_id: null,
                 group_id: null,
                 organization_id: null,
+                sheet_id: null,
             },
         },
     },

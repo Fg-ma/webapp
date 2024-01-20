@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { motion } from "framer-motion";
+import { setIds, setPageState } from "../../../../redux/pageState/pageStateActions";
 
 /* 
     Description:   
@@ -10,6 +12,8 @@ import { motion } from "framer-motion";
 */
 
 export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, socket }) {
+
+    const dispatch = useDispatch();
 
     const [sheetData, setSheetData] = useState([]);
     const [hover, setHover] = useState(false);
@@ -63,15 +67,23 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
         socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
     };
 
+    const handleClick = () => {
+        dispatch(setPageState('main', 'sheets'));
+        dispatch(setIds('main', 'sheet_id', sheet_id));
+    };
+
     return (
-        <div className="shadow-md rounded flex flex-col justify-center">
+        <div className="shadow-md rounded flex flex-col justify-center" onClick={handleClick}>
             <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
                 <button 
                     className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
                     style={{
                         backgroundImage: pinned || hover ? 'url("/assets/icons/pin.svg")' : 'none',
                     }}
-                    onClick={togglePinned}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        togglePinned();
+                    }}
                     onMouseEnter={() => {setHover(true)}}
                     onMouseLeave={() => {setHover(false)}}
                 >

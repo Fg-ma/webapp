@@ -10,6 +10,7 @@ const multer = require('multer');
 app.use(cors());
 app.use(express.json());
 
+
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -504,6 +505,39 @@ app.put("/entities_images_pinned", (req, res) => {
         }
     );
 });
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+app.put("/sheets_updating", upload.single('file'), (req, res) => {
+    const id = req.query.id;
+    const filename = req.query.filename;
+    const data = req.file.buffer;
+
+    db.query(
+        "UPDATE sheets SET sheet_filename = ?, sheet_data = ? WHERE sheet_id = ?;",
+        [filename, data, id],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
+app.get("/get_sheet/:sheet_id", (req, res) => {
+    const sheet_id = req.params.sheet_id;
+
+    db.query("SELECT * FROM sheets WHERE sheet_id = ?;", [sheet_id], (err, result) => {
+        if (err) {
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        };
+    });
+});
+
 
 app.listen(5042, () => {
     console.log("Server running on port 5042");

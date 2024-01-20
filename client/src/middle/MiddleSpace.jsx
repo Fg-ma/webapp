@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import HomePage from "./pages/HomePage";
-import EntityPage from "./pages/EntityPage";
+import EntityPage from "./pages/entityPage/EntityPage";
+import ContentPage from "./pages/contentPage/ContentPage";
 import "./middleSpace.css";
 
 export default function MiddleSpace({ middleSpaceContainerRef }) {
@@ -27,11 +28,13 @@ export default function MiddleSpace({ middleSpaceContainerRef }) {
             setMiddleSpaceContent(<EntityPage entityType="groups" />);
         } else if (mainPageState === "organizations") {
             setMiddleSpaceContent(<EntityPage entityType="organizations" />);
-        }
+        } else if (mainPageState === "sheets") {
+            setMiddleSpaceContent(<ContentPage />);
+        };
     }, [mainPageState]);
     
     return (
-        <div ref={middleSpaceRef} id="middleSpace" className="bg-fg-white-95 rounded-xl h-4/5 w-full max-w-full relative" style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}>
+        <div ref={middleSpaceRef} id="middleSpace" className="bg-fg-white-95 rounded-xl h-4/5 w-full max-w-full relative overflow-hidden" style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}>
             {middleSpaceContent}
         </div>
     )

@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
 
 /* 
     Description:   
@@ -8,9 +10,16 @@ import React from "react";
         N/A
 */
 
-export function NewsCard({ title, subject, affResponses = null }) {
+export function NewsCard({ sheet_id = null, title, subject, affResponses = null }) {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setPageState('main', 'sheets'));
+        dispatch(setIds('main', 'sheet_id', sheet_id));
+    };
+
     return (
-        <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md">
+        <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md" onClick={handleClick}>
             <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
                 <p>pic</p>
             </div>

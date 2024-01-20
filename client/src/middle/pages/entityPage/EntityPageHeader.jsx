@@ -1,5 +1,5 @@
 import React from "react";
-import ReferenceLinks from "../../components/referenceLinks/ReferenceLinks";
+import ReferenceLinks from "../../../components/referenceLinks/ReferenceLinks";
 
 export default function EntityPageHeader({ entityType, entity, entityReferences }) {
 

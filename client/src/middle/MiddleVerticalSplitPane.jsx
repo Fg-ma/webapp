@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
 import PDFViewer from "../components/pdfViewer/PDFViewer";
-import pdf from "../../public/testing1.pdf";
+import Axios from "axios";
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -117,11 +117,37 @@ export default function MiddleVerticalSplitPane() {
         return lightness;
     };
 
+    const fileToBlobFunc = (event) => {
+        const selectedFile = event.target.files[0];
+      
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            Axios.put(
+                `http://localhost:5042/sheets_updating`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    params: {
+                        id: 20,
+                        filename: "test",
+                    },
+                }
+            ).then((response) => {}).catch((error) => {
+                console.error('Error uploading file:', error);
+            });
+        };
+    };
+    
     return (
         <div className="flex flex-col w-full h-full relative">
             <div className="mr-3 overflow-auto box-border" style={{ height: paneHeight }}>
-                <div className="ml-8 mr-5 my-8 bg-white rounded-lg overflow-hidden">
-                    <PDFViewer pdf={pdf} numPages={numPages} onDocumentLoadSuccess={onDocumentLoadSuccess} />
+                <div className="ml-8 mr-5 my-8">
+                    <PDFViewer sheet_id={Math.floor(Math.random() * 20) + 1} />
+                    <input type="file" onChange={fileToBlobFunc} />
                 </div>
             </div>
             <div

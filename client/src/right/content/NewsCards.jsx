@@ -12,17 +12,18 @@ export default function NewsCards() {
             It queries for any affiliate responses.
     */
 
-    const [coverSheet, setCoverSheet] = useState([]);
+    const [sheets, setSheets] = useState([]);
 
     useEffect(() => {
         Axios.get("http://localhost:5042/sheets").then((response) => {
-            setCoverSheet(response.data);
+            setSheets(response.data);
         });
     }, []);
 
-    const newsCards = coverSheet.map(issueInfo => {
+    const newsCards = sheets.map(issueInfo => {
         return <NewsCard 
                     key={issueInfo.sheet_id} 
+                    sheet_id={issueInfo.sheet_id}
                     title={issueInfo.sheet_title} 
                     subject={issueInfo.sheet_subject} 
                 /> //affResponses={issueInfo.affResponses} />
