@@ -11,7 +11,7 @@ export default function VideoViewer({ video_id }) {
     });
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/get_video/${video_id}`).then((response) => {
+        Axios.get(`http://localhost:5042/videos/get_full_video/${video_id}`).then((response) => {
             if (response.data[0]) {
                 const blobData = new Uint8Array(response.data[0].video_data.data);
                 const extension = response.data[0].video_filename.slice(-3).toLowerCase();

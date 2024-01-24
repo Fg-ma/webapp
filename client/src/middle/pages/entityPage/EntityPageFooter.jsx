@@ -10,16 +10,6 @@ export default function EntityPageFooter({ entityType, entity }) {
         dispatch(setPageState('main', newState));
     };
 
-    const getEntityName = () => {
-        if (entityType === "individuals" && entity[0]) {
-            return entity[0].individual_name;
-        } else if (entityType === "groups" && entity[0]) {
-            return entity[0].group_name;
-        } else if (entityType === "organizations" && entity[0]) {
-            return entity[0].organization_name;
-        };
-    };
-
     return (
         <div className="h-10 bg-fg-white-85 flex items-center justify-between">
             <button 

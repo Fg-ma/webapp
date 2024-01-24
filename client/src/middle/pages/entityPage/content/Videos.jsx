@@ -57,7 +57,7 @@ export default function Videos({ entity_id }) {
         });
 
         // Gets original video data
-        Axios.get(`http://localhost:5042/entities_videos/${entity_id}`).then((response) => {
+        Axios.get(`http://localhost:5042/entities/entity_videos/${entity_id}`).then((response) => {
             setVideosData(sortData(response.data));
         });
     }, [entity_id]);

@@ -57,7 +57,7 @@ export default function Images({ entity_id }) {
         });
 
         // Gets original image data
-        Axios.get(`http://localhost:5042/entities_images/${entity_id}`).then((response) => {
+        Axios.get(`http://localhost:5042/entities/entity_images/${entity_id}`).then((response) => {
             setImagesData(sortData(response.data));
         });
     }, [entity_id]);

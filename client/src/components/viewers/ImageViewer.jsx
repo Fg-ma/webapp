@@ -11,7 +11,7 @@ export default function ImageViewer({ image_id }) {
     });
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/get_image/${image_id}`).then((response) => {
+        Axios.get(`http://localhost:5042/images/get_full_image/${image_id}`).then((response) => {
             if (response.data[0]) {
                 const blobData = new Uint8Array(response.data[0].image_data.data);
                 const extension = response.data[0].image_filename.slice(-3).toLowerCase();

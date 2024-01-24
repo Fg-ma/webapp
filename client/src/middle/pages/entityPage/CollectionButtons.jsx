@@ -15,7 +15,7 @@ export default function CollectionButtons({ entityType, entity_id, entityPageRef
     const [collectionNames, setCollectionNames] = useState([]);
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/collections_names`, {
+        Axios.get(`http://localhost:5042/collections/collections_names`, {
             params: {
                 id: entity_id,
                 type: entityType,

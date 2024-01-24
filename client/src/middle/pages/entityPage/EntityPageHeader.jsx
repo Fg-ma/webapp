@@ -62,9 +62,9 @@ export default function EntityPageHeader({ entityType, entity, entityReferences 
                 <button className="w-1/4 h-9 rounded-md bg-fg-primary text-white">Affiliate with</button>
                 <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Message</button>
                 <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
-                <button className="w-1/4 h-9 rounded-md bg-fg-white-95 relative">
-                    Contact
-                    <svg className="w-6 aspect-square absolute right-1.5 top-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <button className="w-1/4 h-9 rounded-md bg-fg-white-95 flex items-center justify-center">
+                    <span className="ml-5 grow">Contact</span>
+                    <svg className="w-6 aspect-square mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </div>
         </>

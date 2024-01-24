@@ -55,7 +55,7 @@ export default function ReferenceLinks({ references }) {
 
     const showPopup = (reference) => {
         setPopupContent(
-            <div className="p-3 absolute bg-white drop-shadow-md rounded w-max">
+            <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50">
                 <p className="text-lg font-bold">Title: {reference.title}</p>
                 <p className="text-base font-K2D">Author: {reference.author}</p>
                 <p className="text-base font-K2D">URL: {reference.url}</p>
@@ -85,7 +85,7 @@ export default function ReferenceLinks({ references }) {
         setPopupContent(prevPopupContent => {
             if (prevPopupContent) {
                 return (
-                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
+                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
                         {prevPopupContent.props.children}
                     </div>
                 );

@@ -37,20 +37,20 @@ export default function EntityPage({ entityType }) {
     // Get data from database
     useEffect(() => {
         if (entityType === "individuals") {
-            Axios.get(`http://localhost:5042/individual/${entity_id}`).then((response) => {
+            Axios.get(`http://localhost:5042/individuals/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "groups") {
-            Axios.get(`http://localhost:5042/group/${entity_id}`).then((response) => {
+            Axios.get(`http://localhost:5042/groups/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "organizations") {
-            Axios.get(`http://localhost:5042/organization/${entity_id}`).then((response) => {
+            Axios.get(`http://localhost:5042/organizations/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         };
 
-        Axios.get(`http://localhost:5042/entity`, {
+        Axios.get(`http://localhost:5042/entities/entity`, {
             params: {
                 id: entity_id,
                 type: entityType,

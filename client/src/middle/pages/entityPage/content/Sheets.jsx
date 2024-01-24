@@ -57,7 +57,7 @@ export default function Sheets({ entity_id, author_id}) {
         });
 
         // Gets original sheet data
-        Axios.get(`http://localhost:5042/entities_sheets/${entity_id}`).then((response) => {
+        Axios.get(`http://localhost:5042/entities/entity_sheets/${entity_id}`).then((response) => {
             setSheetsData(sortData(response.data));
         });
     }, [entity_id]);

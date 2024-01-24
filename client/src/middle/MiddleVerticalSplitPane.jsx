@@ -125,15 +125,11 @@ export default function MiddleVerticalSplitPane() {
             formData.append('file', selectedFile);
             
             Axios.put(
-                `http://localhost:5042/images_updating`,
+                `http://localhost:5042/videos_updating`,
                 formData,
                 {
                     headers: {
-                        'Content-Type': 'image/png', 
-                    },
-                    params: {
-                        id: 42,
-                        filename: "test2.png",
+                        'Content-Type': 'image/png',
                     },
                 }
             ).then((response) => {}).catch((error) => {
