@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -101,10 +102,10 @@ app.put("/images_updating", upload.single('file'), (req, res) => {
     );
 });
 
-server.listen(5041, () => {
-    console.log("Server running on port 5041");
+server.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server running on port ${process.env.SERVER_PORT}`);
 });
 
-app.listen(5042, () => {
-    console.log("Server running on port 5042");
+app.listen(process.env.API_PORT, () => {
+    console.log(`API Server running on port ${process.env.API_PORT}`);
 });

@@ -1,15 +1,11 @@
 FROM node:21
 
-WORKDIR /server
+WORKDIR /client
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
-
-ENV PORT=5043
-
-EXPOSE 5043
 
 CMD [ "npm", "start" ]
