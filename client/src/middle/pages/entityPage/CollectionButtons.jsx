@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import config from '@config';
 import CollectionButton from './CollectionButton';
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function CollectionButtons({ entityType, entity_id, entityPageRef }) {
 
@@ -15,7 +19,7 @@ export default function CollectionButtons({ entityType, entity_id, entityPageRef
     const [collectionNames, setCollectionNames] = useState([]);
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/collections/collections_names`, {
+        Axios.get(`${apiUrl}/collections/collections_names`, {
             params: {
                 id: entity_id,
                 type: entityType,

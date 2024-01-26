@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import io from "socket.io-client";
+import config from "@config";
 import { Sheet, Video, Image } from "./Cards";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function Collections({ entity_id, collection_id }) {
 
@@ -62,7 +65,7 @@ export default function Collections({ entity_id, collection_id }) {
         });
 
         // Gets original collection data
-        Axios.get(`http://localhost:5042/collections/${collection_id}`).then((response) => {
+        Axios.get(`${apiUrl}/collections/${collection_id}`).then((response) => {
             setCollectionData(sortData(response.data));
         });
     }, [collection_id]);

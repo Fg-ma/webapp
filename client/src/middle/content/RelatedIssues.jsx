@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import config from "@config";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function RelatedIssues() {
     
@@ -14,7 +18,7 @@ export default function RelatedIssues() {
     const [coverSheet, setCoverSheet] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:5042/sheets").then((response) => {
+        Axios.get(`${apiUrl}/sheets`).then((response) => {
             setCoverSheet(response.data);
         });
     }, []);

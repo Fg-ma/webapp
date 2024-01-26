@@ -1,5 +1,9 @@
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+
+dotenv.config();
 
 module.exports = {
   entry: './index.jsx',
@@ -19,6 +23,9 @@ module.exports = {
     liveReload: true,
   },
   resolve: {
+    alias: {
+      '@config': path.resolve(__dirname, 'config'),
+    },
     extensions: ['.js', '.jsx', '.json'],
   },
   module: {
@@ -41,6 +48,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html')
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+   })
   ]
 };

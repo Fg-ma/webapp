@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { NewsCard } from "./RightSpaceCards";
 import Axios from "axios";
+import config from "@config";
+import { NewsCard } from "./RightSpaceCards";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function NewsCards() {
 
@@ -15,7 +19,7 @@ export default function NewsCards() {
     const [sheets, setSheets] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:5042/sheets").then((response) => {
+        Axios.get(`http://localhost:5042/sheets`).then((response) => {
             setSheets(response.data);
         });
     }, []);

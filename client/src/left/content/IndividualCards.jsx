@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { IndividualCard } from "./LeftSpaceCards";
 import Axios from "axios";
+import config from "@config";
+import { IndividualCard } from "./LeftSpaceCards";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function IndividualCards() {
 
@@ -15,7 +19,7 @@ export default function IndividualCards() {
     const [individuals, setIndividuals] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:5042/individuals").then((response) => {
+        Axios.get(`${apiUrl}/individuals`).then((response) => {
             setIndividuals(response.data);
         });
     }, []);

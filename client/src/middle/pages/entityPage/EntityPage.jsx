@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
+import config from "@config";
 import Sheets from "./content/Sheets";
 import Videos from "./content/Videos";
 import Images from "./content/Images";
@@ -8,6 +9,9 @@ import Collections from "./content/Collections";
 import EntityPageHeader from "./EntityPageHeader";
 import EntityContentNav from "./EntityContentNav";
 import EntityPageFooter from "./EntityPageFooter";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function EntityPage({ entityType }) {
 
@@ -37,20 +41,20 @@ export default function EntityPage({ entityType }) {
     // Get data from database
     useEffect(() => {
         if (entityType === "individuals") {
-            Axios.get(`http://localhost:5042/individuals/${entity_id}`).then((response) => {
+            Axios.get(`${apiUrl}/individuals/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "groups") {
-            Axios.get(`http://localhost:5042/groups/${entity_id}`).then((response) => {
+            Axios.get(`${apiUrl}/groups/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "organizations") {
-            Axios.get(`http://localhost:5042/organizations/${entity_id}`).then((response) => {
+            Axios.get(`${apiUrl}/organizations/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         };
 
-        Axios.get(`http://localhost:5042/entities/entity`, {
+        Axios.get(`${apiUrl}/entities/entity`, {
             params: {
                 id: entity_id,
                 type: entityType,
@@ -60,7 +64,7 @@ export default function EntityPage({ entityType }) {
         });
 
         if (entity_id) {
-            Axios.get(`http://localhost:5042/references`, {
+            Axios.get(`${apiUrl}/references`, {
                 params: {
                     entity_id: entity_id,
                     type: entityType,

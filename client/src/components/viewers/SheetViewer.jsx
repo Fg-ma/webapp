@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import Axios from "axios";
+import config from '@config';
 import SheetHeader from './SheetHeader';
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -22,7 +26,7 @@ export default function SheetViewer({ sheet_id }) {
     };
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/sheets/get_full_sheet/${sheet_id}`).then((response) => {
+        Axios.get(`${apiUrl}/sheets/get_full_sheet/${sheet_id}`).then((response) => {
             if (response.data[0]) {
                 const blobData = new Uint8Array(response.data[0].sheet_data.data);
                 const url = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));

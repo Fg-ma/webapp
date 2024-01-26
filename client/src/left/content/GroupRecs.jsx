@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Axios  from "axios";
+import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
-import Axios from "axios";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function GroupRecs() {
 
@@ -15,7 +19,7 @@ export default function GroupRecs() {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:5042/groups").then((response) => {
+        Axios.get(`${apiUrl}/groups`).then((response) => {
             setGroups(response.data);
         });
     }, []);

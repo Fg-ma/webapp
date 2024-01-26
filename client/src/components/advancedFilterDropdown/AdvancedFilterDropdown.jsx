@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import FilterCard from "./FilterCard";
 import Axios from "axios";
+import config from "@config";
+import FilterCard from "./FilterCard";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 const dropIconVar = {
     init: { 
@@ -60,19 +64,19 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
     // Gets the data for the filter cards
     useEffect(() => {
         if (subcategory == "ind") {
-            Axios.get("http://localhost:5042/individuals").then((response) => {
+            Axios.get(`${apiUrl}/individuals`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Individuals--");
             setExpandedFilter("individual");
         } else if (subcategory == "grp") {
-            Axios.get("http://localhost:5042/groups").then((response) => {
+            Axios.get(`${apiUrl}/groups`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Groups--");
             setExpandedFilter("group");
         } else if (subcategory == "org") {
-            Axios.get("http://localhost:5042/organizations").then((response) => {
+            Axios.get(`${apiUrl}/organizations`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Organizations--");

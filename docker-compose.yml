@@ -5,6 +5,8 @@ services:
         build:
             context: ./client
             dockerfile: Dockerfile
+        environment:
+            - DOCKER_ENV=true
         ports:
             - "${FRONTEND_PORT}:3000"
         depends_on:

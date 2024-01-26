@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { OrganizationCard } from "./LeftSpaceCards";
 import Axios from "axios";
+import config from "@config";
+import { OrganizationCard } from "./LeftSpaceCards";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function OrganizationRecs() {
 
@@ -15,7 +19,7 @@ export default function OrganizationRecs() {
     const [organizations, setOrganizations] = useState([]);
     
     useEffect(() => {
-        Axios.get("http://localhost:5042/organizations").then((response) => {
+        Axios.get(`${apiUrl}/organizations`).then((response) => {
             setOrganizations(response.data);
         });
     }, []); 

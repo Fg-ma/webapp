@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import io from "socket.io-client";
+import config from "@config";
 import { Sheet } from "./Cards";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function Sheets({ entity_id, author_id}) {
 
@@ -57,7 +61,7 @@ export default function Sheets({ entity_id, author_id}) {
         });
 
         // Gets original sheet data
-        Axios.get(`http://localhost:5042/entities/entity_sheets/${entity_id}`).then((response) => {
+        Axios.get(`${apiUrl}/entities/entity_sheets/${entity_id}`).then((response) => {
             setSheetsData(sortData(response.data));
         });
     }, [entity_id]);

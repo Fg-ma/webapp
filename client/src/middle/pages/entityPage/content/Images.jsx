@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import io from "socket.io-client";
+import config from "@config";
 import { Image } from "./Cards";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
 
 export default function Images({ entity_id }) {
 
@@ -57,7 +61,7 @@ export default function Images({ entity_id }) {
         });
 
         // Gets original image data
-        Axios.get(`http://localhost:5042/entities/entity_images/${entity_id}`).then((response) => {
+        Axios.get(`${apiUrl}/entities/entity_images/${entity_id}`).then((response) => {
             setImagesData(sortData(response.data));
         });
     }, [entity_id]);
