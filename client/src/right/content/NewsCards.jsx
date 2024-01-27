@@ -19,7 +19,7 @@ export default function NewsCards() {
     const [sheets, setSheets] = useState([]);
 
     useEffect(() => {
-        Axios.get(`http://localhost:5042/sheets`).then((response) => {
+        Axios.get(`${apiUrl}/sheets`).then((response) => {
             setSheets(response.data);
         });
     }, []);

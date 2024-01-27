@@ -1,6 +1,6 @@
 FROM node:21
 
-WORKDIR /client
+WORKDIR /app/client
 
 COPY package*.json ./
 
@@ -10,8 +10,8 @@ COPY . .
 
 COPY . ./config
 
-ENV PORT=5044
+ENV PORT=5000
 
-EXPOSE 5044
+EXPOSE 5000
 
 CMD [ "npm", "start" ]
