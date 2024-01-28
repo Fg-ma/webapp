@@ -8,7 +8,6 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { socket } = require("./socket");
-const { db } = require("./database");
 const individualsRouter = require("./routes/individuals");
 const groupsRouter = require("./routes/groups");
 const organizationsRouter = require("./routes/organizations");
@@ -18,15 +17,16 @@ const imagesRouter = require("./routes/images");
 const collectionsRouter = require("./routes/collections");
 const entitiesRouter = require("./routes/entities");
 const referencesRouter = require("./routes/references");
+const { db } = require("./database");
 
 app.use(cors());
 app.use(express.json());
 
 db.connect((err) => {
     if (err) {
-      console.error('Error connecting to database:', err);
+        console.error('Error connecting to database:', err);
     } else {
-      console.log('Connected to database');
+        console.log('Connected to database');
     }
 });
 
