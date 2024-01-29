@@ -14,7 +14,7 @@ module.exports = {
   },
   target: 'web',
   devServer: {
-    port: '5000',
+    port: process.env.FRONTEND_PORT || 5000,
     static: {
       directory: path.join(__dirname, 'public')
     },

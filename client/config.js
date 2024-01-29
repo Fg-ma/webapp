@@ -3,7 +3,7 @@ const config = {
       apiUrl: "http://localhost:5042",
     },
     production: {
-      apiUrl: "https://localhost:5042",
+      apiUrl: "http://backend:5042",
     },
   };
   

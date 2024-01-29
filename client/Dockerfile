@@ -10,8 +10,6 @@ COPY . .
 
 COPY . ./config
 
-ENV PORT=5000
-
-EXPOSE 5000
+EXPOSE ${FRONTEND_PORT}
 
 CMD [ "npm", "start" ]
