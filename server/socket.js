@@ -7,7 +7,7 @@ function socket(server) {
             methods: ["GET", "POST"],
         },
     });
-
+    
     io.on("connection", (socket) => {
         console.log(`User Connected: ${socket.id}`);
 

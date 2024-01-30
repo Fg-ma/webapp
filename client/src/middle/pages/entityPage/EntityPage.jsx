@@ -11,7 +11,7 @@ import EntityContentNav from "./EntityContentNav";
 import EntityPageFooter from "./EntityPageFooter";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function EntityPage({ entityType }) {
 
@@ -41,20 +41,20 @@ export default function EntityPage({ entityType }) {
     // Get data from database
     useEffect(() => {
         if (entityType === "individuals") {
-            Axios.get(`${apiUrl}/individuals/${entity_id}`).then((response) => {
+            Axios.get(`${serverUrl}/individuals/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "groups") {
-            Axios.get(`${apiUrl}/groups/${entity_id}`).then((response) => {
+            Axios.get(`${serverUrl}/groups/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         } else if (entityType === "organizations") {
-            Axios.get(`${apiUrl}/organizations/${entity_id}`).then((response) => {
+            Axios.get(`${serverUrl}/organizations/${entity_id}`).then((response) => {
                 setEntityData(response.data);
             });
         };
 
-        Axios.get(`${apiUrl}/entities/entity`, {
+        Axios.get(`${serverUrl}/entities/entity`, {
             params: {
                 id: entity_id,
                 type: entityType,
@@ -64,7 +64,7 @@ export default function EntityPage({ entityType }) {
         });
 
         if (entity_id) {
-            Axios.get(`${apiUrl}/references`, {
+            Axios.get(`${serverUrl}/references`, {
                 params: {
                     entity_id: entity_id,
                     type: entityType,

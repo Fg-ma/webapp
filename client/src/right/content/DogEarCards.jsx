@@ -4,7 +4,7 @@ import config from "@config";
 import { DogEarCard } from "./RightSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function DogEarCards() {
 
@@ -20,7 +20,7 @@ export default function DogEarCards() {
     const [coverSheet, setCoverSheet] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/sheets`).then((response) => {
+        Axios.get(`${serverUrl}/sheets`).then((response) => {
             setCoverSheet(response.data);
         });
     }, []);

@@ -5,7 +5,7 @@ import config from "@config";
 import { Video } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function Videos({ entity_id }) {
 
@@ -22,7 +22,7 @@ export default function Videos({ entity_id }) {
 
     // Connect socket
     useEffect(() => {
-        videoSocketRef.current = io.connect("http://localhost:5041");
+        videoSocketRef.current = io.connect("http://localhost:5042");
 
         return () => {
             videoSocketRef.current.disconnect();
@@ -61,7 +61,7 @@ export default function Videos({ entity_id }) {
         });
 
         // Gets original video data
-        Axios.get(`${apiUrl}/entities/entity_videos/${entity_id}`).then((response) => {
+        Axios.get(`${serverUrl}/entities/entity_videos/${entity_id}`).then((response) => {
             setVideosData(sortData(response.data));
         });
     }, [entity_id]);

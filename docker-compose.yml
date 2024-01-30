@@ -8,8 +8,9 @@ services:
         depends_on:
             - backend
         ports:
-            - "5041:5041"
             - "5042:5042"
+        networks:
+            - main_network
 
     frontend:
         build:

@@ -6,7 +6,7 @@ import config from "@config";
 import { setIds, setPageState } from "../../../../redux/pageState/pageStateActions";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 /* 
     Description:   
@@ -25,7 +25,7 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
 
     // Gets sheet data from a given sheet_id
     useEffect(() => {
-        Axios.get(`${apiUrl}/sheets/${sheet_id}`).then((response) => {
+        Axios.get(`${serverUrl}/sheets/${sheet_id}`).then((response) => {
             setSheetData(response.data);
         });
     }, [sheet_id]);
@@ -50,7 +50,7 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
 
         if (type === "collection") {
             Axios.put(
-                `${apiUrl}/collections/collections_sheets_pinned`,
+                `${serverUrl}/collections/collections_sheets_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,
@@ -59,7 +59,7 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
             );
         } else if (type === "entity") {
             Axios.put(
-                `${apiUrl}/entities/entity_sheets_pinned`,
+                `${serverUrl}/entities/entity_sheets_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,
@@ -112,7 +112,7 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
 
     // Gets video data from a given video_id
     useEffect(() => {
-        Axios.get(`${apiUrl}/videos/${video_id}`).then((response) => {
+        Axios.get(`${serverUrl}/videos/${video_id}`).then((response) => {
             setVideoData(response.data);
         });
     }, [video_id]);
@@ -132,7 +132,7 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
 
         if (type === "collection") {
             Axios.put(
-                `${apiUrl}/collections/collections_videos_pinned`,
+                `${serverUrl}/collections/collections_videos_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,
@@ -141,7 +141,7 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
             );
         } else if (type === "entity") {
             Axios.put(
-                `${apiUrl}/entities/entity_videos_pinned`,
+                `${serverUrl}/entities/entity_videos_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,
@@ -232,7 +232,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
 
     // Gets image data from a given image_id
     useEffect(() => {
-        Axios.get(`${apiUrl}/images/${image_id}`).then((response) => {
+        Axios.get(`${serverUrl}/images/${image_id}`).then((response) => {
             setImageData(response.data);
         });
     }, [image_id]);
@@ -252,7 +252,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
 
         if (type === "collection") {
             Axios.put(
-                `${apiUrl}/collections/collections_images_pinned`,
+                `${serverUrl}/collections/collections_images_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,
@@ -261,7 +261,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
             );
         } else if (type === "entity") {
             Axios.put(
-                `${apiUrl}/entities/entity_images_pinned`,
+                `${serverUrl}/entities/entity_images_pinned`,
                 {
                     relation_id: relation_id,
                     pinned: newPinned,

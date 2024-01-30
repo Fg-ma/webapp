@@ -12,6 +12,4 @@ EXPOSE ${DB_PORT}
 
 EXPOSE ${SERVER_PORT}
 
-EXPOSE ${API_PORT}
-
 CMD [ "npm", "start" ]

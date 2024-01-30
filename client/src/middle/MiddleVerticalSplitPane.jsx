@@ -6,7 +6,7 @@ import RelatedIssues from "./content/RelatedIssues";
 import SheetViewer from "../components/viewers/SheetViewer";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -129,7 +129,7 @@ export default function MiddleVerticalSplitPane() {
             formData.append('file', selectedFile);
             
             Axios.put(
-                `${apiUrl}/videos_updating`,
+                `${serverUrl}/videos_updating`,
                 formData,
                 {
                     headers: {

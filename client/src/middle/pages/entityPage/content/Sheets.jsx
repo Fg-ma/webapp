@@ -5,7 +5,7 @@ import config from "@config";
 import { Sheet } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function Sheets({ entity_id, author_id}) {
 
@@ -22,7 +22,7 @@ export default function Sheets({ entity_id, author_id}) {
 
     // Connect socket
     useEffect(() => {
-        sheetSocketRef.current = io.connect("http://localhost:5041");
+        sheetSocketRef.current = io.connect("http://localhost:5042");
 
         return () => {
             sheetSocketRef.current.disconnect();
@@ -61,7 +61,7 @@ export default function Sheets({ entity_id, author_id}) {
         });
 
         // Gets original sheet data
-        Axios.get(`${apiUrl}/entities/entity_sheets/${entity_id}`).then((response) => {
+        Axios.get(`${serverUrl}/entities/entity_sheets/${entity_id}`).then((response) => {
             setSheetsData(sortData(response.data));
         });
     }, [entity_id]);

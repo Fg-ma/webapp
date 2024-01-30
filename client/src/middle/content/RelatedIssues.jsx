@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function RelatedIssues() {
     
@@ -18,7 +18,7 @@ export default function RelatedIssues() {
     const [coverSheet, setCoverSheet] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/sheets`).then((response) => {
+        Axios.get(`${serverUrl}/sheets`).then((response) => {
             setCoverSheet(response.data);
         });
     }, []);

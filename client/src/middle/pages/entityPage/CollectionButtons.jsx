@@ -4,7 +4,7 @@ import config from '@config';
 import CollectionButton from './CollectionButton';
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function CollectionButtons({ entityType, entity_id, entityPageRef }) {
 
@@ -19,7 +19,7 @@ export default function CollectionButtons({ entityType, entity_id, entityPageRef
     const [collectionNames, setCollectionNames] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/collections/collections_names`, {
+        Axios.get(`${serverUrl}/collections/collections_names`, {
             params: {
                 id: entity_id,
                 type: entityType,

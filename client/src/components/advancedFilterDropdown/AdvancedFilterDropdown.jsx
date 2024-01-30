@@ -6,7 +6,7 @@ import config from "@config";
 import FilterCard from "./FilterCard";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 const dropIconVar = {
     init: { 
@@ -64,19 +64,19 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
     // Gets the data for the filter cards
     useEffect(() => {
         if (subcategory == "ind") {
-            Axios.get(`${apiUrl}/individuals`).then((response) => {
+            Axios.get(`${serverUrl}/individuals`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Individuals--");
             setExpandedFilter("individual");
         } else if (subcategory == "grp") {
-            Axios.get(`${apiUrl}/groups`).then((response) => {
+            Axios.get(`${serverUrl}/groups`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Groups--");
             setExpandedFilter("group");
         } else if (subcategory == "org") {
-            Axios.get(`${apiUrl}/organizations`).then((response) => {
+            Axios.get(`${serverUrl}/organizations`).then((response) => {
                 setData(response.data);
             });
             setPlaceholder("--Organizations--");

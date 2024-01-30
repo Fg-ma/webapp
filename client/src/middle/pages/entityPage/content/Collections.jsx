@@ -5,7 +5,7 @@ import config from "@config";
 import { Sheet, Video, Image } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function Collections({ entity_id, collection_id }) {
 
@@ -22,7 +22,7 @@ export default function Collections({ entity_id, collection_id }) {
 
     // Connect socket
     useEffect(() => {
-        socketRef.current = io.connect("http://localhost:5041");
+        socketRef.current = io.connect("http://localhost:5042");
 
         return () => {
             socketRef.current.disconnect();
@@ -65,7 +65,7 @@ export default function Collections({ entity_id, collection_id }) {
         });
 
         // Gets original collection data
-        Axios.get(`${apiUrl}/collections/${collection_id}`).then((response) => {
+        Axios.get(`${serverUrl}/collections/${collection_id}`).then((response) => {
             setCollectionData(sortData(response.data));
         });
     }, [collection_id]);

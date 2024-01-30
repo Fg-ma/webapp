@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from '@config';
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function VideoViewer({ video_id }) {
 
@@ -15,7 +15,7 @@ export default function VideoViewer({ video_id }) {
     });
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/videos/get_full_video/${video_id}`).then((response) => {
+        Axios.get(`${serverUrl}/videos/get_full_video/${video_id}`).then((response) => {
             if (response.data[0]) {
                 const blobData = new Uint8Array(response.data[0].video_data.data);
                 const extension = response.data[0].video_filename.slice(-3).toLowerCase();

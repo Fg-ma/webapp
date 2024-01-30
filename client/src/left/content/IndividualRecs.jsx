@@ -4,7 +4,7 @@ import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function IndividualRecs() {
 
@@ -19,7 +19,7 @@ export default function IndividualRecs() {
     const [individuals, setIndividuals] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/individuals`).then((response) => {
+        Axios.get(`${serverUrl}/individuals`).then((response) => {
             setIndividuals(response.data);
         });
     }, []);

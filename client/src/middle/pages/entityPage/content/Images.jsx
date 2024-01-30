@@ -5,7 +5,7 @@ import config from "@config";
 import { Image } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function Images({ entity_id }) {
 
@@ -22,7 +22,7 @@ export default function Images({ entity_id }) {
 
     // Connect socket
     useEffect(() => {
-        imageSocketRef.current = io.connect("http://localhost:5041");
+        imageSocketRef.current = io.connect("http://localhost:5042");
 
         return () => {
             imageSocketRef.current.disconnect();
@@ -61,7 +61,7 @@ export default function Images({ entity_id }) {
         });
 
         // Gets original image data
-        Axios.get(`${apiUrl}/entities/entity_images/${entity_id}`).then((response) => {
+        Axios.get(`${serverUrl}/entities/entity_images/${entity_id}`).then((response) => {
             setImagesData(sortData(response.data));
         });
     }, [entity_id]);

@@ -18,6 +18,7 @@ const collectionsRouter = require("./routes/collections");
 const entitiesRouter = require("./routes/entities");
 const referencesRouter = require("./routes/references");
 const { db } = require("./database");
+const os = require('os');
 
 app.use(cors());
 app.use(express.json());
@@ -102,10 +103,11 @@ app.put("/images_updating", upload.single('file'), (req, res) => {
     );
 });
 
-server.listen(process.env.SERVER_PORT, () => {
-    console.log(`Server running on port ${process.env.SERVER_PORT}`);
+app.use('/', async (req, res) => {
+    console.log(`I am sending a response ${os.hostname()}`)
+    res.json({ message: 'Ok it wokrs...', hostname: os.hostname() })
 });
 
-app.listen(process.env.API_PORT, () => {
-    console.log(`API Server running on port ${process.env.API_PORT}`);
+server.listen(process.env.SERVER_PORT, () => {
+    console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);
 });

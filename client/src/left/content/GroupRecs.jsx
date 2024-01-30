@@ -4,7 +4,7 @@ import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function GroupRecs() {
 
@@ -19,7 +19,7 @@ export default function GroupRecs() {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${apiUrl}/groups`).then((response) => {
+        Axios.get(`${serverUrl}/groups`).then((response) => {
             setGroups(response.data);
         });
     }, []);

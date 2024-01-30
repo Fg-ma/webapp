@@ -4,7 +4,7 @@ import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const apiUrl = isDevelopment ? config.development.apiUrl : config.production.apiUrl;
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
 
 export default function OrganizationRecs() {
 
@@ -19,7 +19,7 @@ export default function OrganizationRecs() {
     const [organizations, setOrganizations] = useState([]);
     
     useEffect(() => {
-        Axios.get(`${apiUrl}/organizations`).then((response) => {
+        Axios.get(`${serverUrl}/organizations`).then((response) => {
             setOrganizations(response.data);
         });
     }, []); 
