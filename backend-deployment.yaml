@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: fgeqma/webapp:backend
+        ports:
+        - containerPort: 5042
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+          requests:
+            memory: "256Mi"
+            cpu: "100m"

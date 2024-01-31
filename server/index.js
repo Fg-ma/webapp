@@ -17,6 +17,7 @@ const imagesRouter = require("./routes/images");
 const collectionsRouter = require("./routes/collections");
 const entitiesRouter = require("./routes/entities");
 const referencesRouter = require("./routes/references");
+const authRouter = require("./routes/auth");
 const { db } = require("./database");
 const os = require('os');
 
@@ -43,6 +44,7 @@ app.use("/images", imagesRouter);
 app.use("/collections", collectionsRouter);
 app.use("/entities", entitiesRouter);
 app.use("/references", referencesRouter);
+app.use("/auth", authRouter);
 
 app.put("/sheets_updating", upload.single('file'), (req, res) => {
     const id = req.query.id;
