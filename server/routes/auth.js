@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
-//const { User } = require('../models'); // Adjust the import based on your user model
+const { db } = require("../database");
 
 router.post("/register", async (req, res) => {
     const { username, password } = req.body;

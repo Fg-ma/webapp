@@ -8,6 +8,7 @@ const intialState = {
                 individual_id: null,
                 group_id: null,
                 organization_id: null,
+                paper_id: null,
                 sheet_id: null,
                 video_id: null,
                 image_id: null,
@@ -21,7 +22,7 @@ const intialState = {
     },
     right: {
         pagePayload: {
-            pageState: "news",
+            pageState: "papers",
         },
     },
     individuals: {

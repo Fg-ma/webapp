@@ -134,7 +134,7 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                     {page !== 'messages' ? (
                         <div>
                             <div className="flex flex-col space-y-2">
-                                {page === 'news' || page === 'explore' ? (
+                                {page === 'news' || page === 'explore' || page === 'papers' ? (
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"
@@ -176,7 +176,7 @@ export default function RightSearchFilter({ page, rightSpaceFilterGeometry, refs
                                         <span className="text-base ml-2 font-K2D">Affiliate Activity</span>
                                     </motion.label>
                                 </div>
-                                {page === 'news' || page === 'explore' ? (
+                                {page === 'news' || page === 'explore' || page === 'papers' ? (
                                     <div className="flex items-center">
                                         <input 
                                             type="checkbox"

@@ -21,15 +21,8 @@ export default function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const middleSpaceContainerRef = useRef(null);
 
-    const handleLogin = () => {
-        // Implement your login logic here (e.g., API call)
-        // If login is successful, setLoggedIn(true)
-        // Otherwise, display an error message
-        // You may use a state variable to handle the login status
-    };
-
     if (!isLoggedIn) {
-        return <LoginScreen onLogin={handleLogin} />;
+        return <LoginScreen />;
     };
 
     return (

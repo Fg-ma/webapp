@@ -50,6 +50,30 @@ const initialState = {
         },
         appliedFilterOptions: null,
     },
+    papers: {
+        isDropFilter: false,
+        filterPayload: {
+            isWhatsCurrent: false,
+            isAffiliateActivity: false,
+            isAllTimeGreats: false,
+            isDatePosted: false,
+            isDatePostedSwitched: false,
+            isPopularity: false,
+            isPopularitySwitched: false,
+            isAdvancedSearch: false,
+            affiliatedFilters: {
+                ind: [],
+                grp: [],
+                org: [],
+            },
+            author: '',
+            dateRange: {
+                from: '',
+                to: '',
+            },
+        },
+        appliedFilterOptions: null,
+    },
     explore: {
         isDropFilter: false,
         filterPayload: {

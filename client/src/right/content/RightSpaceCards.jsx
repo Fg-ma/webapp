@@ -10,6 +10,26 @@ import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
         N/A
 */
 
+export function PapersCard({ paper_id = null, title, subject }) {
+
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(setPageState('main', 'papers'));
+        dispatch(setIds('main', 'paper_id', paper_id));
+    };
+
+    return (
+        <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md" onClick={handleClick}>
+            <img></img>
+            <div className="m-2 w-2/3 space-y-1">
+                <p className="font-Josefin text-lg font-bold line-clamp-2">{title}</p>
+                <p className="font-Josefin text-base text-fg-black-30 line-clamp-2">{subject}</p>
+            </div>
+        </div>
+    )
+}
+
 export function NewsCard({ sheet_id = null, title, subject, affResponses = null }) {
 
     const dispatch = useDispatch();

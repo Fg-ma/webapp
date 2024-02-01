@@ -7,6 +7,7 @@ import NewsCards from "./content/NewsCards";
 import ExploreCards from "./content/ExploreCards";
 import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
+import PapersCards from "./content/PapersCards";
 
 export default function RightSpace() {
 
@@ -22,6 +23,8 @@ export default function RightSpace() {
 
     const renderContent = () => {
         switch (rightPage) {
+            case "papers":
+                return <PapersCards />;
             case "news":
                 return <NewsCards />;
             case "explore":

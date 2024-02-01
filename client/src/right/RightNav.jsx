@@ -49,6 +49,7 @@ export default function RightNav() {
         paddingBottom: "0.25rem",
     };
     const rightStyles = {
+        papers: deactiveStyles,
         news: deactiveStyles,
         explore: deactiveStyles,
         messages: deactiveStyles,
@@ -65,6 +66,16 @@ export default function RightNav() {
     return (
         <nav id="rightNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
             <div className="flex divide-x-2 divide-fg-white-70 h-full">
+                <motion.div 
+                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                    variants={navButtonsVar}
+                    initial="init"
+                    whileHover="hover"
+                    transition={navButtonsVar.transition}
+                    onClick={() => swapRightState('papers')}
+                >
+                    <button className="w-full" style={rightStyles["papers"]}>Papers</button>
+                </motion.div>
                 <motion.div 
                     className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
                     variants={navButtonsVar}
@@ -91,16 +102,6 @@ export default function RightNav() {
                     initial="init"
                     whileHover="hover"
                     transition={navButtonsVar.transition}
-                    onClick={() => swapRightState('messages')}
-                >
-                    <button className="w-full" style={rightStyles["messages"]}>Messages</button>
-                </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
-                    variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
-                    transition={navButtonsVar.transition}
                     onClick={() => swapRightState('dogEars')}
                 >
                     <button className="w-full" style={rightStyles["dogEars"]}>Dog-Ears</button>
@@ -109,3 +110,14 @@ export default function RightNav() {
         </nav>
     );
 }
+
+//<motion.div 
+//    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+//    variants={navButtonsVar}
+//    initial="init"
+//    whileHover="hover"
+//    transition={navButtonsVar.transition}
+//    onClick={() => swapRightState('messages')}
+//>
+//    <button className="w-full" style={rightStyles["messages"]}>Messages</button>
+//</motion.div>
