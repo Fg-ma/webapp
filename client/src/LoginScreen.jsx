@@ -1,33 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
+import config from "@config";
 
-export default function LoginScreen({ onLogin }) {
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+
+export default function LoginScreen({ setLoggedIn }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
+            const response = await Axios.post(`${serverUrl}/auth/login`, {
+                username: username,
+                password: password,
             });
-          
-            const data = await response.json();
-          
-            if (response.ok) {
-                // Save the token in local storage or state for future requests
+        
+            const data = response.data;
+            console.log(data);
+    
+            if (data.success) {
                 localStorage.setItem('token', data.token);
+
+                Axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
+                setLoggedIn(true);
             } else {
-                // Handle login failure
                 console.error(data.message);
-            }
+            };
         } catch (error) {
             console.error('Error during login:', error);
         };
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        console.log(token);
+        const validateToken = async () => {
+            try {
+                if (token) {
+                    // Make a request to validate the token
+                    const response = await Axios.post(`${serverUrl}/auth/validate-token`, {
+                        token: token,
+                    });
+
+                    console.log(response)
+    
+                    const data = response.data;
+    
+                    if (data.success) {
+                        // Token is valid, set user as logged in
+                        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                        setLoggedIn(true);
+                    } else {
+                        // Token is not valid, clear it from local storage
+                        //localStorage.removeItem('token');
+                    }
+                }
+            } catch (error) {
+                console.error('Error validating token:', error);
+            }
+        };
+    
+        validateToken();
+    }, []);
+    
     return (
         <div className="w-screen h-screen flex py-24 px-60">
             <div className="w-7/12 h-full flex items-center justify-start">
@@ -44,14 +81,14 @@ export default function LoginScreen({ onLogin }) {
                         <div className="w-5/12 h-0.5 bg-fg-white-65"></div>
                     </div>
                     <div className="w-full px-10">
-                        <div className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-black-25 text-white p-1 mb-6" onClick={handleLoginClick}>
+                        <div className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-black-25 text-white p-1 mb-6 cursor-pointer" onClick={handleLogin}>
                             <div className="bg-white rounded-full w-full h-full p-0.5">
                                 <div className="bg-fg-black-25 rounded-full w-full h-full text-center pt-1">
                                     Sign in with Google
                                 </div>
                             </div>
                         </div>
-                        <div className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-primary text-white p-1 mb-6" onClick={handleLoginClick}>
+                        <div className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-primary text-white p-1 mb-6 cursor-pointer" onClick={handleLogin}>
                             <div className="bg-white rounded-full w-full h-full p-0.5">
                                 <div className="bg-fg-primary rounded-full w-full h-full text-center pt-1">
                                     Sign in
@@ -66,7 +103,7 @@ export default function LoginScreen({ onLogin }) {
                         <p className="text-base mb-4">All it takes is a username and password!</p>
                     </div>
                     <div className="w-full px-10">
-                        <button className="border-2 border-fg-primary rounded-full h-14 w-full text-2xl font-K2D">Create an account</button>
+                        <button className="border-2 border-fg-primary rounded-full h-14 w-full text-2xl font-K2D cursor-pointer">Create an account</button>
                     </div>
                 </div>
             </div>

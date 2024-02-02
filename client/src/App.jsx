@@ -22,7 +22,7 @@ export default function App() {
     const middleSpaceContainerRef = useRef(null);
 
     if (!isLoggedIn) {
-        return <LoginScreen />;
+        return <LoginScreen setLoggedIn={setLoggedIn} />;
     };
 
     return (
