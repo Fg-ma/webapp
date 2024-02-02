@@ -35,34 +35,18 @@ export default function LoginScreen({ setLoggedIn }) {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log(token);
-        const validateToken = async () => {
-            try {
-                if (token) {
-                    // Make a request to validate the token
-                    const response = await Axios.post(`${serverUrl}/auth/validate-token`, {
-                        token: token,
-                    });
 
-                    console.log(response)
-    
-                    const data = response.data;
-    
-                    if (data.success) {
-                        // Token is valid, set user as logged in
-                        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                        setLoggedIn(true);
-                    } else {
-                        // Token is not valid, clear it from local storage
-                        //localStorage.removeItem('token');
-                    }
-                }
-            } catch (error) {
-                console.error('Error validating token:', error);
+        Axios.post(`${serverUrl}/auth/validate_token`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-        };
+        }).then(response => {
+            console.log(response.data);
+            setLoggedIn(true);
+        }).catch(error => {
+            console.error('Error validating token:', error);
+        });
     
-        validateToken();
     }, []);
     
     return (

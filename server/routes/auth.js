@@ -5,10 +5,16 @@ const jwt = require('jsonwebtoken');
 const { db } = require("../database");
 
 const verifyToken = (req, res, next) => {
-    const token = req.header("Authorization");
+    const authHeader = req.header("Authorization");
 
-    if (!token) {
-        return res.status(403).json({ message: "Access denied" });
+    if (!authHeader) {
+        return res.status(403).json({ message: "Access denied - No Authorization header" });
+    }
+
+    const [bearer, token] = authHeader.split(" ");
+
+    if (bearer !== "Bearer" || !token) {
+        return res.status(401).json({ message: "Invalid token format" });
     }
 
     jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
@@ -57,9 +63,8 @@ router.post("/login", async (req, res) => {
     });
 });
 
-// Protected route example
-router.get("/validate-token", verifyToken, (req, res) => {
-    res.json({ message: "This is a protected route", user: req.user });
+router.post("/validate_token", verifyToken, (req, res) => {
+    res.json({ message: "Token is valid", user: req.user });
 });
 
 module.exports = router;
