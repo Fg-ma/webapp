@@ -1,6 +1,12 @@
-import { SET_PAGE_STATE, SET_IDS } from "./pageStateTypes";
+import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
 
 const intialState = {
+    login: {
+        pagePayload: {
+            pageState: "login",
+            isLoggedIn: false,
+        },
+    },
     main: {
         pagePayload: {
             pageState: "home",
@@ -55,6 +61,7 @@ export default function pageStateReducer(state = intialState, action) {
     switch (action.type) {
         case SET_PAGE_STATE: {
             const { page, newState } = action.payload;
+
             return {
                 ...state,
                 [page]: {
@@ -69,6 +76,7 @@ export default function pageStateReducer(state = intialState, action) {
 
         case SET_IDS: {
             const { page, id, value} = action.payload;
+
             return {
                 ...state,
                 [page]: {
@@ -79,6 +87,21 @@ export default function pageStateReducer(state = intialState, action) {
                             ...intialState[page].pagePayload.ids,
                             [id]: value,
                         },
+                    },
+                },
+            };
+        }
+
+        case SET_LOGGED_IN: {
+            const { isLoggedIn } = action.payload;
+            
+            return {
+                ...state,
+                login: {
+                    ...state.login,
+                    pagePayload: {
+                        ...state.login.pagePayload,
+                        isLoggedIn: isLoggedIn,
                     },
                 },
             };

@@ -8,19 +8,19 @@ const verifyToken = (req, res, next) => {
     const authHeader = req.header("Authorization");
 
     if (!authHeader) {
-        return res.status(403).json({ message: "Access denied - No Authorization header" });
+        return;
     }
 
     const [bearer, token] = authHeader.split(" ");
 
     if (bearer !== "Bearer" || !token) {
-        return res.status(401).json({ message: "Invalid token format" });
-    }
+        return;
+    };
 
     jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
         if (err) {
-            return res.status(401).json({ message: "Invalid token" });
-        }
+            return;
+        };
 
         req.user = user;
         next();
@@ -28,10 +28,10 @@ const verifyToken = (req, res, next) => {
 };
 
 router.post("/register", async (req, res) => {
-    const { username, password } = req.body;
+    const { newUserUsername, newUserPassword } = req.body;
 
     // Hash the password before saving to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(newUserPassword, 10);
 
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
         } else {
             if (results.length > 0) {
                 // Authentication successful, generate token
-                const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: '1h' });
+                const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: '1m' });
 
                 res.json({ success: true, token });
             } else {

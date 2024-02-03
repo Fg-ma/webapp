@@ -1,12 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
 import PageNav from "./middle/PageNav";
 import LoginScreen from "./LoginScreen";
+import CreateAccount from "./CreateAccount";
 import './app.css';
 import './scrollbar.css';
-import './filterSwitches.css'
+import './filterSwitches.css';
 
 export default function App() {
 
@@ -18,11 +20,17 @@ export default function App() {
             so it can reference its width and set its own width to be 80% of that.
     */
 
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const isLoggedIn = useSelector((state) => state.page.login.pagePayload.isLoggedIn);
+    const loginPageState = useSelector((state) => state.page.login.pagePayload.pageState);
     const middleSpaceContainerRef = useRef(null);
 
     if (!isLoggedIn) {
-        return <LoginScreen setLoggedIn={setLoggedIn} />;
+        switch (loginPageState) {
+            case "login":
+                return <LoginScreen />;
+            case "createAccount":
+                return <CreateAccount />;
+        };
     };
 
     return (
