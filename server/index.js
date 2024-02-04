@@ -105,11 +105,6 @@ app.put("/images_updating", upload.single('file'), (req, res) => {
     );
 });
 
-app.use('/', async (req, res) => {
-    console.log(`I am sending a response ${os.hostname()}`)
-    res.json({ message: 'Ok it wokrs...', hostname: os.hostname() })
-});
-
 server.listen(process.env.SERVER_PORT, () => {
     console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);
 });

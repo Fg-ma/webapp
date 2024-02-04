@@ -1,0 +1,276 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model collections {
+  collection_id      Int                  @id @unique(map: "collection_id_UNIQUE") @default(autoincrement())
+  collection_name    String               @db.VarChar(256)
+  individual_id      Int?
+  group_id           Int?
+  organization_id    Int?
+  individuals        individuals?         @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_individual_id_fk")
+  organizations      organizations?       @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_organization_id_fk")
+  groups             groups?              @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "colllections_group_id_fk")
+  collections_images collections_images[]
+  collections_sheets collections_sheets[]
+  collections_videos collections_videos[]
+
+  @@index([group_id], map: "group_id_fk_idx")
+  @@index([individual_id], map: "individual_id_fk_idx")
+  @@index([organization_id], map: "organization_id_fk_idx")
+}
+
+model collections_images {
+  collections_images_id Int         @id @unique(map: "collections_images_id_UNIQUE") @default(autoincrement())
+  collection_id         Int
+  image_id              Int
+  date_added            DateTime    @db.Timestamp(0)
+  pinned                Boolean
+  date_pinned           DateTime?   @db.Timestamp(0)
+  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_collection_id_fk")
+  images                images      @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_image_id")
+
+  @@index([collection_id], map: "collections_images_collection_id_fk_idx")
+  @@index([image_id])
+}
+
+model collections_sheets {
+  collections_sheets_id Int         @id @unique(map: "collections_sheets_id_UNIQUE") @default(autoincrement())
+  collection_id         Int
+  sheet_id              Int
+  date_added            DateTime    @db.Timestamp(0)
+  pinned                Boolean
+  date_pinned           DateTime?   @db.Timestamp(0)
+  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_sheets_collection_id_fk")
+  sheets                sheets      @relation(fields: [sheet_id], references: [sheet_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_sheets_sheet_id_fk")
+
+  @@index([collection_id], map: "collections_sheets_collection_id_fk_idx")
+  @@index([sheet_id], map: "collections_sheets_sheet_id_fk_idx")
+}
+
+model collections_videos {
+  collections_videos_id Int         @id @unique(map: "collections_videos_id_UNIQUE") @default(autoincrement())
+  collection_id         Int
+  video_id              Int
+  date_added            DateTime    @db.Timestamp(0)
+  pinned                Boolean
+  date_pinned           DateTime?   @db.Timestamp(0)
+  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_videos_collection_id_fk")
+  videos                videos      @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_videos_video_id_fk")
+
+  @@index([collection_id], map: "collections_videos_collection_id_fk_idx")
+  @@index([video_id], map: "collections_videos_video_id_fk_idx")
+}
+
+model entities {
+  entity_id       Int               @id @unique(map: "entity_id_UNIQUE") @default(autoincrement())
+  individual_id   Int?
+  group_id        Int?
+  organization_id Int?
+  groups          groups?           @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_group_id_fk")
+  individuals     individuals?      @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_individual_id_fk")
+  organizations   organizations?    @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_organization_id_fk")
+  entities_images entities_images[]
+  entities_sheets entities_sheets[]
+  entities_videos entities_videos[]
+
+  @@index([group_id], map: "entities_groups_id_fk_idx")
+  @@index([individual_id], map: "entities_individual_id_fk_idx")
+  @@index([organization_id], map: "entities_organization_id_fk_idx")
+}
+
+model entities_images {
+  entities_images_id Int       @id @unique(map: "entities_images_id_UNIQUE") @default(autoincrement())
+  entity_id          Int
+  image_id           Int
+  date_added         DateTime  @db.Timestamp(0)
+  pinned             Boolean
+  date_pinned        DateTime? @db.Timestamp(0)
+  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_images_entity_id_fk")
+  images             images    @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_images_image_id_fk")
+
+  @@index([entity_id], map: "entities_images_entity_id_fk_idx")
+  @@index([image_id], map: "entities_images_image_id_fk_idx")
+}
+
+model entities_references {
+  reference_id    Int            @id @unique(map: "reference_id_UNIQUE") @default(autoincrement())
+  individual_id   Int?
+  group_id        Int?
+  organization_id Int?
+  title           String         @db.VarChar(256)
+  author          String         @db.VarChar(256)
+  url             String         @db.VarChar(256)
+  groups          groups?        @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_group_id_fk")
+  individuals     individuals?   @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_individual_id_fk")
+  organizations   organizations? @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_organization_id_fk")
+
+  @@index([group_id], map: "entities_references_group_id_fk_idx")
+  @@index([individual_id], map: "entities_references_individual_id_fk")
+  @@index([organization_id], map: "entities_references_organization_id_fk_idx")
+}
+
+model entities_sheets {
+  entities_sheets_id Int       @id @unique(map: "entities_sheets_id_UNIQUE") @default(autoincrement())
+  entity_id          Int
+  sheet_id           Int
+  date_added         DateTime  @db.Timestamp(0)
+  pinned             Boolean
+  date_pinned        DateTime? @db.Timestamp(0)
+  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_sheets_entity_id")
+  sheets             sheets    @relation(fields: [sheet_id], references: [sheet_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_sheets_sheet_id")
+
+  @@index([entity_id])
+  @@index([sheet_id])
+}
+
+model entities_videos {
+  entities_videos_id Int       @id @unique(map: "entities_videos_id_UNIQUE") @default(autoincrement())
+  entity_id          Int
+  video_id           Int
+  date_added         DateTime  @db.Timestamp(0)
+  pinned             Boolean
+  date_pinned        DateTime? @db.Timestamp(0)
+  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_videos_entity_id_fk")
+  videos             videos    @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_videos_video_id_fk")
+
+  @@index([entity_id], map: "entities_videos_entity_id_fk_idx")
+  @@index([video_id], map: "entities_videos_video_id_fk_idx")
+}
+
+model groups {
+  group_id            Int                   @id @unique(map: "group_id_UNIQUE") @default(autoincrement())
+  group_handle        String                @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
+  group_name          String                @db.VarChar(256)
+  group_currentIssue  String?               @db.Text
+  group_stances       String?               @db.Text
+  group_description   String?               @db.Text
+  collections         collections[]
+  entities            entities[]
+  entities_references entities_references[]
+  groups_members      groups_members[]
+}
+
+model groups_members {
+  group_id      Int
+  individual_id Int
+  groups        groups      @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_group_id_fk")
+  individuals   individuals @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_individual_id_fk")
+
+  @@id([group_id, individual_id])
+  @@index([individual_id], map: "groups_members_individual_id_fk")
+}
+
+model images {
+  image_id           Int                  @id @unique(map: "image_id_UNIQUE") @default(autoincrement())
+  image_creator_id   Int
+  image_title        String               @db.VarChar(256)
+  image_description  String               @db.Text
+  image_filename     String               @db.VarChar(256)
+  image_data_id      Int
+  collections_images collections_images[]
+  entities_images    entities_images[]
+  individuals        individuals          @relation(fields: [image_creator_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
+  images_data        images_data          @relation(fields: [image_data_id], references: [image_data_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_data_id_fk")
+
+  @@index([image_creator_id], map: "image_creator_id_fk_idx")
+  @@index([image_data_id], map: "images_image_data_id_fk_idx")
+}
+
+model images_data {
+  image_data_id Int      @id @unique(map: "image_data_id_UNIQUE") @default(autoincrement())
+  image_data    Bytes
+  images        images[]
+}
+
+model individuals {
+  individual_id           Int                     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  individual_userName     String                  @unique(map: "userName_UNIQUE") @db.VarChar(256)
+  individual_name         String                  @db.VarChar(256)
+  individual_currentIssue String?                 @db.Text
+  individual_roles        String?                 @db.Text
+  individual_description  String?                 @db.Text
+  collections             collections[]
+  entities                entities[]
+  entities_references     entities_references[]
+  groups_members          groups_members[]
+  images                  images[]
+  organizations_members   organizations_members[]
+  sheets                  sheets[]
+  videos                  videos[]
+}
+
+model organizations {
+  organization_id           Int                     @id @unique(map: "organization_id_UNIQUE") @default(autoincrement())
+  organization_handle       String                  @unique(map: "organization_handle_UNIQUE") @db.VarChar(256)
+  organization_name         String                  @db.VarChar(256)
+  organization_currentIssue String?                 @db.Text
+  organization_stances      String?                 @db.Text
+  organization_description  String?                 @db.Text
+  collections               collections[]
+  entities                  entities[]
+  entities_references       entities_references[]
+  organizations_members     organizations_members[]
+}
+
+model organizations_members {
+  organization_id Int
+  individual_id   Int
+  individuals     individuals   @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_individual_id_fk")
+  organizations   organizations @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_organization_id_fk")
+
+  @@id([organization_id, individual_id])
+  @@index([individual_id], map: "organizations_members_individual_id_fk")
+}
+
+model sheets {
+  sheet_id           Int                  @id @unique(map: "cover_sheet_id_UNIQUE") @default(autoincrement())
+  sheet_author_id    Int
+  sheet_title        String               @db.VarChar(256)
+  sheet_subject      String               @db.Text
+  sheet_filename     String?              @db.VarChar(256)
+  sheet_data         Bytes
+  collections_sheets collections_sheets[]
+  entities_sheets    entities_sheets[]
+  individuals        individuals          @relation(fields: [sheet_author_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
+
+  @@index([sheet_author_id], map: "sheets_sheet_author_id_fk")
+}
+
+model user_credentials {
+  user_id           Int     @id @unique(map: "user_id_UNIQUE") @default(autoincrement())
+  username          String  @unique(map: "username_UNIQUE") @db.VarChar(128)
+  user_password     String  @db.VarChar(128)
+  user_first_name   String? @db.VarChar(128)
+  user_last_name    String? @db.VarChar(128)
+  user_email        String? @db.VarChar(128)
+  user_phone_number String? @db.VarChar(15)
+}
+
+model videos {
+  video_id           Int                  @id @unique(map: "video_id_UNIQUE") @default(autoincrement())
+  video_creator_id   Int
+  video_title        String               @db.VarChar(256)
+  video_description  String               @db.Text
+  video_filename     String               @db.VarChar(256)
+  video_data_id      Int
+  collections_videos collections_videos[]
+  entities_videos    entities_videos[]
+  individuals        individuals          @relation(fields: [video_creator_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
+  videos_data        videos_data          @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
+
+  @@index([video_creator_id], map: "video_creator_fk_idx")
+  @@index([video_data_id], map: "videos_video_data_id_fk_idx")
+}
+
+model videos_data {
+  video_data_id Int      @id @unique(map: "videos_data_id_UNIQUE") @default(autoincrement())
+  video_data    Bytes
+  videos        videos[]
+}

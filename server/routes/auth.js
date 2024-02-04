@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
             if (err) {
                 res.status(500).send("Internal Server Error");
             } else {
-                const token = jwt.sign({ username: newUserUsername }, process.env.TOKEN_KEY, { expiresIn: '1m' });
+                const token = jwt.sign({ username: newUserUsername }, process.env.TOKEN_KEY, { expiresIn: process.env.TOKEN_TIME_OUT });
                 res.status(201).json({ success: true, token });
             }
         }
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
                 const match = await bcrypt.compare(password, results[0].user_password);
 
                 if (match) {
-                    const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: '1m' });
+                    const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: process.env.TOKEN_TIME_OUT });
                     res.json({ success: true, token });
                 } else {
                     res.json({ success: false });
