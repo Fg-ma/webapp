@@ -30,33 +30,47 @@ const verifyToken = (req, res, next) => {
 router.post("/register", async (req, res) => {
     const { newUserUsername, newUserPassword } = req.body;
 
-    // Hash the password before saving to the database
     const hashedPassword = await bcrypt.hash(newUserPassword, 10);
 
-    const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully' });
+    db.query(
+        `
+        INSERT INTO user_credentials (username, user_password)
+        VALUES (?, ?);
+        `,
+        [newUserUsername, hashedPassword],
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Internal Server Error");
+            } else {
+                const token = jwt.sign({ username: newUserUsername }, process.env.TOKEN_KEY, { expiresIn: '1m' });
+                res.status(201).json({ success: true, token });
+            }
+        }
+    );
 });
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     
-    // Query the database for the user
-    const query = 'SELECT * FROM user_credentials WHERE username = ? AND user_password = ?';
+    const query = 'SELECT * FROM user_credentials WHERE username = ?';
     
-    db.query(query, [username, password], (err, results) => {
+    db.query(query, [username], async (err, results) => {
         if (err) {
             console.error('MySQL query error:', err);
             res.status(500).json({ message: 'Internal Server Error' });
         } else {
             if (results.length > 0) {
-                // Authentication successful, generate token
-                const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: '1m' });
+                
+                const match = await bcrypt.compare(password, results[0].user_password);
 
-                res.json({ success: true, token });
+                if (match) {
+                    const token = jwt.sign({ username: results[0].username }, process.env.TOKEN_KEY, { expiresIn: '1m' });
+                    res.json({ success: true, token });
+                } else {
+                    res.json({ success: false });
+                }
             } else {
-                // Authentication failed
+                // User not found
                 res.json({ success: false });
             }
         }

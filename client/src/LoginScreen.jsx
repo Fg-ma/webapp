@@ -54,11 +54,11 @@ export default function LoginScreen() {
             }).then(response => {
                 dispatch(setLoggedIn(true));
             }).catch(error => {
-                console.error('Error validating token:', error);
+                return;
             });
         } catch (error) {
-            console.error('Unexpected error:', error);
-        }
+            return;
+        };
     }, []);
     
     return (

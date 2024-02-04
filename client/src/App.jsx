@@ -5,7 +5,7 @@ import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
 import PageNav from "./middle/PageNav";
 import LoginScreen from "./LoginScreen";
-import CreateAccount from "./CreateAccount";
+import CreateAccountScreen from "./CreateAccountScreen";
 import './app.css';
 import './scrollbar.css';
 import './filterSwitches.css';
@@ -29,7 +29,7 @@ export default function App() {
             case "login":
                 return <LoginScreen />;
             case "createAccount":
-                return <CreateAccount />;
+                return <CreateAccountScreen />;
         };
     };
 

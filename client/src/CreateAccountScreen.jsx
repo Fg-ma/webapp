@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import Axios from 'axios';
+import config from "@config";
 import { setPageState, setLoggedIn } from './redux/pageState/pageStateActions';
 
-export default function CreateAccount() {
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+
+export default function CreateAccountScreen() {
 
     const dispatch = useDispatch();
 
@@ -20,6 +25,7 @@ export default function CreateAccount() {
 
         if (newUserPassword != newUserConfirmPassword) {
             setPasswordMatchingError(true);
+            return;
         };
 
         try {
@@ -29,13 +35,16 @@ export default function CreateAccount() {
             });
 
             const data = response.data;
-            console.log(data)
 
             if (data.success) {
+                localStorage.setItem('token', data.token);
+
+                Axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
                 dispatch(setLoggedIn(true));
             };
         } catch (error) {
-            console.error('Error during login:', error);
+            return;
         };
     };
 
@@ -46,13 +55,13 @@ export default function CreateAccount() {
                     <p className="text-5xl mb-12">Webapp</p>
                     <input className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4" placeholder="Username" type="text" value={newUserUsername} onChange={(e) => setNewUserUsername(e.target.value)} />
                     <input className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4" placeholder="Password" type="password" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} />
-                    <input className={`text-xl font-K2D h-12 w-full rounded bg-fg-white-95 pl-4 ${passwordMatchingError ? "mb-1" : "mb-6"}`} placeholder="Confirm Password" type="password" value={newUserConfirmPassword} onChange={(e) => setNewUserConfirmPassword(e.target.value)} />
+                    <input className={`text-xl font-K2D h-12 w-full rounded bg-fg-white-95 pl-4 ${passwordMatchingError ? "mb-0" : "mb-5"}`} placeholder="Confirm Password" type="password" value={newUserConfirmPassword} onChange={(e) => setNewUserConfirmPassword(e.target.value)} />
                     <div className='w-full items-start justify-center'>
                         {passwordMatchingError && (
                             <p className='text-sm font-K2D text-red-400'>Passwords don't match</p>
                         )}
                     </div>
-                    <div className="w-full flex justify-center items-center mb-6">
+                    <div className="w-full flex justify-center items-center mb-4">
                         <div className="w-5/12 h-0.5 bg-fg-white-65"></div>
                         <p className="w-1/6 text-xl text-center pb-1">or</p>
                         <div className="w-5/12 h-0.5 bg-fg-white-65"></div>
@@ -73,7 +82,7 @@ export default function CreateAccount() {
                                     </div>
                                 </div>
                             </div>
-                            <a href="https://www.example.com" className='text-lg italic mt-1'>Our terms and policies</a>
+                            <a href="https://www.example.com" className='text-lg italic mt-1'>Readable terms and policies</a>
                         </div>
                     </div>
                 </div>
