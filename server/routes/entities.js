@@ -1,173 +1,168 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
 // Get entity data from entity type and entity id
-router.get("/entity", (req, res) => {
-    const id = req.query.id;
+router.get("/entity", async (req, res) => {
+    const id = parseInt(req.query.id, 10);
     const type = req.query.type;
 
-    let query;
-    if (type === "individuals") {
-        query = "SELECT entities.entity_id FROM entities WHERE entities.individual_id = ?;";
-    } else if (type === "groups") {
-        query = "SELECT entities.entity_id FROM entities WHERE entities.group_id = ?;";
-    } else if (type === "organizations") {
-        query = "SELECT entities.entity_id FROM entities WHERE entities.organization_id = ?;";
-    };
+    try {
+        let entities;
 
-    db.query(query, [id], (err, result) => {
-        if (err) {
-          res.status(500).send("Internal Server Error");
-        } else {
-          res.send(result);
-        };
-    });
+        if (type === "individuals") {
+            entities = await req.db.entities.findMany({
+                where: {
+                    individual_id: id,
+                },
+            });
+        } else if (type === "groups") {
+            entities = await req.db.entities.findMany({
+                where: {
+                    group_id: id,
+                },
+            });
+        } else if (type === "organizations") {
+            entities = await req.db.entities.findMany({
+                where: {
+                    organization_id: id,
+                },
+            });
+        }
+
+        res.send(entities);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Get all the sheets belonging to an entity
-router.get("/entity_sheets/:entity_id", (req, res) => {
-    const entity_id = req.params.entity_id;
-  
-    db.query(
-        `SELECT 
-            entities.entity_id,
-	        entities_sheets.date_added AS 'date_added',
-            CAST(entities_sheets.pinned AS SIGNED) AS 'pinned',
-            entities_sheets.date_pinned AS 'date_pinned',
-            entities_sheets.entities_sheets_id,
-            sheets.sheet_id,
-            sheets.sheet_author_id,
-            sheets.sheet_title,
-            sheets.sheet_subject
-        FROM entities
-        LEFT JOIN entities_sheets ON entities.entity_id = entities_sheets.entity_id
-        LEFT JOIN sheets ON entities_sheets.sheet_id = sheets.sheet_id
-        WHERE entities.entity_id = ?;`,
-        [entity_id],
-        (err, result) => {
-            if (err) {
-              res.status(500).send("Internal Server Error");
-            } else {
-              res.send(result);
-            };
-        }
-    );
+router.get("/entity_sheets/:entity_id", async (req, res) => {
+    const entity_id = parseInt(req.params.entity_id, 10);
+    
+    try {
+        const result = await req.db.entities_sheets.findMany({
+            where: {
+                entity_id: entity_id,
+            },
+            include: {
+                sheets: true,
+            },
+        });
+        
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Get all the videos belonging to an entity
-router.get("/entity_videos/:entity_id", (req, res) => {
-    const entity_id = req.params.entity_id;
-  
-    db.query(
-        `SELECT 
-            entities.entity_id,
-	        entities_videos.date_added AS 'date_added',
-            CAST(entities_videos.pinned AS SIGNED) AS 'pinned',
-            entities_videos.date_pinned AS 'date_pinned',
-            entities_videos.entities_videos_id,
-            videos.video_id,
-            videos.video_title,
-            videos.video_creator_id
-        FROM entities
-        LEFT JOIN entities_videos ON entities.entity_id = entities_videos.entity_id
-        LEFT JOIN videos ON entities_videos.video_id = videos.video_id
-        WHERE entities.entity_id = ?;`,
-        [entity_id],
-        (err, result) => {
-            if (err) {
-              res.status(500).send("Internal Server Error");
-            } else {
-              res.send(result);
-            };
-        }
-    );
+router.get("/entity_videos/:entity_id", async (req, res) => {
+    const entity_id = parseInt(req.params.entity_id, 10);
+
+    try {
+        const result = await req.db.entities_videos.findMany({
+            where: {
+                entity_id: entity_id,
+            },
+            include: {
+                videos: true,
+            },
+        });
+        
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Get all the images belonging to an entity
-router.get("/entity_images/:entity_id", (req, res) => {
-    const entity_id = req.params.entity_id;
-  
-    db.query(
-        `SELECT 
-            entities.entity_id,
-	        entities_images.date_added AS 'date_added',
-            CAST(entities_images.pinned AS SIGNED) AS 'pinned',
-            entities_images.date_pinned AS 'date_pinned',
-            entities_images.entities_images_id,
-            images.image_id,
-            images.image_title,
-            images.image_description
-        FROM entities
-        LEFT JOIN entities_images ON entities.entity_id = entities_images.entity_id
-        LEFT JOIN images ON entities_images.image_id = images.image_id
-        WHERE entities.entity_id = ?;`,
-        [entity_id],
-        (err, result) => {
-            if (err) {
-              res.status(500).send("Internal Server Error");
-            } else {
-              res.send(result);
-            };
-        }
-    );
+router.get("/entity_images/:entity_id", async (req, res) => {
+    const entity_id = parseInt(req.params.entity_id, 10);
+
+    try {
+        const result = await req.db.entities_images.findMany({
+            where: {
+                entity_id: entity_id,
+            },
+            include: {
+                images: true,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Set a entity's sheet as pinned or not pinned
-router.put("/entity_sheets_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+// Set an entity's sheet as pinned or not pinned
+router.put("/entity_sheets_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE entities_sheets SET pinned = ?, date_pinned = ? WHERE entities_sheets_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.entities_sheets.update({
+            where: {
+                entities_sheets_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Set a entity's video as pinned or not pinned
-router.put("/entity_videos_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+// Set an entity's video as pinned or not pinned
+router.put("/entity_videos_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE entities_videos SET pinned = ?, date_pinned = ? WHERE entities_videos_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.entities_videos.update({
+            where: {
+                entities_videos_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Set a entity's image as pinned or not pinned
-router.put("/entity_images_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+// Set an entity's image as pinned or not pinned
+router.put("/entity_images_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE entities_images SET pinned = ?, date_pinned = ? WHERE entities_images_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.entities_images.update({
+            where: {
+                entities_images_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

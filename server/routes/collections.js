@@ -1,178 +1,167 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
 // Get collection names and ids from entity id
-router.get("/collections_names", (req, res) => {
-    const id = req.query.id;
+router.get("/collections_names", async (req, res) => {
+    const id = parseInt(req.query.id, 10);
     const type = req.query.type;
 
-    let query;
-    if (type === "individuals") {
-        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE individual_id = ?;";
-    } else if (type === "groups") {
-        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE group_id = ?;";
-    } else if (type === "organizations") {
-        query = "SELECT DISTINCT collection_id, collection_name FROM collections WHERE organization_id = ?;";
-    };
+    try {
+        let collections;
 
-    if (id && type && query) {
-        db.query(query, [id], (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            };
-        });
-    };
+        if (type === "individuals") {
+            collections = await req.db.collections.findMany({
+                where: {
+                    individual_id: id,
+                },
+                distinct: ['collection_id'],
+            });
+        } else if (type === "groups") {
+            collections = await req.db.collections.findMany({
+                where: {
+                    group_id: id,
+                },
+                distinct: ['collection_id'],
+            });
+        } else if (type === "organizations") {
+            collections = await req.db.collections.findMany({
+                where: {
+                    organization_id: id,
+                },
+                distinct: ['collection_id'],
+            });
+        }
+
+        res.send(collections);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Get collection from collection_id
-router.get("/:collection_id", (req, res) => {
-    const collection_id = req.params.collection_id;
-  
-    db.query(
-        `SELECT 
-            collections.collection_id,
-            collections.collection_name,
-	        collections_images.date_added AS 'date_added',
-            collections_images.pinned AS 'pinned',
-            collections_images.date_pinned AS 'date_pinned',
-            collections_images.collections_images_id,
-            images.image_id,
-            images.image_title,
-            images.image_description,
-            NULL AS collections_videos_id,
-            NULL AS video_id,
-            NULL AS video_title,
-            NULL AS video_creator_id,
-            NULL AS collections_sheets_id,
-            NULL AS sheet_id,
-            NULL AS sheet_author_id,
-            NULL AS sheet_title,
-            NULL AS sheet_subject
-        FROM collections
-        LEFT JOIN collections_images ON collections.collection_id = collections_images.collection_id
-        LEFT JOIN images ON collections_images.image_id = images.image_id
-        WHERE collections.collection_id = ?
-        
-        UNION
-        
-        SELECT 
-            collections.collection_id,
-            collections.collection_name,
-	        collections_videos.date_added AS 'date_added',
-            collections_videos.pinned AS 'pinned',
-            collections_videos.date_pinned AS 'date_pinned',
-            NULL AS collections_images_id,
-            NULL AS image_id,
-            NULL AS image_title,
-            NULL AS image_description,
-            collections_videos.collections_videos_id,
-            videos.video_id,
-            videos.video_title,
-            videos.video_creator_id,
-            NULL AS collections_sheets_id,
-            NULL AS sheet_id,
-            NULL AS sheet_author_id,
-            NULL AS sheet_title,
-            NULL AS sheet_subject
-        FROM collections
-        LEFT JOIN collections_videos ON collections.collection_id = collections_videos.collection_id
-        LEFT JOIN videos ON collections_videos.video_id = videos.video_id
-        WHERE collections.collection_id = ?
-        
-        UNION
-        
-        SELECT 
-            collections.collection_id,
-            collections.collection_name,
-	        collections_sheets.date_added AS 'date_added',
-            collections_sheets.pinned AS 'pinned',
-            collections_sheets.date_pinned AS 'date_pinned',
-            NULL AS collections_images_id,
-            NULL AS image_id,
-            NULL AS image_title,
-            NULL AS image_description,
-            NULL AS collections_videos_id,
-            NULL AS video_id,
-            NULL AS video_title,
-            NULL AS video_creator_id,
-            collections_sheets.collections_sheets_id,
-            sheets.sheet_id,
-            sheets.sheet_author_id,
-            sheets.sheet_title,
-            sheets.sheet_subject
-        FROM collections
-        LEFT JOIN collections_sheets ON collections.collection_id = collections_sheets.collection_id
-        LEFT JOIN sheets ON collections_sheets.sheet_id = sheets.sheet_id
-        WHERE collections.collection_id = ?;`,
-        [collection_id, collection_id, collection_id],
-        (err, result) => {
-            if (err) {
-              res.status(500).send("Internal Server Error");
-            } else {
-              res.send(result);
-            };
-        }
-    );
+router.get("/:collection_id", async (req, res) => {
+    const collection_id = parseInt(req.params.collection_id, 10);
+
+    try {
+        const collectionDetails = await req.db.$transaction([
+            req.db.collections_sheets.findMany({
+                where: {
+                    collection_id: collection_id,
+                },
+                include: {
+                    sheets: true
+                },
+            }),
+            req.db.collections_videos.findMany({
+                where: {
+                    collection_id: collection_id,
+                },
+                include: {
+                    videos: true,
+                },
+            }),
+            req.db.collections_images.findMany({
+                where: {
+                    collection_id: collection_id,
+                },
+                include: {
+                    images: true,
+                },
+            }),
+        ]);
+
+        const result = collectionDetails
+            .flatMap((item) =>
+                item.map((relation) => {
+                    return {
+                        collection_id: relation.collection_id,
+                        collections_sheets_id: relation.collections_sheets_id || null,
+                        collections_videos_id: relation.collections_videos_id || null,
+                        collections_images_id: relation.collections_images_id || null,
+                        collection_name: relation.collection_name,
+                        date_added: relation.date_added,
+                        pinned: relation.pinned,
+                        date_pinned: relation.date_pinned,
+                        ...relation.sheets,
+                        ...relation.videos,
+                        ...relation.images,
+                    };
+                })
+            )
+            .filter(Boolean);
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Set a collection's sheet as pinned or not pinned
-router.put("/collections_sheets_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+router.put("/collections_sheets_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE collections_sheets SET pinned = ?, date_pinned = ? WHERE collections_sheets_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.collections_sheets.update({
+            where: {
+                collections_sheets_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Set a collection's video as pinned or not pinned
-router.put("/collections_videos_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+router.put("/collections_videos_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE collections_videos SET pinned = ?, date_pinned = ? WHERE collections_videos_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.collections_videos.update({
+            where: {
+                collections_videos_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Set a collection's image as pinned or not pinned
-router.put("/collections_images_pinned", (req, res) => {
-    const relation_id = req.body.relation_id;
-    const pinned = req.body.pinned;
-    const date_pinned = req.body.date_pinned;
+router.put("/collections_images_pinned", async (req, res) => {
+    const { relation_id, pinned, date_pinned } = req.body;
 
-    db.query(
-        "UPDATE collections_images SET pinned = ?, date_pinned = ? WHERE collections_images_id = ?;",
-        [pinned, date_pinned, relation_id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    try {
+        const result = await req.db.collections_images.update({
+            where: {
+                collections_images_id: relation_id,
+            },
+            data: {
+                pinned: pinned,
+                date_pinned: date_pinned,
+            },
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

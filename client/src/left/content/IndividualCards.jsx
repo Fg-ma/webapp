@@ -19,9 +19,16 @@ export default function IndividualCards() {
     const [individuals, setIndividuals] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/individuals`).then((response) => {
-            setIndividuals(response.data);
-        });
+        const fetchIndividualData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/individuals`);
+                setIndividuals(response.data);
+            } catch (error) {
+                console.error('Error fetching individual data:', error);
+            };
+        };
+      
+        fetchIndividualData();
     }, []);
 
     const indCards = individuals.map(indInfo => {

@@ -63,25 +63,26 @@ export default function AdvancedFilterDropdown({ filter, subcategory, advancedFi
 
     // Gets the data for the filter cards
     useEffect(() => {
-        if (subcategory == "ind") {
-            Axios.get(`${serverUrl}/individuals`).then((response) => {
+        const fetchFilterCardData = async () => {
+            if (subcategory == "ind") {
+                const response = await Axios.get(`${serverUrl}/individuals`);
                 setData(response.data);
-            });
-            setPlaceholder("--Individuals--");
-            setExpandedFilter("individual");
-        } else if (subcategory == "grp") {
-            Axios.get(`${serverUrl}/groups`).then((response) => {
+                setPlaceholder("--Individuals--");
+                setExpandedFilter("individual");
+            } else if (subcategory == "grp") {
+                const response = await Axios.get(`${serverUrl}/groups`);
                 setData(response.data);
-            });
-            setPlaceholder("--Groups--");
-            setExpandedFilter("group");
-        } else if (subcategory == "org") {
-            Axios.get(`${serverUrl}/organizations`).then((response) => {
+                setPlaceholder("--Groups--");
+                setExpandedFilter("group");
+            } else if (subcategory == "org") {
+                const response = await Axios.get(`${serverUrl}/organizations`);
                 setData(response.data);
-            });
-            setPlaceholder("--Organizations--");
-            setExpandedFilter("organization");
+                setPlaceholder("--Organizations--");
+                setExpandedFilter("organization");
+            };
         };
+
+        fetchFilterCardData();
     }, []);
 
     const toggleDropdown = () => {

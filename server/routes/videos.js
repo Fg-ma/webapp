@@ -1,44 +1,54 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
-// Route to get an video by ID
-router.get("/:video_id", (req, res) => {
+// Route to get a video by ID
+router.get("/:video_id", async (req, res) => {
     const video_id = req.params.video_id;
 
-    db.query("SELECT * FROM videos WHERE video_id = ?;", [video_id], (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+    try {
+        const video = await req.db.videos.findUnique({
+            where: {
+                video_id: parseInt(video_id),
+            },
+        });
+
+        if (!video) {
+            res.status(404).send("Video not found");
+            return;
+        }
+
+        res.send(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-
 // Gets all the data needed to display a video's contents
-router.get("/get_full_video/:video_id", (req, res) => {
+router.get("/get_full_video/:video_id", async (req, res) => {
     const video_id = req.params.video_id;
 
-    db.query(
-        `SELECT 
-            video_data,
-            video_title,
-            video_description,
-            video_filename,
-            individual_name
-        FROM videos
-        JOIN individuals ON videos.video_creator_id = individuals.individual_id
-        JOIN videos_data ON videos.video_data_id = videos_data.video_data_id
-        WHERE videos.video_id = ?;`, 
-        [video_id], 
-        (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
+    try {
+        const fullVideoData = await req.db.videos.findMany({
+            where: {
+                video_id: parseInt(video_id),
+            },
+            include: {
+                individuals: true,
+                videos_data: true,
+            },
+        });
+
+        if (!fullVideoData || fullVideoData.length === 0) {
+            res.status(404).send("Video not found");
+            return;
         };
-    });
+        
+        res.send(fullVideoData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

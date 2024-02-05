@@ -31,8 +31,8 @@ export default function Videos({ entity_id }) {
 
     // Sorts the video data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
     const sortData = (data) => {
-        const pinnedRows = data.filter((item) => item.pinned === 1);
-        const notPinnedRows = data.filter((item) => item.pinned === 0);
+        const pinnedRows = data.filter((item) => item.pinned === true);
+        const notPinnedRows = data.filter((item) => item.pinned === false);
     
         const parseDate = (dateString) => new Date(dateString);
     
@@ -61,9 +61,16 @@ export default function Videos({ entity_id }) {
         });
 
         // Gets original video data
-        Axios.get(`${serverUrl}/entities/entity_videos/${entity_id}`).then((response) => {
-            setVideosData(sortData(response.data));
-        });
+        const fetchVideosData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/entities/entity_videos/${entity_id}`);
+                setVideosData(sortData(response.data));
+            } catch (error) {
+                console.error('Error fetching image data:', error);
+            };
+        };
+      
+        fetchVideosData();
     }, [entity_id]);
 
     const videos = videosData.map(video => {

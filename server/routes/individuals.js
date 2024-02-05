@@ -1,29 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
 // Route to get all individuals
-router.get("/", (req, res) => {
-  db.query("SELECT * FROM individuals;", (err, result) => {
-    if (err) {
-      res.status(500).send("Internal Server Error");
-    } else {
-      res.send(result);
+router.get("/", async (req, res) => {
+    try {
+        const individuals = await req.db.individuals.findMany();
+        res.send(individuals);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-  });
 });
 
 // Route to get an individual by ID
-router.get("/:individual_id", (req, res) => {
-  const individual_id = req.params.individual_id;
+router.get("/:individual_id", async (req, res) => {
+    const individual_id = req.params.individual_id;
 
-  db.query("SELECT * FROM individuals WHERE individual_id = ?;", [individual_id], (err, result) => {
-    if (err) {
-      res.status(500).send("Internal Server Error");
-    } else {
-      res.send(result);
+    try {
+        const individual = await req.db.individuals.findUnique({
+            where: {
+                individual_id: parseInt(individual_id),
+            },
+        });
+
+        if (!individual) {
+            res.status(404).send("Individual not found");
+            return;
+        };
+
+        res.send(individual);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-  });
 });
 
 module.exports = router;

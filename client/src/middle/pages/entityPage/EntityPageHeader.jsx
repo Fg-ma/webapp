@@ -17,7 +17,7 @@ export default function EntityPageHeader({ entityType, entity, entityReferences 
                 <div className="w-24 aspect-square rounded-full bg-fg-white-85 mr-8"></div>
                 <div className="h-fit">
                     <p className="text-4xl mb-1">
-                        {entity[0]?.[`${entityType.slice(0, -1)}_name`]}
+                        {entity?.[`${entityType.slice(0, -1)}_name`]}
                     </p>
                     <div className="flex space-x-6">
                         <div className="h-8 aspect-square bg-fg-white-85 rounded-full"></div>
@@ -31,30 +31,30 @@ export default function EntityPageHeader({ entityType, entity, entityReferences 
                 </div>
             </div>
             <div className="text-xl mt-4">
-                {entity[0]?.[`${entityType.slice(0, -1)}_userName`]}
-                {entity[0]?.[`${entityType.slice(0, -1)}_handle`] && (
+                {entity?.[`${entityType.slice(0, -1)}_userName`]}
+                {entity?.[`${entityType.slice(0, -1)}_handle`] && (
                   <div className="flex items-center justify-start">
                     <p className="pb-1">@</p>
-                    <p>{entity[0][`${entityType.slice(0, -1)}_handle`]}</p>
+                    <p>{entity[`${entityType.slice(0, -1)}_handle`]}</p>
                   </div>
                 )}
             </div>
             <p className="text-2xl font-bold mt-2">
-                {entity[0]?.[`${entityType.slice(0, -1)}_currentIssue`]}
+                {entity?.[`${entityType.slice(0, -1)}_currentIssue`]}
             </p>
-            {entity[0]?.[`${entityType.slice(0, -1)}_roles`] && 
+            {entity?.[`${entityType.slice(0, -1)}_roles`] && 
                 <p className="text-xl font-K2D line-clamp-2 mt-1">
-                    {entity[0][`${entityType.slice(0, -1)}_roles`]}
+                    {entity[`${entityType.slice(0, -1)}_roles`]}
                 </p>
             }
-            {entity[0]?.[`${entityType.slice(0, -1)}_stances`] && 
+            {entity?.[`${entityType.slice(0, -1)}_stances`] && 
                 <p className="text-xl font-K2D line-clamp-2 mt-1">
-                    {entity[0][`${entityType.slice(0, -1)}_stances`]}
+                    {entity[`${entityType.slice(0, -1)}_stances`]}
                 </p>
             }
-            {entity[0]?.[`${entityType.slice(0, -1)}_description`] &&
+            {entity?.[`${entityType.slice(0, -1)}_description`] &&
                 <p className="text-base font-K2D mt-4">
-                    {entity[0][`${entityType.slice(0, -1)}_description`]}
+                    {entity[`${entityType.slice(0, -1)}_description`]}
                 </p>
             }
             {entityReferences && (<ReferenceLinks references={entityReferences} />)}

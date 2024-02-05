@@ -20,9 +20,16 @@ export default function DogEarCards() {
     const [coverSheet, setCoverSheet] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/sheets`).then((response) => {
-            setCoverSheet(response.data);
-        });
+        const fetchCoverSheetData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/sheets`);
+                setCoverSheet(response.data);
+            } catch (error) {
+                console.error('Error fetching cover sheet data:', error);
+            };
+        };
+      
+        fetchCoverSheetData();
     }, []);
     
     const dogEarCards = coverSheet.map(issueInfo => {

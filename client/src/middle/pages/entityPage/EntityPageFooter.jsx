@@ -19,7 +19,7 @@ export default function EntityPageFooter({ entityType, entity }) {
             >
             </button>
             <p className="text-3xl mt-2">
-                {entity[0]?.[`${entityType.slice(0, -1)}_name`]}
+                {entity?.[`${entityType.slice(0, -1)}_name`]}
             </p>
             <button className="h-8 aspect-square bg-cover bg-no-repeat mr-4" style={{ backgroundImage: 'url("/assets/icons/moreHorizontal.svg")' }}></button>
         </div>

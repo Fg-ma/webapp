@@ -1,29 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
 // Route to get all organizations
-router.get("/", (req, res) => {
-    db.query("SELECT * FROM organizations;", (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+router.get("/", async (req, res) => {
+    try {
+        const organizations = await req.db.organizations.findMany();
+        res.send(organizations);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Route to get an organization by ID
-router.get("/:organization_id", (req, res) => {
+router.get("/:organization_id", async (req, res) => {
     const organization_id = req.params.organization_id;
 
-    db.query("SELECT * FROM organizations WHERE organization_id = ?;", [organization_id], (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+    try {
+        const organization = await req.db.organizations.findUnique({
+            where: {
+                organization_id: parseInt(organization_id),
+            },
+        });
+
+        if (!organization) {
+            res.status(404).send("Organization not found");
+            return;
+        }
+
+        res.send(organization);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

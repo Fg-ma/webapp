@@ -31,8 +31,8 @@ export default function Images({ entity_id }) {
 
     // Sorts the image data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
     const sortData = (data) => {
-        const pinnedRows = data.filter((item) => item.pinned === 1);
-        const notPinnedRows = data.filter((item) => item.pinned === 0);
+        const pinnedRows = data.filter((item) => item.pinned === true);
+        const notPinnedRows = data.filter((item) => item.pinned === false);
     
         const parseDate = (dateString) => new Date(dateString);
     
@@ -61,9 +61,16 @@ export default function Images({ entity_id }) {
         });
 
         // Gets original image data
-        Axios.get(`${serverUrl}/entities/entity_images/${entity_id}`).then((response) => {
-            setImagesData(sortData(response.data));
-        });
+        const fetchImagesData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/entities/entity_images/${entity_id}`);
+                setImagesData(sortData(response.data));
+            } catch (error) {
+                console.error('Error fetching image data:', error);
+            };
+        };
+      
+        fetchImagesData();
     }, [entity_id]);
 
     const images = imagesData.map(image => {

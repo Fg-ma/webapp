@@ -1,27 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     const entity_id = req.query.entity_id;
     const type = req.query.type;
 
-    let query;
-    if (type === "individuals") {
-        query = "SELECT * FROM entities_references WHERE individual_id = ?;";
-    } else if (type === "groups") {
-        query = "SELECT * FROM entities_references WHERE group_id = ?;";
-    } else if (type === "organizations") {
-        query = "SELECT * FROM entities_references WHERE organization_id = ?;";
-    };
+    try {
+        let entitiesReferences;
 
-    db.query(query, [entity_id], (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+        if (type === "individuals") {
+            entitiesReferences = await req.db.entities_references.findMany({
+                where: {
+                    individual_id: parseInt(entity_id),
+                },
+            });
+        } else if (type === "groups") {
+            entitiesReferences = await req.db.entities_references.findMany({
+                where: {
+                    group_id: parseInt(entity_id),
+                },
+            });
+        } else if (type === "organizations") {
+            entitiesReferences = await req.db.entities_references.findMany({
+                where: {
+                    organization_id: parseInt(entity_id),
+                },
+            });
+        }
+
+        res.send(entitiesReferences);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

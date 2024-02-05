@@ -19,9 +19,16 @@ export default function OrganizationRecs() {
     const [organizations, setOrganizations] = useState([]);
     
     useEffect(() => {
-        Axios.get(`${serverUrl}/organizations`).then((response) => {
-            setOrganizations(response.data);
-        });
+        const fetchOrganizationData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/organizations`);
+                setOrganizations(response.data);
+            } catch (error) {
+                console.error('Error fetching organization data:', error);
+            };
+        };
+      
+        fetchOrganizationData();
     }, []); 
     
     const orgRecs = organizations.map(orgInfo => {

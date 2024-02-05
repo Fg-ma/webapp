@@ -25,50 +25,67 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
 
     // Gets sheet data from a given sheet_id
     useEffect(() => {
-        Axios.get(`${serverUrl}/sheets/${sheet_id}`).then((response) => {
-            setSheetData(response.data);
-        });
+        const fetchSheetData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/sheets/${sheet_id}`);
+                setSheetData(response.data);
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+            };
+        };
+      
+        fetchSheetData();
     }, [sheet_id]);
 
     // Checks if the entity is the author of the sheet
-    if (sheetData[0] && sheetData[0].sheet_author_id === author_id) {
+    if (sheetData && sheetData.sheet_author_id === author_id) {
         isAuthor.current = true;
     };
 
     // Toggles if a sheet is pinned by updating the db and then emitting togglePinned to the socket
-    const togglePinned = () => {
+    const togglePinned = async () => {
+
         let newPinned;
         let date_pinned;
+
         if (pinned) {
-            newPinned = 0;
+            newPinned = false;
             date_pinned = null;
         } else {
-            newPinned = 1;
+            newPinned = true;
             const currentDate = new Date();
-            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
-        }
-
-        if (type === "collection") {
-            Axios.put(
-                `${serverUrl}/collections/collections_sheets_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
-        } else if (type === "entity") {
-            Axios.put(
-                `${serverUrl}/entities/entity_sheets_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
+            date_pinned = currentDate.toISOString();
+        };
+        
+        try {
+            if (type === "collection") {
+                await Axios.put(
+                    `${serverUrl}/collections/collections_sheets_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            } else if (type === "entity") {
+                await Axios.put(
+                    `${serverUrl}/entities/entity_sheets_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            };
+        } catch (error) {
+            console.error('Error toggling pinned:', error);
         };
 
-        socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
+        try {
+            socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
+        } catch (error) {
+            console.error('Error with socket:', error);
+        };
     };
 
     const handleClick = () => {
@@ -93,12 +110,12 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
                 >
                 </button>
             </div>
-            {sheetData[0] && 
+            {sheetData && 
                 <p className="text-base font-bold leading-5 text-center mx-4 h-[3.75rem] line-clamp-3 mb-1">
-                    {sheetData[0].sheet_title}
+                    {sheetData.sheet_title}
                 </p>
             }
-            <p className="text-sm font-K2D text-center mb-3">{isAuthor.current ? "Creator" : "Responseded to"}</p>
+            <p className="text-sm font-K2D text-center mb-3">{isAuthor.current ? "Author" : "Responseded to"}</p>
         </div>
     );
 };
@@ -112,45 +129,62 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
 
     // Gets video data from a given video_id
     useEffect(() => {
-        Axios.get(`${serverUrl}/videos/${video_id}`).then((response) => {
-            setVideoData(response.data);
-        });
+        const fetchVideoData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/videos/${video_id}`);
+                setVideoData(response.data);
+            } catch (error) {
+                console.error('Error fetching video data:', error);
+            };
+        };
+      
+        fetchVideoData();
     }, [video_id]);
 
     // Toggles if a video is pinned by updating the db and then emitting togglePinned to the socket
-    const togglePinned = () => {
+    const togglePinned = async () => {
+
         let newPinned;
         let date_pinned;
+
         if (pinned) {
-            newPinned = 0;
+            newPinned = false;
             date_pinned = null;
         } else {
-            newPinned = 1;
+            newPinned = true;
             const currentDate = new Date();
-            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
-        }
-
-        if (type === "collection") {
-            Axios.put(
-                `${serverUrl}/collections/collections_videos_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
-        } else if (type === "entity") {
-            Axios.put(
-                `${serverUrl}/entities/entity_videos_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
+            date_pinned = currentDate.toISOString();
         };
 
-        socket.emit("togglePinned", "video", relation_id, newPinned, date_pinned);
+        try {
+            if (type === "collection") {
+                await Axios.put(
+                    `${serverUrl}/collections/collections_videos_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            } else if (type === "entity") {
+                await Axios.put(
+                    `${serverUrl}/entities/entity_videos_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            };
+        } catch (error) {
+            console.error('Error toggling pinned:', error);
+        };
+
+        try {
+            socket.emit("togglePinned", "video", relation_id, newPinned, date_pinned);
+        } catch (error) {
+            console.error('Error with socket:', error);
+        };
     };
 
     const handleClick = () => {
@@ -177,12 +211,12 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
             </div>
             <div className="flex justify-start items-center mb-2">
                 <div className="bg-fg-white-85 w-8 aspect-square rounded-full"></div>
-                {videoData[0] && 
+                {videoData && 
                     <p 
                         className="text-sm font-bold leading-4 text-left h-[2] line-clamp-2 ml-2" 
                         style={{ width: 'calc(100% - 2.5rem)' }}
                     >
-                        {videoData[0].video_title}
+                        {videoData.video_title}
                     </p>
                 }
             </div>
@@ -232,53 +266,68 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
 
     // Gets image data from a given image_id
     useEffect(() => {
-        Axios.get(`${serverUrl}/images/${image_id}`).then((response) => {
-            setImageData(response.data);
-        });
+        const fetchImageData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/images/${image_id}`);
+                setImageData(response.data);
+            } catch (error) {
+                console.error('Error fetching image data:', error);
+            };
+        };
+      
+        fetchImageData();
     }, [image_id]);
 
     // Toggles if a image is pinned by updating the db and then emitting togglePinned to the socket
-    const togglePinned = () => {
+    const togglePinned = async () => {
         let newPinned;
         let date_pinned;
         if (pinned) {
-            newPinned = 0;
+            newPinned = false;
             date_pinned = null;
         } else {
-            newPinned = 1;
+            newPinned = true;
             const currentDate = new Date();
-            date_pinned = `${currentDate.toISOString().slice(0, 19).replace("T", " ")}`;
-        }
-
-        if (type === "collection") {
-            Axios.put(
-                `${serverUrl}/collections/collections_images_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
-        } else if (type === "entity") {
-            Axios.put(
-                `${serverUrl}/entities/entity_images_pinned`,
-                {
-                    relation_id: relation_id,
-                    pinned: newPinned,
-                    date_pinned: date_pinned,
-                }
-            );
+            date_pinned = currentDate.toISOString();
         };
 
-        socket.emit("togglePinned", "image", relation_id, newPinned, date_pinned);
+        try {
+            if (type === "collection") {
+                await Axios.put(
+                    `${serverUrl}/collections/collections_images_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            } else if (type === "entity") {
+                await Axios.put(
+                    `${serverUrl}/entities/entity_images_pinned`,
+                    {
+                        relation_id: relation_id,
+                        pinned: newPinned,
+                        date_pinned: date_pinned,
+                    }
+                );
+            };
+        } catch (error) {
+            console.error('Error toggling pinned:', error);
+        };
+
+        try {
+            socket.emit("togglePinned", "image", relation_id, newPinned, date_pinned);
+        } catch (error) {
+            console.error('Error with socket:', error);
+        }; 
     };
 
     const showPopup = () => {
-        if (imageData[0]) {
+        if (imageData) {
             setPopupContent(
                 <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs">
-                    <p className="text-lg font-bold line-clamp-2">{imageData[0].image_title}</p> 
-                    <p className="text-base font-K2D line-clamp-4">{imageData[0].image_description}</p>
+                    <p className="text-lg font-bold line-clamp-2">{imageData.image_title}</p> 
+                    <p className="text-base font-K2D line-clamp-4">{imageData.image_description}</p>
                 </div>
             );
         };
@@ -296,7 +345,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
 
     const updateMousePosition = (e) => {
         mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
-    }
+    };
 
     const updatePopupPosition = (e) => {
         setPopupContent(prevPopupContent => {

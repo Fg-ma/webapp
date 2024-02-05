@@ -15,9 +15,11 @@ export default function VideoViewer({ video_id }) {
     });
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/videos/get_full_video/${video_id}`).then((response) => {
+        const fetchVideoData = async () => {
+            const response = await Axios.get(`${serverUrl}/videos/get_full_video/${video_id}`);
+
             if (response.data[0]) {
-                const blobData = new Uint8Array(response.data[0].video_data.data);
+                const blobData = new Uint8Array(response.data[0].videos_data.video_data.data);
                 const extension = response.data[0].video_filename.slice(-3).toLowerCase();
                 const mimeType = getMimeType(extension);
 
@@ -30,9 +32,13 @@ export default function VideoViewer({ video_id }) {
                         video_description: response.data[0].video_description,
                         video_author: response.data[0].individual_name,
                     });
-                }
-            }
-        });
+                };
+            };
+        };
+
+        if (video_id) {
+            fetchVideoData();
+        };
     }, [video_id]);
 
     const getMimeType = (extension) => {

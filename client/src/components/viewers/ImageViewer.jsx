@@ -15,24 +15,34 @@ export default function ImageViewer({ image_id }) {
     });
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/images/get_full_image/${image_id}`).then((response) => {
-            if (response.data[0]) {
-                const blobData = new Uint8Array(response.data[0].image_data.data);
-                const extension = response.data[0].image_filename.slice(-3).toLowerCase();
-                const mimeType = getMimeType(extension);
+        const fetchImageData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/images/get_full_image/${image_id}`);
+                
+                if (response.data) {
+                    const blobData = new Uint8Array(response.data.images_data.image_data.data);
+                    const extension = response.data.image_filename.slice(-3).toLowerCase();
+                    const mimeType = getMimeType(extension);
 
-                if (mimeType) {
-                    const url = URL.createObjectURL(new Blob([blobData], { type: mimeType }));
+                    if (mimeType) {
+                        const url = URL.createObjectURL(new Blob([blobData], { type: mimeType }));
 
-                    setImageData({
-                        image_url: url,
-                        image_title: response.data[0].image_title,
-                        image_description: response.data[0].image_description,
-                        image_author: response.data[0].individual_name,
-                    });
-                }
-            }
-        });
+                        setImageData({
+                            image_url: url,
+                            image_title: response.data.image_title,
+                            image_description: response.data.image_description,
+                            image_author: response.data.individual_name,
+                        });
+                    };
+                };
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+            };
+        };
+
+        if (image_id) {
+            fetchImageData();
+        };
     }, [image_id]);
 
     const getMimeType = (extension) => {

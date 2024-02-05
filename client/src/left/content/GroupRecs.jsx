@@ -19,9 +19,16 @@ export default function GroupRecs() {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/groups`).then((response) => {
-            setGroups(response.data);
-        });
+        const fetchGroupData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/groups`);
+                setGroups(response.data);
+            } catch (error) {
+                console.error('Error fetching group data:', error);
+            };
+        };
+      
+        fetchGroupData();
     }, []);
 
     const grpRecs = groups.map(grpInfo => {

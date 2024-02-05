@@ -18,19 +18,11 @@ const collectionsRouter = require("./routes/collections");
 const entitiesRouter = require("./routes/entities");
 const referencesRouter = require("./routes/references");
 const authRouter = require("./routes/auth");
-const { db } = require("./database");
-const os = require('os');
+const prismaMiddleware = require("./prismaMiddleware");
 
 app.use(cors());
 app.use(express.json());
-
-db.connect((err) => {
-    if (err) {
-        console.error('Error connecting to database:', err);
-    } else {
-        console.log('Connected to database');
-    }
-});
+app.use(prismaMiddleware);
 
 const server = http.createServer(app);
 socket(server);

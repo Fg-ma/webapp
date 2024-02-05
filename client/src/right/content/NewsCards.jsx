@@ -19,9 +19,16 @@ export default function NewsCards() {
     const [sheets, setSheets] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/sheets`).then((response) => {
-            setSheets(response.data);
-        });
+        const fetchSheetData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/sheets`);
+                setSheets(response.data);
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+            };
+        };
+      
+        fetchSheetData();
     }, []);
 
     const newsCards = sheets.map(issueInfo => {

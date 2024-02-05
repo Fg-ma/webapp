@@ -19,14 +19,21 @@ export default function CollectionButtons({ entityType, entity_id, entityPageRef
     const [collectionNames, setCollectionNames] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/collections/collections_names`, {
-            params: {
-                id: entity_id,
-                type: entityType,
-            }
-        }).then((response) => {
-            setCollectionNames(response.data);
-        });
+        const fetchCollectionNamesData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/collections/collections_names`, {
+                    params: {
+                        id: entity_id,
+                        type: entityType,
+                    }
+                });
+                setCollectionNames(response.data);
+            } catch (error) {
+                console.error('Error fetching collection names:', error);
+            };
+        };
+      
+        fetchCollectionNamesData();
     }, [entity_id]);
 
     const collections = collectionNames.map(collection => {

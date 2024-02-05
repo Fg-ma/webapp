@@ -31,8 +31,8 @@ export default function Collections({ entity_id, collection_id }) {
 
     // Sorts the collection data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
     const sortData = (data) => {
-        const pinnedRows = data.filter((item) => item.pinned === 1);
-        const notPinnedRows = data.filter((item) => item.pinned === 0);
+        const pinnedRows = data.filter((item) => item.pinned === true);
+        const notPinnedRows = data.filter((item) => item.pinned === false);
     
         const parseDate = (dateString) => new Date(dateString);
     
@@ -65,9 +65,16 @@ export default function Collections({ entity_id, collection_id }) {
         });
 
         // Gets original collection data
-        Axios.get(`${serverUrl}/collections/${collection_id}`).then((response) => {
-            setCollectionData(sortData(response.data));
-        });
+        const fetchCollectionsData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/collections/${collection_id}`);
+                setCollectionData(sortData(response.data));
+            } catch (error) {
+                console.error('Error fetching image data:', error);
+            };
+        };
+      
+        fetchCollectionsData();
     }, [collection_id]);
 
     // Maps the collection data into the appropriate places
@@ -100,7 +107,7 @@ export default function Collections({ entity_id, collection_id }) {
                 relation_id={item.collections_videos_id}
                 socket={socketRef.current}
             />
-        }
+        };
     });
 
     return (

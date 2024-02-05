@@ -26,19 +26,29 @@ export default function SheetViewer({ sheet_id }) {
     };
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/sheets/get_full_sheet/${sheet_id}`).then((response) => {
-            if (response.data[0]) {
-                const blobData = new Uint8Array(response.data[0].sheet_data.data);
-                const url = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
+        const fetchSheetData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/sheets/get_full_sheet/${sheet_id}`);
                 
-                setSheetData({
-                    sheet_url: url,
-                    sheet_title: response.data[0].sheet_title,
-                    sheet_subject: response.data[0].sheet_subject,
-                    sheet_author: response.data[0].individual_name,
-                });
+                if (response.data) {
+                    const blobData = new Uint8Array(response.data.sheet_data.data);
+                    const url = URL.createObjectURL(new Blob([blobData], { type: 'application/pdf' }));
+                    
+                    setSheetData({
+                        sheet_url: url,
+                        sheet_title: response.data.sheet_title,
+                        sheet_subject: response.data.sheet_subject,
+                        sheet_author: response.data.individual_name,
+                    });
+                };
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
             };
-        });
+        };
+      
+        if (sheet_id) {
+            fetchSheetData();
+        };
     }, [sheet_id]);
     
     return (

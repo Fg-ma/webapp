@@ -19,9 +19,16 @@ export default function PapersCards() {
     const [papers, setPapers] = useState([]);
 
     useEffect(() => {
-        Axios.get(`${serverUrl}/sheets`).then((response) => {
-            setPapers(response.data);
-        });
+        const fetchPaperData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/sheets`);
+                setPapers(response.data);
+            } catch (error) {
+                console.error('Error fetching paper data:', error);
+            };
+        };
+      
+        fetchPaperData();
     }, []);
 
     const newsCards = papers.map(paperInfo => {

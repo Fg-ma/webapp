@@ -40,106 +40,62 @@ export default function EntityPage({ entityType }) {
     
     // Get data from database
     useEffect(() => {
-        if (entityType === "individuals") {
-            Axios.get(`${serverUrl}/individuals/${entity_id}`).then((response) => {
+        const fetchEntityData = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/${entityType}/${entity_id}`);
                 setEntityData(response.data);
-            });
-        } else if (entityType === "groups") {
-            Axios.get(`${serverUrl}/groups/${entity_id}`).then((response) => {
-                setEntityData(response.data);
-            });
-        } else if (entityType === "organizations") {
-            Axios.get(`${serverUrl}/organizations/${entity_id}`).then((response) => {
-                setEntityData(response.data);
-            });
+            } catch (error) {
+                console.error('Error fetching entity data:', error);
+            };
+        };
+      
+        const fetchEntity = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/entities/entity`, {
+                    params: {
+                        id: entity_id,
+                        type: entityType,
+                    }
+                });
+                setEntity(response.data);
+            } catch (error) {
+                console.error('Error fetching entity:', error);
+            };
         };
 
-        Axios.get(`${serverUrl}/entities/entity`, {
-            params: {
-                id: entity_id,
-                type: entityType,
-            }
-        }).then((response) => {
-            setEntity(response.data);
-        });
+        const fetchEntityReferences = async () => {
+            try {
+                const response = await Axios.get(`${serverUrl}/references`, {
+                    params: {
+                        entity_id: entity_id,
+                        type: entityType,
+                    }
+                });
+                setEntityReferences(response.data);
+            } catch (error) {
+                console.error('Error fetching entity references:', error);
+            };
+        };
 
         if (entity_id) {
-            Axios.get(`${serverUrl}/references`, {
-                params: {
-                    entity_id: entity_id,
-                    type: entityType,
-                }
-            }).then((response) => {
-                setEntityReferences(response.data);
-            });
-        }
+            fetchEntityData();
+        
+            fetchEntity();
+
+            fetchEntityReferences();
+        };
     }, [entity_id]);
 
     const renderContent = (entityData) => {
-        if (entityData[0]) {
-            switch (entityType) {
-                case "individuals": {
-                    switch (pageState) {
-                        case "sheets":
-                            if (entity[0]) {
-                                return <Sheets entity_id={entity[0].entity_id} author_id={entityData[0].individual_id} />;
-                            };
-                        case "videos":
-                            if (entity[0]) {
-                                return <Videos entity_id={entity[0].entity_id} />;
-                            };
-                        case "images":
-                            if (entity[0]) {
-                                return <Images entity_id={entity[0].entity_id} />;
-                            };
-                        case "collections":
-                            return <Collections entity_id={entityData[0].individual_id} collection_id={entity_collection_id} />;
-                        default:
-                            return <></>;
-                    };
-                }
-                case "groups": {
-                    switch (pageState) {
-                        case "sheets":
-                            if (entity[0]) {
-                                return <Sheets entity_id={entity[0].entity_id} author_id={entityData[0].group_id} />;
-                            };
-                        case "videos":
-                            if (entity[0]) {
-                                return <Videos entity_id={entity[0].entity_id} />;
-                            };
-                        case "images":
-                            if (entity[0]) {
-                                return <Images entity_id={entity[0].entity_id} />;
-                            };
-                        case "collections":
-                            return <Collections entity_id={entityData[0].group_id} collection_id={entity_collection_id} />;
-                        default:
-                            return <></>;
-                    };
-                }
-                case "organizations": {
-                    switch (pageState) {
-                        case "sheets":
-                            if (entity[0]) {
-                                return <Sheets entity_id={entity[0].entity_id} author_id={entityData[0].organization_id} />;
-                            };
-                        case "videos":
-                            if (entity[0]) {
-                                return <Videos entity_id={entity[0].entity_id} />;
-                            };
-                        case "images":
-                            if (entity[0]) {
-                                return <Images entity_id={entity[0].entity_id} />;
-                            };
-                        case "collections":
-                            return <Collections entity_id={entityData[0].organization_id} collection_id={entity_collection_id} />;
-                        default:
-                            return <></>;
-                    };
-                }
-                default:
-                    return <></>;
+        if (entityData) {
+            if (pageState === "sheets" && entity[0]) {
+                return <Sheets entity_id={entity[0].entity_id} author_id={entityData.individual_id} />;
+            } else if (pageState === "videos" && entity[0]) {
+                return <Videos entity_id={entity[0].entity_id} />;
+            } else if (pageState === "images" && entity[0]) {
+                return <Images entity_id={entity[0].entity_id} />;
+            } else if (pageState === "collections") {
+                return <Collections entity_id={entityData[entityType.slice(0, -1).concat("_id")]} collection_id={entity_collection_id} />;
             };
         };
     };

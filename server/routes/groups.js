@@ -1,29 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../database");
 
 // Route to get all groups
-router.get("/", (req, res) => {
-    db.query("SELECT * FROM `groups`;", (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+router.get("/", async (req, res) => {
+    try {
+        const groups = await req.db.groups.findMany();
+        res.send(groups);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Route to get an groups by ID
-router.get("/:group_id", (req, res) => {
+// Route to get a group by ID
+router.get("/:group_id", async (req, res) => {
     const group_id = req.params.group_id;
 
-    db.query("SELECT * FROM `groups` WHERE group_id = ?;", [group_id], (err, result) => {
-        if (err) {
-            res.status(500).send("Internal Server Error");
-        } else {
-            res.send(result);
-        };
-    });
+    try {
+        const group = await req.db.groups.findUnique({
+            where: {
+                group_id: parseInt(group_id),
+            },
+        });
+
+        if (!group) {
+            res.status(404).send("Group not found");
+            return;
+        }
+
+        res.send(group);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;
