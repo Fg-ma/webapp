@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { setPageState } from "../redux/pageState/pageStateActions";
 import { closeDrop } from "../redux/filters/filterActions";
 
@@ -20,14 +20,13 @@ const navButtonsVar = {
         lineHeight: "1.5rem",
         paddingTop: "0rem",
     },
-    transition: { 
-        ease: "easeOut", 
+    transition: {
+        ease: "easeOut",
         duration: 0.1,
     },
 };
 
 export default function RightNav() {
-
     /* 
         Description:   
             A navbar that cycles between news, explore, messages, and dog ears. The currently 
@@ -38,7 +37,9 @@ export default function RightNav() {
     */
 
     const dispatch = useDispatch();
-    const rightPage = useSelector((state) => state.page.right.pagePayload.pageState);
+    const rightPage = useSelector(
+        (state) => state.page.right.pagePayload.pageState
+    );
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -55,63 +56,74 @@ export default function RightNav() {
         messages: deactiveStyles,
         dogEars: deactiveStyles,
     };
-    
+
     rightStyles[rightPage] = { ...activeStyles };
 
     function swapRightState(state) {
-        dispatch(closeDrop(state, 'isDropFilter'))
-        dispatch(setPageState('right', state));
+        dispatch(closeDrop(state, "isDropFilter"));
+        dispatch(setPageState("right", state));
     }
 
     return (
-        <nav id="rightNavbarBarSpace" className="block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
-            <div className="flex divide-x-2 divide-fg-white-70 h-full">
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+        <nav
+            id='rightNavbarBarSpace'
+            className='block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md'
+        >
+            <div className='flex divide-x-2 divide-fg-white-70 h-full'>
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapRightState('papers')}
+                    onClick={() => swapRightState("papers")}
                 >
-                    <button className="w-full" style={rightStyles["papers"]}>Papers</button>
+                    <button className='w-full' style={rightStyles["papers"]}>
+                        Papers
+                    </button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapRightState('news')}
+                    onClick={() => swapRightState("news")}
                 >
-                    <button className="w-full" style={rightStyles["news"]}>News</button>
+                    <button className='w-full' style={rightStyles["news"]}>
+                        News
+                    </button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapRightState('explore')}
+                    onClick={() => swapRightState("explore")}
                 >
-                    <button className="w-full" style={rightStyles["explore"]}>Explore</button>
+                    <button className='w-full' style={rightStyles["explore"]}>
+                        Explore
+                    </button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapRightState('dogEars')}
+                    onClick={() => swapRightState("dogEars")}
                 >
-                    <button className="w-full" style={rightStyles["dogEars"]}>Dog-Ears</button>
+                    <button className='w-full' style={rightStyles["dogEars"]}>
+                        Dog-Ears
+                    </button>
                 </motion.div>
             </div>
         </nav>
     );
 }
 
-//<motion.div 
+//<motion.div
 //    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
 //    variants={navButtonsVar}
 //    initial="init"

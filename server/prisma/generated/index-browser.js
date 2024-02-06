@@ -243,6 +243,11 @@ exports.Prisma.SheetsScalarFieldEnum = {
   sheet_title: 'sheet_title',
   sheet_subject: 'sheet_subject',
   sheet_filename: 'sheet_filename',
+  sheet_data_id: 'sheet_data_id'
+};
+
+exports.Prisma.Sheets_dataScalarFieldEnum = {
+  sheet_data_id: 'sheet_data_id',
   sheet_data: 'sheet_data'
 };
 
@@ -299,6 +304,7 @@ exports.Prisma.ModelName = {
   organizations: 'organizations',
   organizations_members: 'organizations_members',
   sheets: 'sheets',
+  sheets_data: 'sheets_data',
   user_credentials: 'user_credentials',
   videos: 'videos',
   videos_data: 'videos_data'

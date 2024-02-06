@@ -5,10 +5,11 @@ import config from "@config";
 import { Sheet } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
-export default function Sheets({ entity_id, author_id}) {
-
+export default function Sheets({ entity_id, author_id }) {
     /* 
         Description:   
             Queries the database to get the sheets that the passed in entity is related 
@@ -16,7 +17,7 @@ export default function Sheets({ entity_id, author_id}) {
         Unique Properties:
             N/A
     */
-    
+
     const [sheetsData, setSheetsData] = useState([]);
     const sheetSocketRef = useRef(null);
 
@@ -35,59 +36,70 @@ export default function Sheets({ entity_id, author_id}) {
         const notPinnedRows = data.filter((item) => item.pinned === false);
 
         const parseDate = (dateString) => new Date(dateString);
-    
-        pinnedRows.sort((a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned));
-        notPinnedRows.sort((a, b) => parseDate(b.date_added) - parseDate(a.date_added));
+
+        pinnedRows.sort(
+            (a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned)
+        );
+        notPinnedRows.sort(
+            (a, b) => parseDate(b.date_added) - parseDate(a.date_added)
+        );
 
         return [...pinnedRows, ...notPinnedRows];
     };
 
     // Gets sheet data and connects to socket
-    useEffect(() => {   
+    useEffect(() => {
         // Connects to the socket to get the new data when pinned is updated
-        sheetSocketRef.current.on("pinnedUpdated", ({ relation, relation_id, pinned, date_pinned }) => {
-            setSheetsData((prevData) => {
-                const updatedData = prevData.map((sheet) => {
-                    if (sheet.entities_sheets_id === relation_id) {
-                        return { ...sheet, pinned: pinned, date_pinned: date_pinned };
-                    }
-                    return sheet;
+        sheetSocketRef.current.on(
+            "pinnedUpdated",
+            ({ relation, relation_id, pinned, date_pinned }) => {
+                setSheetsData((prevData) => {
+                    const updatedData = prevData.map((sheet) => {
+                        if (sheet.entities_sheets_id === relation_id) {
+                            return {
+                                ...sheet,
+                                pinned: pinned,
+                                date_pinned: date_pinned,
+                            };
+                        }
+                        return sheet;
+                    });
+
+                    const sortedData = sortData(updatedData);
+
+                    return sortedData;
                 });
-    
-                const sortedData = sortData(updatedData);
-                
-                return sortedData;
-            });
-        });
+            }
+        );
 
         // Gets original sheet data
         const fetchSheetsData = async () => {
             try {
-                const response = await Axios.get(`${serverUrl}/entities/entity_sheets/${entity_id}`);
+                const response = await Axios.get(
+                    `${serverUrl}/entities/entity_sheets/${entity_id}`
+                );
                 setSheetsData(sortData(response.data));
             } catch (error) {
-                console.error('Error fetching image data:', error);
-            };
+                console.error("Error fetching image data:", error);
+            }
         };
-      
+
         fetchSheetsData();
     }, [entity_id]);
 
-    const sheets = sheetsData.map(sheet => {
-        return <Sheet 
-            key={`sheet_${sheet.sheet_id}`} 
-            type={"entity"} 
-            sheet_id={sheet.sheet_id} 
-            author_id={author_id}
-            pinned={sheet.pinned}
-            relation_id={sheet.entities_sheets_id}
-            socket={sheetSocketRef.current}
-        />
+    const sheets = sheetsData.map((sheet) => {
+        return (
+            <Sheet
+                key={`sheet_${sheet.sheet_id}`}
+                type={"entity"}
+                sheet_id={sheet.sheet_id}
+                author_id={author_id}
+                pinned={sheet.pinned}
+                relation_id={sheet.entities_sheets_id}
+                socket={sheetSocketRef.current}
+            />
+        );
     });
 
-    return (
-        <div className="mt-4 grid grid-cols-3 gap-6">
-            {sheets}
-        </div>
-    );
-};
+    return <div className='mt-4 grid grid-cols-3 gap-6'>{sheets}</div>;
+}

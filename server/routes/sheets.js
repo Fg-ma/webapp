@@ -41,6 +41,7 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
             },
             include: {
                 individuals: true,
+                sheets_data: true,
             },
         });
 

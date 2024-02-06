@@ -1,4 +1,4 @@
-import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes"
+import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
 
 export const setPageState = (page, newState) => ({
     type: SET_PAGE_STATE,

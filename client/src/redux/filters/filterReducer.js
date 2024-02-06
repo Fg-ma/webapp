@@ -1,4 +1,16 @@
-import { TOGGLE_DROP, CLOSE_DROP, SET_FILTER_OPTION, APPLY_FILTER_OPTIONS, CLEAR_FILTER_OPTIONS, CANCEL_FILTER_CHANGES, TOGGLE_ADVANCED_SEARCH, ADD_ADVANCED_AFFILIATED_FILTER, REMOVE_ADVANCED_AFFILIATED_FILTER, CLEAR_ADVANCED_AFFILIATED_FILTER, SET_DATE_RANGE } from './filterTypes';
+import {
+    TOGGLE_DROP,
+    CLOSE_DROP,
+    SET_FILTER_OPTION,
+    APPLY_FILTER_OPTIONS,
+    CLEAR_FILTER_OPTIONS,
+    CANCEL_FILTER_CHANGES,
+    TOGGLE_ADVANCED_SEARCH,
+    ADD_ADVANCED_AFFILIATED_FILTER,
+    REMOVE_ADVANCED_AFFILIATED_FILTER,
+    CLEAR_ADVANCED_AFFILIATED_FILTER,
+    SET_DATE_RANGE,
+} from "./filterTypes";
 
 const initialState = {
     middle: {
@@ -18,10 +30,10 @@ const initialState = {
                 grp: [],
                 org: [],
             },
-            author: '',
+            author: "",
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -42,10 +54,10 @@ const initialState = {
                 grp: [],
                 org: [],
             },
-            author: '',
+            author: "",
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -66,10 +78,10 @@ const initialState = {
                 grp: [],
                 org: [],
             },
-            author: '',
+            author: "",
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -90,10 +102,10 @@ const initialState = {
                 grp: [],
                 org: [],
             },
-            author: '',
+            author: "",
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -109,8 +121,8 @@ const initialState = {
             isNewestAffiliate: false,
             isOldestAffiliate: false,
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -129,10 +141,10 @@ const initialState = {
                 grp: [],
                 org: [],
             },
-            author: '',
+            author: "",
             dateRange: {
-                from: '',
-                to: '',
+                from: "",
+                to: "",
             },
         },
         appliedFilterOptions: null,
@@ -207,7 +219,9 @@ export default function filterReducer(state = initialState, action) {
                 ...state,
                 [filter]: {
                     ...state[filter],
-                    filterPayload: state[filter].appliedFilterOptions || initialState[filter].filterPayload,
+                    filterPayload:
+                        state[filter].appliedFilterOptions ||
+                        initialState[filter].filterPayload,
                 },
             };
         }
@@ -220,14 +234,16 @@ export default function filterReducer(state = initialState, action) {
                     ...state[filter],
                     filterPayload: {
                         ...state[filter].filterPayload,
-                        isAdvancedSearch: !state[filter].filterPayload.isAdvancedSearch,
+                        isAdvancedSearch:
+                            !state[filter].filterPayload.isAdvancedSearch,
                     },
                 },
             };
         }
 
         case ADD_ADVANCED_AFFILIATED_FILTER: {
-            const { filter, addAdvancedAffiliateFilter, addSubcategory } = action.payload;
+            const { filter, addAdvancedAffiliateFilter, addSubcategory } =
+                action.payload;
             return {
                 ...state,
                 [filter]: {
@@ -236,7 +252,11 @@ export default function filterReducer(state = initialState, action) {
                         ...state[filter].filterPayload,
                         affiliatedFilters: {
                             ...state[filter].filterPayload.affiliatedFilters,
-                            [addSubcategory]: [...state[filter].filterPayload.affiliatedFilters[addSubcategory], addAdvancedAffiliateFilter],
+                            [addSubcategory]: [
+                                ...state[filter].filterPayload
+                                    .affiliatedFilters[addSubcategory],
+                                addAdvancedAffiliateFilter,
+                            ],
                         },
                     },
                 },
@@ -244,7 +264,8 @@ export default function filterReducer(state = initialState, action) {
         }
 
         case REMOVE_ADVANCED_AFFILIATED_FILTER: {
-            const { filter, removeAdvancedAffiliateFilter, removeSubcategory } = action.payload;         
+            const { filter, removeAdvancedAffiliateFilter, removeSubcategory } =
+                action.payload;
             return {
                 ...state,
                 [filter]: {
@@ -253,7 +274,14 @@ export default function filterReducer(state = initialState, action) {
                         ...state[filter].filterPayload,
                         affiliatedFilters: {
                             ...state[filter].filterPayload.affiliatedFilters,
-                            [removeSubcategory]: state[filter].filterPayload.affiliatedFilters[removeSubcategory].filter(filter => filter !== removeAdvancedAffiliateFilter),
+                            [removeSubcategory]: state[
+                                filter
+                            ].filterPayload.affiliatedFilters[
+                                removeSubcategory
+                            ].filter(
+                                (filter) =>
+                                    filter !== removeAdvancedAffiliateFilter
+                            ),
                         },
                     },
                 },
@@ -261,7 +289,7 @@ export default function filterReducer(state = initialState, action) {
         }
 
         case CLEAR_ADVANCED_AFFILIATED_FILTER: {
-            const { filter, clearSubcategory } = action.payload;       
+            const { filter, clearSubcategory } = action.payload;
             return {
                 ...state,
                 [filter]: {
@@ -278,7 +306,7 @@ export default function filterReducer(state = initialState, action) {
         }
 
         case SET_DATE_RANGE: {
-            const { filter, from, to } = action.payload;       
+            const { filter, from, to } = action.payload;
             return {
                 ...state,
                 [filter]: {
@@ -288,7 +316,8 @@ export default function filterReducer(state = initialState, action) {
                         dateRange: {
                             ...state[filter].filterPayload.dateRange,
                             from: from,
-                            to, to,
+                            to,
+                            to,
                         },
                     },
                 },
@@ -296,6 +325,6 @@ export default function filterReducer(state = initialState, action) {
         }
 
         default:
-          return state;
-    };
-};
+            return state;
+    }
+}

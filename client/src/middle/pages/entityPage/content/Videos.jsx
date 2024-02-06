@@ -5,10 +5,11 @@ import config from "@config";
 import { Video } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function Videos({ entity_id }) {
-
     /* 
         Description:   
             Queries the database to get the videos that the passed in entity is related 
@@ -33,60 +34,71 @@ export default function Videos({ entity_id }) {
     const sortData = (data) => {
         const pinnedRows = data.filter((item) => item.pinned === true);
         const notPinnedRows = data.filter((item) => item.pinned === false);
-    
+
         const parseDate = (dateString) => new Date(dateString);
-    
-        pinnedRows.sort((a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned));
-        notPinnedRows.sort((a, b) => parseDate(b.date_added) - parseDate(a.date_added));
-    
+
+        pinnedRows.sort(
+            (a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned)
+        );
+        notPinnedRows.sort(
+            (a, b) => parseDate(b.date_added) - parseDate(a.date_added)
+        );
+
         return [...pinnedRows, ...notPinnedRows];
     };
 
     // Gets video data and connects to socket
-    useEffect(() => {   
+    useEffect(() => {
         // Connects to the socket to get the new data when pinned is updated
-        videoSocketRef.current.on("pinnedUpdated", ({ relation, relation_id, pinned, date_pinned }) => {
-            setVideosData((prevData) => {
-                const updatedData = prevData.map((video) => {
-                    if (video.entities_videos_id === relation_id) {
-                        return { ...video, pinned: pinned, date_pinned: date_pinned };
-                    }
-                    return video;
+        videoSocketRef.current.on(
+            "pinnedUpdated",
+            ({ relation, relation_id, pinned, date_pinned }) => {
+                setVideosData((prevData) => {
+                    const updatedData = prevData.map((video) => {
+                        if (video.entities_videos_id === relation_id) {
+                            return {
+                                ...video,
+                                pinned: pinned,
+                                date_pinned: date_pinned,
+                            };
+                        }
+                        return video;
+                    });
+
+                    const sortedData = sortData(updatedData);
+
+                    return sortedData;
                 });
-    
-                const sortedData = sortData(updatedData);
-                
-                return sortedData;
-            });
-        });
+            }
+        );
 
         // Gets original video data
         const fetchVideosData = async () => {
             try {
-                const response = await Axios.get(`${serverUrl}/entities/entity_videos/${entity_id}`);
+                const response = await Axios.get(
+                    `${serverUrl}/entities/entity_videos/${entity_id}`
+                );
                 setVideosData(sortData(response.data));
             } catch (error) {
-                console.error('Error fetching image data:', error);
-            };
+                console.error("Error fetching image data:", error);
+            }
         };
-      
+
         fetchVideosData();
     }, [entity_id]);
 
-    const videos = videosData.map(video => {
-        return <Video 
-            key={`video_${video.video_id}`} 
-            type={"entity"} 
-            video_id={video.video_id}
-            pinned={video.pinned}
-            relation_id={video.entities_videos_id}
-            socket={videoSocketRef.current}
-        />
+    const videos = videosData.map((video) => {
+        return (
+            <Video
+                key={`video_${video.video_id}`}
+                type={"entity"}
+                video_id={video.video_id}
+                pinned={video.pinned}
+                relation_id={video.entities_videos_id}
+                socket={videoSocketRef.current}
+            />
+        );
     });
-    
-    return (
-        <div className="mt-4 grid grid-cols-3 gap-6">
-            {videos}
-        </div>
-    );
-};
+
+    return <div className='mt-4 grid grid-cols-3 gap-6'>{videos}</div>;
+}

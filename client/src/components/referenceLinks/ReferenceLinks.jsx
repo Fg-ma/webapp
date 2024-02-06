@@ -15,7 +15,6 @@ const popupContentVar = {
 };
 
 export default function ReferenceLinks({ references }) {
-
     /* 
         Description:   
             Creates a list of refernce links that can be clicked to get redirected to a 
@@ -29,21 +28,21 @@ export default function ReferenceLinks({ references }) {
     const [popupContent, setPopupContent] = useState(null);
     const hoverTimeout = useRef(null);
     const mousePosition = useRef(null);
-    
+
     // Get links for references
     useEffect(() => {
         setReferencesLinks(
             references.map((reference, index) => (
-                <div 
-                    key={reference.reference_id} 
-                    className="flex" 
-                >
-                    <a 
-                        href={reference.url} 
-                        className="text-fg-secondary underline decoration-2 underline-offset-2"
-                        onMouseEnter={(e) => startHoverTimer(e, reference)} 
-                        onMouseLeave={() => cancelHoverTimer()} 
-                        onMouseMove={(e) => {updateMousePosition(e); updatePopupPosition(e)}}
+                <div key={reference.reference_id} className='flex'>
+                    <a
+                        href={reference.url}
+                        className='text-fg-secondary underline decoration-2 underline-offset-2'
+                        onMouseEnter={(e) => startHoverTimer(e, reference)}
+                        onMouseLeave={() => cancelHoverTimer()}
+                        onMouseMove={(e) => {
+                            updateMousePosition(e);
+                            updatePopupPosition(e);
+                        }}
                     >
                         "{reference.title}"
                     </a>
@@ -55,21 +54,25 @@ export default function ReferenceLinks({ references }) {
 
     const showPopup = (reference) => {
         setPopupContent(
-            <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50">
-                <p className="text-lg font-bold">Title: {reference.title}</p>
-                <p className="text-base font-K2D">Author: {reference.author}</p>
-                <p className="text-base font-K2D">URL: {reference.url}</p>
+            <div className='p-3 absolute bg-white drop-shadow-md rounded w-max z-50'>
+                <p className='text-lg font-bold'>Title: {reference.title}</p>
+                <p className='text-base font-K2D'>Author: {reference.author}</p>
+                <p className='text-base font-K2D'>URL: {reference.url}</p>
             </div>
         );
     };
 
     const startHoverTimer = (e, reference) => {
-        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
+        mousePosition.current = {
+            x: `${e.clientX - 535}px`,
+            y: `${e.clientY - 50}px`,
+        };
         hoverTimeout.current = setTimeout(() => {
-            showPopup(reference); updatePopupPosition(e);
+            showPopup(reference);
+            updatePopupPosition(e);
         }, 1500);
     };
-    
+
     const cancelHoverTimer = () => {
         if (hoverTimeout.current) {
             clearTimeout(hoverTimeout.current);
@@ -78,14 +81,23 @@ export default function ReferenceLinks({ references }) {
     };
 
     const updateMousePosition = (e) => {
-        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
-    }
-    
+        mousePosition.current = {
+            x: `${e.clientX - 535}px`,
+            y: `${e.clientY - 50}px`,
+        };
+    };
+
     const updatePopupPosition = (e) => {
-        setPopupContent(prevPopupContent => {
+        setPopupContent((prevPopupContent) => {
             if (prevPopupContent) {
                 return (
-                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
+                    <div
+                        className='p-3 absolute bg-white drop-shadow-md rounded w-max z-50'
+                        style={{
+                            top: mousePosition.current.y,
+                            left: mousePosition.current.x,
+                        }}
+                    >
                         {prevPopupContent.props.children}
                     </div>
                 );
@@ -93,27 +105,26 @@ export default function ReferenceLinks({ references }) {
             return null;
         });
     };
-    
+
     return (
         <div>
-            {referencesLinks && 
+            {referencesLinks && (
                 <div>
-                    <div className="text-base font-K2D mt-4 italic flex flex-wrap line-clamp-2">
+                    <div className='text-base font-K2D mt-4 italic flex flex-wrap line-clamp-2'>
                         {referencesLinks}
                     </div>
                     {popupContent && (
-                            <motion.div 
-                                variants={popupContentVar}
-                                initial="init"
-                                animate="animate"
-                                transition="transition"
-                            >
-                                {popupContent}
-                            </motion.div>
-                        )
-                    }
+                        <motion.div
+                            variants={popupContentVar}
+                            initial='init'
+                            animate='animate'
+                            transition='transition'
+                        >
+                            {popupContent}
+                        </motion.div>
+                    )}
                 </div>
-            }
+            )}
         </div>
-    )
+    );
 }

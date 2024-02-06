@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { setPageState } from "../redux/pageState/pageStateActions";
 
 const navButtonsVar = {
@@ -19,14 +19,13 @@ const navButtonsVar = {
         lineHeight: "1.5rem",
         paddingTop: "0rem",
     },
-    transition: { 
-        ease: "easeOut", 
+    transition: {
+        ease: "easeOut",
         duration: 0.1,
     },
 };
 
 export default function LeftNav() {
-
     /* 
         Description:   
             A navbar that cycles between individuals, groups, and organizations. The currently 
@@ -37,7 +36,9 @@ export default function LeftNav() {
     */
 
     const dispatch = useDispatch();
-    const leftPage = useSelector((state) => state.page.left.pagePayload.pageState);
+    const leftPage = useSelector(
+        (state) => state.page.left.pagePayload.pageState
+    );
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -52,46 +53,60 @@ export default function LeftNav() {
         groups: deactiveStyles,
         organizations: deactiveStyles,
     };
-    
+
     leftStyles[leftPage] = { ...activeStyles };
 
-
     function swapLeftState(newState) {
-        dispatch(setPageState('left', newState));
+        dispatch(setPageState("left", newState));
     }
 
     return (
-        <nav id="leftNavbarBarSpace" className="relative z-50 block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md">
-            <div className="flex divide-x-2 divide-fg-white-70 h-full drop-shadow-md">
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+        <nav
+            id='leftNavbarBarSpace'
+            className='relative z-50 block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md'
+        >
+            <div className='flex divide-x-2 divide-fg-white-70 h-full drop-shadow-md'>
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapLeftState('individuals')}
+                    onClick={() => swapLeftState("individuals")}
                 >
-                    <button className="w-full" style={leftStyles["individuals"]}>Individuals</button>
+                    <button
+                        className='w-full'
+                        style={leftStyles["individuals"]}
+                    >
+                        Individuals
+                    </button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapLeftState('groups')}
+                    onClick={() => swapLeftState("groups")}
                 >
-                    <button className="w-full" style={leftStyles["groups"]}>Groups</button>
+                    <button className='w-full' style={leftStyles["groups"]}>
+                        Groups
+                    </button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapLeftState('organizations')}
+                    onClick={() => swapLeftState("organizations")}
                 >
-                    <button className="w-full" style={leftStyles["organizations"]}>Organizations</button>
+                    <button
+                        className='w-full'
+                        style={leftStyles["organizations"]}
+                    >
+                        Organizations
+                    </button>
                 </motion.div>
             </div>
         </nav>

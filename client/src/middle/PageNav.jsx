@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { setPageState } from "../redux/pageState/pageStateActions";
 
 const navButtonsVar = {
@@ -19,14 +19,13 @@ const navButtonsVar = {
         lineHeight: "1.25rem",
         paddingTop: "0rem",
     },
-    transition: { 
-        ease: "easeOut", 
+    transition: {
+        ease: "easeOut",
         duration: 0.1,
     },
 };
 
 export default function PageNav() {
-
     /* 
         Description:   
             Creates the page navbar that appears at the bottom of the middle space
@@ -37,7 +36,9 @@ export default function PageNav() {
     */
 
     const dispatch = useDispatch();
-    const mainPageState = useSelector((state) => state.page.main.pagePayload.pageState);
+    const mainPageState = useSelector(
+        (state) => state.page.main.pagePayload.pageState
+    );
 
     const deactiveStyles = {};
     const activeStyles = {
@@ -59,100 +60,141 @@ export default function PageNav() {
     mainPageStyles[mainPageState] = { ...activeStyles };
 
     function swapPageState(newState) {
-        dispatch(setPageState('main', newState));
-    };
+        dispatch(setPageState("main", newState));
+    }
 
     return (
         <nav
-            id="pageNav"
-            className="bg-fg-white-95 h-16  w-full rounded-xl mt-8" 
-            style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}
+            id='pageNav'
+            className='bg-fg-white-95 h-16  w-full rounded-xl mt-8'
+            style={{
+                boxShadow:
+                    "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
+            }}
         >
-            <div className="flex divide-x-2 divide-fg-white-70 h-full">
-                <motion.div 
-                    className="h-11 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            <div className='flex divide-x-2 divide-fg-white-70 h-full'>
+                <motion.div
+                    className='h-11 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('profile')}
+                    onClick={() => swapPageState("profile")}
                 >
-                    <button 
-                        className="rounded-full bg-fg-white-90 h-10 aspect-square text-sm">
+                    <button className='rounded-full bg-fg-white-90 h-10 aspect-square text-sm'></button>
+                    <button style={mainPageStyles["profile"]} className='ml-2'>
+                        Profile
                     </button>
-                    <button style={mainPageStyles["profile"]} className="ml-2">Profile</button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('home')}
+                    onClick={() => swapPageState("home")}
                 >
-                    <button 
-                        className="w-7 aspect-square bg-no-repeat bg-center bg-cover" 
-                        style={{ backgroundImage: 'url("/assets/icons/home.svg")' }}>
+                    <button
+                        className='w-7 aspect-square bg-no-repeat bg-center bg-cover'
+                        style={{
+                            backgroundImage: 'url("/assets/icons/home.svg")',
+                        }}
+                    ></button>
+                    <button
+                        style={mainPageStyles["home"]}
+                        className='ml-1 pt-1'
+                    >
+                        Home
                     </button>
-                    <button style={mainPageStyles["home"]} className="ml-1 pt-1">Home</button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('messages')}
+                    onClick={() => swapPageState("messages")}
                 >
-                    <button 
-                        className="w-7 aspect-square bg-no-repeat bg-center bg-cover" 
-                        style={{ backgroundImage: 'url("/assets/icons/messages.svg")' }}>
+                    <button
+                        className='w-7 aspect-square bg-no-repeat bg-center bg-cover'
+                        style={{
+                            backgroundImage:
+                                'url("/assets/icons/messages.svg")',
+                        }}
+                    ></button>
+                    <button
+                        style={mainPageStyles["messages"]}
+                        className='ml-1 pt-1'
+                    >
+                        Messages
                     </button>
-                    <button style={mainPageStyles["messages"]} className="ml-1 pt-1">Messages</button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('dogEars')}
+                    onClick={() => swapPageState("dogEars")}
                 >
-                    <button 
-                        className="w-7 aspect-square bg-no-repeat bg-center bg-cover" 
-                        style={{ backgroundImage: 'url("/assets/icons/dogEars.svg")' }}>
+                    <button
+                        className='w-7 aspect-square bg-no-repeat bg-center bg-cover'
+                        style={{
+                            backgroundImage: 'url("/assets/icons/dogEars.svg")',
+                        }}
+                    ></button>
+                    <button
+                        style={mainPageStyles["dogEars"]}
+                        className='ml-1 pt-1'
+                    >
+                        Dog-Ears
                     </button>
-                    <button style={mainPageStyles["dogEars"]} className="ml-1 pt-1">Dog-Ears</button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('notifications')}
+                    onClick={() => swapPageState("notifications")}
                 >
-                    <button 
-                        className="w-7 aspect-square bg-no-repeat bg-center bg-cover" 
-                        style={{ backgroundImage: 'url("/assets/icons/notifications.svg")' }}>
+                    <button
+                        className='w-7 aspect-square bg-no-repeat bg-center bg-cover'
+                        style={{
+                            backgroundImage:
+                                'url("/assets/icons/notifications.svg")',
+                        }}
+                    ></button>
+                    <button
+                        style={mainPageStyles["notifications"]}
+                        className='ml-1 pt-1'
+                    >
+                        Notifications
                     </button>
-                    <button style={mainPageStyles["notifications"]} className="ml-1 pt-1">Notifications</button>
                 </motion.div>
-                <motion.div 
-                    className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+                <motion.div
+                    className='h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer'
                     variants={navButtonsVar}
-                    initial="init"
-                    whileHover="hover"
+                    initial='init'
+                    whileHover='hover'
                     transition={navButtonsVar.transition}
-                    onClick={() => swapPageState('settings')}
+                    onClick={() => swapPageState("settings")}
                 >
-                    <button 
-                        className="w-7 aspect-square bg-no-repeat bg-center bg-cover" 
-                        style={{ backgroundImage: 'url("/assets/icons/settings.svg")' }}>
+                    <button
+                        className='w-7 aspect-square bg-no-repeat bg-center bg-cover'
+                        style={{
+                            backgroundImage:
+                                'url("/assets/icons/settings.svg")',
+                        }}
+                    ></button>
+                    <button
+                        style={mainPageStyles["settings"]}
+                        className='ml-1 pt-1'
+                    >
+                        Settings
                     </button>
-                    <button style={mainPageStyles["settings"]} className="ml-1 pt-1">Settings</button>
                 </motion.div>
             </div>
         </nav>
-    )
+    );
 }

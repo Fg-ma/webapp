@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function CaptionDropdown({ options, value, onChange, type, dateRangeCaptionDropdownRef }) {
-
+export default function CaptionDropdown({
+    options,
+    value,
+    onChange,
+    type,
+    dateRangeCaptionDropdownRef,
+}) {
     /* 
         Description:   
             Creates the month and year dropdowns for the caption of the date range dropdown.
@@ -20,13 +25,16 @@ export default function CaptionDropdown({ options, value, onChange, type, dateRa
         setTimeout(() => {
             onChange(option);
             setIsCaptionDropOpen(false);
-        }, 0)
+        }, 0);
     };
 
     const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
             setIsCaptionDropOpen(false);
-        };
+        }
     };
 
     useEffect(() => {
@@ -37,21 +45,24 @@ export default function CaptionDropdown({ options, value, onChange, type, dateRa
     }, []);
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className='relative' ref={dropdownRef}>
             <button
                 onClick={handleToggle}
-                className="h-8 px-1.5 bg-125 text-black font-Josefin text-xl leading-5"
+                className='h-8 px-1.5 bg-125 text-black font-Josefin text-xl leading-5'
             >
-                {type === 'month' ? options[value] : value}
+                {type === "month" ? options[value] : value}
             </button>
             {isCaptionDropOpen && (
-                <div ref={dateRangeCaptionDropdownRef} className="absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2">
-                    <div className="h-48 overflow-scroll">
-                        <ul className="py-1">
+                <div
+                    ref={dateRangeCaptionDropdownRef}
+                    className='absolute top-full mt-1 pr-2 bg-white rounded shadow-md z-50 left-1/2 transform -translate-x-1/2'
+                >
+                    <div className='h-48 overflow-scroll'>
+                        <ul className='py-1'>
                             {options.map((option, index) => (
                                 <li
                                     key={index}
-                                    className="px-3 py-1 cursor-pointer hover:bg-gray-200"
+                                    className='px-3 py-1 cursor-pointer hover:bg-gray-200'
                                     onClick={() => handleSelect(index)}
                                 >
                                     {option}
@@ -63,4 +74,4 @@ export default function CaptionDropdown({ options, value, onChange, type, dateRa
             )}
         </div>
     );
-};
+}

@@ -8,9 +8,7 @@ import IndividualRecs from "./content/IndividualRecs";
 import GroupRecs from "./content/GroupRecs";
 import OrganizationRecs from "./content/OrganizationRecs";
 
-
 export default function LeftVerticalSplitPane() {
-
     /*
         Description:   
             Creates 3 panes of which the top and bottom are used to display context
@@ -21,57 +19,64 @@ export default function LeftVerticalSplitPane() {
             Depending on the height that the middle pane is dragged to the bg-color changes
             from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
     */
-   
-    const leftPage = useSelector(state => state.page.left.pagePayload.pageState);
+
+    const leftPage = useSelector(
+        (state) => state.page.left.pagePayload.pageState
+    );
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);
-    const [paneHeight, setPaneHeight] = useState('60%');
-    const [headerLightness, setHeaderLightness] = useState(80)
+    const [paneHeight, setPaneHeight] = useState("60%");
+    const [headerLightness, setHeaderLightness] = useState(80);
 
-    // Handles softly lowering and raising the pane height when togglePaneHeight is called 
+    // Handles softly lowering and raising the pane height when togglePaneHeight is called
     const animateTogglePaneHeight = (targetHeight, duration = 500) => {
         const start = Date.now();
         const initialHeight = parseFloat(paneHeight) || 0;
-        
+
         const animate = () => {
             const now = Date.now();
             const progress = Math.min(1, (now - start) / duration);
-            
+
             const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
-            
-            const newPaneHeight = initialHeight + (targetHeight - initialHeight) * easedProgress;
-            
+
+            const newPaneHeight =
+                initialHeight + (targetHeight - initialHeight) * easedProgress;
+
             setPaneHeight(`${newPaneHeight}%`);
             setHeaderLightness(getLightness(newPaneHeight));
-            
+
             if (progress < 1) {
                 requestAnimationFrame(animate);
             }
         };
-      
+
         requestAnimationFrame(animate);
     };
 
     const handleMove = (clientY) => {
         if (isResizing) {
-            const containerHeight = document.getElementById("leftSpaceContentContainer").offsetHeight;
+            const containerHeight = document.getElementById(
+                "leftSpaceContentContainer"
+            ).offsetHeight;
             const mouseYDelta = clientY - initialMousePosition;
-            
+
             // Adjust the speed by fiddling with the sensitivity factor
             const sensitivityFactor = 1;
-            let newPaneHeight = initialPaneHeight + (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
-            
+            let newPaneHeight =
+                initialPaneHeight +
+                (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
+
             // Cap the newPaneHeight to a maximum value
             const maxPaneHeight = 100;
             newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
-            
+
             const minPaneHeight = 15;
             newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
-            
+
             // Calculate lightness based on the percentage of newPaneHeight
             let lightness = getLightness(newPaneHeight);
-            
+
             setPaneHeight(`${newPaneHeight}%`);
             setHeaderLightness(lightness);
         }
@@ -80,29 +85,29 @@ export default function LeftVerticalSplitPane() {
     const handleEnd = () => {
         setIsResizing(false);
     };
-    
+
     const handleStart = (clientY) => {
         setIsResizing(true);
         setInitialMousePosition(clientY);
         setInitialPaneHeight(parseFloat(paneHeight) || 0);
     };
-    
+
     const handleMouseMove = (event) => {
         handleMove(event.clientY);
     };
-    
+
     const handleTouchMove = (event) => {
         handleMove(event.touches[0].clientY);
     };
-    
+
     const handleMouseUp = () => {
         handleEnd();
     };
-    
+
     const handleTouchEnd = () => {
         handleEnd();
     };
-    
+
     // Handles resizing event listeners
     useEffect(() => {
         document.addEventListener("mousemove", handleMouseMove);
@@ -122,10 +127,10 @@ export default function LeftVerticalSplitPane() {
     useEffect(() => {
         // Get the initial height of the leftPane when the component mounts
         const initialHeight = parseFloat(paneHeight) || 0;
-    
+
         // Set the initial lightness based on the initial height
-        let initialLightness = getLightness(initialHeight)
-    
+        let initialLightness = getLightness(initialHeight);
+
         setHeaderLightness(initialLightness);
     }, []);
 
@@ -136,10 +141,10 @@ export default function LeftVerticalSplitPane() {
     };
 
     const getLightness = (height) => {
-        let lightness = Math.max(52, 100 - (height*.75));
+        let lightness = Math.max(52, 100 - height * 0.75);
         lightness = Math.min(60, lightness);
-        return lightness
-    }
+        return lightness;
+    };
 
     const renderContent = () => {
         switch (leftPage) {
@@ -168,12 +173,12 @@ export default function LeftVerticalSplitPane() {
     };
 
     return (
-        <div className="leftVerticalSplitPane">
-            <div className="leftPane" style={{ height: paneHeight }}>
+        <div className='leftVerticalSplitPane'>
+            <div className='leftPane' style={{ height: paneHeight }}>
                 {renderContent()}
             </div>
-            <div 
-                className="leftResizer" 
+            <div
+                className='leftResizer'
                 onMouseDown={(e) => {
                     handleStart(e.clientY);
                 }}
@@ -183,11 +188,18 @@ export default function LeftVerticalSplitPane() {
                 onMouseUp={handleMouseUp}
                 onTouchEnd={handleTouchEnd}
             >
-                <RecHeader lightness={headerLightness} togglePaneHeight={togglePaneHeight} />
+                <RecHeader
+                    lightness={headerLightness}
+                    togglePaneHeight={togglePaneHeight}
+                />
             </div>
-            <div id="leftBottomPane" className="leftPane" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
+            <div
+                id='leftBottomPane'
+                className='leftPane'
+                style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
+            >
                 {renderRecs()}
             </div>
         </div>
-  );
-};
+    );
+}

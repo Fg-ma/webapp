@@ -4,10 +4,11 @@ import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function IndividualCards() {
-
     /* 
         Description:   
             Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
@@ -15,7 +16,7 @@ export default function IndividualCards() {
         Unique Properties:
             N/A
     */
-   
+
     const [individuals, setIndividuals] = useState([]);
 
     useEffect(() => {
@@ -24,25 +25,27 @@ export default function IndividualCards() {
                 const response = await Axios.get(`${serverUrl}/individuals`);
                 setIndividuals(response.data);
             } catch (error) {
-                console.error('Error fetching individual data:', error);
-            };
+                console.error("Error fetching individual data:", error);
+            }
         };
-      
+
         fetchIndividualData();
     }, []);
 
-    const indCards = individuals.map(indInfo => {
-        return <IndividualCard 
-                    key={indInfo.individual_id} 
-                    id={indInfo.individual_id}
-                    name={indInfo.individual_name} 
-                    currentIssue={indInfo.individual_currentIssue} 
-                />
+    const indCards = individuals.map((indInfo) => {
+        return (
+            <IndividualCard
+                key={indInfo.individual_id}
+                id={indInfo.individual_id}
+                name={indInfo.individual_name}
+                currentIssue={indInfo.individual_currentIssue}
+            />
+        );
     });
 
     return (
-        <div id="individualCards" className="h-full mr-3 overflow-scroll">
+        <div id='individualCards' className='h-full mr-3 overflow-scroll'>
             {indCards}
         </div>
-    )
+    );
 }

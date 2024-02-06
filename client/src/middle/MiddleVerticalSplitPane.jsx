@@ -6,7 +6,9 @@ import RelatedIssues from "./content/RelatedIssues";
 import SheetViewer from "../components/viewers/SheetViewer";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function MiddleVerticalSplitPane() {
     const [isResizing, setIsResizing] = useState(false);
@@ -15,46 +17,51 @@ export default function MiddleVerticalSplitPane() {
     const [paneHeight, setPaneHeight] = useState("79%");
     const [headerLightness, setHeaderLightness] = useState(80);
 
-    // Handles softly lowering and raising the pane height when togglePaneHeight is called 
+    // Handles softly lowering and raising the pane height when togglePaneHeight is called
     const animateTogglePaneHeight = (targetHeight, duration = 500) => {
         const start = Date.now();
         const initialHeight = parseFloat(paneHeight) || 0;
-        
+
         const animate = () => {
             const now = Date.now();
             const progress = Math.min(1, (now - start) / duration);
-            
+
             const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
-            
-            const newPaneHeight = initialHeight + (targetHeight - initialHeight) * easedProgress;
-            
+
+            const newPaneHeight =
+                initialHeight + (targetHeight - initialHeight) * easedProgress;
+
             setPaneHeight(`${newPaneHeight}%`);
             setHeaderLightness(getLightness(newPaneHeight));
-            
+
             if (progress < 1) {
                 requestAnimationFrame(animate);
             }
         };
-      
+
         requestAnimationFrame(animate);
     };
 
     const handleMove = (clientY) => {
         if (isResizing) {
-            const containerHeight = document.getElementById("leftSpaceContentContainer").offsetHeight;
+            const containerHeight = document.getElementById(
+                "leftSpaceContentContainer"
+            ).offsetHeight;
             const mouseYDelta = clientY - initialMousePosition;
-            
+
             // Adjust the speed by fiddling with the sensitivity factor
             const sensitivityFactor = 1;
-            let newPaneHeight = initialPaneHeight + (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
-            
+            let newPaneHeight =
+                initialPaneHeight +
+                (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
+
             // Cap the newPaneHeight to a max and min value
             const maxPaneHeight = 100;
             newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
-            
+
             const minPaneHeight = 15;
             newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
-            
+
             setPaneHeight(`${newPaneHeight}%`);
             setHeaderLightness(getLightness(newPaneHeight));
         }
@@ -83,7 +90,7 @@ export default function MiddleVerticalSplitPane() {
     };
 
     const handleTouchEnd = () => {
-         handleEnd();
+        handleEnd();
     };
 
     // Handles resizing event listeners
@@ -123,35 +130,38 @@ export default function MiddleVerticalSplitPane() {
 
     const fileToBlobFunc = (event) => {
         const selectedFile = event.target.files[0];
-      
+
         if (selectedFile) {
             const formData = new FormData();
-            formData.append('file', selectedFile);
-            
-            Axios.put(
-                `${serverUrl}/videos_updating`,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'image/png',
-                    },
-                }
-            ).then((response) => {}).catch((error) => {
-                console.error('Error uploading file:', error);
-            });
-        };
+            formData.append("file", selectedFile);
+
+            Axios.put(`${serverUrl}/videos_updating`, formData, {
+                headers: {
+                    "Content-Type": "image/png",
+                },
+            })
+                .then((response) => {})
+                .catch((error) => {
+                    console.error("Error uploading file:", error);
+                });
+        }
     };
-    
+
     return (
-        <div className="flex flex-col w-full h-full relative">
-            <div className="mr-3 overflow-auto box-border" style={{ height: paneHeight }}>
-                <div className="ml-8 mr-5 my-8">
-                    <SheetViewer sheet_id={Math.floor(Math.random() * 20) + 1} />
-                    <input type="file" onChange={fileToBlobFunc} />
+        <div className='flex flex-col w-full h-full relative'>
+            <div
+                className='mr-3 overflow-auto box-border'
+                style={{ height: paneHeight }}
+            >
+                <div className='ml-8 mr-5 my-8'>
+                    <SheetViewer
+                        sheet_id={Math.floor(Math.random() * 20) + 1}
+                    />
+                    <input type='file' onChange={fileToBlobFunc} />
                 </div>
             </div>
             <div
-                className="cursor-ns-resize select-none"
+                className='cursor-ns-resize select-none'
                 onMouseDown={(e) => {
                     handleStart(e.clientY);
                 }}
@@ -161,9 +171,15 @@ export default function MiddleVerticalSplitPane() {
                 onMouseUp={handleMouseUp}
                 onTouchEnd={handleTouchEnd}
             >
-                <RelatedIssuesHeader lightness={headerLightness} togglePaneHeight={togglePaneHeight} />
+                <RelatedIssuesHeader
+                    lightness={headerLightness}
+                    togglePaneHeight={togglePaneHeight}
+                />
             </div>
-            <div className="overflow-auto box-border bg-fg-white-95" style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}>
+            <div
+                className='overflow-auto box-border bg-fg-white-95'
+                style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
+            >
                 <RelatedIssues />
             </div>
         </div>

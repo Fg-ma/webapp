@@ -4,10 +4,11 @@ import config from "@config";
 import { NewsCard } from "./RightSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function NewsCards() {
-
     /* 
         Description:   
             Gets issues data from a database then extracts the id, title, and issueQuestions to be mapped
@@ -24,25 +25,27 @@ export default function NewsCards() {
                 const response = await Axios.get(`${serverUrl}/sheets`);
                 setSheets(response.data);
             } catch (error) {
-                console.error('Error fetching sheet data:', error);
-            };
+                console.error("Error fetching sheet data:", error);
+            }
         };
-      
+
         fetchSheetData();
     }, []);
 
-    const newsCards = sheets.map(issueInfo => {
-        return <NewsCard 
-                    key={issueInfo.sheet_id} 
-                    sheet_id={issueInfo.sheet_id}
-                    title={issueInfo.sheet_title} 
-                    subject={issueInfo.sheet_subject} 
-                /> //affResponses={issueInfo.affResponses} />
+    const newsCards = sheets.map((issueInfo) => {
+        return (
+            <NewsCard
+                key={issueInfo.sheet_id}
+                sheet_id={issueInfo.sheet_id}
+                title={issueInfo.sheet_title}
+                subject={issueInfo.sheet_subject}
+            />
+        ); //affResponses={issueInfo.affResponses} />
     });
 
     return (
-        <div id="newsCards" className="h-full mr-3 overflow-scroll">
+        <div id='newsCards' className='h-full mr-3 overflow-scroll'>
             {newsCards}
         </div>
-    )
+    );
 }

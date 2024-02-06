@@ -4,10 +4,11 @@ import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function GroupCards() {
-
     /* 
         Description:   
             Gets group data from a database then extracts the id, name, and currentIssue to be mapped
@@ -24,25 +25,27 @@ export default function GroupCards() {
                 const response = await Axios.get(`${serverUrl}/groups`);
                 setGroups(response.data);
             } catch (error) {
-                console.error('Error fetching group data:', error);
-            };
+                console.error("Error fetching group data:", error);
+            }
         };
-      
+
         fetchGroupData();
     }, []);
-   
-    const grpCards = groups.map(grpInfo => {
-        return <GroupCard 
-                    key={grpInfo.group_id} 
-                    id={grpInfo.group_id}
-                    name={grpInfo.group_name} 
-                    currentIssue={grpInfo.group_currentIssue} 
-                /> //affInCommon={grpInfo.affInCommon} />
+
+    const grpCards = groups.map((grpInfo) => {
+        return (
+            <GroupCard
+                key={grpInfo.group_id}
+                id={grpInfo.group_id}
+                name={grpInfo.group_name}
+                currentIssue={grpInfo.group_currentIssue}
+            />
+        ); //affInCommon={grpInfo.affInCommon} />
     });
 
     return (
-        <div id="groupCards" className="h-full mr-3 overflow-scroll">
+        <div id='groupCards' className='h-full mr-3 overflow-scroll'>
             {grpCards}
         </div>
-    )
+    );
 }

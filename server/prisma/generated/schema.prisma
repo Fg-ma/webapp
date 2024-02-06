@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/client"
+  output   = "./generated"
 }
 
 datasource db {
@@ -234,13 +234,21 @@ model sheets {
   sheet_author_id    Int
   sheet_title        String               @db.VarChar(256)
   sheet_subject      String               @db.Text
-  sheet_filename     String?              @db.VarChar(256)
-  sheet_data         Bytes
+  sheet_filename     String               @db.VarChar(256)
+  sheet_data_id      Int
   collections_sheets collections_sheets[]
   entities_sheets    entities_sheets[]
+  sheets_data        sheets_data          @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "Sheets_sheet_data_id_fk")
   individuals        individuals          @relation(fields: [sheet_author_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
 
+  @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
   @@index([sheet_author_id], map: "sheets_sheet_author_id_fk")
+}
+
+model sheets_data {
+  sheet_data_id Int      @id @unique(map: "sheet_data_id_UNIQUE") @default(autoincrement())
+  sheet_data    Bytes
+  sheets        sheets[]
 }
 
 model user_credentials {

@@ -10,7 +10,6 @@ import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
 
 export default function RightSpace() {
-
     /* 
         Description:   
             Container for everything that happens in the right space section including 
@@ -19,7 +18,9 @@ export default function RightSpace() {
             N/A
     */
 
-    const rightPage = useSelector(state => state.page.right.pagePayload.pageState);
+    const rightPage = useSelector(
+        (state) => state.page.right.pagePayload.pageState
+    );
 
     const renderContent = () => {
         switch (rightPage) {
@@ -32,26 +33,31 @@ export default function RightSpace() {
             case "messages":
                 return <MessagesCards />;
             case "dogEars":
-                return <DogEarCards />
+                return <DogEarCards />;
             default:
-                return <NewsCards />
+                return <NewsCards />;
         }
     };
-    
+
     return (
-        <div 
-            className="bg-fg-white-95 rounded-xl overflow-hidden h-4/5" 
-            style={{ 
-                width: "24.5%", 
+        <div
+            className='bg-fg-white-95 rounded-xl overflow-hidden h-4/5'
+            style={{
+                width: "24.5%",
                 minWidth: "24.5%",
                 maxWidth: "24.5%",
-                boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)'
-            }}>
+                boxShadow:
+                    "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
+            }}
+        >
             <RightNav />
-            <div id="rightSpaceContentContainer" style={{ height: `calc(100% - 7rem)` }}>
+            <div
+                id='rightSpaceContentContainer'
+                style={{ height: `calc(100% - 7rem)` }}
+            >
                 {renderContent()}
             </div>
             <RightSearchBar page={rightPage} />
         </div>
-    )
+    );
 }

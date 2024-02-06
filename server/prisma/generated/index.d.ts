@@ -99,6 +99,11 @@ export type organizations_members = $Result.DefaultSelection<Prisma.$organizatio
  */
 export type sheets = $Result.DefaultSelection<Prisma.$sheetsPayload>
 /**
+ * Model sheets_data
+ * 
+ */
+export type sheets_data = $Result.DefaultSelection<Prisma.$sheets_dataPayload>
+/**
  * Model user_credentials
  * 
  */
@@ -405,6 +410,16 @@ export class PrismaClient<
     * ```
     */
   get sheets(): Prisma.sheetsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.sheets_data`: Exposes CRUD operations for the **sheets_data** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sheets_data
+    * const sheets_data = await prisma.sheets_data.findMany()
+    * ```
+    */
+  get sheets_data(): Prisma.sheets_dataDelegate<ExtArgs>;
 
   /**
    * `prisma.user_credentials`: Exposes CRUD operations for the **user_credentials** model.
@@ -922,6 +937,7 @@ export namespace Prisma {
     organizations: 'organizations',
     organizations_members: 'organizations_members',
     sheets: 'sheets',
+    sheets_data: 'sheets_data',
     user_credentials: 'user_credentials',
     videos: 'videos',
     videos_data: 'videos_data'
@@ -941,7 +957,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'collections' | 'collections_images' | 'collections_sheets' | 'collections_videos' | 'entities' | 'entities_images' | 'entities_references' | 'entities_sheets' | 'entities_videos' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'user_credentials' | 'videos' | 'videos_data'
+      modelProps: 'collections' | 'collections_images' | 'collections_sheets' | 'collections_videos' | 'entities' | 'entities_images' | 'entities_references' | 'entities_sheets' | 'entities_videos' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2067,6 +2083,72 @@ export namespace Prisma {
           }
         }
       }
+      sheets_data: {
+        payload: Prisma.$sheets_dataPayload<ExtArgs>
+        fields: Prisma.sheets_dataFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.sheets_dataFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.sheets_dataFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          findFirst: {
+            args: Prisma.sheets_dataFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.sheets_dataFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          findMany: {
+            args: Prisma.sheets_dataFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>[]
+          }
+          create: {
+            args: Prisma.sheets_dataCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          createMany: {
+            args: Prisma.sheets_dataCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.sheets_dataDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          update: {
+            args: Prisma.sheets_dataUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          deleteMany: {
+            args: Prisma.sheets_dataDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.sheets_dataUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.sheets_dataUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_dataPayload>
+          }
+          aggregate: {
+            args: Prisma.Sheets_dataAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSheets_data>
+          }
+          groupBy: {
+            args: Prisma.sheets_dataGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Sheets_dataGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.sheets_dataCountArgs<ExtArgs>,
+            result: $Utils.Optional<Sheets_dataCountAggregateOutputType> | number
+          }
+        }
+      }
       user_credentials: {
         payload: Prisma.$user_credentialsPayload<ExtArgs>
         fields: Prisma.user_credentialsFieldRefs
@@ -2867,6 +2949,40 @@ export namespace Prisma {
    */
   export type SheetsCountOutputTypeCountEntities_sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: entities_sheetsWhereInput
+  }
+
+
+
+  /**
+   * Count Type Sheets_dataCountOutputType
+   */
+
+  export type Sheets_dataCountOutputType = {
+    sheets: number
+  }
+
+  export type Sheets_dataCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sheets?: boolean | Sheets_dataCountOutputTypeCountSheetsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Sheets_dataCountOutputType without action
+   */
+  export type Sheets_dataCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sheets_dataCountOutputType
+     */
+    select?: Sheets_dataCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Sheets_dataCountOutputType without action
+   */
+  export type Sheets_dataCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sheetsWhereInput
   }
 
 
@@ -19185,11 +19301,13 @@ export namespace Prisma {
   export type SheetsAvgAggregateOutputType = {
     sheet_id: number | null
     sheet_author_id: number | null
+    sheet_data_id: number | null
   }
 
   export type SheetsSumAggregateOutputType = {
     sheet_id: number | null
     sheet_author_id: number | null
+    sheet_data_id: number | null
   }
 
   export type SheetsMinAggregateOutputType = {
@@ -19198,7 +19316,7 @@ export namespace Prisma {
     sheet_title: string | null
     sheet_subject: string | null
     sheet_filename: string | null
-    sheet_data: Buffer | null
+    sheet_data_id: number | null
   }
 
   export type SheetsMaxAggregateOutputType = {
@@ -19207,7 +19325,7 @@ export namespace Prisma {
     sheet_title: string | null
     sheet_subject: string | null
     sheet_filename: string | null
-    sheet_data: Buffer | null
+    sheet_data_id: number | null
   }
 
   export type SheetsCountAggregateOutputType = {
@@ -19216,7 +19334,7 @@ export namespace Prisma {
     sheet_title: number
     sheet_subject: number
     sheet_filename: number
-    sheet_data: number
+    sheet_data_id: number
     _all: number
   }
 
@@ -19224,11 +19342,13 @@ export namespace Prisma {
   export type SheetsAvgAggregateInputType = {
     sheet_id?: true
     sheet_author_id?: true
+    sheet_data_id?: true
   }
 
   export type SheetsSumAggregateInputType = {
     sheet_id?: true
     sheet_author_id?: true
+    sheet_data_id?: true
   }
 
   export type SheetsMinAggregateInputType = {
@@ -19237,7 +19357,7 @@ export namespace Prisma {
     sheet_title?: true
     sheet_subject?: true
     sheet_filename?: true
-    sheet_data?: true
+    sheet_data_id?: true
   }
 
   export type SheetsMaxAggregateInputType = {
@@ -19246,7 +19366,7 @@ export namespace Prisma {
     sheet_title?: true
     sheet_subject?: true
     sheet_filename?: true
-    sheet_data?: true
+    sheet_data_id?: true
   }
 
   export type SheetsCountAggregateInputType = {
@@ -19255,7 +19375,7 @@ export namespace Prisma {
     sheet_title?: true
     sheet_subject?: true
     sheet_filename?: true
-    sheet_data?: true
+    sheet_data_id?: true
     _all?: true
   }
 
@@ -19350,8 +19470,8 @@ export namespace Prisma {
     sheet_author_id: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
     _count: SheetsCountAggregateOutputType | null
     _avg: SheetsAvgAggregateOutputType | null
     _sum: SheetsSumAggregateOutputType | null
@@ -19379,9 +19499,10 @@ export namespace Prisma {
     sheet_title?: boolean
     sheet_subject?: boolean
     sheet_filename?: boolean
-    sheet_data?: boolean
+    sheet_data_id?: boolean
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
+    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     individuals?: boolean | individualsDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sheets"]>
@@ -19392,12 +19513,13 @@ export namespace Prisma {
     sheet_title?: boolean
     sheet_subject?: boolean
     sheet_filename?: boolean
-    sheet_data?: boolean
+    sheet_data_id?: boolean
   }
 
   export type sheetsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
+    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     individuals?: boolean | individualsDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -19408,6 +19530,7 @@ export namespace Prisma {
     objects: {
       collections_sheets: Prisma.$collections_sheetsPayload<ExtArgs>[]
       entities_sheets: Prisma.$entities_sheetsPayload<ExtArgs>[]
+      sheets_data: Prisma.$sheets_dataPayload<ExtArgs>
       individuals: Prisma.$individualsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -19415,8 +19538,8 @@ export namespace Prisma {
       sheet_author_id: number
       sheet_title: string
       sheet_subject: string
-      sheet_filename: string | null
-      sheet_data: Buffer
+      sheet_filename: string
+      sheet_data_id: number
     }, ExtArgs["result"]["sheets"]>
     composites: {}
   }
@@ -19786,6 +19909,8 @@ export namespace Prisma {
 
     entities_sheets<T extends sheets$entities_sheetsArgs<ExtArgs> = {}>(args?: Subset<T, sheets$entities_sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    sheets_data<T extends sheets_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sheets_dataDefaultArgs<ExtArgs>>): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
     individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
@@ -19821,7 +19946,7 @@ export namespace Prisma {
     readonly sheet_title: FieldRef<"sheets", 'String'>
     readonly sheet_subject: FieldRef<"sheets", 'String'>
     readonly sheet_filename: FieldRef<"sheets", 'String'>
-    readonly sheet_data: FieldRef<"sheets", 'Bytes'>
+    readonly sheet_data_id: FieldRef<"sheets", 'Int'>
   }
     
 
@@ -20187,6 +20312,948 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: sheetsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model sheets_data
+   */
+
+  export type AggregateSheets_data = {
+    _count: Sheets_dataCountAggregateOutputType | null
+    _avg: Sheets_dataAvgAggregateOutputType | null
+    _sum: Sheets_dataSumAggregateOutputType | null
+    _min: Sheets_dataMinAggregateOutputType | null
+    _max: Sheets_dataMaxAggregateOutputType | null
+  }
+
+  export type Sheets_dataAvgAggregateOutputType = {
+    sheet_data_id: number | null
+  }
+
+  export type Sheets_dataSumAggregateOutputType = {
+    sheet_data_id: number | null
+  }
+
+  export type Sheets_dataMinAggregateOutputType = {
+    sheet_data_id: number | null
+    sheet_data: Buffer | null
+  }
+
+  export type Sheets_dataMaxAggregateOutputType = {
+    sheet_data_id: number | null
+    sheet_data: Buffer | null
+  }
+
+  export type Sheets_dataCountAggregateOutputType = {
+    sheet_data_id: number
+    sheet_data: number
+    _all: number
+  }
+
+
+  export type Sheets_dataAvgAggregateInputType = {
+    sheet_data_id?: true
+  }
+
+  export type Sheets_dataSumAggregateInputType = {
+    sheet_data_id?: true
+  }
+
+  export type Sheets_dataMinAggregateInputType = {
+    sheet_data_id?: true
+    sheet_data?: true
+  }
+
+  export type Sheets_dataMaxAggregateInputType = {
+    sheet_data_id?: true
+    sheet_data?: true
+  }
+
+  export type Sheets_dataCountAggregateInputType = {
+    sheet_data_id?: true
+    sheet_data?: true
+    _all?: true
+  }
+
+  export type Sheets_dataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sheets_data to aggregate.
+     */
+    where?: sheets_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_data to fetch.
+     */
+    orderBy?: sheets_dataOrderByWithRelationInput | sheets_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: sheets_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned sheets_data
+    **/
+    _count?: true | Sheets_dataCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Sheets_dataAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Sheets_dataSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Sheets_dataMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Sheets_dataMaxAggregateInputType
+  }
+
+  export type GetSheets_dataAggregateType<T extends Sheets_dataAggregateArgs> = {
+        [P in keyof T & keyof AggregateSheets_data]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSheets_data[P]>
+      : GetScalarType<T[P], AggregateSheets_data[P]>
+  }
+
+
+
+
+  export type sheets_dataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sheets_dataWhereInput
+    orderBy?: sheets_dataOrderByWithAggregationInput | sheets_dataOrderByWithAggregationInput[]
+    by: Sheets_dataScalarFieldEnum[] | Sheets_dataScalarFieldEnum
+    having?: sheets_dataScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Sheets_dataCountAggregateInputType | true
+    _avg?: Sheets_dataAvgAggregateInputType
+    _sum?: Sheets_dataSumAggregateInputType
+    _min?: Sheets_dataMinAggregateInputType
+    _max?: Sheets_dataMaxAggregateInputType
+  }
+
+  export type Sheets_dataGroupByOutputType = {
+    sheet_data_id: number
+    sheet_data: Buffer
+    _count: Sheets_dataCountAggregateOutputType | null
+    _avg: Sheets_dataAvgAggregateOutputType | null
+    _sum: Sheets_dataSumAggregateOutputType | null
+    _min: Sheets_dataMinAggregateOutputType | null
+    _max: Sheets_dataMaxAggregateOutputType | null
+  }
+
+  type GetSheets_dataGroupByPayload<T extends sheets_dataGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Sheets_dataGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Sheets_dataGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Sheets_dataGroupByOutputType[P]>
+            : GetScalarType<T[P], Sheets_dataGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type sheets_dataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    sheet_data_id?: boolean
+    sheet_data?: boolean
+    sheets?: boolean | sheets_data$sheetsArgs<ExtArgs>
+    _count?: boolean | Sheets_dataCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sheets_data"]>
+
+  export type sheets_dataSelectScalar = {
+    sheet_data_id?: boolean
+    sheet_data?: boolean
+  }
+
+  export type sheets_dataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sheets?: boolean | sheets_data$sheetsArgs<ExtArgs>
+    _count?: boolean | Sheets_dataCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $sheets_dataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "sheets_data"
+    objects: {
+      sheets: Prisma.$sheetsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      sheet_data_id: number
+      sheet_data: Buffer
+    }, ExtArgs["result"]["sheets_data"]>
+    composites: {}
+  }
+
+
+  type sheets_dataGetPayload<S extends boolean | null | undefined | sheets_dataDefaultArgs> = $Result.GetResult<Prisma.$sheets_dataPayload, S>
+
+  type sheets_dataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<sheets_dataFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Sheets_dataCountAggregateInputType | true
+    }
+
+  export interface sheets_dataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['sheets_data'], meta: { name: 'sheets_data' } }
+    /**
+     * Find zero or one Sheets_data that matches the filter.
+     * @param {sheets_dataFindUniqueArgs} args - Arguments to find a Sheets_data
+     * @example
+     * // Get one Sheets_data
+     * const sheets_data = await prisma.sheets_data.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends sheets_dataFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataFindUniqueArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Sheets_data that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {sheets_dataFindUniqueOrThrowArgs} args - Arguments to find a Sheets_data
+     * @example
+     * // Get one Sheets_data
+     * const sheets_data = await prisma.sheets_data.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends sheets_dataFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Sheets_data that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataFindFirstArgs} args - Arguments to find a Sheets_data
+     * @example
+     * // Get one Sheets_data
+     * const sheets_data = await prisma.sheets_data.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends sheets_dataFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataFindFirstArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Sheets_data that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataFindFirstOrThrowArgs} args - Arguments to find a Sheets_data
+     * @example
+     * // Get one Sheets_data
+     * const sheets_data = await prisma.sheets_data.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends sheets_dataFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Sheets_data that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sheets_data
+     * const sheets_data = await prisma.sheets_data.findMany()
+     * 
+     * // Get first 10 Sheets_data
+     * const sheets_data = await prisma.sheets_data.findMany({ take: 10 })
+     * 
+     * // Only select the `sheet_data_id`
+     * const sheets_dataWithSheet_data_idOnly = await prisma.sheets_data.findMany({ select: { sheet_data_id: true } })
+     * 
+    **/
+    findMany<T extends sheets_dataFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Sheets_data.
+     * @param {sheets_dataCreateArgs} args - Arguments to create a Sheets_data.
+     * @example
+     * // Create one Sheets_data
+     * const Sheets_data = await prisma.sheets_data.create({
+     *   data: {
+     *     // ... data to create a Sheets_data
+     *   }
+     * })
+     * 
+    **/
+    create<T extends sheets_dataCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataCreateArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Sheets_data.
+     *     @param {sheets_dataCreateManyArgs} args - Arguments to create many Sheets_data.
+     *     @example
+     *     // Create many Sheets_data
+     *     const sheets_data = await prisma.sheets_data.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends sheets_dataCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Sheets_data.
+     * @param {sheets_dataDeleteArgs} args - Arguments to delete one Sheets_data.
+     * @example
+     * // Delete one Sheets_data
+     * const Sheets_data = await prisma.sheets_data.delete({
+     *   where: {
+     *     // ... filter to delete one Sheets_data
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends sheets_dataDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataDeleteArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Sheets_data.
+     * @param {sheets_dataUpdateArgs} args - Arguments to update one Sheets_data.
+     * @example
+     * // Update one Sheets_data
+     * const sheets_data = await prisma.sheets_data.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends sheets_dataUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataUpdateArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Sheets_data.
+     * @param {sheets_dataDeleteManyArgs} args - Arguments to filter Sheets_data to delete.
+     * @example
+     * // Delete a few Sheets_data
+     * const { count } = await prisma.sheets_data.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends sheets_dataDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_dataDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sheets_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sheets_data
+     * const sheets_data = await prisma.sheets_data.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends sheets_dataUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Sheets_data.
+     * @param {sheets_dataUpsertArgs} args - Arguments to update or create a Sheets_data.
+     * @example
+     * // Update or create a Sheets_data
+     * const sheets_data = await prisma.sheets_data.upsert({
+     *   create: {
+     *     // ... data to create a Sheets_data
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sheets_data we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends sheets_dataUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_dataUpsertArgs<ExtArgs>>
+    ): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Sheets_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataCountArgs} args - Arguments to filter Sheets_data to count.
+     * @example
+     * // Count the number of Sheets_data
+     * const count = await prisma.sheets_data.count({
+     *   where: {
+     *     // ... the filter for the Sheets_data we want to count
+     *   }
+     * })
+    **/
+    count<T extends sheets_dataCountArgs>(
+      args?: Subset<T, sheets_dataCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Sheets_dataCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sheets_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Sheets_dataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Sheets_dataAggregateArgs>(args: Subset<T, Sheets_dataAggregateArgs>): Prisma.PrismaPromise<GetSheets_dataAggregateType<T>>
+
+    /**
+     * Group by Sheets_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_dataGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends sheets_dataGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: sheets_dataGroupByArgs['orderBy'] }
+        : { orderBy?: sheets_dataGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, sheets_dataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSheets_dataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the sheets_data model
+   */
+  readonly fields: sheets_dataFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for sheets_data.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__sheets_dataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    sheets<T extends sheets_data$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, sheets_data$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the sheets_data model
+   */ 
+  interface sheets_dataFieldRefs {
+    readonly sheet_data_id: FieldRef<"sheets_data", 'Int'>
+    readonly sheet_data: FieldRef<"sheets_data", 'Bytes'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * sheets_data findUnique
+   */
+  export type sheets_dataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_data to fetch.
+     */
+    where: sheets_dataWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_data findUniqueOrThrow
+   */
+  export type sheets_dataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_data to fetch.
+     */
+    where: sheets_dataWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_data findFirst
+   */
+  export type sheets_dataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_data to fetch.
+     */
+    where?: sheets_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_data to fetch.
+     */
+    orderBy?: sheets_dataOrderByWithRelationInput | sheets_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sheets_data.
+     */
+    cursor?: sheets_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sheets_data.
+     */
+    distinct?: Sheets_dataScalarFieldEnum | Sheets_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_data findFirstOrThrow
+   */
+  export type sheets_dataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_data to fetch.
+     */
+    where?: sheets_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_data to fetch.
+     */
+    orderBy?: sheets_dataOrderByWithRelationInput | sheets_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sheets_data.
+     */
+    cursor?: sheets_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sheets_data.
+     */
+    distinct?: Sheets_dataScalarFieldEnum | Sheets_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_data findMany
+   */
+  export type sheets_dataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_data to fetch.
+     */
+    where?: sheets_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_data to fetch.
+     */
+    orderBy?: sheets_dataOrderByWithRelationInput | sheets_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing sheets_data.
+     */
+    cursor?: sheets_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_data.
+     */
+    skip?: number
+    distinct?: Sheets_dataScalarFieldEnum | Sheets_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_data create
+   */
+  export type sheets_dataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * The data needed to create a sheets_data.
+     */
+    data: XOR<sheets_dataCreateInput, sheets_dataUncheckedCreateInput>
+  }
+
+
+  /**
+   * sheets_data createMany
+   */
+  export type sheets_dataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many sheets_data.
+     */
+    data: sheets_dataCreateManyInput | sheets_dataCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * sheets_data update
+   */
+  export type sheets_dataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * The data needed to update a sheets_data.
+     */
+    data: XOR<sheets_dataUpdateInput, sheets_dataUncheckedUpdateInput>
+    /**
+     * Choose, which sheets_data to update.
+     */
+    where: sheets_dataWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_data updateMany
+   */
+  export type sheets_dataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update sheets_data.
+     */
+    data: XOR<sheets_dataUpdateManyMutationInput, sheets_dataUncheckedUpdateManyInput>
+    /**
+     * Filter which sheets_data to update
+     */
+    where?: sheets_dataWhereInput
+  }
+
+
+  /**
+   * sheets_data upsert
+   */
+  export type sheets_dataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * The filter to search for the sheets_data to update in case it exists.
+     */
+    where: sheets_dataWhereUniqueInput
+    /**
+     * In case the sheets_data found by the `where` argument doesn't exist, create a new sheets_data with this data.
+     */
+    create: XOR<sheets_dataCreateInput, sheets_dataUncheckedCreateInput>
+    /**
+     * In case the sheets_data was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<sheets_dataUpdateInput, sheets_dataUncheckedUpdateInput>
+  }
+
+
+  /**
+   * sheets_data delete
+   */
+  export type sheets_dataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
+    /**
+     * Filter which sheets_data to delete.
+     */
+    where: sheets_dataWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_data deleteMany
+   */
+  export type sheets_dataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sheets_data to delete
+     */
+    where?: sheets_dataWhereInput
+  }
+
+
+  /**
+   * sheets_data.sheets
+   */
+  export type sheets_data$sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets
+     */
+    select?: sheetsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheetsInclude<ExtArgs> | null
+    where?: sheetsWhereInput
+    orderBy?: sheetsOrderByWithRelationInput | sheetsOrderByWithRelationInput[]
+    cursor?: sheetsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SheetsScalarFieldEnum | SheetsScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_data without action
+   */
+  export type sheets_dataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_data
+     */
+    select?: sheets_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_dataInclude<ExtArgs> | null
   }
 
 
@@ -23287,10 +24354,18 @@ export namespace Prisma {
     sheet_title: 'sheet_title',
     sheet_subject: 'sheet_subject',
     sheet_filename: 'sheet_filename',
-    sheet_data: 'sheet_data'
+    sheet_data_id: 'sheet_data_id'
   };
 
   export type SheetsScalarFieldEnum = (typeof SheetsScalarFieldEnum)[keyof typeof SheetsScalarFieldEnum]
+
+
+  export const Sheets_dataScalarFieldEnum: {
+    sheet_data_id: 'sheet_data_id',
+    sheet_data: 'sheet_data'
+  };
+
+  export type Sheets_dataScalarFieldEnum = (typeof Sheets_dataScalarFieldEnum)[keyof typeof Sheets_dataScalarFieldEnum]
 
 
   export const User_credentialsScalarFieldEnum: {
@@ -24432,10 +25507,11 @@ export namespace Prisma {
     sheet_author_id?: IntFilter<"sheets"> | number
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
-    sheet_filename?: StringNullableFilter<"sheets"> | string | null
-    sheet_data?: BytesFilter<"sheets"> | Buffer
+    sheet_filename?: StringFilter<"sheets"> | string
+    sheet_data_id?: IntFilter<"sheets"> | number
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
+    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
     individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
   }
 
@@ -24444,10 +25520,11 @@ export namespace Prisma {
     sheet_author_id?: SortOrder
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
-    sheet_filename?: SortOrderInput | SortOrder
-    sheet_data?: SortOrder
+    sheet_filename?: SortOrder
+    sheet_data_id?: SortOrder
     collections_sheets?: collections_sheetsOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
+    sheets_data?: sheets_dataOrderByWithRelationInput
     individuals?: individualsOrderByWithRelationInput
   }
 
@@ -24459,10 +25536,11 @@ export namespace Prisma {
     sheet_author_id?: IntFilter<"sheets"> | number
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
-    sheet_filename?: StringNullableFilter<"sheets"> | string | null
-    sheet_data?: BytesFilter<"sheets"> | Buffer
+    sheet_filename?: StringFilter<"sheets"> | string
+    sheet_data_id?: IntFilter<"sheets"> | number
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
+    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
     individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
   }, "sheet_id" | "sheet_id">
 
@@ -24471,8 +25549,8 @@ export namespace Prisma {
     sheet_author_id?: SortOrder
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
-    sheet_filename?: SortOrderInput | SortOrder
-    sheet_data?: SortOrder
+    sheet_filename?: SortOrder
+    sheet_data_id?: SortOrder
     _count?: sheetsCountOrderByAggregateInput
     _avg?: sheetsAvgOrderByAggregateInput
     _max?: sheetsMaxOrderByAggregateInput
@@ -24488,8 +25566,50 @@ export namespace Prisma {
     sheet_author_id?: IntWithAggregatesFilter<"sheets"> | number
     sheet_title?: StringWithAggregatesFilter<"sheets"> | string
     sheet_subject?: StringWithAggregatesFilter<"sheets"> | string
-    sheet_filename?: StringNullableWithAggregatesFilter<"sheets"> | string | null
-    sheet_data?: BytesWithAggregatesFilter<"sheets"> | Buffer
+    sheet_filename?: StringWithAggregatesFilter<"sheets"> | string
+    sheet_data_id?: IntWithAggregatesFilter<"sheets"> | number
+  }
+
+  export type sheets_dataWhereInput = {
+    AND?: sheets_dataWhereInput | sheets_dataWhereInput[]
+    OR?: sheets_dataWhereInput[]
+    NOT?: sheets_dataWhereInput | sheets_dataWhereInput[]
+    sheet_data_id?: IntFilter<"sheets_data"> | number
+    sheet_data?: BytesFilter<"sheets_data"> | Buffer
+    sheets?: SheetsListRelationFilter
+  }
+
+  export type sheets_dataOrderByWithRelationInput = {
+    sheet_data_id?: SortOrder
+    sheet_data?: SortOrder
+    sheets?: sheetsOrderByRelationAggregateInput
+  }
+
+  export type sheets_dataWhereUniqueInput = Prisma.AtLeast<{
+    sheet_data_id?: number
+    AND?: sheets_dataWhereInput | sheets_dataWhereInput[]
+    OR?: sheets_dataWhereInput[]
+    NOT?: sheets_dataWhereInput | sheets_dataWhereInput[]
+    sheet_data?: BytesFilter<"sheets_data"> | Buffer
+    sheets?: SheetsListRelationFilter
+  }, "sheet_data_id" | "sheet_data_id">
+
+  export type sheets_dataOrderByWithAggregationInput = {
+    sheet_data_id?: SortOrder
+    sheet_data?: SortOrder
+    _count?: sheets_dataCountOrderByAggregateInput
+    _avg?: sheets_dataAvgOrderByAggregateInput
+    _max?: sheets_dataMaxOrderByAggregateInput
+    _min?: sheets_dataMinOrderByAggregateInput
+    _sum?: sheets_dataSumOrderByAggregateInput
+  }
+
+  export type sheets_dataScalarWhereWithAggregatesInput = {
+    AND?: sheets_dataScalarWhereWithAggregatesInput | sheets_dataScalarWhereWithAggregatesInput[]
+    OR?: sheets_dataScalarWhereWithAggregatesInput[]
+    NOT?: sheets_dataScalarWhereWithAggregatesInput | sheets_dataScalarWhereWithAggregatesInput[]
+    sheet_data_id?: IntWithAggregatesFilter<"sheets_data"> | number
+    sheet_data?: BytesWithAggregatesFilter<"sheets_data"> | Buffer
   }
 
   export type user_credentialsWhereInput = {
@@ -25616,10 +26736,10 @@ export namespace Prisma {
   export type sheetsCreateInput = {
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     individuals: individualsCreateNestedOneWithoutSheetsInput
   }
 
@@ -25628,8 +26748,8 @@ export namespace Prisma {
     sheet_author_id: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -25637,10 +26757,10 @@ export namespace Prisma {
   export type sheetsUpdateInput = {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
   }
 
@@ -25649,8 +26769,8 @@ export namespace Prisma {
     sheet_author_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
@@ -25660,15 +26780,14 @@ export namespace Prisma {
     sheet_author_id: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
   }
 
   export type sheetsUpdateManyMutationInput = {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheetsUncheckedUpdateManyInput = {
@@ -25676,7 +26795,43 @@ export namespace Prisma {
     sheet_author_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type sheets_dataCreateInput = {
+    sheet_data: Buffer
+    sheets?: sheetsCreateNestedManyWithoutSheets_dataInput
+  }
+
+  export type sheets_dataUncheckedCreateInput = {
+    sheet_data_id?: number
+    sheet_data: Buffer
+    sheets?: sheetsUncheckedCreateNestedManyWithoutSheets_dataInput
+  }
+
+  export type sheets_dataUpdateInput = {
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheets?: sheetsUpdateManyWithoutSheets_dataNestedInput
+  }
+
+  export type sheets_dataUncheckedUpdateInput = {
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheets?: sheetsUncheckedUpdateManyWithoutSheets_dataNestedInput
+  }
+
+  export type sheets_dataCreateManyInput = {
+    sheet_data_id?: number
+    sheet_data: Buffer
+  }
+
+  export type sheets_dataUpdateManyMutationInput = {
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type sheets_dataUncheckedUpdateManyInput = {
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
@@ -26828,18 +27983,24 @@ export namespace Prisma {
     individual_id?: SortOrder
   }
 
+  export type Sheets_dataRelationFilter = {
+    is?: sheets_dataWhereInput
+    isNot?: sheets_dataWhereInput
+  }
+
   export type sheetsCountOrderByAggregateInput = {
     sheet_id?: SortOrder
     sheet_author_id?: SortOrder
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
-    sheet_data?: SortOrder
+    sheet_data_id?: SortOrder
   }
 
   export type sheetsAvgOrderByAggregateInput = {
     sheet_id?: SortOrder
     sheet_author_id?: SortOrder
+    sheet_data_id?: SortOrder
   }
 
   export type sheetsMaxOrderByAggregateInput = {
@@ -26848,7 +28009,7 @@ export namespace Prisma {
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
-    sheet_data?: SortOrder
+    sheet_data_id?: SortOrder
   }
 
   export type sheetsMinOrderByAggregateInput = {
@@ -26857,12 +28018,36 @@ export namespace Prisma {
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
-    sheet_data?: SortOrder
+    sheet_data_id?: SortOrder
   }
 
   export type sheetsSumOrderByAggregateInput = {
     sheet_id?: SortOrder
     sheet_author_id?: SortOrder
+    sheet_data_id?: SortOrder
+  }
+
+  export type sheets_dataCountOrderByAggregateInput = {
+    sheet_data_id?: SortOrder
+    sheet_data?: SortOrder
+  }
+
+  export type sheets_dataAvgOrderByAggregateInput = {
+    sheet_data_id?: SortOrder
+  }
+
+  export type sheets_dataMaxOrderByAggregateInput = {
+    sheet_data_id?: SortOrder
+    sheet_data?: SortOrder
+  }
+
+  export type sheets_dataMinOrderByAggregateInput = {
+    sheet_data_id?: SortOrder
+    sheet_data?: SortOrder
+  }
+
+  export type sheets_dataSumOrderByAggregateInput = {
+    sheet_data_id?: SortOrder
   }
 
   export type user_credentialsCountOrderByAggregateInput = {
@@ -28470,6 +29655,12 @@ export namespace Prisma {
     connect?: entities_sheetsWhereUniqueInput | entities_sheetsWhereUniqueInput[]
   }
 
+  export type sheets_dataCreateNestedOneWithoutSheetsInput = {
+    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
+    connect?: sheets_dataWhereUniqueInput
+  }
+
   export type individualsCreateNestedOneWithoutSheetsInput = {
     create?: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
     connectOrCreate?: individualsCreateOrConnectWithoutSheetsInput
@@ -28518,6 +29709,14 @@ export namespace Prisma {
     deleteMany?: entities_sheetsScalarWhereInput | entities_sheetsScalarWhereInput[]
   }
 
+  export type sheets_dataUpdateOneRequiredWithoutSheetsNestedInput = {
+    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
+    upsert?: sheets_dataUpsertWithoutSheetsInput
+    connect?: sheets_dataWhereUniqueInput
+    update?: XOR<XOR<sheets_dataUpdateToOneWithWhereWithoutSheetsInput, sheets_dataUpdateWithoutSheetsInput>, sheets_dataUncheckedUpdateWithoutSheetsInput>
+  }
+
   export type individualsUpdateOneRequiredWithoutSheetsNestedInput = {
     create?: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
     connectOrCreate?: individualsCreateOrConnectWithoutSheetsInput
@@ -28552,6 +29751,48 @@ export namespace Prisma {
     update?: entities_sheetsUpdateWithWhereUniqueWithoutSheetsInput | entities_sheetsUpdateWithWhereUniqueWithoutSheetsInput[]
     updateMany?: entities_sheetsUpdateManyWithWhereWithoutSheetsInput | entities_sheetsUpdateManyWithWhereWithoutSheetsInput[]
     deleteMany?: entities_sheetsScalarWhereInput | entities_sheetsScalarWhereInput[]
+  }
+
+  export type sheetsCreateNestedManyWithoutSheets_dataInput = {
+    create?: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput> | sheetsCreateWithoutSheets_dataInput[] | sheetsUncheckedCreateWithoutSheets_dataInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_dataInput | sheetsCreateOrConnectWithoutSheets_dataInput[]
+    createMany?: sheetsCreateManySheets_dataInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type sheetsUncheckedCreateNestedManyWithoutSheets_dataInput = {
+    create?: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput> | sheetsCreateWithoutSheets_dataInput[] | sheetsUncheckedCreateWithoutSheets_dataInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_dataInput | sheetsCreateOrConnectWithoutSheets_dataInput[]
+    createMany?: sheetsCreateManySheets_dataInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type sheetsUpdateManyWithoutSheets_dataNestedInput = {
+    create?: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput> | sheetsCreateWithoutSheets_dataInput[] | sheetsUncheckedCreateWithoutSheets_dataInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_dataInput | sheetsCreateOrConnectWithoutSheets_dataInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutSheets_dataInput | sheetsUpsertWithWhereUniqueWithoutSheets_dataInput[]
+    createMany?: sheetsCreateManySheets_dataInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutSheets_dataInput | sheetsUpdateWithWhereUniqueWithoutSheets_dataInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutSheets_dataInput | sheetsUpdateManyWithWhereWithoutSheets_dataInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutSheets_dataNestedInput = {
+    create?: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput> | sheetsCreateWithoutSheets_dataInput[] | sheetsUncheckedCreateWithoutSheets_dataInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_dataInput | sheetsCreateOrConnectWithoutSheets_dataInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutSheets_dataInput | sheetsUpsertWithWhereUniqueWithoutSheets_dataInput[]
+    createMany?: sheetsCreateManySheets_dataInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutSheets_dataInput | sheetsUpdateWithWhereUniqueWithoutSheets_dataInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutSheets_dataInput | sheetsUpdateManyWithWhereWithoutSheets_dataInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
   }
 
   export type collections_videosCreateNestedManyWithoutVideosInput = {
@@ -29422,9 +30663,9 @@ export namespace Prisma {
   export type sheetsCreateWithoutCollections_sheetsInput = {
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     individuals: individualsCreateNestedOneWithoutSheetsInput
   }
 
@@ -29433,8 +30674,8 @@ export namespace Prisma {
     sheet_author_id: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -29487,9 +30728,9 @@ export namespace Prisma {
   export type sheetsUpdateWithoutCollections_sheetsInput = {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
   }
 
@@ -29498,8 +30739,8 @@ export namespace Prisma {
     sheet_author_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
@@ -30303,9 +31544,9 @@ export namespace Prisma {
   export type sheetsCreateWithoutEntities_sheetsInput = {
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     individuals: individualsCreateNestedOneWithoutSheetsInput
   }
 
@@ -30314,8 +31555,8 @@ export namespace Prisma {
     sheet_author_id: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -30366,9 +31607,9 @@ export namespace Prisma {
   export type sheetsUpdateWithoutEntities_sheetsInput = {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
   }
 
@@ -30377,8 +31618,8 @@ export namespace Prisma {
     sheet_author_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
@@ -31235,18 +32476,18 @@ export namespace Prisma {
   export type sheetsCreateWithoutIndividualsInput = {
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutIndividualsInput = {
     sheet_id?: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -31418,8 +32659,8 @@ export namespace Prisma {
     sheet_author_id?: IntFilter<"sheets"> | number
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
-    sheet_filename?: StringNullableFilter<"sheets"> | string | null
-    sheet_data?: BytesFilter<"sheets"> | Buffer
+    sheet_filename?: StringFilter<"sheets"> | string
+    sheet_data_id?: IntFilter<"sheets"> | number
   }
 
   export type videosUpsertWithWhereUniqueWithoutIndividualsInput = {
@@ -31805,6 +33046,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type sheets_dataCreateWithoutSheetsInput = {
+    sheet_data: Buffer
+  }
+
+  export type sheets_dataUncheckedCreateWithoutSheetsInput = {
+    sheet_data_id?: number
+    sheet_data: Buffer
+  }
+
+  export type sheets_dataCreateOrConnectWithoutSheetsInput = {
+    where: sheets_dataWhereUniqueInput
+    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+  }
+
   export type individualsCreateWithoutSheetsInput = {
     individual_userName: string
     individual_name: string
@@ -31873,6 +33128,26 @@ export namespace Prisma {
     data: XOR<entities_sheetsUpdateManyMutationInput, entities_sheetsUncheckedUpdateManyWithoutSheetsInput>
   }
 
+  export type sheets_dataUpsertWithoutSheetsInput = {
+    update: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
+    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    where?: sheets_dataWhereInput
+  }
+
+  export type sheets_dataUpdateToOneWithWhereWithoutSheetsInput = {
+    where?: sheets_dataWhereInput
+    data: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
+  }
+
+  export type sheets_dataUpdateWithoutSheetsInput = {
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type sheets_dataUncheckedUpdateWithoutSheetsInput = {
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
   export type individualsUpsertWithoutSheetsInput = {
     update: XOR<individualsUpdateWithoutSheetsInput, individualsUncheckedUpdateWithoutSheetsInput>
     create: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
@@ -31913,6 +33188,51 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
     videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
+  }
+
+  export type sheetsCreateWithoutSheets_dataInput = {
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
+    individuals: individualsCreateNestedOneWithoutSheetsInput
+  }
+
+  export type sheetsUncheckedCreateWithoutSheets_dataInput = {
+    sheet_id?: number
+    sheet_author_id: number
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
+  }
+
+  export type sheetsCreateOrConnectWithoutSheets_dataInput = {
+    where: sheetsWhereUniqueInput
+    create: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput>
+  }
+
+  export type sheetsCreateManySheets_dataInputEnvelope = {
+    data: sheetsCreateManySheets_dataInput | sheetsCreateManySheets_dataInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type sheetsUpsertWithWhereUniqueWithoutSheets_dataInput = {
+    where: sheetsWhereUniqueInput
+    update: XOR<sheetsUpdateWithoutSheets_dataInput, sheetsUncheckedUpdateWithoutSheets_dataInput>
+    create: XOR<sheetsCreateWithoutSheets_dataInput, sheetsUncheckedCreateWithoutSheets_dataInput>
+  }
+
+  export type sheetsUpdateWithWhereUniqueWithoutSheets_dataInput = {
+    where: sheetsWhereUniqueInput
+    data: XOR<sheetsUpdateWithoutSheets_dataInput, sheetsUncheckedUpdateWithoutSheets_dataInput>
+  }
+
+  export type sheetsUpdateManyWithWhereWithoutSheets_dataInput = {
+    where: sheetsScalarWhereInput
+    data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutSheets_dataInput>
   }
 
   export type collections_videosCreateWithoutVideosInput = {
@@ -32592,8 +33912,8 @@ export namespace Prisma {
     sheet_id?: number
     sheet_title: string
     sheet_subject: string
-    sheet_filename?: string | null
-    sheet_data: Buffer
+    sheet_filename: string
+    sheet_data_id: number
   }
 
   export type videosCreateManyIndividualsInput = {
@@ -32733,18 +34053,18 @@ export namespace Prisma {
   export type sheetsUpdateWithoutIndividualsInput = {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutIndividualsInput = {
     sheet_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
@@ -32753,8 +34073,8 @@ export namespace Prisma {
     sheet_id?: IntFieldUpdateOperationsInput | number
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: NullableStringFieldUpdateOperationsInput | string | null
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type videosUpdateWithoutIndividualsInput = {
@@ -32959,6 +34279,41 @@ export namespace Prisma {
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type sheetsCreateManySheets_dataInput = {
+    sheet_id?: number
+    sheet_author_id: number
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+  }
+
+  export type sheetsUpdateWithoutSheets_dataInput = {
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
+    individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
+  }
+
+  export type sheetsUncheckedUpdateWithoutSheets_dataInput = {
+    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutSheets_dataInput = {
+    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+  }
+
   export type collections_videosCreateManyVideosInput = {
     collections_videos_id?: number
     collection_id: number
@@ -33094,6 +34449,10 @@ export namespace Prisma {
      */
     export type SheetsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SheetsCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Sheets_dataCountOutputTypeDefaultArgs instead
+     */
+    export type Sheets_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Sheets_dataCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use VideosCountOutputTypeDefaultArgs instead
      */
     export type VideosCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VideosCountOutputTypeDefaultArgs<ExtArgs>
@@ -33169,6 +34528,10 @@ export namespace Prisma {
      * @deprecated Use sheetsDefaultArgs instead
      */
     export type sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sheetsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use sheets_dataDefaultArgs instead
+     */
+    export type sheets_dataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sheets_dataDefaultArgs<ExtArgs>
     /**
      * @deprecated Use user_credentialsDefaultArgs instead
      */

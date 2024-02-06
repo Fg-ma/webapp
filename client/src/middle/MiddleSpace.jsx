@@ -6,7 +6,6 @@ import ContentPage from "./pages/contentPage/ContentPage";
 import "./middleSpace.css";
 
 export default function MiddleSpace({ middleSpaceContainerRef }) {
-
     /* 
         Description:   
             Container for everything that happens in the middle space section including 
@@ -16,30 +15,45 @@ export default function MiddleSpace({ middleSpaceContainerRef }) {
     */
 
     const middleSpaceRef = useRef(null);
-    const mainPageState = useSelector((state) => state.page.main.pagePayload.pageState);
-    const [middleSpaceContent, setMiddleSpaceContent] = useState([])
+    const mainPageState = useSelector(
+        (state) => state.page.main.pagePayload.pageState
+    );
+    const [middleSpaceContent, setMiddleSpaceContent] = useState([]);
 
     useEffect(() => {
         if (mainPageState === "home") {
-            setMiddleSpaceContent(<HomePage middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} />);
+            setMiddleSpaceContent(
+                <HomePage
+                    middleSpaceContainerRef={middleSpaceContainerRef}
+                    middleSpaceRef={middleSpaceRef}
+                />
+            );
         } else if (mainPageState === "individuals") {
-            setMiddleSpaceContent(<EntityPage entityType="individuals" />);
+            setMiddleSpaceContent(<EntityPage entityType='individuals' />);
         } else if (mainPageState === "groups") {
-            setMiddleSpaceContent(<EntityPage entityType="groups" />);
+            setMiddleSpaceContent(<EntityPage entityType='groups' />);
         } else if (mainPageState === "organizations") {
-            setMiddleSpaceContent(<EntityPage entityType="organizations" />);
+            setMiddleSpaceContent(<EntityPage entityType='organizations' />);
         } else if (mainPageState === "sheets") {
-            setMiddleSpaceContent(<ContentPage contentType="sheets" />);
+            setMiddleSpaceContent(<ContentPage contentType='sheets' />);
         } else if (mainPageState === "videos") {
-            setMiddleSpaceContent(<ContentPage contentType="videos" />);
+            setMiddleSpaceContent(<ContentPage contentType='videos' />);
         } else if (mainPageState === "images") {
-            setMiddleSpaceContent(<ContentPage contentType="images" />);
-        };
+            setMiddleSpaceContent(<ContentPage contentType='images' />);
+        }
     }, [mainPageState]);
-    
+
     return (
-        <div ref={middleSpaceRef} id="middleSpace" className="bg-fg-white-95 rounded-xl h-4/5 w-full max-w-full relative" style={{ boxShadow: '0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)' }}>
+        <div
+            ref={middleSpaceRef}
+            id='middleSpace'
+            className='bg-fg-white-95 rounded-xl h-4/5 w-full max-w-full relative'
+            style={{
+                boxShadow:
+                    "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
+            }}
+        >
             {middleSpaceContent}
         </div>
-    )
+    );
 }

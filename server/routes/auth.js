@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.header("Authorization");
@@ -39,7 +39,11 @@ router.post("/register", async (req, res) => {
             },
         });
 
-        const token = jwt.sign({ username: newUser.username }, process.env.TOKEN_KEY, { expiresIn: process.env.TOKEN_TIME_OUT });
+        const token = jwt.sign(
+            { username: newUser.username },
+            process.env.TOKEN_KEY,
+            { expiresIn: process.env.TOKEN_TIME_OUT }
+        );
         res.status(201).json({ success: true, token });
     } catch (error) {
         console.error(error);
@@ -49,7 +53,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    
+
     try {
         const user = await req.db.user_credentials.findUnique({
             where: {
@@ -61,7 +65,11 @@ router.post("/login", async (req, res) => {
             const match = await bcrypt.compare(password, user.user_password);
 
             if (match) {
-                const token = jwt.sign({ username: user.username }, process.env.TOKEN_KEY, { expiresIn: process.env.TOKEN_TIME_OUT });
+                const token = jwt.sign(
+                    { username: user.username },
+                    process.env.TOKEN_KEY,
+                    { expiresIn: process.env.TOKEN_TIME_OUT }
+                );
                 res.json({ success: true, token });
             } else {
                 res.json({ success: false });
@@ -72,7 +80,7 @@ router.post("/login", async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 });
 

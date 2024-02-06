@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { format } from 'date-fns';
-import { useNavigation } from 'react-day-picker';
+import { format } from "date-fns";
+import { useNavigation } from "react-day-picker";
 import CaptionDropdown from "./CaptionDropdown";
 
-const months = Array.from({ length: 12 }, (_, i) => format(new Date(0, i), "MMMM"));
-const years = Array.from({ length: new Date().getFullYear() - 1999 + 1 }, (_, i) => 1999 + i);
+const months = Array.from({ length: 12 }, (_, i) =>
+    format(new Date(0, i), "MMMM")
+);
+const years = Array.from(
+    { length: new Date().getFullYear() - 1999 + 1 },
+    (_, i) => 1999 + i
+);
 
 export default function DateCenteredCaption(props) {
-
     /* 
         Description:   
             Creates the caption for the caption for the date range dropdown. Places the date centered 
@@ -17,8 +21,12 @@ export default function DateCenteredCaption(props) {
     */
 
     const { goToMonth, nextMonth, previousMonth } = useNavigation();
-    const [selectedMonth, setSelectedMonth] = useState(props.displayMonth.getMonth());
-    const [selectedYear, setSelectedYear] = useState(props.displayMonth.getFullYear());
+    const [selectedMonth, setSelectedMonth] = useState(
+        props.displayMonth.getMonth()
+    );
+    const [selectedYear, setSelectedYear] = useState(
+        props.displayMonth.getFullYear()
+    );
 
     const handleDropMonthChange = (newMonthIndex) => {
         props.updateRangeStyles();
@@ -54,34 +62,42 @@ export default function DateCenteredCaption(props) {
     };
 
     return (
-        <div className="w-full flex items-center justify-between">
+        <div className='w-full flex items-center justify-between'>
             <button
                 disabled={!previousMonth}
                 onClick={handleBackMonth}
-                className="h-8 aspect-square bg-125 bg-no-repeat bg-center"
-                style={{ backgroundImage: "url('assets/icons/navigateBack.svg')" }}
+                className='h-8 aspect-square bg-125 bg-no-repeat bg-center'
+                style={{
+                    backgroundImage: "url('assets/icons/navigateBack.svg')",
+                }}
             ></button>
-            <div className="flex items-center justify-center">
+            <div className='flex items-center justify-center'>
                 <CaptionDropdown
                     options={months}
                     value={selectedMonth}
                     onChange={handleDropMonthChange}
-                    type={'month'}
-                    dateRangeCaptionDropdownRef={props.dateRangeCaptionDropdownRef}
+                    type={"month"}
+                    dateRangeCaptionDropdownRef={
+                        props.dateRangeCaptionDropdownRef
+                    }
                 />
                 <CaptionDropdown
                     options={years}
                     value={selectedYear}
                     onChange={handleDropYearChange}
-                    type={'year'}
-                    dateRangeCaptionDropdownRef={props.dateRangeCaptionDropdownRef}
+                    type={"year"}
+                    dateRangeCaptionDropdownRef={
+                        props.dateRangeCaptionDropdownRef
+                    }
                 />
             </div>
             <button
                 disabled={!nextMonth}
                 onClick={handleForwardMonth}
-                className="h-8 aspect-square bg-125 bg-no-repeat bg-center"
-                style={{ backgroundImage: "url('assets/icons/navigateForward.svg')" }}
+                className='h-8 aspect-square bg-125 bg-no-repeat bg-center'
+                style={{
+                    backgroundImage: "url('assets/icons/navigateForward.svg')",
+                }}
             ></button>
         </div>
     );

@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { setPageState, setIds } from "../../../redux/pageState/pageStateActions";
+import {
+    setPageState,
+    setIds,
+} from "../../../redux/pageState/pageStateActions";
 import CollectionButtons from "./CollectionButtons";
 
 const indNavButtonsVar = {
@@ -20,14 +23,13 @@ const indNavButtonsVar = {
         paddingLeft: "0.25rem",
         paddingRight: "0.25rem",
     },
-    transition: { 
-        ease: "easeOut", 
+    transition: {
+        ease: "easeOut",
         duration: 0.1,
     },
 };
 
 export default function EntityContentNav({ entityType, entity }) {
-
     /* 
         Description:   
             Creates the content nav containing the sheets, videos, and images buttons
@@ -37,8 +39,10 @@ export default function EntityContentNav({ entityType, entity }) {
     */
 
     const dispatch = useDispatch();
-    const pageState = useSelector((state) => state.page[entityType].pagePayload.pageState);
-    
+    const pageState = useSelector(
+        (state) => state.page[entityType].pagePayload.pageState
+    );
+
     const deactiveStyles = {};
     const activeStyles = {
         textDecorationColor: "#F56114",
@@ -53,53 +57,71 @@ export default function EntityContentNav({ entityType, entity }) {
 
     function swapPageState(newState) {
         dispatch(setPageState(entityType, newState));
-        dispatch(setIds(entityType, 'collection_id', null));
-    };
+        dispatch(setIds(entityType, "collection_id", null));
+    }
 
     return (
         <>
-            <div className="mt-6 mb-1 flex items-center justify-center">
-                <div className="w-1/3 flex items-center justify-center font-bold">
-                    <motion.div 
-                        className="h-8 flex cursor-pointer"
+            <div className='mt-6 mb-1 flex items-center justify-center'>
+                <div className='w-1/3 flex items-center justify-center font-bold'>
+                    <motion.div
+                        className='h-8 flex cursor-pointer'
                         variants={indNavButtonsVar}
-                        initial="init"
-                        whileHover="hover"
+                        initial='init'
+                        whileHover='hover'
                         transition={indNavButtonsVar.transition}
-                        onClick={() => swapPageState('sheets')}
+                        onClick={() => swapPageState("sheets")}
                     >
-                        <button style={pageStyles["sheets"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Sheets</button>
+                        <button
+                            style={pageStyles["sheets"]}
+                            className='underline decoration-2 underline-offset-8 decoration-transparent'
+                        >
+                            Sheets
+                        </button>
                     </motion.div>
                 </div>
-                <div className="w-1/3 flex items-center justify-center font-bold">
-                    <motion.div 
-                        className="h-8 flex cursor-pointer"
+                <div className='w-1/3 flex items-center justify-center font-bold'>
+                    <motion.div
+                        className='h-8 flex cursor-pointer'
                         variants={indNavButtonsVar}
-                        initial="init"
-                        whileHover="hover"
+                        initial='init'
+                        whileHover='hover'
                         transition={indNavButtonsVar.transition}
-                        onClick={() => swapPageState('videos')}
+                        onClick={() => swapPageState("videos")}
                     >
-                        <button style={pageStyles["videos"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Videos</button>
+                        <button
+                            style={pageStyles["videos"]}
+                            className='underline decoration-2 underline-offset-8 decoration-transparent'
+                        >
+                            Videos
+                        </button>
                     </motion.div>
                 </div>
-                <div className="w-1/3 flex items-center justify-center font-bold">
-                    <motion.div 
-                        className="h-8 flex cursor-pointer"
+                <div className='w-1/3 flex items-center justify-center font-bold'>
+                    <motion.div
+                        className='h-8 flex cursor-pointer'
                         variants={indNavButtonsVar}
-                        initial="init"
-                        whileHover="hover"
+                        initial='init'
+                        whileHover='hover'
                         transition={indNavButtonsVar.transition}
-                        onClick={() => swapPageState('images')}
+                        onClick={() => swapPageState("images")}
                     >
-                        <button style={pageStyles["images"]} className="underline decoration-2 underline-offset-8 decoration-transparent">Images</button>
+                        <button
+                            style={pageStyles["images"]}
+                            className='underline decoration-2 underline-offset-8 decoration-transparent'
+                        >
+                            Images
+                        </button>
                     </motion.div>
                 </div>
             </div>
-            <div className="h-0.5 w-full bg-fg-black-25 rounded-full mb-2"></div>
+            <div className='h-0.5 w-full bg-fg-black-25 rounded-full mb-2'></div>
             {entity && (
-                <CollectionButtons entityType={entityType} entity_id={entity[`${entityType.slice(0, -1)}_id`]} />
+                <CollectionButtons
+                    entityType={entityType}
+                    entity_id={entity[`${entityType.slice(0, -1)}_id`]}
+                />
             )}
         </>
-    )
+    );
 }

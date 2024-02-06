@@ -26,7 +26,7 @@ router.get("/:individual_id", async (req, res) => {
         if (!individual) {
             res.status(404).send("Individual not found");
             return;
-        };
+        }
 
         res.send(individual);
     } catch (error) {

@@ -14,21 +14,21 @@ router.get("/collections_names", async (req, res) => {
                 where: {
                     individual_id: id,
                 },
-                distinct: ['collection_id'],
+                distinct: ["collection_id"],
             });
         } else if (type === "groups") {
             collections = await req.db.collections.findMany({
                 where: {
                     group_id: id,
                 },
-                distinct: ['collection_id'],
+                distinct: ["collection_id"],
             });
         } else if (type === "organizations") {
             collections = await req.db.collections.findMany({
                 where: {
                     organization_id: id,
                 },
-                distinct: ['collection_id'],
+                distinct: ["collection_id"],
             });
         }
 
@@ -50,7 +50,7 @@ router.get("/:collection_id", async (req, res) => {
                     collection_id: collection_id,
                 },
                 include: {
-                    sheets: true
+                    sheets: true,
                 },
             }),
             req.db.collections_videos.findMany({
@@ -76,9 +76,12 @@ router.get("/:collection_id", async (req, res) => {
                 item.map((relation) => {
                     return {
                         collection_id: relation.collection_id,
-                        collections_sheets_id: relation.collections_sheets_id || null,
-                        collections_videos_id: relation.collections_videos_id || null,
-                        collections_images_id: relation.collections_images_id || null,
+                        collections_sheets_id:
+                            relation.collections_sheets_id || null,
+                        collections_videos_id:
+                            relation.collections_videos_id || null,
+                        collections_images_id:
+                            relation.collections_images_id || null,
                         collection_name: relation.collection_name,
                         date_added: relation.date_added,
                         pinned: relation.pinned,

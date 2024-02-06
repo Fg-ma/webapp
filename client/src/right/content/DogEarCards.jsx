@@ -4,10 +4,11 @@ import config from "@config";
 import { DogEarCard } from "./RightSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 export default function DogEarCards() {
-
     /* 
         Description:   
             Gets dogEars data from a database then extracts the id, title, and issueQuestions to be mapped
@@ -15,7 +16,6 @@ export default function DogEarCards() {
         Unique Properties:
             It queries for any affiliate responses.
     */
-
 
     const [coverSheet, setCoverSheet] = useState([]);
 
@@ -25,24 +25,26 @@ export default function DogEarCards() {
                 const response = await Axios.get(`${serverUrl}/sheets`);
                 setCoverSheet(response.data);
             } catch (error) {
-                console.error('Error fetching cover sheet data:', error);
-            };
+                console.error("Error fetching cover sheet data:", error);
+            }
         };
-      
+
         fetchCoverSheetData();
     }, []);
-    
-    const dogEarCards = coverSheet.map(issueInfo => {
-        return <DogEarCard 
-                    key={issueInfo.sheet_id} 
-                    title={issueInfo.sheet_title} 
-                    subject={issueInfo.sheet_subject} 
-                /> //affResponses={issueInfo.affResponses} />
+
+    const dogEarCards = coverSheet.map((issueInfo) => {
+        return (
+            <DogEarCard
+                key={issueInfo.sheet_id}
+                title={issueInfo.sheet_title}
+                subject={issueInfo.sheet_subject}
+            />
+        ); //affResponses={issueInfo.affResponses} />
     });
 
     return (
-        <div id="dogEarCards" className="h-full mr-3 overflow-scroll">
+        <div id='dogEarCards' className='h-full mr-3 overflow-scroll'>
             {dogEarCards}
         </div>
-    )
+    );
 }

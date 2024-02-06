@@ -75,7 +75,7 @@ export default function pageStateReducer(state = intialState, action) {
         }
 
         case SET_IDS: {
-            const { page, id, value} = action.payload;
+            const { page, id, value } = action.payload;
 
             return {
                 ...state,
@@ -94,7 +94,7 @@ export default function pageStateReducer(state = intialState, action) {
 
         case SET_LOGGED_IN: {
             const { isLoggedIn } = action.payload;
-            
+
             return {
                 ...state,
                 login: {
@@ -109,5 +109,5 @@ export default function pageStateReducer(state = intialState, action) {
 
         default:
             return state;
-    };
-};
+    }
+}

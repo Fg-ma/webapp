@@ -39,7 +39,7 @@ router.get("/entity", async (req, res) => {
 // Get all the sheets belonging to an entity
 router.get("/entity_sheets/:entity_id", async (req, res) => {
     const entity_id = parseInt(req.params.entity_id, 10);
-    
+
     try {
         const result = await req.db.entities_sheets.findMany({
             where: {
@@ -49,7 +49,7 @@ router.get("/entity_sheets/:entity_id", async (req, res) => {
                 sheets: true,
             },
         });
-        
+
         res.send(result);
     } catch (error) {
         console.error(error);
@@ -70,7 +70,7 @@ router.get("/entity_videos/:entity_id", async (req, res) => {
                 videos: true,
             },
         });
-        
+
         res.send(result);
     } catch (error) {
         console.error(error);

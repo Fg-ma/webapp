@@ -3,10 +3,15 @@ import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { motion } from "framer-motion";
 import config from "@config";
-import { setIds, setPageState } from "../../../../redux/pageState/pageStateActions";
+import {
+    setIds,
+    setPageState,
+} from "../../../../redux/pageState/pageStateActions";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment ? config.development.serverUrl : config.production.serverUrl;
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
 /* 
     Description:   
@@ -15,8 +20,14 @@ const serverUrl = isDevelopment ? config.development.serverUrl : config.producti
         N/A
 */
 
-export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, socket }) {
-
+export function Sheet({
+    type,
+    sheet_id,
+    author_id,
+    pinned = 0,
+    relation_id,
+    socket,
+}) {
     const dispatch = useDispatch();
 
     const [sheetData, setSheetData] = useState([]);
@@ -27,24 +38,25 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
     useEffect(() => {
         const fetchSheetData = async () => {
             try {
-                const response = await Axios.get(`${serverUrl}/sheets/${sheet_id}`);
+                const response = await Axios.get(
+                    `${serverUrl}/sheets/${sheet_id}`
+                );
                 setSheetData(response.data);
             } catch (error) {
-                console.error('Error fetching sheet data:', error);
-            };
+                console.error("Error fetching sheet data:", error);
+            }
         };
-      
+
         fetchSheetData();
     }, [sheet_id]);
 
     // Checks if the entity is the author of the sheet
     if (sheetData && sheetData.sheet_author_id === author_id) {
         isAuthor.current = true;
-    };
+    }
 
     // Toggles if a sheet is pinned by updating the db and then emitting togglePinned to the socket
     const togglePinned = async () => {
-
         let newPinned;
         let date_pinned;
 
@@ -55,8 +67,8 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
             newPinned = true;
             const currentDate = new Date();
             date_pinned = currentDate.toISOString();
-        };
-        
+        }
+
         try {
             if (type === "collection") {
                 await Axios.put(
@@ -68,60 +80,73 @@ export function Sheet({ type, sheet_id, author_id, pinned = 0, relation_id, sock
                     }
                 );
             } else if (type === "entity") {
-                await Axios.put(
-                    `${serverUrl}/entities/entity_sheets_pinned`,
-                    {
-                        relation_id: relation_id,
-                        pinned: newPinned,
-                        date_pinned: date_pinned,
-                    }
-                );
-            };
+                await Axios.put(`${serverUrl}/entities/entity_sheets_pinned`, {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                });
+            }
         } catch (error) {
-            console.error('Error toggling pinned:', error);
-        };
+            console.error("Error toggling pinned:", error);
+        }
 
         try {
-            socket.emit("togglePinned", "sheet", relation_id, newPinned, date_pinned);
+            socket.emit(
+                "togglePinned",
+                "sheet",
+                relation_id,
+                newPinned,
+                date_pinned
+            );
         } catch (error) {
-            console.error('Error with socket:', error);
-        };
+            console.error("Error with socket:", error);
+        }
     };
 
     const handleClick = () => {
-        dispatch(setPageState('main', 'sheets'));
-        dispatch(setIds('main', 'sheet_id', sheet_id));
+        dispatch(setPageState("main", "sheets"));
+        dispatch(setIds("main", "sheet_id", sheet_id));
     };
 
     return (
-        <div className="shadow-md rounded flex flex-col justify-center" onClick={handleClick}>
-            <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
-                <button 
-                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+        <div
+            className='shadow-md rounded flex flex-col justify-center'
+            onClick={handleClick}
+        >
+            <div className='bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative'>
+                <button
+                    className='w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none'
                     style={{
-                        backgroundImage: pinned || hover ? 'url("/assets/icons/pin.svg")' : 'none',
+                        backgroundImage:
+                            pinned || hover
+                                ? 'url("/assets/icons/pin.svg")'
+                                : "none",
                     }}
                     onClick={(e) => {
                         e.stopPropagation();
                         togglePinned();
                     }}
-                    onMouseEnter={() => {setHover(true)}}
-                    onMouseLeave={() => {setHover(false)}}
-                >
-                </button>
+                    onMouseEnter={() => {
+                        setHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setHover(false);
+                    }}
+                ></button>
             </div>
-            {sheetData && 
-                <p className="text-base font-bold leading-5 text-center mx-4 h-[3.75rem] line-clamp-3 mb-1">
+            {sheetData && (
+                <p className='text-base font-bold leading-5 text-center mx-4 h-[3.75rem] line-clamp-3 mb-1'>
                     {sheetData.sheet_title}
                 </p>
-            }
-            <p className="text-sm font-K2D text-center mb-3">{isAuthor.current ? "Author" : "Responseded to"}</p>
+            )}
+            <p className='text-sm font-K2D text-center mb-3'>
+                {isAuthor.current ? "Author" : "Responseded to"}
+            </p>
         </div>
     );
-};
+}
 
 export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
-
     const dispatch = useDispatch();
 
     const [videoData, setVideoData] = useState([]);
@@ -131,19 +156,20 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
     useEffect(() => {
         const fetchVideoData = async () => {
             try {
-                const response = await Axios.get(`${serverUrl}/videos/${video_id}`);
+                const response = await Axios.get(
+                    `${serverUrl}/videos/${video_id}`
+                );
                 setVideoData(response.data);
             } catch (error) {
-                console.error('Error fetching video data:', error);
-            };
+                console.error("Error fetching video data:", error);
+            }
         };
-      
+
         fetchVideoData();
     }, [video_id]);
 
     // Toggles if a video is pinned by updating the db and then emitting togglePinned to the socket
     const togglePinned = async () => {
-
         let newPinned;
         let date_pinned;
 
@@ -154,7 +180,7 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
             newPinned = true;
             const currentDate = new Date();
             date_pinned = currentDate.toISOString();
-        };
+        }
 
         try {
             if (type === "collection") {
@@ -167,62 +193,71 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
                     }
                 );
             } else if (type === "entity") {
-                await Axios.put(
-                    `${serverUrl}/entities/entity_videos_pinned`,
-                    {
-                        relation_id: relation_id,
-                        pinned: newPinned,
-                        date_pinned: date_pinned,
-                    }
-                );
-            };
+                await Axios.put(`${serverUrl}/entities/entity_videos_pinned`, {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                });
+            }
         } catch (error) {
-            console.error('Error toggling pinned:', error);
-        };
+            console.error("Error toggling pinned:", error);
+        }
 
         try {
-            socket.emit("togglePinned", "video", relation_id, newPinned, date_pinned);
+            socket.emit(
+                "togglePinned",
+                "video",
+                relation_id,
+                newPinned,
+                date_pinned
+            );
         } catch (error) {
-            console.error('Error with socket:', error);
-        };
+            console.error("Error with socket:", error);
+        }
     };
 
     const handleClick = () => {
-        dispatch(setPageState('main', 'videos'));
-        dispatch(setIds('main', 'video_id', video_id));
+        dispatch(setPageState("main", "videos"));
+        dispatch(setIds("main", "video_id", video_id));
     };
 
     return (
-        <div className="flex flex-col justify-center" onClick={handleClick}>
-            <div className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative">
-                <button 
-                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+        <div className='flex flex-col justify-center' onClick={handleClick}>
+            <div className='bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative'>
+                <button
+                    className='w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none'
                     style={{
-                        backgroundImage: pinned || hover ? 'url("/assets/icons/pin.svg")' : 'none',
+                        backgroundImage:
+                            pinned || hover
+                                ? 'url("/assets/icons/pin.svg")'
+                                : "none",
                     }}
                     onClick={(e) => {
                         e.stopPropagation();
                         togglePinned();
                     }}
-                    onMouseEnter={() => {setHover(true)}}
-                    onMouseLeave={() => {setHover(false)}}
-                >
-                </button>
+                    onMouseEnter={() => {
+                        setHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setHover(false);
+                    }}
+                ></button>
             </div>
-            <div className="flex justify-start items-center mb-2">
-                <div className="bg-fg-white-85 w-8 aspect-square rounded-full"></div>
-                {videoData && 
-                    <p 
-                        className="text-sm font-bold leading-4 text-left h-[2] line-clamp-2 ml-2" 
-                        style={{ width: 'calc(100% - 2.5rem)' }}
+            <div className='flex justify-start items-center mb-2'>
+                <div className='bg-fg-white-85 w-8 aspect-square rounded-full'></div>
+                {videoData && (
+                    <p
+                        className='text-sm font-bold leading-4 text-left h-[2] line-clamp-2 ml-2'
+                        style={{ width: "calc(100% - 2.5rem)" }}
                     >
                         {videoData.video_title}
                     </p>
-                }
+                )}
             </div>
         </div>
     );
-};
+}
 
 const popupContentVar = {
     init: {
@@ -253,7 +288,6 @@ const profileVar = {
 };
 
 export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
-
     const dispatch = useDispatch();
 
     const [imageData, setImageData] = useState([]);
@@ -268,13 +302,15 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
     useEffect(() => {
         const fetchImageData = async () => {
             try {
-                const response = await Axios.get(`${serverUrl}/images/${image_id}`);
+                const response = await Axios.get(
+                    `${serverUrl}/images/${image_id}`
+                );
                 setImageData(response.data);
             } catch (error) {
-                console.error('Error fetching image data:', error);
-            };
+                console.error("Error fetching image data:", error);
+            }
         };
-      
+
         fetchImageData();
     }, [image_id]);
 
@@ -289,7 +325,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
             newPinned = true;
             const currentDate = new Date();
             date_pinned = currentDate.toISOString();
-        };
+        }
 
         try {
             if (type === "collection") {
@@ -302,56 +338,76 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
                     }
                 );
             } else if (type === "entity") {
-                await Axios.put(
-                    `${serverUrl}/entities/entity_images_pinned`,
-                    {
-                        relation_id: relation_id,
-                        pinned: newPinned,
-                        date_pinned: date_pinned,
-                    }
-                );
-            };
+                await Axios.put(`${serverUrl}/entities/entity_images_pinned`, {
+                    relation_id: relation_id,
+                    pinned: newPinned,
+                    date_pinned: date_pinned,
+                });
+            }
         } catch (error) {
-            console.error('Error toggling pinned:', error);
-        };
+            console.error("Error toggling pinned:", error);
+        }
 
         try {
-            socket.emit("togglePinned", "image", relation_id, newPinned, date_pinned);
+            socket.emit(
+                "togglePinned",
+                "image",
+                relation_id,
+                newPinned,
+                date_pinned
+            );
         } catch (error) {
-            console.error('Error with socket:', error);
-        }; 
+            console.error("Error with socket:", error);
+        }
     };
 
     const showPopup = () => {
         if (imageData) {
             setPopupContent(
-                <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs">
-                    <p className="text-lg font-bold line-clamp-2">{imageData.image_title}</p> 
-                    <p className="text-base font-K2D line-clamp-4">{imageData.image_description}</p>
+                <div className='p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs'>
+                    <p className='text-lg font-bold line-clamp-2'>
+                        {imageData.image_title}
+                    </p>
+                    <p className='text-base font-K2D line-clamp-4'>
+                        {imageData.image_description}
+                    </p>
                 </div>
             );
-        };
+        }
     };
 
     const startHoverTimer = (e) => {
-        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
+        mousePosition.current = {
+            x: `${e.clientX - 535}px`,
+            y: `${e.clientY - 50}px`,
+        };
         primaryHoverTimeout.current = setTimeout(() => {
-            showPopup(); updatePopupPosition(e);
+            showPopup();
+            updatePopupPosition(e);
         }, 3000);
         secondaryHoverTimeout.current = setTimeout(() => {
             setShowCreator(true);
-        }, 1000)
+        }, 1000);
     };
 
     const updateMousePosition = (e) => {
-        mousePosition.current = ({ x: `${e.clientX - 535}px`, y: `${e.clientY - 50}px` });
+        mousePosition.current = {
+            x: `${e.clientX - 535}px`,
+            y: `${e.clientY - 50}px`,
+        };
     };
 
     const updatePopupPosition = (e) => {
-        setPopupContent(prevPopupContent => {
+        setPopupContent((prevPopupContent) => {
             if (prevPopupContent) {
                 return (
-                    <div className="p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs" style={{ top: mousePosition.current.y, left: mousePosition.current.x }}>
+                    <div
+                        className='p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs'
+                        style={{
+                            top: mousePosition.current.y,
+                            left: mousePosition.current.x,
+                        }}
+                    >
                         {prevPopupContent.props.children}
                     </div>
                 );
@@ -363,63 +419,71 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
     const cancelHoverTimer = () => {
         if (primaryHoverTimeout.current) {
             clearTimeout(primaryHoverTimeout.current);
-        };
+        }
         if (secondaryHoverTimeout.current) {
             clearTimeout(secondaryHoverTimeout.current);
-        };
+        }
         setShowCreator(false);
         setPopupContent(null);
     };
 
     const handleClick = () => {
-        dispatch(setPageState('main', 'images'));
-        dispatch(setIds('main', 'image_id', image_id));
+        dispatch(setPageState("main", "images"));
+        dispatch(setIds("main", "image_id", image_id));
     };
 
     return (
-        <div className="flex flex-col justify-center" onClick={handleClick}>
-            <div 
-                className="bg-fg-white-85 w-full aspect-square rounded mb-3 relative"
-                style={{ width: 'calc(100% - 1rem)'}}
-                onMouseEnter={(e) => startHoverTimer(e)} 
-                onMouseLeave={() => cancelHoverTimer()} 
-                onMouseMove={(e) => {updateMousePosition(e); updatePopupPosition(e)}}
+        <div className='flex flex-col justify-center' onClick={handleClick}>
+            <div
+                className='bg-fg-white-85 w-full aspect-square rounded mb-3 relative'
+                style={{ width: "calc(100% - 1rem)" }}
+                onMouseEnter={(e) => startHoverTimer(e)}
+                onMouseLeave={() => cancelHoverTimer()}
+                onMouseMove={(e) => {
+                    updateMousePosition(e);
+                    updatePopupPosition(e);
+                }}
             >
-                <button 
-                    className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+                <button
+                    className='w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none'
                     style={{
-                        backgroundImage: pinned || pinHover ? 'url("/assets/icons/pin.svg")' : 'none',
+                        backgroundImage:
+                            pinned || pinHover
+                                ? 'url("/assets/icons/pin.svg")'
+                                : "none",
                     }}
                     onClick={(e) => {
                         e.stopPropagation();
                         togglePinned();
                     }}
-                    onMouseEnter={() => {setPinHover(true)}}
-                    onMouseLeave={() => {setPinHover(false)}}
-                >
-                </button>
-                {showCreator && 
-                    <motion.div 
-                        className="bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3"
+                    onMouseEnter={() => {
+                        setPinHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setPinHover(false);
+                    }}
+                ></button>
+                {showCreator && (
+                    <motion.div
+                        className='bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3'
                         variants={profileVar}
-                        initial="init"
-                        animate="animate"
-                        transition="transition"
-                    >
-                    </motion.div>
-                }
+                        initial='init'
+                        animate='animate'
+                        transition='transition'
+                    ></motion.div>
+                )}
             </div>
             {popupContent && (
                 <motion.div
-                    className="z-50"
+                    className='z-50'
                     variants={popupContentVar}
-                    initial="init"
-                    animate="animate"
-                    transition="transition"
+                    initial='init'
+                    animate='animate'
+                    transition='transition'
                 >
                     {popupContent}
                 </motion.div>
             )}
         </div>
     );
-};
+}

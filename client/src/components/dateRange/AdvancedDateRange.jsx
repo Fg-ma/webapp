@@ -1,7 +1,7 @@
 import React from "react";
-import { createPortal } from 'react-dom';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+import { createPortal } from "react-dom";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import { motion } from "framer-motion";
 import { setDateRange } from "../../redux/filters/filterActions";
 import { useDispatch } from "react-redux";
@@ -34,26 +34,32 @@ const css = `
 
 const dateRangeVar = {
     middleInit: {
-        opacity: 0, 
-        y: "-1vh" 
+        opacity: 0,
+        y: "-1vh",
     },
     rightInit: {
-        opacity: 0, 
-        y: "1vh" 
+        opacity: 0,
+        y: "1vh",
     },
-    animate: { 
-        opacity: 1, 
-        y: 0 
+    animate: {
+        opacity: 1,
+        y: 0,
     },
-    transition: { 
-        duration: 0.25, 
-        ease: "easeOut", 
-        delay: 0.275 
-    }
+    transition: {
+        duration: 0.25,
+        ease: "easeOut",
+        delay: 0.275,
+    },
 };
 
-export default function AdvancedDateRange({ filter, position, selectedRange, setSelectedRange, updateRangeStyles, refs }) {
-    
+export default function AdvancedDateRange({
+    filter,
+    position,
+    selectedRange,
+    setSelectedRange,
+    updateRangeStyles,
+    refs,
+}) {
     /* 
         Description:   
             Creates the date range dropdown via create portal with the date range picker in it.
@@ -61,7 +67,7 @@ export default function AdvancedDateRange({ filter, position, selectedRange, set
             I don't know why but the only way to apply css styles was by using the style element.
     */
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const toDateString = (date) => {
         const inputDateString = String(date).substring(4, 15);
@@ -75,8 +81,8 @@ export default function AdvancedDateRange({ filter, position, selectedRange, set
         }
 
         // Extract the month, day, and year
-        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
-        const day = String(dateObject.getDate()).padStart(2, '0');
+        const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+        const day = String(dateObject.getDate()).padStart(2, "0");
         const year = dateObject.getFullYear();
 
         // Create the formatted date string
@@ -87,44 +93,74 @@ export default function AdvancedDateRange({ filter, position, selectedRange, set
 
     const handleDayClick = (day) => {
         if (!selectedRange.from || (selectedRange.from && selectedRange.to)) {
-            setSelectedRange({ from: day, to: '' });
-            dispatch(setDateRange(filter, toDateString(day), ''))
+            setSelectedRange({ from: day, to: "" });
+            dispatch(setDateRange(filter, toDateString(day), ""));
         } else {
             if (day < selectedRange.from) {
                 setSelectedRange({ from: day, to: selectedRange.from });
-                dispatch(setDateRange(filter, toDateString(day), toDateString(selectedRange.from)))
+                dispatch(
+                    setDateRange(
+                        filter,
+                        toDateString(day),
+                        toDateString(selectedRange.from)
+                    )
+                );
             } else {
                 setSelectedRange({ ...selectedRange, to: day });
-                dispatch(setDateRange(filter, toDateString(selectedRange.from), toDateString(day)))
+                dispatch(
+                    setDateRange(
+                        filter,
+                        toDateString(selectedRange.from),
+                        toDateString(day)
+                    )
+                );
             }
-        };
+        }
     };
 
     return createPortal(
-        <motion.div 
-            className="bg-white absolute z-50 rounded-md select-none" 
-            style={position !== null ? (filter == "middle") ? { top: `${position.top}px`, left: `${position.left}px` } : { bottom: `${position.bottom}px`, left: `${position.left}px` } : null}
+        <motion.div
+            className='bg-white absolute z-50 rounded-md select-none'
+            style={
+                position !== null
+                    ? filter == "middle"
+                        ? {
+                              top: `${position.top}px`,
+                              left: `${position.left}px`,
+                          }
+                        : {
+                              bottom: `${position.bottom}px`,
+                              left: `${position.left}px`,
+                          }
+                    : null
+            }
             ref={refs.dateRange}
             variants={dateRangeVar}
             initial={filter === "middle" ? "middleInit" : "rightInit"}
-            animate="animate"
+            animate='animate'
             exit={filter === "middle" ? "middleInit" : "rightInit"}
-            transition="transition"
+            transition='transition'
         >
             <style>{css}</style>
             <DayPicker
                 selected={selectedRange}
                 components={{
-                    Caption: ({  ...props }) => (
-                        <DateCenteredCaption {...props} updateRangeStyles={updateRangeStyles} dateRangeCaptionDropdownRef={refs.dateRangeCaptionDropdown} />
+                    Caption: ({ ...props }) => (
+                        <DateCenteredCaption
+                            {...props}
+                            updateRangeStyles={updateRangeStyles}
+                            dateRangeCaptionDropdownRef={
+                                refs.dateRangeCaptionDropdown
+                            }
+                        />
                     ),
                 }}
-                mode="range"
+                mode='range'
                 onDayClick={handleDayClick}
-                className="custom-picker" 
+                className='custom-picker'
                 modifiersClassNames={{
-                    selected: 'selected',
-                    today: 'today',
+                    selected: "selected",
+                    today: "today",
                 }}
             />
         </motion.div>,

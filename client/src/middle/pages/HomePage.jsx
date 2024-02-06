@@ -4,13 +4,16 @@ import MiddleDrop from "../search/MiddleDrop";
 
 export default function HomePage({ middleSpaceContainerRef, middleSpaceRef }) {
     return (
-        <div className="h-full">
-            <div className="absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit">
-                <MiddleDrop middleSpaceContainerRef={middleSpaceContainerRef} middleSpaceRef={middleSpaceRef} />
+        <div className='h-full'>
+            <div className='absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit'>
+                <MiddleDrop
+                    middleSpaceContainerRef={middleSpaceContainerRef}
+                    middleSpaceRef={middleSpaceRef}
+                />
             </div>
-            <div className="overflow-hidden rounded-xl h-full w-full">
+            <div className='overflow-hidden rounded-xl h-full w-full'>
                 <MiddleVerticalSplitPane />
             </div>
         </div>
-    )
-};
+    );
+}

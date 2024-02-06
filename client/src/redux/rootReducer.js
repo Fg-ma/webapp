@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import pageStateReducer from './pageState/pageStateReducer';
-import filterReducer from './filters/filterReducer';
+import { combineReducers } from "redux";
+import pageStateReducer from "./pageState/pageStateReducer";
+import filterReducer from "./filters/filterReducer";
 
 export const rootReducer = combineReducers({
-  page: pageStateReducer,
-  filters: filterReducer,
-})
+    page: pageStateReducer,
+    filters: filterReducer,
+});

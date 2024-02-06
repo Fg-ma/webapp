@@ -42,8 +42,8 @@ router.get("/get_full_video/:video_id", async (req, res) => {
         if (!fullVideoData || fullVideoData.length === 0) {
             res.status(404).send("Video not found");
             return;
-        };
-        
+        }
+
         res.send(fullVideoData);
     } catch (error) {
         console.error(error);

@@ -1,10 +1,10 @@
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const http = require("http");
-const multer = require('multer');
+const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { socket } = require("./socket");
@@ -38,7 +38,7 @@ app.use("/entities", entitiesRouter);
 app.use("/references", referencesRouter);
 app.use("/auth", authRouter);
 
-app.put("/sheets_updating", upload.single('file'), (req, res) => {
+app.put("/sheets_updating", upload.single("file"), (req, res) => {
     const id = req.query.id;
     const filename = req.query.filename;
     const data = req.file.buffer;
@@ -56,7 +56,7 @@ app.put("/sheets_updating", upload.single('file'), (req, res) => {
     );
 });
 
-app.put("/videos_updating", upload.single('file'), (req, res) => {
+app.put("/videos_updating", upload.single("file"), (req, res) => {
     const data = req.file.buffer;
 
     db.query(
@@ -75,7 +75,7 @@ app.put("/videos_updating", upload.single('file'), (req, res) => {
     );
 });
 
-app.put("/images_updating", upload.single('file'), (req, res) => {
+app.put("/images_updating", upload.single("file"), (req, res) => {
     const id = req.query.id;
     const filename = req.query.filename;
     const data = req.file.buffer;
