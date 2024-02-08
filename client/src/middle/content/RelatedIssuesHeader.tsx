@@ -1,22 +1,30 @@
 import React from "react";
 
-export default function RecHeader({ lightness, togglePaneHeight }) {
+interface RelatedIssuesHeaderProps {
+    lightness: number;
+    togglePaneHeight: () => void;
+}
+
+export default function RelatedIssuesHeader({
+    lightness,
+    togglePaneHeight,
+}: RelatedIssuesHeaderProps) {
     /* 
         Description:   
-            Acts as a divider in the LeftVerticalSplitPane. Basic set up of a recommendations header.
+            Acts as a divider in the MiddleVerticalSplitPane. Basic set up of a related issues header.
         Unique Properties:
             Changes lightness based on its height on the page but that logic is handled in 
-            LeftVerticalSplitPane and passed in with the correct value.
+            MiddleVerticalSplitPane and passed in with the correct value.
     */
 
     return (
         <div
-            id='recHeader'
+            id='relatedIssuesHeader'
             className='h-9 flex items-center drop-shadow-md'
             style={{ backgroundColor: `hsl(21, 92%, ${lightness}%)` }}
         >
-            <div className='grow flex items-center justify-start ml-5 text-xl text-white pt-1'>
-                <p>Recommendations...</p>
+            <div className='grow my-auto flex justify-start items-center ml-5 text-xl text-white pt-1'>
+                <p>Related Issues</p>
             </div>
             <div className='flex items-center mr-5'>
                 <div

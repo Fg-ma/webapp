@@ -8,6 +8,15 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
+interface Organization {
+    organization_id: number;
+    organization_name: string;
+    organization_handle: string;
+    organization_currentIssue: string;
+    organization_description: string;
+    organization_stances: string;
+}
+
 export default function OrganizationRecs() {
     /* 
         Description:   
@@ -17,7 +26,7 @@ export default function OrganizationRecs() {
             N/A
     */
 
-    const [organizations, setOrganizations] = useState([]);
+    const [organizations, setOrganizations] = useState<Organization[]>([]);
 
     useEffect(() => {
         const fetchOrganizationData = async () => {

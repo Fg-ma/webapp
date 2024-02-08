@@ -69,7 +69,7 @@ export default function ImageViewer({ image_id }) {
                 return null;
         }
     };
-    console.log(imageData);
+
     return (
         <div className='w-full'>
             {imageData.image_url && (

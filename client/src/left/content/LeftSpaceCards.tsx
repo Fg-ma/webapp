@@ -9,8 +9,17 @@ import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
     Unique Properties:
         N/A
 */
+interface IndividualCardProps {
+    id: number;
+    name: string;
+    currentIssue: string | null;
+}
 
-export function IndividualCard({ id, name, currentIssue = null }) {
+export function IndividualCard({
+    id,
+    name,
+    currentIssue = null,
+}: IndividualCardProps) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -38,12 +47,19 @@ export function IndividualCard({ id, name, currentIssue = null }) {
     );
 }
 
+interface GroupCardProps {
+    id: number;
+    name: string;
+    currentIssue: string | null;
+    affInCommon: string | null;
+}
+
 export function GroupCard({
     id,
     name,
     currentIssue = null,
     affInCommon = null,
-}) {
+}: GroupCardProps) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -74,12 +90,19 @@ export function GroupCard({
     );
 }
 
+interface OrganizationCardProps {
+    id: number;
+    name: string;
+    currentIssue: string | null;
+    stances: string | null;
+}
+
 export function OrganizationCard({
     id,
     name,
     currentIssue = null,
     stances = null,
-}) {
+}: OrganizationCardProps) {
     const dispatch = useDispatch();
 
     const handleClick = () => {

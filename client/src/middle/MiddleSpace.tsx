@@ -1,11 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/homePage/HomePage";
 import EntityPage from "./pages/entityPage/EntityPage";
 import ContentPage from "./pages/contentPage/ContentPage";
 import "./middleSpace.css";
 
-export default function MiddleSpace({ middleSpaceContainerRef }) {
+interface MiddleSpaceProps {
+    middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
+}
+
+interface MainState {
+    page: {
+        main: {
+            pagePayload: {
+                pageState: string;
+            };
+        };
+    };
+}
+
+export default function MiddleSpace({
+    middleSpaceContainerRef,
+}: MiddleSpaceProps) {
     /* 
         Description:   
             Container for everything that happens in the middle space section including 
@@ -14,11 +30,12 @@ export default function MiddleSpace({ middleSpaceContainerRef }) {
             N/A
     */
 
-    const middleSpaceRef = useRef(null);
+    const middleSpaceRef = useRef<HTMLDivElement>(null);
     const mainPageState = useSelector(
-        (state) => state.page.main.pagePayload.pageState
+        (state: MainState) => state.page.main.pagePayload.pageState
     );
-    const [middleSpaceContent, setMiddleSpaceContent] = useState([]);
+    const [middleSpaceContent, setMiddleSpaceContent] =
+        useState<React.JSX.Element | null>(null);
 
     useEffect(() => {
         if (mainPageState === "home") {

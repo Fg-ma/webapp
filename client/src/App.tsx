@@ -10,6 +10,17 @@ import "./app.css";
 import "./scrollbar.css";
 import "./filterSwitches.css";
 
+interface LoginState {
+    page: {
+        login: {
+            pagePayload: {
+                pageState: string;
+                isLoggedIn: boolean;
+            };
+        };
+    };
+}
+
 export default function App() {
     /* 
         Description:   
@@ -20,12 +31,12 @@ export default function App() {
     */
 
     const isLoggedIn = useSelector(
-        (state) => state.page.login.pagePayload.isLoggedIn
+        (state: LoginState) => state.page.login.pagePayload.isLoggedIn
     );
     const loginPageState = useSelector(
-        (state) => state.page.login.pagePayload.pageState
+        (state: LoginState) => state.page.login.pagePayload.pageState
     );
-    const middleSpaceContainerRef = useRef(null);
+    const middleSpaceContainerRef = useRef<HTMLDivElement>(null);
 
     if (!isLoggedIn) {
         switch (loginPageState) {

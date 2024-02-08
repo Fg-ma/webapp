@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./leftSpace.css";
 import LeftVerticalSplitPane from "./LeftVerticalSplitPane";
 import LeftNav from "./LeftNav";
@@ -11,6 +11,8 @@ export default function LeftSpace() {
         Unique Properties:
             N/A
     */
+
+    const leftSpaceContentContainerRef = useRef<HTMLDivElement>(null);
 
     return (
         <div
@@ -25,10 +27,12 @@ export default function LeftSpace() {
         >
             <LeftNav />
             <div
-                id='leftSpaceContentContainer'
+                ref={leftSpaceContentContainerRef}
                 style={{ height: `calc(100% - 3rem)` }}
             >
-                <LeftVerticalSplitPane />
+                <LeftVerticalSplitPane
+                    leftSpaceContentContainerRef={leftSpaceContentContainerRef}
+                />
             </div>
         </div>
     );

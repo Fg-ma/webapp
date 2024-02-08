@@ -8,7 +8,16 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
-export default function IndividualRecs() {
+interface Individual {
+    individual_id: number;
+    individual_name: string;
+    individual_userName: string;
+    individual_currentIssue: string;
+    individual_description: string;
+    individual_roles: string;
+}
+
+export default function IndividualCards() {
     /* 
         Description:   
             Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
@@ -17,7 +26,7 @@ export default function IndividualRecs() {
             N/A
     */
 
-    const [individuals, setIndividuals] = useState([]);
+    const [individuals, setIndividuals] = useState<Individual[]>([]);
 
     useEffect(() => {
         const fetchIndividualData = async () => {
@@ -32,7 +41,7 @@ export default function IndividualRecs() {
         fetchIndividualData();
     }, []);
 
-    const indRecs = individuals.map((indInfo) => {
+    const indCards = individuals.map((indInfo) => {
         return (
             <IndividualCard
                 key={indInfo.individual_id}
@@ -44,8 +53,8 @@ export default function IndividualRecs() {
     });
 
     return (
-        <div id='individualRecs' className='mr-3 h-full overflow-scroll'>
-            {indRecs}
+        <div id='individualCards' className='h-full mr-3 overflow-scroll'>
+            {indCards}
         </div>
     );
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "../redux/pageState/pageStateActions";
 
-const navButtonsVar = {
+const navButtonsVar: Variants = {
     init: {
         fontSize: "1rem",
         lineHeight: "1rem",
@@ -19,11 +19,24 @@ const navButtonsVar = {
         lineHeight: "1.25rem",
         paddingTop: "0rem",
     },
+};
+
+const transition: Transition = {
     transition: {
         ease: "easeOut",
         duration: 0.1,
     },
 };
+
+interface MainState {
+    page: {
+        main: {
+            pagePayload: {
+                pageState: string;
+            };
+        };
+    };
+}
 
 export default function PageNav() {
     /* 
@@ -37,18 +50,18 @@ export default function PageNav() {
 
     const dispatch = useDispatch();
     const mainPageState = useSelector(
-        (state) => state.page.main.pagePayload.pageState
+        (state: MainState) => state.page.main.pagePayload.pageState
     );
 
-    const deactiveStyles = {};
-    const activeStyles = {
+    const deactiveStyles: React.CSSProperties = {};
+    const activeStyles: React.CSSProperties = {
         textDecorationLine: "underline",
         textDecorationColor: "#F56114",
         textUnderlineOffset: "8px",
         textDecorationThickness: "2px",
         paddingBottom: "0.25rem",
     };
-    const mainPageStyles = {
+    const mainPageStyles: Record<string, React.CSSProperties> = {
         profile: deactiveStyles,
         home: deactiveStyles,
         messages: deactiveStyles,
@@ -59,7 +72,7 @@ export default function PageNav() {
 
     mainPageStyles[mainPageState] = { ...activeStyles };
 
-    function swapPageState(newState) {
+    function swapPageState(newState: string) {
         dispatch(setPageState("main", newState));
     }
 
@@ -78,7 +91,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("profile")}
                 >
                     <button className='rounded-full bg-fg-white-90 h-10 aspect-square text-sm'></button>
@@ -91,7 +104,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("home")}
                 >
                     <button
@@ -112,7 +125,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("messages")}
                 >
                     <button
@@ -134,7 +147,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("dogEars")}
                 >
                     <button
@@ -155,7 +168,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("notifications")}
                 >
                     <button
@@ -177,7 +190,7 @@ export default function PageNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapPageState("settings")}
                 >
                     <button

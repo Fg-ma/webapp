@@ -8,7 +8,15 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
-export default function GroupRecs() {
+interface Group {
+    group_id: number;
+    group_name: string;
+    group_currentIssue: string;
+    group_description: string;
+    group_stances: string;
+}
+
+export default function GroupCards() {
     /* 
         Description:   
             Gets group data from a database then extracts the id, name, and currentIssue to be mapped
@@ -17,7 +25,7 @@ export default function GroupRecs() {
             It queries for any affiliates that the user may have in common with the group.
     */
 
-    const [groups, setGroups] = useState([]);
+    const [groups, setGroups] = useState<Group[]>([]);
 
     useEffect(() => {
         const fetchGroupData = async () => {
@@ -32,20 +40,21 @@ export default function GroupRecs() {
         fetchGroupData();
     }, []);
 
-    const grpRecs = groups.map((grpInfo) => {
+    const grpCards = groups.map((grpInfo) => {
         return (
             <GroupCard
                 key={grpInfo.group_id}
                 id={grpInfo.group_id}
                 name={grpInfo.group_name}
                 currentIssue={grpInfo.group_currentIssue}
+                affInCommon='placeholder'
             />
-        ); //affInCommon={grpInfo.affInCommon} />
+        );
     });
 
     return (
-        <div id='groupRecs' className='mr-3 h-full overflow-scroll'>
-            {grpRecs}
+        <div id='groupCards' className='h-full mr-3 overflow-scroll'>
+            {grpCards}
         </div>
     );
 }

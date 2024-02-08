@@ -7,6 +7,15 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
+interface CoverSheet {
+    sheet_id: number;
+    sheet_data_id: number;
+    sheet_author_id: number;
+    sheet_filename: string;
+    sheet_title: string;
+    sheet_subject: string;
+}
+
 export default function RelatedIssues() {
     /* 
         Description:   
@@ -16,13 +25,13 @@ export default function RelatedIssues() {
             It queries for any affiliates responses to the related issue.
     */
 
-    const [coverSheet, setCoverSheet] = useState([]);
+    const [coverSheets, setCoverSheets] = useState<CoverSheet[]>([]);
 
     useEffect(() => {
         const fetchCoverSheetData = async () => {
             try {
                 const response = await Axios.get(`${serverUrl}/sheets`);
-                setCoverSheet(response.data);
+                setCoverSheets(response.data);
             } catch (error) {
                 console.error("Error fetching cover sheet data:", error);
             }
@@ -31,13 +40,14 @@ export default function RelatedIssues() {
         fetchCoverSheetData();
     }, []);
 
-    const relIssues = coverSheet.map((relIssuesInfo) => {
+    const relIssues = coverSheets.map((relIssuesInfo) => {
         return (
             <RelatedIssuesCard
                 key={relIssuesInfo.sheet_id}
                 title={relIssuesInfo.sheet_title}
+                affResponses='placeholder'
             />
-        ); //affResponses={issueInfo.affResponses} />
+        );
     });
 
     return (
@@ -47,7 +57,15 @@ export default function RelatedIssues() {
     );
 }
 
-function RelatedIssuesCard({ title, affResponses = null }) {
+interface RelatedIssuesCardProps {
+    title: string;
+    affResponses: string | null;
+}
+
+function RelatedIssuesCard({
+    title,
+    affResponses = null,
+}: RelatedIssuesCardProps) {
     return (
         <div className='bg-white w-fill my-4 mr-5 ml-8 h-24 flex items-center rounded-md'>
             <div className='w-16 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center'>

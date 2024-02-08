@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { motion, Transition, Variants } from "framer-motion";
 import { setPageState } from "../redux/pageState/pageStateActions";
 
-const navButtonsVar = {
+const navButtonsVar: Variants = {
     init: {
         fontSize: "1.125rem",
         lineHeight: "1.75rem",
@@ -19,11 +19,24 @@ const navButtonsVar = {
         lineHeight: "1.5rem",
         paddingTop: "0rem",
     },
+};
+
+const transition: Transition = {
     transition: {
         ease: "easeOut",
         duration: 0.1,
     },
 };
+
+interface LeftState {
+    page: {
+        left: {
+            pagePayload: {
+                pageState: string;
+            };
+        };
+    };
+}
 
 export default function LeftNav() {
     /* 
@@ -37,18 +50,18 @@ export default function LeftNav() {
 
     const dispatch = useDispatch();
     const leftPage = useSelector(
-        (state) => state.page.left.pagePayload.pageState
+        (state: LeftState) => state.page.left.pagePayload.pageState
     );
 
-    const deactiveStyles = {};
-    const activeStyles = {
+    const deactiveStyles: React.CSSProperties = {};
+    const activeStyles: React.CSSProperties = {
         textDecorationLine: "underline",
         textDecorationColor: "#F56114",
         textUnderlineOffset: "8px",
         textDecorationThickness: "2px",
         paddingBottom: "0.25rem",
     };
-    const leftStyles = {
+    const leftStyles: Record<string, React.CSSProperties> = {
         individuals: deactiveStyles,
         groups: deactiveStyles,
         organizations: deactiveStyles,
@@ -56,7 +69,7 @@ export default function LeftNav() {
 
     leftStyles[leftPage] = { ...activeStyles };
 
-    function swapLeftState(newState) {
+    function swapLeftState(newState: string) {
         dispatch(setPageState("left", newState));
     }
 
@@ -71,7 +84,7 @@ export default function LeftNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapLeftState("individuals")}
                 >
                     <button
@@ -86,7 +99,7 @@ export default function LeftNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapLeftState("groups")}
                 >
                     <button className='w-full' style={leftStyles["groups"]}>
@@ -98,7 +111,7 @@ export default function LeftNav() {
                     variants={navButtonsVar}
                     initial='init'
                     whileHover='hover'
-                    transition={navButtonsVar.transition}
+                    transition={transition}
                     onClick={() => swapLeftState("organizations")}
                 >
                     <button

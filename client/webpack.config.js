@@ -6,7 +6,7 @@ const path = require("path");
 dotenv.config();
 
 module.exports = {
-    entry: "./index.jsx",
+    entry: "./index.tsx",
     mode: "development",
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -26,7 +26,7 @@ module.exports = {
         alias: {
             "@config": path.resolve(__dirname, "config"),
         },
-        extensions: [".js", ".jsx", ".json"],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     },
     module: {
         rules: [

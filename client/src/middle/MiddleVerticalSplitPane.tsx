@@ -1,36 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import RecHeader from "./content/RecHeader";
-import IndividualCards from "./content/IndividualCards";
-import GroupCards from "./content/GroupCards";
-import OrganizationCards from "./content/OrganizationCards";
-import IndividualRecs from "./content/IndividualRecs";
-import GroupRecs from "./content/GroupRecs";
-import OrganizationRecs from "./content/OrganizationRecs";
+import Axios from "axios";
+import config from "@config";
+import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
+import RelatedIssues from "./content/RelatedIssues";
+import SheetViewer from "../components/viewers/SheetViewer";
 
-export default function LeftVerticalSplitPane() {
-    /*
-        Description:   
-            Creates 3 panes of which the top and bottom are used to display context
-            (individuals/groups/organizations and recommendations respectively).
-            The middle panel is a dragable panel that resizes the top and bottom panes,
-            importantly this middle pane can be any div(the contents of which dont matter).
-        Unique Properties:
-            Depending on the height that the middle pane is dragged to the bg-color changes
-            from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
-    */
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
 
-    const leftPage = useSelector(
-        (state) => state.page.left.pagePayload.pageState
-    );
+interface MiddleVerticalSplitPaneProps {
+    middleSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
+}
+
+export default function MiddleVerticalSplitPane({
+    middleSpaceContentContainerRef,
+}: MiddleVerticalSplitPaneProps) {
     const [isResizing, setIsResizing] = useState(false);
     const [initialMousePosition, setInitialMousePosition] = useState(0);
     const [initialPaneHeight, setInitialPaneHeight] = useState(0);
-    const [paneHeight, setPaneHeight] = useState("60%");
+    const [paneHeight, setPaneHeight] = useState("79%");
     const [headerLightness, setHeaderLightness] = useState(80);
 
     // Handles softly lowering and raising the pane height when togglePaneHeight is called
-    const animateTogglePaneHeight = (targetHeight, duration = 500) => {
+    const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
         const start = Date.now();
         const initialHeight = parseFloat(paneHeight) || 0;
 
@@ -54,11 +48,15 @@ export default function LeftVerticalSplitPane() {
         requestAnimationFrame(animate);
     };
 
-    const handleMove = (clientY) => {
+    const handleMove = (clientY: number) => {
         if (isResizing) {
-            const containerHeight = document.getElementById(
-                "leftSpaceContentContainer"
-            ).offsetHeight;
+            const containerHeight =
+                middleSpaceContentContainerRef.current?.offsetHeight;
+
+            if (!containerHeight) {
+                return;
+            }
+
             const mouseYDelta = clientY - initialMousePosition;
 
             // Adjust the speed by fiddling with the sensitivity factor
@@ -67,18 +65,15 @@ export default function LeftVerticalSplitPane() {
                 initialPaneHeight +
                 (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
 
-            // Cap the newPaneHeight to a maximum value
+            // Cap the newPaneHeight to a max and min value
             const maxPaneHeight = 100;
             newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
 
             const minPaneHeight = 15;
             newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
 
-            // Calculate lightness based on the percentage of newPaneHeight
-            let lightness = getLightness(newPaneHeight);
-
             setPaneHeight(`${newPaneHeight}%`);
-            setHeaderLightness(lightness);
+            setHeaderLightness(getLightness(newPaneHeight));
         }
     };
 
@@ -86,18 +81,18 @@ export default function LeftVerticalSplitPane() {
         setIsResizing(false);
     };
 
-    const handleStart = (clientY) => {
+    const handleStart = (clientY: number) => {
         setIsResizing(true);
         setInitialMousePosition(clientY);
         setInitialPaneHeight(parseFloat(paneHeight) || 0);
     };
 
-    const handleMouseMove = (event) => {
-        handleMove(event.clientY);
+    const handleMouseMove = (event: MouseEvent) => {
+        requestAnimationFrame(() => handleMove(event.clientY));
     };
 
-    const handleTouchMove = (event) => {
-        handleMove(event.touches[0].clientY);
+    const handleTouchMove = (event: TouchEvent) => {
+        requestAnimationFrame(() => handleMove(event.touches[0].clientY));
     };
 
     const handleMouseUp = () => {
@@ -123,12 +118,9 @@ export default function LeftVerticalSplitPane() {
         };
     }, [isResizing]);
 
-    // Gets initial conditions
     useEffect(() => {
-        // Get the initial height of the leftPane when the component mounts
         const initialHeight = parseFloat(paneHeight) || 0;
 
-        // Set the initial lightness based on the initial height
         let initialLightness = getLightness(initialHeight);
 
         setHeaderLightness(initialLightness);
@@ -140,45 +132,46 @@ export default function LeftVerticalSplitPane() {
         animateTogglePaneHeight(parseFloat(newHeight));
     };
 
-    const getLightness = (height) => {
+    const getLightness = (height: number) => {
         let lightness = Math.max(52, 100 - height * 0.75);
         lightness = Math.min(60, lightness);
         return lightness;
     };
 
-    const renderContent = () => {
-        switch (leftPage) {
-            case "individuals":
-                return <IndividualCards />;
-            case "groups":
-                return <GroupCards />;
-            case "organizations":
-                return <OrganizationCards />;
-            default:
-                return <IndividualCards />;
-        }
-    };
+    const fileToBlobFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0];
 
-    const renderRecs = () => {
-        switch (leftPage) {
-            case "individuals":
-                return <IndividualRecs />;
-            case "groups":
-                return <GroupRecs />;
-            case "organizations":
-                return <OrganizationRecs />;
-            default:
-                return <IndividualRecs />;
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+
+            Axios.put(`${serverUrl}/videos_updating`, formData, {
+                headers: {
+                    "Content-Type": "image/png",
+                },
+            })
+                .then((response) => {})
+                .catch((error) => {
+                    console.error("Error uploading file:", error);
+                });
         }
     };
 
     return (
-        <div className='leftVerticalSplitPane'>
-            <div className='leftPane' style={{ height: paneHeight }}>
-                {renderContent()}
+        <div className='flex flex-col w-full h-full relative'>
+            <div
+                className='mr-3 overflow-auto box-border'
+                style={{ height: paneHeight }}
+            >
+                <div className='ml-8 mr-5 my-8'>
+                    <SheetViewer
+                        sheet_id={Math.floor(Math.random() * 20) + 1}
+                    />
+                    <input type='file' onChange={fileToBlobFunc} />
+                </div>
             </div>
             <div
-                className='leftResizer'
+                className='cursor-ns-resize select-none'
                 onMouseDown={(e) => {
                     handleStart(e.clientY);
                 }}
@@ -188,17 +181,16 @@ export default function LeftVerticalSplitPane() {
                 onMouseUp={handleMouseUp}
                 onTouchEnd={handleTouchEnd}
             >
-                <RecHeader
+                <RelatedIssuesHeader
                     lightness={headerLightness}
                     togglePaneHeight={togglePaneHeight}
                 />
             </div>
             <div
-                id='leftBottomPane'
-                className='leftPane'
+                className='overflow-auto box-border bg-fg-white-95'
                 style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
             >
-                {renderRecs()}
+                <RelatedIssues />
             </div>
         </div>
     );
