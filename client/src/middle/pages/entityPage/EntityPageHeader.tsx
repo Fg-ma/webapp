@@ -1,11 +1,49 @@
 import React from "react";
 import ReferenceLinks from "../../../components/referenceLinks/ReferenceLinks";
 
+interface EntityPageHeaderProps {
+    entityType: string;
+    entity: Entity | null;
+    entityReferences: EntityReferences[];
+}
+
+interface Entity {
+    [key: string]: any;
+    individual_id?: number;
+    individual_name?: string;
+    individual_userName?: string;
+    individual_roles?: string;
+    individual_currentIssue?: string;
+    individual_description?: string;
+    group_id?: number;
+    group_name?: string;
+    group_handle?: string;
+    group_stances?: string;
+    group_currentIssue?: string;
+    group_description?: string;
+    organization_id?: number;
+    organization_name?: string;
+    organization_handle?: string;
+    organization_stances?: string;
+    organization_currentIssue?: string;
+    organization_description?: string;
+}
+
+interface EntityReferences {
+    reference_id: number;
+    individual_id: number | null;
+    group_id: number | null;
+    organization_id: number | null;
+    title: string;
+    author: string;
+    url: string;
+}
+
 export default function EntityPageHeader({
     entityType,
     entity,
     entityReferences,
-}) {
+}: EntityPageHeaderProps) {
     /* 
         Description:   
             Creates an entity's page header from information retrieved(or not retrieved)

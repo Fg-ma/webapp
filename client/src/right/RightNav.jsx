@@ -56,8 +56,9 @@ export default function RightNav() {
         messages: deactiveStyles,
         dogEars: deactiveStyles,
     };
-
     rightStyles[rightPage] = { ...activeStyles };
+
+    const navItems = ["papers", "news", "explore", "dogEars"];
 
     function swapRightState(state) {
         dispatch(closeDrop(state, "isDropFilter"));
@@ -70,54 +71,24 @@ export default function RightNav() {
             className='block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md'
         >
             <div className='flex divide-x-2 divide-fg-white-70 h-full'>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={navButtonsVar.transition}
-                    onClick={() => swapRightState("papers")}
-                >
-                    <button className='w-full' style={rightStyles["papers"]}>
-                        Papers
-                    </button>
-                </motion.div>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={navButtonsVar.transition}
-                    onClick={() => swapRightState("news")}
-                >
-                    <button className='w-full' style={rightStyles["news"]}>
-                        News
-                    </button>
-                </motion.div>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={navButtonsVar.transition}
-                    onClick={() => swapRightState("explore")}
-                >
-                    <button className='w-full' style={rightStyles["explore"]}>
-                        Explore
-                    </button>
-                </motion.div>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={navButtonsVar.transition}
-                    onClick={() => swapRightState("dogEars")}
-                >
-                    <button className='w-full' style={rightStyles["dogEars"]}>
-                        Dog-Ears
-                    </button>
-                </motion.div>
+                {navItems.map((navItem) => (
+                    <motion.div
+                        key={navItem}
+                        className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
+                        variants={navButtonsVar}
+                        initial='init'
+                        whileHover='hover'
+                        transition={navButtonsVar.transition}
+                        onClick={() => swapRightState(navItem)}
+                    >
+                        <button className='w-full' style={rightStyles[navItem]}>
+                            {navItem !== "dogEars"
+                                ? navItem.charAt(0).toUpperCase() +
+                                  navItem.slice(1)
+                                : "Dog-Ears"}
+                        </button>
+                    </motion.div>
+                ))}
             </div>
         </nav>
     );

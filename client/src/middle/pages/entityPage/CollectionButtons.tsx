@@ -8,11 +8,23 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
+interface CollectionButtonsProps {
+    entityType: string;
+    entity_id: number;
+}
+
+interface CollectionNames {
+    collection_id: number;
+    collection_name: string;
+    individual_id: number | null;
+    group_id: number | null;
+    organization_id: number | null;
+}
+
 export default function CollectionButtons({
     entityType,
     entity_id,
-    entityPageRef,
-}) {
+}: CollectionButtonsProps) {
     /* 
         Description:   
             Creates the collection buttons for swtiching between different collections 
@@ -21,7 +33,9 @@ export default function CollectionButtons({
             N/A
     */
 
-    const [collectionNames, setCollectionNames] = useState([]);
+    const [collectionNames, setCollectionNames] = useState<CollectionNames[]>(
+        []
+    );
 
     useEffect(() => {
         const fetchCollectionNamesData = async () => {

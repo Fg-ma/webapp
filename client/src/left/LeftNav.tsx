@@ -66,8 +66,9 @@ export default function LeftNav() {
         groups: deactiveStyles,
         organizations: deactiveStyles,
     };
-
     leftStyles[leftPage] = { ...activeStyles };
+
+    const navItems = ["individuals", "groups", "organizations"];
 
     function swapLeftState(newState: string) {
         dispatch(setPageState("left", newState));
@@ -79,48 +80,21 @@ export default function LeftNav() {
             className='relative z-50 block w-full rounded-t-xl h-12 bg-fg-white-90 drop-shadow-md'
         >
             <div className='flex divide-x-2 divide-fg-white-70 h-full drop-shadow-md'>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={transition}
-                    onClick={() => swapLeftState("individuals")}
-                >
-                    <button
-                        className='w-full'
-                        style={leftStyles["individuals"]}
+                {navItems.map((navItem) => (
+                    <motion.div
+                        key={navItem}
+                        className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
+                        variants={navButtonsVar}
+                        initial='init'
+                        whileHover='hover'
+                        transition={transition}
+                        onClick={() => swapLeftState(navItem)}
                     >
-                        Individuals
-                    </button>
-                </motion.div>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={transition}
-                    onClick={() => swapLeftState("groups")}
-                >
-                    <button className='w-full' style={leftStyles["groups"]}>
-                        Groups
-                    </button>
-                </motion.div>
-                <motion.div
-                    className='h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer'
-                    variants={navButtonsVar}
-                    initial='init'
-                    whileHover='hover'
-                    transition={transition}
-                    onClick={() => swapLeftState("organizations")}
-                >
-                    <button
-                        className='w-full'
-                        style={leftStyles["organizations"]}
-                    >
-                        Organizations
-                    </button>
-                </motion.div>
+                        <button className='w-full' style={leftStyles[navItem]}>
+                            {navItem.charAt(0).toUpperCase() + navItem.slice(1)}
+                        </button>
+                    </motion.div>
+                ))}
             </div>
         </nav>
     );
