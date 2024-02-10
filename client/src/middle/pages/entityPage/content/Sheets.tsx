@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
-import io from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { Sheet } from "./Cards";
 
@@ -9,7 +9,29 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
-export default function Sheets({ entity_id, author_id }) {
+interface SheetsProps {
+    entity_id: number;
+    author_id: number;
+}
+
+interface SheetData {
+    sheet_id: number;
+    entity_id: number;
+    entities_sheets_id: number;
+    date_added: string;
+    pinned: boolean;
+    date_pinned: string | null;
+    sheets: {
+        sheet_id: number;
+        sheet_data_id: number;
+        sheet_author_id: number;
+        sheet_filename: string;
+        sheet_title: string;
+        sheet_subject: string;
+    };
+}
+
+export default function Sheets({ entity_id, author_id }: SheetsProps) {
     /* 
         Description:   
             Queries the database to get the sheets that the passed in entity is related 
@@ -18,24 +40,28 @@ export default function Sheets({ entity_id, author_id }) {
             N/A
     */
 
-    const [sheetsData, setSheetsData] = useState([]);
-    const sheetSocketRef = useRef(null);
+    const [sheetsData, setSheetsData] = useState<SheetData[]>([]);
+    const sheetSocketRef = useRef<Socket | null>(null);
 
     // Connect socket
     useEffect(() => {
-        sheetSocketRef.current = io.connect("http://localhost:5042");
+        const socket = io as any;
+        sheetSocketRef.current = socket.connect(serverUrl);
 
         return () => {
-            sheetSocketRef.current.disconnect();
+            sheetSocketRef.current?.disconnect();
         };
     }, []);
 
     // Sorts the sheet data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
-    const sortData = (data) => {
+    const sortData = (data: SheetData[]) => {
         const pinnedRows = data.filter((item) => item.pinned === true);
         const notPinnedRows = data.filter((item) => item.pinned === false);
 
-        const parseDate = (dateString) => new Date(dateString);
+        const parseDate = (dateString: string | null) =>
+            dateString
+                ? new Date(dateString).getTime()
+                : new Date("2000-01-01T01:01:01.000Z").getTime();
 
         pinnedRows.sort(
             (a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned)
@@ -50,7 +76,7 @@ export default function Sheets({ entity_id, author_id }) {
     // Gets sheet data and connects to socket
     useEffect(() => {
         // Connects to the socket to get the new data when pinned is updated
-        sheetSocketRef.current.on(
+        sheetSocketRef.current?.on(
             "pinnedUpdated",
             ({ relation, relation_id, pinned, date_pinned }) => {
                 setSheetsData((prevData) => {

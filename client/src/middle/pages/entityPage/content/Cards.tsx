@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
-import { motion } from "framer-motion";
+import { Socket } from "socket.io-client";
+import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
-import {
-    setIds,
-    setPageState,
-} from "../../../../redux/pageState/pageStateActions";
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 
 /* 
     Description:   
@@ -20,19 +13,42 @@ const serverUrl = isDevelopment
         N/A
 */
 
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+    ? config.development.serverUrl
+    : config.production.serverUrl;
+
+interface SheetProps {
+    type: string;
+    sheet_id: number;
+    author_id: number;
+    pinned: boolean;
+    relation_id: number;
+    socket: Socket;
+}
+
+interface SheetData {
+    sheet_id: number;
+    sheet_data_id: number;
+    sheet_author_id: number;
+    sheet_filename: string;
+    sheet_title: string;
+    sheet_subject: string;
+}
+
 export function Sheet({
     type,
     sheet_id,
     author_id,
-    pinned = 0,
+    pinned = false,
     relation_id,
     socket,
-}) {
+}: SheetProps) {
     const dispatch = useDispatch();
 
-    const [sheetData, setSheetData] = useState([]);
+    const [sheetData, setSheetData] = useState<SheetData>();
     const [hover, setHover] = useState(false);
-    const isAuthor = useRef(null);
+    const isAuthor = useRef<boolean | null>(null);
 
     // Gets sheet data from a given sheet_id
     useEffect(() => {
@@ -146,10 +162,33 @@ export function Sheet({
     );
 }
 
-export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
+interface VideoProps {
+    type: string;
+    video_id: number;
+    pinned: boolean;
+    relation_id: number;
+    socket: Socket;
+}
+
+interface VideoData {
+    video_id: number;
+    video_data_id: number;
+    video_creator_id: number;
+    video_filename: string;
+    video_title: string;
+    video_description: string;
+}
+
+export function Video({
+    type,
+    video_id,
+    pinned = false,
+    relation_id,
+    socket,
+}: VideoProps) {
     const dispatch = useDispatch();
 
-    const [videoData, setVideoData] = useState([]);
+    const [videoData, setVideoData] = useState<VideoData>();
     const [hover, setHover] = useState(false);
 
     // Gets video data from a given video_id
@@ -259,20 +298,16 @@ export function Video({ type, video_id, pinned = 0, relation_id, socket }) {
     );
 }
 
-const popupContentVar = {
+const popupContentVar: Variants = {
     init: {
         opacity: 0,
     },
     animate: {
         opacity: 1,
     },
-    transition: {
-        duration: 0.25,
-        ease: "easeOut",
-    },
 };
 
-const profileVar = {
+const profileVar: Variants = {
     init: {
         opacity: 0.6,
         scale: 0.9,
@@ -281,21 +316,47 @@ const profileVar = {
         opacity: 1,
         scale: 1,
     },
+};
+
+const transition: Transition = {
     transition: {
         duration: 0.25,
         ease: "easeOut",
     },
 };
 
-export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
+interface ImageProps {
+    type: string;
+    image_id: number;
+    pinned: boolean;
+    relation_id: number;
+    socket: Socket;
+}
+
+interface ImageData {
+    image_id: number;
+    image_data_id: number;
+    image_creator_id: number;
+    image_filename: string;
+    image_title: string;
+    image_description: string;
+}
+
+export function Image({
+    type,
+    image_id,
+    pinned = false,
+    relation_id,
+    socket,
+}: ImageProps) {
     const dispatch = useDispatch();
 
-    const [imageData, setImageData] = useState([]);
-    const [popupContent, setPopupContent] = useState(null);
+    const [imageData, setImageData] = useState<ImageData>();
+    const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
     const [showCreator, setShowCreator] = useState(false);
-    const primaryHoverTimeout = useRef(null);
-    const secondaryHoverTimeout = useRef(null);
-    const mousePosition = useRef(null);
+    const primaryHoverTimeout = useRef<NodeJS.Timeout | null>(null);
+    const secondaryHoverTimeout = useRef<NodeJS.Timeout | null>(null);
+    const mousePosition = useRef<{ x: string; y: string } | null>(null);
     const [pinHover, setPinHover] = useState(false);
 
     // Gets image data from a given image_id
@@ -376,7 +437,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
         }
     };
 
-    const startHoverTimer = (e) => {
+    const startHoverTimer = (e: React.MouseEvent<HTMLDivElement>) => {
         mousePosition.current = {
             x: `${e.clientX - 535}px`,
             y: `${e.clientY - 50}px`,
@@ -390,22 +451,22 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
         }, 1000);
     };
 
-    const updateMousePosition = (e) => {
+    const updateMousePosition = (e: React.MouseEvent<HTMLDivElement>) => {
         mousePosition.current = {
             x: `${e.clientX - 535}px`,
             y: `${e.clientY - 50}px`,
         };
     };
 
-    const updatePopupPosition = (e) => {
+    const updatePopupPosition = (e: React.MouseEvent<HTMLDivElement>) => {
         setPopupContent((prevPopupContent) => {
             if (prevPopupContent) {
                 return (
                     <div
                         className='p-3 absolute bg-white drop-shadow-md rounded w-max max-w-xs'
                         style={{
-                            top: mousePosition.current.y,
-                            left: mousePosition.current.x,
+                            top: mousePosition.current?.y,
+                            left: mousePosition.current?.x,
                         }}
                     >
                         {prevPopupContent.props.children}
@@ -469,7 +530,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
                         variants={profileVar}
                         initial='init'
                         animate='animate'
-                        transition='transition'
+                        transition={transition}
                     ></motion.div>
                 )}
             </div>
@@ -479,7 +540,7 @@ export function Image({ type, image_id, pinned = 0, relation_id, socket }) {
                     variants={popupContentVar}
                     initial='init'
                     animate='animate'
-                    transition='transition'
+                    transition={transition}
                 >
                     {popupContent}
                 </motion.div>

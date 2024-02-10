@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
 import config from "@config";
-import { setLoggedIn, setPageState } from "./redux/pageState/pageStateActions";
+import { setLoggedIn, setPageState } from "@redux/pageState/pageStateActions";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

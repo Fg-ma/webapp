@@ -7,7 +7,7 @@ import {
     applyFilterOptions,
     clearFilterOptions,
     cancelFilterChanges,
-} from "../../redux/filters/filterActions";
+} from "@redux/filters/filterActions";
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
 import Checkbox from "../../components/checkbox/Checkbox";

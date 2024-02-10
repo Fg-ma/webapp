@@ -5,7 +5,7 @@ import {
     toggleAdvancedSearch,
     clearAdvancedAffiliateFilter,
     setDateRange,
-} from "../../redux/filters/filterActions";
+} from "@redux/filters/filterActions";
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 

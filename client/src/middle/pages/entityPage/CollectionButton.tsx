@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setPageState,
-    setIds,
-} from "../../../redux/pageState/pageStateActions";
+import { setPageState, setIds } from "@redux/pageState/pageStateActions";
 
 const collectionsStyles = {
     init: {
@@ -20,11 +17,29 @@ const collectionsStyles = {
     },
 };
 
+interface CollectionButtonProps {
+    entityType: string;
+    collection_id: number;
+    collection_name: string;
+}
+
+interface CollectionPageState {
+    page: {
+        [entityType: string]: {
+            pagePayload: {
+                ids: {
+                    collection_id: number;
+                };
+            };
+        };
+    };
+}
+
 export default function CollectionButton({
     entityType,
     collection_id,
     collection_name,
-}) {
+}: CollectionButtonProps) {
     /* 
         Description:   
             Creates each collection button which can be clicked inorder to switch the page state 
@@ -35,11 +50,12 @@ export default function CollectionButton({
 
     const dispatch = useDispatch();
     const collectionID = useSelector(
-        (state) => state.page[entityType].pagePayload.ids.collection_id
+        (state: CollectionPageState) =>
+            state.page[entityType].pagePayload.ids.collection_id
     );
     const [isHovered, setIsHovered] = useState(false);
 
-    function swapPageState(newState) {
+    function swapPageState(newState: string) {
         dispatch(setPageState(entityType, newState));
         dispatch(setIds(entityType, "collection_id", collection_id));
     }

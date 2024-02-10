@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { motion } from "framer-motion";
-import { setDateRange } from "../../redux/filters/filterActions";
+import { setDateRange } from "@redux/filters/filterActions";
 import { useDispatch } from "react-redux";
 import DateCenteredCaption from "./DateCenterCaption";
 

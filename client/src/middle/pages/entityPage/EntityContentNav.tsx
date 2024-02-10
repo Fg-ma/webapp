@@ -1,10 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, Transition, Variants } from "framer-motion";
-import {
-    setPageState,
-    setIds,
-} from "../../../redux/pageState/pageStateActions";
+import { setPageState, setIds } from "@redux/pageState/pageStateActions";
 import CollectionButtons from "./CollectionButtons";
 
 const indNavButtonsVar: Variants = {

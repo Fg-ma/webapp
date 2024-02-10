@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import {
     addAdvancedAffiliateFilter,
     removeAdvancedAffiliateFilter,
-} from "../../redux/filters/filterActions";
+} from "@redux/filters/filterActions";
 import Popup from "./Popup";
 
 export default function FilterCard({

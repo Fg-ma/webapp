@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
-import io from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { Video } from "./Cards";
 
@@ -9,7 +9,28 @@ const serverUrl = isDevelopment
     ? config.development.serverUrl
     : config.production.serverUrl;
 
-export default function Videos({ entity_id }) {
+interface VideosProps {
+    entity_id: number;
+}
+
+interface VideoData {
+    video_id: number;
+    entity_id: number;
+    entities_videos_id: number;
+    date_added: string;
+    pinned: boolean;
+    date_pinned: string | null;
+    videos: {
+        video_id: number;
+        video_data_id: number;
+        video_creator_id: number;
+        video_filename: string;
+        video_title: string;
+        video_description: string;
+    };
+}
+
+export default function Videos({ entity_id }: VideosProps) {
     /* 
         Description:   
             Queries the database to get the videos that the passed in entity is related 
@@ -18,24 +39,28 @@ export default function Videos({ entity_id }) {
             N/A
     */
 
-    const [videosData, setVideosData] = useState([]);
-    const videoSocketRef = useRef(null);
+    const [videosData, setVideosData] = useState<VideoData[]>([]);
+    const videoSocketRef = useRef<Socket | null>(null);
 
     // Connect socket
     useEffect(() => {
-        videoSocketRef.current = io.connect("http://localhost:5042");
+        const socket = io as any;
+        videoSocketRef.current = socket.connect(serverUrl);
 
         return () => {
-            videoSocketRef.current.disconnect();
+            videoSocketRef.current?.disconnect();
         };
     }, []);
 
     // Sorts the video data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
-    const sortData = (data) => {
+    const sortData = (data: VideoData[]) => {
         const pinnedRows = data.filter((item) => item.pinned === true);
         const notPinnedRows = data.filter((item) => item.pinned === false);
 
-        const parseDate = (dateString) => new Date(dateString);
+        const parseDate = (dateString: string | null) =>
+            dateString
+                ? new Date(dateString).getTime()
+                : new Date("2000-01-01T01:01:01.000Z").getTime();
 
         pinnedRows.sort(
             (a, b) => parseDate(b.date_pinned) - parseDate(a.date_pinned)
@@ -50,7 +75,7 @@ export default function Videos({ entity_id }) {
     // Gets video data and connects to socket
     useEffect(() => {
         // Connects to the socket to get the new data when pinned is updated
-        videoSocketRef.current.on(
+        videoSocketRef.current?.on(
             "pinnedUpdated",
             ({ relation, relation_id, pinned, date_pinned }) => {
                 setVideosData((prevData) => {

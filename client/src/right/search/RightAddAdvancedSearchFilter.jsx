@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { toggleAdvancedSearch } from "../../redux/filters/filterActions";
+import { toggleAdvancedSearch } from "@redux/filters/filterActions";
 
 export default function RightAddAdvancedSearchFilter({
     page,

@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import RightSearchFilter from "./RightSearchFilter";
-import {
-    toggleDrop,
-    cancelFilterChanges,
-} from "../../redux/filters/filterActions";
+import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
 
 export default function RightSearchBar({ page }) {
     /* 

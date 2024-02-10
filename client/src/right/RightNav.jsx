@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { setPageState } from "../redux/pageState/pageStateActions";
-import { closeDrop } from "../redux/filters/filterActions";
+import { setPageState } from "@redux/pageState/pageStateActions";
+import { closeDrop } from "@redux/filters/filterActions";
 
 const navButtonsVar = {
     init: {

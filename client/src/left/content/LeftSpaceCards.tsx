@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setIds, setPageState } from "../../redux/pageState/pageStateActions";
+import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 
 /* 
     Description:   

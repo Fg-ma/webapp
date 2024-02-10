@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import { toggleDrop } from "../../redux/filters/filterActions";
+import { toggleDrop } from "@redux/filters/filterActions";
 import MiddleSearchBar from "./MiddleSearchBar";
 
 const dropButtonVar = {

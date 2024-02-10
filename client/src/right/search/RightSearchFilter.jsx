@@ -8,7 +8,7 @@ import {
     applyFilterOptions,
     clearFilterOptions,
     cancelFilterChanges,
-} from "../../redux/filters/filterActions";
+} from "@redux/filters/filterActions";
 import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import Checkbox from "../../components/checkbox/Checkbox";

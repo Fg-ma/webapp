@@ -2,7 +2,8 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@config": ["config.js"]
+            "@config": ["config.js"],
+            "@redux/*": ["src/redux/*"]
         },
         "target": "ES5",
         "lib": ["dom", "dom.iterable", "esnext"],

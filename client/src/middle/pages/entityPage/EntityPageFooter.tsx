@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setPageState } from "../../../redux/pageState/pageStateActions";
+import { setPageState } from "@redux/pageState/pageStateActions";
 
 interface EntityPageFooterProps {
     entityType: string;

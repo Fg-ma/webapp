@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-    toggleDrop,
-    cancelFilterChanges,
-} from "../../redux/filters/filterActions";
+import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
 const middleSearchFilterVar = {

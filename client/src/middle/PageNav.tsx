@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
-import { setPageState } from "../redux/pageState/pageStateActions";
+import { setPageState } from "@redux/pageState/pageStateActions";
 
 const navButtonsVar: Variants = {
     init: {
