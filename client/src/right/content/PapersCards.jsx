@@ -5,47 +5,47 @@ import { PapersCard } from "./RightSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 export default function PapersCards() {
-    /* 
-        Description:   
-            Gets issues data from a database then extracts the id, title, and issueQuestions to be mapped
-            into cards.
-        Unique Properties:
-            It queries for any affiliate responses.
-    */
+  /* 
+    Description:   
+      Gets issues data from a database then extracts the id, title, and issueQuestions to be mapped
+      into cards.
+    Unique Properties:
+      It queries for any affiliate responses.
+  */
 
-    const [papers, setPapers] = useState([]);
+  const [papers, setPapers] = useState([]);
 
-    useEffect(() => {
-        const fetchPaperData = async () => {
-            try {
-                const response = await Axios.get(`${serverUrl}/sheets`);
-                setPapers(response.data);
-            } catch (error) {
-                console.error("Error fetching paper data:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchPaperData = async () => {
+      try {
+        const response = await Axios.get(`${serverUrl}/sheets`);
+        setPapers(response.data);
+      } catch (error) {
+        console.error("Error fetching paper data:", error);
+      }
+    };
 
-        fetchPaperData();
-    }, []);
+    fetchPaperData();
+  }, []);
 
-    const newsCards = papers.map((paperInfo) => {
-        return (
-            <PapersCard
-                key={paperInfo.sheet_id}
-                paper_id={paperInfo.sheet_id}
-                title={paperInfo.sheet_title}
-                subject={paperInfo.sheet_subject}
-            />
-        );
-    });
-
+  const newsCards = papers.map((paperInfo) => {
     return (
-        <div id='newsCards' className='h-full mr-3 overflow-scroll'>
-            {newsCards}
-        </div>
+      <PapersCard
+        key={paperInfo.sheet_id}
+        paper_id={paperInfo.sheet_id}
+        title={paperInfo.sheet_title}
+        subject={paperInfo.sheet_subject}
+      />
     );
+  });
+
+  return (
+    <div id="newsCards" className="h-full mr-3 overflow-scroll">
+      {newsCards}
+    </div>
+  );
 }

@@ -5,56 +5,56 @@ import { GroupCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 interface Group {
-    group_id: number;
-    group_name: string;
-    group_currentIssue: string;
-    group_description: string;
-    group_stances: string;
+  group_id: number;
+  group_name: string;
+  group_currentIssue: string;
+  group_description: string;
+  group_stances: string;
 }
 
 export default function GroupRecs() {
-    /* 
-        Description:   
-            Gets group data from a database then extracts the id, name, and currentIssue to be mapped
-            into cards.
-        Unique Properties:
-            It queries for any affiliates that the user may have in common with the group.
-    */
+  /* 
+    Description:   
+      Gets group data from a database then extracts the id, name, and currentIssue to be mapped
+      into cards.
+    Unique Properties:
+      It queries for any affiliates that the user may have in common with the group.
+  */
 
-    const [groups, setGroups] = useState<Group[]>([]);
+  const [groups, setGroups] = useState<Group[]>([]);
 
-    useEffect(() => {
-        const fetchGroupData = async () => {
-            try {
-                const response = await Axios.get(`${serverUrl}/groups`);
-                setGroups(response.data);
-            } catch (error) {
-                console.error("Error fetching group data:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      try {
+        const response = await Axios.get(`${serverUrl}/groups`);
+        setGroups(response.data);
+      } catch (error) {
+        console.error("Error fetching group data:", error);
+      }
+    };
 
-        fetchGroupData();
-    }, []);
+    fetchGroupData();
+  }, []);
 
-    const grpRecs = groups.map((grpInfo) => {
-        return (
-            <GroupCard
-                key={grpInfo.group_id}
-                id={grpInfo.group_id}
-                name={grpInfo.group_name}
-                currentIssue={grpInfo.group_currentIssue}
-                affInCommon='placeholder'
-            />
-        );
-    });
-
+  const grpRecs = groups.map((grpInfo) => {
     return (
-        <div id='groupRecs' className='mr-3 h-full overflow-scroll'>
-            {grpRecs}
-        </div>
+      <GroupCard
+        key={grpInfo.group_id}
+        id={grpInfo.group_id}
+        name={grpInfo.group_name}
+        currentIssue={grpInfo.group_currentIssue}
+        affInCommon='placeholder'
+      />
     );
+  });
+
+  return (
+    <div id='groupRecs' className='mr-3 h-full overflow-scroll'>
+      {grpRecs}
+    </div>
+  );
 }

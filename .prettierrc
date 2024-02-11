@@ -1,0 +1,12 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "lineWidth": 200,
+  "comment": {
+    "lineComment": "//",
+    "blockComment": "*",
+    "lineWidth": 200,
+    "leadingComment": " ",
+    "trailingComment": " "
+  }
+}

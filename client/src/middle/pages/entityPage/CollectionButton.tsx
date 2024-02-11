@@ -3,78 +3,78 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
 
 const collectionsStyles = {
-    init: {
-        textUnderlineOffset: "6px",
-        textDecorationColor: "rgb(0, 0, 0)",
-    },
-    selected: {
-        textUnderlineOffset: "6px",
-        textDecorationColor: "#F56114",
-    },
-    hover: {
-        textUnderlineOffset: "6px",
-        textDecorationColor: "rgb(44, 146, 245)",
-    },
+  init: {
+    textUnderlineOffset: "6px",
+    textDecorationColor: "rgb(0, 0, 0)",
+  },
+  selected: {
+    textUnderlineOffset: "6px",
+    textDecorationColor: "#F56114",
+  },
+  hover: {
+    textUnderlineOffset: "6px",
+    textDecorationColor: "rgb(44, 146, 245)",
+  },
 };
 
 interface CollectionButtonProps {
-    entityType: string;
-    collection_id: number;
-    collection_name: string;
+  entityType: string;
+  collection_id: number;
+  collection_name: string;
 }
 
 interface CollectionPageState {
-    page: {
-        [entityType: string]: {
-            pagePayload: {
-                ids: {
-                    collection_id: number;
-                };
-            };
+  page: {
+    [entityType: string]: {
+      pagePayload: {
+        ids: {
+          collection_id: number;
         };
+      };
     };
+  };
 }
 
 export default function CollectionButton({
-    entityType,
-    collection_id,
-    collection_name,
+  entityType,
+  collection_id,
+  collection_name,
 }: CollectionButtonProps) {
-    /* 
-        Description:   
-            Creates each collection button which can be clicked inorder to switch the page state 
-            to the clicked collection.
-        Unique Properties:
-            N/A
-    */
+  /* 
+    Description:   
+      Creates each collection button which can be clicked inorder to switch the page state 
+      to the clicked collection.
+    Unique Properties:
+      N/A
+  */
 
-    const dispatch = useDispatch();
-    const collectionID = useSelector(
-        (state: CollectionPageState) =>
-            state.page[entityType].pagePayload.ids.collection_id
-    );
-    const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const collectionID = useSelector(
+    (state: CollectionPageState) =>
+      state.page[entityType].pagePayload.ids.collection_id,
+  );
+  const [isHovered, setIsHovered] = useState(false);
 
-    function swapPageState(newState: string) {
-        dispatch(setPageState(entityType, newState));
-        dispatch(setIds(entityType, "collection_id", collection_id));
-    }
+  function swapPageState(newState: string) {
+    dispatch(setPageState(entityType, newState));
+    dispatch(setIds(entityType, "collection_id", collection_id));
+  }
 
-    return (
-        <button
-            className='font-K2D text-lg underline decoration-2 min-w-max bg-fg-white-95 rounded px-5 pb-2'
-            style={
-                collectionID === collection_id
-                    ? collectionsStyles.selected
-                    : isHovered
-                      ? collectionsStyles.hover
-                      : collectionsStyles.init
-            }
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onClick={() => swapPageState("collections")}
-        >
-            {collection_name}
-        </button>
-    );
+  return (
+    <button
+      className="font-K2D text-lg underline decoration-2 min-w-max bg-fg-white-95 rounded px-5 pb-2"
+      style={
+        collectionID === collection_id
+          ? collectionsStyles.selected
+          : isHovered
+            ? collectionsStyles.hover
+            : collectionsStyles.init
+      }
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => swapPageState("collections")}
+    >
+      {collection_name}
+    </button>
+  );
 }

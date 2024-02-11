@@ -3,34 +3,32 @@ import MiddleVerticalSplitPane from "../../MiddleVerticalSplitPane";
 import MiddleDrop from "../../search/MiddleDrop";
 
 interface HomePageProps {
-    middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
-    middleSpaceRef: React.RefObject<HTMLDivElement>;
+  middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
+  middleSpaceRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function HomePage({
-    middleSpaceContainerRef,
-    middleSpaceRef,
+  middleSpaceContainerRef,
+  middleSpaceRef,
 }: HomePageProps) {
-    const middleSpaceContentContainerRef = useRef<HTMLDivElement>(null);
+  const middleSpaceContentContainerRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <div className='h-full'>
-            <div className='absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit'>
-                <MiddleDrop
-                    middleSpaceContainerRef={middleSpaceContainerRef}
-                    middleSpaceRef={middleSpaceRef}
-                />
-            </div>
-            <div
-                ref={middleSpaceContentContainerRef}
-                className='overflow-hidden rounded-xl h-full w-full'
-            >
-                <MiddleVerticalSplitPane
-                    middleSpaceContentContainerRef={
-                        middleSpaceContentContainerRef
-                    }
-                />
-            </div>
-        </div>
-    );
+  return (
+    <div className="h-full">
+      <div className="absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit">
+        <MiddleDrop
+          middleSpaceContainerRef={middleSpaceContainerRef}
+          middleSpaceRef={middleSpaceRef}
+        />
+      </div>
+      <div
+        ref={middleSpaceContentContainerRef}
+        className="overflow-hidden rounded-xl h-full w-full"
+      >
+        <MiddleVerticalSplitPane
+          middleSpaceContentContainerRef={middleSpaceContentContainerRef}
+        />
+      </div>
+    </div>
+  );
 }

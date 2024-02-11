@@ -7,191 +7,189 @@ import SheetViewer from "../components/viewers/SheetViewer";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 interface MiddleVerticalSplitPaneProps {
-    middleSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
+  middleSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function MiddleVerticalSplitPane({
-    middleSpaceContentContainerRef,
+  middleSpaceContentContainerRef,
 }: MiddleVerticalSplitPaneProps) {
-    const [isResizing, setIsResizing] = useState(false);
-    const [initialMousePosition, setInitialMousePosition] = useState(0);
-    const [initialPaneHeight, setInitialPaneHeight] = useState(0);
-    const [paneHeight, setPaneHeight] = useState("79%");
-    const [headerLightness, setHeaderLightness] = useState(80);
+  const [isResizing, setIsResizing] = useState(false);
+  const [initialMousePosition, setInitialMousePosition] = useState(0);
+  const [initialPaneHeight, setInitialPaneHeight] = useState(0);
+  const [paneHeight, setPaneHeight] = useState("79%");
+  const [headerLightness, setHeaderLightness] = useState(80);
 
-    // Handles softly lowering and raising the pane height when togglePaneHeight is called
-    const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
-        const start = Date.now();
-        const initialHeight = parseFloat(paneHeight) || 0;
+  // Handles softly lowering and raising the pane height when togglePaneHeight is called
+  const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
+    const start = Date.now();
+    const initialHeight = parseFloat(paneHeight) || 0;
 
-        const animate = () => {
-            const now = Date.now();
-            const progress = Math.min(1, (now - start) / duration);
+    const animate = () => {
+      const now = Date.now();
+      const progress = Math.min(1, (now - start) / duration);
 
-            const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
+      const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
 
-            const newPaneHeight =
-                initialHeight + (targetHeight - initialHeight) * easedProgress;
+      const newPaneHeight =
+        initialHeight + (targetHeight - initialHeight) * easedProgress;
 
-            setPaneHeight(`${newPaneHeight}%`);
-            setHeaderLightness(getLightness(newPaneHeight));
+      setPaneHeight(`${newPaneHeight}%`);
+      setHeaderLightness(getLightness(newPaneHeight));
 
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
-
+      if (progress < 1) {
         requestAnimationFrame(animate);
+      }
     };
 
-    const handleMove = (clientY: number) => {
-        if (isResizing) {
-            const containerHeight =
-                middleSpaceContentContainerRef.current?.offsetHeight;
+    requestAnimationFrame(animate);
+  };
 
-            if (!containerHeight) {
-                return;
-            }
+  const handleMove = (clientY: number) => {
+    if (isResizing) {
+      const containerHeight =
+        middleSpaceContentContainerRef.current?.offsetHeight;
 
-            const mouseYDelta = clientY - initialMousePosition;
+      if (!containerHeight) {
+        return;
+      }
 
-            // Adjust the speed by fiddling with the sensitivity factor
-            const sensitivityFactor = 1;
-            let newPaneHeight =
-                initialPaneHeight +
-                (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
+      const mouseYDelta = clientY - initialMousePosition;
 
-            // Cap the newPaneHeight to a max and min value
-            const maxPaneHeight = 100;
-            newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
+      // Adjust the speed by fiddling with the sensitivity factor
+      const sensitivityFactor = 1;
+      let newPaneHeight =
+        initialPaneHeight +
+        (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
 
-            const minPaneHeight = 15;
-            newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
+      // Cap the newPaneHeight to a max and min value
+      const maxPaneHeight = 100;
+      newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
 
-            setPaneHeight(`${newPaneHeight}%`);
-            setHeaderLightness(getLightness(newPaneHeight));
-        }
+      const minPaneHeight = 15;
+      newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
+
+      setPaneHeight(`${newPaneHeight}%`);
+      setHeaderLightness(getLightness(newPaneHeight));
+    }
+  };
+
+  const handleEnd = () => {
+    setIsResizing(false);
+  };
+
+  const handleStart = (clientY: number) => {
+    setIsResizing(true);
+    setInitialMousePosition(clientY);
+    setInitialPaneHeight(parseFloat(paneHeight) || 0);
+  };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    requestAnimationFrame(() => handleMove(event.clientY));
+  };
+
+  const handleTouchMove = (event: TouchEvent) => {
+    requestAnimationFrame(() => handleMove(event.touches[0].clientY));
+  };
+
+  const handleMouseUp = () => {
+    handleEnd();
+  };
+
+  const handleTouchEnd = () => {
+    handleEnd();
+  };
+
+  // Handles resizing event listeners
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
+  }, [isResizing]);
 
-    const handleEnd = () => {
-        setIsResizing(false);
-    };
+  useEffect(() => {
+    const initialHeight = parseFloat(paneHeight) || 0;
 
-    const handleStart = (clientY: number) => {
-        setIsResizing(true);
-        setInitialMousePosition(clientY);
-        setInitialPaneHeight(parseFloat(paneHeight) || 0);
-    };
+    let initialLightness = getLightness(initialHeight);
 
-    const handleMouseMove = (event: MouseEvent) => {
-        requestAnimationFrame(() => handleMove(event.clientY));
-    };
+    setHeaderLightness(initialLightness);
+  }, []);
 
-    const handleTouchMove = (event: TouchEvent) => {
-        requestAnimationFrame(() => handleMove(event.touches[0].clientY));
-    };
+  // Controls the toggle pane height controlled by the button in RelatedIssuesHeader
+  const togglePaneHeight = () => {
+    const newHeight = parseFloat(paneHeight) < 100 ? "100%" : "79%";
+    animateTogglePaneHeight(parseFloat(newHeight));
+  };
 
-    const handleMouseUp = () => {
-        handleEnd();
-    };
+  const getLightness = (height: number) => {
+    let lightness = Math.max(52, 100 - height * 0.75);
+    lightness = Math.min(60, lightness);
+    return lightness;
+  };
 
-    const handleTouchEnd = () => {
-        handleEnd();
-    };
+  const fileToBlobFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
 
-    // Handles resizing event listeners
-    useEffect(() => {
-        document.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("touchmove", handleTouchMove);
-        document.addEventListener("mouseup", handleMouseUp);
-        document.addEventListener("touchend", handleTouchEnd);
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
 
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("touchmove", handleTouchMove);
-            document.removeEventListener("mouseup", handleMouseUp);
-            document.removeEventListener("touchend", handleTouchEnd);
-        };
-    }, [isResizing]);
+      Axios.put(`${serverUrl}/videos_updating`, formData, {
+        headers: {
+          "Content-Type": "image/png",
+        },
+      })
+        .then((response) => {})
+        .catch((error) => {
+          console.error("Error uploading file:", error);
+        });
+    }
+  };
 
-    useEffect(() => {
-        const initialHeight = parseFloat(paneHeight) || 0;
-
-        let initialLightness = getLightness(initialHeight);
-
-        setHeaderLightness(initialLightness);
-    }, []);
-
-    // Controls the toggle pane height controlled by the button in RelatedIssuesHeader
-    const togglePaneHeight = () => {
-        const newHeight = parseFloat(paneHeight) < 100 ? "100%" : "79%";
-        animateTogglePaneHeight(parseFloat(newHeight));
-    };
-
-    const getLightness = (height: number) => {
-        let lightness = Math.max(52, 100 - height * 0.75);
-        lightness = Math.min(60, lightness);
-        return lightness;
-    };
-
-    const fileToBlobFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = event.target.files?.[0];
-
-        if (selectedFile) {
-            const formData = new FormData();
-            formData.append("file", selectedFile);
-
-            Axios.put(`${serverUrl}/videos_updating`, formData, {
-                headers: {
-                    "Content-Type": "image/png",
-                },
-            })
-                .then((response) => {})
-                .catch((error) => {
-                    console.error("Error uploading file:", error);
-                });
-        }
-    };
-
-    return (
-        <div className='flex flex-col w-full h-full relative'>
-            <div
-                className='mr-3 overflow-auto box-border'
-                style={{ height: paneHeight }}
-            >
-                <div className='ml-8 mr-5 my-8'>
-                    <SheetViewer
-                        sheet_id={Math.floor(Math.random() * 20) + 1}
-                    />
-                    <input type='file' onChange={fileToBlobFunc} />
-                </div>
-            </div>
-            <div
-                className='cursor-ns-resize select-none'
-                onMouseDown={(e) => {
-                    handleStart(e.clientY);
-                }}
-                onTouchStart={(e) => {
-                    handleStart(e.touches[0].clientY);
-                }}
-                onMouseUp={handleMouseUp}
-                onTouchEnd={handleTouchEnd}
-            >
-                <RelatedIssuesHeader
-                    lightness={headerLightness}
-                    togglePaneHeight={togglePaneHeight}
-                />
-            </div>
-            <div
-                className='overflow-auto box-border bg-fg-white-95'
-                style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
-            >
-                <RelatedIssues />
-            </div>
+  return (
+    <div className="flex flex-col w-full h-full relative">
+      <div
+        className="mr-3 overflow-auto box-border"
+        style={{ height: paneHeight }}
+      >
+        <div className="ml-8 mr-5 my-8">
+          <SheetViewer sheet_id={Math.floor(Math.random() * 20) + 1} />
+          <input type="file" onChange={fileToBlobFunc} />
         </div>
-    );
+      </div>
+      <div
+        className="cursor-ns-resize select-none"
+        onMouseDown={(e) => {
+          handleStart(e.clientY);
+        }}
+        onTouchStart={(e) => {
+          handleStart(e.touches[0].clientY);
+        }}
+        onMouseUp={handleMouseUp}
+        onTouchEnd={handleTouchEnd}
+      >
+        <RelatedIssuesHeader
+          lightness={headerLightness}
+          togglePaneHeight={togglePaneHeight}
+        />
+      </div>
+      <div
+        className="overflow-auto box-border bg-fg-white-95"
+        style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
+      >
+        <RelatedIssues />
+      </div>
+    </div>
+  );
 }

@@ -2,21 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face { 
-    font-family: "Josefin"; 
-    src: url("../public/assets/fonts/JosefinSans-Regular.ttf"); 
-} 
-@font-face { 
-    font-family: "K2D"; 
-    src: url("../public/assets/fonts/K2D-Bold.ttf"); 
+@font-face {
+  font-family: "Josefin";
+  src: url("../public/assets/fonts/JosefinSans-Regular.ttf");
+}
+@font-face {
+  font-family: "K2D";
+  src: url("../public/assets/fonts/K2D-Bold.ttf");
 }
 
-html, body {
-    margin: 0; 
-    height: 100%; 
-    overflow: hidden
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 #base {
-    @apply font-Josefin text-fg-black-15;
+  @apply font-Josefin text-fg-black-15;
 }

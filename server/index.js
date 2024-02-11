@@ -39,64 +39,64 @@ app.use("/references", referencesRouter);
 app.use("/auth", authRouter);
 
 app.put("/sheets_updating", upload.single("file"), (req, res) => {
-    const id = req.query.id;
-    const filename = req.query.filename;
-    const data = req.file.buffer;
+  const id = req.query.id;
+  const filename = req.query.filename;
+  const data = req.file.buffer;
 
-    db.query(
-        "UPDATE sheets SET sheet_filename = ?, sheet_data = ? WHERE sheet_id = ?;",
-        [filename, data, id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+  db.query(
+    "UPDATE sheets SET sheet_filename = ?, sheet_data = ? WHERE sheet_id = ?;",
+    [filename, data, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 app.put("/videos_updating", upload.single("file"), (req, res) => {
-    const data = req.file.buffer;
+  const data = req.file.buffer;
 
-    db.query(
-        `
+  db.query(
+    `
         INSERT INTO images_data (image_data)
         VALUES (?);
         `,
-        [data],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    [data],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 app.put("/images_updating", upload.single("file"), (req, res) => {
-    const id = req.query.id;
-    const filename = req.query.filename;
-    const data = req.file.buffer;
+  const id = req.query.id;
+  const filename = req.query.filename;
+  const data = req.file.buffer;
 
-    db.query(
-        `
+  db.query(
+    `
         UPDATE images
         SET image_filename = ?, image_data = ?
         WHERE image_id <= ?
         `,
-        [filename, data, id],
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Internal Server Error");
-            } else {
-                res.send(result);
-            }
-        }
-    );
+    [filename, data, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 server.listen(process.env.SERVER_PORT, () => {
-    console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);
+  console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);
 });

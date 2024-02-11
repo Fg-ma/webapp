@@ -9,217 +9,217 @@ import GroupRecs from "./content/GroupRecs";
 import OrganizationRecs from "./content/OrganizationRecs";
 
 interface LeftState {
-    page: {
-        left: {
-            pagePayload: {
-                pageState: string;
-            };
-        };
+  page: {
+    left: {
+      pagePayload: {
+        pageState: string;
+      };
     };
+  };
 }
 
 interface LeftVerticalSplitPaneProps {
-    leftSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
+  leftSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function LeftVerticalSplitPane({
-    leftSpaceContentContainerRef,
+  leftSpaceContentContainerRef,
 }: LeftVerticalSplitPaneProps) {
-    /*
-        Description:   
-            Creates 3 panes of which the top and bottom are used to display context
-            (individuals/groups/organizations and recommendations respectively).
-            The middle panel is a dragable panel that resizes the top and bottom panes,
-            importantly this middle pane can be any div(the contents of which dont matter).
-        Unique Properties:
-            Depending on the height that the middle pane is dragged to the bg-color changes
-            from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
-    */
+  /*
+    Description:   
+      Creates 3 panes of which the top and bottom are used to display context
+      (individuals/groups/organizations and recommendations respectively).
+      The middle panel is a dragable panel that resizes the top and bottom panes,
+      importantly this middle pane can be any div(the contents of which dont matter).
+    Unique Properties:
+      Depending on the height that the middle pane is dragged to the bg-color changes
+      from regular lightness fg-primary at the bottom to a lighter fg-primary at the top.
+  */
 
-    const leftPage = useSelector(
-        (state: LeftState) => state.page.left.pagePayload.pageState
-    );
-    const [isResizing, setIsResizing] = useState(false);
-    const [initialMousePosition, setInitialMousePosition] = useState(0);
-    const [initialPaneHeight, setInitialPaneHeight] = useState(0);
-    const [paneHeight, setPaneHeight] = useState("60%");
-    const [headerLightness, setHeaderLightness] = useState(80);
+  const leftPage = useSelector(
+    (state: LeftState) => state.page.left.pagePayload.pageState,
+  );
+  const [isResizing, setIsResizing] = useState(false);
+  const [initialMousePosition, setInitialMousePosition] = useState(0);
+  const [initialPaneHeight, setInitialPaneHeight] = useState(0);
+  const [paneHeight, setPaneHeight] = useState("60%");
+  const [headerLightness, setHeaderLightness] = useState(80);
 
-    // Handles softly lowering and raising the pane height when togglePaneHeight is called
-    const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
-        const start = Date.now();
-        const initialHeight = parseFloat(paneHeight) || 0;
+  // Handles softly lowering and raising the pane height when togglePaneHeight is called
+  const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
+    const start = Date.now();
+    const initialHeight = parseFloat(paneHeight) || 0;
 
-        const animate = () => {
-            const now = Date.now();
-            const progress = Math.min(1, (now - start) / duration);
+    const animate = () => {
+      const now = Date.now();
+      const progress = Math.min(1, (now - start) / duration);
 
-            const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
+      const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
 
-            const newPaneHeight =
-                initialHeight + (targetHeight - initialHeight) * easedProgress;
+      const newPaneHeight =
+        initialHeight + (targetHeight - initialHeight) * easedProgress;
 
-            setPaneHeight(`${newPaneHeight}%`);
-            setHeaderLightness(getLightness(newPaneHeight));
+      setPaneHeight(`${newPaneHeight}%`);
+      setHeaderLightness(getLightness(newPaneHeight));
 
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
-
+      if (progress < 1) {
         requestAnimationFrame(animate);
+      }
     };
 
-    const handleMove = (clientY: number) => {
-        if (isResizing) {
-            const containerHeight =
-                leftSpaceContentContainerRef.current?.offsetHeight;
+    requestAnimationFrame(animate);
+  };
 
-            if (!containerHeight) {
-                return;
-            }
+  const handleMove = (clientY: number) => {
+    if (isResizing) {
+      const containerHeight =
+        leftSpaceContentContainerRef.current?.offsetHeight;
 
-            const mouseYDelta = clientY - initialMousePosition;
+      if (!containerHeight) {
+        return;
+      }
 
-            // Adjust the speed by fiddling with the sensitivity factor
-            const sensitivityFactor = 1;
-            let newPaneHeight =
-                initialPaneHeight +
-                (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
+      const mouseYDelta = clientY - initialMousePosition;
 
-            // Cap the newPaneHeight to a maximum value
-            const maxPaneHeight = 100;
-            newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
+      // Adjust the speed by fiddling with the sensitivity factor
+      const sensitivityFactor = 1;
+      let newPaneHeight =
+        initialPaneHeight +
+        (mouseYDelta / containerHeight) * 100 * sensitivityFactor;
 
-            const minPaneHeight = 15;
-            newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
+      // Cap the newPaneHeight to a maximum value
+      const maxPaneHeight = 100;
+      newPaneHeight = Math.min(newPaneHeight, maxPaneHeight);
 
-            // Calculate lightness based on the percentage of newPaneHeight
-            let lightness = getLightness(newPaneHeight);
+      const minPaneHeight = 15;
+      newPaneHeight = Math.max(newPaneHeight, minPaneHeight);
 
-            setPaneHeight(`${newPaneHeight}%`);
-            setHeaderLightness(lightness);
-        }
+      // Calculate lightness based on the percentage of newPaneHeight
+      let lightness = getLightness(newPaneHeight);
+
+      setPaneHeight(`${newPaneHeight}%`);
+      setHeaderLightness(lightness);
+    }
+  };
+
+  const handleEnd = () => {
+    setIsResizing(false);
+  };
+
+  const handleStart = (clientY: number) => {
+    setIsResizing(true);
+    setInitialMousePosition(clientY);
+    setInitialPaneHeight(parseFloat(paneHeight) || 0);
+  };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    handleMove(event.clientY);
+  };
+
+  const handleTouchMove = (event: TouchEvent) => {
+    handleMove(event.touches[0].clientY);
+  };
+
+  const handleMouseUp = () => {
+    handleEnd();
+  };
+
+  const handleTouchEnd = () => {
+    handleEnd();
+  };
+
+  // Handles resizing event listeners
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
+  }, [isResizing]);
 
-    const handleEnd = () => {
-        setIsResizing(false);
-    };
+  // Gets initial conditions
+  useEffect(() => {
+    // Get the initial height of the leftPane when the component mounts
+    const initialHeight = parseFloat(paneHeight) || 0;
 
-    const handleStart = (clientY: number) => {
-        setIsResizing(true);
-        setInitialMousePosition(clientY);
-        setInitialPaneHeight(parseFloat(paneHeight) || 0);
-    };
+    // Set the initial lightness based on the initial height
+    let initialLightness = getLightness(initialHeight);
 
-    const handleMouseMove = (event: MouseEvent) => {
-        handleMove(event.clientY);
-    };
+    setHeaderLightness(initialLightness);
+  }, []);
 
-    const handleTouchMove = (event: TouchEvent) => {
-        handleMove(event.touches[0].clientY);
-    };
+  // Controls the toggle pane height controlled by the button in RelatedIssuesHeader
+  const togglePaneHeight = () => {
+    const newHeight = parseFloat(paneHeight) < 100 ? "100%" : "79%";
+    animateTogglePaneHeight(parseFloat(newHeight));
+  };
 
-    const handleMouseUp = () => {
-        handleEnd();
-    };
+  const getLightness = (height: number) => {
+    let lightness = Math.max(52, 100 - height * 0.75);
+    lightness = Math.min(60, lightness);
+    return lightness;
+  };
 
-    const handleTouchEnd = () => {
-        handleEnd();
-    };
+  const renderContent = () => {
+    switch (leftPage) {
+      case "individuals":
+        return <IndividualCards />;
+      case "groups":
+        return <GroupCards />;
+      case "organizations":
+        return <OrganizationCards />;
+      default:
+        return <IndividualCards />;
+    }
+  };
 
-    // Handles resizing event listeners
-    useEffect(() => {
-        document.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("touchmove", handleTouchMove);
-        document.addEventListener("mouseup", handleMouseUp);
-        document.addEventListener("touchend", handleTouchEnd);
+  const renderRecs = () => {
+    switch (leftPage) {
+      case "individuals":
+        return <IndividualRecs />;
+      case "groups":
+        return <GroupRecs />;
+      case "organizations":
+        return <OrganizationRecs />;
+      default:
+        return <IndividualRecs />;
+    }
+  };
 
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("touchmove", handleTouchMove);
-            document.removeEventListener("mouseup", handleMouseUp);
-            document.removeEventListener("touchend", handleTouchEnd);
-        };
-    }, [isResizing]);
-
-    // Gets initial conditions
-    useEffect(() => {
-        // Get the initial height of the leftPane when the component mounts
-        const initialHeight = parseFloat(paneHeight) || 0;
-
-        // Set the initial lightness based on the initial height
-        let initialLightness = getLightness(initialHeight);
-
-        setHeaderLightness(initialLightness);
-    }, []);
-
-    // Controls the toggle pane height controlled by the button in RelatedIssuesHeader
-    const togglePaneHeight = () => {
-        const newHeight = parseFloat(paneHeight) < 100 ? "100%" : "79%";
-        animateTogglePaneHeight(parseFloat(newHeight));
-    };
-
-    const getLightness = (height: number) => {
-        let lightness = Math.max(52, 100 - height * 0.75);
-        lightness = Math.min(60, lightness);
-        return lightness;
-    };
-
-    const renderContent = () => {
-        switch (leftPage) {
-            case "individuals":
-                return <IndividualCards />;
-            case "groups":
-                return <GroupCards />;
-            case "organizations":
-                return <OrganizationCards />;
-            default:
-                return <IndividualCards />;
-        }
-    };
-
-    const renderRecs = () => {
-        switch (leftPage) {
-            case "individuals":
-                return <IndividualRecs />;
-            case "groups":
-                return <GroupRecs />;
-            case "organizations":
-                return <OrganizationRecs />;
-            default:
-                return <IndividualRecs />;
-        }
-    };
-
-    return (
-        <div className='leftVerticalSplitPane'>
-            <div className='leftPane' style={{ height: paneHeight }}>
-                {renderContent()}
-            </div>
-            <div
-                className='leftResizer'
-                onMouseDown={(e) => {
-                    handleStart(e.clientY);
-                }}
-                onTouchStart={(e) => {
-                    handleStart(e.touches[0].clientY);
-                }}
-                onMouseUp={handleMouseUp}
-                onTouchEnd={handleTouchEnd}
-            >
-                <RecHeader
-                    lightness={headerLightness}
-                    togglePaneHeight={togglePaneHeight}
-                />
-            </div>
-            <div
-                id='leftBottomPane'
-                className='leftPane'
-                style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
-            >
-                {renderRecs()}
-            </div>
-        </div>
-    );
+  return (
+    <div className="leftVerticalSplitPane">
+      <div className="leftPane" style={{ height: paneHeight }}>
+        {renderContent()}
+      </div>
+      <div
+        className="leftResizer"
+        onMouseDown={(e) => {
+          handleStart(e.clientY);
+        }}
+        onTouchStart={(e) => {
+          handleStart(e.touches[0].clientY);
+        }}
+        onMouseUp={handleMouseUp}
+        onTouchEnd={handleTouchEnd}
+      >
+        <RecHeader
+          lightness={headerLightness}
+          togglePaneHeight={togglePaneHeight}
+        />
+      </div>
+      <div
+        id="leftBottomPane"
+        className="leftPane"
+        style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
+      >
+        {renderRecs()}
+      </div>
+    </div>
+  );
 }

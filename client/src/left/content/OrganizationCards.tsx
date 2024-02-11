@@ -5,57 +5,57 @@ import { OrganizationCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 interface Organization {
-    organization_id: number;
-    organization_name: string;
-    organization_handle: string;
-    organization_currentIssue: string;
-    organization_description: string;
-    organization_stances: string;
+  organization_id: number;
+  organization_name: string;
+  organization_handle: string;
+  organization_currentIssue: string;
+  organization_description: string;
+  organization_stances: string;
 }
 
 export default function OrganizationCards() {
-    /* 
-        Description:   
-            Gets organization data from a database then extracts the id, name, currentIssue, and stances to 
-            be mapped into cards.
-        Unique Properties:
-            N/A
-    */
+  /* 
+    Description:   
+      Gets organization data from a database then extracts the id, name, currentIssue, and stances to 
+      be mapped into cards.
+    Unique Properties:
+      N/A
+  */
 
-    const [organizations, setOrganizations] = useState<Organization[]>([]);
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
 
-    useEffect(() => {
-        const fetchOrganizationData = async () => {
-            try {
-                const response = await Axios.get(`${serverUrl}/organizations`);
-                setOrganizations(response.data);
-            } catch (error) {
-                console.error("Error fetching organization data:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchOrganizationData = async () => {
+      try {
+        const response = await Axios.get(`${serverUrl}/organizations`);
+        setOrganizations(response.data);
+      } catch (error) {
+        console.error("Error fetching organization data:", error);
+      }
+    };
 
-        fetchOrganizationData();
-    }, []);
+    fetchOrganizationData();
+  }, []);
 
-    const orgCards = organizations.map((orgInfo) => {
-        return (
-            <OrganizationCard
-                key={orgInfo.organization_id}
-                id={orgInfo.organization_id}
-                name={orgInfo.organization_name}
-                currentIssue={orgInfo.organization_currentIssue}
-                stances={orgInfo.organization_stances}
-            />
-        );
-    });
-
+  const orgCards = organizations.map((orgInfo) => {
     return (
-        <div id='organizationCards' className='h-full mr-3 overflow-scroll'>
-            {orgCards}
-        </div>
+      <OrganizationCard
+        key={orgInfo.organization_id}
+        id={orgInfo.organization_id}
+        name={orgInfo.organization_name}
+        currentIssue={orgInfo.organization_currentIssue}
+        stances={orgInfo.organization_stances}
+      />
     );
+  });
+
+  return (
+    <div id="organizationCards" className="h-full mr-3 overflow-scroll">
+      {orgCards}
+    </div>
+  );
 }

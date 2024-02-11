@@ -5,56 +5,56 @@ import { IndividualCard } from "./LeftSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
-    ? config.development.serverUrl
-    : config.production.serverUrl;
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 interface Individual {
-    individual_id: number;
-    individual_name: string;
-    individual_userName: string;
-    individual_currentIssue: string;
-    individual_description: string;
-    individual_roles: string;
+  individual_id: number;
+  individual_name: string;
+  individual_userName: string;
+  individual_currentIssue: string;
+  individual_description: string;
+  individual_roles: string;
 }
 
 export default function IndividualRecs() {
-    /* 
-        Description:   
-            Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
-            into cards.
-        Unique Properties:
-            N/A
-    */
+  /* 
+    Description:   
+      Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
+      into cards.
+    Unique Properties:
+      N/A
+  */
 
-    const [individuals, setIndividuals] = useState<Individual[]>([]);
+  const [individuals, setIndividuals] = useState<Individual[]>([]);
 
-    useEffect(() => {
-        const fetchIndividualData = async () => {
-            try {
-                const response = await Axios.get(`${serverUrl}/individuals`);
-                setIndividuals(response.data);
-            } catch (error) {
-                console.error("Error fetching individual data:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchIndividualData = async () => {
+      try {
+        const response = await Axios.get(`${serverUrl}/individuals`);
+        setIndividuals(response.data);
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
 
-        fetchIndividualData();
-    }, []);
+    fetchIndividualData();
+  }, []);
 
-    const indRecs = individuals.map((indInfo) => {
-        return (
-            <IndividualCard
-                key={indInfo.individual_id}
-                id={indInfo.individual_id}
-                name={indInfo.individual_name}
-                currentIssue={indInfo.individual_currentIssue}
-            />
-        );
-    });
-
+  const indRecs = individuals.map((indInfo) => {
     return (
-        <div id='individualRecs' className='mr-3 h-full overflow-scroll'>
-            {indRecs}
-        </div>
+      <IndividualCard
+        key={indInfo.individual_id}
+        id={indInfo.individual_id}
+        name={indInfo.individual_name}
+        currentIssue={indInfo.individual_currentIssue}
+      />
     );
+  });
+
+  return (
+    <div id="individualRecs" className="mr-3 h-full overflow-scroll">
+      {indRecs}
+    </div>
+  );
 }
