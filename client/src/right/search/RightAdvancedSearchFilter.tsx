@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -9,11 +9,58 @@ import {
 import AdvancedFilterDropdown from "../../components/advancedFilterDropdown/AdvancedFilterDropdown";
 import AdvancedDateRange from "../../components/dateRange/AdvancedDateRange";
 
+interface RightAdvancedSearchFilter {
+  page: string;
+  handleFilterFormChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  refs: {
+    rightSpaceFilter: React.RefObject<HTMLDivElement>;
+    rightAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
+    rightDateRange: React.RefObject<HTMLDivElement>;
+    rightDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
+    rightAdvancedFilterDropdownDrop: React.RefObject<HTMLDivElement>;
+    rightDateRangeContainer?: React.RefObject<HTMLDivElement>;
+  };
+}
+
+interface RightFilterState {
+  filters: {
+    [page: string]: {
+      filterPayload: {
+        isWhatsCurrent: boolean;
+        isAffiliateActivity: boolean;
+        isAllTimeGreats: boolean;
+        isDatePosted: boolean;
+        isDatePostedSwitched: boolean;
+        isPopularity: boolean;
+        isPopularitySwitched: boolean;
+        isAdvancedSearch: boolean;
+        isIndividuals?: boolean;
+        isGroups?: boolean;
+        isOrganizations?: boolean;
+        isNewestMessages?: boolean;
+        isOldestMessages?: boolean;
+        isNewestAffiliate?: boolean;
+        isOldestAffiliate?: boolean;
+        affiliatedFilters: {
+          ind: string[];
+          grp: string[];
+          org: string[];
+        };
+        author: string;
+        dateRange: {
+          from: string;
+          to: string;
+        };
+      };
+    };
+  };
+}
+
 export default function RightAdvancedSearchFilter({
   page,
   handleFilterFormChange,
   refs,
-}) {
+}: RightAdvancedSearchFilter) {
   /* 
     Description:   
       Creates the card for the advanced right search filter.
@@ -24,16 +71,16 @@ export default function RightAdvancedSearchFilter({
 
   const dispatch = useDispatch();
   const formAuthor = useSelector(
-    (state) => state.filters[page].filterPayload.author,
+    (state: RightFilterState) => state.filters[page].filterPayload.author,
   );
   const formDateRange = useSelector(
-    (state) => state.filters[page].filterPayload.dateRange,
+    (state: RightFilterState) => state.filters[page].filterPayload.dateRange,
   );
   const [isDateRange, setIsDateRange] = useState(false);
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState({ bottom: 0, left: 0 });
   const [selectedRange, setSelectedRange] = useState({ from: "", to: "" });
   const [typed, setTyped] = useState(false);
-  refs.rightDateRangeContainer = useRef(null);
+  refs.rightDateRangeContainer = useRef<HTMLDivElement>(null);
 
   const handleAdvancedFilter = () => {
     setTimeout(() => {
@@ -44,16 +91,16 @@ export default function RightAdvancedSearchFilter({
     }, 0);
   };
 
-  function emptyAdvAffFilter(subcategory) {
+  function emptyAdvAffFilter(subcategory: string) {
     dispatch(clearAdvancedAffiliateFilter(page, subcategory));
   }
 
   /* 
-        Calculates what position the date range create portal should appear in and sets the position 
-        state which is then passed down to the date range component
-    */
+    Calculates what position the date range create portal should appear in and sets the position 
+    state which is then passed down to the date range component
+  */
   useEffect(() => {
-    if (refs.rightDateRangeContainer.current && refs.rightDateRange.current) {
+    if (refs.rightDateRangeContainer?.current && refs.rightDateRange.current) {
       const containerBoundingBox =
         refs.rightDateRangeContainer.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -91,7 +138,7 @@ export default function RightAdvancedSearchFilter({
   };
 
   // Handles any typed changes to the date range and dispatches as necessary to the redux state
-  const handleDateRangeChange = (event) => {
+  const handleDateRangeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name == "from") {
       dispatch(setDateRange(page, value, formDateRange.to));
@@ -179,20 +226,22 @@ export default function RightAdvancedSearchFilter({
   }, [formDateRange, isDateRange]);
 
   // Handles logic for outside clicks and when to close the date range picker
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (!isDateRange) {
       return;
     }
 
     const isOutsideDateRange =
       !refs.rightDateRange.current ||
-      !refs.rightDateRange.current.contains(event.target);
+      !refs.rightDateRange.current.contains(event.target as Node);
     const isOutsideDateRangeContainer =
-      !refs.rightDateRangeContainer.current ||
-      !refs.rightDateRangeContainer.current.contains(event.target);
+      !refs.rightDateRangeContainer?.current ||
+      !refs.rightDateRangeContainer.current.contains(event.target as Node);
     const isOutsideCaptionDropdown =
       !refs.rightDateRangeCaptionDropdown.current ||
-      !refs.rightDateRangeCaptionDropdown.current.contains(event.target);
+      !refs.rightDateRangeCaptionDropdown.current.contains(
+        event.target as Node,
+      );
 
     if (
       isOutsideDateRange &&
@@ -327,7 +376,11 @@ export default function RightAdvancedSearchFilter({
                 style={{
                   backgroundImage: "url('assets/icons/trashCan.svg')",
                 }}
-                onClick={handleFilterFormChange}
+                onClick={() =>
+                  handleFilterFormChange({
+                    target: { name: "author", value: "" },
+                  } as ChangeEvent<HTMLInputElement>)
+                }
                 value=""
                 whileTap={{ scale: 1.075 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
@@ -383,7 +436,11 @@ export default function RightAdvancedSearchFilter({
             style={{
               backgroundImage: "url('assets/icons/trashCan.svg')",
             }}
-            onClick={handleFilterFormChange}
+            onClick={() =>
+              handleDateRangeChange({
+                target: { name: "clearDateRange" },
+              } as ChangeEvent<HTMLInputElement>)
+            }
             value=""
             whileTap={{ scale: 1.075 }}
             transition={{ duration: 0.25, ease: "easeOut" }}

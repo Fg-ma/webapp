@@ -9,6 +9,16 @@ import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
 
+interface RightState {
+  page: {
+    right: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
+
 export default function RightSpace() {
   /* 
     Description:   
@@ -19,7 +29,7 @@ export default function RightSpace() {
   */
 
   const rightPage = useSelector(
-    (state) => state.page.right.pagePayload.pageState,
+    (state: RightState) => state.page.right.pagePayload.pageState,
   );
 
   const renderContent = () => {

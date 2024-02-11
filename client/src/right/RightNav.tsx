@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
 import { closeDrop } from "@redux/filters/filterActions";
 
-const navButtonsVar = {
+const navButtonsVar: Variants = {
   init: {
     fontSize: "1.125rem",
     lineHeight: "1.75rem",
@@ -20,11 +20,24 @@ const navButtonsVar = {
     lineHeight: "1.5rem",
     paddingTop: "0rem",
   },
+};
+
+const transition: Transition = {
   transition: {
     ease: "easeOut",
     duration: 0.1,
   },
 };
+
+interface RightState {
+  page: {
+    right: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
 
 export default function RightNav() {
   /* 
@@ -38,18 +51,18 @@ export default function RightNav() {
 
   const dispatch = useDispatch();
   const rightPage = useSelector(
-    (state) => state.page.right.pagePayload.pageState,
+    (state: RightState) => state.page.right.pagePayload.pageState,
   );
 
-  const deactiveStyles = {};
-  const activeStyles = {
+  const deactiveStyles: React.CSSProperties = {};
+  const activeStyles: React.CSSProperties = {
     textDecorationLine: "underline",
     textDecorationColor: "#F56114",
     textUnderlineOffset: "8px",
     textDecorationThickness: "2px",
     paddingBottom: "0.25rem",
   };
-  const rightStyles = {
+  const rightStyles: Record<string, React.CSSProperties> = {
     papers: deactiveStyles,
     news: deactiveStyles,
     explore: deactiveStyles,
@@ -60,7 +73,7 @@ export default function RightNav() {
 
   const navItems = ["papers", "news", "explore", "dogEars"];
 
-  function swapRightState(state) {
+  function swapRightState(state: string) {
     dispatch(closeDrop(state, "isDropFilter"));
     dispatch(setPageState("right", state));
   }
@@ -78,7 +91,7 @@ export default function RightNav() {
             variants={navButtonsVar}
             initial="init"
             whileHover="hover"
-            transition={navButtonsVar.transition}
+            transition={transition}
             onClick={() => swapRightState(navItem)}
           >
             <button className="w-full" style={rightStyles[navItem]}>
@@ -92,14 +105,3 @@ export default function RightNav() {
     </nav>
   );
 }
-
-//<motion.div
-//    className="h-8 w-1/3 my-auto flex justify-center items-center cursor-pointer"
-//    variants={navButtonsVar}
-//    initial="init"
-//    whileHover="hover"
-//    transition={navButtonsVar.transition}
-//    onClick={() => swapRightState('messages')}
-//>
-//    <button className="w-full" style={rightStyles["messages"]}>Messages</button>
-//</motion.div>

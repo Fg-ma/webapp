@@ -1,6 +1,33 @@
 import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
 
-const intialState = {
+interface State {
+  [key: string]: {
+    pagePayload: {
+      pageState: string;
+      isLoggedIn?: boolean;
+      ids?: {
+        individual_id?: number | null;
+        group_id?: number | null;
+        organization_id?: number | null;
+        paper_id?: number | null;
+        sheet_id?: number | null;
+        video_id?: number | null;
+        image_id?: number | null;
+        collection_id?: number | null;
+      };
+    };
+  };
+}
+
+type Action =
+  | { type: typeof SET_PAGE_STATE; payload: { page: string; newState: string } }
+  | {
+      type: typeof SET_IDS;
+      payload: { page: string; id: string; value: string | null };
+    }
+  | { type: typeof SET_LOGGED_IN; payload: { isLoggedIn: boolean } };
+
+const initialState: State = {
   login: {
     pagePayload: {
       pageState: "login",
@@ -57,7 +84,10 @@ const intialState = {
   },
 };
 
-export default function pageStateReducer(state = intialState, action) {
+export default function pageStateReducer(
+  state = initialState,
+  action: Action,
+): State {
   switch (action.type) {
     case SET_PAGE_STATE: {
       const { page, newState } = action.payload;
@@ -84,7 +114,7 @@ export default function pageStateReducer(state = intialState, action) {
           pagePayload: {
             ...state[page].pagePayload,
             ids: {
-              ...intialState[page].pagePayload.ids,
+              ...initialState[page].pagePayload.ids,
               [id]: value,
             },
           },

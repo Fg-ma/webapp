@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import {
   toggleDrop,
   setFilterOption,
@@ -13,7 +13,7 @@ import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import Checkbox from "../../components/checkbox/Checkbox";
 
-const rightSearchFilterVar = {
+const rightSearchFilterVar: Variants = {
   init: {
     opacity: 0,
     y: "1vh",
@@ -22,13 +22,16 @@ const rightSearchFilterVar = {
     opacity: 1,
     y: 0,
   },
+};
+
+const rightSearchFilterTransition: Transition = {
   transition: {
     duration: 0.25,
     ease: "easeOut",
   },
 };
 
-const rightAdvancedSearchFilterVar = {
+const rightAdvancedSearchFilterVar: Variants = {
   init: {
     y: "25%",
     opacity: 0,
@@ -37,17 +40,74 @@ const rightAdvancedSearchFilterVar = {
     y: 0,
     opacity: 1,
   },
+};
+
+const rightAdvancedSearchFilterTransition: Transition = {
   transition: {
     duration: 0.85,
     ease: "easeOut",
   },
 };
 
+interface RightSearchFilterProps {
+  page: string;
+  rightSpaceFilterGeometry: {
+    width: number;
+    position: {
+      bottom: number;
+      left: number;
+    };
+  };
+  refs: {
+    rightAddAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
+    rightAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
+    rightDateRange: React.RefObject<HTMLDivElement>;
+    rightDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
+    rightSpaceFilter: React.RefObject<HTMLDivElement>;
+    rightSpaceSearchBar: React.RefObject<HTMLDivElement>;
+    rightAdvancedFilterDropdownDrop: React.RefObject<HTMLDivElement>;
+  };
+}
+
+interface RightFilterState {
+  filters: {
+    [page: string]: {
+      filterPayload: {
+        isWhatsCurrent: boolean;
+        isAffiliateActivity: boolean;
+        isAllTimeGreats: boolean;
+        isDatePosted: boolean;
+        isDatePostedSwitched: boolean;
+        isPopularity: boolean;
+        isPopularitySwitched: boolean;
+        isAdvancedSearch: boolean;
+        isIndividuals?: boolean;
+        isGroups?: boolean;
+        isOrganizations?: boolean;
+        isNewestMessages?: boolean;
+        isOldestMessages?: boolean;
+        isNewestAffiliate?: boolean;
+        isOldestAffiliate?: boolean;
+        affiliatedFilters: {
+          ind: string[];
+          grp: string[];
+          org: string[];
+        };
+        author: string;
+        dateRange: {
+          from: string;
+          to: string;
+        };
+      };
+    };
+  };
+}
+
 export default function RightSearchFilter({
   page,
   rightSpaceFilterGeometry,
   refs,
-}) {
+}: RightSearchFilterProps) {
   /* 
     Description:   
       Creates the right search filter form and sets the state using redux.
@@ -57,7 +117,7 @@ export default function RightSearchFilter({
 
   const dispatch = useDispatch();
   const filterFormData = useSelector(
-    (state) => state.filters[page].filterPayload,
+    (state: RightFilterState) => state.filters[page].filterPayload,
   );
   const [
     rightAdvancedSearchFilterVisible,
@@ -71,9 +131,9 @@ export default function RightSearchFilter({
     }
   }, [filterFormData.isAdvancedSearch]);
 
-  function handleFilterFormChange(event) {
+  function handleFilterFormChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, type, checked, value } = event.target;
-    const inverseOptions = {
+    const inverseOptions: { [key: string]: string } = {
       isNewestMessages: "isOldestMessages",
       isOldestMessages: "isNewestMessages",
       isNewestAffiliate: "isOldestAffiliate",
@@ -114,16 +174,16 @@ export default function RightSearchFilter({
     rightIsPopularity: false,
   });
 
-  const handleCheckboxStartHover = (event) => {
-    const { id } = event.target;
+  const handleCheckboxStartHover = (event: MouseEvent) => {
+    const { id } = event.target as HTMLInputElement;
     setHovering((prev) => ({
       ...prev,
       [id]: true,
     }));
   };
 
-  const handleCheckboxEndHover = (event) => {
-    const { id } = event.target;
+  const handleCheckboxEndHover = (event: MouseEvent) => {
+    const { id } = event.target as HTMLInputElement;
     setHovering((prev) => ({
       ...prev,
       [id]: false,
@@ -142,11 +202,12 @@ export default function RightSearchFilter({
               left: `${rightSpaceFilterGeometry.position.left}px`,
               width: `${rightSpaceFilterGeometry.width}px`,
             }
-          : null
+          : {}
       }
       variants={rightSearchFilterVar}
       initial="init"
       animate="animate"
+      transition={rightSearchFilterTransition}
       exit="init"
     >
       <form className="flex flex-col h-full m-4">
@@ -168,7 +229,7 @@ export default function RightSearchFilter({
                     <motion.label
                       id="rightIsWhatsCurrent"
                       htmlFor="rightIsWhatsCurrentInput"
-                      className="relative flex items-center cursor-pointer"
+                      className="relative flex items-center cursor-pointer select-none"
                       onHoverStart={handleCheckboxStartHover}
                       onHoverEnd={handleCheckboxEndHover}
                     >
@@ -194,7 +255,7 @@ export default function RightSearchFilter({
                   <motion.label
                     id="rightIsAffiliateActivity"
                     htmlFor="rightIsAffiliateActivityInput"
-                    className="relative flex items-center cursor-pointer"
+                    className="relative flex items-center cursor-pointer select-none"
                     onHoverStart={handleCheckboxStartHover}
                     onHoverEnd={handleCheckboxEndHover}
                   >
@@ -220,7 +281,7 @@ export default function RightSearchFilter({
                     <motion.label
                       id="rightIsAllTimeGreats"
                       htmlFor="rightIsAllTimeGreatsInput"
-                      className="relative flex items-center cursor-pointer"
+                      className="relative flex items-center cursor-pointer select-none"
                       onHoverStart={handleCheckboxStartHover}
                       onHoverEnd={handleCheckboxEndHover}
                     >
@@ -247,7 +308,7 @@ export default function RightSearchFilter({
                     <motion.label
                       id="rightIsDatePosted"
                       htmlFor="rightIsDatePostedInput"
-                      className="relative flex items-center cursor-pointer"
+                      className="relative flex items-center cursor-pointer select-none"
                       onHoverStart={handleCheckboxStartHover}
                       onHoverEnd={handleCheckboxEndHover}
                     >
@@ -294,7 +355,7 @@ export default function RightSearchFilter({
                     <motion.label
                       id="rightIsPopularity"
                       htmlFor="rightIsPopularityInput"
-                      className="relative flex items-center cursor-pointer"
+                      className="relative flex items-center cursor-pointer select-none"
                       onHoverStart={handleCheckboxStartHover}
                       onHoverEnd={handleCheckboxEndHover}
                     >
@@ -344,7 +405,7 @@ export default function RightSearchFilter({
                       variants={rightAdvancedSearchFilterVar}
                       initial="init"
                       animate="animate"
-                      transition="transition"
+                      transition={rightAdvancedSearchFilterTransition}
                       exit="init"
                     >
                       <RightAdvancedSearchFilter
@@ -522,6 +583,7 @@ export default function RightSearchFilter({
                 page={page}
                 handleFilterFormChange={handleFilterFormChange}
                 refs={{
+                  rightSpaceFilter: refs.rightSpaceFilter,
                   rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
                   rightDateRange: refs.rightDateRange,
                   rightDateRangeCaptionDropdown:

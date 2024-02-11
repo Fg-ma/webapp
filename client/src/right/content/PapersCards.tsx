@@ -8,6 +8,15 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
+interface Sheet {
+  sheet_id: number;
+  sheet_data_id: number;
+  sheet_author_id: number;
+  sheet_filename: string;
+  sheet_title: string;
+  sheet_subject: string;
+}
+
 export default function PapersCards() {
   /* 
     Description:   
@@ -17,7 +26,7 @@ export default function PapersCards() {
       It queries for any affiliate responses.
   */
 
-  const [papers, setPapers] = useState([]);
+  const [papers, setPapers] = useState<Sheet[]>([]);
 
   useEffect(() => {
     const fetchPaperData = async () => {

@@ -10,7 +10,13 @@ import { setIds, setPageState } from "@redux/pageState/pageStateActions";
     N/A
 */
 
-export function PapersCard({ paper_id = null, title, subject }) {
+interface PapersCardProps {
+  paper_id: number;
+  title: string;
+  subject: string;
+}
+
+export function PapersCard({ paper_id, title, subject }: PapersCardProps) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -34,12 +40,19 @@ export function PapersCard({ paper_id = null, title, subject }) {
   );
 }
 
+interface NewsCardProps {
+  sheet_id: number;
+  title: string;
+  subject: string;
+  affResponses?: string | null;
+}
+
 export function NewsCard({
-  sheet_id = null,
+  sheet_id,
   title,
   subject,
   affResponses = null,
-}) {
+}: NewsCardProps) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -70,7 +83,12 @@ export function NewsCard({
   );
 }
 
-export function MessagesCard({ name, lastMessage = null }) {
+interface MessagesCardProps {
+  name: string;
+  lastMessage: string | null;
+}
+
+export function MessagesCard({ name, lastMessage = null }: MessagesCardProps) {
   return (
     <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md">
       <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
@@ -86,7 +104,17 @@ export function MessagesCard({ name, lastMessage = null }) {
   );
 }
 
-export function DogEarCard({ title, subject, affResponses = null }) {
+interface DogEarCard {
+  title: string;
+  subject: string;
+  affResponses?: string | null;
+}
+
+export function DogEarCard({
+  title,
+  subject,
+  affResponses = null,
+}: DogEarCard) {
   return (
     <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md">
       <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">

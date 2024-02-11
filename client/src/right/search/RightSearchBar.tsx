@@ -1,10 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import RightSearchFilter from "./RightSearchFilter";
 import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
 
-export default function RightSearchBar({ page }) {
+interface RightSearchBarProps {
+  page: string;
+}
+
+interface PageState {
+  filters: {
+    [page: string]: {
+      isDropFilter: boolean;
+    };
+  };
+}
+
+export default function RightSearchBar({ page }: RightSearchBarProps) {
   /* 
     Description:   
       Creates the RightSearchBar with a submit button, text input, and filter button.
@@ -14,24 +26,26 @@ export default function RightSearchBar({ page }) {
   */
 
   const dispatch = useDispatch();
-  const dropFilter = useSelector((state) => state.filters[page].isDropFilter);
+  const dropFilter = useSelector(
+    (state: PageState) => state.filters[page].isDropFilter,
+  );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [rightSpaceFilterGeometry, setRightSpaceFilterGeometry] = useState({
-    width: null,
+    width: 0,
     position: {
-      top: null,
-      left: null,
+      bottom: 0,
+      left: 0,
     },
   });
   const refs = {
-    rightAddAdvancedSearchFilter: useRef(null),
-    rightAdvancedSearchFilter: useRef(null),
-    rightDateRange: useRef(null),
-    rightDateRangeCaptionDropdown: useRef(null),
-    rightSpaceFilter: useRef(null),
-    rightSpaceSearchBar: useRef(null),
-    rightAdvancedFilterDropdownDrop: useRef(null),
+    rightAddAdvancedSearchFilter: useRef<HTMLDivElement>(null),
+    rightAdvancedSearchFilter: useRef<HTMLDivElement>(null),
+    rightDateRange: useRef<HTMLDivElement>(null),
+    rightDateRangeCaptionDropdown: useRef<HTMLDivElement>(null),
+    rightSpaceFilter: useRef<HTMLDivElement>(null),
+    rightSpaceSearchBar: useRef<HTMLDivElement>(null),
+    rightAdvancedFilterDropdownDrop: useRef<HTMLDivElement>(null),
   };
 
   const calculateRightSpaceFilterGeometry = () => {
@@ -78,7 +92,7 @@ export default function RightSearchBar({ page }) {
     setIsInputFocused(false);
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
@@ -88,13 +102,13 @@ export default function RightSearchBar({ page }) {
   };
 
   // Handles logic for outside clicks and when to close the filter
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (!dropFilter) {
       return;
     }
 
-    const isOutsideElement = (elementRef) =>
-      elementRef.current && !elementRef.current.contains(event.target);
+    const isOutsideElement = (elementRef: React.RefObject<HTMLElement>) =>
+      elementRef.current && !elementRef.current.contains(event.target as Node);
 
     const isOutsideFilter = isOutsideElement(refs.rightSpaceFilter);
     const isOutsideSearchBar = isOutsideElement(refs.rightSpaceSearchBar);
@@ -104,18 +118,24 @@ export default function RightSearchBar({ page }) {
 
     const shouldToggleDrop =
       (refs.rightAddAdvancedSearchFilter.current &&
-        !refs.rightAddAdvancedSearchFilter.current.contains(event.target) &&
+        !refs.rightAddAdvancedSearchFilter.current.contains(
+          event.target as Node,
+        ) &&
         !refs.rightAdvancedFilterDropdownDrop.current &&
         isOutsideFilter &&
         isOutsideSearchBar) ||
       (refs.rightAdvancedSearchFilter.current &&
-        !refs.rightAdvancedSearchFilter.current.contains(event.target) &&
+        !refs.rightAdvancedSearchFilter.current.contains(
+          event.target as Node,
+        ) &&
         !refs.rightDateRange.current &&
         !refs.rightAdvancedFilterDropdownDrop.current &&
         isOutsideFilter &&
         isOutsideSearchBar) ||
       (refs.rightAdvancedSearchFilter.current &&
-        !refs.rightAdvancedSearchFilter.current.contains(event.target) &&
+        !refs.rightAdvancedSearchFilter.current.contains(
+          event.target as Node,
+        ) &&
         refs.rightDateRange.current &&
         !refs.rightAdvancedFilterDropdownDrop.current &&
         isOutsideFilter &&
@@ -188,6 +208,7 @@ export default function RightSearchBar({ page }) {
               rightAdvancedSearchFilter: refs.rightAdvancedSearchFilter,
               rightDateRange: refs.rightDateRange,
               rightDateRangeCaptionDropdown: refs.rightDateRangeCaptionDropdown,
+              rightSpaceSearchBar: refs.rightSpaceSearchBar,
               rightAdvancedFilterDropdownDrop:
                 refs.rightAdvancedFilterDropdownDrop,
             }}

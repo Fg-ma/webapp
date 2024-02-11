@@ -23,7 +23,7 @@ const middleAdvancedSearchFilterVar: Variants = {
   },
 };
 
-const middleAdvancedSearchFilterTransition: Transition = {
+const transition: Transition = {
   transition: {
     duration: 0.85,
     ease: "easeOut",
@@ -168,7 +168,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                 <motion.label
                   id="middleIsWhatsCurrent"
                   htmlFor="middleIsWhatsCurrentInput"
-                  className="relative flex items-center cursor-pointer"
+                  className="relative flex items-center cursor-pointer select-none"
                   onHoverStart={handleCheckboxStartHover}
                   onHoverEnd={handleCheckboxEndHover}
                 >
@@ -193,7 +193,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                 <motion.label
                   id="middleIsAffiliateActivity"
                   htmlFor="middleIsAffiliateActivityInput"
-                  className="relative flex items-center cursor-pointer"
+                  className="relative flex items-center cursor-pointer select-none"
                   onHoverStart={handleCheckboxStartHover}
                   onHoverEnd={handleCheckboxEndHover}
                 >
@@ -218,7 +218,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                 <motion.label
                   id="middleIsAllTimeGreats"
                   htmlFor="middleIsAllTimeGreatsInput"
-                  className="relative flex items-center cursor-pointer"
+                  className="relative flex items-center cursor-pointer select-none"
                   onHoverStart={handleCheckboxStartHover}
                   onHoverEnd={handleCheckboxEndHover}
                 >
@@ -244,7 +244,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                   <motion.label
                     id="middleIsDatePosted"
                     htmlFor="middleIsDatePostedInput"
-                    className="relative flex items-center cursor-pointer"
+                    className="relative flex items-center cursor-pointer select-none"
                     onHoverStart={handleCheckboxStartHover}
                     onHoverEnd={handleCheckboxEndHover}
                   >
@@ -289,7 +289,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                   <motion.label
                     id="middleIsPopularity"
                     htmlFor="middleIsPopularityInput"
-                    className="relative flex items-center cursor-pointer"
+                    className="relative flex items-center cursor-pointer select-none"
                     onHoverStart={handleCheckboxStartHover}
                     onHoverEnd={handleCheckboxEndHover}
                   >
@@ -399,7 +399,7 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                 variants={middleAdvancedSearchFilterVar}
                 initial="init"
                 animate="animate"
-                transition={middleAdvancedSearchFilterTransition}
+                transition={transition}
                 exit="init"
               >
                 <MiddleAdvancedSearchFilter

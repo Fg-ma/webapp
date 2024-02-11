@@ -15,7 +15,7 @@ const middleSearchFilterVar: Variants = {
   },
 };
 
-const middleSearchFilterTransition: Transition = {
+const transition: Transition = {
   transition: {
     duration: 0.25,
     ease: "easeOut",
@@ -155,7 +155,7 @@ export default function MiddleSearchBar({
       className="flex flex-col justify-center items-center"
       style={{ width: middleSearchWidth }}
     >
-      <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center">
+      <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center shadow-md">
         <input
           id="middleSearchSubmit"
           type="submit"
@@ -197,7 +197,7 @@ export default function MiddleSearchBar({
             initial="init"
             animate="animate"
             exit="init"
-            transition={middleSearchFilterTransition}
+            transition={transition}
           >
             <MiddleSearchFilter
               refs={{
