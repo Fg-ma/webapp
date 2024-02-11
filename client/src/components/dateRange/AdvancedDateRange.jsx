@@ -120,7 +120,7 @@ export default function AdvancedDateRange({
 
   return createPortal(
     <motion.div
-      className="bg-white absolute z-50 rounded-md select-none"
+      className="bg-white absolute z-50 rounded-md select-none shadow"
       style={
         position !== null
           ? filter == "middle"
