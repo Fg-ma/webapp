@@ -24,7 +24,7 @@ interface RightAdvancedSearchFilter {
 
 interface RightFilterState {
   filters: {
-    [page: string]: {
+    [filter: string]: {
       filterPayload: {
         isWhatsCurrent: boolean;
         isAffiliateActivity: boolean;
@@ -97,9 +97,23 @@ export default function RightAdvancedSearchFilter({
 
   /* 
     Calculates what position the date range create portal should appear in and sets the position 
-    state which is then passed down to the date range component
+    state which is then passed down to the date range component. And sets selectedRange equal
+    to formDateRange if selectedRange has an empty value where formDtaeRange doesn't.
   */
   useEffect(() => {
+    if (
+      formDateRange.from &&
+      formDateRange.to &&
+      !selectedRange.from &&
+      !selectedRange.to
+    ) {
+      setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
+    } else if (formDateRange.from && !formDateRange.to && !selectedRange.from) {
+      setSelectedRange((prev) => ({ from: formDateRange.from, to: prev.to }));
+    } else if (!formDateRange.from && formDateRange.to && !selectedRange.to) {
+      setSelectedRange((prev) => ({ from: prev.from, to: formDateRange.to }));
+    }
+
     if (refs.rightDateRangeContainer?.current && refs.rightDateRange.current) {
       const containerBoundingBox =
         refs.rightDateRangeContainer.current.getBoundingClientRect();
@@ -152,9 +166,9 @@ export default function RightAdvancedSearchFilter({
   };
 
   /* 
-        If a valid range is in state then it will ensure that the correct classes are applied to 
-        the correct elements it is also passed down to elements in the drop down
-    */
+    If a valid range is in state then it will ensure that the correct classes are applied to 
+    the correct elements it is also passed down to elements in the drop down
+  */
   const updateRangeStyles = () => {
     setTimeout(() => {
       const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
@@ -210,6 +224,60 @@ export default function RightAdvancedSearchFilter({
                 "rdp-day_range_middle",
                 "selected",
               );
+            });
+          }
+        }
+      } else if (formDateRange.from && !formDateRange.to) {
+        if (refs.rightDateRange.current) {
+          const buttons = refs.rightDateRange.current.querySelectorAll(
+            'button[name="day"].selected',
+          );
+
+          if (buttons.length) {
+            const buttonArray = Array.from(buttons);
+
+            buttonArray.forEach((button) => {
+              if (!button.classList.contains("rdp-day_range_start")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                  "selected",
+                );
+              } else if (button.classList.contains("rdp-day_range_start")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                );
+              }
+            });
+          }
+        }
+      } else if (!formDateRange.from && formDateRange.to) {
+        if (refs.rightDateRange.current) {
+          const buttons = refs.rightDateRange.current.querySelectorAll(
+            'button[name="day"].selected',
+          );
+
+          if (buttons.length) {
+            const buttonArray = Array.from(buttons);
+
+            buttonArray.forEach((button) => {
+              if (!button.classList.contains("rdp-day_range_end")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                  "selected",
+                );
+              } else if (button.classList.contains("rdp-day_range_end")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                );
+              }
             });
           }
         }

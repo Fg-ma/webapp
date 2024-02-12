@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import Axios from "axios";
 import config from "@config";
 import FilterCard from "./FilterCard";
@@ -10,20 +10,23 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-const dropIconVar = {
+const dropIconVar: Variants = {
   init: {
     rotateX: 0,
   },
   animate: {
     rotateX: 180,
   },
+};
+
+const dropIconTransition: Transition = {
   transition: {
     duration: 0.75,
     ease: "easeOut",
   },
 };
 
-const dropdownVar = {
+const dropdownVar: Variants = {
   init: {
     opacity: 0,
     y: "-1vh",
@@ -32,6 +35,9 @@ const dropdownVar = {
     opacity: 1,
     y: 0,
   },
+};
+
+const dropdownTransition: Transition = {
   transition: {
     duration: 0.25,
     ease: "easeOut",
@@ -39,12 +45,34 @@ const dropdownVar = {
   },
 };
 
+interface AdvancedFilterDropdownProps {
+  filter: string;
+  subcategory: string;
+  advancedFilterDropdownDropRef: React.RefObject<HTMLDivElement>;
+  searchFilterRef: React.RefObject<HTMLDivElement>;
+}
+
+interface FilterState {
+  filters: {
+    [filter: string]: {
+      filterPayload: {
+        affiliatedFilters: {
+          [key: string]: string[];
+          ind: string[];
+          grp: string[];
+          org: string[];
+        };
+      };
+    };
+  };
+}
+
 export default function AdvancedFilterDropdown({
   filter,
   subcategory,
   advancedFilterDropdownDropRef,
   searchFilterRef,
-}) {
+}: AdvancedFilterDropdownProps) {
   /* 
     Description:   
       Creates the dropdown for adding affiliates filters, by querying a database
@@ -62,10 +90,10 @@ export default function AdvancedFilterDropdown({
   const [data, setData] = useState([]);
   const [placeholder, setPlaceholder] = useState("");
   const [expandedFilter, setExpandedFilter] = useState("");
-  const dropdownRef = useRef(null);
-  const popupRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
   const advFilters = useSelector(
-    (state) =>
+    (state: FilterState) =>
       state.filters[filter].filterPayload.affiliatedFilters[subcategory],
   );
   const uniqueId = useRef(
@@ -113,11 +141,11 @@ export default function AdvancedFilterDropdown({
     );
   });
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
-      !dropdownRef.current.contains(event.target) &&
-      (!popupRef.current || !popupRef.current.contains(event.target))
+      !dropdownRef.current.contains(event.target as Node) &&
+      (!popupRef.current || !popupRef.current.contains(event.target as Node))
     ) {
       setIsOpen(false);
     }
@@ -127,9 +155,13 @@ export default function AdvancedFilterDropdown({
   useEffect(() => {
     const updateMaxWidth = () => {
       const dropdownSpanWidth =
-        searchFilterRef.current.getBoundingClientRect().width;
+        searchFilterRef.current?.getBoundingClientRect().width;
 
-      let maxWidth;
+      if (!dropdownSpanWidth) {
+        return;
+      }
+
+      let maxWidth: number;
       if (filter === "middle") {
         maxWidth = dropdownSpanWidth - 100;
       } else {
@@ -138,7 +170,7 @@ export default function AdvancedFilterDropdown({
 
       document.documentElement.style.setProperty(
         `--max-width-${uniqueId.current}`,
-        `${parseInt(maxWidth)}px`,
+        `${maxWidth}px`,
       );
     };
 
@@ -180,7 +212,7 @@ export default function AdvancedFilterDropdown({
             variants={dropIconVar}
             initial="init"
             animate={isOpen ? "animate" : "init"}
-            transition="transition"
+            transition={dropIconTransition}
           >
             <path
               strokeLinecap="round"
@@ -201,7 +233,7 @@ export default function AdvancedFilterDropdown({
               initial="init"
               animate="animate"
               exit="init"
-              transition="transition"
+              transition={dropdownTransition}
             >
               <div className="overflow-y-scroll overflow-x-visible max-h-80 max-w-xs w-80 h-80">
                 {filterCards}

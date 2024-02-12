@@ -69,15 +69,19 @@ export default function AdvancedDateRange({
 
   const dispatch = useDispatch();
 
+  function isValidDateFormat(dateString) {
+    const regex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
+    return regex.test(dateString);
+  }
+
   const toDateString = (date) => {
     const inputDateString = String(date).substring(4, 15);
     // Create a Date object from the input string
     const dateObject = new Date(inputDateString);
 
     // Check if the dateObject is a valid date
-    if (isNaN(dateObject.getTime())) {
-      console.error("Invalid date string");
-      return null;
+    if (isNaN(dateObject.getTime()) && isValidDateFormat(date)) {
+      return date;
     }
 
     // Extract the month, day, and year

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MouseEventHandler } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import {
@@ -7,13 +7,36 @@ import {
 } from "@redux/filters/filterActions";
 import Popup from "./Popup";
 
+interface FilterCardProps {
+  filter: string;
+  identify: string;
+  name: string;
+  subcategory: string;
+  popupRef: React.RefObject<HTMLDivElement>;
+}
+
+interface FilterState {
+  filters: {
+    [filter: string]: {
+      filterPayload: {
+        affiliatedFilters: {
+          [key: string]: string[];
+          ind: string[];
+          grp: string[];
+          org: string[];
+        };
+      };
+    };
+  };
+}
+
 export default function FilterCard({
   filter,
   identify,
   name,
   subcategory,
   popupRef,
-}) {
+}: FilterCardProps) {
   /* 
     Description:   
       Creates the cards that appear in the AdvancedFilterDropDowns.
@@ -23,7 +46,7 @@ export default function FilterCard({
 
   const dispatch = useDispatch();
   const advFilters = useSelector(
-    (state) =>
+    (state: FilterState) =>
       state.filters[filter].filterPayload.affiliatedFilters[subcategory],
   );
   const isFilterSelected = advFilters.includes(name);
@@ -33,11 +56,11 @@ export default function FilterCard({
   });
   const [isMouseInsidePopup, setIsMouseInsidePopup] = useState(false);
   const isMouseInsideCard = useRef(true);
-  const hoverTimeout = useRef(null);
-  const nameSpanRef = useRef(null);
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+  const nameSpanRef = useRef<HTMLSpanElement>(null);
 
-  const calculatePopupPosition = (event) => {
-    const boundingBox = event.target.getBoundingClientRect();
+  const calculatePopupPosition = (event: MouseEvent) => {
+    const boundingBox = (event.target as HTMLElement).getBoundingClientRect();
     return {
       top: boundingBox.top + window.scrollY - 4,
       left: boundingBox.left + window.scrollX - 8,
@@ -45,9 +68,9 @@ export default function FilterCard({
   };
 
   // Handles the mouse entering a card and waits 1.5 seconds to set the popup state to visible
-  const handleMouseEnter = (event) => {
+  const handleMouseEnter = (event: MouseEvent) => {
     isMouseInsideCard.current = true;
-    clearTimeout(hoverTimeout.current);
+    clearTimeout(hoverTimeout.current!);
     if (!isMouseInsidePopup) {
       hoverTimeout.current = setTimeout(() => {
         if (
@@ -73,17 +96,17 @@ export default function FilterCard({
 
   const handleMouseLeave = () => {
     isMouseInsideCard.current = false;
-    clearTimeout(hoverTimeout.current);
+    clearTimeout(hoverTimeout.current!);
   };
 
   const handlePopupMouseEnter = () => {
     setIsMouseInsidePopup(true);
-    clearTimeout(hoverTimeout.current);
+    clearTimeout(hoverTimeout.current!);
   };
 
   const handlePopupMouseLeave = () => {
     setIsMouseInsidePopup(false);
-    clearTimeout(hoverTimeout.current);
+    clearTimeout(hoverTimeout.current!);
   };
 
   useEffect(() => {
@@ -103,7 +126,7 @@ export default function FilterCard({
       element.addEventListener("mouseleave", handleMouseLeave);
 
       return () => {
-        clearTimeout(hoverTimeout.current);
+        clearTimeout(hoverTimeout.current!);
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);
       };
@@ -124,7 +147,7 @@ export default function FilterCard({
     <motion.div
       id={`${subcategory}_${identify}`}
       className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md"
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleMouseEnter as any}
       onMouseLeave={handleMouseLeave}
       onClick={!popupState.visible ? handleFilterClick : () => {}}
       whileHover={{ backgroundColor: "rgb(44, 146, 245)" }}

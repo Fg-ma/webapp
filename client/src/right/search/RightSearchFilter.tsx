@@ -71,7 +71,7 @@ interface RightSearchFilterProps {
 
 interface RightFilterState {
   filters: {
-    [page: string]: {
+    [filter: string]: {
       filterPayload: {
         isWhatsCurrent: boolean;
         isAffiliateActivity: boolean;

@@ -90,9 +90,23 @@ export default function MiddleAdvancedSearchFilter({
 
   /* 
     Calculates what position the date range create portal should appear in and sets the position 
-    state which is then passed down to the date range component
+    state which is then passed down to the date range component. And sets selectedRange equal
+    to formDateRange if selectedRange has an empty value where formDtaeRange doesn't.
   */
   useEffect(() => {
+    if (
+      formDateRange.from &&
+      formDateRange.to &&
+      !selectedRange.from &&
+      !selectedRange.to
+    ) {
+      setSelectedRange({ from: formDateRange.from, to: formDateRange.to });
+    } else if (formDateRange.from && !formDateRange.to && !selectedRange.from) {
+      setSelectedRange((prev) => ({ from: formDateRange.from, to: prev.to }));
+    } else if (!formDateRange.from && formDateRange.to && !selectedRange.to) {
+      setSelectedRange((prev) => ({ from: prev.from, to: formDateRange.to }));
+    }
+
     if (
       refs.middleDateRangeContainer?.current &&
       refs.middleDateRange.current
@@ -142,6 +156,7 @@ export default function MiddleAdvancedSearchFilter({
     } else if (name == "clearDateRange") {
       dispatch(setDateRange("middle", "", ""));
     }
+
     setTyped(true);
     updateRangeStyles();
   };
@@ -155,6 +170,7 @@ export default function MiddleAdvancedSearchFilter({
       const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/;
       let validFrom = regex.test(formDateRange.from);
       let validTo = regex.test(formDateRange.to);
+
       if (validFrom && validTo) {
         setTimeout(() => {
           if (refs.middleDateRange.current) {
@@ -205,6 +221,60 @@ export default function MiddleAdvancedSearchFilter({
                 "rdp-day_range_middle",
                 "selected",
               );
+            });
+          }
+        }
+      } else if (formDateRange.from && !formDateRange.to) {
+        if (refs.middleDateRange.current) {
+          const buttons = refs.middleDateRange.current.querySelectorAll(
+            'button[name="day"].selected',
+          );
+
+          if (buttons.length) {
+            const buttonArray = Array.from(buttons);
+
+            buttonArray.forEach((button) => {
+              if (!button.classList.contains("rdp-day_range_start")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                  "selected",
+                );
+              } else if (button.classList.contains("rdp-day_range_start")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                );
+              }
+            });
+          }
+        }
+      } else if (!formDateRange.from && formDateRange.to) {
+        if (refs.middleDateRange.current) {
+          const buttons = refs.middleDateRange.current.querySelectorAll(
+            'button[name="day"].selected',
+          );
+
+          if (buttons.length) {
+            const buttonArray = Array.from(buttons);
+
+            buttonArray.forEach((button) => {
+              if (!button.classList.contains("rdp-day_range_end")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                  "selected",
+                );
+              } else if (button.classList.contains("rdp-day_range_end")) {
+                button.classList.remove(
+                  "rdp-day_range_start",
+                  "rdp-day_range_end",
+                  "rdp-day_range_middle",
+                );
+              }
             });
           }
         }

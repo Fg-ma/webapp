@@ -10,7 +10,7 @@ interface RightSearchBarProps {
 
 interface PageState {
   filters: {
-    [page: string]: {
+    [filter: string]: {
       isDropFilter: boolean;
     };
   };

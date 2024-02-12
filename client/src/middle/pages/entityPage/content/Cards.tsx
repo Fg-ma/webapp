@@ -63,7 +63,7 @@ export function Sheet({
 
     fetchSheetData();
   }, [sheet_id]);
-  console.log(sheetData);
+
   // Checks if the entity is the author of the sheet
   if (sheetData && sheetData.sheet_author_id === author_id) {
     isAuthor.current = true;

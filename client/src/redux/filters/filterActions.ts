@@ -25,13 +25,13 @@ export const closeDrop = (filter: string, dropType: string) => ({
 export const setFilterOption = (
   filter: string,
   option: string,
-  value: boolean,
+  value: boolean | string,
 ) => ({
   type: SET_FILTER_OPTION,
   payload: { filter, option, value },
 });
 
-export const applyFilterOptions = (filter: string, filterOptions) => ({
+export const applyFilterOptions = (filter: string, filterOptions: any) => ({
   type: APPLY_FILTER_OPTIONS,
   payload: { filter, filterOptions },
 });
