@@ -7,12 +7,23 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function ImageViewer({ image_id }) {
-  const [imageData, setImageData] = useState({
-    image_url: null,
-    image_title: null,
-    image_description: null,
-    image_author: null,
+interface ImageViewerProps {
+  image_id: number;
+}
+
+interface ImageData {
+  image_url: string;
+  image_title: string;
+  image_description: string;
+  image_author: string;
+}
+
+export default function ImageViewer({ image_id }: ImageViewerProps) {
+  const [imageData, setImageData] = useState<ImageData>({
+    image_url: "",
+    image_title: "",
+    image_description: "",
+    image_author: "",
   });
 
   useEffect(() => {
@@ -42,7 +53,13 @@ export default function ImageViewer({ image_id }) {
               image_url: url,
               image_title: response.data.image_title,
               image_description: response.data.image_description,
-              image_author: response.data.individuals,
+              image_author: response.data.entities.individuals
+                ? response.data.entities.individuals.individual_name
+                : response.data.entities.groups
+                  ? response.data.entities.groups.group_name
+                  : response.data.entities.organizations
+                    ? response.data.entities.organizations.organization_name
+                    : "",
             });
           }
         }
@@ -56,7 +73,7 @@ export default function ImageViewer({ image_id }) {
     }
   }, [image_id]);
 
-  const getMimeType = (extension) => {
+  const getMimeType = (extension: string) => {
     switch (extension) {
       case "jpg":
       case "jpeg":
@@ -83,16 +100,14 @@ export default function ImageViewer({ image_id }) {
         </div>
       )}
       {imageData.image_title &&
-        imageData.image_author.individual_name &&
+        imageData.image_author &&
         imageData.image_description && (
           <div className="flex flex-col mt-4 items-start justify-center">
             <p className="text-xl mb-2">{imageData.image_title}</p>
             <div className="flex items-center justify-start mb-2">
               <div className="bg-fg-white-85 rounded-full h-10 aspect-square"></div>
               <div className="flex flex-col items-start justify-center ml-4">
-                <p className="text-lg">
-                  {imageData.image_author.individual_name}
-                </p>
+                <p className="text-lg">{imageData.image_author}</p>
               </div>
             </div>
             <p className="font-K2D text-base">{imageData.image_description}</p>

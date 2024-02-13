@@ -2553,12 +2553,18 @@ export namespace Prisma {
     entities_images: number
     entities_sheets: number
     entities_videos: number
+    images: number
+    sheets: number
+    videos: number
   }
 
   export type EntitiesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entities_images?: boolean | EntitiesCountOutputTypeCountEntities_imagesArgs
     entities_sheets?: boolean | EntitiesCountOutputTypeCountEntities_sheetsArgs
     entities_videos?: boolean | EntitiesCountOutputTypeCountEntities_videosArgs
+    images?: boolean | EntitiesCountOutputTypeCountImagesArgs
+    sheets?: boolean | EntitiesCountOutputTypeCountSheetsArgs
+    videos?: boolean | EntitiesCountOutputTypeCountVideosArgs
   }
 
   // Custom InputTypes
@@ -2595,6 +2601,30 @@ export namespace Prisma {
    */
   export type EntitiesCountOutputTypeCountEntities_videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: entities_videosWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: imagesWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sheetsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videosWhereInput
   }
 
 
@@ -2750,10 +2780,7 @@ export namespace Prisma {
     entities: number
     entities_references: number
     groups_members: number
-    images: number
     organizations_members: number
-    sheets: number
-    videos: number
   }
 
   export type IndividualsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2761,10 +2788,7 @@ export namespace Prisma {
     entities?: boolean | IndividualsCountOutputTypeCountEntitiesArgs
     entities_references?: boolean | IndividualsCountOutputTypeCountEntities_referencesArgs
     groups_members?: boolean | IndividualsCountOutputTypeCountGroups_membersArgs
-    images?: boolean | IndividualsCountOutputTypeCountImagesArgs
     organizations_members?: boolean | IndividualsCountOutputTypeCountOrganizations_membersArgs
-    sheets?: boolean | IndividualsCountOutputTypeCountSheetsArgs
-    videos?: boolean | IndividualsCountOutputTypeCountVideosArgs
   }
 
   // Custom InputTypes
@@ -2815,32 +2839,8 @@ export namespace Prisma {
   /**
    * IndividualsCountOutputType without action
    */
-  export type IndividualsCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: imagesWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
   export type IndividualsCountOutputTypeCountOrganizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: organizations_membersWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: sheetsWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: videosWhereInput
   }
 
 
@@ -7307,6 +7307,9 @@ export namespace Prisma {
     entities_images?: boolean | entities$entities_imagesArgs<ExtArgs>
     entities_sheets?: boolean | entities$entities_sheetsArgs<ExtArgs>
     entities_videos?: boolean | entities$entities_videosArgs<ExtArgs>
+    images?: boolean | entities$imagesArgs<ExtArgs>
+    sheets?: boolean | entities$sheetsArgs<ExtArgs>
+    videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entities"]>
 
@@ -7324,6 +7327,9 @@ export namespace Prisma {
     entities_images?: boolean | entities$entities_imagesArgs<ExtArgs>
     entities_sheets?: boolean | entities$entities_sheetsArgs<ExtArgs>
     entities_videos?: boolean | entities$entities_videosArgs<ExtArgs>
+    images?: boolean | entities$imagesArgs<ExtArgs>
+    sheets?: boolean | entities$sheetsArgs<ExtArgs>
+    videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7337,6 +7343,9 @@ export namespace Prisma {
       entities_images: Prisma.$entities_imagesPayload<ExtArgs>[]
       entities_sheets: Prisma.$entities_sheetsPayload<ExtArgs>[]
       entities_videos: Prisma.$entities_videosPayload<ExtArgs>[]
+      images: Prisma.$imagesPayload<ExtArgs>[]
+      sheets: Prisma.$sheetsPayload<ExtArgs>[]
+      videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       entity_id: number
@@ -7719,6 +7728,12 @@ export namespace Prisma {
     entities_sheets<T extends entities$entities_sheetsArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_videos<T extends entities$entities_videosArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_videosPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    images<T extends entities$imagesArgs<ExtArgs> = {}>(args?: Subset<T, entities$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    sheets<T extends entities$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, entities$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    videos<T extends entities$videosArgs<ExtArgs> = {}>(args?: Subset<T, entities$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8171,6 +8186,69 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Entities_videosScalarFieldEnum | Entities_videosScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.images
+   */
+  export type entities$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the images
+     */
+    select?: imagesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: imagesInclude<ExtArgs> | null
+    where?: imagesWhereInput
+    orderBy?: imagesOrderByWithRelationInput | imagesOrderByWithRelationInput[]
+    cursor?: imagesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ImagesScalarFieldEnum | ImagesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.sheets
+   */
+  export type entities$sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets
+     */
+    select?: sheetsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheetsInclude<ExtArgs> | null
+    where?: sheetsWhereInput
+    orderBy?: sheetsOrderByWithRelationInput | sheetsOrderByWithRelationInput[]
+    cursor?: sheetsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SheetsScalarFieldEnum | SheetsScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.videos
+   */
+  export type entities$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videosInclude<ExtArgs> | null
+    where?: videosWhereInput
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    cursor?: videosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
   }
 
 
@@ -14370,7 +14448,7 @@ export namespace Prisma {
     image_data_id?: boolean
     collections_images?: boolean | images$collections_imagesArgs<ExtArgs>
     entities_images?: boolean | images$entities_imagesArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     images_data?: boolean | images_dataDefaultArgs<ExtArgs>
     _count?: boolean | ImagesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["images"]>
@@ -14387,7 +14465,7 @@ export namespace Prisma {
   export type imagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_images?: boolean | images$collections_imagesArgs<ExtArgs>
     entities_images?: boolean | images$entities_imagesArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     images_data?: boolean | images_dataDefaultArgs<ExtArgs>
     _count?: boolean | ImagesCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -14398,7 +14476,7 @@ export namespace Prisma {
     objects: {
       collections_images: Prisma.$collections_imagesPayload<ExtArgs>[]
       entities_images: Prisma.$entities_imagesPayload<ExtArgs>[]
-      individuals: Prisma.$individualsPayload<ExtArgs>
+      entities: Prisma.$entitiesPayload<ExtArgs>
       images_data: Prisma.$images_dataPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -14777,7 +14855,7 @@ export namespace Prisma {
 
     entities_images<T extends images$entities_imagesArgs<ExtArgs> = {}>(args?: Subset<T, images$entities_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     images_data<T extends images_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, images_dataDefaultArgs<ExtArgs>>): Prisma__images_dataClient<$Result.GetResult<Prisma.$images_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -16336,10 +16414,7 @@ export namespace Prisma {
     entities?: boolean | individuals$entitiesArgs<ExtArgs>
     entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
-    images?: boolean | individuals$imagesArgs<ExtArgs>
     organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
-    sheets?: boolean | individuals$sheetsArgs<ExtArgs>
-    videos?: boolean | individuals$videosArgs<ExtArgs>
     _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["individuals"]>
 
@@ -16357,10 +16432,7 @@ export namespace Prisma {
     entities?: boolean | individuals$entitiesArgs<ExtArgs>
     entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
-    images?: boolean | individuals$imagesArgs<ExtArgs>
     organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
-    sheets?: boolean | individuals$sheetsArgs<ExtArgs>
-    videos?: boolean | individuals$videosArgs<ExtArgs>
     _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -16372,10 +16444,7 @@ export namespace Prisma {
       entities: Prisma.$entitiesPayload<ExtArgs>[]
       entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
-      images: Prisma.$imagesPayload<ExtArgs>[]
       organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
-      sheets: Prisma.$sheetsPayload<ExtArgs>[]
-      videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       individual_id: number
@@ -16757,13 +16826,7 @@ export namespace Prisma {
 
     groups_members<T extends individuals$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    images<T extends individuals$imagesArgs<ExtArgs> = {}>(args?: Subset<T, individuals$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     organizations_members<T extends individuals$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    sheets<T extends individuals$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, individuals$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    videos<T extends individuals$videosArgs<ExtArgs> = {}>(args?: Subset<T, individuals$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17195,27 +17258,6 @@ export namespace Prisma {
 
 
   /**
-   * individuals.images
-   */
-  export type individuals$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the images
-     */
-    select?: imagesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: imagesInclude<ExtArgs> | null
-    where?: imagesWhereInput
-    orderBy?: imagesOrderByWithRelationInput | imagesOrderByWithRelationInput[]
-    cursor?: imagesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ImagesScalarFieldEnum | ImagesScalarFieldEnum[]
-  }
-
-
-  /**
    * individuals.organizations_members
    */
   export type individuals$organizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17233,48 +17275,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Organizations_membersScalarFieldEnum | Organizations_membersScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.sheets
-   */
-  export type individuals$sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the sheets
-     */
-    select?: sheetsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: sheetsInclude<ExtArgs> | null
-    where?: sheetsWhereInput
-    orderBy?: sheetsOrderByWithRelationInput | sheetsOrderByWithRelationInput[]
-    cursor?: sheetsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SheetsScalarFieldEnum | SheetsScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.videos
-   */
-  export type individuals$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the videos
-     */
-    select?: videosSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: videosInclude<ExtArgs> | null
-    where?: videosWhereInput
-    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
-    cursor?: videosWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
   }
 
 
@@ -19503,7 +19503,7 @@ export namespace Prisma {
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
     sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sheets"]>
 
@@ -19520,7 +19520,7 @@ export namespace Prisma {
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
     sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -19531,7 +19531,7 @@ export namespace Prisma {
       collections_sheets: Prisma.$collections_sheetsPayload<ExtArgs>[]
       entities_sheets: Prisma.$entities_sheetsPayload<ExtArgs>[]
       sheets_data: Prisma.$sheets_dataPayload<ExtArgs>
-      individuals: Prisma.$individualsPayload<ExtArgs>
+      entities: Prisma.$entitiesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       sheet_id: number
@@ -19911,7 +19911,7 @@ export namespace Prisma {
 
     sheets_data<T extends sheets_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sheets_dataDefaultArgs<ExtArgs>>): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -22400,7 +22400,7 @@ export namespace Prisma {
     video_data_id?: boolean
     collections_videos?: boolean | videos$collections_videosArgs<ExtArgs>
     entities_videos?: boolean | videos$entities_videosArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     videos_data?: boolean | videos_dataDefaultArgs<ExtArgs>
     _count?: boolean | VideosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videos"]>
@@ -22417,7 +22417,7 @@ export namespace Prisma {
   export type videosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_videos?: boolean | videos$collections_videosArgs<ExtArgs>
     entities_videos?: boolean | videos$entities_videosArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     videos_data?: boolean | videos_dataDefaultArgs<ExtArgs>
     _count?: boolean | VideosCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -22428,7 +22428,7 @@ export namespace Prisma {
     objects: {
       collections_videos: Prisma.$collections_videosPayload<ExtArgs>[]
       entities_videos: Prisma.$entities_videosPayload<ExtArgs>[]
-      individuals: Prisma.$individualsPayload<ExtArgs>
+      entities: Prisma.$entitiesPayload<ExtArgs>
       videos_data: Prisma.$videos_dataPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -22807,7 +22807,7 @@ export namespace Prisma {
 
     entities_videos<T extends videos$entities_videosArgs<ExtArgs> = {}>(args?: Subset<T, videos$entities_videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     videos_data<T extends videos_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videos_dataDefaultArgs<ExtArgs>>): Prisma__videos_dataClient<$Result.GetResult<Prisma.$videos_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -24748,6 +24748,9 @@ export namespace Prisma {
     entities_images?: Entities_imagesListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
+    images?: ImagesListRelationFilter
+    sheets?: SheetsListRelationFilter
+    videos?: VideosListRelationFilter
   }
 
   export type entitiesOrderByWithRelationInput = {
@@ -24761,6 +24764,9 @@ export namespace Prisma {
     entities_images?: entities_imagesOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
     entities_videos?: entities_videosOrderByRelationAggregateInput
+    images?: imagesOrderByRelationAggregateInput
+    sheets?: sheetsOrderByRelationAggregateInput
+    videos?: videosOrderByRelationAggregateInput
   }
 
   export type entitiesWhereUniqueInput = Prisma.AtLeast<{
@@ -24777,6 +24783,9 @@ export namespace Prisma {
     entities_images?: Entities_imagesListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
+    images?: ImagesListRelationFilter
+    sheets?: SheetsListRelationFilter
+    videos?: VideosListRelationFilter
   }, "entity_id" | "entity_id">
 
   export type entitiesOrderByWithAggregationInput = {
@@ -25198,7 +25207,7 @@ export namespace Prisma {
     image_data_id?: IntFilter<"images"> | number
     collections_images?: Collections_imagesListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     images_data?: XOR<Images_dataRelationFilter, images_dataWhereInput>
   }
 
@@ -25211,7 +25220,7 @@ export namespace Prisma {
     image_data_id?: SortOrder
     collections_images?: collections_imagesOrderByRelationAggregateInput
     entities_images?: entities_imagesOrderByRelationAggregateInput
-    individuals?: individualsOrderByWithRelationInput
+    entities?: entitiesOrderByWithRelationInput
     images_data?: images_dataOrderByWithRelationInput
   }
 
@@ -25227,7 +25236,7 @@ export namespace Prisma {
     image_data_id?: IntFilter<"images"> | number
     collections_images?: Collections_imagesListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     images_data?: XOR<Images_dataRelationFilter, images_dataWhereInput>
   }, "image_id" | "image_id">
 
@@ -25313,10 +25322,7 @@ export namespace Prisma {
     entities?: EntitiesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
-    images?: ImagesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
-    sheets?: SheetsListRelationFilter
-    videos?: VideosListRelationFilter
   }
 
   export type individualsOrderByWithRelationInput = {
@@ -25330,10 +25336,7 @@ export namespace Prisma {
     entities?: entitiesOrderByRelationAggregateInput
     entities_references?: entities_referencesOrderByRelationAggregateInput
     groups_members?: groups_membersOrderByRelationAggregateInput
-    images?: imagesOrderByRelationAggregateInput
     organizations_members?: organizations_membersOrderByRelationAggregateInput
-    sheets?: sheetsOrderByRelationAggregateInput
-    videos?: videosOrderByRelationAggregateInput
   }
 
   export type individualsWhereUniqueInput = Prisma.AtLeast<{
@@ -25350,10 +25353,7 @@ export namespace Prisma {
     entities?: EntitiesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
-    images?: ImagesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
-    sheets?: SheetsListRelationFilter
-    videos?: VideosListRelationFilter
   }, "individual_id" | "individual_id" | "individual_userName">
 
   export type individualsOrderByWithAggregationInput = {
@@ -25512,7 +25512,7 @@ export namespace Prisma {
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
   }
 
   export type sheetsOrderByWithRelationInput = {
@@ -25525,7 +25525,7 @@ export namespace Prisma {
     collections_sheets?: collections_sheetsOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
     sheets_data?: sheets_dataOrderByWithRelationInput
-    individuals?: individualsOrderByWithRelationInput
+    entities?: entitiesOrderByWithRelationInput
   }
 
   export type sheetsWhereUniqueInput = Prisma.AtLeast<{
@@ -25541,7 +25541,7 @@ export namespace Prisma {
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
   }, "sheet_id" | "sheet_id">
 
   export type sheetsOrderByWithAggregationInput = {
@@ -25688,7 +25688,7 @@ export namespace Prisma {
     video_data_id?: IntFilter<"videos"> | number
     collections_videos?: Collections_videosListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
   }
 
@@ -25701,7 +25701,7 @@ export namespace Prisma {
     video_data_id?: SortOrder
     collections_videos?: collections_videosOrderByRelationAggregateInput
     entities_videos?: entities_videosOrderByRelationAggregateInput
-    individuals?: individualsOrderByWithRelationInput
+    entities?: entitiesOrderByWithRelationInput
     videos_data?: videos_dataOrderByWithRelationInput
   }
 
@@ -25717,7 +25717,7 @@ export namespace Prisma {
     video_data_id?: IntFilter<"videos"> | number
     collections_videos?: Collections_videosListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
   }, "video_id" | "video_id">
 
@@ -26032,6 +26032,9 @@ export namespace Prisma {
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateInput = {
@@ -26042,6 +26045,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUpdateInput = {
@@ -26051,6 +26057,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateInput = {
@@ -26061,6 +26070,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesCreateManyInput = {
@@ -26435,7 +26447,7 @@ export namespace Prisma {
     image_filename: string
     collections_images?: collections_imagesCreateNestedManyWithoutImagesInput
     entities_images?: entities_imagesCreateNestedManyWithoutImagesInput
-    individuals: individualsCreateNestedOneWithoutImagesInput
+    entities: entitiesCreateNestedOneWithoutImagesInput
     images_data: images_dataCreateNestedOneWithoutImagesInput
   }
 
@@ -26456,7 +26468,7 @@ export namespace Prisma {
     image_filename?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUpdateManyWithoutImagesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutImagesNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutImagesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
     images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
   }
 
@@ -26541,10 +26553,7 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateInput = {
@@ -26558,10 +26567,7 @@ export namespace Prisma {
     entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUpdateInput = {
@@ -26574,10 +26580,7 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateInput = {
@@ -26591,10 +26594,7 @@ export namespace Prisma {
     entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsCreateManyInput = {
@@ -26740,7 +26740,7 @@ export namespace Prisma {
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
-    individuals: individualsCreateNestedOneWithoutSheetsInput
+    entities: entitiesCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateInput = {
@@ -26761,7 +26761,7 @@ export namespace Prisma {
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateInput = {
@@ -26908,7 +26908,7 @@ export namespace Prisma {
     video_filename: string
     collections_videos?: collections_videosCreateNestedManyWithoutVideosInput
     entities_videos?: entities_videosCreateNestedManyWithoutVideosInput
-    individuals: individualsCreateNestedOneWithoutVideosInput
+    entities: entitiesCreateNestedOneWithoutVideosInput
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
   }
 
@@ -26929,7 +26929,7 @@ export namespace Prisma {
     video_filename?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUpdateManyWithoutVideosNestedInput
     entities_videos?: entities_videosUpdateManyWithoutVideosNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutVideosNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
   }
 
@@ -27395,6 +27395,24 @@ export namespace Prisma {
     none?: entities_videosWhereInput
   }
 
+  export type ImagesListRelationFilter = {
+    every?: imagesWhereInput
+    some?: imagesWhereInput
+    none?: imagesWhereInput
+  }
+
+  export type SheetsListRelationFilter = {
+    every?: sheetsWhereInput
+    some?: sheetsWhereInput
+    none?: sheetsWhereInput
+  }
+
+  export type VideosListRelationFilter = {
+    every?: videosWhereInput
+    some?: videosWhereInput
+    none?: videosWhereInput
+  }
+
   export type entities_imagesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -27404,6 +27422,18 @@ export namespace Prisma {
   }
 
   export type entities_videosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type imagesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type sheetsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type videosOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27805,16 +27835,6 @@ export namespace Prisma {
     not?: NestedBytesFilter<$PrismaModel> | Buffer
   }
 
-  export type ImagesListRelationFilter = {
-    every?: imagesWhereInput
-    some?: imagesWhereInput
-    none?: imagesWhereInput
-  }
-
-  export type imagesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type images_dataCountOrderByAggregateInput = {
     image_data_id?: SortOrder
     image_data?: SortOrder
@@ -27854,27 +27874,7 @@ export namespace Prisma {
     none?: organizations_membersWhereInput
   }
 
-  export type SheetsListRelationFilter = {
-    every?: sheetsWhereInput
-    some?: sheetsWhereInput
-    none?: sheetsWhereInput
-  }
-
-  export type VideosListRelationFilter = {
-    every?: videosWhereInput
-    some?: videosWhereInput
-    none?: videosWhereInput
-  }
-
   export type organizations_membersOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type sheetsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type videosOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28484,6 +28484,27 @@ export namespace Prisma {
     connect?: entities_videosWhereUniqueInput | entities_videosWhereUniqueInput[]
   }
 
+  export type imagesCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: imagesCreateManyEntitiesInputEnvelope
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type sheetsCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput> | sheetsCreateWithoutEntitiesInput[] | sheetsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutEntitiesInput | sheetsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: sheetsCreateManyEntitiesInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type videosCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
+    createMany?: videosCreateManyEntitiesInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
   export type entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<entities_imagesCreateWithoutEntitiesInput, entities_imagesUncheckedCreateWithoutEntitiesInput> | entities_imagesCreateWithoutEntitiesInput[] | entities_imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: entities_imagesCreateOrConnectWithoutEntitiesInput | entities_imagesCreateOrConnectWithoutEntitiesInput[]
@@ -28503,6 +28524,27 @@ export namespace Prisma {
     connectOrCreate?: entities_videosCreateOrConnectWithoutEntitiesInput | entities_videosCreateOrConnectWithoutEntitiesInput[]
     createMany?: entities_videosCreateManyEntitiesInputEnvelope
     connect?: entities_videosWhereUniqueInput | entities_videosWhereUniqueInput[]
+  }
+
+  export type imagesUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: imagesCreateManyEntitiesInputEnvelope
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type sheetsUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput> | sheetsCreateWithoutEntitiesInput[] | sheetsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutEntitiesInput | sheetsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: sheetsCreateManyEntitiesInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type videosUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
+    createMany?: videosCreateManyEntitiesInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
   }
 
   export type groupsUpdateOneWithoutEntitiesNestedInput = {
@@ -28577,6 +28619,48 @@ export namespace Prisma {
     deleteMany?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
   }
 
+  export type imagesUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: imagesUpsertWithWhereUniqueWithoutEntitiesInput | imagesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: imagesCreateManyEntitiesInputEnvelope
+    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    update?: imagesUpdateWithWhereUniqueWithoutEntitiesInput | imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: imagesUpdateManyWithWhereWithoutEntitiesInput | imagesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type sheetsUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput> | sheetsCreateWithoutEntitiesInput[] | sheetsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutEntitiesInput | sheetsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutEntitiesInput | sheetsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: sheetsCreateManyEntitiesInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutEntitiesInput | sheetsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutEntitiesInput | sheetsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type videosUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutEntitiesInput | videosUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: videosCreateManyEntitiesInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutEntitiesInput | videosUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutEntitiesInput | videosUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
   export type entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<entities_imagesCreateWithoutEntitiesInput, entities_imagesUncheckedCreateWithoutEntitiesInput> | entities_imagesCreateWithoutEntitiesInput[] | entities_imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: entities_imagesCreateOrConnectWithoutEntitiesInput | entities_imagesCreateOrConnectWithoutEntitiesInput[]
@@ -28617,6 +28701,48 @@ export namespace Prisma {
     update?: entities_videosUpdateWithWhereUniqueWithoutEntitiesInput | entities_videosUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: entities_videosUpdateManyWithWhereWithoutEntitiesInput | entities_videosUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
+  }
+
+  export type imagesUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: imagesUpsertWithWhereUniqueWithoutEntitiesInput | imagesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: imagesCreateManyEntitiesInputEnvelope
+    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    update?: imagesUpdateWithWhereUniqueWithoutEntitiesInput | imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: imagesUpdateManyWithWhereWithoutEntitiesInput | imagesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput> | sheetsCreateWithoutEntitiesInput[] | sheetsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutEntitiesInput | sheetsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutEntitiesInput | sheetsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: sheetsCreateManyEntitiesInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutEntitiesInput | sheetsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutEntitiesInput | sheetsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type videosUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutEntitiesInput | videosUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: videosCreateManyEntitiesInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutEntitiesInput | videosUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutEntitiesInput | videosUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
   export type entitiesCreateNestedOneWithoutEntities_imagesInput = {
@@ -28965,10 +29091,10 @@ export namespace Prisma {
     connect?: entities_imagesWhereUniqueInput | entities_imagesWhereUniqueInput[]
   }
 
-  export type individualsCreateNestedOneWithoutImagesInput = {
-    create?: XOR<individualsCreateWithoutImagesInput, individualsUncheckedCreateWithoutImagesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutImagesInput
-    connect?: individualsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutImagesInput = {
+    create?: XOR<entitiesCreateWithoutImagesInput, entitiesUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutImagesInput
+    connect?: entitiesWhereUniqueInput
   }
 
   export type images_dataCreateNestedOneWithoutImagesInput = {
@@ -29019,12 +29145,12 @@ export namespace Prisma {
     deleteMany?: entities_imagesScalarWhereInput | entities_imagesScalarWhereInput[]
   }
 
-  export type individualsUpdateOneRequiredWithoutImagesNestedInput = {
-    create?: XOR<individualsCreateWithoutImagesInput, individualsUncheckedCreateWithoutImagesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutImagesInput
-    upsert?: individualsUpsertWithoutImagesInput
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutImagesInput, individualsUpdateWithoutImagesInput>, individualsUncheckedUpdateWithoutImagesInput>
+  export type entitiesUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<entitiesCreateWithoutImagesInput, entitiesUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutImagesInput
+    upsert?: entitiesUpsertWithoutImagesInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutImagesInput, entitiesUpdateWithoutImagesInput>, entitiesUncheckedUpdateWithoutImagesInput>
   }
 
   export type images_dataUpdateOneRequiredWithoutImagesNestedInput = {
@@ -29137,32 +29263,11 @@ export namespace Prisma {
     connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
   }
 
-  export type imagesCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput> | imagesCreateWithoutIndividualsInput[] | imagesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: imagesCreateOrConnectWithoutIndividualsInput | imagesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: imagesCreateManyIndividualsInputEnvelope
-    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-  }
-
   export type organizations_membersCreateNestedManyWithoutIndividualsInput = {
     create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
     createMany?: organizations_membersCreateManyIndividualsInputEnvelope
     connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-  }
-
-  export type sheetsCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput> | sheetsCreateWithoutIndividualsInput[] | sheetsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: sheetsCreateOrConnectWithoutIndividualsInput | sheetsCreateOrConnectWithoutIndividualsInput[]
-    createMany?: sheetsCreateManyIndividualsInputEnvelope
-    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-  }
-
-  export type videosCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput> | videosCreateWithoutIndividualsInput[] | videosUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: videosCreateOrConnectWithoutIndividualsInput | videosCreateOrConnectWithoutIndividualsInput[]
-    createMany?: videosCreateManyIndividualsInputEnvelope
-    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
   }
 
   export type collectionsUncheckedCreateNestedManyWithoutIndividualsInput = {
@@ -29193,32 +29298,11 @@ export namespace Prisma {
     connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
   }
 
-  export type imagesUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput> | imagesCreateWithoutIndividualsInput[] | imagesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: imagesCreateOrConnectWithoutIndividualsInput | imagesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: imagesCreateManyIndividualsInputEnvelope
-    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-  }
-
   export type organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput = {
     create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
     createMany?: organizations_membersCreateManyIndividualsInputEnvelope
     connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-  }
-
-  export type sheetsUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput> | sheetsCreateWithoutIndividualsInput[] | sheetsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: sheetsCreateOrConnectWithoutIndividualsInput | sheetsCreateOrConnectWithoutIndividualsInput[]
-    createMany?: sheetsCreateManyIndividualsInputEnvelope
-    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-  }
-
-  export type videosUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput> | videosCreateWithoutIndividualsInput[] | videosUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: videosCreateOrConnectWithoutIndividualsInput | videosCreateOrConnectWithoutIndividualsInput[]
-    createMany?: videosCreateManyIndividualsInputEnvelope
-    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
   }
 
   export type collectionsUpdateManyWithoutIndividualsNestedInput = {
@@ -29277,20 +29361,6 @@ export namespace Prisma {
     deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
   }
 
-  export type imagesUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput> | imagesCreateWithoutIndividualsInput[] | imagesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: imagesCreateOrConnectWithoutIndividualsInput | imagesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: imagesUpsertWithWhereUniqueWithoutIndividualsInput | imagesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: imagesCreateManyIndividualsInputEnvelope
-    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    update?: imagesUpdateWithWhereUniqueWithoutIndividualsInput | imagesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: imagesUpdateManyWithWhereWithoutIndividualsInput | imagesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
-  }
-
   export type organizations_membersUpdateManyWithoutIndividualsNestedInput = {
     create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
@@ -29303,34 +29373,6 @@ export namespace Prisma {
     update?: organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput | organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
     updateMany?: organizations_membersUpdateManyWithWhereWithoutIndividualsInput | organizations_membersUpdateManyWithWhereWithoutIndividualsInput[]
     deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-  }
-
-  export type sheetsUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput> | sheetsCreateWithoutIndividualsInput[] | sheetsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: sheetsCreateOrConnectWithoutIndividualsInput | sheetsCreateOrConnectWithoutIndividualsInput[]
-    upsert?: sheetsUpsertWithWhereUniqueWithoutIndividualsInput | sheetsUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: sheetsCreateManyIndividualsInputEnvelope
-    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    update?: sheetsUpdateWithWhereUniqueWithoutIndividualsInput | sheetsUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: sheetsUpdateManyWithWhereWithoutIndividualsInput | sheetsUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
-  }
-
-  export type videosUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput> | videosCreateWithoutIndividualsInput[] | videosUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: videosCreateOrConnectWithoutIndividualsInput | videosCreateOrConnectWithoutIndividualsInput[]
-    upsert?: videosUpsertWithWhereUniqueWithoutIndividualsInput | videosUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: videosCreateManyIndividualsInputEnvelope
-    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    update?: videosUpdateWithWhereUniqueWithoutIndividualsInput | videosUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: videosUpdateManyWithWhereWithoutIndividualsInput | videosUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
   export type collectionsUncheckedUpdateManyWithoutIndividualsNestedInput = {
@@ -29389,20 +29431,6 @@ export namespace Prisma {
     deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
   }
 
-  export type imagesUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput> | imagesCreateWithoutIndividualsInput[] | imagesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: imagesCreateOrConnectWithoutIndividualsInput | imagesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: imagesUpsertWithWhereUniqueWithoutIndividualsInput | imagesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: imagesCreateManyIndividualsInputEnvelope
-    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
-    update?: imagesUpdateWithWhereUniqueWithoutIndividualsInput | imagesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: imagesUpdateManyWithWhereWithoutIndividualsInput | imagesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
-  }
-
   export type organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput = {
     create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
@@ -29415,34 +29443,6 @@ export namespace Prisma {
     update?: organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput | organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
     updateMany?: organizations_membersUpdateManyWithWhereWithoutIndividualsInput | organizations_membersUpdateManyWithWhereWithoutIndividualsInput[]
     deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-  }
-
-  export type sheetsUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput> | sheetsCreateWithoutIndividualsInput[] | sheetsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: sheetsCreateOrConnectWithoutIndividualsInput | sheetsCreateOrConnectWithoutIndividualsInput[]
-    upsert?: sheetsUpsertWithWhereUniqueWithoutIndividualsInput | sheetsUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: sheetsCreateManyIndividualsInputEnvelope
-    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
-    update?: sheetsUpdateWithWhereUniqueWithoutIndividualsInput | sheetsUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: sheetsUpdateManyWithWhereWithoutIndividualsInput | sheetsUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
-  }
-
-  export type videosUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput> | videosCreateWithoutIndividualsInput[] | videosUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: videosCreateOrConnectWithoutIndividualsInput | videosCreateOrConnectWithoutIndividualsInput[]
-    upsert?: videosUpsertWithWhereUniqueWithoutIndividualsInput | videosUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: videosCreateManyIndividualsInputEnvelope
-    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
-    update?: videosUpdateWithWhereUniqueWithoutIndividualsInput | videosUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: videosUpdateManyWithWhereWithoutIndividualsInput | videosUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
   export type collectionsCreateNestedManyWithoutOrganizationsInput = {
@@ -29661,10 +29661,10 @@ export namespace Prisma {
     connect?: sheets_dataWhereUniqueInput
   }
 
-  export type individualsCreateNestedOneWithoutSheetsInput = {
-    create?: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutSheetsInput
-    connect?: individualsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutSheetsInput = {
+    create?: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutSheetsInput
+    connect?: entitiesWhereUniqueInput
   }
 
   export type collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput = {
@@ -29717,12 +29717,12 @@ export namespace Prisma {
     update?: XOR<XOR<sheets_dataUpdateToOneWithWhereWithoutSheetsInput, sheets_dataUpdateWithoutSheetsInput>, sheets_dataUncheckedUpdateWithoutSheetsInput>
   }
 
-  export type individualsUpdateOneRequiredWithoutSheetsNestedInput = {
-    create?: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutSheetsInput
-    upsert?: individualsUpsertWithoutSheetsInput
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutSheetsInput, individualsUpdateWithoutSheetsInput>, individualsUncheckedUpdateWithoutSheetsInput>
+  export type entitiesUpdateOneRequiredWithoutSheetsNestedInput = {
+    create?: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutSheetsInput
+    upsert?: entitiesUpsertWithoutSheetsInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutSheetsInput, entitiesUpdateWithoutSheetsInput>, entitiesUncheckedUpdateWithoutSheetsInput>
   }
 
   export type collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput = {
@@ -29809,10 +29809,10 @@ export namespace Prisma {
     connect?: entities_videosWhereUniqueInput | entities_videosWhereUniqueInput[]
   }
 
-  export type individualsCreateNestedOneWithoutVideosInput = {
-    create?: XOR<individualsCreateWithoutVideosInput, individualsUncheckedCreateWithoutVideosInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutVideosInput
-    connect?: individualsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutVideosInput = {
+    create?: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutVideosInput
+    connect?: entitiesWhereUniqueInput
   }
 
   export type videos_dataCreateNestedOneWithoutVideosInput = {
@@ -29863,12 +29863,12 @@ export namespace Prisma {
     deleteMany?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
   }
 
-  export type individualsUpdateOneRequiredWithoutVideosNestedInput = {
-    create?: XOR<individualsCreateWithoutVideosInput, individualsUncheckedCreateWithoutVideosInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutVideosInput
-    upsert?: individualsUpsertWithoutVideosInput
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutVideosInput, individualsUpdateWithoutVideosInput>, individualsUncheckedUpdateWithoutVideosInput>
+  export type entitiesUpdateOneRequiredWithoutVideosNestedInput = {
+    create?: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutVideosInput
+    upsert?: entitiesUpsertWithoutVideosInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutVideosInput, entitiesUpdateWithoutVideosInput>, entitiesUncheckedUpdateWithoutVideosInput>
   }
 
   export type videos_dataUpdateOneRequiredWithoutVideosNestedInput = {
@@ -30176,10 +30176,7 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutCollectionsInput = {
@@ -30192,10 +30189,7 @@ export namespace Prisma {
     entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutCollectionsInput = {
@@ -30354,10 +30348,7 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutCollectionsInput = {
@@ -30370,10 +30361,7 @@ export namespace Prisma {
     entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type organizationsUpsertWithoutCollectionsInput = {
@@ -30557,7 +30545,7 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     entities_images?: entities_imagesCreateNestedManyWithoutImagesInput
-    individuals: individualsCreateNestedOneWithoutImagesInput
+    entities: entitiesCreateNestedOneWithoutImagesInput
     images_data: images_dataCreateNestedOneWithoutImagesInput
   }
 
@@ -30622,7 +30610,7 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     entities_images?: entities_imagesUpdateManyWithoutImagesNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutImagesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
     images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
   }
 
@@ -30666,7 +30654,7 @@ export namespace Prisma {
     sheet_filename: string
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
-    individuals: individualsCreateNestedOneWithoutSheetsInput
+    entities: entitiesCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutCollections_sheetsInput = {
@@ -30731,7 +30719,7 @@ export namespace Prisma {
     sheet_filename?: StringFieldUpdateOperationsInput | string
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutCollections_sheetsInput = {
@@ -30773,7 +30761,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     entities_videos?: entities_videosCreateNestedManyWithoutVideosInput
-    individuals: individualsCreateNestedOneWithoutVideosInput
+    entities: entitiesCreateNestedOneWithoutVideosInput
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
   }
 
@@ -30838,7 +30826,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     entities_videos?: entities_videosUpdateManyWithoutVideosNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutVideosNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
   }
 
@@ -30889,10 +30877,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutEntitiesInput = {
@@ -30905,10 +30890,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutEntitiesInput = {
@@ -31019,6 +31001,93 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type imagesCreateWithoutEntitiesInput = {
+    image_title: string
+    image_description: string
+    image_filename: string
+    collections_images?: collections_imagesCreateNestedManyWithoutImagesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutImagesInput
+    images_data: images_dataCreateNestedOneWithoutImagesInput
+  }
+
+  export type imagesUncheckedCreateWithoutEntitiesInput = {
+    image_id?: number
+    image_title: string
+    image_description: string
+    image_filename: string
+    image_data_id: number
+    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutImagesInput
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutImagesInput
+  }
+
+  export type imagesCreateOrConnectWithoutEntitiesInput = {
+    where: imagesWhereUniqueInput
+    create: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type imagesCreateManyEntitiesInputEnvelope = {
+    data: imagesCreateManyEntitiesInput | imagesCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type sheetsCreateWithoutEntitiesInput = {
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
+  }
+
+  export type sheetsUncheckedCreateWithoutEntitiesInput = {
+    sheet_id?: number
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    sheet_data_id: number
+    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
+  }
+
+  export type sheetsCreateOrConnectWithoutEntitiesInput = {
+    where: sheetsWhereUniqueInput
+    create: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type sheetsCreateManyEntitiesInputEnvelope = {
+    data: sheetsCreateManyEntitiesInput | sheetsCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type videosCreateWithoutEntitiesInput = {
+    video_title: string
+    video_description: string
+    video_filename: string
+    collections_videos?: collections_videosCreateNestedManyWithoutVideosInput
+    entities_videos?: entities_videosCreateNestedManyWithoutVideosInput
+    videos_data: videos_dataCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutEntitiesInput = {
+    video_id?: number
+    video_title: string
+    video_description: string
+    video_filename: string
+    video_data_id: number
+    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutVideosInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutVideosInput
+  }
+
+  export type videosCreateOrConnectWithoutEntitiesInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type videosCreateManyEntitiesInputEnvelope = {
+    data: videosCreateManyEntitiesInput | videosCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type groupsUpsertWithoutEntitiesInput = {
     update: XOR<groupsUpdateWithoutEntitiesInput, groupsUncheckedUpdateWithoutEntitiesInput>
     create: XOR<groupsCreateWithoutEntitiesInput, groupsUncheckedCreateWithoutEntitiesInput>
@@ -31073,10 +31142,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutEntitiesInput = {
@@ -31089,10 +31155,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type organizationsUpsertWithoutEntitiesInput = {
@@ -31213,12 +31276,99 @@ export namespace Prisma {
     date_pinned?: DateTimeNullableFilter<"entities_videos"> | Date | string | null
   }
 
+  export type imagesUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: imagesWhereUniqueInput
+    update: XOR<imagesUpdateWithoutEntitiesInput, imagesUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type imagesUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: imagesWhereUniqueInput
+    data: XOR<imagesUpdateWithoutEntitiesInput, imagesUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type imagesUpdateManyWithWhereWithoutEntitiesInput = {
+    where: imagesScalarWhereInput
+    data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type imagesScalarWhereInput = {
+    AND?: imagesScalarWhereInput | imagesScalarWhereInput[]
+    OR?: imagesScalarWhereInput[]
+    NOT?: imagesScalarWhereInput | imagesScalarWhereInput[]
+    image_id?: IntFilter<"images"> | number
+    image_creator_id?: IntFilter<"images"> | number
+    image_title?: StringFilter<"images"> | string
+    image_description?: StringFilter<"images"> | string
+    image_filename?: StringFilter<"images"> | string
+    image_data_id?: IntFilter<"images"> | number
+  }
+
+  export type sheetsUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: sheetsWhereUniqueInput
+    update: XOR<sheetsUpdateWithoutEntitiesInput, sheetsUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<sheetsCreateWithoutEntitiesInput, sheetsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type sheetsUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: sheetsWhereUniqueInput
+    data: XOR<sheetsUpdateWithoutEntitiesInput, sheetsUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type sheetsUpdateManyWithWhereWithoutEntitiesInput = {
+    where: sheetsScalarWhereInput
+    data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type sheetsScalarWhereInput = {
+    AND?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+    OR?: sheetsScalarWhereInput[]
+    NOT?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+    sheet_id?: IntFilter<"sheets"> | number
+    sheet_author_id?: IntFilter<"sheets"> | number
+    sheet_title?: StringFilter<"sheets"> | string
+    sheet_subject?: StringFilter<"sheets"> | string
+    sheet_filename?: StringFilter<"sheets"> | string
+    sheet_data_id?: IntFilter<"sheets"> | number
+  }
+
+  export type videosUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: videosWhereUniqueInput
+    update: XOR<videosUpdateWithoutEntitiesInput, videosUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type videosUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: videosWhereUniqueInput
+    data: XOR<videosUpdateWithoutEntitiesInput, videosUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type videosUpdateManyWithWhereWithoutEntitiesInput = {
+    where: videosScalarWhereInput
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type videosScalarWhereInput = {
+    AND?: videosScalarWhereInput | videosScalarWhereInput[]
+    OR?: videosScalarWhereInput[]
+    NOT?: videosScalarWhereInput | videosScalarWhereInput[]
+    video_id?: IntFilter<"videos"> | number
+    video_creator_id?: IntFilter<"videos"> | number
+    video_title?: StringFilter<"videos"> | string
+    video_description?: StringFilter<"videos"> | string
+    video_filename?: StringFilter<"videos"> | string
+    video_data_id?: IntFilter<"videos"> | number
+  }
+
   export type entitiesCreateWithoutEntities_imagesInput = {
     groups?: groupsCreateNestedOneWithoutEntitiesInput
     individuals?: individualsCreateNestedOneWithoutEntitiesInput
     organizations?: organizationsCreateNestedOneWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_imagesInput = {
@@ -31228,6 +31378,9 @@ export namespace Prisma {
     organization_id?: number | null
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutEntities_imagesInput = {
@@ -31240,7 +31393,7 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     collections_images?: collections_imagesCreateNestedManyWithoutImagesInput
-    individuals: individualsCreateNestedOneWithoutImagesInput
+    entities: entitiesCreateNestedOneWithoutImagesInput
     images_data: images_dataCreateNestedOneWithoutImagesInput
   }
 
@@ -31276,6 +31429,9 @@ export namespace Prisma {
     organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_imagesInput = {
@@ -31285,6 +31441,9 @@ export namespace Prisma {
     organization_id?: NullableIntFieldUpdateOperationsInput | number | null
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type imagesUpsertWithoutEntities_imagesInput = {
@@ -31303,7 +31462,7 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUpdateManyWithoutImagesNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutImagesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
     images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
   }
 
@@ -31354,10 +31513,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutEntities_referencesInput = {
@@ -31370,10 +31526,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
     entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutEntities_referencesInput = {
@@ -31463,10 +31616,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutEntities_referencesInput = {
@@ -31479,10 +31629,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type organizationsUpsertWithoutEntities_referencesInput = {
@@ -31525,6 +31672,9 @@ export namespace Prisma {
     organizations?: organizationsCreateNestedOneWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_sheetsInput = {
@@ -31534,6 +31684,9 @@ export namespace Prisma {
     organization_id?: number | null
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutEntities_sheetsInput = {
@@ -31547,7 +31700,7 @@ export namespace Prisma {
     sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
-    individuals: individualsCreateNestedOneWithoutSheetsInput
+    entities: entitiesCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutEntities_sheetsInput = {
@@ -31582,6 +31735,9 @@ export namespace Prisma {
     organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_sheetsInput = {
@@ -31591,6 +31747,9 @@ export namespace Prisma {
     organization_id?: NullableIntFieldUpdateOperationsInput | number | null
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type sheetsUpsertWithoutEntities_sheetsInput = {
@@ -31610,7 +31769,7 @@ export namespace Prisma {
     sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutEntities_sheetsInput = {
@@ -31629,6 +31788,9 @@ export namespace Prisma {
     organizations?: organizationsCreateNestedOneWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_videosInput = {
@@ -31638,6 +31800,9 @@ export namespace Prisma {
     organization_id?: number | null
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutEntities_videosInput = {
@@ -31650,7 +31815,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     collections_videos?: collections_videosCreateNestedManyWithoutVideosInput
-    individuals: individualsCreateNestedOneWithoutVideosInput
+    entities: entitiesCreateNestedOneWithoutVideosInput
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
   }
 
@@ -31686,6 +31851,9 @@ export namespace Prisma {
     organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_videosInput = {
@@ -31695,6 +31863,9 @@ export namespace Prisma {
     organization_id?: NullableIntFieldUpdateOperationsInput | number | null
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type videosUpsertWithoutEntities_videosInput = {
@@ -31713,7 +31884,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUpdateManyWithoutVideosNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutVideosNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
   }
 
@@ -31762,6 +31933,9 @@ export namespace Prisma {
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutGroupsInput = {
@@ -31771,6 +31945,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutGroupsInput = {
@@ -31971,10 +32148,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutGroups_membersInput = {
@@ -31987,10 +32161,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
     entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutGroups_membersInput = {
@@ -32052,10 +32223,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutGroups_membersInput = {
@@ -32068,10 +32236,7 @@ export namespace Prisma {
     collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type collections_imagesCreateWithoutImagesInput = {
@@ -32124,40 +32289,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type individualsCreateWithoutImagesInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
+  export type entitiesCreateWithoutImagesInput = {
+    groups?: groupsCreateNestedOneWithoutEntitiesInput
+    individuals?: individualsCreateNestedOneWithoutEntitiesInput
+    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsUncheckedCreateWithoutImagesInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUncheckedCreateWithoutImagesInput = {
+    entity_id?: number
+    individual_id?: number | null
+    group_id?: number | null
+    organization_id?: number | null
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsCreateOrConnectWithoutImagesInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutImagesInput, individualsUncheckedCreateWithoutImagesInput>
+  export type entitiesCreateOrConnectWithoutImagesInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutImagesInput, entitiesUncheckedCreateWithoutImagesInput>
   }
 
   export type images_dataCreateWithoutImagesInput = {
@@ -32206,46 +32363,38 @@ export namespace Prisma {
     data: XOR<entities_imagesUpdateManyMutationInput, entities_imagesUncheckedUpdateManyWithoutImagesInput>
   }
 
-  export type individualsUpsertWithoutImagesInput = {
-    update: XOR<individualsUpdateWithoutImagesInput, individualsUncheckedUpdateWithoutImagesInput>
-    create: XOR<individualsCreateWithoutImagesInput, individualsUncheckedCreateWithoutImagesInput>
-    where?: individualsWhereInput
+  export type entitiesUpsertWithoutImagesInput = {
+    update: XOR<entitiesUpdateWithoutImagesInput, entitiesUncheckedUpdateWithoutImagesInput>
+    create: XOR<entitiesCreateWithoutImagesInput, entitiesUncheckedCreateWithoutImagesInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUpdateToOneWithWhereWithoutImagesInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutImagesInput, individualsUncheckedUpdateWithoutImagesInput>
+  export type entitiesUpdateToOneWithWhereWithoutImagesInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutImagesInput, entitiesUncheckedUpdateWithoutImagesInput>
   }
 
-  export type individualsUpdateWithoutImagesInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUpdateWithoutImagesInput = {
+    groups?: groupsUpdateOneWithoutEntitiesNestedInput
+    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
+    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type individualsUncheckedUpdateWithoutImagesInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUncheckedUpdateWithoutImagesInput = {
+    entity_id?: IntFieldUpdateOperationsInput | number
+    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
+    group_id?: NullableIntFieldUpdateOperationsInput | number | null
+    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type images_dataUpsertWithoutImagesInput = {
@@ -32274,7 +32423,7 @@ export namespace Prisma {
     image_filename: string
     collections_images?: collections_imagesCreateNestedManyWithoutImagesInput
     entities_images?: entities_imagesCreateNestedManyWithoutImagesInput
-    individuals: individualsCreateNestedOneWithoutImagesInput
+    entities: entitiesCreateNestedOneWithoutImagesInput
   }
 
   export type imagesUncheckedCreateWithoutImages_dataInput = {
@@ -32313,18 +32462,6 @@ export namespace Prisma {
     data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutImages_dataInput>
   }
 
-  export type imagesScalarWhereInput = {
-    AND?: imagesScalarWhereInput | imagesScalarWhereInput[]
-    OR?: imagesScalarWhereInput[]
-    NOT?: imagesScalarWhereInput | imagesScalarWhereInput[]
-    image_id?: IntFilter<"images"> | number
-    image_creator_id?: IntFilter<"images"> | number
-    image_title?: StringFilter<"images"> | string
-    image_description?: StringFilter<"images"> | string
-    image_filename?: StringFilter<"images"> | string
-    image_data_id?: IntFilter<"images"> | number
-  }
-
   export type collectionsCreateWithoutIndividualsInput = {
     collection_name: string
     organizations?: organizationsCreateNestedOneWithoutCollectionsInput
@@ -32360,6 +32497,9 @@ export namespace Prisma {
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutIndividualsInput = {
@@ -32369,6 +32509,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutIndividualsInput = {
@@ -32426,35 +32569,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type imagesCreateWithoutIndividualsInput = {
-    image_title: string
-    image_description: string
-    image_filename: string
-    collections_images?: collections_imagesCreateNestedManyWithoutImagesInput
-    entities_images?: entities_imagesCreateNestedManyWithoutImagesInput
-    images_data: images_dataCreateNestedOneWithoutImagesInput
-  }
-
-  export type imagesUncheckedCreateWithoutIndividualsInput = {
-    image_id?: number
-    image_title: string
-    image_description: string
-    image_filename: string
-    image_data_id: number
-    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutImagesInput
-    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutImagesInput
-  }
-
-  export type imagesCreateOrConnectWithoutIndividualsInput = {
-    where: imagesWhereUniqueInput
-    create: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type imagesCreateManyIndividualsInputEnvelope = {
-    data: imagesCreateManyIndividualsInput | imagesCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type organizations_membersCreateWithoutIndividualsInput = {
     organizations: organizationsCreateNestedOneWithoutOrganizations_membersInput
   }
@@ -32470,64 +32584,6 @@ export namespace Prisma {
 
   export type organizations_membersCreateManyIndividualsInputEnvelope = {
     data: organizations_membersCreateManyIndividualsInput | organizations_membersCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type sheetsCreateWithoutIndividualsInput = {
-    sheet_title: string
-    sheet_subject: string
-    sheet_filename: string
-    collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
-    entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
-    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
-  }
-
-  export type sheetsUncheckedCreateWithoutIndividualsInput = {
-    sheet_id?: number
-    sheet_title: string
-    sheet_subject: string
-    sheet_filename: string
-    sheet_data_id: number
-    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
-    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
-  }
-
-  export type sheetsCreateOrConnectWithoutIndividualsInput = {
-    where: sheetsWhereUniqueInput
-    create: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type sheetsCreateManyIndividualsInputEnvelope = {
-    data: sheetsCreateManyIndividualsInput | sheetsCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type videosCreateWithoutIndividualsInput = {
-    video_title: string
-    video_description: string
-    video_filename: string
-    collections_videos?: collections_videosCreateNestedManyWithoutVideosInput
-    entities_videos?: entities_videosCreateNestedManyWithoutVideosInput
-    videos_data: videos_dataCreateNestedOneWithoutVideosInput
-  }
-
-  export type videosUncheckedCreateWithoutIndividualsInput = {
-    video_id?: number
-    video_title: string
-    video_description: string
-    video_filename: string
-    video_data_id: number
-    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutVideosInput
-    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutVideosInput
-  }
-
-  export type videosCreateOrConnectWithoutIndividualsInput = {
-    where: videosWhereUniqueInput
-    create: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type videosCreateManyIndividualsInputEnvelope = {
-    data: videosCreateManyIndividualsInput | videosCreateManyIndividualsInput[]
     skipDuplicates?: boolean
   }
 
@@ -32595,22 +32651,6 @@ export namespace Prisma {
     data: XOR<groups_membersUpdateManyMutationInput, groups_membersUncheckedUpdateManyWithoutIndividualsInput>
   }
 
-  export type imagesUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: imagesWhereUniqueInput
-    update: XOR<imagesUpdateWithoutIndividualsInput, imagesUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<imagesCreateWithoutIndividualsInput, imagesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type imagesUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: imagesWhereUniqueInput
-    data: XOR<imagesUpdateWithoutIndividualsInput, imagesUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type imagesUpdateManyWithWhereWithoutIndividualsInput = {
-    where: imagesScalarWhereInput
-    data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
   export type organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput = {
     where: organizations_membersWhereUniqueInput
     update: XOR<organizations_membersUpdateWithoutIndividualsInput, organizations_membersUncheckedUpdateWithoutIndividualsInput>
@@ -32633,62 +32673,6 @@ export namespace Prisma {
     NOT?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
     organization_id?: IntFilter<"organizations_members"> | number
     individual_id?: IntFilter<"organizations_members"> | number
-  }
-
-  export type sheetsUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: sheetsWhereUniqueInput
-    update: XOR<sheetsUpdateWithoutIndividualsInput, sheetsUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<sheetsCreateWithoutIndividualsInput, sheetsUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type sheetsUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: sheetsWhereUniqueInput
-    data: XOR<sheetsUpdateWithoutIndividualsInput, sheetsUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type sheetsUpdateManyWithWhereWithoutIndividualsInput = {
-    where: sheetsScalarWhereInput
-    data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type sheetsScalarWhereInput = {
-    AND?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
-    OR?: sheetsScalarWhereInput[]
-    NOT?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
-    sheet_id?: IntFilter<"sheets"> | number
-    sheet_author_id?: IntFilter<"sheets"> | number
-    sheet_title?: StringFilter<"sheets"> | string
-    sheet_subject?: StringFilter<"sheets"> | string
-    sheet_filename?: StringFilter<"sheets"> | string
-    sheet_data_id?: IntFilter<"sheets"> | number
-  }
-
-  export type videosUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: videosWhereUniqueInput
-    update: XOR<videosUpdateWithoutIndividualsInput, videosUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<videosCreateWithoutIndividualsInput, videosUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type videosUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: videosWhereUniqueInput
-    data: XOR<videosUpdateWithoutIndividualsInput, videosUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type videosUpdateManyWithWhereWithoutIndividualsInput = {
-    where: videosScalarWhereInput
-    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type videosScalarWhereInput = {
-    AND?: videosScalarWhereInput | videosScalarWhereInput[]
-    OR?: videosScalarWhereInput[]
-    NOT?: videosScalarWhereInput | videosScalarWhereInput[]
-    video_id?: IntFilter<"videos"> | number
-    video_creator_id?: IntFilter<"videos"> | number
-    video_title?: StringFilter<"videos"> | string
-    video_description?: StringFilter<"videos"> | string
-    video_filename?: StringFilter<"videos"> | string
-    video_data_id?: IntFilter<"videos"> | number
   }
 
   export type collectionsCreateWithoutOrganizationsInput = {
@@ -32726,6 +32710,9 @@ export namespace Prisma {
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutOrganizationsInput = {
@@ -32735,6 +32722,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutOrganizationsInput = {
@@ -32866,9 +32856,6 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutOrganizations_membersInput = {
@@ -32882,9 +32869,6 @@ export namespace Prisma {
     entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutOrganizations_membersInput = {
@@ -32941,9 +32925,6 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutOrganizations_membersInput = {
@@ -32957,9 +32938,6 @@ export namespace Prisma {
     entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type organizationsUpsertWithoutOrganizations_membersInput = {
@@ -33060,40 +33038,32 @@ export namespace Prisma {
     create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
   }
 
-  export type individualsCreateWithoutSheetsInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    videos?: videosCreateNestedManyWithoutIndividualsInput
+  export type entitiesCreateWithoutSheetsInput = {
+    groups?: groupsCreateNestedOneWithoutEntitiesInput
+    individuals?: individualsCreateNestedOneWithoutEntitiesInput
+    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsUncheckedCreateWithoutSheetsInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    videos?: videosUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUncheckedCreateWithoutSheetsInput = {
+    entity_id?: number
+    individual_id?: number | null
+    group_id?: number | null
+    organization_id?: number | null
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsCreateOrConnectWithoutSheetsInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
+  export type entitiesCreateOrConnectWithoutSheetsInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
   }
 
   export type collections_sheetsUpsertWithWhereUniqueWithoutSheetsInput = {
@@ -33148,46 +33118,38 @@ export namespace Prisma {
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
-  export type individualsUpsertWithoutSheetsInput = {
-    update: XOR<individualsUpdateWithoutSheetsInput, individualsUncheckedUpdateWithoutSheetsInput>
-    create: XOR<individualsCreateWithoutSheetsInput, individualsUncheckedCreateWithoutSheetsInput>
-    where?: individualsWhereInput
+  export type entitiesUpsertWithoutSheetsInput = {
+    update: XOR<entitiesUpdateWithoutSheetsInput, entitiesUncheckedUpdateWithoutSheetsInput>
+    create: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUpdateToOneWithWhereWithoutSheetsInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutSheetsInput, individualsUncheckedUpdateWithoutSheetsInput>
+  export type entitiesUpdateToOneWithWhereWithoutSheetsInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutSheetsInput, entitiesUncheckedUpdateWithoutSheetsInput>
   }
 
-  export type individualsUpdateWithoutSheetsInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUpdateWithoutSheetsInput = {
+    groups?: groupsUpdateOneWithoutEntitiesNestedInput
+    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
+    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type individualsUncheckedUpdateWithoutSheetsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    videos?: videosUncheckedUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUncheckedUpdateWithoutSheetsInput = {
+    entity_id?: IntFieldUpdateOperationsInput | number
+    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
+    group_id?: NullableIntFieldUpdateOperationsInput | number | null
+    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type sheetsCreateWithoutSheets_dataInput = {
@@ -33196,7 +33158,7 @@ export namespace Prisma {
     sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
-    individuals: individualsCreateNestedOneWithoutSheetsInput
+    entities: entitiesCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutSheets_dataInput = {
@@ -33285,40 +33247,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type individualsCreateWithoutVideosInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    images?: imagesCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsCreateNestedManyWithoutIndividualsInput
+  export type entitiesCreateWithoutVideosInput = {
+    groups?: groupsCreateNestedOneWithoutEntitiesInput
+    individuals?: individualsCreateNestedOneWithoutEntitiesInput
+    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsUncheckedCreateWithoutVideosInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    images?: imagesUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUncheckedCreateWithoutVideosInput = {
+    entity_id?: number
+    individual_id?: number | null
+    group_id?: number | null
+    organization_id?: number | null
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsCreateOrConnectWithoutVideosInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutVideosInput, individualsUncheckedCreateWithoutVideosInput>
+  export type entitiesCreateOrConnectWithoutVideosInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
   }
 
   export type videos_dataCreateWithoutVideosInput = {
@@ -33367,46 +33321,38 @@ export namespace Prisma {
     data: XOR<entities_videosUpdateManyMutationInput, entities_videosUncheckedUpdateManyWithoutVideosInput>
   }
 
-  export type individualsUpsertWithoutVideosInput = {
-    update: XOR<individualsUpdateWithoutVideosInput, individualsUncheckedUpdateWithoutVideosInput>
-    create: XOR<individualsCreateWithoutVideosInput, individualsUncheckedCreateWithoutVideosInput>
-    where?: individualsWhereInput
+  export type entitiesUpsertWithoutVideosInput = {
+    update: XOR<entitiesUpdateWithoutVideosInput, entitiesUncheckedUpdateWithoutVideosInput>
+    create: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUpdateToOneWithWhereWithoutVideosInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutVideosInput, individualsUncheckedUpdateWithoutVideosInput>
+  export type entitiesUpdateToOneWithWhereWithoutVideosInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutVideosInput, entitiesUncheckedUpdateWithoutVideosInput>
   }
 
-  export type individualsUpdateWithoutVideosInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUpdateWithoutVideosInput = {
+    groups?: groupsUpdateOneWithoutEntitiesNestedInput
+    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
+    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type individualsUncheckedUpdateWithoutVideosInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    images?: imagesUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUncheckedUpdateWithoutVideosInput = {
+    entity_id?: IntFieldUpdateOperationsInput | number
+    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
+    group_id?: NullableIntFieldUpdateOperationsInput | number | null
+    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type videos_dataUpsertWithoutVideosInput = {
@@ -33435,7 +33381,7 @@ export namespace Prisma {
     video_filename: string
     collections_videos?: collections_videosCreateNestedManyWithoutVideosInput
     entities_videos?: entities_videosCreateNestedManyWithoutVideosInput
-    individuals: individualsCreateNestedOneWithoutVideosInput
+    entities: entitiesCreateNestedOneWithoutVideosInput
   }
 
   export type videosUncheckedCreateWithoutVideos_dataInput = {
@@ -33591,6 +33537,30 @@ export namespace Prisma {
     date_pinned?: Date | string | null
   }
 
+  export type imagesCreateManyEntitiesInput = {
+    image_id?: number
+    image_title: string
+    image_description: string
+    image_filename: string
+    image_data_id: number
+  }
+
+  export type sheetsCreateManyEntitiesInput = {
+    sheet_id?: number
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    sheet_data_id: number
+  }
+
+  export type videosCreateManyEntitiesInput = {
+    video_id?: number
+    video_title: string
+    video_description: string
+    video_filename: string
+    video_data_id: number
+  }
+
   export type entities_imagesUpdateWithoutEntitiesInput = {
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
@@ -33660,6 +33630,87 @@ export namespace Prisma {
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type imagesUpdateWithoutEntitiesInput = {
+    image_title?: StringFieldUpdateOperationsInput | string
+    image_description?: StringFieldUpdateOperationsInput | string
+    image_filename?: StringFieldUpdateOperationsInput | string
+    collections_images?: collections_imagesUpdateManyWithoutImagesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutImagesNestedInput
+    images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type imagesUncheckedUpdateWithoutEntitiesInput = {
+    image_id?: IntFieldUpdateOperationsInput | number
+    image_title?: StringFieldUpdateOperationsInput | string
+    image_description?: StringFieldUpdateOperationsInput | string
+    image_filename?: StringFieldUpdateOperationsInput | string
+    image_data_id?: IntFieldUpdateOperationsInput | number
+    collections_images?: collections_imagesUncheckedUpdateManyWithoutImagesNestedInput
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutImagesNestedInput
+  }
+
+  export type imagesUncheckedUpdateManyWithoutEntitiesInput = {
+    image_id?: IntFieldUpdateOperationsInput | number
+    image_title?: StringFieldUpdateOperationsInput | string
+    image_description?: StringFieldUpdateOperationsInput | string
+    image_filename?: StringFieldUpdateOperationsInput | string
+    image_data_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type sheetsUpdateWithoutEntitiesInput = {
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
+  }
+
+  export type sheetsUncheckedUpdateWithoutEntitiesInput = {
+    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutEntitiesInput = {
+    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type videosUpdateWithoutEntitiesInput = {
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    collections_videos?: collections_videosUpdateManyWithoutVideosNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutVideosNestedInput
+    videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutEntitiesInput = {
+    video_id?: IntFieldUpdateOperationsInput | number
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    video_data_id?: IntFieldUpdateOperationsInput | number
+    collections_videos?: collections_videosUncheckedUpdateManyWithoutVideosNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateManyWithoutEntitiesInput = {
+    video_id?: IntFieldUpdateOperationsInput | number
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    video_data_id?: IntFieldUpdateOperationsInput | number
+  }
+
   export type collectionsCreateManyGroupsInput = {
     collection_id?: number
     collection_name: string
@@ -33718,6 +33769,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutGroupsInput = {
@@ -33727,6 +33781,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateManyWithoutGroupsInput = {
@@ -33849,7 +33906,7 @@ export namespace Prisma {
     image_filename?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUpdateManyWithoutImagesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutImagesNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutImagesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
   }
 
   export type imagesUncheckedUpdateWithoutImages_dataInput = {
@@ -33896,32 +33953,8 @@ export namespace Prisma {
     group_id: number
   }
 
-  export type imagesCreateManyIndividualsInput = {
-    image_id?: number
-    image_title: string
-    image_description: string
-    image_filename: string
-    image_data_id: number
-  }
-
   export type organizations_membersCreateManyIndividualsInput = {
     organization_id: number
-  }
-
-  export type sheetsCreateManyIndividualsInput = {
-    sheet_id?: number
-    sheet_title: string
-    sheet_subject: string
-    sheet_filename: string
-    sheet_data_id: number
-  }
-
-  export type videosCreateManyIndividualsInput = {
-    video_id?: number
-    video_title: string
-    video_description: string
-    video_filename: string
-    video_data_id: number
   }
 
   export type collectionsUpdateWithoutIndividualsInput = {
@@ -33956,6 +33989,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutIndividualsInput = {
@@ -33965,6 +34001,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateManyWithoutIndividualsInput = {
@@ -34011,33 +34050,6 @@ export namespace Prisma {
     group_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type imagesUpdateWithoutIndividualsInput = {
-    image_title?: StringFieldUpdateOperationsInput | string
-    image_description?: StringFieldUpdateOperationsInput | string
-    image_filename?: StringFieldUpdateOperationsInput | string
-    collections_images?: collections_imagesUpdateManyWithoutImagesNestedInput
-    entities_images?: entities_imagesUpdateManyWithoutImagesNestedInput
-    images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
-  }
-
-  export type imagesUncheckedUpdateWithoutIndividualsInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_title?: StringFieldUpdateOperationsInput | string
-    image_description?: StringFieldUpdateOperationsInput | string
-    image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
-    collections_images?: collections_imagesUncheckedUpdateManyWithoutImagesNestedInput
-    entities_images?: entities_imagesUncheckedUpdateManyWithoutImagesNestedInput
-  }
-
-  export type imagesUncheckedUpdateManyWithoutIndividualsInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_title?: StringFieldUpdateOperationsInput | string
-    image_description?: StringFieldUpdateOperationsInput | string
-    image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
-  }
-
   export type organizations_membersUpdateWithoutIndividualsInput = {
     organizations?: organizationsUpdateOneRequiredWithoutOrganizations_membersNestedInput
   }
@@ -34048,60 +34060,6 @@ export namespace Prisma {
 
   export type organizations_membersUncheckedUpdateManyWithoutIndividualsInput = {
     organization_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type sheetsUpdateWithoutIndividualsInput = {
-    sheet_title?: StringFieldUpdateOperationsInput | string
-    sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: StringFieldUpdateOperationsInput | string
-    collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
-    entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
-    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
-  }
-
-  export type sheetsUncheckedUpdateWithoutIndividualsInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_title?: StringFieldUpdateOperationsInput | string
-    sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
-    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
-    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
-  }
-
-  export type sheetsUncheckedUpdateManyWithoutIndividualsInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_title?: StringFieldUpdateOperationsInput | string
-    sheet_subject?: StringFieldUpdateOperationsInput | string
-    sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type videosUpdateWithoutIndividualsInput = {
-    video_title?: StringFieldUpdateOperationsInput | string
-    video_description?: StringFieldUpdateOperationsInput | string
-    video_filename?: StringFieldUpdateOperationsInput | string
-    collections_videos?: collections_videosUpdateManyWithoutVideosNestedInput
-    entities_videos?: entities_videosUpdateManyWithoutVideosNestedInput
-    videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
-  }
-
-  export type videosUncheckedUpdateWithoutIndividualsInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_title?: StringFieldUpdateOperationsInput | string
-    video_description?: StringFieldUpdateOperationsInput | string
-    video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
-    collections_videos?: collections_videosUncheckedUpdateManyWithoutVideosNestedInput
-    entities_videos?: entities_videosUncheckedUpdateManyWithoutVideosNestedInput
-  }
-
-  export type videosUncheckedUpdateManyWithoutIndividualsInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_title?: StringFieldUpdateOperationsInput | string
-    video_description?: StringFieldUpdateOperationsInput | string
-    video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type collectionsCreateManyOrganizationsInput = {
@@ -34162,6 +34120,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutOrganizationsInput = {
@@ -34171,6 +34132,9 @@ export namespace Prisma {
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateManyWithoutOrganizationsInput = {
@@ -34293,7 +34257,7 @@ export namespace Prisma {
     sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutSheetsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutSheets_dataInput = {
@@ -34390,7 +34354,7 @@ export namespace Prisma {
     video_filename?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUpdateManyWithoutVideosNestedInput
     entities_videos?: entities_videosUpdateManyWithoutVideosNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutVideosNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
   }
 
   export type videosUncheckedUpdateWithoutVideos_dataInput = {

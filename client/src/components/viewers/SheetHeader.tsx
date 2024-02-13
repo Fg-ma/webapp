@@ -1,6 +1,15 @@
 import React from "react";
 
-export default function SheetHeader({ sheetData }) {
+interface SheetHeaderProps {
+  sheetData: {
+    sheet_title: string;
+    sheet_subject: string;
+    sheet_author: string;
+    sheet_url: string;
+  };
+}
+
+export default function SheetHeader({ sheetData }: SheetHeaderProps) {
   return (
     <div className="bg-fg-white-90 mb-12 rounded-md shadow relative">
       <div className="w-full h-full px-4 pt-4 pb-6 flex flex-col items-center justify-center">

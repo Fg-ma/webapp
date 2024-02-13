@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Checkbox({ checked, hovering }) {
+interface CheckboxProps {
+  checked: boolean;
+  hovering: boolean;
+}
+
+export default function Checkbox({ checked, hovering }: CheckboxProps) {
   return (
     <div
       className={`w-5 h-5 bg-white border-2 rounded flex justify-center items-center ${

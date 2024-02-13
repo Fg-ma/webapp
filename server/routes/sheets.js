@@ -40,10 +40,21 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
         sheet_id: sheet_id,
       },
       include: {
-        individuals: true,
         sheets_data: true,
+        entities: {
+          include: {
+            individuals: true,
+            groups: true,
+            organizations: true,
+          },
+        },
       },
     });
+
+    if (!fullSheet) {
+      res.status(404).send("Sheet not found");
+      return;
+    }
 
     res.send(fullSheet);
   } catch (error) {

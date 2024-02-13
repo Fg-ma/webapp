@@ -79,6 +79,9 @@ model entities {
   entities_images entities_images[]
   entities_sheets entities_sheets[]
   entities_videos entities_videos[]
+  images          images[]
+  sheets          sheets[]
+  videos          videos[]
 
   @@index([group_id], map: "entities_groups_id_fk_idx")
   @@index([individual_id], map: "entities_individual_id_fk_idx")
@@ -176,10 +179,10 @@ model images {
   image_data_id      Int
   collections_images collections_images[]
   entities_images    entities_images[]
-  individuals        individuals          @relation(fields: [image_creator_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
+  entities           entities             @relation(fields: [image_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
   images_data        images_data          @relation(fields: [image_data_id], references: [image_data_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_data_id_fk")
 
-  @@index([image_creator_id], map: "image_creator_id_fk_idx")
+  @@index([image_creator_id], map: "images_image_creator_id_fk_idx")
   @@index([image_data_id], map: "images_image_data_id_fk_idx")
 }
 
@@ -200,10 +203,7 @@ model individuals {
   entities                entities[]
   entities_references     entities_references[]
   groups_members          groups_members[]
-  images                  images[]
   organizations_members   organizations_members[]
-  sheets                  sheets[]
-  videos                  videos[]
 }
 
 model organizations {
@@ -239,10 +239,10 @@ model sheets {
   collections_sheets collections_sheets[]
   entities_sheets    entities_sheets[]
   sheets_data        sheets_data          @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "Sheets_sheet_data_id_fk")
-  individuals        individuals          @relation(fields: [sheet_author_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
+  entities           entities             @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
 
   @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
-  @@index([sheet_author_id], map: "sheets_sheet_author_id_fk")
+  @@index([sheet_author_id], map: "sheets_sheet_author_id_fk_idx")
 }
 
 model sheets_data {
@@ -270,10 +270,10 @@ model videos {
   video_data_id      Int
   collections_videos collections_videos[]
   entities_videos    entities_videos[]
-  individuals        individuals          @relation(fields: [video_creator_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
+  entities           entities             @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
   videos_data        videos_data          @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
 
-  @@index([video_creator_id], map: "video_creator_fk_idx")
+  @@index([video_creator_id], map: "videos_video_creator_id_fk_idx")
   @@index([video_data_id], map: "videos_video_data_id_fk_idx")
 }
 

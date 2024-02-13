@@ -26,25 +26,31 @@ router.get("/:image_id", async (req, res) => {
 
 // Gets all the data needed to display an image's contents
 router.get("/get_full_image/:image_id", async (req, res) => {
-  const image_id = req.params.image_id;
+  const image_id = parseInt(req.params.image_id);
 
   try {
-    const result = await req.db.images.findUnique({
+    const fullImage = await req.db.images.findUnique({
       where: {
-        image_id: parseInt(image_id),
+        image_id: image_id,
       },
       include: {
-        individuals: true,
         images_data: true,
+        entities: {
+          include: {
+            individuals: true,
+            groups: true,
+            organizations: true,
+          },
+        },
       },
     });
 
-    if (!result) {
+    if (!fullImage) {
       res.status(404).send("Image not found");
       return;
     }
 
-    res.send(result);
+    res.send(fullImage);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

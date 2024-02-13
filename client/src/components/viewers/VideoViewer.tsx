@@ -7,12 +7,37 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function VideoViewer({ video_id }) {
-  const [videoData, setVideoData] = useState({
-    video_url: null,
-    video_title: null,
-    video_description: null,
-    video_author: null,
+interface VideoViewerProps {
+  video_id: number;
+}
+
+interface ImageData {
+  video_url: string;
+  video_title: string;
+  video_description: string;
+  video_author: {
+    individual_id: number;
+    individual_name: string;
+    individual_userName: string;
+    individual_roles: string;
+    individual_description: string;
+    individual_currentIssue: string;
+  };
+}
+
+export default function VideoViewer({ video_id }: VideoViewerProps) {
+  const [videoData, setVideoData] = useState<ImageData>({
+    video_url: "",
+    video_title: "",
+    video_description: "",
+    video_author: {
+      individual_id: 0,
+      individual_name: "",
+      individual_userName: "",
+      individual_roles: "",
+      individual_description: "",
+      individual_currentIssue: "",
+    },
   });
 
   useEffect(() => {
@@ -52,7 +77,7 @@ export default function VideoViewer({ video_id }) {
     }
   }, [video_id]);
 
-  const getMimeType = (extension) => {
+  const getMimeType = (extension: string) => {
     switch (extension) {
       case "mp4":
         return "video/mp4";
@@ -70,10 +95,7 @@ export default function VideoViewer({ video_id }) {
       {videoData.video_url && (
         <div className="rounded-md overflow-hidden">
           <video controls width="100%" height="auto">
-            <source
-              src={videoData.video_url}
-              type={getMimeType(videoData.video_extension)}
-            />
+            <source src={videoData.video_url} />
             Your browser does not support the video tag.
           </video>
         </div>

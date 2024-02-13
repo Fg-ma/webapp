@@ -1,6 +1,20 @@
 import React from "react";
 import { createPortal } from "react-dom";
 
+interface PopupProps {
+  name: string;
+  position: {
+    top: number;
+    left: number;
+  };
+  onMouseEnter: (event: MouseEvent) => void;
+  onMouseLeave: () => void;
+  handleFilterClick: () => void;
+  popupRef: React.RefObject<HTMLDivElement>;
+  isFilterSelected: boolean;
+  subcategory: string;
+}
+
 export default function Popup({
   name,
   position,
@@ -10,7 +24,7 @@ export default function Popup({
   popupRef,
   isFilterSelected,
   subcategory,
-}) {
+}: PopupProps) {
   /* 
     Description:   
       The popup is the portal that is created when the mouse hovers over a FilterCard that has 
@@ -25,7 +39,7 @@ export default function Popup({
       id={`${subcategory}Popup_${name}`}
       className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max fixed z-10 overflow-visible cursor-pointer flex items-center rounded-md"
       style={{ top: `${position.top}px`, left: `${position.left}px` }}
-      onMouseEnter={onMouseEnter}
+      onMouseEnter={onMouseEnter as any}
       onMouseLeave={onMouseLeave}
       onClick={handleFilterClick}
       ref={popupRef}

@@ -1,20 +1,37 @@
-import { motion } from "framer-motion";
+import { Transition, Variants, motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 
-const popupContentVar = {
+const popupContentVar: Variants = {
   init: {
     opacity: 0,
   },
   animate: {
     opacity: 1,
   },
+};
+
+const transition: Transition = {
   transition: {
     duration: 0.25,
     ease: "easeOut",
   },
 };
 
-export default function ReferenceLinks({ references }) {
+interface Reference {
+  reference_id: number;
+  individual_id: number | null;
+  group_id: number | null;
+  organization_id: number | null;
+  title: string;
+  author: string;
+  url: string;
+}
+
+interface ReferenceLinksProps {
+  references: Reference[];
+}
+
+export default function ReferenceLinks({ references }: ReferenceLinksProps) {
   /* 
     Description:   
       Creates a list of refernce links that can be clicked to get redirected to a 
@@ -24,10 +41,12 @@ export default function ReferenceLinks({ references }) {
       displays the author, title, and url link.
   */
 
-  const [referencesLinks, setReferencesLinks] = useState(null);
-  const [popupContent, setPopupContent] = useState(null);
-  const hoverTimeout = useRef(null);
-  const mousePosition = useRef(null);
+  const [referencesLinks, setReferencesLinks] = useState<JSX.Element[] | null>(
+    null,
+  );
+  const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+  const mousePosition = useRef<{ x: string; y: string } | null>(null);
 
   // Get links for references
   useEffect(() => {
@@ -37,11 +56,11 @@ export default function ReferenceLinks({ references }) {
           <a
             href={reference.url}
             className="text-fg-secondary underline decoration-2 underline-offset-2"
-            onMouseEnter={(e) => startHoverTimer(e, reference)}
+            onMouseEnter={(event) => startHoverTimer(event, reference)}
             onMouseLeave={() => cancelHoverTimer()}
-            onMouseMove={(e) => {
-              updateMousePosition(e);
-              updatePopupPosition(e);
+            onMouseMove={(event) => {
+              updateMousePosition(event);
+              updatePopupPosition();
             }}
           >
             "{reference.title}"
@@ -52,7 +71,7 @@ export default function ReferenceLinks({ references }) {
     );
   }, [references]);
 
-  const showPopup = (reference) => {
+  const showPopup = (reference: Reference) => {
     setPopupContent(
       <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50">
         <p className="text-lg font-bold">Title: {reference.title}</p>
@@ -62,14 +81,17 @@ export default function ReferenceLinks({ references }) {
     );
   };
 
-  const startHoverTimer = (e, reference) => {
+  const startHoverTimer = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    reference: Reference,
+  ) => {
     mousePosition.current = {
-      x: `${e.clientX - 535}px`,
-      y: `${e.clientY - 50}px`,
+      x: `${event.clientX - 535}px`,
+      y: `${event.clientY - 50}px`,
     };
     hoverTimeout.current = setTimeout(() => {
       showPopup(reference);
-      updatePopupPosition(e);
+      updatePopupPosition();
     }, 1500);
   };
 
@@ -80,22 +102,24 @@ export default function ReferenceLinks({ references }) {
     setPopupContent(null);
   };
 
-  const updateMousePosition = (e) => {
+  const updateMousePosition = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
     mousePosition.current = {
-      x: `${e.clientX - 535}px`,
-      y: `${e.clientY - 50}px`,
+      x: `${event.clientX - 535}px`,
+      y: `${event.clientY - 50}px`,
     };
   };
 
-  const updatePopupPosition = (e) => {
+  const updatePopupPosition = () => {
     setPopupContent((prevPopupContent) => {
       if (prevPopupContent) {
         return (
           <div
             className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50"
             style={{
-              top: mousePosition.current.y,
-              left: mousePosition.current.x,
+              top: mousePosition.current?.y,
+              left: mousePosition.current?.x,
             }}
           >
             {prevPopupContent.props.children}
@@ -118,7 +142,7 @@ export default function ReferenceLinks({ references }) {
               variants={popupContentVar}
               initial="init"
               animate="animate"
-              transition="transition"
+              transition={transition}
             >
               {popupContent}
             </motion.div>

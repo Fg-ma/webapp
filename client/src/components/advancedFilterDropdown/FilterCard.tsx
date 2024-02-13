@@ -135,13 +135,13 @@ export default function FilterCard({
     return () => {};
   }, [identify, name]);
 
-  function handleFilterClick() {
+  const handleFilterClick = () => {
     if (!isFilterSelected) {
       dispatch(addAdvancedAffiliateFilter(filter, name, subcategory));
     } else {
       dispatch(removeAdvancedAffiliateFilter(filter, name, subcategory));
     }
-  }
+  };
 
   return (
     <motion.div

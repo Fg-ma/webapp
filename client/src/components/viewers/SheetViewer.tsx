@@ -14,16 +14,20 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 
-export default function SheetViewer({ sheet_id }) {
-  const [numPages, setNumPages] = useState();
+interface SheetViewerProps {
+  sheet_id: number;
+}
+
+export default function SheetViewer({ sheet_id }: SheetViewerProps) {
+  const [numPages, setNumPages] = useState<number>(0);
   const [sheetData, setSheetData] = useState({
-    sheet_url: null,
-    sheet_title: null,
-    sheet_subject: null,
-    sheet_author: null,
+    sheet_url: "",
+    sheet_title: "",
+    sheet_subject: "",
+    sheet_author: "",
   });
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
   };
 
@@ -46,7 +50,13 @@ export default function SheetViewer({ sheet_id }) {
             sheet_url: url,
             sheet_title: response.data.sheet_title,
             sheet_subject: response.data.sheet_subject,
-            sheet_author: response.data.individual_name,
+            sheet_author: response.data.entities.individuals
+              ? response.data.entities.individuals.individual_name
+              : response.data.entities.groups
+                ? response.data.entities.groups.group_name
+                : response.data.entities.organizations
+                  ? response.data.entities.organizations.organization_name
+                  : "",
           });
         }
       } catch (error) {
