@@ -15,14 +15,7 @@ interface ImageData {
   video_url: string;
   video_title: string;
   video_description: string;
-  video_author: {
-    individual_id: number;
-    individual_name: string;
-    individual_userName: string;
-    individual_roles: string;
-    individual_description: string;
-    individual_currentIssue: string;
-  };
+  video_author: string;
 }
 
 export default function VideoViewer({ video_id }: VideoViewerProps) {
@@ -30,14 +23,7 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
     video_url: "",
     video_title: "",
     video_description: "",
-    video_author: {
-      individual_id: 0,
-      individual_name: "",
-      individual_userName: "",
-      individual_roles: "",
-      individual_description: "",
-      individual_currentIssue: "",
-    },
+    video_author: "",
   });
 
   useEffect(() => {
@@ -46,14 +32,12 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
         `${serverUrl}/videos/get_full_video/${video_id}`,
       );
 
-      if (response.data[0]) {
+      if (response.data) {
         const blobData = new Uint8Array(
-          response.data[0].videos_data.video_data.data,
+          response.data.videos_data.video_data.data,
         );
 
-        const extension = response.data[0].video_filename
-          .slice(-3)
-          .toLowerCase();
+        const extension = response.data.video_filename.slice(-3).toLowerCase();
 
         const mimeType = getMimeType(extension);
 
@@ -64,9 +48,15 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
 
           setVideoData({
             video_url: url,
-            video_title: response.data[0].video_title,
-            video_description: response.data[0].video_description,
-            video_author: response.data[0].individuals,
+            video_title: response.data.video_title,
+            video_description: response.data.video_description,
+            video_author: response.data.entities.individuals
+              ? response.data.entities.individuals.individual_name
+              : response.data.entities.groups
+                ? response.data.entities.groups.group_name
+                : response.data.entities.organizations
+                  ? response.data.entities.organizations.organization_name
+                  : "",
           });
         }
       }
@@ -101,16 +91,14 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
         </div>
       )}
       {videoData.video_title &&
-        videoData.video_author.individual_name &&
+        videoData.video_author &&
         videoData.video_description && (
           <div className="flex flex-col mt-4 items-start justify-center">
             <p className="text-xl mb-2">{videoData.video_title}</p>
             <div className="flex items-center justify-start mb-2">
               <div className="bg-fg-white-85 rounded-full h-10 aspect-square"></div>
               <div className="flex flex-col items-start justify-center ml-4">
-                <p className="text-lg">
-                  {videoData.video_author.individual_name}
-                </p>
+                <p className="text-lg">{videoData.video_author}</p>
               </div>
             </div>
             <p className="font-K2D text-base">{videoData.video_description}</p>

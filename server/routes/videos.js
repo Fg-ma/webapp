@@ -26,25 +26,31 @@ router.get("/:video_id", async (req, res) => {
 
 // Gets all the data needed to display a video's contents
 router.get("/get_full_video/:video_id", async (req, res) => {
-  const video_id = req.params.video_id;
+  const video_id = parseInt(req.params.video_id);
 
   try {
-    const fullVideoData = await req.db.videos.findMany({
+    const fullVideo = await req.db.videos.findUnique({
       where: {
-        video_id: parseInt(video_id),
+        video_id: video_id,
       },
       include: {
-        individuals: true,
         videos_data: true,
+        entities: {
+          include: {
+            individuals: true,
+            groups: true,
+            organizations: true,
+          },
+        },
       },
     });
 
-    if (!fullVideoData || fullVideoData.length === 0) {
+    if (!fullVideo || fullVideo.length === 0) {
       res.status(404).send("Video not found");
       return;
     }
 
-    res.send(fullVideoData);
+    res.send(fullVideo);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
