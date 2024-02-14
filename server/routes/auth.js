@@ -2,29 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-const verifyToken = (req, res, next) => {
-  const authHeader = req.header("Authorization");
-
-  if (!authHeader) {
-    return;
-  }
-
-  const [bearer, token] = authHeader.split(" ");
-
-  if (bearer !== "Bearer" || !token) {
-    return;
-  }
-
-  jwt.verify(token, process.env.TOKEN_KEY, (err, user) => {
-    if (err) {
-      return;
-    }
-
-    req.user = user;
-    next();
-  });
-};
+const verifyToken = require("./verifyJWT");
 
 router.post("/register", async (req, res) => {
   const { newUserUsername, newUserPassword } = req.body;
@@ -66,7 +44,7 @@ router.post("/login", async (req, res) => {
 
       if (match) {
         const token = jwt.sign(
-          { username: user.username },
+          { user_id: user.user_id, username: user.username },
           process.env.TOKEN_KEY,
           { expiresIn: process.env.TOKEN_TIME_OUT }
         );

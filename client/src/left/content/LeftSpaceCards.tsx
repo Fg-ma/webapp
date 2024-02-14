@@ -26,7 +26,7 @@ export function IndividualCard({
     dispatch(setPageState("main", "individuals"));
     dispatch(setPageState("individuals", "sheets"));
     dispatch(setIds("main", "individual_id", id));
-    dispatch(setIds("individuals", "collection_id", null));
+    dispatch(setIds("individuals", "collection_id", 0));
   };
 
   return (
@@ -66,7 +66,7 @@ export function GroupCard({
     dispatch(setPageState("main", "groups"));
     dispatch(setPageState("groups", "sheets"));
     dispatch(setIds("main", "group_id", id));
-    dispatch(setIds("groups", "collection_id", null));
+    dispatch(setIds("groups", "collection_id", 0));
   };
 
   return (
@@ -109,7 +109,7 @@ export function OrganizationCard({
     dispatch(setPageState("main", "organizations"));
     dispatch(setPageState("organizations", "sheets"));
     dispatch(setIds("main", "organization_id", id));
-    dispatch(setIds("organizations", "collection_id", null));
+    dispatch(setIds("organizations", "collection_id", 0));
   };
 
   return (

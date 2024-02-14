@@ -107,6 +107,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.Affiliates_relationsScalarFieldEnum = {
+  affiliate_relation_id: 'affiliate_relation_id',
+  affiliate_id_1: 'affiliate_id_1',
+  affiliate_type_1: 'affiliate_type_1',
+  affiliate_id_2: 'affiliate_id_2',
+  affiliate_type_2: 'affiliate_type_2'
+};
+
 exports.Prisma.CollectionsScalarFieldEnum = {
   collection_id: 'collection_id',
   collection_name: 'collection_name',
@@ -287,6 +295,7 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  affiliates_relations: 'affiliates_relations',
   collections: 'collections',
   collections_images: 'collections_images',
   collections_sheets: 'collections_sheets',

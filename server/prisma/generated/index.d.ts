@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model affiliates_relations
+ * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ */
+export type affiliates_relations = $Result.DefaultSelection<Prisma.$affiliates_relationsPayload>
+/**
  * Model collections
  * 
  */
@@ -126,8 +131,8 @@ export type videos_data = $Result.DefaultSelection<Prisma.$videos_dataPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Collections
- * const collections = await prisma.collections.findMany()
+ * // Fetch zero or more Affiliates_relations
+ * const affiliates_relations = await prisma.affiliates_relations.findMany()
  * ```
  *
  * 
@@ -147,8 +152,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Collections
-   * const collections = await prisma.collections.findMany()
+   * // Fetch zero or more Affiliates_relations
+   * const affiliates_relations = await prisma.affiliates_relations.findMany()
    * ```
    *
    * 
@@ -242,6 +247,16 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
+   * `prisma.affiliates_relations`: Exposes CRUD operations for the **affiliates_relations** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Affiliates_relations
+    * const affiliates_relations = await prisma.affiliates_relations.findMany()
+    * ```
+    */
+  get affiliates_relations(): Prisma.affiliates_relationsDelegate<ExtArgs>;
+
+  /**
    * `prisma.collections`: Exposes CRUD operations for the **collections** model.
     * Example usage:
     * ```ts
@@ -920,6 +935,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    affiliates_relations: 'affiliates_relations',
     collections: 'collections',
     collections_images: 'collections_images',
     collections_sheets: 'collections_sheets',
@@ -957,10 +973,76 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'collections' | 'collections_images' | 'collections_sheets' | 'collections_videos' | 'entities' | 'entities_images' | 'entities_references' | 'entities_sheets' | 'entities_videos' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_images' | 'collections_sheets' | 'collections_videos' | 'entities' | 'entities_images' | 'entities_references' | 'entities_sheets' | 'entities_videos' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
+      affiliates_relations: {
+        payload: Prisma.$affiliates_relationsPayload<ExtArgs>
+        fields: Prisma.affiliates_relationsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.affiliates_relationsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.affiliates_relationsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          findFirst: {
+            args: Prisma.affiliates_relationsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.affiliates_relationsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          findMany: {
+            args: Prisma.affiliates_relationsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>[]
+          }
+          create: {
+            args: Prisma.affiliates_relationsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          createMany: {
+            args: Prisma.affiliates_relationsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.affiliates_relationsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          update: {
+            args: Prisma.affiliates_relationsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          deleteMany: {
+            args: Prisma.affiliates_relationsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.affiliates_relationsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.affiliates_relationsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$affiliates_relationsPayload>
+          }
+          aggregate: {
+            args: Prisma.Affiliates_relationsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateAffiliates_relations>
+          }
+          groupBy: {
+            args: Prisma.affiliates_relationsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Affiliates_relationsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.affiliates_relationsCountArgs<ExtArgs>,
+            result: $Utils.Optional<Affiliates_relationsCountAggregateOutputType> | number
+          }
+        }
+      }
       collections: {
         payload: Prisma.$collectionsPayload<ExtArgs>
         fields: Prisma.collectionsFieldRefs
@@ -3068,6 +3150,926 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model affiliates_relations
+   */
+
+  export type AggregateAffiliates_relations = {
+    _count: Affiliates_relationsCountAggregateOutputType | null
+    _avg: Affiliates_relationsAvgAggregateOutputType | null
+    _sum: Affiliates_relationsSumAggregateOutputType | null
+    _min: Affiliates_relationsMinAggregateOutputType | null
+    _max: Affiliates_relationsMaxAggregateOutputType | null
+  }
+
+  export type Affiliates_relationsAvgAggregateOutputType = {
+    affiliate_relation_id: number | null
+    affiliate_id_1: number | null
+    affiliate_type_1: number | null
+    affiliate_id_2: number | null
+    affiliate_type_2: number | null
+  }
+
+  export type Affiliates_relationsSumAggregateOutputType = {
+    affiliate_relation_id: number | null
+    affiliate_id_1: number | null
+    affiliate_type_1: number | null
+    affiliate_id_2: number | null
+    affiliate_type_2: number | null
+  }
+
+  export type Affiliates_relationsMinAggregateOutputType = {
+    affiliate_relation_id: number | null
+    affiliate_id_1: number | null
+    affiliate_type_1: number | null
+    affiliate_id_2: number | null
+    affiliate_type_2: number | null
+  }
+
+  export type Affiliates_relationsMaxAggregateOutputType = {
+    affiliate_relation_id: number | null
+    affiliate_id_1: number | null
+    affiliate_type_1: number | null
+    affiliate_id_2: number | null
+    affiliate_type_2: number | null
+  }
+
+  export type Affiliates_relationsCountAggregateOutputType = {
+    affiliate_relation_id: number
+    affiliate_id_1: number
+    affiliate_type_1: number
+    affiliate_id_2: number
+    affiliate_type_2: number
+    _all: number
+  }
+
+
+  export type Affiliates_relationsAvgAggregateInputType = {
+    affiliate_relation_id?: true
+    affiliate_id_1?: true
+    affiliate_type_1?: true
+    affiliate_id_2?: true
+    affiliate_type_2?: true
+  }
+
+  export type Affiliates_relationsSumAggregateInputType = {
+    affiliate_relation_id?: true
+    affiliate_id_1?: true
+    affiliate_type_1?: true
+    affiliate_id_2?: true
+    affiliate_type_2?: true
+  }
+
+  export type Affiliates_relationsMinAggregateInputType = {
+    affiliate_relation_id?: true
+    affiliate_id_1?: true
+    affiliate_type_1?: true
+    affiliate_id_2?: true
+    affiliate_type_2?: true
+  }
+
+  export type Affiliates_relationsMaxAggregateInputType = {
+    affiliate_relation_id?: true
+    affiliate_id_1?: true
+    affiliate_type_1?: true
+    affiliate_id_2?: true
+    affiliate_type_2?: true
+  }
+
+  export type Affiliates_relationsCountAggregateInputType = {
+    affiliate_relation_id?: true
+    affiliate_id_1?: true
+    affiliate_type_1?: true
+    affiliate_id_2?: true
+    affiliate_type_2?: true
+    _all?: true
+  }
+
+  export type Affiliates_relationsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which affiliates_relations to aggregate.
+     */
+    where?: affiliates_relationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of affiliates_relations to fetch.
+     */
+    orderBy?: affiliates_relationsOrderByWithRelationInput | affiliates_relationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: affiliates_relationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` affiliates_relations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` affiliates_relations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned affiliates_relations
+    **/
+    _count?: true | Affiliates_relationsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Affiliates_relationsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Affiliates_relationsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Affiliates_relationsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Affiliates_relationsMaxAggregateInputType
+  }
+
+  export type GetAffiliates_relationsAggregateType<T extends Affiliates_relationsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAffiliates_relations]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAffiliates_relations[P]>
+      : GetScalarType<T[P], AggregateAffiliates_relations[P]>
+  }
+
+
+
+
+  export type affiliates_relationsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: affiliates_relationsWhereInput
+    orderBy?: affiliates_relationsOrderByWithAggregationInput | affiliates_relationsOrderByWithAggregationInput[]
+    by: Affiliates_relationsScalarFieldEnum[] | Affiliates_relationsScalarFieldEnum
+    having?: affiliates_relationsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Affiliates_relationsCountAggregateInputType | true
+    _avg?: Affiliates_relationsAvgAggregateInputType
+    _sum?: Affiliates_relationsSumAggregateInputType
+    _min?: Affiliates_relationsMinAggregateInputType
+    _max?: Affiliates_relationsMaxAggregateInputType
+  }
+
+  export type Affiliates_relationsGroupByOutputType = {
+    affiliate_relation_id: number
+    affiliate_id_1: number
+    affiliate_type_1: number
+    affiliate_id_2: number
+    affiliate_type_2: number
+    _count: Affiliates_relationsCountAggregateOutputType | null
+    _avg: Affiliates_relationsAvgAggregateOutputType | null
+    _sum: Affiliates_relationsSumAggregateOutputType | null
+    _min: Affiliates_relationsMinAggregateOutputType | null
+    _max: Affiliates_relationsMaxAggregateOutputType | null
+  }
+
+  type GetAffiliates_relationsGroupByPayload<T extends affiliates_relationsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Affiliates_relationsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Affiliates_relationsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Affiliates_relationsGroupByOutputType[P]>
+            : GetScalarType<T[P], Affiliates_relationsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type affiliates_relationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    affiliate_relation_id?: boolean
+    affiliate_id_1?: boolean
+    affiliate_type_1?: boolean
+    affiliate_id_2?: boolean
+    affiliate_type_2?: boolean
+  }, ExtArgs["result"]["affiliates_relations"]>
+
+  export type affiliates_relationsSelectScalar = {
+    affiliate_relation_id?: boolean
+    affiliate_id_1?: boolean
+    affiliate_type_1?: boolean
+    affiliate_id_2?: boolean
+    affiliate_type_2?: boolean
+  }
+
+
+  export type $affiliates_relationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "affiliates_relations"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      affiliate_relation_id: number
+      affiliate_id_1: number
+      affiliate_type_1: number
+      affiliate_id_2: number
+      affiliate_type_2: number
+    }, ExtArgs["result"]["affiliates_relations"]>
+    composites: {}
+  }
+
+
+  type affiliates_relationsGetPayload<S extends boolean | null | undefined | affiliates_relationsDefaultArgs> = $Result.GetResult<Prisma.$affiliates_relationsPayload, S>
+
+  type affiliates_relationsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<affiliates_relationsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Affiliates_relationsCountAggregateInputType | true
+    }
+
+  export interface affiliates_relationsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['affiliates_relations'], meta: { name: 'affiliates_relations' } }
+    /**
+     * Find zero or one Affiliates_relations that matches the filter.
+     * @param {affiliates_relationsFindUniqueArgs} args - Arguments to find a Affiliates_relations
+     * @example
+     * // Get one Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends affiliates_relationsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsFindUniqueArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Affiliates_relations that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {affiliates_relationsFindUniqueOrThrowArgs} args - Arguments to find a Affiliates_relations
+     * @example
+     * // Get one Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends affiliates_relationsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Affiliates_relations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsFindFirstArgs} args - Arguments to find a Affiliates_relations
+     * @example
+     * // Get one Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends affiliates_relationsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsFindFirstArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Affiliates_relations that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsFindFirstOrThrowArgs} args - Arguments to find a Affiliates_relations
+     * @example
+     * // Get one Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends affiliates_relationsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Affiliates_relations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findMany()
+     * 
+     * // Get first 10 Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.findMany({ take: 10 })
+     * 
+     * // Only select the `affiliate_relation_id`
+     * const affiliates_relationsWithAffiliate_relation_idOnly = await prisma.affiliates_relations.findMany({ select: { affiliate_relation_id: true } })
+     * 
+    **/
+    findMany<T extends affiliates_relationsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Affiliates_relations.
+     * @param {affiliates_relationsCreateArgs} args - Arguments to create a Affiliates_relations.
+     * @example
+     * // Create one Affiliates_relations
+     * const Affiliates_relations = await prisma.affiliates_relations.create({
+     *   data: {
+     *     // ... data to create a Affiliates_relations
+     *   }
+     * })
+     * 
+    **/
+    create<T extends affiliates_relationsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsCreateArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Affiliates_relations.
+     *     @param {affiliates_relationsCreateManyArgs} args - Arguments to create many Affiliates_relations.
+     *     @example
+     *     // Create many Affiliates_relations
+     *     const affiliates_relations = await prisma.affiliates_relations.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends affiliates_relationsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Affiliates_relations.
+     * @param {affiliates_relationsDeleteArgs} args - Arguments to delete one Affiliates_relations.
+     * @example
+     * // Delete one Affiliates_relations
+     * const Affiliates_relations = await prisma.affiliates_relations.delete({
+     *   where: {
+     *     // ... filter to delete one Affiliates_relations
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends affiliates_relationsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsDeleteArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Affiliates_relations.
+     * @param {affiliates_relationsUpdateArgs} args - Arguments to update one Affiliates_relations.
+     * @example
+     * // Update one Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends affiliates_relationsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsUpdateArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Affiliates_relations.
+     * @param {affiliates_relationsDeleteManyArgs} args - Arguments to filter Affiliates_relations to delete.
+     * @example
+     * // Delete a few Affiliates_relations
+     * const { count } = await prisma.affiliates_relations.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends affiliates_relationsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, affiliates_relationsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Affiliates_relations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends affiliates_relationsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Affiliates_relations.
+     * @param {affiliates_relationsUpsertArgs} args - Arguments to update or create a Affiliates_relations.
+     * @example
+     * // Update or create a Affiliates_relations
+     * const affiliates_relations = await prisma.affiliates_relations.upsert({
+     *   create: {
+     *     // ... data to create a Affiliates_relations
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Affiliates_relations we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends affiliates_relationsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, affiliates_relationsUpsertArgs<ExtArgs>>
+    ): Prisma__affiliates_relationsClient<$Result.GetResult<Prisma.$affiliates_relationsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Affiliates_relations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsCountArgs} args - Arguments to filter Affiliates_relations to count.
+     * @example
+     * // Count the number of Affiliates_relations
+     * const count = await prisma.affiliates_relations.count({
+     *   where: {
+     *     // ... the filter for the Affiliates_relations we want to count
+     *   }
+     * })
+    **/
+    count<T extends affiliates_relationsCountArgs>(
+      args?: Subset<T, affiliates_relationsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Affiliates_relationsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Affiliates_relations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Affiliates_relationsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Affiliates_relationsAggregateArgs>(args: Subset<T, Affiliates_relationsAggregateArgs>): Prisma.PrismaPromise<GetAffiliates_relationsAggregateType<T>>
+
+    /**
+     * Group by Affiliates_relations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {affiliates_relationsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends affiliates_relationsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: affiliates_relationsGroupByArgs['orderBy'] }
+        : { orderBy?: affiliates_relationsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, affiliates_relationsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAffiliates_relationsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the affiliates_relations model
+   */
+  readonly fields: affiliates_relationsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for affiliates_relations.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__affiliates_relationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the affiliates_relations model
+   */ 
+  interface affiliates_relationsFieldRefs {
+    readonly affiliate_relation_id: FieldRef<"affiliates_relations", 'Int'>
+    readonly affiliate_id_1: FieldRef<"affiliates_relations", 'Int'>
+    readonly affiliate_type_1: FieldRef<"affiliates_relations", 'Int'>
+    readonly affiliate_id_2: FieldRef<"affiliates_relations", 'Int'>
+    readonly affiliate_type_2: FieldRef<"affiliates_relations", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * affiliates_relations findUnique
+   */
+  export type affiliates_relationsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter, which affiliates_relations to fetch.
+     */
+    where: affiliates_relationsWhereUniqueInput
+  }
+
+
+  /**
+   * affiliates_relations findUniqueOrThrow
+   */
+  export type affiliates_relationsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter, which affiliates_relations to fetch.
+     */
+    where: affiliates_relationsWhereUniqueInput
+  }
+
+
+  /**
+   * affiliates_relations findFirst
+   */
+  export type affiliates_relationsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter, which affiliates_relations to fetch.
+     */
+    where?: affiliates_relationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of affiliates_relations to fetch.
+     */
+    orderBy?: affiliates_relationsOrderByWithRelationInput | affiliates_relationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for affiliates_relations.
+     */
+    cursor?: affiliates_relationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` affiliates_relations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` affiliates_relations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of affiliates_relations.
+     */
+    distinct?: Affiliates_relationsScalarFieldEnum | Affiliates_relationsScalarFieldEnum[]
+  }
+
+
+  /**
+   * affiliates_relations findFirstOrThrow
+   */
+  export type affiliates_relationsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter, which affiliates_relations to fetch.
+     */
+    where?: affiliates_relationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of affiliates_relations to fetch.
+     */
+    orderBy?: affiliates_relationsOrderByWithRelationInput | affiliates_relationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for affiliates_relations.
+     */
+    cursor?: affiliates_relationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` affiliates_relations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` affiliates_relations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of affiliates_relations.
+     */
+    distinct?: Affiliates_relationsScalarFieldEnum | Affiliates_relationsScalarFieldEnum[]
+  }
+
+
+  /**
+   * affiliates_relations findMany
+   */
+  export type affiliates_relationsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter, which affiliates_relations to fetch.
+     */
+    where?: affiliates_relationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of affiliates_relations to fetch.
+     */
+    orderBy?: affiliates_relationsOrderByWithRelationInput | affiliates_relationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing affiliates_relations.
+     */
+    cursor?: affiliates_relationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` affiliates_relations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` affiliates_relations.
+     */
+    skip?: number
+    distinct?: Affiliates_relationsScalarFieldEnum | Affiliates_relationsScalarFieldEnum[]
+  }
+
+
+  /**
+   * affiliates_relations create
+   */
+  export type affiliates_relationsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * The data needed to create a affiliates_relations.
+     */
+    data: XOR<affiliates_relationsCreateInput, affiliates_relationsUncheckedCreateInput>
+  }
+
+
+  /**
+   * affiliates_relations createMany
+   */
+  export type affiliates_relationsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many affiliates_relations.
+     */
+    data: affiliates_relationsCreateManyInput | affiliates_relationsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * affiliates_relations update
+   */
+  export type affiliates_relationsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * The data needed to update a affiliates_relations.
+     */
+    data: XOR<affiliates_relationsUpdateInput, affiliates_relationsUncheckedUpdateInput>
+    /**
+     * Choose, which affiliates_relations to update.
+     */
+    where: affiliates_relationsWhereUniqueInput
+  }
+
+
+  /**
+   * affiliates_relations updateMany
+   */
+  export type affiliates_relationsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update affiliates_relations.
+     */
+    data: XOR<affiliates_relationsUpdateManyMutationInput, affiliates_relationsUncheckedUpdateManyInput>
+    /**
+     * Filter which affiliates_relations to update
+     */
+    where?: affiliates_relationsWhereInput
+  }
+
+
+  /**
+   * affiliates_relations upsert
+   */
+  export type affiliates_relationsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * The filter to search for the affiliates_relations to update in case it exists.
+     */
+    where: affiliates_relationsWhereUniqueInput
+    /**
+     * In case the affiliates_relations found by the `where` argument doesn't exist, create a new affiliates_relations with this data.
+     */
+    create: XOR<affiliates_relationsCreateInput, affiliates_relationsUncheckedCreateInput>
+    /**
+     * In case the affiliates_relations was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<affiliates_relationsUpdateInput, affiliates_relationsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * affiliates_relations delete
+   */
+  export type affiliates_relationsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+    /**
+     * Filter which affiliates_relations to delete.
+     */
+    where: affiliates_relationsWhereUniqueInput
+  }
+
+
+  /**
+   * affiliates_relations deleteMany
+   */
+  export type affiliates_relationsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which affiliates_relations to delete
+     */
+    where?: affiliates_relationsWhereInput
+  }
+
+
+  /**
+   * affiliates_relations without action
+   */
+  export type affiliates_relationsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the affiliates_relations
+     */
+    select?: affiliates_relationsSelect<ExtArgs> | null
+  }
+
+
 
   /**
    * Model collections
@@ -16414,6 +17416,7 @@ export namespace Prisma {
     entities?: boolean | individuals$entitiesArgs<ExtArgs>
     entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
+    user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
     organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
     _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["individuals"]>
@@ -16432,6 +17435,7 @@ export namespace Prisma {
     entities?: boolean | individuals$entitiesArgs<ExtArgs>
     entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
+    user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
     organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
     _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -16444,6 +17448,7 @@ export namespace Prisma {
       entities: Prisma.$entitiesPayload<ExtArgs>[]
       entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
+      user_credentials: Prisma.$user_credentialsPayload<ExtArgs>
       organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16825,6 +17830,8 @@ export namespace Prisma {
     entities_references<T extends individuals$entities_referencesArgs<ExtArgs> = {}>(args?: Subset<T, individuals$entities_referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_referencesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     groups_members<T extends individuals$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    user_credentials<T extends user_credentialsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, user_credentialsDefaultArgs<ExtArgs>>): Prisma__user_credentialsClient<$Result.GetResult<Prisma.$user_credentialsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     organizations_members<T extends individuals$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -21472,6 +22479,7 @@ export namespace Prisma {
     user_last_name?: boolean
     user_email?: boolean
     user_phone_number?: boolean
+    individuals?: boolean | user_credentials$individualsArgs<ExtArgs>
   }, ExtArgs["result"]["user_credentials"]>
 
   export type user_credentialsSelectScalar = {
@@ -21484,10 +22492,16 @@ export namespace Prisma {
     user_phone_number?: boolean
   }
 
+  export type user_credentialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    individuals?: boolean | user_credentials$individualsArgs<ExtArgs>
+  }
+
 
   export type $user_credentialsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user_credentials"
-    objects: {}
+    objects: {
+      individuals: Prisma.$individualsPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       user_id: number
       username: string
@@ -21861,6 +22875,7 @@ export namespace Prisma {
   export interface Prisma__user_credentialsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    individuals<T extends user_credentials$individualsArgs<ExtArgs> = {}>(args?: Subset<T, user_credentials$individualsArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21911,6 +22926,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * Filter, which user_credentials to fetch.
      */
     where: user_credentialsWhereUniqueInput
@@ -21926,6 +22945,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * Filter, which user_credentials to fetch.
      */
     where: user_credentialsWhereUniqueInput
@@ -21940,6 +22963,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the user_credentials
      */
     select?: user_credentialsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
     /**
      * Filter, which user_credentials to fetch.
      */
@@ -21986,6 +23013,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * Filter, which user_credentials to fetch.
      */
     where?: user_credentialsWhereInput
@@ -22031,6 +23062,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * Filter, which user_credentials to fetch.
      */
     where?: user_credentialsWhereInput
@@ -22071,6 +23106,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * The data needed to create a user_credentials.
      */
     data: XOR<user_credentialsCreateInput, user_credentialsUncheckedCreateInput>
@@ -22097,6 +23136,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the user_credentials
      */
     select?: user_credentialsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
     /**
      * The data needed to update a user_credentials.
      */
@@ -22132,6 +23175,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * The filter to search for the user_credentials to update in case it exists.
      */
     where: user_credentialsWhereUniqueInput
@@ -22155,6 +23202,10 @@ export namespace Prisma {
      */
     select?: user_credentialsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
+    /**
      * Filter which user_credentials to delete.
      */
     where: user_credentialsWhereUniqueInput
@@ -22173,6 +23224,22 @@ export namespace Prisma {
 
 
   /**
+   * user_credentials.individuals
+   */
+  export type user_credentials$individualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the individuals
+     */
+    select?: individualsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: individualsInclude<ExtArgs> | null
+    where?: individualsWhereInput
+  }
+
+
+  /**
    * user_credentials without action
    */
   export type user_credentialsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22180,6 +23247,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the user_credentials
      */
     select?: user_credentialsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: user_credentialsInclude<ExtArgs> | null
   }
 
 
@@ -24170,6 +25241,17 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const Affiliates_relationsScalarFieldEnum: {
+    affiliate_relation_id: 'affiliate_relation_id',
+    affiliate_id_1: 'affiliate_id_1',
+    affiliate_type_1: 'affiliate_type_1',
+    affiliate_id_2: 'affiliate_id_2',
+    affiliate_type_2: 'affiliate_type_2'
+  };
+
+  export type Affiliates_relationsScalarFieldEnum = (typeof Affiliates_relationsScalarFieldEnum)[keyof typeof Affiliates_relationsScalarFieldEnum]
+
+
   export const CollectionsScalarFieldEnum: {
     collection_id: 'collection_id',
     collection_name: 'collection_name',
@@ -24466,6 +25548,61 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type affiliates_relationsWhereInput = {
+    AND?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
+    OR?: affiliates_relationsWhereInput[]
+    NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
+    affiliate_relation_id?: IntFilter<"affiliates_relations"> | number
+    affiliate_id_1?: IntFilter<"affiliates_relations"> | number
+    affiliate_type_1?: IntFilter<"affiliates_relations"> | number
+    affiliate_id_2?: IntFilter<"affiliates_relations"> | number
+    affiliate_type_2?: IntFilter<"affiliates_relations"> | number
+  }
+
+  export type affiliates_relationsOrderByWithRelationInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type affiliates_relationsWhereUniqueInput = Prisma.AtLeast<{
+    affiliate_relation_id?: number
+    affiliate_id_1_affiliate_id_2?: affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput
+    AND?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
+    OR?: affiliates_relationsWhereInput[]
+    NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
+    affiliate_id_1?: IntFilter<"affiliates_relations"> | number
+    affiliate_type_1?: IntFilter<"affiliates_relations"> | number
+    affiliate_id_2?: IntFilter<"affiliates_relations"> | number
+    affiliate_type_2?: IntFilter<"affiliates_relations"> | number
+  }, "affiliate_relation_id" | "affiliate_id_1_affiliate_id_2">
+
+  export type affiliates_relationsOrderByWithAggregationInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+    _count?: affiliates_relationsCountOrderByAggregateInput
+    _avg?: affiliates_relationsAvgOrderByAggregateInput
+    _max?: affiliates_relationsMaxOrderByAggregateInput
+    _min?: affiliates_relationsMinOrderByAggregateInput
+    _sum?: affiliates_relationsSumOrderByAggregateInput
+  }
+
+  export type affiliates_relationsScalarWhereWithAggregatesInput = {
+    AND?: affiliates_relationsScalarWhereWithAggregatesInput | affiliates_relationsScalarWhereWithAggregatesInput[]
+    OR?: affiliates_relationsScalarWhereWithAggregatesInput[]
+    NOT?: affiliates_relationsScalarWhereWithAggregatesInput | affiliates_relationsScalarWhereWithAggregatesInput[]
+    affiliate_relation_id?: IntWithAggregatesFilter<"affiliates_relations"> | number
+    affiliate_id_1?: IntWithAggregatesFilter<"affiliates_relations"> | number
+    affiliate_type_1?: IntWithAggregatesFilter<"affiliates_relations"> | number
+    affiliate_id_2?: IntWithAggregatesFilter<"affiliates_relations"> | number
+    affiliate_type_2?: IntWithAggregatesFilter<"affiliates_relations"> | number
+  }
 
   export type collectionsWhereInput = {
     AND?: collectionsWhereInput | collectionsWhereInput[]
@@ -25322,6 +26459,7 @@ export namespace Prisma {
     entities?: EntitiesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
+    user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
     organizations_members?: Organizations_membersListRelationFilter
   }
 
@@ -25336,6 +26474,7 @@ export namespace Prisma {
     entities?: entitiesOrderByRelationAggregateInput
     entities_references?: entities_referencesOrderByRelationAggregateInput
     groups_members?: groups_membersOrderByRelationAggregateInput
+    user_credentials?: user_credentialsOrderByWithRelationInput
     organizations_members?: organizations_membersOrderByRelationAggregateInput
   }
 
@@ -25353,6 +26492,7 @@ export namespace Prisma {
     entities?: EntitiesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
+    user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
     organizations_members?: Organizations_membersListRelationFilter
   }, "individual_id" | "individual_id" | "individual_userName">
 
@@ -25623,6 +26763,7 @@ export namespace Prisma {
     user_last_name?: StringNullableFilter<"user_credentials"> | string | null
     user_email?: StringNullableFilter<"user_credentials"> | string | null
     user_phone_number?: StringNullableFilter<"user_credentials"> | string | null
+    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
   }
 
   export type user_credentialsOrderByWithRelationInput = {
@@ -25633,6 +26774,7 @@ export namespace Prisma {
     user_last_name?: SortOrderInput | SortOrder
     user_email?: SortOrderInput | SortOrder
     user_phone_number?: SortOrderInput | SortOrder
+    individuals?: individualsOrderByWithRelationInput
   }
 
   export type user_credentialsWhereUniqueInput = Prisma.AtLeast<{
@@ -25646,6 +26788,7 @@ export namespace Prisma {
     user_last_name?: StringNullableFilter<"user_credentials"> | string | null
     user_email?: StringNullableFilter<"user_credentials"> | string | null
     user_phone_number?: StringNullableFilter<"user_credentials"> | string | null
+    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
   }, "user_id" | "user_id" | "username">
 
   export type user_credentialsOrderByWithAggregationInput = {
@@ -25787,6 +26930,59 @@ export namespace Prisma {
     NOT?: videos_dataScalarWhereWithAggregatesInput | videos_dataScalarWhereWithAggregatesInput[]
     video_data_id?: IntWithAggregatesFilter<"videos_data"> | number
     video_data?: BytesWithAggregatesFilter<"videos_data"> | Buffer
+  }
+
+  export type affiliates_relationsCreateInput = {
+    affiliate_id_1: number
+    affiliate_type_1: number
+    affiliate_id_2: number
+    affiliate_type_2: number
+  }
+
+  export type affiliates_relationsUncheckedCreateInput = {
+    affiliate_relation_id?: number
+    affiliate_id_1: number
+    affiliate_type_1: number
+    affiliate_id_2: number
+    affiliate_type_2: number
+  }
+
+  export type affiliates_relationsUpdateInput = {
+    affiliate_id_1?: IntFieldUpdateOperationsInput | number
+    affiliate_type_1?: IntFieldUpdateOperationsInput | number
+    affiliate_id_2?: IntFieldUpdateOperationsInput | number
+    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type affiliates_relationsUncheckedUpdateInput = {
+    affiliate_relation_id?: IntFieldUpdateOperationsInput | number
+    affiliate_id_1?: IntFieldUpdateOperationsInput | number
+    affiliate_type_1?: IntFieldUpdateOperationsInput | number
+    affiliate_id_2?: IntFieldUpdateOperationsInput | number
+    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type affiliates_relationsCreateManyInput = {
+    affiliate_relation_id?: number
+    affiliate_id_1: number
+    affiliate_type_1: number
+    affiliate_id_2: number
+    affiliate_type_2: number
+  }
+
+  export type affiliates_relationsUpdateManyMutationInput = {
+    affiliate_id_1?: IntFieldUpdateOperationsInput | number
+    affiliate_type_1?: IntFieldUpdateOperationsInput | number
+    affiliate_id_2?: IntFieldUpdateOperationsInput | number
+    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type affiliates_relationsUncheckedUpdateManyInput = {
+    affiliate_relation_id?: IntFieldUpdateOperationsInput | number
+    affiliate_id_1?: IntFieldUpdateOperationsInput | number
+    affiliate_type_1?: IntFieldUpdateOperationsInput | number
+    affiliate_id_2?: IntFieldUpdateOperationsInput | number
+    affiliate_type_2?: IntFieldUpdateOperationsInput | number
   }
 
   export type collectionsCreateInput = {
@@ -26553,6 +27749,7 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
@@ -26580,6 +27777,7 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
@@ -26842,6 +28040,7 @@ export namespace Prisma {
     user_last_name?: string | null
     user_email?: string | null
     user_phone_number?: string | null
+    individuals?: individualsCreateNestedOneWithoutUser_credentialsInput
   }
 
   export type user_credentialsUncheckedCreateInput = {
@@ -26852,6 +28051,7 @@ export namespace Prisma {
     user_last_name?: string | null
     user_email?: string | null
     user_phone_number?: string | null
+    individuals?: individualsUncheckedCreateNestedOneWithoutUser_credentialsInput
   }
 
   export type user_credentialsUpdateInput = {
@@ -26861,6 +28061,7 @@ export namespace Prisma {
     user_last_name?: NullableStringFieldUpdateOperationsInput | string | null
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
     user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    individuals?: individualsUpdateOneWithoutUser_credentialsNestedInput
   }
 
   export type user_credentialsUncheckedUpdateInput = {
@@ -26871,6 +28072,7 @@ export namespace Prisma {
     user_last_name?: NullableStringFieldUpdateOperationsInput | string | null
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
     user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    individuals?: individualsUncheckedUpdateOneWithoutUser_credentialsNestedInput
   }
 
   export type user_credentialsCreateManyInput = {
@@ -27015,6 +28217,67 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput = {
+    affiliate_id_1: number
+    affiliate_id_2: number
+  }
+
+  export type affiliates_relationsCountOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type affiliates_relationsAvgOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type affiliates_relationsMaxOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type affiliates_relationsMinOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type affiliates_relationsSumOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_type_1?: SortOrder
+    affiliate_id_2?: SortOrder
+    affiliate_type_2?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -27126,22 +28389,6 @@ export namespace Prisma {
     individual_id?: SortOrder
     group_id?: SortOrder
     organization_id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -27868,6 +29115,11 @@ export namespace Prisma {
     _max?: NestedBytesFilter<$PrismaModel>
   }
 
+  export type User_credentialsRelationFilter = {
+    is?: user_credentialsWhereInput
+    isNot?: user_credentialsWhereInput
+  }
+
   export type Organizations_membersListRelationFilter = {
     every?: organizations_membersWhereInput
     some?: organizations_membersWhereInput
@@ -28155,6 +29407,14 @@ export namespace Prisma {
     video_data_id?: SortOrder
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type individualsCreateNestedOneWithoutCollectionsInput = {
     create?: XOR<individualsCreateWithoutCollectionsInput, individualsUncheckedCreateWithoutCollectionsInput>
     connectOrCreate?: individualsCreateOrConnectWithoutCollectionsInput
@@ -28289,14 +29549,6 @@ export namespace Prisma {
     update?: collections_videosUpdateWithWhereUniqueWithoutCollectionsInput | collections_videosUpdateWithWhereUniqueWithoutCollectionsInput[]
     updateMany?: collections_videosUpdateManyWithWhereWithoutCollectionsInput | collections_videosUpdateManyWithWhereWithoutCollectionsInput[]
     deleteMany?: collections_videosScalarWhereInput | collections_videosScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -29263,6 +30515,12 @@ export namespace Prisma {
     connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
   }
 
+  export type user_credentialsCreateNestedOneWithoutIndividualsInput = {
+    create?: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
+    connectOrCreate?: user_credentialsCreateOrConnectWithoutIndividualsInput
+    connect?: user_credentialsWhereUniqueInput
+  }
+
   export type organizations_membersCreateNestedManyWithoutIndividualsInput = {
     create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
@@ -29359,6 +30617,14 @@ export namespace Prisma {
     update?: groups_membersUpdateWithWhereUniqueWithoutIndividualsInput | groups_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
     updateMany?: groups_membersUpdateManyWithWhereWithoutIndividualsInput | groups_membersUpdateManyWithWhereWithoutIndividualsInput[]
     deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
+  }
+
+  export type user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput = {
+    create?: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
+    connectOrCreate?: user_credentialsCreateOrConnectWithoutIndividualsInput
+    upsert?: user_credentialsUpsertWithoutIndividualsInput
+    connect?: user_credentialsWhereUniqueInput
+    update?: XOR<XOR<user_credentialsUpdateToOneWithWhereWithoutIndividualsInput, user_credentialsUpdateWithoutIndividualsInput>, user_credentialsUncheckedUpdateWithoutIndividualsInput>
   }
 
   export type organizations_membersUpdateManyWithoutIndividualsNestedInput = {
@@ -29795,6 +31061,38 @@ export namespace Prisma {
     deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
   }
 
+  export type individualsCreateNestedOneWithoutUser_credentialsInput = {
+    create?: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+    connectOrCreate?: individualsCreateOrConnectWithoutUser_credentialsInput
+    connect?: individualsWhereUniqueInput
+  }
+
+  export type individualsUncheckedCreateNestedOneWithoutUser_credentialsInput = {
+    create?: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+    connectOrCreate?: individualsCreateOrConnectWithoutUser_credentialsInput
+    connect?: individualsWhereUniqueInput
+  }
+
+  export type individualsUpdateOneWithoutUser_credentialsNestedInput = {
+    create?: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+    connectOrCreate?: individualsCreateOrConnectWithoutUser_credentialsInput
+    upsert?: individualsUpsertWithoutUser_credentialsInput
+    disconnect?: individualsWhereInput | boolean
+    delete?: individualsWhereInput | boolean
+    connect?: individualsWhereUniqueInput
+    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutUser_credentialsInput, individualsUpdateWithoutUser_credentialsInput>, individualsUncheckedUpdateWithoutUser_credentialsInput>
+  }
+
+  export type individualsUncheckedUpdateOneWithoutUser_credentialsNestedInput = {
+    create?: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+    connectOrCreate?: individualsCreateOrConnectWithoutUser_credentialsInput
+    upsert?: individualsUpsertWithoutUser_credentialsInput
+    disconnect?: individualsWhereInput | boolean
+    delete?: individualsWhereInput | boolean
+    connect?: individualsWhereUniqueInput
+    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutUser_credentialsInput, individualsUpdateWithoutUser_credentialsInput>, individualsUncheckedUpdateWithoutUser_credentialsInput>
+  }
+
   export type collections_videosCreateNestedManyWithoutVideosInput = {
     create?: XOR<collections_videosCreateWithoutVideosInput, collections_videosUncheckedCreateWithoutVideosInput> | collections_videosCreateWithoutVideosInput[] | collections_videosUncheckedCreateWithoutVideosInput[]
     connectOrCreate?: collections_videosCreateOrConnectWithoutVideosInput | collections_videosCreateOrConnectWithoutVideosInput[]
@@ -29960,31 +31258,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -30010,6 +31283,31 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -30176,6 +31474,7 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
@@ -30348,6 +31647,7 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
@@ -30877,6 +32177,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
@@ -31142,6 +32443,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
@@ -31513,6 +32815,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
@@ -31616,6 +32919,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
@@ -32148,6 +33452,7 @@ export namespace Prisma {
     collections?: collectionsCreateNestedManyWithoutIndividualsInput
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
@@ -32223,6 +33528,7 @@ export namespace Prisma {
     collections?: collectionsUpdateManyWithoutIndividualsNestedInput
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
@@ -32569,6 +33875,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type user_credentialsCreateWithoutIndividualsInput = {
+    username: string
+    user_password: string
+    user_first_name?: string | null
+    user_last_name?: string | null
+    user_email?: string | null
+    user_phone_number?: string | null
+  }
+
+  export type user_credentialsUncheckedCreateWithoutIndividualsInput = {
+    user_id?: number
+    username: string
+    user_password: string
+    user_first_name?: string | null
+    user_last_name?: string | null
+    user_email?: string | null
+    user_phone_number?: string | null
+  }
+
+  export type user_credentialsCreateOrConnectWithoutIndividualsInput = {
+    where: user_credentialsWhereUniqueInput
+    create: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
+  }
+
   export type organizations_membersCreateWithoutIndividualsInput = {
     organizations: organizationsCreateNestedOneWithoutOrganizations_membersInput
   }
@@ -32649,6 +33979,36 @@ export namespace Prisma {
   export type groups_membersUpdateManyWithWhereWithoutIndividualsInput = {
     where: groups_membersScalarWhereInput
     data: XOR<groups_membersUpdateManyMutationInput, groups_membersUncheckedUpdateManyWithoutIndividualsInput>
+  }
+
+  export type user_credentialsUpsertWithoutIndividualsInput = {
+    update: XOR<user_credentialsUpdateWithoutIndividualsInput, user_credentialsUncheckedUpdateWithoutIndividualsInput>
+    create: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
+    where?: user_credentialsWhereInput
+  }
+
+  export type user_credentialsUpdateToOneWithWhereWithoutIndividualsInput = {
+    where?: user_credentialsWhereInput
+    data: XOR<user_credentialsUpdateWithoutIndividualsInput, user_credentialsUncheckedUpdateWithoutIndividualsInput>
+  }
+
+  export type user_credentialsUpdateWithoutIndividualsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    user_password?: StringFieldUpdateOperationsInput | string
+    user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type user_credentialsUncheckedUpdateWithoutIndividualsInput = {
+    user_id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    user_password?: StringFieldUpdateOperationsInput | string
+    user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput = {
@@ -32856,6 +34216,7 @@ export namespace Prisma {
     entities?: entitiesCreateNestedManyWithoutIndividualsInput
     entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
     groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutOrganizations_membersInput = {
@@ -32925,6 +34286,7 @@ export namespace Prisma {
     entities?: entitiesUpdateManyWithoutIndividualsNestedInput
     entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
     groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutOrganizations_membersInput = {
@@ -33195,6 +34557,74 @@ export namespace Prisma {
   export type sheetsUpdateManyWithWhereWithoutSheets_dataInput = {
     where: sheetsScalarWhereInput
     data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutSheets_dataInput>
+  }
+
+  export type individualsCreateWithoutUser_credentialsInput = {
+    individual_userName: string
+    individual_name: string
+    individual_currentIssue?: string | null
+    individual_roles?: string | null
+    individual_description?: string | null
+    collections?: collectionsCreateNestedManyWithoutIndividualsInput
+    entities?: entitiesCreateNestedManyWithoutIndividualsInput
+    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
+    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
+  }
+
+  export type individualsUncheckedCreateWithoutUser_credentialsInput = {
+    individual_userName: string
+    individual_name: string
+    individual_currentIssue?: string | null
+    individual_roles?: string | null
+    individual_description?: string | null
+    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
+    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
+  }
+
+  export type individualsCreateOrConnectWithoutUser_credentialsInput = {
+    where: individualsWhereUniqueInput
+    create: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+  }
+
+  export type individualsUpsertWithoutUser_credentialsInput = {
+    update: XOR<individualsUpdateWithoutUser_credentialsInput, individualsUncheckedUpdateWithoutUser_credentialsInput>
+    create: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
+    where?: individualsWhereInput
+  }
+
+  export type individualsUpdateToOneWithWhereWithoutUser_credentialsInput = {
+    where?: individualsWhereInput
+    data: XOR<individualsUpdateWithoutUser_credentialsInput, individualsUncheckedUpdateWithoutUser_credentialsInput>
+  }
+
+  export type individualsUpdateWithoutUser_credentialsInput = {
+    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
+    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
+    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
+  }
+
+  export type individualsUncheckedUpdateWithoutUser_credentialsInput = {
+    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
+    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type collections_videosCreateWithoutVideosInput = {
@@ -34424,6 +35854,10 @@ export namespace Prisma {
      * @deprecated Use Videos_dataCountOutputTypeDefaultArgs instead
      */
     export type Videos_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Videos_dataCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use affiliates_relationsDefaultArgs instead
+     */
+    export type affiliates_relationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = affiliates_relationsDefaultArgs<ExtArgs>
     /**
      * @deprecated Use collectionsDefaultArgs instead
      */

@@ -31,7 +31,22 @@ export default function IndividualCards() {
   useEffect(() => {
     const fetchIndividualData = async () => {
       try {
-        const response = await Axios.get(`${serverUrl}/individuals`);
+        const token = localStorage.getItem("token");
+        if (!token) {
+          // Handle the case where token is not available (e.g., redirect to login page)
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/individuals/get_affiliated_individuals`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
         setIndividuals(response.data);
       } catch (error) {
         console.error("Error fetching individual data:", error);

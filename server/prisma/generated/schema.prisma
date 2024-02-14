@@ -8,6 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model affiliates_relations {
+  affiliate_relation_id Int @id @default(autoincrement())
+  affiliate_id_1        Int
+  affiliate_type_1      Int
+  affiliate_id_2        Int
+  affiliate_type_2      Int
+
+  @@unique([affiliate_id_1, affiliate_id_2], map: "unique_affiliate_combination")
+}
+
 model collections {
   collection_id      Int                  @id @unique(map: "collection_id_UNIQUE") @default(autoincrement())
   collection_name    String               @db.VarChar(256)
@@ -203,6 +214,7 @@ model individuals {
   entities                entities[]
   entities_references     entities_references[]
   groups_members          groups_members[]
+  user_credentials        user_credentials        @relation(fields: [individual_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_individual_id_fk")
   organizations_members   organizations_members[]
 }
 
@@ -252,13 +264,14 @@ model sheets_data {
 }
 
 model user_credentials {
-  user_id           Int     @id @unique(map: "user_id_UNIQUE") @default(autoincrement())
-  username          String  @unique(map: "username_UNIQUE") @db.VarChar(128)
-  user_password     String  @db.VarChar(128)
-  user_first_name   String? @db.VarChar(128)
-  user_last_name    String? @db.VarChar(128)
-  user_email        String? @db.VarChar(128)
-  user_phone_number String? @db.VarChar(15)
+  user_id           Int          @id @unique(map: "user_id_UNIQUE") @default(autoincrement())
+  username          String       @unique(map: "username_UNIQUE") @db.VarChar(128)
+  user_password     String       @db.VarChar(128)
+  user_first_name   String?      @db.VarChar(128)
+  user_last_name    String?      @db.VarChar(128)
+  user_email        String?      @db.VarChar(128)
+  user_phone_number String?      @db.VarChar(15)
+  individuals       individuals?
 }
 
 model videos {
