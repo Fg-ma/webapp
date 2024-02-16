@@ -9,19 +9,19 @@ interface EntityPageHeaderProps {
 
 interface Entity {
   [key: string]: any;
-  individual_id?: number;
+  individual_id?: string;
   individual_name?: string;
   individual_userName?: string;
   individual_roles?: string;
   individual_currentIssue?: string;
   individual_description?: string;
-  group_id?: number;
+  group_id?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
   group_currentIssue?: string;
   group_description?: string;
-  organization_id?: number;
+  organization_id?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
@@ -30,10 +30,10 @@ interface Entity {
 }
 
 interface EntityReferences {
-  reference_id: number;
-  individual_id: number | null;
-  group_id: number | null;
-  organization_id: number | null;
+  reference_id: string;
+  individual_id: string | null;
+  group_id: string | null;
+  organization_id: string | null;
   title: string;
   author: string;
   url: string;

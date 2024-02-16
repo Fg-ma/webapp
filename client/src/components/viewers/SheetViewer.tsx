@@ -15,16 +15,25 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 interface SheetViewerProps {
-  sheet_id: number;
+  sheet_id: string;
+}
+
+interface SheetData {
+  sheet_url: string;
+  sheet_title: string;
+  sheet_subject: string;
+  entity_type: number;
+  sheet_author: any;
 }
 
 export default function SheetViewer({ sheet_id }: SheetViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
-  const [sheetData, setSheetData] = useState({
+  const [sheetData, setSheetData] = useState<SheetData>({
     sheet_url: "",
     sheet_title: "",
     sheet_subject: "",
-    sheet_author: "",
+    entity_type: 0,
+    sheet_author: null,
   });
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
@@ -40,7 +49,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
 
         if (response.data) {
           const blobData = new Uint8Array(
-            response.data.sheets_data.sheet_data.data,
+            response.data.fullSheet.sheets_data.sheet_data.data,
           );
           const url = URL.createObjectURL(
             new Blob([blobData], { type: "application/pdf" }),
@@ -48,15 +57,10 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
 
           setSheetData({
             sheet_url: url,
-            sheet_title: response.data.sheet_title,
-            sheet_subject: response.data.sheet_subject,
-            sheet_author: response.data.entities.individuals
-              ? response.data.entities.individuals.individual_name
-              : response.data.entities.groups
-                ? response.data.entities.groups.group_name
-                : response.data.entities.organizations
-                  ? response.data.entities.organizations.organization_name
-                  : "",
+            sheet_title: response.data.fullSheet.sheet_title,
+            sheet_subject: response.data.fullSheet.sheet_subject,
+            entity_type: response.data.fullSheet.entities.entity_type,
+            sheet_author: response.data.sheetAuthor,
           });
         }
       } catch (error) {

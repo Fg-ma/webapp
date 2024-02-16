@@ -3,34 +3,17 @@ const router = express.Router();
 
 // Get collection names and ids from entity id
 router.get("/collections_names", async (req, res) => {
-  const id = parseInt(req.query.id, 10);
-  const type = req.query.type;
+  const id = req.query.id;
 
   try {
     let collections;
 
-    if (type === "individuals") {
-      collections = await req.db.collections.findMany({
-        where: {
-          individual_id: id,
-        },
-        distinct: ["collection_id"],
-      });
-    } else if (type === "groups") {
-      collections = await req.db.collections.findMany({
-        where: {
-          group_id: id,
-        },
-        distinct: ["collection_id"],
-      });
-    } else if (type === "organizations") {
-      collections = await req.db.collections.findMany({
-        where: {
-          organization_id: id,
-        },
-        distinct: ["collection_id"],
-      });
-    }
+    collections = await req.db.collections.findMany({
+      where: {
+        entity_id: id,
+      },
+      distinct: ["collection_id"],
+    });
 
     res.send(collections);
   } catch (error) {
@@ -41,7 +24,7 @@ router.get("/collections_names", async (req, res) => {
 
 // Get collection from collection_id
 router.get("/:collection_id", async (req, res) => {
-  const collection_id = parseInt(req.params.collection_id, 10);
+  const collection_id = req.params.collection_id;
 
   try {
     const collectionDetails = await req.db.$transaction([

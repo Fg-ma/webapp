@@ -10,20 +10,20 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface SheetsProps {
-  entity_id: number;
+  entity_id: string;
 }
 
 interface SheetData {
-  sheet_id: number;
-  entity_id: number;
-  entities_sheets_id: number;
+  sheet_id: string;
+  entity_id: string;
+  entities_sheets_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
   sheets: {
-    sheet_id: number;
-    sheet_data_id: number;
-    sheet_author_id: number;
+    sheet_id: string;
+    sheet_data_id: string;
+    sheet_author_id: string;
     sheet_filename: string;
     sheet_title: string;
     sheet_subject: string;

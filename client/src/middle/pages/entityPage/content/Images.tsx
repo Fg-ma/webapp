@@ -10,20 +10,20 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface ImagesProps {
-  entity_id: number;
+  entity_id: string;
 }
 
 interface ImageData {
-  image_id: number;
-  entity_id: number;
-  entities_images_id: number;
+  image_id: string;
+  entity_id: string;
+  entities_images_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
   images: {
-    image_id: number;
-    image_data_id: number;
-    image_creator_id: number;
+    image_id: string;
+    image_data_id: string;
+    image_creator_id: string;
     image_title: string;
     image_description: string;
     image_filename: string;

@@ -11,19 +11,21 @@ interface VideoViewerProps {
   video_id: number;
 }
 
-interface ImageData {
+interface VideoData {
   video_url: string;
   video_title: string;
   video_description: string;
-  video_author: string;
+  entity_type: number;
+  video_creator: any;
 }
 
 export default function VideoViewer({ video_id }: VideoViewerProps) {
-  const [videoData, setVideoData] = useState<ImageData>({
+  const [videoData, setVideoData] = useState<VideoData>({
     video_url: "",
     video_title: "",
     video_description: "",
-    video_author: "",
+    entity_type: 0,
+    video_creator: null,
   });
 
   useEffect(() => {
@@ -34,10 +36,12 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
 
       if (response.data) {
         const blobData = new Uint8Array(
-          response.data.videos_data.video_data.data,
+          response.data.fullVideo.videos_data.video_data.data,
         );
 
-        const extension = response.data.video_filename.slice(-3).toLowerCase();
+        const extension = response.data.fullVideo.video_filename
+          .slice(-3)
+          .toLowerCase();
 
         const mimeType = getMimeType(extension);
 
@@ -48,15 +52,10 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
 
           setVideoData({
             video_url: url,
-            video_title: response.data.video_title,
-            video_description: response.data.video_description,
-            video_author: response.data.entities.individuals
-              ? response.data.entities.individuals.individual_name
-              : response.data.entities.groups
-                ? response.data.entities.groups.group_name
-                : response.data.entities.organizations
-                  ? response.data.entities.organizations.organization_name
-                  : "",
+            video_title: response.data.fullVideo.video_title,
+            video_description: response.data.fullVideo.video_description,
+            entity_type: response.data.fullVideo.entities.entity_type,
+            video_creator: response.data.videoCreator,
           });
         }
       }
@@ -80,6 +79,23 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
     }
   };
 
+  let creatorElement = null;
+  if (videoData.video_creator) {
+    if (videoData.entity_type === 1) {
+      creatorElement = (
+        <p className="text-lg">{videoData.video_creator.individual_name}</p>
+      );
+    } else if (videoData.entity_type === 2) {
+      creatorElement = (
+        <p className="text-lg">{videoData.video_creator.group_name}</p>
+      );
+    } else if (videoData.entity_type === 3) {
+      creatorElement = (
+        <p className="text-lg">{videoData.video_creator.organization_name}</p>
+      );
+    }
+  }
+
   return (
     <div className="w-full">
       {videoData.video_url && (
@@ -91,14 +107,14 @@ export default function VideoViewer({ video_id }: VideoViewerProps) {
         </div>
       )}
       {videoData.video_title &&
-        videoData.video_author &&
+        videoData.video_creator &&
         videoData.video_description && (
           <div className="flex flex-col mt-4 items-start justify-center">
             <p className="text-xl mb-2">{videoData.video_title}</p>
             <div className="flex items-center justify-start mb-2">
               <div className="bg-fg-white-85 rounded-full h-10 aspect-square"></div>
               <div className="flex flex-col items-start justify-center ml-4">
-                <p className="text-lg">{videoData.video_author}</p>
+                {creatorElement}
               </div>
             </div>
             <p className="font-K2D text-base">{videoData.video_description}</p>

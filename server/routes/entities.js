@@ -3,31 +3,16 @@ const router = express.Router();
 
 // Get entity data from entity type and entity id
 router.get("/entity", async (req, res) => {
-  const id = parseInt(req.query.id, 10);
-  const type = req.query.type;
+  const id = req.query.id;
 
   try {
     let entities;
 
-    if (type === "individuals") {
-      entities = await req.db.entities.findMany({
-        where: {
-          individual_id: id,
-        },
-      });
-    } else if (type === "groups") {
-      entities = await req.db.entities.findMany({
-        where: {
-          group_id: id,
-        },
-      });
-    } else if (type === "organizations") {
-      entities = await req.db.entities.findMany({
-        where: {
-          organization_id: id,
-        },
-      });
-    }
+    entities = await req.db.entities.findMany({
+      where: {
+        entity_id: id,
+      },
+    });
 
     res.send(entities);
   } catch (error) {
@@ -38,7 +23,7 @@ router.get("/entity", async (req, res) => {
 
 // Get all the sheets belonging to an entity
 router.get("/entity_sheets/:entity_id", async (req, res) => {
-  const entity_id = parseInt(req.params.entity_id, 10);
+  const entity_id = req.params.entity_id;
 
   try {
     const result = await req.db.entities_sheets.findMany({
@@ -59,7 +44,7 @@ router.get("/entity_sheets/:entity_id", async (req, res) => {
 
 // Get all the videos belonging to an entity
 router.get("/entity_videos/:entity_id", async (req, res) => {
-  const entity_id = parseInt(req.params.entity_id, 10);
+  const entity_id = req.params.entity_id;
 
   try {
     const result = await req.db.entities_videos.findMany({
@@ -80,7 +65,7 @@ router.get("/entity_videos/:entity_id", async (req, res) => {
 
 // Get all the images belonging to an entity
 router.get("/entity_images/:entity_id", async (req, res) => {
-  const entity_id = parseInt(req.params.entity_id, 10);
+  const entity_id = req.params.entity_id;
 
   try {
     const result = await req.db.entities_images.findMany({

@@ -18,10 +18,10 @@ const transition: Transition = {
 };
 
 interface Reference {
-  reference_id: number;
-  individual_id: number | null;
-  group_id: number | null;
-  organization_id: number | null;
+  reference_id: string;
+  individual_id: string | null;
+  group_id: string | null;
+  organization_id: string | null;
   title: string;
   author: string;
   url: string;

@@ -8,7 +8,7 @@ router.get("/:video_id", async (req, res) => {
   try {
     const video = await req.db.videos.findUnique({
       where: {
-        video_id: parseInt(video_id),
+        video_id: video_id,
       },
     });
 
@@ -26,7 +26,7 @@ router.get("/:video_id", async (req, res) => {
 
 // Gets all the data needed to display a video's contents
 router.get("/get_full_video/:video_id", async (req, res) => {
-  const video_id = parseInt(req.params.video_id);
+  const video_id = req.params.video_id;
 
   try {
     const fullVideo = await req.db.videos.findUnique({
@@ -35,22 +35,43 @@ router.get("/get_full_video/:video_id", async (req, res) => {
       },
       include: {
         videos_data: true,
-        entities: {
-          include: {
-            individuals: true,
-            groups: true,
-            organizations: true,
-          },
-        },
+        entities: true,
       },
     });
+
+    const getVideoCreator = async (fullVideo) => {
+      if (fullVideo.entities.entity_type === 1) {
+        return await req.db.individuals.findUnique({
+          where: {
+            individual_id: fullVideo.entities.entity_id,
+          },
+        });
+      } else if (fullVideo.entities.entity_type === 2) {
+        return await req.db.groups.findUnique({
+          where: {
+            group_id: fullVideo.entities.entity_id,
+          },
+        });
+      } else if (fullVideo.entities.entity_type === 3) {
+        return await req.db.organizations.findUnique({
+          where: {
+            organization_id: fullVideo.entities.entity_id,
+          },
+        });
+      }
+    };
+
+    const videoCreator = await getVideoCreator(fullVideo);
 
     if (!fullVideo || fullVideo.length === 0) {
       res.status(404).send("Video not found");
       return;
+    } else if (!videoCreator) {
+      res.status(404).send("Creator not found");
+      return;
     }
 
-    res.send(fullVideo);
+    res.send({ fullVideo, videoCreator });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

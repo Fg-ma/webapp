@@ -32,8 +32,8 @@ export default function IndividualCards() {
     const fetchIndividualData = async () => {
       try {
         const token = localStorage.getItem("token");
+
         if (!token) {
-          // Handle the case where token is not available (e.g., redirect to login page)
           console.error("Token not found in local storage");
           return;
         }

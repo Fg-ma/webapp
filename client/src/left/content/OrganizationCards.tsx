@@ -31,7 +31,22 @@ export default function OrganizationCards() {
   useEffect(() => {
     const fetchOrganizationData = async () => {
       try {
-        const response = await Axios.get(`${serverUrl}/organizations`);
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/organizations/get_affiliated_organizations`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
         setOrganizations(response.data);
       } catch (error) {
         console.error("Error fetching organization data:", error);

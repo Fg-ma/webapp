@@ -10,20 +10,20 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface VideosProps {
-  entity_id: number;
+  entity_id: string;
 }
 
 interface VideoData {
-  video_id: number;
-  entity_id: number;
-  entities_videos_id: number;
+  video_id: string;
+  entity_id: string;
+  entities_videos_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
   videos: {
-    video_id: number;
-    video_data_id: number;
-    video_creator_id: number;
+    video_id: string;
+    video_data_id: string;
+    video_creator_id: string;
     video_filename: string;
     video_title: string;
     video_description: string;

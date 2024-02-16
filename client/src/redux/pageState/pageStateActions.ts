@@ -5,7 +5,7 @@ export const setPageState = (page: string, newState: string) => ({
   payload: { page, newState },
 });
 
-export const setIds = (page: string, id: string, value: number) => ({
+export const setIds = (page: string, id: string, value: string | null) => ({
   type: SET_IDS,
   payload: { page, id, value },
 });

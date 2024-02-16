@@ -25,10 +25,10 @@ interface EntityPageState {
       pagePayload: {
         pageState: string;
         ids: {
-          individual_id: number | null;
-          group_id: number | null;
-          organization_id: number | null;
-          collection_id: number | null;
+          individual_id: string | null;
+          group_id: string | null;
+          organization_id: string | null;
+          collection_id: string | null;
         };
       };
     };
@@ -36,19 +36,19 @@ interface EntityPageState {
 }
 
 interface EntityData {
-  individual_id?: number;
+  individual_id?: string;
   individual_name?: string;
   individual_userName?: string;
   individual_roles?: string;
   individual_currentIssue?: string;
   individual_description?: string;
-  group_id?: number;
+  group_id?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
   group_currentIssue?: string;
   group_description?: string;
-  organization_id?: number;
+  organization_id?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
@@ -57,20 +57,18 @@ interface EntityData {
 }
 
 interface EntityReferences {
-  reference_id: number;
-  individual_id: number | null;
-  group_id: number | null;
-  organization_id: number | null;
+  reference_id: string;
+  individual_id: string | null;
+  group_id: string | null;
+  organization_id: string | null;
   title: string;
   author: string;
   url: string;
 }
 
 interface Entity {
-  entity_id: number;
-  individual_id: number | null;
-  group_id: number | null;
-  organization_id: number | null;
+  entity_id: string;
+  entity_type: number;
 }
 
 interface ContentMap {
@@ -138,7 +136,6 @@ export default function EntityPage({ entityType }: EntityPageProps) {
         const response = await Axios.get(`${serverUrl}/entities/entity`, {
           params: {
             id: entity_id,
-            type: entityType,
           },
         });
 
@@ -156,6 +153,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
             type: entityType,
           },
         });
+
         setEntityReferences(response.data);
       } catch (error) {
         console.error("Error fetching entity references:", error);

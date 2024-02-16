@@ -110,17 +110,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.Affiliates_relationsScalarFieldEnum = {
   affiliate_relation_id: 'affiliate_relation_id',
   affiliate_id_1: 'affiliate_id_1',
-  affiliate_type_1: 'affiliate_type_1',
-  affiliate_id_2: 'affiliate_id_2',
-  affiliate_type_2: 'affiliate_type_2'
+  affiliate_id_2: 'affiliate_id_2'
 };
 
 exports.Prisma.CollectionsScalarFieldEnum = {
   collection_id: 'collection_id',
   collection_name: 'collection_name',
-  individual_id: 'individual_id',
-  group_id: 'group_id',
-  organization_id: 'organization_id'
+  entity_id: 'entity_id'
 };
 
 exports.Prisma.Collections_imagesScalarFieldEnum = {
@@ -152,9 +148,7 @@ exports.Prisma.Collections_videosScalarFieldEnum = {
 
 exports.Prisma.EntitiesScalarFieldEnum = {
   entity_id: 'entity_id',
-  individual_id: 'individual_id',
-  group_id: 'group_id',
-  organization_id: 'organization_id'
+  entity_type: 'entity_type'
 };
 
 exports.Prisma.Entities_imagesScalarFieldEnum = {
@@ -168,9 +162,7 @@ exports.Prisma.Entities_imagesScalarFieldEnum = {
 
 exports.Prisma.Entities_referencesScalarFieldEnum = {
   reference_id: 'reference_id',
-  individual_id: 'individual_id',
-  group_id: 'group_id',
-  organization_id: 'organization_id',
+  entity_id: 'entity_id',
   title: 'title',
   author: 'author',
   url: 'url'
@@ -204,8 +196,9 @@ exports.Prisma.GroupsScalarFieldEnum = {
 };
 
 exports.Prisma.Groups_membersScalarFieldEnum = {
+  groups_members_id: 'groups_members_id',
   group_id: 'group_id',
-  individual_id: 'individual_id'
+  entity_id: 'entity_id'
 };
 
 exports.Prisma.ImagesScalarFieldEnum = {
@@ -224,7 +217,7 @@ exports.Prisma.Images_dataScalarFieldEnum = {
 
 exports.Prisma.IndividualsScalarFieldEnum = {
   individual_id: 'individual_id',
-  individual_userName: 'individual_userName',
+  individual_username: 'individual_username',
   individual_name: 'individual_name',
   individual_currentIssue: 'individual_currentIssue',
   individual_roles: 'individual_roles',
@@ -241,8 +234,9 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
 };
 
 exports.Prisma.Organizations_membersScalarFieldEnum = {
+  organizations_members_id: 'organizations_members_id',
   organization_id: 'organization_id',
-  individual_id: 'individual_id'
+  entity_id: 'entity_id'
 };
 
 exports.Prisma.SheetsScalarFieldEnum = {

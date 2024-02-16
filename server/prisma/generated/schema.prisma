@@ -8,53 +8,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model affiliates_relations {
-  affiliate_relation_id Int @id @default(autoincrement())
-  affiliate_id_1        Int
-  affiliate_type_1      Int
-  affiliate_id_2        Int
-  affiliate_type_2      Int
+  affiliate_relation_id String @id @unique(map: "affiliate_relation_id_UNIQUE") @db.Char(36)
+  affiliate_id_1        String @db.Char(36)
+  affiliate_id_2        String @db.Char(36)
 
   @@unique([affiliate_id_1, affiliate_id_2], map: "unique_affiliate_combination")
 }
 
 model collections {
-  collection_id      Int                  @id @unique(map: "collection_id_UNIQUE") @default(autoincrement())
+  collection_id      String               @id @unique(map: "temp_collection_id_UNIQUE") @db.Char(36)
   collection_name    String               @db.VarChar(256)
-  individual_id      Int?
-  group_id           Int?
-  organization_id    Int?
-  individuals        individuals?         @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_individual_id_fk")
-  organizations      organizations?       @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_organization_id_fk")
-  groups             groups?              @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "colllections_group_id_fk")
+  entity_id          String               @db.Char(36)
+  entities           entities             @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_entity_id_fk")
   collections_images collections_images[]
   collections_sheets collections_sheets[]
   collections_videos collections_videos[]
 
-  @@index([group_id], map: "group_id_fk_idx")
-  @@index([individual_id], map: "individual_id_fk_idx")
-  @@index([organization_id], map: "organization_id_fk_idx")
+  @@index([entity_id], map: "collections_entity_id_fk_idx")
 }
 
 model collections_images {
-  collections_images_id Int         @id @unique(map: "collections_images_id_UNIQUE") @default(autoincrement())
-  collection_id         Int
-  image_id              Int
+  collections_images_id String      @id @unique(map: "temp_collections_images_id_UNIQUE") @db.Char(36)
+  collection_id         String      @db.Char(36)
+  image_id              String      @db.Char(36)
   date_added            DateTime    @db.Timestamp(0)
   pinned                Boolean
   date_pinned           DateTime?   @db.Timestamp(0)
   collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_collection_id_fk")
-  images                images      @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_image_id")
+  images                images      @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_image_id_fk")
 
   @@index([collection_id], map: "collections_images_collection_id_fk_idx")
   @@index([image_id])
 }
 
 model collections_sheets {
-  collections_sheets_id Int         @id @unique(map: "collections_sheets_id_UNIQUE") @default(autoincrement())
-  collection_id         Int
-  sheet_id              Int
+  collections_sheets_id String      @id @unique(map: "temp_collections_sheets_id_UNIQUE") @db.Char(36)
+  collection_id         String      @db.Char(36)
+  sheet_id              String      @db.Char(36)
   date_added            DateTime    @db.Timestamp(0)
   pinned                Boolean
   date_pinned           DateTime?   @db.Timestamp(0)
@@ -66,9 +57,9 @@ model collections_sheets {
 }
 
 model collections_videos {
-  collections_videos_id Int         @id @unique(map: "collections_videos_id_UNIQUE") @default(autoincrement())
-  collection_id         Int
-  video_id              Int
+  collections_videos_id String      @id @unique(map: "temp_collections_videos_id_UNIQUE") @db.Char(36)
+  collection_id         String      @db.Char(36)
+  video_id              String      @db.Char(36)
   date_added            DateTime    @db.Timestamp(0)
   pinned                Boolean
   date_pinned           DateTime?   @db.Timestamp(0)
@@ -80,29 +71,24 @@ model collections_videos {
 }
 
 model entities {
-  entity_id       Int               @id @unique(map: "entity_id_UNIQUE") @default(autoincrement())
-  individual_id   Int?
-  group_id        Int?
-  organization_id Int?
-  groups          groups?           @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_group_id_fk")
-  individuals     individuals?      @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_individual_id_fk")
-  organizations   organizations?    @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_organization_id_fk")
-  entities_images entities_images[]
-  entities_sheets entities_sheets[]
-  entities_videos entities_videos[]
-  images          images[]
-  sheets          sheets[]
-  videos          videos[]
-
-  @@index([group_id], map: "entities_groups_id_fk_idx")
-  @@index([individual_id], map: "entities_individual_id_fk_idx")
-  @@index([organization_id], map: "entities_organization_id_fk_idx")
+  entity_id             String                  @id @unique(map: "temp_entity_id_UNIQUE") @db.Char(36)
+  entity_type           Int                     @default(0)
+  collections           collections[]
+  entities_images       entities_images[]
+  entities_references   entities_references[]
+  entities_sheets       entities_sheets[]
+  entities_videos       entities_videos[]
+  groups_members        groups_members[]
+  images                images[]
+  organizations_members organizations_members[]
+  sheets                sheets[]
+  videos                videos[]
 }
 
 model entities_images {
-  entities_images_id Int       @id @unique(map: "entities_images_id_UNIQUE") @default(autoincrement())
-  entity_id          Int
-  image_id           Int
+  entities_images_id String    @id @unique(map: "temp_entities_images_id_UNIQUE") @db.Char(36)
+  entity_id          String    @db.Char(36)
+  image_id           String    @db.Char(36)
   date_added         DateTime  @db.Timestamp(0)
   pinned             Boolean
   date_pinned        DateTime? @db.Timestamp(0)
@@ -114,26 +100,20 @@ model entities_images {
 }
 
 model entities_references {
-  reference_id    Int            @id @unique(map: "reference_id_UNIQUE") @default(autoincrement())
-  individual_id   Int?
-  group_id        Int?
-  organization_id Int?
-  title           String         @db.VarChar(256)
-  author          String         @db.VarChar(256)
-  url             String         @db.VarChar(256)
-  groups          groups?        @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_group_id_fk")
-  individuals     individuals?   @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_individual_id_fk")
-  organizations   organizations? @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_organization_id_fk")
+  reference_id String   @id @unique(map: "temp_reference_id_UNIQUE") @db.Char(36)
+  entity_id    String   @db.Char(36)
+  title        String   @db.VarChar(256)
+  author       String   @db.VarChar(256)
+  url          String   @db.VarChar(256)
+  entities     entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_entity_id_fk")
 
-  @@index([group_id], map: "entities_references_group_id_fk_idx")
-  @@index([individual_id], map: "entities_references_individual_id_fk")
-  @@index([organization_id], map: "entities_references_organization_id_fk_idx")
+  @@index([entity_id], map: "entities_references_entity_id_fk_idx")
 }
 
 model entities_sheets {
-  entities_sheets_id Int       @id @unique(map: "entities_sheets_id_UNIQUE") @default(autoincrement())
-  entity_id          Int
-  sheet_id           Int
+  entities_sheets_id String    @id @unique(map: "temp_entities_sheets_id_UNIQUE") @db.Char(36)
+  entity_id          String    @db.Char(36)
+  sheet_id           String    @db.Char(36)
   date_added         DateTime  @db.Timestamp(0)
   pinned             Boolean
   date_pinned        DateTime? @db.Timestamp(0)
@@ -145,9 +125,9 @@ model entities_sheets {
 }
 
 model entities_videos {
-  entities_videos_id Int       @id @unique(map: "entities_videos_id_UNIQUE") @default(autoincrement())
-  entity_id          Int
-  video_id           Int
+  entities_videos_id String    @id @unique(map: "temp_entities_videos_id_UNIQUE") @db.Char(36)
+  entity_id          String    @db.Char(36)
+  video_id           String    @db.Char(36)
   date_added         DateTime  @db.Timestamp(0)
   pinned             Boolean
   date_pinned        DateTime? @db.Timestamp(0)
@@ -159,35 +139,34 @@ model entities_videos {
 }
 
 model groups {
-  group_id            Int                   @id @unique(map: "group_id_UNIQUE") @default(autoincrement())
-  group_handle        String                @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
-  group_name          String                @db.VarChar(256)
-  group_currentIssue  String?               @db.Text
-  group_stances       String?               @db.Text
-  group_description   String?               @db.Text
-  collections         collections[]
-  entities            entities[]
-  entities_references entities_references[]
-  groups_members      groups_members[]
+  group_id           String           @id @unique(map: "temp_group_id_UNIQUE") @db.Char(36)
+  group_handle       String           @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
+  group_name         String           @db.VarChar(256)
+  group_currentIssue String?          @db.Text
+  group_stances      String?          @db.Text
+  group_description  String?          @db.Text
+  groups_members     groups_members[]
 }
 
 model groups_members {
-  group_id      Int
-  individual_id Int
-  groups        groups      @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_group_id_fk")
-  individuals   individuals @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_individual_id_fk")
+  groups_members_id String   @id @unique(map: "groups_members_id_UNIQUE") @db.Char(36)
+  group_id          String   @db.Char(36)
+  entity_id         String   @db.Char(36)
+  entities          entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_entity_id_fk")
+  groups            groups   @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_members_group_id_fk")
 
-  @@id([group_id, individual_id])
-  @@index([individual_id], map: "groups_members_individual_id_fk")
+  @@unique([group_id, entity_id], map: "unique_group_member_combination")
+  @@index([entity_id], map: "groups_members_entity_id_fk")
+  @@index([group_id], map: "groups_members_group_id_fk_idx")
 }
 
 model images {
-  image_id           Int                  @id @unique(map: "image_id_UNIQUE") @default(autoincrement())
-  image_creator_id   Int
+  image_id           String               @id @unique(map: "temp_image_id_UNIQUE") @db.Char(36)
+  image_creator_id   String               @db.Char(36)
   image_title        String               @db.VarChar(256)
   image_description  String               @db.Text
   image_filename     String               @db.VarChar(256)
-  image_data_id      Int
+  image_data_id      String               @db.Char(36)
   collections_images collections_images[]
   entities_images    entities_images[]
   entities           entities             @relation(fields: [image_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
@@ -198,73 +177,66 @@ model images {
 }
 
 model images_data {
-  image_data_id Int      @id @unique(map: "image_data_id_UNIQUE") @default(autoincrement())
+  image_data_id String   @id @unique(map: "temp_image_data_id_UNIQUE") @db.Char(36)
   image_data    Bytes
   images        images[]
 }
 
 model individuals {
-  individual_id           Int                     @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  individual_userName     String                  @unique(map: "userName_UNIQUE") @db.VarChar(256)
-  individual_name         String                  @db.VarChar(256)
-  individual_currentIssue String?                 @db.Text
-  individual_roles        String?                 @db.Text
-  individual_description  String?                 @db.Text
-  collections             collections[]
-  entities                entities[]
-  entities_references     entities_references[]
-  groups_members          groups_members[]
-  user_credentials        user_credentials        @relation(fields: [individual_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_individual_id_fk")
-  organizations_members   organizations_members[]
+  individual_id           String           @id @unique(map: "temp_individual_id_UNIQUE") @db.Char(36)
+  individual_username     String           @unique(map: "userName_UNIQUE") @db.VarChar(256)
+  individual_name         String           @db.VarChar(256)
+  individual_currentIssue String?          @db.Text
+  individual_roles        String?          @db.Text
+  individual_description  String?          @db.Text
+  user_credentials        user_credentials @relation(fields: [individual_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_individual_id_fk")
 }
 
 model organizations {
-  organization_id           Int                     @id @unique(map: "organization_id_UNIQUE") @default(autoincrement())
+  organization_id           String                  @id @unique(map: "temp_organization_id_UNIQUE") @db.Char(36)
   organization_handle       String                  @unique(map: "organization_handle_UNIQUE") @db.VarChar(256)
   organization_name         String                  @db.VarChar(256)
   organization_currentIssue String?                 @db.Text
   organization_stances      String?                 @db.Text
   organization_description  String?                 @db.Text
-  collections               collections[]
-  entities                  entities[]
-  entities_references       entities_references[]
   organizations_members     organizations_members[]
 }
 
 model organizations_members {
-  organization_id Int
-  individual_id   Int
-  individuals     individuals   @relation(fields: [individual_id], references: [individual_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_individual_id_fk")
-  organizations   organizations @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_organization_id_fk")
+  organizations_members_id String        @id @unique(map: "temp_organizations_members_id_UNIQUE") @db.Char(36)
+  organization_id          String        @db.Char(36)
+  entity_id                String        @db.Char(36)
+  entities                 entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_entity_id_fk")
+  organizations            organizations @relation(fields: [organization_id], references: [organization_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_organization_id_fk")
 
-  @@id([organization_id, individual_id])
-  @@index([individual_id], map: "organizations_members_individual_id_fk")
+  @@index([entity_id], map: "organizations_members_entity_id_fk_idx")
+  @@index([organization_id], map: "organizations_members_organization_id_fk_idx")
 }
 
 model sheets {
-  sheet_id           Int                  @id @unique(map: "cover_sheet_id_UNIQUE") @default(autoincrement())
-  sheet_author_id    Int
+  sheet_id           String               @id @unique(map: "temp_sheet_id_UNIQUE") @db.Char(36)
+  sheet_author_id    String               @db.Char(36)
   sheet_title        String               @db.VarChar(256)
   sheet_subject      String               @db.Text
   sheet_filename     String               @db.VarChar(256)
-  sheet_data_id      Int
+  sheet_data_id      String               @db.Char(36)
   collections_sheets collections_sheets[]
   entities_sheets    entities_sheets[]
-  sheets_data        sheets_data          @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "Sheets_sheet_data_id_fk")
   entities           entities             @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
+  sheets_data        sheets_data          @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
 
   @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
   @@index([sheet_author_id], map: "sheets_sheet_author_id_fk_idx")
 }
 
 model sheets_data {
-  sheet_data_id Int      @id @unique(map: "sheet_data_id_UNIQUE") @default(autoincrement())
+  sheet_data_id String   @id @unique(map: "temp_sheet_data_id_UNIQUE") @db.Char(36)
   sheet_data    Bytes
   sheets        sheets[]
 }
 
 model user_credentials {
-  user_id           Int          @id @unique(map: "user_id_UNIQUE") @default(autoincrement())
+  user_id           String       @id @unique(map: "user_id_UNIQUE") @db.Char(36)
   username          String       @unique(map: "username_UNIQUE") @db.VarChar(128)
   user_password     String       @db.VarChar(128)
   user_first_name   String?      @db.VarChar(128)
@@ -275,12 +247,12 @@ model user_credentials {
 }
 
 model videos {
-  video_id           Int                  @id @unique(map: "video_id_UNIQUE") @default(autoincrement())
-  video_creator_id   Int
+  video_id           String               @id @unique(map: "temp_video_id_UNIQUE") @db.Char(36)
+  video_creator_id   String               @db.Char(36)
   video_title        String               @db.VarChar(256)
   video_description  String               @db.Text
   video_filename     String               @db.VarChar(256)
-  video_data_id      Int
+  video_data_id      String               @db.Char(36)
   collections_videos collections_videos[]
   entities_videos    entities_videos[]
   entities           entities             @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
@@ -291,7 +263,7 @@ model videos {
 }
 
 model videos_data {
-  video_data_id Int      @id @unique(map: "videos_data_id_UNIQUE") @default(autoincrement())
+  video_data_id String   @id @unique(map: "temp_video_data_id_UNIQUE") @db.Char(36)
   video_data    Bytes
   videos        videos[]
 }

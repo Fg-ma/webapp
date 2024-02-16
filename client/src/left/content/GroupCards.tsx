@@ -30,7 +30,22 @@ export default function GroupCards() {
   useEffect(() => {
     const fetchGroupData = async () => {
       try {
-        const response = await Axios.get(`${serverUrl}/groups`);
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/groups/get_affiliated_groups`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
         setGroups(response.data);
       } catch (error) {
         console.error("Error fetching group data:", error);

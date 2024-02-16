@@ -10,33 +10,33 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface CollectionsProps {
-  entity_id: number;
-  collection_id: number;
+  entity_id: string;
+  collection_id: string;
 }
 
 interface CollectionItem {
-  collection_id: number;
-  collections_images_id: number | null;
-  collections_sheets_id: number | null;
-  collections_videos_id: number | null;
+  collection_id: string;
+  collections_images_id: string | null;
+  collections_sheets_id: string | null;
+  collections_videos_id: string | null;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
-  image_creator_id?: number;
-  sheet_author_id?: number;
-  video_creator_id?: number;
-  image_data_id?: number;
-  sheet_data_id?: number;
-  video_data_id?: number;
+  image_creator_id?: string;
+  sheet_author_id?: string;
+  video_creator_id?: string;
+  image_data_id?: string;
+  sheet_data_id?: string;
+  video_data_id?: string;
   image_description?: string;
   sheet_subject?: string;
   video_description?: string;
   image_filename?: string;
   sheet_filename?: string;
   video_filename?: string;
-  image_id?: number;
-  sheet_id?: number;
-  video_id?: number;
+  image_id?: string;
+  sheet_id?: string;
+  video_id?: string;
   image_title?: string;
   sheet_title?: string;
   video_title?: string;

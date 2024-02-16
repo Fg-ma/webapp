@@ -20,17 +20,17 @@ const serverUrl = isDevelopment
 
 interface SheetProps {
   type: string;
-  sheet_id: number;
-  author_id: number;
+  sheet_id: string;
+  author_id: string;
   pinned: boolean;
-  relation_id: number;
+  relation_id: string;
   socket: Socket | null;
 }
 
 interface SheetData {
-  sheet_id: number;
-  sheet_data_id: number;
-  sheet_author_id: number;
+  sheet_id: string;
+  sheet_data_id: string;
+  sheet_author_id: string;
   sheet_filename: string;
   sheet_title: string;
   sheet_subject: string;
@@ -157,16 +157,16 @@ export function Sheet({
 
 interface VideoProps {
   type: string;
-  video_id: number;
+  video_id: string;
   pinned: boolean;
-  relation_id: number;
+  relation_id: string;
   socket: Socket | null;
 }
 
 interface VideoData {
-  video_id: number;
-  video_data_id: number;
-  video_creator_id: number;
+  video_id: string;
+  video_data_id: string;
+  video_creator_id: string;
   video_filename: string;
   video_title: string;
   video_description: string;
@@ -313,16 +313,16 @@ const transition: Transition = {
 
 interface ImageProps {
   type: string;
-  image_id: number;
+  image_id: string;
   pinned: boolean;
-  relation_id: number;
+  relation_id: string;
   socket: Socket | null;
 }
 
 interface ImageData {
-  image_id: number;
-  image_data_id: number;
-  image_creator_id: number;
+  image_id: string;
+  image_data_id: string;
+  image_creator_id: string;
   image_filename: string;
   image_title: string;
   image_description: string;

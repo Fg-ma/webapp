@@ -16,34 +16,37 @@ router.get("/", async (req, res) => {
 // Route to get all the affiliated individuals with a certian entity id
 router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
   try {
-    // Access the user ID from the decoded token payload
     const user_id = req.user.user_id;
 
-    // Use the user ID to fetch data specific to the authenticated user
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
-        OR: [
-          { affiliate_id_1: user_id, affiliate_type_2: 0 },
-          { affiliate_type_1: 0, affiliate_id_2: user_id },
-        ],
+        OR: [{ affiliate_id_1: user_id }, { affiliate_id_2: user_id }],
       },
     });
 
-    const individual_ids = [];
+    const entity_ids = [];
 
     for (const relation of affiliates_relations) {
       if (relation.affiliate_id_1 !== user_id) {
-        individual_ids.push(relation.affiliate_id_1);
+        entity_ids.push(relation.affiliate_id_1);
       } else if (relation.affiliate_id_2 !== user_id) {
-        individual_ids.push(relation.affiliate_id_2);
+        entity_ids.push(relation.affiliate_id_2);
       }
     }
 
-    const individuals = await req.db.individuals.findMany({
-      where: { individual_id: { in: individual_ids } },
+    const individual_ids = await req.db.entities.findMany({
+      where: { entity_id: { in: entity_ids }, entity_type: 1 },
+      select: {
+        entity_id: true,
+      },
     });
 
-    // Send the response with the fetched data
+    const individual_ids_list = individual_ids.map((entry) => entry.entity_id);
+
+    const individuals = await req.db.individuals.findMany({
+      where: { individual_id: { in: individual_ids_list } },
+    });
+
     res.send(individuals);
   } catch (error) {
     console.error("Error fetching individual data:", error);
@@ -58,7 +61,7 @@ router.get("/:individual_id", async (req, res) => {
   try {
     const individual = await req.db.individuals.findUnique({
       where: {
-        individual_id: parseInt(individual_id),
+        individual_id: individual_id,
       },
     });
 

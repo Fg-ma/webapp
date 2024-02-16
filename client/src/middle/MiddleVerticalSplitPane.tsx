@@ -164,7 +164,7 @@ export default function MiddleVerticalSplitPane({
         style={{ height: paneHeight }}
       >
         <div className="ml-8 mr-5 my-8">
-          <SheetViewer sheet_id={Math.floor(Math.random() * 20) + 1} />
+          <SheetViewer sheet_id="1065bab7-caee-11ee-83a1-00ff8797c34e" />
           <input type="file" onChange={fileToBlobFunc} />
         </div>
       </div>

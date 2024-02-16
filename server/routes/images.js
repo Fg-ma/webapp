@@ -8,7 +8,7 @@ router.get("/:image_id", async (req, res) => {
   try {
     const image = await req.db.images.findUnique({
       where: {
-        image_id: parseInt(image_id),
+        image_id: image_id,
       },
     });
 
@@ -26,7 +26,7 @@ router.get("/:image_id", async (req, res) => {
 
 // Gets all the data needed to display an image's contents
 router.get("/get_full_image/:image_id", async (req, res) => {
-  const image_id = parseInt(req.params.image_id);
+  const image_id = req.params.image_id;
 
   try {
     const fullImage = await req.db.images.findUnique({
@@ -35,22 +35,43 @@ router.get("/get_full_image/:image_id", async (req, res) => {
       },
       include: {
         images_data: true,
-        entities: {
-          include: {
-            individuals: true,
-            groups: true,
-            organizations: true,
-          },
-        },
+        entities: true,
       },
     });
+
+    const getImageCreator = async (fullImage) => {
+      if (fullImage.entities.entity_type === 1) {
+        return await req.db.individuals.findUnique({
+          where: {
+            individual_id: fullImage.entities.entity_id,
+          },
+        });
+      } else if (fullImage.entities.entity_type === 2) {
+        return await req.db.groups.findUnique({
+          where: {
+            group_id: fullImage.entities.entity_id,
+          },
+        });
+      } else if (fullImage.entities.entity_type === 3) {
+        return await req.db.organizations.findUnique({
+          where: {
+            organization_id: fullImage.entities.entity_id,
+          },
+        });
+      }
+    };
+
+    const imageCreator = await getImageCreator(fullImage);
 
     if (!fullImage) {
       res.status(404).send("Image not found");
       return;
+    } else if (!imageCreator) {
+      res.status(404).send("Creator not found");
+      return;
     }
 
-    res.send(fullImage);
+    res.send({ fullImage, imageCreator });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

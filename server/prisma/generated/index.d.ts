@@ -15,7 +15,7 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model affiliates_relations
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ * 
  */
 export type affiliates_relations = $Result.DefaultSelection<Prisma.$affiliates_relationsPayload>
 /**
@@ -2632,19 +2632,27 @@ export namespace Prisma {
    */
 
   export type EntitiesCountOutputType = {
+    collections: number
     entities_images: number
+    entities_references: number
     entities_sheets: number
     entities_videos: number
+    groups_members: number
     images: number
+    organizations_members: number
     sheets: number
     videos: number
   }
 
   export type EntitiesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    collections?: boolean | EntitiesCountOutputTypeCountCollectionsArgs
     entities_images?: boolean | EntitiesCountOutputTypeCountEntities_imagesArgs
+    entities_references?: boolean | EntitiesCountOutputTypeCountEntities_referencesArgs
     entities_sheets?: boolean | EntitiesCountOutputTypeCountEntities_sheetsArgs
     entities_videos?: boolean | EntitiesCountOutputTypeCountEntities_videosArgs
+    groups_members?: boolean | EntitiesCountOutputTypeCountGroups_membersArgs
     images?: boolean | EntitiesCountOutputTypeCountImagesArgs
+    organizations_members?: boolean | EntitiesCountOutputTypeCountOrganizations_membersArgs
     sheets?: boolean | EntitiesCountOutputTypeCountSheetsArgs
     videos?: boolean | EntitiesCountOutputTypeCountVideosArgs
   }
@@ -2665,8 +2673,24 @@ export namespace Prisma {
   /**
    * EntitiesCountOutputType without action
    */
+  export type EntitiesCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: collectionsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
   export type EntitiesCountOutputTypeCountEntities_imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: entities_imagesWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountEntities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: entities_referencesWhereInput
   }
 
 
@@ -2689,8 +2713,24 @@ export namespace Prisma {
   /**
    * EntitiesCountOutputType without action
    */
+  export type EntitiesCountOutputTypeCountGroups_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: groups_membersWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
   export type EntitiesCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: imagesWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountOrganizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: organizations_membersWhereInput
   }
 
 
@@ -2716,16 +2756,10 @@ export namespace Prisma {
    */
 
   export type GroupsCountOutputType = {
-    collections: number
-    entities: number
-    entities_references: number
     groups_members: number
   }
 
   export type GroupsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | GroupsCountOutputTypeCountCollectionsArgs
-    entities?: boolean | GroupsCountOutputTypeCountEntitiesArgs
-    entities_references?: boolean | GroupsCountOutputTypeCountEntities_referencesArgs
     groups_members?: boolean | GroupsCountOutputTypeCountGroups_membersArgs
   }
 
@@ -2739,30 +2773,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the GroupsCountOutputType
      */
     select?: GroupsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * GroupsCountOutputType without action
-   */
-  export type GroupsCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: collectionsWhereInput
-  }
-
-
-  /**
-   * GroupsCountOutputType without action
-   */
-  export type GroupsCountOutputTypeCountEntitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entitiesWhereInput
-  }
-
-
-  /**
-   * GroupsCountOutputType without action
-   */
-  export type GroupsCountOutputTypeCountEntities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entities_referencesWhereInput
   }
 
 
@@ -2854,94 +2864,14 @@ export namespace Prisma {
 
 
   /**
-   * Count Type IndividualsCountOutputType
-   */
-
-  export type IndividualsCountOutputType = {
-    collections: number
-    entities: number
-    entities_references: number
-    groups_members: number
-    organizations_members: number
-  }
-
-  export type IndividualsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | IndividualsCountOutputTypeCountCollectionsArgs
-    entities?: boolean | IndividualsCountOutputTypeCountEntitiesArgs
-    entities_references?: boolean | IndividualsCountOutputTypeCountEntities_referencesArgs
-    groups_members?: boolean | IndividualsCountOutputTypeCountGroups_membersArgs
-    organizations_members?: boolean | IndividualsCountOutputTypeCountOrganizations_membersArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the IndividualsCountOutputType
-     */
-    select?: IndividualsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: collectionsWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountEntitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entitiesWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountEntities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entities_referencesWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountGroups_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: groups_membersWhereInput
-  }
-
-
-  /**
-   * IndividualsCountOutputType without action
-   */
-  export type IndividualsCountOutputTypeCountOrganizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: organizations_membersWhereInput
-  }
-
-
-
-  /**
    * Count Type OrganizationsCountOutputType
    */
 
   export type OrganizationsCountOutputType = {
-    collections: number
-    entities: number
-    entities_references: number
     organizations_members: number
   }
 
   export type OrganizationsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | OrganizationsCountOutputTypeCountCollectionsArgs
-    entities?: boolean | OrganizationsCountOutputTypeCountEntitiesArgs
-    entities_references?: boolean | OrganizationsCountOutputTypeCountEntities_referencesArgs
     organizations_members?: boolean | OrganizationsCountOutputTypeCountOrganizations_membersArgs
   }
 
@@ -2955,30 +2885,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the OrganizationsCountOutputType
      */
     select?: OrganizationsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * OrganizationsCountOutputType without action
-   */
-  export type OrganizationsCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: collectionsWhereInput
-  }
-
-
-  /**
-   * OrganizationsCountOutputType without action
-   */
-  export type OrganizationsCountOutputTypeCountEntitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entitiesWhereInput
-  }
-
-
-  /**
-   * OrganizationsCountOutputType without action
-   */
-  export type OrganizationsCountOutputTypeCountEntities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: entities_referencesWhereInput
   }
 
 
@@ -3157,92 +3063,46 @@ export namespace Prisma {
 
   export type AggregateAffiliates_relations = {
     _count: Affiliates_relationsCountAggregateOutputType | null
-    _avg: Affiliates_relationsAvgAggregateOutputType | null
-    _sum: Affiliates_relationsSumAggregateOutputType | null
     _min: Affiliates_relationsMinAggregateOutputType | null
     _max: Affiliates_relationsMaxAggregateOutputType | null
   }
 
-  export type Affiliates_relationsAvgAggregateOutputType = {
-    affiliate_relation_id: number | null
-    affiliate_id_1: number | null
-    affiliate_type_1: number | null
-    affiliate_id_2: number | null
-    affiliate_type_2: number | null
-  }
-
-  export type Affiliates_relationsSumAggregateOutputType = {
-    affiliate_relation_id: number | null
-    affiliate_id_1: number | null
-    affiliate_type_1: number | null
-    affiliate_id_2: number | null
-    affiliate_type_2: number | null
-  }
-
   export type Affiliates_relationsMinAggregateOutputType = {
-    affiliate_relation_id: number | null
-    affiliate_id_1: number | null
-    affiliate_type_1: number | null
-    affiliate_id_2: number | null
-    affiliate_type_2: number | null
+    affiliate_relation_id: string | null
+    affiliate_id_1: string | null
+    affiliate_id_2: string | null
   }
 
   export type Affiliates_relationsMaxAggregateOutputType = {
-    affiliate_relation_id: number | null
-    affiliate_id_1: number | null
-    affiliate_type_1: number | null
-    affiliate_id_2: number | null
-    affiliate_type_2: number | null
+    affiliate_relation_id: string | null
+    affiliate_id_1: string | null
+    affiliate_id_2: string | null
   }
 
   export type Affiliates_relationsCountAggregateOutputType = {
     affiliate_relation_id: number
     affiliate_id_1: number
-    affiliate_type_1: number
     affiliate_id_2: number
-    affiliate_type_2: number
     _all: number
   }
 
 
-  export type Affiliates_relationsAvgAggregateInputType = {
-    affiliate_relation_id?: true
-    affiliate_id_1?: true
-    affiliate_type_1?: true
-    affiliate_id_2?: true
-    affiliate_type_2?: true
-  }
-
-  export type Affiliates_relationsSumAggregateInputType = {
-    affiliate_relation_id?: true
-    affiliate_id_1?: true
-    affiliate_type_1?: true
-    affiliate_id_2?: true
-    affiliate_type_2?: true
-  }
-
   export type Affiliates_relationsMinAggregateInputType = {
     affiliate_relation_id?: true
     affiliate_id_1?: true
-    affiliate_type_1?: true
     affiliate_id_2?: true
-    affiliate_type_2?: true
   }
 
   export type Affiliates_relationsMaxAggregateInputType = {
     affiliate_relation_id?: true
     affiliate_id_1?: true
-    affiliate_type_1?: true
     affiliate_id_2?: true
-    affiliate_type_2?: true
   }
 
   export type Affiliates_relationsCountAggregateInputType = {
     affiliate_relation_id?: true
     affiliate_id_1?: true
-    affiliate_type_1?: true
     affiliate_id_2?: true
-    affiliate_type_2?: true
     _all?: true
   }
 
@@ -3284,18 +3144,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Affiliates_relationsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Affiliates_relationsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Affiliates_relationsMinAggregateInputType
@@ -3326,21 +3174,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Affiliates_relationsCountAggregateInputType | true
-    _avg?: Affiliates_relationsAvgAggregateInputType
-    _sum?: Affiliates_relationsSumAggregateInputType
     _min?: Affiliates_relationsMinAggregateInputType
     _max?: Affiliates_relationsMaxAggregateInputType
   }
 
   export type Affiliates_relationsGroupByOutputType = {
-    affiliate_relation_id: number
-    affiliate_id_1: number
-    affiliate_type_1: number
-    affiliate_id_2: number
-    affiliate_type_2: number
+    affiliate_relation_id: string
+    affiliate_id_1: string
+    affiliate_id_2: string
     _count: Affiliates_relationsCountAggregateOutputType | null
-    _avg: Affiliates_relationsAvgAggregateOutputType | null
-    _sum: Affiliates_relationsSumAggregateOutputType | null
     _min: Affiliates_relationsMinAggregateOutputType | null
     _max: Affiliates_relationsMaxAggregateOutputType | null
   }
@@ -3362,17 +3204,13 @@ export namespace Prisma {
   export type affiliates_relationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     affiliate_relation_id?: boolean
     affiliate_id_1?: boolean
-    affiliate_type_1?: boolean
     affiliate_id_2?: boolean
-    affiliate_type_2?: boolean
   }, ExtArgs["result"]["affiliates_relations"]>
 
   export type affiliates_relationsSelectScalar = {
     affiliate_relation_id?: boolean
     affiliate_id_1?: boolean
-    affiliate_type_1?: boolean
     affiliate_id_2?: boolean
-    affiliate_type_2?: boolean
   }
 
 
@@ -3380,11 +3218,9 @@ export namespace Prisma {
     name: "affiliates_relations"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      affiliate_relation_id: number
-      affiliate_id_1: number
-      affiliate_type_1: number
-      affiliate_id_2: number
-      affiliate_type_2: number
+      affiliate_relation_id: string
+      affiliate_id_1: string
+      affiliate_id_2: string
     }, ExtArgs["result"]["affiliates_relations"]>
     composites: {}
   }
@@ -3779,11 +3615,9 @@ export namespace Prisma {
    * Fields of the affiliates_relations model
    */ 
   interface affiliates_relationsFieldRefs {
-    readonly affiliate_relation_id: FieldRef<"affiliates_relations", 'Int'>
-    readonly affiliate_id_1: FieldRef<"affiliates_relations", 'Int'>
-    readonly affiliate_type_1: FieldRef<"affiliates_relations", 'Int'>
-    readonly affiliate_id_2: FieldRef<"affiliates_relations", 'Int'>
-    readonly affiliate_type_2: FieldRef<"affiliates_relations", 'Int'>
+    readonly affiliate_relation_id: FieldRef<"affiliates_relations", 'String'>
+    readonly affiliate_id_1: FieldRef<"affiliates_relations", 'String'>
+    readonly affiliate_id_2: FieldRef<"affiliates_relations", 'String'>
   }
     
 
@@ -4077,88 +3911,46 @@ export namespace Prisma {
 
   export type AggregateCollections = {
     _count: CollectionsCountAggregateOutputType | null
-    _avg: CollectionsAvgAggregateOutputType | null
-    _sum: CollectionsSumAggregateOutputType | null
     _min: CollectionsMinAggregateOutputType | null
     _max: CollectionsMaxAggregateOutputType | null
   }
 
-  export type CollectionsAvgAggregateOutputType = {
-    collection_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
-  }
-
-  export type CollectionsSumAggregateOutputType = {
-    collection_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
-  }
-
   export type CollectionsMinAggregateOutputType = {
-    collection_id: number | null
+    collection_id: string | null
     collection_name: string | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string | null
   }
 
   export type CollectionsMaxAggregateOutputType = {
-    collection_id: number | null
+    collection_id: string | null
     collection_name: string | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string | null
   }
 
   export type CollectionsCountAggregateOutputType = {
     collection_id: number
     collection_name: number
-    individual_id: number
-    group_id: number
-    organization_id: number
+    entity_id: number
     _all: number
   }
 
 
-  export type CollectionsAvgAggregateInputType = {
-    collection_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
-  }
-
-  export type CollectionsSumAggregateInputType = {
-    collection_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
-  }
-
   export type CollectionsMinAggregateInputType = {
     collection_id?: true
     collection_name?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
   }
 
   export type CollectionsMaxAggregateInputType = {
     collection_id?: true
     collection_name?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
   }
 
   export type CollectionsCountAggregateInputType = {
     collection_id?: true
     collection_name?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
     _all?: true
   }
 
@@ -4200,18 +3992,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: CollectionsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CollectionsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: CollectionsMinAggregateInputType
@@ -4242,21 +4022,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CollectionsCountAggregateInputType | true
-    _avg?: CollectionsAvgAggregateInputType
-    _sum?: CollectionsSumAggregateInputType
     _min?: CollectionsMinAggregateInputType
     _max?: CollectionsMaxAggregateInputType
   }
 
   export type CollectionsGroupByOutputType = {
-    collection_id: number
+    collection_id: string
     collection_name: string
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string
     _count: CollectionsCountAggregateOutputType | null
-    _avg: CollectionsAvgAggregateOutputType | null
-    _sum: CollectionsSumAggregateOutputType | null
     _min: CollectionsMinAggregateOutputType | null
     _max: CollectionsMaxAggregateOutputType | null
   }
@@ -4278,12 +4052,8 @@ export namespace Prisma {
   export type collectionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     collection_id?: boolean
     collection_name?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
-    individuals?: boolean | collections$individualsArgs<ExtArgs>
-    organizations?: boolean | collections$organizationsArgs<ExtArgs>
-    groups?: boolean | collections$groupsArgs<ExtArgs>
+    entity_id?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     collections_images?: boolean | collections$collections_imagesArgs<ExtArgs>
     collections_sheets?: boolean | collections$collections_sheetsArgs<ExtArgs>
     collections_videos?: boolean | collections$collections_videosArgs<ExtArgs>
@@ -4293,15 +4063,11 @@ export namespace Prisma {
   export type collectionsSelectScalar = {
     collection_id?: boolean
     collection_name?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
+    entity_id?: boolean
   }
 
   export type collectionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    individuals?: boolean | collections$individualsArgs<ExtArgs>
-    organizations?: boolean | collections$organizationsArgs<ExtArgs>
-    groups?: boolean | collections$groupsArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     collections_images?: boolean | collections$collections_imagesArgs<ExtArgs>
     collections_sheets?: boolean | collections$collections_sheetsArgs<ExtArgs>
     collections_videos?: boolean | collections$collections_videosArgs<ExtArgs>
@@ -4312,19 +4078,15 @@ export namespace Prisma {
   export type $collectionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "collections"
     objects: {
-      individuals: Prisma.$individualsPayload<ExtArgs> | null
-      organizations: Prisma.$organizationsPayload<ExtArgs> | null
-      groups: Prisma.$groupsPayload<ExtArgs> | null
+      entities: Prisma.$entitiesPayload<ExtArgs>
       collections_images: Prisma.$collections_imagesPayload<ExtArgs>[]
       collections_sheets: Prisma.$collections_sheetsPayload<ExtArgs>[]
       collections_videos: Prisma.$collections_videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      collection_id: number
+      collection_id: string
       collection_name: string
-      individual_id: number | null
-      group_id: number | null
-      organization_id: number | null
+      entity_id: string
     }, ExtArgs["result"]["collections"]>
     composites: {}
   }
@@ -4690,11 +4452,7 @@ export namespace Prisma {
   export interface Prisma__collectionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    individuals<T extends collections$individualsArgs<ExtArgs> = {}>(args?: Subset<T, collections$individualsArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    organizations<T extends collections$organizationsArgs<ExtArgs> = {}>(args?: Subset<T, collections$organizationsArgs<ExtArgs>>): Prisma__organizationsClient<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    groups<T extends collections$groupsArgs<ExtArgs> = {}>(args?: Subset<T, collections$groupsArgs<ExtArgs>>): Prisma__groupsClient<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     collections_images<T extends collections$collections_imagesArgs<ExtArgs> = {}>(args?: Subset<T, collections$collections_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collections_imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -4730,11 +4488,9 @@ export namespace Prisma {
    * Fields of the collections model
    */ 
   interface collectionsFieldRefs {
-    readonly collection_id: FieldRef<"collections", 'Int'>
+    readonly collection_id: FieldRef<"collections", 'String'>
     readonly collection_name: FieldRef<"collections", 'String'>
-    readonly individual_id: FieldRef<"collections", 'Int'>
-    readonly group_id: FieldRef<"collections", 'Int'>
-    readonly organization_id: FieldRef<"collections", 'Int'>
+    readonly entity_id: FieldRef<"collections", 'String'>
   }
     
 
@@ -5047,54 +4803,6 @@ export namespace Prisma {
 
 
   /**
-   * collections.individuals
-   */
-  export type collections$individualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the individuals
-     */
-    select?: individualsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: individualsInclude<ExtArgs> | null
-    where?: individualsWhereInput
-  }
-
-
-  /**
-   * collections.organizations
-   */
-  export type collections$organizationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the organizations
-     */
-    select?: organizationsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: organizationsInclude<ExtArgs> | null
-    where?: organizationsWhereInput
-  }
-
-
-  /**
-   * collections.groups
-   */
-  export type collections$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the groups
-     */
-    select?: groupsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: groupsInclude<ExtArgs> | null
-    where?: groupsWhereInput
-  }
-
-
-  /**
    * collections.collections_images
    */
   export type collections$collections_imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5179,37 +4887,23 @@ export namespace Prisma {
 
   export type AggregateCollections_images = {
     _count: Collections_imagesCountAggregateOutputType | null
-    _avg: Collections_imagesAvgAggregateOutputType | null
-    _sum: Collections_imagesSumAggregateOutputType | null
     _min: Collections_imagesMinAggregateOutputType | null
     _max: Collections_imagesMaxAggregateOutputType | null
   }
 
-  export type Collections_imagesAvgAggregateOutputType = {
-    collections_images_id: number | null
-    collection_id: number | null
-    image_id: number | null
-  }
-
-  export type Collections_imagesSumAggregateOutputType = {
-    collections_images_id: number | null
-    collection_id: number | null
-    image_id: number | null
-  }
-
   export type Collections_imagesMinAggregateOutputType = {
-    collections_images_id: number | null
-    collection_id: number | null
-    image_id: number | null
+    collections_images_id: string | null
+    collection_id: string | null
+    image_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Collections_imagesMaxAggregateOutputType = {
-    collections_images_id: number | null
-    collection_id: number | null
-    image_id: number | null
+    collections_images_id: string | null
+    collection_id: string | null
+    image_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -5225,18 +4919,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Collections_imagesAvgAggregateInputType = {
-    collections_images_id?: true
-    collection_id?: true
-    image_id?: true
-  }
-
-  export type Collections_imagesSumAggregateInputType = {
-    collections_images_id?: true
-    collection_id?: true
-    image_id?: true
-  }
 
   export type Collections_imagesMinAggregateInputType = {
     collections_images_id?: true
@@ -5304,18 +4986,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Collections_imagesAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Collections_imagesSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Collections_imagesMinAggregateInputType
@@ -5346,22 +5016,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Collections_imagesCountAggregateInputType | true
-    _avg?: Collections_imagesAvgAggregateInputType
-    _sum?: Collections_imagesSumAggregateInputType
     _min?: Collections_imagesMinAggregateInputType
     _max?: Collections_imagesMaxAggregateInputType
   }
 
   export type Collections_imagesGroupByOutputType = {
-    collections_images_id: number
-    collection_id: number
-    image_id: number
+    collections_images_id: string
+    collection_id: string
+    image_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Collections_imagesCountAggregateOutputType | null
-    _avg: Collections_imagesAvgAggregateOutputType | null
-    _sum: Collections_imagesSumAggregateOutputType | null
     _min: Collections_imagesMinAggregateOutputType | null
     _max: Collections_imagesMaxAggregateOutputType | null
   }
@@ -5413,9 +5079,9 @@ export namespace Prisma {
       images: Prisma.$imagesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      collections_images_id: number
-      collection_id: number
-      image_id: number
+      collections_images_id: string
+      collection_id: string
+      image_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -5816,9 +5482,9 @@ export namespace Prisma {
    * Fields of the collections_images model
    */ 
   interface collections_imagesFieldRefs {
-    readonly collections_images_id: FieldRef<"collections_images", 'Int'>
-    readonly collection_id: FieldRef<"collections_images", 'Int'>
-    readonly image_id: FieldRef<"collections_images", 'Int'>
+    readonly collections_images_id: FieldRef<"collections_images", 'String'>
+    readonly collection_id: FieldRef<"collections_images", 'String'>
+    readonly image_id: FieldRef<"collections_images", 'String'>
     readonly date_added: FieldRef<"collections_images", 'DateTime'>
     readonly pinned: FieldRef<"collections_images", 'Boolean'>
     readonly date_pinned: FieldRef<"collections_images", 'DateTime'>
@@ -6155,37 +5821,23 @@ export namespace Prisma {
 
   export type AggregateCollections_sheets = {
     _count: Collections_sheetsCountAggregateOutputType | null
-    _avg: Collections_sheetsAvgAggregateOutputType | null
-    _sum: Collections_sheetsSumAggregateOutputType | null
     _min: Collections_sheetsMinAggregateOutputType | null
     _max: Collections_sheetsMaxAggregateOutputType | null
   }
 
-  export type Collections_sheetsAvgAggregateOutputType = {
-    collections_sheets_id: number | null
-    collection_id: number | null
-    sheet_id: number | null
-  }
-
-  export type Collections_sheetsSumAggregateOutputType = {
-    collections_sheets_id: number | null
-    collection_id: number | null
-    sheet_id: number | null
-  }
-
   export type Collections_sheetsMinAggregateOutputType = {
-    collections_sheets_id: number | null
-    collection_id: number | null
-    sheet_id: number | null
+    collections_sheets_id: string | null
+    collection_id: string | null
+    sheet_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Collections_sheetsMaxAggregateOutputType = {
-    collections_sheets_id: number | null
-    collection_id: number | null
-    sheet_id: number | null
+    collections_sheets_id: string | null
+    collection_id: string | null
+    sheet_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -6201,18 +5853,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Collections_sheetsAvgAggregateInputType = {
-    collections_sheets_id?: true
-    collection_id?: true
-    sheet_id?: true
-  }
-
-  export type Collections_sheetsSumAggregateInputType = {
-    collections_sheets_id?: true
-    collection_id?: true
-    sheet_id?: true
-  }
 
   export type Collections_sheetsMinAggregateInputType = {
     collections_sheets_id?: true
@@ -6280,18 +5920,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Collections_sheetsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Collections_sheetsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Collections_sheetsMinAggregateInputType
@@ -6322,22 +5950,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Collections_sheetsCountAggregateInputType | true
-    _avg?: Collections_sheetsAvgAggregateInputType
-    _sum?: Collections_sheetsSumAggregateInputType
     _min?: Collections_sheetsMinAggregateInputType
     _max?: Collections_sheetsMaxAggregateInputType
   }
 
   export type Collections_sheetsGroupByOutputType = {
-    collections_sheets_id: number
-    collection_id: number
-    sheet_id: number
+    collections_sheets_id: string
+    collection_id: string
+    sheet_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Collections_sheetsCountAggregateOutputType | null
-    _avg: Collections_sheetsAvgAggregateOutputType | null
-    _sum: Collections_sheetsSumAggregateOutputType | null
     _min: Collections_sheetsMinAggregateOutputType | null
     _max: Collections_sheetsMaxAggregateOutputType | null
   }
@@ -6389,9 +6013,9 @@ export namespace Prisma {
       sheets: Prisma.$sheetsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      collections_sheets_id: number
-      collection_id: number
-      sheet_id: number
+      collections_sheets_id: string
+      collection_id: string
+      sheet_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -6792,9 +6416,9 @@ export namespace Prisma {
    * Fields of the collections_sheets model
    */ 
   interface collections_sheetsFieldRefs {
-    readonly collections_sheets_id: FieldRef<"collections_sheets", 'Int'>
-    readonly collection_id: FieldRef<"collections_sheets", 'Int'>
-    readonly sheet_id: FieldRef<"collections_sheets", 'Int'>
+    readonly collections_sheets_id: FieldRef<"collections_sheets", 'String'>
+    readonly collection_id: FieldRef<"collections_sheets", 'String'>
+    readonly sheet_id: FieldRef<"collections_sheets", 'String'>
     readonly date_added: FieldRef<"collections_sheets", 'DateTime'>
     readonly pinned: FieldRef<"collections_sheets", 'Boolean'>
     readonly date_pinned: FieldRef<"collections_sheets", 'DateTime'>
@@ -7131,37 +6755,23 @@ export namespace Prisma {
 
   export type AggregateCollections_videos = {
     _count: Collections_videosCountAggregateOutputType | null
-    _avg: Collections_videosAvgAggregateOutputType | null
-    _sum: Collections_videosSumAggregateOutputType | null
     _min: Collections_videosMinAggregateOutputType | null
     _max: Collections_videosMaxAggregateOutputType | null
   }
 
-  export type Collections_videosAvgAggregateOutputType = {
-    collections_videos_id: number | null
-    collection_id: number | null
-    video_id: number | null
-  }
-
-  export type Collections_videosSumAggregateOutputType = {
-    collections_videos_id: number | null
-    collection_id: number | null
-    video_id: number | null
-  }
-
   export type Collections_videosMinAggregateOutputType = {
-    collections_videos_id: number | null
-    collection_id: number | null
-    video_id: number | null
+    collections_videos_id: string | null
+    collection_id: string | null
+    video_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Collections_videosMaxAggregateOutputType = {
-    collections_videos_id: number | null
-    collection_id: number | null
-    video_id: number | null
+    collections_videos_id: string | null
+    collection_id: string | null
+    video_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -7177,18 +6787,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Collections_videosAvgAggregateInputType = {
-    collections_videos_id?: true
-    collection_id?: true
-    video_id?: true
-  }
-
-  export type Collections_videosSumAggregateInputType = {
-    collections_videos_id?: true
-    collection_id?: true
-    video_id?: true
-  }
 
   export type Collections_videosMinAggregateInputType = {
     collections_videos_id?: true
@@ -7256,18 +6854,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Collections_videosAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Collections_videosSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Collections_videosMinAggregateInputType
@@ -7298,22 +6884,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Collections_videosCountAggregateInputType | true
-    _avg?: Collections_videosAvgAggregateInputType
-    _sum?: Collections_videosSumAggregateInputType
     _min?: Collections_videosMinAggregateInputType
     _max?: Collections_videosMaxAggregateInputType
   }
 
   export type Collections_videosGroupByOutputType = {
-    collections_videos_id: number
-    collection_id: number
-    video_id: number
+    collections_videos_id: string
+    collection_id: string
+    video_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Collections_videosCountAggregateOutputType | null
-    _avg: Collections_videosAvgAggregateOutputType | null
-    _sum: Collections_videosSumAggregateOutputType | null
     _min: Collections_videosMinAggregateOutputType | null
     _max: Collections_videosMaxAggregateOutputType | null
   }
@@ -7365,9 +6947,9 @@ export namespace Prisma {
       videos: Prisma.$videosPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      collections_videos_id: number
-      collection_id: number
-      video_id: number
+      collections_videos_id: string
+      collection_id: string
+      video_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -7768,9 +7350,9 @@ export namespace Prisma {
    * Fields of the collections_videos model
    */ 
   interface collections_videosFieldRefs {
-    readonly collections_videos_id: FieldRef<"collections_videos", 'Int'>
-    readonly collection_id: FieldRef<"collections_videos", 'Int'>
-    readonly video_id: FieldRef<"collections_videos", 'Int'>
+    readonly collections_videos_id: FieldRef<"collections_videos", 'String'>
+    readonly collection_id: FieldRef<"collections_videos", 'String'>
+    readonly video_id: FieldRef<"collections_videos", 'String'>
     readonly date_added: FieldRef<"collections_videos", 'DateTime'>
     readonly pinned: FieldRef<"collections_videos", 'Boolean'>
     readonly date_pinned: FieldRef<"collections_videos", 'DateTime'>
@@ -8114,75 +7696,51 @@ export namespace Prisma {
   }
 
   export type EntitiesAvgAggregateOutputType = {
-    entity_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_type: number | null
   }
 
   export type EntitiesSumAggregateOutputType = {
-    entity_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_type: number | null
   }
 
   export type EntitiesMinAggregateOutputType = {
-    entity_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string | null
+    entity_type: number | null
   }
 
   export type EntitiesMaxAggregateOutputType = {
-    entity_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string | null
+    entity_type: number | null
   }
 
   export type EntitiesCountAggregateOutputType = {
     entity_id: number
-    individual_id: number
-    group_id: number
-    organization_id: number
+    entity_type: number
     _all: number
   }
 
 
   export type EntitiesAvgAggregateInputType = {
-    entity_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_type?: true
   }
 
   export type EntitiesSumAggregateInputType = {
-    entity_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_type?: true
   }
 
   export type EntitiesMinAggregateInputType = {
     entity_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_type?: true
   }
 
   export type EntitiesMaxAggregateInputType = {
     entity_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_type?: true
   }
 
   export type EntitiesCountAggregateInputType = {
     entity_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_type?: true
     _all?: true
   }
 
@@ -8273,10 +7831,8 @@ export namespace Prisma {
   }
 
   export type EntitiesGroupByOutputType = {
-    entity_id: number
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    entity_id: string
+    entity_type: number
     _count: EntitiesCountAggregateOutputType | null
     _avg: EntitiesAvgAggregateOutputType | null
     _sum: EntitiesSumAggregateOutputType | null
@@ -8300,16 +7856,15 @@ export namespace Prisma {
 
   export type entitiesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     entity_id?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
-    groups?: boolean | entities$groupsArgs<ExtArgs>
-    individuals?: boolean | entities$individualsArgs<ExtArgs>
-    organizations?: boolean | entities$organizationsArgs<ExtArgs>
+    entity_type?: boolean
+    collections?: boolean | entities$collectionsArgs<ExtArgs>
     entities_images?: boolean | entities$entities_imagesArgs<ExtArgs>
+    entities_references?: boolean | entities$entities_referencesArgs<ExtArgs>
     entities_sheets?: boolean | entities$entities_sheetsArgs<ExtArgs>
     entities_videos?: boolean | entities$entities_videosArgs<ExtArgs>
+    groups_members?: boolean | entities$groups_membersArgs<ExtArgs>
     images?: boolean | entities$imagesArgs<ExtArgs>
+    organizations_members?: boolean | entities$organizations_membersArgs<ExtArgs>
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
@@ -8317,19 +7872,18 @@ export namespace Prisma {
 
   export type entitiesSelectScalar = {
     entity_id?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
+    entity_type?: boolean
   }
 
   export type entitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    groups?: boolean | entities$groupsArgs<ExtArgs>
-    individuals?: boolean | entities$individualsArgs<ExtArgs>
-    organizations?: boolean | entities$organizationsArgs<ExtArgs>
+    collections?: boolean | entities$collectionsArgs<ExtArgs>
     entities_images?: boolean | entities$entities_imagesArgs<ExtArgs>
+    entities_references?: boolean | entities$entities_referencesArgs<ExtArgs>
     entities_sheets?: boolean | entities$entities_sheetsArgs<ExtArgs>
     entities_videos?: boolean | entities$entities_videosArgs<ExtArgs>
+    groups_members?: boolean | entities$groups_membersArgs<ExtArgs>
     images?: boolean | entities$imagesArgs<ExtArgs>
+    organizations_members?: boolean | entities$organizations_membersArgs<ExtArgs>
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
@@ -8339,21 +7893,20 @@ export namespace Prisma {
   export type $entitiesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "entities"
     objects: {
-      groups: Prisma.$groupsPayload<ExtArgs> | null
-      individuals: Prisma.$individualsPayload<ExtArgs> | null
-      organizations: Prisma.$organizationsPayload<ExtArgs> | null
+      collections: Prisma.$collectionsPayload<ExtArgs>[]
       entities_images: Prisma.$entities_imagesPayload<ExtArgs>[]
+      entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       entities_sheets: Prisma.$entities_sheetsPayload<ExtArgs>[]
       entities_videos: Prisma.$entities_videosPayload<ExtArgs>[]
+      groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
       images: Prisma.$imagesPayload<ExtArgs>[]
+      organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
       sheets: Prisma.$sheetsPayload<ExtArgs>[]
       videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      entity_id: number
-      individual_id: number | null
-      group_id: number | null
-      organization_id: number | null
+      entity_id: string
+      entity_type: number
     }, ExtArgs["result"]["entities"]>
     composites: {}
   }
@@ -8719,19 +8272,21 @@ export namespace Prisma {
   export interface Prisma__entitiesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    groups<T extends entities$groupsArgs<ExtArgs> = {}>(args?: Subset<T, entities$groupsArgs<ExtArgs>>): Prisma__groupsClient<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    individuals<T extends entities$individualsArgs<ExtArgs> = {}>(args?: Subset<T, entities$individualsArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    organizations<T extends entities$organizationsArgs<ExtArgs> = {}>(args?: Subset<T, entities$organizationsArgs<ExtArgs>>): Prisma__organizationsClient<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    collections<T extends entities$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, entities$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_images<T extends entities$entities_imagesArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    entities_references<T extends entities$entities_referencesArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_referencesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_sheets<T extends entities$entities_sheetsArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_videos<T extends entities$entities_videosArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    groups_members<T extends entities$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     images<T extends entities$imagesArgs<ExtArgs> = {}>(args?: Subset<T, entities$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagesPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    organizations_members<T extends entities$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     sheets<T extends entities$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, entities$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -8765,10 +8320,8 @@ export namespace Prisma {
    * Fields of the entities model
    */ 
   interface entitiesFieldRefs {
-    readonly entity_id: FieldRef<"entities", 'Int'>
-    readonly individual_id: FieldRef<"entities", 'Int'>
-    readonly group_id: FieldRef<"entities", 'Int'>
-    readonly organization_id: FieldRef<"entities", 'Int'>
+    readonly entity_id: FieldRef<"entities", 'String'>
+    readonly entity_type: FieldRef<"entities", 'Int'>
   }
     
 
@@ -8969,7 +8522,7 @@ export namespace Prisma {
     /**
      * The data needed to create a entities.
      */
-    data?: XOR<entitiesCreateInput, entitiesUncheckedCreateInput>
+    data: XOR<entitiesCreateInput, entitiesUncheckedCreateInput>
   }
 
 
@@ -9081,50 +8634,23 @@ export namespace Prisma {
 
 
   /**
-   * entities.groups
+   * entities.collections
    */
-  export type entities$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type entities$collectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the groups
+     * Select specific fields to fetch from the collections
      */
-    select?: groupsSelect<ExtArgs> | null
+    select?: collectionsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: groupsInclude<ExtArgs> | null
-    where?: groupsWhereInput
-  }
-
-
-  /**
-   * entities.individuals
-   */
-  export type entities$individualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the individuals
-     */
-    select?: individualsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: individualsInclude<ExtArgs> | null
-    where?: individualsWhereInput
-  }
-
-
-  /**
-   * entities.organizations
-   */
-  export type entities$organizationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the organizations
-     */
-    select?: organizationsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: organizationsInclude<ExtArgs> | null
-    where?: organizationsWhereInput
+    include?: collectionsInclude<ExtArgs> | null
+    where?: collectionsWhereInput
+    orderBy?: collectionsOrderByWithRelationInput | collectionsOrderByWithRelationInput[]
+    cursor?: collectionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CollectionsScalarFieldEnum | CollectionsScalarFieldEnum[]
   }
 
 
@@ -9146,6 +8672,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Entities_imagesScalarFieldEnum | Entities_imagesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.entities_references
+   */
+  export type entities$entities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_references
+     */
+    select?: entities_referencesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_referencesInclude<ExtArgs> | null
+    where?: entities_referencesWhereInput
+    orderBy?: entities_referencesOrderByWithRelationInput | entities_referencesOrderByWithRelationInput[]
+    cursor?: entities_referencesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Entities_referencesScalarFieldEnum | Entities_referencesScalarFieldEnum[]
   }
 
 
@@ -9192,6 +8739,27 @@ export namespace Prisma {
 
 
   /**
+   * entities.groups_members
+   */
+  export type entities$groups_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the groups_members
+     */
+    select?: groups_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: groups_membersInclude<ExtArgs> | null
+    where?: groups_membersWhereInput
+    orderBy?: groups_membersOrderByWithRelationInput | groups_membersOrderByWithRelationInput[]
+    cursor?: groups_membersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Groups_membersScalarFieldEnum | Groups_membersScalarFieldEnum[]
+  }
+
+
+  /**
    * entities.images
    */
   export type entities$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9209,6 +8777,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ImagesScalarFieldEnum | ImagesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.organizations_members
+   */
+  export type entities$organizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the organizations_members
+     */
+    select?: organizations_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: organizations_membersInclude<ExtArgs> | null
+    where?: organizations_membersWhereInput
+    orderBy?: organizations_membersOrderByWithRelationInput | organizations_membersOrderByWithRelationInput[]
+    cursor?: organizations_membersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Organizations_membersScalarFieldEnum | Organizations_membersScalarFieldEnum[]
   }
 
 
@@ -9276,37 +8865,23 @@ export namespace Prisma {
 
   export type AggregateEntities_images = {
     _count: Entities_imagesCountAggregateOutputType | null
-    _avg: Entities_imagesAvgAggregateOutputType | null
-    _sum: Entities_imagesSumAggregateOutputType | null
     _min: Entities_imagesMinAggregateOutputType | null
     _max: Entities_imagesMaxAggregateOutputType | null
   }
 
-  export type Entities_imagesAvgAggregateOutputType = {
-    entities_images_id: number | null
-    entity_id: number | null
-    image_id: number | null
-  }
-
-  export type Entities_imagesSumAggregateOutputType = {
-    entities_images_id: number | null
-    entity_id: number | null
-    image_id: number | null
-  }
-
   export type Entities_imagesMinAggregateOutputType = {
-    entities_images_id: number | null
-    entity_id: number | null
-    image_id: number | null
+    entities_images_id: string | null
+    entity_id: string | null
+    image_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Entities_imagesMaxAggregateOutputType = {
-    entities_images_id: number | null
-    entity_id: number | null
-    image_id: number | null
+    entities_images_id: string | null
+    entity_id: string | null
+    image_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -9322,18 +8897,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Entities_imagesAvgAggregateInputType = {
-    entities_images_id?: true
-    entity_id?: true
-    image_id?: true
-  }
-
-  export type Entities_imagesSumAggregateInputType = {
-    entities_images_id?: true
-    entity_id?: true
-    image_id?: true
-  }
 
   export type Entities_imagesMinAggregateInputType = {
     entities_images_id?: true
@@ -9401,18 +8964,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Entities_imagesAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Entities_imagesSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Entities_imagesMinAggregateInputType
@@ -9443,22 +8994,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Entities_imagesCountAggregateInputType | true
-    _avg?: Entities_imagesAvgAggregateInputType
-    _sum?: Entities_imagesSumAggregateInputType
     _min?: Entities_imagesMinAggregateInputType
     _max?: Entities_imagesMaxAggregateInputType
   }
 
   export type Entities_imagesGroupByOutputType = {
-    entities_images_id: number
-    entity_id: number
-    image_id: number
+    entities_images_id: string
+    entity_id: string
+    image_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Entities_imagesCountAggregateOutputType | null
-    _avg: Entities_imagesAvgAggregateOutputType | null
-    _sum: Entities_imagesSumAggregateOutputType | null
     _min: Entities_imagesMinAggregateOutputType | null
     _max: Entities_imagesMaxAggregateOutputType | null
   }
@@ -9510,9 +9057,9 @@ export namespace Prisma {
       images: Prisma.$imagesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      entities_images_id: number
-      entity_id: number
-      image_id: number
+      entities_images_id: string
+      entity_id: string
+      image_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -9913,9 +9460,9 @@ export namespace Prisma {
    * Fields of the entities_images model
    */ 
   interface entities_imagesFieldRefs {
-    readonly entities_images_id: FieldRef<"entities_images", 'Int'>
-    readonly entity_id: FieldRef<"entities_images", 'Int'>
-    readonly image_id: FieldRef<"entities_images", 'Int'>
+    readonly entities_images_id: FieldRef<"entities_images", 'String'>
+    readonly entity_id: FieldRef<"entities_images", 'String'>
+    readonly image_id: FieldRef<"entities_images", 'String'>
     readonly date_added: FieldRef<"entities_images", 'DateTime'>
     readonly pinned: FieldRef<"entities_images", 'Boolean'>
     readonly date_pinned: FieldRef<"entities_images", 'DateTime'>
@@ -10252,41 +9799,21 @@ export namespace Prisma {
 
   export type AggregateEntities_references = {
     _count: Entities_referencesCountAggregateOutputType | null
-    _avg: Entities_referencesAvgAggregateOutputType | null
-    _sum: Entities_referencesSumAggregateOutputType | null
     _min: Entities_referencesMinAggregateOutputType | null
     _max: Entities_referencesMaxAggregateOutputType | null
   }
 
-  export type Entities_referencesAvgAggregateOutputType = {
-    reference_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
-  }
-
-  export type Entities_referencesSumAggregateOutputType = {
-    reference_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
-  }
-
   export type Entities_referencesMinAggregateOutputType = {
-    reference_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    reference_id: string | null
+    entity_id: string | null
     title: string | null
     author: string | null
     url: string | null
   }
 
   export type Entities_referencesMaxAggregateOutputType = {
-    reference_id: number | null
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    reference_id: string | null
+    entity_id: string | null
     title: string | null
     author: string | null
     url: string | null
@@ -10294,9 +9821,7 @@ export namespace Prisma {
 
   export type Entities_referencesCountAggregateOutputType = {
     reference_id: number
-    individual_id: number
-    group_id: number
-    organization_id: number
+    entity_id: number
     title: number
     author: number
     url: number
@@ -10304,25 +9829,9 @@ export namespace Prisma {
   }
 
 
-  export type Entities_referencesAvgAggregateInputType = {
-    reference_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
-  }
-
-  export type Entities_referencesSumAggregateInputType = {
-    reference_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
-  }
-
   export type Entities_referencesMinAggregateInputType = {
     reference_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
     title?: true
     author?: true
     url?: true
@@ -10330,9 +9839,7 @@ export namespace Prisma {
 
   export type Entities_referencesMaxAggregateInputType = {
     reference_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
     title?: true
     author?: true
     url?: true
@@ -10340,9 +9847,7 @@ export namespace Prisma {
 
   export type Entities_referencesCountAggregateInputType = {
     reference_id?: true
-    individual_id?: true
-    group_id?: true
-    organization_id?: true
+    entity_id?: true
     title?: true
     author?: true
     url?: true
@@ -10387,18 +9892,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Entities_referencesAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Entities_referencesSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Entities_referencesMinAggregateInputType
@@ -10429,23 +9922,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Entities_referencesCountAggregateInputType | true
-    _avg?: Entities_referencesAvgAggregateInputType
-    _sum?: Entities_referencesSumAggregateInputType
     _min?: Entities_referencesMinAggregateInputType
     _max?: Entities_referencesMaxAggregateInputType
   }
 
   export type Entities_referencesGroupByOutputType = {
-    reference_id: number
-    individual_id: number | null
-    group_id: number | null
-    organization_id: number | null
+    reference_id: string
+    entity_id: string
     title: string
     author: string
     url: string
     _count: Entities_referencesCountAggregateOutputType | null
-    _avg: Entities_referencesAvgAggregateOutputType | null
-    _sum: Entities_referencesSumAggregateOutputType | null
     _min: Entities_referencesMinAggregateOutputType | null
     _max: Entities_referencesMaxAggregateOutputType | null
   }
@@ -10466,46 +9953,34 @@ export namespace Prisma {
 
   export type entities_referencesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     reference_id?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
+    entity_id?: boolean
     title?: boolean
     author?: boolean
     url?: boolean
-    groups?: boolean | entities_references$groupsArgs<ExtArgs>
-    individuals?: boolean | entities_references$individualsArgs<ExtArgs>
-    organizations?: boolean | entities_references$organizationsArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entities_references"]>
 
   export type entities_referencesSelectScalar = {
     reference_id?: boolean
-    individual_id?: boolean
-    group_id?: boolean
-    organization_id?: boolean
+    entity_id?: boolean
     title?: boolean
     author?: boolean
     url?: boolean
   }
 
   export type entities_referencesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    groups?: boolean | entities_references$groupsArgs<ExtArgs>
-    individuals?: boolean | entities_references$individualsArgs<ExtArgs>
-    organizations?: boolean | entities_references$organizationsArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
   }
 
 
   export type $entities_referencesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "entities_references"
     objects: {
-      groups: Prisma.$groupsPayload<ExtArgs> | null
-      individuals: Prisma.$individualsPayload<ExtArgs> | null
-      organizations: Prisma.$organizationsPayload<ExtArgs> | null
+      entities: Prisma.$entitiesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      reference_id: number
-      individual_id: number | null
-      group_id: number | null
-      organization_id: number | null
+      reference_id: string
+      entity_id: string
       title: string
       author: string
       url: string
@@ -10874,11 +10349,7 @@ export namespace Prisma {
   export interface Prisma__entities_referencesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    groups<T extends entities_references$groupsArgs<ExtArgs> = {}>(args?: Subset<T, entities_references$groupsArgs<ExtArgs>>): Prisma__groupsClient<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    individuals<T extends entities_references$individualsArgs<ExtArgs> = {}>(args?: Subset<T, entities_references$individualsArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    organizations<T extends entities_references$organizationsArgs<ExtArgs> = {}>(args?: Subset<T, entities_references$organizationsArgs<ExtArgs>>): Prisma__organizationsClient<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10908,10 +10379,8 @@ export namespace Prisma {
    * Fields of the entities_references model
    */ 
   interface entities_referencesFieldRefs {
-    readonly reference_id: FieldRef<"entities_references", 'Int'>
-    readonly individual_id: FieldRef<"entities_references", 'Int'>
-    readonly group_id: FieldRef<"entities_references", 'Int'>
-    readonly organization_id: FieldRef<"entities_references", 'Int'>
+    readonly reference_id: FieldRef<"entities_references", 'String'>
+    readonly entity_id: FieldRef<"entities_references", 'String'>
     readonly title: FieldRef<"entities_references", 'String'>
     readonly author: FieldRef<"entities_references", 'String'>
     readonly url: FieldRef<"entities_references", 'String'>
@@ -11227,54 +10696,6 @@ export namespace Prisma {
 
 
   /**
-   * entities_references.groups
-   */
-  export type entities_references$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the groups
-     */
-    select?: groupsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: groupsInclude<ExtArgs> | null
-    where?: groupsWhereInput
-  }
-
-
-  /**
-   * entities_references.individuals
-   */
-  export type entities_references$individualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the individuals
-     */
-    select?: individualsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: individualsInclude<ExtArgs> | null
-    where?: individualsWhereInput
-  }
-
-
-  /**
-   * entities_references.organizations
-   */
-  export type entities_references$organizationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the organizations
-     */
-    select?: organizationsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: organizationsInclude<ExtArgs> | null
-    where?: organizationsWhereInput
-  }
-
-
-  /**
    * entities_references without action
    */
   export type entities_referencesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11296,37 +10717,23 @@ export namespace Prisma {
 
   export type AggregateEntities_sheets = {
     _count: Entities_sheetsCountAggregateOutputType | null
-    _avg: Entities_sheetsAvgAggregateOutputType | null
-    _sum: Entities_sheetsSumAggregateOutputType | null
     _min: Entities_sheetsMinAggregateOutputType | null
     _max: Entities_sheetsMaxAggregateOutputType | null
   }
 
-  export type Entities_sheetsAvgAggregateOutputType = {
-    entities_sheets_id: number | null
-    entity_id: number | null
-    sheet_id: number | null
-  }
-
-  export type Entities_sheetsSumAggregateOutputType = {
-    entities_sheets_id: number | null
-    entity_id: number | null
-    sheet_id: number | null
-  }
-
   export type Entities_sheetsMinAggregateOutputType = {
-    entities_sheets_id: number | null
-    entity_id: number | null
-    sheet_id: number | null
+    entities_sheets_id: string | null
+    entity_id: string | null
+    sheet_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Entities_sheetsMaxAggregateOutputType = {
-    entities_sheets_id: number | null
-    entity_id: number | null
-    sheet_id: number | null
+    entities_sheets_id: string | null
+    entity_id: string | null
+    sheet_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -11342,18 +10749,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Entities_sheetsAvgAggregateInputType = {
-    entities_sheets_id?: true
-    entity_id?: true
-    sheet_id?: true
-  }
-
-  export type Entities_sheetsSumAggregateInputType = {
-    entities_sheets_id?: true
-    entity_id?: true
-    sheet_id?: true
-  }
 
   export type Entities_sheetsMinAggregateInputType = {
     entities_sheets_id?: true
@@ -11421,18 +10816,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Entities_sheetsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Entities_sheetsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Entities_sheetsMinAggregateInputType
@@ -11463,22 +10846,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Entities_sheetsCountAggregateInputType | true
-    _avg?: Entities_sheetsAvgAggregateInputType
-    _sum?: Entities_sheetsSumAggregateInputType
     _min?: Entities_sheetsMinAggregateInputType
     _max?: Entities_sheetsMaxAggregateInputType
   }
 
   export type Entities_sheetsGroupByOutputType = {
-    entities_sheets_id: number
-    entity_id: number
-    sheet_id: number
+    entities_sheets_id: string
+    entity_id: string
+    sheet_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Entities_sheetsCountAggregateOutputType | null
-    _avg: Entities_sheetsAvgAggregateOutputType | null
-    _sum: Entities_sheetsSumAggregateOutputType | null
     _min: Entities_sheetsMinAggregateOutputType | null
     _max: Entities_sheetsMaxAggregateOutputType | null
   }
@@ -11530,9 +10909,9 @@ export namespace Prisma {
       sheets: Prisma.$sheetsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      entities_sheets_id: number
-      entity_id: number
-      sheet_id: number
+      entities_sheets_id: string
+      entity_id: string
+      sheet_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -11933,9 +11312,9 @@ export namespace Prisma {
    * Fields of the entities_sheets model
    */ 
   interface entities_sheetsFieldRefs {
-    readonly entities_sheets_id: FieldRef<"entities_sheets", 'Int'>
-    readonly entity_id: FieldRef<"entities_sheets", 'Int'>
-    readonly sheet_id: FieldRef<"entities_sheets", 'Int'>
+    readonly entities_sheets_id: FieldRef<"entities_sheets", 'String'>
+    readonly entity_id: FieldRef<"entities_sheets", 'String'>
+    readonly sheet_id: FieldRef<"entities_sheets", 'String'>
     readonly date_added: FieldRef<"entities_sheets", 'DateTime'>
     readonly pinned: FieldRef<"entities_sheets", 'Boolean'>
     readonly date_pinned: FieldRef<"entities_sheets", 'DateTime'>
@@ -12272,37 +11651,23 @@ export namespace Prisma {
 
   export type AggregateEntities_videos = {
     _count: Entities_videosCountAggregateOutputType | null
-    _avg: Entities_videosAvgAggregateOutputType | null
-    _sum: Entities_videosSumAggregateOutputType | null
     _min: Entities_videosMinAggregateOutputType | null
     _max: Entities_videosMaxAggregateOutputType | null
   }
 
-  export type Entities_videosAvgAggregateOutputType = {
-    entities_videos_id: number | null
-    entity_id: number | null
-    video_id: number | null
-  }
-
-  export type Entities_videosSumAggregateOutputType = {
-    entities_videos_id: number | null
-    entity_id: number | null
-    video_id: number | null
-  }
-
   export type Entities_videosMinAggregateOutputType = {
-    entities_videos_id: number | null
-    entity_id: number | null
-    video_id: number | null
+    entities_videos_id: string | null
+    entity_id: string | null
+    video_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
   }
 
   export type Entities_videosMaxAggregateOutputType = {
-    entities_videos_id: number | null
-    entity_id: number | null
-    video_id: number | null
+    entities_videos_id: string | null
+    entity_id: string | null
+    video_id: string | null
     date_added: Date | null
     pinned: boolean | null
     date_pinned: Date | null
@@ -12318,18 +11683,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Entities_videosAvgAggregateInputType = {
-    entities_videos_id?: true
-    entity_id?: true
-    video_id?: true
-  }
-
-  export type Entities_videosSumAggregateInputType = {
-    entities_videos_id?: true
-    entity_id?: true
-    video_id?: true
-  }
 
   export type Entities_videosMinAggregateInputType = {
     entities_videos_id?: true
@@ -12397,18 +11750,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Entities_videosAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Entities_videosSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Entities_videosMinAggregateInputType
@@ -12439,22 +11780,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Entities_videosCountAggregateInputType | true
-    _avg?: Entities_videosAvgAggregateInputType
-    _sum?: Entities_videosSumAggregateInputType
     _min?: Entities_videosMinAggregateInputType
     _max?: Entities_videosMaxAggregateInputType
   }
 
   export type Entities_videosGroupByOutputType = {
-    entities_videos_id: number
-    entity_id: number
-    video_id: number
+    entities_videos_id: string
+    entity_id: string
+    video_id: string
     date_added: Date
     pinned: boolean
     date_pinned: Date | null
     _count: Entities_videosCountAggregateOutputType | null
-    _avg: Entities_videosAvgAggregateOutputType | null
-    _sum: Entities_videosSumAggregateOutputType | null
     _min: Entities_videosMinAggregateOutputType | null
     _max: Entities_videosMaxAggregateOutputType | null
   }
@@ -12506,9 +11843,9 @@ export namespace Prisma {
       videos: Prisma.$videosPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      entities_videos_id: number
-      entity_id: number
-      video_id: number
+      entities_videos_id: string
+      entity_id: string
+      video_id: string
       date_added: Date
       pinned: boolean
       date_pinned: Date | null
@@ -12909,9 +12246,9 @@ export namespace Prisma {
    * Fields of the entities_videos model
    */ 
   interface entities_videosFieldRefs {
-    readonly entities_videos_id: FieldRef<"entities_videos", 'Int'>
-    readonly entity_id: FieldRef<"entities_videos", 'Int'>
-    readonly video_id: FieldRef<"entities_videos", 'Int'>
+    readonly entities_videos_id: FieldRef<"entities_videos", 'String'>
+    readonly entity_id: FieldRef<"entities_videos", 'String'>
+    readonly video_id: FieldRef<"entities_videos", 'String'>
     readonly date_added: FieldRef<"entities_videos", 'DateTime'>
     readonly pinned: FieldRef<"entities_videos", 'Boolean'>
     readonly date_pinned: FieldRef<"entities_videos", 'DateTime'>
@@ -13248,22 +12585,12 @@ export namespace Prisma {
 
   export type AggregateGroups = {
     _count: GroupsCountAggregateOutputType | null
-    _avg: GroupsAvgAggregateOutputType | null
-    _sum: GroupsSumAggregateOutputType | null
     _min: GroupsMinAggregateOutputType | null
     _max: GroupsMaxAggregateOutputType | null
   }
 
-  export type GroupsAvgAggregateOutputType = {
-    group_id: number | null
-  }
-
-  export type GroupsSumAggregateOutputType = {
-    group_id: number | null
-  }
-
   export type GroupsMinAggregateOutputType = {
-    group_id: number | null
+    group_id: string | null
     group_handle: string | null
     group_name: string | null
     group_currentIssue: string | null
@@ -13272,7 +12599,7 @@ export namespace Prisma {
   }
 
   export type GroupsMaxAggregateOutputType = {
-    group_id: number | null
+    group_id: string | null
     group_handle: string | null
     group_name: string | null
     group_currentIssue: string | null
@@ -13290,14 +12617,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type GroupsAvgAggregateInputType = {
-    group_id?: true
-  }
-
-  export type GroupsSumAggregateInputType = {
-    group_id?: true
-  }
 
   export type GroupsMinAggregateInputType = {
     group_id?: true
@@ -13365,18 +12684,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: GroupsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GroupsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: GroupsMinAggregateInputType
@@ -13407,22 +12714,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: GroupsCountAggregateInputType | true
-    _avg?: GroupsAvgAggregateInputType
-    _sum?: GroupsSumAggregateInputType
     _min?: GroupsMinAggregateInputType
     _max?: GroupsMaxAggregateInputType
   }
 
   export type GroupsGroupByOutputType = {
-    group_id: number
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue: string | null
     group_stances: string | null
     group_description: string | null
     _count: GroupsCountAggregateOutputType | null
-    _avg: GroupsAvgAggregateOutputType | null
-    _sum: GroupsSumAggregateOutputType | null
     _min: GroupsMinAggregateOutputType | null
     _max: GroupsMaxAggregateOutputType | null
   }
@@ -13448,9 +12751,6 @@ export namespace Prisma {
     group_currentIssue?: boolean
     group_stances?: boolean
     group_description?: boolean
-    collections?: boolean | groups$collectionsArgs<ExtArgs>
-    entities?: boolean | groups$entitiesArgs<ExtArgs>
-    entities_references?: boolean | groups$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | groups$groups_membersArgs<ExtArgs>
     _count?: boolean | GroupsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["groups"]>
@@ -13465,9 +12765,6 @@ export namespace Prisma {
   }
 
   export type groupsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | groups$collectionsArgs<ExtArgs>
-    entities?: boolean | groups$entitiesArgs<ExtArgs>
-    entities_references?: boolean | groups$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | groups$groups_membersArgs<ExtArgs>
     _count?: boolean | GroupsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13476,13 +12773,10 @@ export namespace Prisma {
   export type $groupsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "groups"
     objects: {
-      collections: Prisma.$collectionsPayload<ExtArgs>[]
-      entities: Prisma.$entitiesPayload<ExtArgs>[]
-      entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      group_id: number
+      group_id: string
       group_handle: string
       group_name: string
       group_currentIssue: string | null
@@ -13853,12 +13147,6 @@ export namespace Prisma {
   export interface Prisma__groupsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    collections<T extends groups$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, groups$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities<T extends groups$entitiesArgs<ExtArgs> = {}>(args?: Subset<T, groups$entitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities_references<T extends groups$entities_referencesArgs<ExtArgs> = {}>(args?: Subset<T, groups$entities_referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_referencesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     groups_members<T extends groups$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, groups$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
@@ -13889,7 +13177,7 @@ export namespace Prisma {
    * Fields of the groups model
    */ 
   interface groupsFieldRefs {
-    readonly group_id: FieldRef<"groups", 'Int'>
+    readonly group_id: FieldRef<"groups", 'String'>
     readonly group_handle: FieldRef<"groups", 'String'>
     readonly group_name: FieldRef<"groups", 'String'>
     readonly group_currentIssue: FieldRef<"groups", 'String'>
@@ -14207,69 +13495,6 @@ export namespace Prisma {
 
 
   /**
-   * groups.collections
-   */
-  export type groups$collectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the collections
-     */
-    select?: collectionsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: collectionsInclude<ExtArgs> | null
-    where?: collectionsWhereInput
-    orderBy?: collectionsOrderByWithRelationInput | collectionsOrderByWithRelationInput[]
-    cursor?: collectionsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CollectionsScalarFieldEnum | CollectionsScalarFieldEnum[]
-  }
-
-
-  /**
-   * groups.entities
-   */
-  export type groups$entitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities
-     */
-    select?: entitiesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entitiesInclude<ExtArgs> | null
-    where?: entitiesWhereInput
-    orderBy?: entitiesOrderByWithRelationInput | entitiesOrderByWithRelationInput[]
-    cursor?: entitiesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EntitiesScalarFieldEnum | EntitiesScalarFieldEnum[]
-  }
-
-
-  /**
-   * groups.entities_references
-   */
-  export type groups$entities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities_references
-     */
-    select?: entities_referencesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entities_referencesInclude<ExtArgs> | null
-    where?: entities_referencesWhereInput
-    orderBy?: entities_referencesOrderByWithRelationInput | entities_referencesOrderByWithRelationInput[]
-    cursor?: entities_referencesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Entities_referencesScalarFieldEnum | Entities_referencesScalarFieldEnum[]
-  }
-
-
-  /**
    * groups.groups_members
    */
   export type groups$groups_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14312,62 +13537,46 @@ export namespace Prisma {
 
   export type AggregateGroups_members = {
     _count: Groups_membersCountAggregateOutputType | null
-    _avg: Groups_membersAvgAggregateOutputType | null
-    _sum: Groups_membersSumAggregateOutputType | null
     _min: Groups_membersMinAggregateOutputType | null
     _max: Groups_membersMaxAggregateOutputType | null
   }
 
-  export type Groups_membersAvgAggregateOutputType = {
-    group_id: number | null
-    individual_id: number | null
-  }
-
-  export type Groups_membersSumAggregateOutputType = {
-    group_id: number | null
-    individual_id: number | null
-  }
-
   export type Groups_membersMinAggregateOutputType = {
-    group_id: number | null
-    individual_id: number | null
+    groups_members_id: string | null
+    group_id: string | null
+    entity_id: string | null
   }
 
   export type Groups_membersMaxAggregateOutputType = {
-    group_id: number | null
-    individual_id: number | null
+    groups_members_id: string | null
+    group_id: string | null
+    entity_id: string | null
   }
 
   export type Groups_membersCountAggregateOutputType = {
+    groups_members_id: number
     group_id: number
-    individual_id: number
+    entity_id: number
     _all: number
   }
 
 
-  export type Groups_membersAvgAggregateInputType = {
-    group_id?: true
-    individual_id?: true
-  }
-
-  export type Groups_membersSumAggregateInputType = {
-    group_id?: true
-    individual_id?: true
-  }
-
   export type Groups_membersMinAggregateInputType = {
+    groups_members_id?: true
     group_id?: true
-    individual_id?: true
+    entity_id?: true
   }
 
   export type Groups_membersMaxAggregateInputType = {
+    groups_members_id?: true
     group_id?: true
-    individual_id?: true
+    entity_id?: true
   }
 
   export type Groups_membersCountAggregateInputType = {
+    groups_members_id?: true
     group_id?: true
-    individual_id?: true
+    entity_id?: true
     _all?: true
   }
 
@@ -14409,18 +13618,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Groups_membersAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Groups_membersSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Groups_membersMinAggregateInputType
@@ -14451,18 +13648,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Groups_membersCountAggregateInputType | true
-    _avg?: Groups_membersAvgAggregateInputType
-    _sum?: Groups_membersSumAggregateInputType
     _min?: Groups_membersMinAggregateInputType
     _max?: Groups_membersMaxAggregateInputType
   }
 
   export type Groups_membersGroupByOutputType = {
-    group_id: number
-    individual_id: number
+    groups_members_id: string
+    group_id: string
+    entity_id: string
     _count: Groups_membersCountAggregateOutputType | null
-    _avg: Groups_membersAvgAggregateOutputType | null
-    _sum: Groups_membersSumAggregateOutputType | null
     _min: Groups_membersMinAggregateOutputType | null
     _max: Groups_membersMaxAggregateOutputType | null
   }
@@ -14482,32 +13676,35 @@ export namespace Prisma {
 
 
   export type groups_membersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    groups_members_id?: boolean
     group_id?: boolean
-    individual_id?: boolean
+    entity_id?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     groups?: boolean | groupsDefaultArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["groups_members"]>
 
   export type groups_membersSelectScalar = {
+    groups_members_id?: boolean
     group_id?: boolean
-    individual_id?: boolean
+    entity_id?: boolean
   }
 
   export type groups_membersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     groups?: boolean | groupsDefaultArgs<ExtArgs>
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
   }
 
 
   export type $groups_membersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "groups_members"
     objects: {
+      entities: Prisma.$entitiesPayload<ExtArgs>
       groups: Prisma.$groupsPayload<ExtArgs>
-      individuals: Prisma.$individualsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      group_id: number
-      individual_id: number
+      groups_members_id: string
+      group_id: string
+      entity_id: string
     }, ExtArgs["result"]["groups_members"]>
     composites: {}
   }
@@ -14600,8 +13797,8 @@ export namespace Prisma {
      * // Get first 10 Groups_members
      * const groups_members = await prisma.groups_members.findMany({ take: 10 })
      * 
-     * // Only select the `group_id`
-     * const groups_membersWithGroup_idOnly = await prisma.groups_members.findMany({ select: { group_id: true } })
+     * // Only select the `groups_members_id`
+     * const groups_membersWithGroups_members_idOnly = await prisma.groups_members.findMany({ select: { groups_members_id: true } })
      * 
     **/
     findMany<T extends groups_membersFindManyArgs<ExtArgs>>(
@@ -14873,9 +14070,9 @@ export namespace Prisma {
   export interface Prisma__groups_membersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    groups<T extends groupsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, groupsDefaultArgs<ExtArgs>>): Prisma__groupsClient<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    groups<T extends groupsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, groupsDefaultArgs<ExtArgs>>): Prisma__groupsClient<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14905,8 +14102,9 @@ export namespace Prisma {
    * Fields of the groups_members model
    */ 
   interface groups_membersFieldRefs {
-    readonly group_id: FieldRef<"groups_members", 'Int'>
-    readonly individual_id: FieldRef<"groups_members", 'Int'>
+    readonly groups_members_id: FieldRef<"groups_members", 'String'>
+    readonly group_id: FieldRef<"groups_members", 'String'>
+    readonly entity_id: FieldRef<"groups_members", 'String'>
   }
     
 
@@ -15240,40 +14438,26 @@ export namespace Prisma {
 
   export type AggregateImages = {
     _count: ImagesCountAggregateOutputType | null
-    _avg: ImagesAvgAggregateOutputType | null
-    _sum: ImagesSumAggregateOutputType | null
     _min: ImagesMinAggregateOutputType | null
     _max: ImagesMaxAggregateOutputType | null
   }
 
-  export type ImagesAvgAggregateOutputType = {
-    image_id: number | null
-    image_creator_id: number | null
-    image_data_id: number | null
-  }
-
-  export type ImagesSumAggregateOutputType = {
-    image_id: number | null
-    image_creator_id: number | null
-    image_data_id: number | null
-  }
-
   export type ImagesMinAggregateOutputType = {
-    image_id: number | null
-    image_creator_id: number | null
+    image_id: string | null
+    image_creator_id: string | null
     image_title: string | null
     image_description: string | null
     image_filename: string | null
-    image_data_id: number | null
+    image_data_id: string | null
   }
 
   export type ImagesMaxAggregateOutputType = {
-    image_id: number | null
-    image_creator_id: number | null
+    image_id: string | null
+    image_creator_id: string | null
     image_title: string | null
     image_description: string | null
     image_filename: string | null
-    image_data_id: number | null
+    image_data_id: string | null
   }
 
   export type ImagesCountAggregateOutputType = {
@@ -15286,18 +14470,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type ImagesAvgAggregateInputType = {
-    image_id?: true
-    image_creator_id?: true
-    image_data_id?: true
-  }
-
-  export type ImagesSumAggregateInputType = {
-    image_id?: true
-    image_creator_id?: true
-    image_data_id?: true
-  }
 
   export type ImagesMinAggregateInputType = {
     image_id?: true
@@ -15365,18 +14537,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ImagesAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ImagesSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ImagesMinAggregateInputType
@@ -15407,22 +14567,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ImagesCountAggregateInputType | true
-    _avg?: ImagesAvgAggregateInputType
-    _sum?: ImagesSumAggregateInputType
     _min?: ImagesMinAggregateInputType
     _max?: ImagesMaxAggregateInputType
   }
 
   export type ImagesGroupByOutputType = {
-    image_id: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
     _count: ImagesCountAggregateOutputType | null
-    _avg: ImagesAvgAggregateOutputType | null
-    _sum: ImagesSumAggregateOutputType | null
     _min: ImagesMinAggregateOutputType | null
     _max: ImagesMaxAggregateOutputType | null
   }
@@ -15482,12 +14638,12 @@ export namespace Prisma {
       images_data: Prisma.$images_dataPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      image_id: number
-      image_creator_id: number
+      image_id: string
+      image_creator_id: string
       image_title: string
       image_description: string
       image_filename: string
-      image_data_id: number
+      image_data_id: string
     }, ExtArgs["result"]["images"]>
     composites: {}
   }
@@ -15889,12 +15045,12 @@ export namespace Prisma {
    * Fields of the images model
    */ 
   interface imagesFieldRefs {
-    readonly image_id: FieldRef<"images", 'Int'>
-    readonly image_creator_id: FieldRef<"images", 'Int'>
+    readonly image_id: FieldRef<"images", 'String'>
+    readonly image_creator_id: FieldRef<"images", 'String'>
     readonly image_title: FieldRef<"images", 'String'>
     readonly image_description: FieldRef<"images", 'String'>
     readonly image_filename: FieldRef<"images", 'String'>
-    readonly image_data_id: FieldRef<"images", 'Int'>
+    readonly image_data_id: FieldRef<"images", 'String'>
   }
     
 
@@ -16270,27 +15426,17 @@ export namespace Prisma {
 
   export type AggregateImages_data = {
     _count: Images_dataCountAggregateOutputType | null
-    _avg: Images_dataAvgAggregateOutputType | null
-    _sum: Images_dataSumAggregateOutputType | null
     _min: Images_dataMinAggregateOutputType | null
     _max: Images_dataMaxAggregateOutputType | null
   }
 
-  export type Images_dataAvgAggregateOutputType = {
-    image_data_id: number | null
-  }
-
-  export type Images_dataSumAggregateOutputType = {
-    image_data_id: number | null
-  }
-
   export type Images_dataMinAggregateOutputType = {
-    image_data_id: number | null
+    image_data_id: string | null
     image_data: Buffer | null
   }
 
   export type Images_dataMaxAggregateOutputType = {
-    image_data_id: number | null
+    image_data_id: string | null
     image_data: Buffer | null
   }
 
@@ -16300,14 +15446,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Images_dataAvgAggregateInputType = {
-    image_data_id?: true
-  }
-
-  export type Images_dataSumAggregateInputType = {
-    image_data_id?: true
-  }
 
   export type Images_dataMinAggregateInputType = {
     image_data_id?: true
@@ -16363,18 +15501,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Images_dataAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Images_dataSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Images_dataMinAggregateInputType
@@ -16405,18 +15531,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Images_dataCountAggregateInputType | true
-    _avg?: Images_dataAvgAggregateInputType
-    _sum?: Images_dataSumAggregateInputType
     _min?: Images_dataMinAggregateInputType
     _max?: Images_dataMaxAggregateInputType
   }
 
   export type Images_dataGroupByOutputType = {
-    image_data_id: number
+    image_data_id: string
     image_data: Buffer
     _count: Images_dataCountAggregateOutputType | null
-    _avg: Images_dataAvgAggregateOutputType | null
-    _sum: Images_dataSumAggregateOutputType | null
     _min: Images_dataMinAggregateOutputType | null
     _max: Images_dataMaxAggregateOutputType | null
   }
@@ -16459,7 +15581,7 @@ export namespace Prisma {
       images: Prisma.$imagesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      image_data_id: number
+      image_data_id: string
       image_data: Buffer
     }, ExtArgs["result"]["images_data"]>
     composites: {}
@@ -16856,7 +15978,7 @@ export namespace Prisma {
    * Fields of the images_data model
    */ 
   interface images_dataFieldRefs {
-    readonly image_data_id: FieldRef<"images_data", 'Int'>
+    readonly image_data_id: FieldRef<"images_data", 'String'>
     readonly image_data: FieldRef<"images_data", 'Bytes'>
   }
     
@@ -17212,23 +16334,13 @@ export namespace Prisma {
 
   export type AggregateIndividuals = {
     _count: IndividualsCountAggregateOutputType | null
-    _avg: IndividualsAvgAggregateOutputType | null
-    _sum: IndividualsSumAggregateOutputType | null
     _min: IndividualsMinAggregateOutputType | null
     _max: IndividualsMaxAggregateOutputType | null
   }
 
-  export type IndividualsAvgAggregateOutputType = {
-    individual_id: number | null
-  }
-
-  export type IndividualsSumAggregateOutputType = {
-    individual_id: number | null
-  }
-
   export type IndividualsMinAggregateOutputType = {
-    individual_id: number | null
-    individual_userName: string | null
+    individual_id: string | null
+    individual_username: string | null
     individual_name: string | null
     individual_currentIssue: string | null
     individual_roles: string | null
@@ -17236,8 +16348,8 @@ export namespace Prisma {
   }
 
   export type IndividualsMaxAggregateOutputType = {
-    individual_id: number | null
-    individual_userName: string | null
+    individual_id: string | null
+    individual_username: string | null
     individual_name: string | null
     individual_currentIssue: string | null
     individual_roles: string | null
@@ -17246,7 +16358,7 @@ export namespace Prisma {
 
   export type IndividualsCountAggregateOutputType = {
     individual_id: number
-    individual_userName: number
+    individual_username: number
     individual_name: number
     individual_currentIssue: number
     individual_roles: number
@@ -17255,17 +16367,9 @@ export namespace Prisma {
   }
 
 
-  export type IndividualsAvgAggregateInputType = {
-    individual_id?: true
-  }
-
-  export type IndividualsSumAggregateInputType = {
-    individual_id?: true
-  }
-
   export type IndividualsMinAggregateInputType = {
     individual_id?: true
-    individual_userName?: true
+    individual_username?: true
     individual_name?: true
     individual_currentIssue?: true
     individual_roles?: true
@@ -17274,7 +16378,7 @@ export namespace Prisma {
 
   export type IndividualsMaxAggregateInputType = {
     individual_id?: true
-    individual_userName?: true
+    individual_username?: true
     individual_name?: true
     individual_currentIssue?: true
     individual_roles?: true
@@ -17283,7 +16387,7 @@ export namespace Prisma {
 
   export type IndividualsCountAggregateInputType = {
     individual_id?: true
-    individual_userName?: true
+    individual_username?: true
     individual_name?: true
     individual_currentIssue?: true
     individual_roles?: true
@@ -17329,18 +16433,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: IndividualsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: IndividualsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: IndividualsMinAggregateInputType
@@ -17371,22 +16463,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: IndividualsCountAggregateInputType | true
-    _avg?: IndividualsAvgAggregateInputType
-    _sum?: IndividualsSumAggregateInputType
     _min?: IndividualsMinAggregateInputType
     _max?: IndividualsMaxAggregateInputType
   }
 
   export type IndividualsGroupByOutputType = {
-    individual_id: number
-    individual_userName: string
+    individual_id: string
+    individual_username: string
     individual_name: string
     individual_currentIssue: string | null
     individual_roles: string | null
     individual_description: string | null
     _count: IndividualsCountAggregateOutputType | null
-    _avg: IndividualsAvgAggregateOutputType | null
-    _sum: IndividualsSumAggregateOutputType | null
     _min: IndividualsMinAggregateOutputType | null
     _max: IndividualsMaxAggregateOutputType | null
   }
@@ -17407,23 +16495,17 @@ export namespace Prisma {
 
   export type individualsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     individual_id?: boolean
-    individual_userName?: boolean
+    individual_username?: boolean
     individual_name?: boolean
     individual_currentIssue?: boolean
     individual_roles?: boolean
     individual_description?: boolean
-    collections?: boolean | individuals$collectionsArgs<ExtArgs>
-    entities?: boolean | individuals$entitiesArgs<ExtArgs>
-    entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
-    groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
     user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
-    organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
-    _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["individuals"]>
 
   export type individualsSelectScalar = {
     individual_id?: boolean
-    individual_userName?: boolean
+    individual_username?: boolean
     individual_name?: boolean
     individual_currentIssue?: boolean
     individual_roles?: boolean
@@ -17431,29 +16513,18 @@ export namespace Prisma {
   }
 
   export type individualsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | individuals$collectionsArgs<ExtArgs>
-    entities?: boolean | individuals$entitiesArgs<ExtArgs>
-    entities_references?: boolean | individuals$entities_referencesArgs<ExtArgs>
-    groups_members?: boolean | individuals$groups_membersArgs<ExtArgs>
     user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
-    organizations_members?: boolean | individuals$organizations_membersArgs<ExtArgs>
-    _count?: boolean | IndividualsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
   export type $individualsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "individuals"
     objects: {
-      collections: Prisma.$collectionsPayload<ExtArgs>[]
-      entities: Prisma.$entitiesPayload<ExtArgs>[]
-      entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
-      groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
       user_credentials: Prisma.$user_credentialsPayload<ExtArgs>
-      organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      individual_id: number
-      individual_userName: string
+      individual_id: string
+      individual_username: string
       individual_name: string
       individual_currentIssue: string | null
       individual_roles: string | null
@@ -17823,17 +16894,7 @@ export namespace Prisma {
   export interface Prisma__individualsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    collections<T extends individuals$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, individuals$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities<T extends individuals$entitiesArgs<ExtArgs> = {}>(args?: Subset<T, individuals$entitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities_references<T extends individuals$entities_referencesArgs<ExtArgs> = {}>(args?: Subset<T, individuals$entities_referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_referencesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    groups_members<T extends individuals$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     user_credentials<T extends user_credentialsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, user_credentialsDefaultArgs<ExtArgs>>): Prisma__user_credentialsClient<$Result.GetResult<Prisma.$user_credentialsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    organizations_members<T extends individuals$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, individuals$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17863,8 +16924,8 @@ export namespace Prisma {
    * Fields of the individuals model
    */ 
   interface individualsFieldRefs {
-    readonly individual_id: FieldRef<"individuals", 'Int'>
-    readonly individual_userName: FieldRef<"individuals", 'String'>
+    readonly individual_id: FieldRef<"individuals", 'String'>
+    readonly individual_username: FieldRef<"individuals", 'String'>
     readonly individual_name: FieldRef<"individuals", 'String'>
     readonly individual_currentIssue: FieldRef<"individuals", 'String'>
     readonly individual_roles: FieldRef<"individuals", 'String'>
@@ -18181,111 +17242,6 @@ export namespace Prisma {
 
 
   /**
-   * individuals.collections
-   */
-  export type individuals$collectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the collections
-     */
-    select?: collectionsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: collectionsInclude<ExtArgs> | null
-    where?: collectionsWhereInput
-    orderBy?: collectionsOrderByWithRelationInput | collectionsOrderByWithRelationInput[]
-    cursor?: collectionsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CollectionsScalarFieldEnum | CollectionsScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.entities
-   */
-  export type individuals$entitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities
-     */
-    select?: entitiesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entitiesInclude<ExtArgs> | null
-    where?: entitiesWhereInput
-    orderBy?: entitiesOrderByWithRelationInput | entitiesOrderByWithRelationInput[]
-    cursor?: entitiesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EntitiesScalarFieldEnum | EntitiesScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.entities_references
-   */
-  export type individuals$entities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities_references
-     */
-    select?: entities_referencesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entities_referencesInclude<ExtArgs> | null
-    where?: entities_referencesWhereInput
-    orderBy?: entities_referencesOrderByWithRelationInput | entities_referencesOrderByWithRelationInput[]
-    cursor?: entities_referencesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Entities_referencesScalarFieldEnum | Entities_referencesScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.groups_members
-   */
-  export type individuals$groups_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the groups_members
-     */
-    select?: groups_membersSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: groups_membersInclude<ExtArgs> | null
-    where?: groups_membersWhereInput
-    orderBy?: groups_membersOrderByWithRelationInput | groups_membersOrderByWithRelationInput[]
-    cursor?: groups_membersWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Groups_membersScalarFieldEnum | Groups_membersScalarFieldEnum[]
-  }
-
-
-  /**
-   * individuals.organizations_members
-   */
-  export type individuals$organizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the organizations_members
-     */
-    select?: organizations_membersSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: organizations_membersInclude<ExtArgs> | null
-    where?: organizations_membersWhereInput
-    orderBy?: organizations_membersOrderByWithRelationInput | organizations_membersOrderByWithRelationInput[]
-    cursor?: organizations_membersWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Organizations_membersScalarFieldEnum | Organizations_membersScalarFieldEnum[]
-  }
-
-
-  /**
    * individuals without action
    */
   export type individualsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18307,22 +17263,12 @@ export namespace Prisma {
 
   export type AggregateOrganizations = {
     _count: OrganizationsCountAggregateOutputType | null
-    _avg: OrganizationsAvgAggregateOutputType | null
-    _sum: OrganizationsSumAggregateOutputType | null
     _min: OrganizationsMinAggregateOutputType | null
     _max: OrganizationsMaxAggregateOutputType | null
   }
 
-  export type OrganizationsAvgAggregateOutputType = {
-    organization_id: number | null
-  }
-
-  export type OrganizationsSumAggregateOutputType = {
-    organization_id: number | null
-  }
-
   export type OrganizationsMinAggregateOutputType = {
-    organization_id: number | null
+    organization_id: string | null
     organization_handle: string | null
     organization_name: string | null
     organization_currentIssue: string | null
@@ -18331,7 +17277,7 @@ export namespace Prisma {
   }
 
   export type OrganizationsMaxAggregateOutputType = {
-    organization_id: number | null
+    organization_id: string | null
     organization_handle: string | null
     organization_name: string | null
     organization_currentIssue: string | null
@@ -18349,14 +17295,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type OrganizationsAvgAggregateInputType = {
-    organization_id?: true
-  }
-
-  export type OrganizationsSumAggregateInputType = {
-    organization_id?: true
-  }
 
   export type OrganizationsMinAggregateInputType = {
     organization_id?: true
@@ -18424,18 +17362,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: OrganizationsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: OrganizationsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: OrganizationsMinAggregateInputType
@@ -18466,22 +17392,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: OrganizationsCountAggregateInputType | true
-    _avg?: OrganizationsAvgAggregateInputType
-    _sum?: OrganizationsSumAggregateInputType
     _min?: OrganizationsMinAggregateInputType
     _max?: OrganizationsMaxAggregateInputType
   }
 
   export type OrganizationsGroupByOutputType = {
-    organization_id: number
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue: string | null
     organization_stances: string | null
     organization_description: string | null
     _count: OrganizationsCountAggregateOutputType | null
-    _avg: OrganizationsAvgAggregateOutputType | null
-    _sum: OrganizationsSumAggregateOutputType | null
     _min: OrganizationsMinAggregateOutputType | null
     _max: OrganizationsMaxAggregateOutputType | null
   }
@@ -18507,9 +17429,6 @@ export namespace Prisma {
     organization_currentIssue?: boolean
     organization_stances?: boolean
     organization_description?: boolean
-    collections?: boolean | organizations$collectionsArgs<ExtArgs>
-    entities?: boolean | organizations$entitiesArgs<ExtArgs>
-    entities_references?: boolean | organizations$entities_referencesArgs<ExtArgs>
     organizations_members?: boolean | organizations$organizations_membersArgs<ExtArgs>
     _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
@@ -18524,9 +17443,6 @@ export namespace Prisma {
   }
 
   export type organizationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    collections?: boolean | organizations$collectionsArgs<ExtArgs>
-    entities?: boolean | organizations$entitiesArgs<ExtArgs>
-    entities_references?: boolean | organizations$entities_referencesArgs<ExtArgs>
     organizations_members?: boolean | organizations$organizations_membersArgs<ExtArgs>
     _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -18535,13 +17451,10 @@ export namespace Prisma {
   export type $organizationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "organizations"
     objects: {
-      collections: Prisma.$collectionsPayload<ExtArgs>[]
-      entities: Prisma.$entitiesPayload<ExtArgs>[]
-      entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      organization_id: number
+      organization_id: string
       organization_handle: string
       organization_name: string
       organization_currentIssue: string | null
@@ -18912,12 +17825,6 @@ export namespace Prisma {
   export interface Prisma__organizationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    collections<T extends organizations$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, organizations$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities<T extends organizations$entitiesArgs<ExtArgs> = {}>(args?: Subset<T, organizations$entitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    entities_references<T extends organizations$entities_referencesArgs<ExtArgs> = {}>(args?: Subset<T, organizations$entities_referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_referencesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     organizations_members<T extends organizations$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, organizations$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
@@ -18948,7 +17855,7 @@ export namespace Prisma {
    * Fields of the organizations model
    */ 
   interface organizationsFieldRefs {
-    readonly organization_id: FieldRef<"organizations", 'Int'>
+    readonly organization_id: FieldRef<"organizations", 'String'>
     readonly organization_handle: FieldRef<"organizations", 'String'>
     readonly organization_name: FieldRef<"organizations", 'String'>
     readonly organization_currentIssue: FieldRef<"organizations", 'String'>
@@ -19266,69 +18173,6 @@ export namespace Prisma {
 
 
   /**
-   * organizations.collections
-   */
-  export type organizations$collectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the collections
-     */
-    select?: collectionsSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: collectionsInclude<ExtArgs> | null
-    where?: collectionsWhereInput
-    orderBy?: collectionsOrderByWithRelationInput | collectionsOrderByWithRelationInput[]
-    cursor?: collectionsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CollectionsScalarFieldEnum | CollectionsScalarFieldEnum[]
-  }
-
-
-  /**
-   * organizations.entities
-   */
-  export type organizations$entitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities
-     */
-    select?: entitiesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entitiesInclude<ExtArgs> | null
-    where?: entitiesWhereInput
-    orderBy?: entitiesOrderByWithRelationInput | entitiesOrderByWithRelationInput[]
-    cursor?: entitiesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EntitiesScalarFieldEnum | EntitiesScalarFieldEnum[]
-  }
-
-
-  /**
-   * organizations.entities_references
-   */
-  export type organizations$entities_referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the entities_references
-     */
-    select?: entities_referencesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: entities_referencesInclude<ExtArgs> | null
-    where?: entities_referencesWhereInput
-    orderBy?: entities_referencesOrderByWithRelationInput | entities_referencesOrderByWithRelationInput[]
-    cursor?: entities_referencesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Entities_referencesScalarFieldEnum | Entities_referencesScalarFieldEnum[]
-  }
-
-
-  /**
    * organizations.organizations_members
    */
   export type organizations$organizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19371,62 +18215,46 @@ export namespace Prisma {
 
   export type AggregateOrganizations_members = {
     _count: Organizations_membersCountAggregateOutputType | null
-    _avg: Organizations_membersAvgAggregateOutputType | null
-    _sum: Organizations_membersSumAggregateOutputType | null
     _min: Organizations_membersMinAggregateOutputType | null
     _max: Organizations_membersMaxAggregateOutputType | null
   }
 
-  export type Organizations_membersAvgAggregateOutputType = {
-    organization_id: number | null
-    individual_id: number | null
-  }
-
-  export type Organizations_membersSumAggregateOutputType = {
-    organization_id: number | null
-    individual_id: number | null
-  }
-
   export type Organizations_membersMinAggregateOutputType = {
-    organization_id: number | null
-    individual_id: number | null
+    organizations_members_id: string | null
+    organization_id: string | null
+    entity_id: string | null
   }
 
   export type Organizations_membersMaxAggregateOutputType = {
-    organization_id: number | null
-    individual_id: number | null
+    organizations_members_id: string | null
+    organization_id: string | null
+    entity_id: string | null
   }
 
   export type Organizations_membersCountAggregateOutputType = {
+    organizations_members_id: number
     organization_id: number
-    individual_id: number
+    entity_id: number
     _all: number
   }
 
 
-  export type Organizations_membersAvgAggregateInputType = {
-    organization_id?: true
-    individual_id?: true
-  }
-
-  export type Organizations_membersSumAggregateInputType = {
-    organization_id?: true
-    individual_id?: true
-  }
-
   export type Organizations_membersMinAggregateInputType = {
+    organizations_members_id?: true
     organization_id?: true
-    individual_id?: true
+    entity_id?: true
   }
 
   export type Organizations_membersMaxAggregateInputType = {
+    organizations_members_id?: true
     organization_id?: true
-    individual_id?: true
+    entity_id?: true
   }
 
   export type Organizations_membersCountAggregateInputType = {
+    organizations_members_id?: true
     organization_id?: true
-    individual_id?: true
+    entity_id?: true
     _all?: true
   }
 
@@ -19468,18 +18296,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Organizations_membersAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Organizations_membersSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Organizations_membersMinAggregateInputType
@@ -19510,18 +18326,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Organizations_membersCountAggregateInputType | true
-    _avg?: Organizations_membersAvgAggregateInputType
-    _sum?: Organizations_membersSumAggregateInputType
     _min?: Organizations_membersMinAggregateInputType
     _max?: Organizations_membersMaxAggregateInputType
   }
 
   export type Organizations_membersGroupByOutputType = {
-    organization_id: number
-    individual_id: number
+    organizations_members_id: string
+    organization_id: string
+    entity_id: string
     _count: Organizations_membersCountAggregateOutputType | null
-    _avg: Organizations_membersAvgAggregateOutputType | null
-    _sum: Organizations_membersSumAggregateOutputType | null
     _min: Organizations_membersMinAggregateOutputType | null
     _max: Organizations_membersMaxAggregateOutputType | null
   }
@@ -19541,19 +18354,21 @@ export namespace Prisma {
 
 
   export type organizations_membersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    organizations_members_id?: boolean
     organization_id?: boolean
-    individual_id?: boolean
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entity_id?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     organizations?: boolean | organizationsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations_members"]>
 
   export type organizations_membersSelectScalar = {
+    organizations_members_id?: boolean
     organization_id?: boolean
-    individual_id?: boolean
+    entity_id?: boolean
   }
 
   export type organizations_membersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    individuals?: boolean | individualsDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
     organizations?: boolean | organizationsDefaultArgs<ExtArgs>
   }
 
@@ -19561,12 +18376,13 @@ export namespace Prisma {
   export type $organizations_membersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "organizations_members"
     objects: {
-      individuals: Prisma.$individualsPayload<ExtArgs>
+      entities: Prisma.$entitiesPayload<ExtArgs>
       organizations: Prisma.$organizationsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      organization_id: number
-      individual_id: number
+      organizations_members_id: string
+      organization_id: string
+      entity_id: string
     }, ExtArgs["result"]["organizations_members"]>
     composites: {}
   }
@@ -19659,8 +18475,8 @@ export namespace Prisma {
      * // Get first 10 Organizations_members
      * const organizations_members = await prisma.organizations_members.findMany({ take: 10 })
      * 
-     * // Only select the `organization_id`
-     * const organizations_membersWithOrganization_idOnly = await prisma.organizations_members.findMany({ select: { organization_id: true } })
+     * // Only select the `organizations_members_id`
+     * const organizations_membersWithOrganizations_members_idOnly = await prisma.organizations_members.findMany({ select: { organizations_members_id: true } })
      * 
     **/
     findMany<T extends organizations_membersFindManyArgs<ExtArgs>>(
@@ -19932,7 +18748,7 @@ export namespace Prisma {
   export interface Prisma__organizations_membersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    individuals<T extends individualsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, individualsDefaultArgs<ExtArgs>>): Prisma__individualsClient<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     organizations<T extends organizationsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, organizationsDefaultArgs<ExtArgs>>): Prisma__organizationsClient<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -19964,8 +18780,9 @@ export namespace Prisma {
    * Fields of the organizations_members model
    */ 
   interface organizations_membersFieldRefs {
-    readonly organization_id: FieldRef<"organizations_members", 'Int'>
-    readonly individual_id: FieldRef<"organizations_members", 'Int'>
+    readonly organizations_members_id: FieldRef<"organizations_members", 'String'>
+    readonly organization_id: FieldRef<"organizations_members", 'String'>
+    readonly entity_id: FieldRef<"organizations_members", 'String'>
   }
     
 
@@ -20299,40 +19116,26 @@ export namespace Prisma {
 
   export type AggregateSheets = {
     _count: SheetsCountAggregateOutputType | null
-    _avg: SheetsAvgAggregateOutputType | null
-    _sum: SheetsSumAggregateOutputType | null
     _min: SheetsMinAggregateOutputType | null
     _max: SheetsMaxAggregateOutputType | null
   }
 
-  export type SheetsAvgAggregateOutputType = {
-    sheet_id: number | null
-    sheet_author_id: number | null
-    sheet_data_id: number | null
-  }
-
-  export type SheetsSumAggregateOutputType = {
-    sheet_id: number | null
-    sheet_author_id: number | null
-    sheet_data_id: number | null
-  }
-
   export type SheetsMinAggregateOutputType = {
-    sheet_id: number | null
-    sheet_author_id: number | null
+    sheet_id: string | null
+    sheet_author_id: string | null
     sheet_title: string | null
     sheet_subject: string | null
     sheet_filename: string | null
-    sheet_data_id: number | null
+    sheet_data_id: string | null
   }
 
   export type SheetsMaxAggregateOutputType = {
-    sheet_id: number | null
-    sheet_author_id: number | null
+    sheet_id: string | null
+    sheet_author_id: string | null
     sheet_title: string | null
     sheet_subject: string | null
     sheet_filename: string | null
-    sheet_data_id: number | null
+    sheet_data_id: string | null
   }
 
   export type SheetsCountAggregateOutputType = {
@@ -20345,18 +19148,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type SheetsAvgAggregateInputType = {
-    sheet_id?: true
-    sheet_author_id?: true
-    sheet_data_id?: true
-  }
-
-  export type SheetsSumAggregateInputType = {
-    sheet_id?: true
-    sheet_author_id?: true
-    sheet_data_id?: true
-  }
 
   export type SheetsMinAggregateInputType = {
     sheet_id?: true
@@ -20424,18 +19215,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: SheetsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: SheetsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: SheetsMinAggregateInputType
@@ -20466,22 +19245,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SheetsCountAggregateInputType | true
-    _avg?: SheetsAvgAggregateInputType
-    _sum?: SheetsSumAggregateInputType
     _min?: SheetsMinAggregateInputType
     _max?: SheetsMaxAggregateInputType
   }
 
   export type SheetsGroupByOutputType = {
-    sheet_id: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
     _count: SheetsCountAggregateOutputType | null
-    _avg: SheetsAvgAggregateOutputType | null
-    _sum: SheetsSumAggregateOutputType | null
     _min: SheetsMinAggregateOutputType | null
     _max: SheetsMaxAggregateOutputType | null
   }
@@ -20509,8 +19284,8 @@ export namespace Prisma {
     sheet_data_id?: boolean
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
-    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sheets"]>
 
@@ -20526,8 +19301,8 @@ export namespace Prisma {
   export type sheetsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
-    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
     _count?: boolean | SheetsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -20537,16 +19312,16 @@ export namespace Prisma {
     objects: {
       collections_sheets: Prisma.$collections_sheetsPayload<ExtArgs>[]
       entities_sheets: Prisma.$entities_sheetsPayload<ExtArgs>[]
-      sheets_data: Prisma.$sheets_dataPayload<ExtArgs>
       entities: Prisma.$entitiesPayload<ExtArgs>
+      sheets_data: Prisma.$sheets_dataPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      sheet_id: number
-      sheet_author_id: number
+      sheet_id: string
+      sheet_author_id: string
       sheet_title: string
       sheet_subject: string
       sheet_filename: string
-      sheet_data_id: number
+      sheet_data_id: string
     }, ExtArgs["result"]["sheets"]>
     composites: {}
   }
@@ -20916,9 +19691,9 @@ export namespace Prisma {
 
     entities_sheets<T extends sheets$entities_sheetsArgs<ExtArgs> = {}>(args?: Subset<T, sheets$entities_sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    sheets_data<T extends sheets_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sheets_dataDefaultArgs<ExtArgs>>): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    sheets_data<T extends sheets_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sheets_dataDefaultArgs<ExtArgs>>): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -20948,12 +19723,12 @@ export namespace Prisma {
    * Fields of the sheets model
    */ 
   interface sheetsFieldRefs {
-    readonly sheet_id: FieldRef<"sheets", 'Int'>
-    readonly sheet_author_id: FieldRef<"sheets", 'Int'>
+    readonly sheet_id: FieldRef<"sheets", 'String'>
+    readonly sheet_author_id: FieldRef<"sheets", 'String'>
     readonly sheet_title: FieldRef<"sheets", 'String'>
     readonly sheet_subject: FieldRef<"sheets", 'String'>
     readonly sheet_filename: FieldRef<"sheets", 'String'>
-    readonly sheet_data_id: FieldRef<"sheets", 'Int'>
+    readonly sheet_data_id: FieldRef<"sheets", 'String'>
   }
     
 
@@ -21329,27 +20104,17 @@ export namespace Prisma {
 
   export type AggregateSheets_data = {
     _count: Sheets_dataCountAggregateOutputType | null
-    _avg: Sheets_dataAvgAggregateOutputType | null
-    _sum: Sheets_dataSumAggregateOutputType | null
     _min: Sheets_dataMinAggregateOutputType | null
     _max: Sheets_dataMaxAggregateOutputType | null
   }
 
-  export type Sheets_dataAvgAggregateOutputType = {
-    sheet_data_id: number | null
-  }
-
-  export type Sheets_dataSumAggregateOutputType = {
-    sheet_data_id: number | null
-  }
-
   export type Sheets_dataMinAggregateOutputType = {
-    sheet_data_id: number | null
+    sheet_data_id: string | null
     sheet_data: Buffer | null
   }
 
   export type Sheets_dataMaxAggregateOutputType = {
-    sheet_data_id: number | null
+    sheet_data_id: string | null
     sheet_data: Buffer | null
   }
 
@@ -21359,14 +20124,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Sheets_dataAvgAggregateInputType = {
-    sheet_data_id?: true
-  }
-
-  export type Sheets_dataSumAggregateInputType = {
-    sheet_data_id?: true
-  }
 
   export type Sheets_dataMinAggregateInputType = {
     sheet_data_id?: true
@@ -21422,18 +20179,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Sheets_dataAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Sheets_dataSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Sheets_dataMinAggregateInputType
@@ -21464,18 +20209,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Sheets_dataCountAggregateInputType | true
-    _avg?: Sheets_dataAvgAggregateInputType
-    _sum?: Sheets_dataSumAggregateInputType
     _min?: Sheets_dataMinAggregateInputType
     _max?: Sheets_dataMaxAggregateInputType
   }
 
   export type Sheets_dataGroupByOutputType = {
-    sheet_data_id: number
+    sheet_data_id: string
     sheet_data: Buffer
     _count: Sheets_dataCountAggregateOutputType | null
-    _avg: Sheets_dataAvgAggregateOutputType | null
-    _sum: Sheets_dataSumAggregateOutputType | null
     _min: Sheets_dataMinAggregateOutputType | null
     _max: Sheets_dataMaxAggregateOutputType | null
   }
@@ -21518,7 +20259,7 @@ export namespace Prisma {
       sheets: Prisma.$sheetsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      sheet_data_id: number
+      sheet_data_id: string
       sheet_data: Buffer
     }, ExtArgs["result"]["sheets_data"]>
     composites: {}
@@ -21915,7 +20656,7 @@ export namespace Prisma {
    * Fields of the sheets_data model
    */ 
   interface sheets_dataFieldRefs {
-    readonly sheet_data_id: FieldRef<"sheets_data", 'Int'>
+    readonly sheet_data_id: FieldRef<"sheets_data", 'String'>
     readonly sheet_data: FieldRef<"sheets_data", 'Bytes'>
   }
     
@@ -22271,22 +21012,12 @@ export namespace Prisma {
 
   export type AggregateUser_credentials = {
     _count: User_credentialsCountAggregateOutputType | null
-    _avg: User_credentialsAvgAggregateOutputType | null
-    _sum: User_credentialsSumAggregateOutputType | null
     _min: User_credentialsMinAggregateOutputType | null
     _max: User_credentialsMaxAggregateOutputType | null
   }
 
-  export type User_credentialsAvgAggregateOutputType = {
-    user_id: number | null
-  }
-
-  export type User_credentialsSumAggregateOutputType = {
-    user_id: number | null
-  }
-
   export type User_credentialsMinAggregateOutputType = {
-    user_id: number | null
+    user_id: string | null
     username: string | null
     user_password: string | null
     user_first_name: string | null
@@ -22296,7 +21027,7 @@ export namespace Prisma {
   }
 
   export type User_credentialsMaxAggregateOutputType = {
-    user_id: number | null
+    user_id: string | null
     username: string | null
     user_password: string | null
     user_first_name: string | null
@@ -22316,14 +21047,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type User_credentialsAvgAggregateInputType = {
-    user_id?: true
-  }
-
-  export type User_credentialsSumAggregateInputType = {
-    user_id?: true
-  }
 
   export type User_credentialsMinAggregateInputType = {
     user_id?: true
@@ -22394,18 +21117,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: User_credentialsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: User_credentialsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: User_credentialsMinAggregateInputType
@@ -22436,14 +21147,12 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: User_credentialsCountAggregateInputType | true
-    _avg?: User_credentialsAvgAggregateInputType
-    _sum?: User_credentialsSumAggregateInputType
     _min?: User_credentialsMinAggregateInputType
     _max?: User_credentialsMaxAggregateInputType
   }
 
   export type User_credentialsGroupByOutputType = {
-    user_id: number
+    user_id: string
     username: string
     user_password: string
     user_first_name: string | null
@@ -22451,8 +21160,6 @@ export namespace Prisma {
     user_email: string | null
     user_phone_number: string | null
     _count: User_credentialsCountAggregateOutputType | null
-    _avg: User_credentialsAvgAggregateOutputType | null
-    _sum: User_credentialsSumAggregateOutputType | null
     _min: User_credentialsMinAggregateOutputType | null
     _max: User_credentialsMaxAggregateOutputType | null
   }
@@ -22503,7 +21210,7 @@ export namespace Prisma {
       individuals: Prisma.$individualsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      user_id: number
+      user_id: string
       username: string
       user_password: string
       user_first_name: string | null
@@ -22905,7 +21612,7 @@ export namespace Prisma {
    * Fields of the user_credentials model
    */ 
   interface user_credentialsFieldRefs {
-    readonly user_id: FieldRef<"user_credentials", 'Int'>
+    readonly user_id: FieldRef<"user_credentials", 'String'>
     readonly username: FieldRef<"user_credentials", 'String'>
     readonly user_password: FieldRef<"user_credentials", 'String'>
     readonly user_first_name: FieldRef<"user_credentials", 'String'>
@@ -23261,40 +21968,26 @@ export namespace Prisma {
 
   export type AggregateVideos = {
     _count: VideosCountAggregateOutputType | null
-    _avg: VideosAvgAggregateOutputType | null
-    _sum: VideosSumAggregateOutputType | null
     _min: VideosMinAggregateOutputType | null
     _max: VideosMaxAggregateOutputType | null
   }
 
-  export type VideosAvgAggregateOutputType = {
-    video_id: number | null
-    video_creator_id: number | null
-    video_data_id: number | null
-  }
-
-  export type VideosSumAggregateOutputType = {
-    video_id: number | null
-    video_creator_id: number | null
-    video_data_id: number | null
-  }
-
   export type VideosMinAggregateOutputType = {
-    video_id: number | null
-    video_creator_id: number | null
+    video_id: string | null
+    video_creator_id: string | null
     video_title: string | null
     video_description: string | null
     video_filename: string | null
-    video_data_id: number | null
+    video_data_id: string | null
   }
 
   export type VideosMaxAggregateOutputType = {
-    video_id: number | null
-    video_creator_id: number | null
+    video_id: string | null
+    video_creator_id: string | null
     video_title: string | null
     video_description: string | null
     video_filename: string | null
-    video_data_id: number | null
+    video_data_id: string | null
   }
 
   export type VideosCountAggregateOutputType = {
@@ -23307,18 +22000,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type VideosAvgAggregateInputType = {
-    video_id?: true
-    video_creator_id?: true
-    video_data_id?: true
-  }
-
-  export type VideosSumAggregateInputType = {
-    video_id?: true
-    video_creator_id?: true
-    video_data_id?: true
-  }
 
   export type VideosMinAggregateInputType = {
     video_id?: true
@@ -23386,18 +22067,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: VideosAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VideosSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: VideosMinAggregateInputType
@@ -23428,22 +22097,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VideosCountAggregateInputType | true
-    _avg?: VideosAvgAggregateInputType
-    _sum?: VideosSumAggregateInputType
     _min?: VideosMinAggregateInputType
     _max?: VideosMaxAggregateInputType
   }
 
   export type VideosGroupByOutputType = {
-    video_id: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
     _count: VideosCountAggregateOutputType | null
-    _avg: VideosAvgAggregateOutputType | null
-    _sum: VideosSumAggregateOutputType | null
     _min: VideosMinAggregateOutputType | null
     _max: VideosMaxAggregateOutputType | null
   }
@@ -23503,12 +22168,12 @@ export namespace Prisma {
       videos_data: Prisma.$videos_dataPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      video_id: number
-      video_creator_id: number
+      video_id: string
+      video_creator_id: string
       video_title: string
       video_description: string
       video_filename: string
-      video_data_id: number
+      video_data_id: string
     }, ExtArgs["result"]["videos"]>
     composites: {}
   }
@@ -23910,12 +22575,12 @@ export namespace Prisma {
    * Fields of the videos model
    */ 
   interface videosFieldRefs {
-    readonly video_id: FieldRef<"videos", 'Int'>
-    readonly video_creator_id: FieldRef<"videos", 'Int'>
+    readonly video_id: FieldRef<"videos", 'String'>
+    readonly video_creator_id: FieldRef<"videos", 'String'>
     readonly video_title: FieldRef<"videos", 'String'>
     readonly video_description: FieldRef<"videos", 'String'>
     readonly video_filename: FieldRef<"videos", 'String'>
-    readonly video_data_id: FieldRef<"videos", 'Int'>
+    readonly video_data_id: FieldRef<"videos", 'String'>
   }
     
 
@@ -24291,27 +22956,17 @@ export namespace Prisma {
 
   export type AggregateVideos_data = {
     _count: Videos_dataCountAggregateOutputType | null
-    _avg: Videos_dataAvgAggregateOutputType | null
-    _sum: Videos_dataSumAggregateOutputType | null
     _min: Videos_dataMinAggregateOutputType | null
     _max: Videos_dataMaxAggregateOutputType | null
   }
 
-  export type Videos_dataAvgAggregateOutputType = {
-    video_data_id: number | null
-  }
-
-  export type Videos_dataSumAggregateOutputType = {
-    video_data_id: number | null
-  }
-
   export type Videos_dataMinAggregateOutputType = {
-    video_data_id: number | null
+    video_data_id: string | null
     video_data: Buffer | null
   }
 
   export type Videos_dataMaxAggregateOutputType = {
-    video_data_id: number | null
+    video_data_id: string | null
     video_data: Buffer | null
   }
 
@@ -24321,14 +22976,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type Videos_dataAvgAggregateInputType = {
-    video_data_id?: true
-  }
-
-  export type Videos_dataSumAggregateInputType = {
-    video_data_id?: true
-  }
 
   export type Videos_dataMinAggregateInputType = {
     video_data_id?: true
@@ -24384,18 +23031,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: Videos_dataAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Videos_dataSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: Videos_dataMinAggregateInputType
@@ -24426,18 +23061,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: Videos_dataCountAggregateInputType | true
-    _avg?: Videos_dataAvgAggregateInputType
-    _sum?: Videos_dataSumAggregateInputType
     _min?: Videos_dataMinAggregateInputType
     _max?: Videos_dataMaxAggregateInputType
   }
 
   export type Videos_dataGroupByOutputType = {
-    video_data_id: number
+    video_data_id: string
     video_data: Buffer
     _count: Videos_dataCountAggregateOutputType | null
-    _avg: Videos_dataAvgAggregateOutputType | null
-    _sum: Videos_dataSumAggregateOutputType | null
     _min: Videos_dataMinAggregateOutputType | null
     _max: Videos_dataMaxAggregateOutputType | null
   }
@@ -24480,7 +23111,7 @@ export namespace Prisma {
       videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      video_data_id: number
+      video_data_id: string
       video_data: Buffer
     }, ExtArgs["result"]["videos_data"]>
     composites: {}
@@ -24877,7 +23508,7 @@ export namespace Prisma {
    * Fields of the videos_data model
    */ 
   interface videos_dataFieldRefs {
-    readonly video_data_id: FieldRef<"videos_data", 'Int'>
+    readonly video_data_id: FieldRef<"videos_data", 'String'>
     readonly video_data: FieldRef<"videos_data", 'Bytes'>
   }
     
@@ -25244,9 +23875,7 @@ export namespace Prisma {
   export const Affiliates_relationsScalarFieldEnum: {
     affiliate_relation_id: 'affiliate_relation_id',
     affiliate_id_1: 'affiliate_id_1',
-    affiliate_type_1: 'affiliate_type_1',
-    affiliate_id_2: 'affiliate_id_2',
-    affiliate_type_2: 'affiliate_type_2'
+    affiliate_id_2: 'affiliate_id_2'
   };
 
   export type Affiliates_relationsScalarFieldEnum = (typeof Affiliates_relationsScalarFieldEnum)[keyof typeof Affiliates_relationsScalarFieldEnum]
@@ -25255,9 +23884,7 @@ export namespace Prisma {
   export const CollectionsScalarFieldEnum: {
     collection_id: 'collection_id',
     collection_name: 'collection_name',
-    individual_id: 'individual_id',
-    group_id: 'group_id',
-    organization_id: 'organization_id'
+    entity_id: 'entity_id'
   };
 
   export type CollectionsScalarFieldEnum = (typeof CollectionsScalarFieldEnum)[keyof typeof CollectionsScalarFieldEnum]
@@ -25301,9 +23928,7 @@ export namespace Prisma {
 
   export const EntitiesScalarFieldEnum: {
     entity_id: 'entity_id',
-    individual_id: 'individual_id',
-    group_id: 'group_id',
-    organization_id: 'organization_id'
+    entity_type: 'entity_type'
   };
 
   export type EntitiesScalarFieldEnum = (typeof EntitiesScalarFieldEnum)[keyof typeof EntitiesScalarFieldEnum]
@@ -25323,9 +23948,7 @@ export namespace Prisma {
 
   export const Entities_referencesScalarFieldEnum: {
     reference_id: 'reference_id',
-    individual_id: 'individual_id',
-    group_id: 'group_id',
-    organization_id: 'organization_id',
+    entity_id: 'entity_id',
     title: 'title',
     author: 'author',
     url: 'url'
@@ -25371,8 +23994,9 @@ export namespace Prisma {
 
 
   export const Groups_membersScalarFieldEnum: {
+    groups_members_id: 'groups_members_id',
     group_id: 'group_id',
-    individual_id: 'individual_id'
+    entity_id: 'entity_id'
   };
 
   export type Groups_membersScalarFieldEnum = (typeof Groups_membersScalarFieldEnum)[keyof typeof Groups_membersScalarFieldEnum]
@@ -25400,7 +24024,7 @@ export namespace Prisma {
 
   export const IndividualsScalarFieldEnum: {
     individual_id: 'individual_id',
-    individual_userName: 'individual_userName',
+    individual_username: 'individual_username',
     individual_name: 'individual_name',
     individual_currentIssue: 'individual_currentIssue',
     individual_roles: 'individual_roles',
@@ -25423,8 +24047,9 @@ export namespace Prisma {
 
 
   export const Organizations_membersScalarFieldEnum: {
+    organizations_members_id: 'organizations_members_id',
     organization_id: 'organization_id',
-    individual_id: 'individual_id'
+    entity_id: 'entity_id'
   };
 
   export type Organizations_membersScalarFieldEnum = (typeof Organizations_membersScalarFieldEnum)[keyof typeof Organizations_membersScalarFieldEnum]
@@ -25505,13 +24130,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -25529,6 +24147,13 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -25553,69 +24178,53 @@ export namespace Prisma {
     AND?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
     OR?: affiliates_relationsWhereInput[]
     NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
-    affiliate_relation_id?: IntFilter<"affiliates_relations"> | number
-    affiliate_id_1?: IntFilter<"affiliates_relations"> | number
-    affiliate_type_1?: IntFilter<"affiliates_relations"> | number
-    affiliate_id_2?: IntFilter<"affiliates_relations"> | number
-    affiliate_type_2?: IntFilter<"affiliates_relations"> | number
+    affiliate_relation_id?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_1?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_2?: StringFilter<"affiliates_relations"> | string
   }
 
   export type affiliates_relationsOrderByWithRelationInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
     affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
   }
 
   export type affiliates_relationsWhereUniqueInput = Prisma.AtLeast<{
-    affiliate_relation_id?: number
+    affiliate_relation_id?: string
     affiliate_id_1_affiliate_id_2?: affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput
     AND?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
     OR?: affiliates_relationsWhereInput[]
     NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
-    affiliate_id_1?: IntFilter<"affiliates_relations"> | number
-    affiliate_type_1?: IntFilter<"affiliates_relations"> | number
-    affiliate_id_2?: IntFilter<"affiliates_relations"> | number
-    affiliate_type_2?: IntFilter<"affiliates_relations"> | number
-  }, "affiliate_relation_id" | "affiliate_id_1_affiliate_id_2">
+    affiliate_id_1?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_2?: StringFilter<"affiliates_relations"> | string
+  }, "affiliate_relation_id" | "affiliate_relation_id" | "affiliate_id_1_affiliate_id_2">
 
   export type affiliates_relationsOrderByWithAggregationInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
     affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
     _count?: affiliates_relationsCountOrderByAggregateInput
-    _avg?: affiliates_relationsAvgOrderByAggregateInput
     _max?: affiliates_relationsMaxOrderByAggregateInput
     _min?: affiliates_relationsMinOrderByAggregateInput
-    _sum?: affiliates_relationsSumOrderByAggregateInput
   }
 
   export type affiliates_relationsScalarWhereWithAggregatesInput = {
     AND?: affiliates_relationsScalarWhereWithAggregatesInput | affiliates_relationsScalarWhereWithAggregatesInput[]
     OR?: affiliates_relationsScalarWhereWithAggregatesInput[]
     NOT?: affiliates_relationsScalarWhereWithAggregatesInput | affiliates_relationsScalarWhereWithAggregatesInput[]
-    affiliate_relation_id?: IntWithAggregatesFilter<"affiliates_relations"> | number
-    affiliate_id_1?: IntWithAggregatesFilter<"affiliates_relations"> | number
-    affiliate_type_1?: IntWithAggregatesFilter<"affiliates_relations"> | number
-    affiliate_id_2?: IntWithAggregatesFilter<"affiliates_relations"> | number
-    affiliate_type_2?: IntWithAggregatesFilter<"affiliates_relations"> | number
+    affiliate_relation_id?: StringWithAggregatesFilter<"affiliates_relations"> | string
+    affiliate_id_1?: StringWithAggregatesFilter<"affiliates_relations"> | string
+    affiliate_id_2?: StringWithAggregatesFilter<"affiliates_relations"> | string
   }
 
   export type collectionsWhereInput = {
     AND?: collectionsWhereInput | collectionsWhereInput[]
     OR?: collectionsWhereInput[]
     NOT?: collectionsWhereInput | collectionsWhereInput[]
-    collection_id?: IntFilter<"collections"> | number
+    collection_id?: StringFilter<"collections"> | string
     collection_name?: StringFilter<"collections"> | string
-    individual_id?: IntNullableFilter<"collections"> | number | null
-    group_id?: IntNullableFilter<"collections"> | number | null
-    organization_id?: IntNullableFilter<"collections"> | number | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
+    entity_id?: StringFilter<"collections"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     collections_images?: Collections_imagesListRelationFilter
     collections_sheets?: Collections_sheetsListRelationFilter
     collections_videos?: Collections_videosListRelationFilter
@@ -25624,29 +24233,21 @@ export namespace Prisma {
   export type collectionsOrderByWithRelationInput = {
     collection_id?: SortOrder
     collection_name?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
-    individuals?: individualsOrderByWithRelationInput
-    organizations?: organizationsOrderByWithRelationInput
-    groups?: groupsOrderByWithRelationInput
+    entity_id?: SortOrder
+    entities?: entitiesOrderByWithRelationInput
     collections_images?: collections_imagesOrderByRelationAggregateInput
     collections_sheets?: collections_sheetsOrderByRelationAggregateInput
     collections_videos?: collections_videosOrderByRelationAggregateInput
   }
 
   export type collectionsWhereUniqueInput = Prisma.AtLeast<{
-    collection_id?: number
+    collection_id?: string
     AND?: collectionsWhereInput | collectionsWhereInput[]
     OR?: collectionsWhereInput[]
     NOT?: collectionsWhereInput | collectionsWhereInput[]
     collection_name?: StringFilter<"collections"> | string
-    individual_id?: IntNullableFilter<"collections"> | number | null
-    group_id?: IntNullableFilter<"collections"> | number | null
-    organization_id?: IntNullableFilter<"collections"> | number | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
+    entity_id?: StringFilter<"collections"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     collections_images?: Collections_imagesListRelationFilter
     collections_sheets?: Collections_sheetsListRelationFilter
     collections_videos?: Collections_videosListRelationFilter
@@ -25655,34 +24256,28 @@ export namespace Prisma {
   export type collectionsOrderByWithAggregationInput = {
     collection_id?: SortOrder
     collection_name?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
+    entity_id?: SortOrder
     _count?: collectionsCountOrderByAggregateInput
-    _avg?: collectionsAvgOrderByAggregateInput
     _max?: collectionsMaxOrderByAggregateInput
     _min?: collectionsMinOrderByAggregateInput
-    _sum?: collectionsSumOrderByAggregateInput
   }
 
   export type collectionsScalarWhereWithAggregatesInput = {
     AND?: collectionsScalarWhereWithAggregatesInput | collectionsScalarWhereWithAggregatesInput[]
     OR?: collectionsScalarWhereWithAggregatesInput[]
     NOT?: collectionsScalarWhereWithAggregatesInput | collectionsScalarWhereWithAggregatesInput[]
-    collection_id?: IntWithAggregatesFilter<"collections"> | number
+    collection_id?: StringWithAggregatesFilter<"collections"> | string
     collection_name?: StringWithAggregatesFilter<"collections"> | string
-    individual_id?: IntNullableWithAggregatesFilter<"collections"> | number | null
-    group_id?: IntNullableWithAggregatesFilter<"collections"> | number | null
-    organization_id?: IntNullableWithAggregatesFilter<"collections"> | number | null
+    entity_id?: StringWithAggregatesFilter<"collections"> | string
   }
 
   export type collections_imagesWhereInput = {
     AND?: collections_imagesWhereInput | collections_imagesWhereInput[]
     OR?: collections_imagesWhereInput[]
     NOT?: collections_imagesWhereInput | collections_imagesWhereInput[]
-    collections_images_id?: IntFilter<"collections_images"> | number
-    collection_id?: IntFilter<"collections_images"> | number
-    image_id?: IntFilter<"collections_images"> | number
+    collections_images_id?: StringFilter<"collections_images"> | string
+    collection_id?: StringFilter<"collections_images"> | string
+    image_id?: StringFilter<"collections_images"> | string
     date_added?: DateTimeFilter<"collections_images"> | Date | string
     pinned?: BoolFilter<"collections_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_images"> | Date | string | null
@@ -25702,12 +24297,12 @@ export namespace Prisma {
   }
 
   export type collections_imagesWhereUniqueInput = Prisma.AtLeast<{
-    collections_images_id?: number
+    collections_images_id?: string
     AND?: collections_imagesWhereInput | collections_imagesWhereInput[]
     OR?: collections_imagesWhereInput[]
     NOT?: collections_imagesWhereInput | collections_imagesWhereInput[]
-    collection_id?: IntFilter<"collections_images"> | number
-    image_id?: IntFilter<"collections_images"> | number
+    collection_id?: StringFilter<"collections_images"> | string
+    image_id?: StringFilter<"collections_images"> | string
     date_added?: DateTimeFilter<"collections_images"> | Date | string
     pinned?: BoolFilter<"collections_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_images"> | Date | string | null
@@ -25723,19 +24318,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: collections_imagesCountOrderByAggregateInput
-    _avg?: collections_imagesAvgOrderByAggregateInput
     _max?: collections_imagesMaxOrderByAggregateInput
     _min?: collections_imagesMinOrderByAggregateInput
-    _sum?: collections_imagesSumOrderByAggregateInput
   }
 
   export type collections_imagesScalarWhereWithAggregatesInput = {
     AND?: collections_imagesScalarWhereWithAggregatesInput | collections_imagesScalarWhereWithAggregatesInput[]
     OR?: collections_imagesScalarWhereWithAggregatesInput[]
     NOT?: collections_imagesScalarWhereWithAggregatesInput | collections_imagesScalarWhereWithAggregatesInput[]
-    collections_images_id?: IntWithAggregatesFilter<"collections_images"> | number
-    collection_id?: IntWithAggregatesFilter<"collections_images"> | number
-    image_id?: IntWithAggregatesFilter<"collections_images"> | number
+    collections_images_id?: StringWithAggregatesFilter<"collections_images"> | string
+    collection_id?: StringWithAggregatesFilter<"collections_images"> | string
+    image_id?: StringWithAggregatesFilter<"collections_images"> | string
     date_added?: DateTimeWithAggregatesFilter<"collections_images"> | Date | string
     pinned?: BoolWithAggregatesFilter<"collections_images"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"collections_images"> | Date | string | null
@@ -25745,9 +24338,9 @@ export namespace Prisma {
     AND?: collections_sheetsWhereInput | collections_sheetsWhereInput[]
     OR?: collections_sheetsWhereInput[]
     NOT?: collections_sheetsWhereInput | collections_sheetsWhereInput[]
-    collections_sheets_id?: IntFilter<"collections_sheets"> | number
-    collection_id?: IntFilter<"collections_sheets"> | number
-    sheet_id?: IntFilter<"collections_sheets"> | number
+    collections_sheets_id?: StringFilter<"collections_sheets"> | string
+    collection_id?: StringFilter<"collections_sheets"> | string
+    sheet_id?: StringFilter<"collections_sheets"> | string
     date_added?: DateTimeFilter<"collections_sheets"> | Date | string
     pinned?: BoolFilter<"collections_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_sheets"> | Date | string | null
@@ -25767,12 +24360,12 @@ export namespace Prisma {
   }
 
   export type collections_sheetsWhereUniqueInput = Prisma.AtLeast<{
-    collections_sheets_id?: number
+    collections_sheets_id?: string
     AND?: collections_sheetsWhereInput | collections_sheetsWhereInput[]
     OR?: collections_sheetsWhereInput[]
     NOT?: collections_sheetsWhereInput | collections_sheetsWhereInput[]
-    collection_id?: IntFilter<"collections_sheets"> | number
-    sheet_id?: IntFilter<"collections_sheets"> | number
+    collection_id?: StringFilter<"collections_sheets"> | string
+    sheet_id?: StringFilter<"collections_sheets"> | string
     date_added?: DateTimeFilter<"collections_sheets"> | Date | string
     pinned?: BoolFilter<"collections_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_sheets"> | Date | string | null
@@ -25788,19 +24381,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: collections_sheetsCountOrderByAggregateInput
-    _avg?: collections_sheetsAvgOrderByAggregateInput
     _max?: collections_sheetsMaxOrderByAggregateInput
     _min?: collections_sheetsMinOrderByAggregateInput
-    _sum?: collections_sheetsSumOrderByAggregateInput
   }
 
   export type collections_sheetsScalarWhereWithAggregatesInput = {
     AND?: collections_sheetsScalarWhereWithAggregatesInput | collections_sheetsScalarWhereWithAggregatesInput[]
     OR?: collections_sheetsScalarWhereWithAggregatesInput[]
     NOT?: collections_sheetsScalarWhereWithAggregatesInput | collections_sheetsScalarWhereWithAggregatesInput[]
-    collections_sheets_id?: IntWithAggregatesFilter<"collections_sheets"> | number
-    collection_id?: IntWithAggregatesFilter<"collections_sheets"> | number
-    sheet_id?: IntWithAggregatesFilter<"collections_sheets"> | number
+    collections_sheets_id?: StringWithAggregatesFilter<"collections_sheets"> | string
+    collection_id?: StringWithAggregatesFilter<"collections_sheets"> | string
+    sheet_id?: StringWithAggregatesFilter<"collections_sheets"> | string
     date_added?: DateTimeWithAggregatesFilter<"collections_sheets"> | Date | string
     pinned?: BoolWithAggregatesFilter<"collections_sheets"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"collections_sheets"> | Date | string | null
@@ -25810,9 +24401,9 @@ export namespace Prisma {
     AND?: collections_videosWhereInput | collections_videosWhereInput[]
     OR?: collections_videosWhereInput[]
     NOT?: collections_videosWhereInput | collections_videosWhereInput[]
-    collections_videos_id?: IntFilter<"collections_videos"> | number
-    collection_id?: IntFilter<"collections_videos"> | number
-    video_id?: IntFilter<"collections_videos"> | number
+    collections_videos_id?: StringFilter<"collections_videos"> | string
+    collection_id?: StringFilter<"collections_videos"> | string
+    video_id?: StringFilter<"collections_videos"> | string
     date_added?: DateTimeFilter<"collections_videos"> | Date | string
     pinned?: BoolFilter<"collections_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_videos"> | Date | string | null
@@ -25832,12 +24423,12 @@ export namespace Prisma {
   }
 
   export type collections_videosWhereUniqueInput = Prisma.AtLeast<{
-    collections_videos_id?: number
+    collections_videos_id?: string
     AND?: collections_videosWhereInput | collections_videosWhereInput[]
     OR?: collections_videosWhereInput[]
     NOT?: collections_videosWhereInput | collections_videosWhereInput[]
-    collection_id?: IntFilter<"collections_videos"> | number
-    video_id?: IntFilter<"collections_videos"> | number
+    collection_id?: StringFilter<"collections_videos"> | string
+    video_id?: StringFilter<"collections_videos"> | string
     date_added?: DateTimeFilter<"collections_videos"> | Date | string
     pinned?: BoolFilter<"collections_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_videos"> | Date | string | null
@@ -25853,19 +24444,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: collections_videosCountOrderByAggregateInput
-    _avg?: collections_videosAvgOrderByAggregateInput
     _max?: collections_videosMaxOrderByAggregateInput
     _min?: collections_videosMinOrderByAggregateInput
-    _sum?: collections_videosSumOrderByAggregateInput
   }
 
   export type collections_videosScalarWhereWithAggregatesInput = {
     AND?: collections_videosScalarWhereWithAggregatesInput | collections_videosScalarWhereWithAggregatesInput[]
     OR?: collections_videosScalarWhereWithAggregatesInput[]
     NOT?: collections_videosScalarWhereWithAggregatesInput | collections_videosScalarWhereWithAggregatesInput[]
-    collections_videos_id?: IntWithAggregatesFilter<"collections_videos"> | number
-    collection_id?: IntWithAggregatesFilter<"collections_videos"> | number
-    video_id?: IntWithAggregatesFilter<"collections_videos"> | number
+    collections_videos_id?: StringWithAggregatesFilter<"collections_videos"> | string
+    collection_id?: StringWithAggregatesFilter<"collections_videos"> | string
+    video_id?: StringWithAggregatesFilter<"collections_videos"> | string
     date_added?: DateTimeWithAggregatesFilter<"collections_videos"> | Date | string
     pinned?: BoolWithAggregatesFilter<"collections_videos"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"collections_videos"> | Date | string | null
@@ -25875,61 +24464,56 @@ export namespace Prisma {
     AND?: entitiesWhereInput | entitiesWhereInput[]
     OR?: entitiesWhereInput[]
     NOT?: entitiesWhereInput | entitiesWhereInput[]
-    entity_id?: IntFilter<"entities"> | number
-    individual_id?: IntNullableFilter<"entities"> | number | null
-    group_id?: IntNullableFilter<"entities"> | number | null
-    organization_id?: IntNullableFilter<"entities"> | number | null
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
+    entity_id?: StringFilter<"entities"> | string
+    entity_type?: IntFilter<"entities"> | number
+    collections?: CollectionsListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
+    entities_references?: Entities_referencesListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
+    groups_members?: Groups_membersListRelationFilter
     images?: ImagesListRelationFilter
+    organizations_members?: Organizations_membersListRelationFilter
     sheets?: SheetsListRelationFilter
     videos?: VideosListRelationFilter
   }
 
   export type entitiesOrderByWithRelationInput = {
     entity_id?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
-    groups?: groupsOrderByWithRelationInput
-    individuals?: individualsOrderByWithRelationInput
-    organizations?: organizationsOrderByWithRelationInput
+    entity_type?: SortOrder
+    collections?: collectionsOrderByRelationAggregateInput
     entities_images?: entities_imagesOrderByRelationAggregateInput
+    entities_references?: entities_referencesOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
     entities_videos?: entities_videosOrderByRelationAggregateInput
+    groups_members?: groups_membersOrderByRelationAggregateInput
     images?: imagesOrderByRelationAggregateInput
+    organizations_members?: organizations_membersOrderByRelationAggregateInput
     sheets?: sheetsOrderByRelationAggregateInput
     videos?: videosOrderByRelationAggregateInput
   }
 
   export type entitiesWhereUniqueInput = Prisma.AtLeast<{
-    entity_id?: number
+    entity_id?: string
     AND?: entitiesWhereInput | entitiesWhereInput[]
     OR?: entitiesWhereInput[]
     NOT?: entitiesWhereInput | entitiesWhereInput[]
-    individual_id?: IntNullableFilter<"entities"> | number | null
-    group_id?: IntNullableFilter<"entities"> | number | null
-    organization_id?: IntNullableFilter<"entities"> | number | null
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
+    entity_type?: IntFilter<"entities"> | number
+    collections?: CollectionsListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
+    entities_references?: Entities_referencesListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
+    groups_members?: Groups_membersListRelationFilter
     images?: ImagesListRelationFilter
+    organizations_members?: Organizations_membersListRelationFilter
     sheets?: SheetsListRelationFilter
     videos?: VideosListRelationFilter
   }, "entity_id" | "entity_id">
 
   export type entitiesOrderByWithAggregationInput = {
     entity_id?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
+    entity_type?: SortOrder
     _count?: entitiesCountOrderByAggregateInput
     _avg?: entitiesAvgOrderByAggregateInput
     _max?: entitiesMaxOrderByAggregateInput
@@ -25941,19 +24525,17 @@ export namespace Prisma {
     AND?: entitiesScalarWhereWithAggregatesInput | entitiesScalarWhereWithAggregatesInput[]
     OR?: entitiesScalarWhereWithAggregatesInput[]
     NOT?: entitiesScalarWhereWithAggregatesInput | entitiesScalarWhereWithAggregatesInput[]
-    entity_id?: IntWithAggregatesFilter<"entities"> | number
-    individual_id?: IntNullableWithAggregatesFilter<"entities"> | number | null
-    group_id?: IntNullableWithAggregatesFilter<"entities"> | number | null
-    organization_id?: IntNullableWithAggregatesFilter<"entities"> | number | null
+    entity_id?: StringWithAggregatesFilter<"entities"> | string
+    entity_type?: IntWithAggregatesFilter<"entities"> | number
   }
 
   export type entities_imagesWhereInput = {
     AND?: entities_imagesWhereInput | entities_imagesWhereInput[]
     OR?: entities_imagesWhereInput[]
     NOT?: entities_imagesWhereInput | entities_imagesWhereInput[]
-    entities_images_id?: IntFilter<"entities_images"> | number
-    entity_id?: IntFilter<"entities_images"> | number
-    image_id?: IntFilter<"entities_images"> | number
+    entities_images_id?: StringFilter<"entities_images"> | string
+    entity_id?: StringFilter<"entities_images"> | string
+    image_id?: StringFilter<"entities_images"> | string
     date_added?: DateTimeFilter<"entities_images"> | Date | string
     pinned?: BoolFilter<"entities_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_images"> | Date | string | null
@@ -25973,12 +24555,12 @@ export namespace Prisma {
   }
 
   export type entities_imagesWhereUniqueInput = Prisma.AtLeast<{
-    entities_images_id?: number
+    entities_images_id?: string
     AND?: entities_imagesWhereInput | entities_imagesWhereInput[]
     OR?: entities_imagesWhereInput[]
     NOT?: entities_imagesWhereInput | entities_imagesWhereInput[]
-    entity_id?: IntFilter<"entities_images"> | number
-    image_id?: IntFilter<"entities_images"> | number
+    entity_id?: StringFilter<"entities_images"> | string
+    image_id?: StringFilter<"entities_images"> | string
     date_added?: DateTimeFilter<"entities_images"> | Date | string
     pinned?: BoolFilter<"entities_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_images"> | Date | string | null
@@ -25994,19 +24576,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: entities_imagesCountOrderByAggregateInput
-    _avg?: entities_imagesAvgOrderByAggregateInput
     _max?: entities_imagesMaxOrderByAggregateInput
     _min?: entities_imagesMinOrderByAggregateInput
-    _sum?: entities_imagesSumOrderByAggregateInput
   }
 
   export type entities_imagesScalarWhereWithAggregatesInput = {
     AND?: entities_imagesScalarWhereWithAggregatesInput | entities_imagesScalarWhereWithAggregatesInput[]
     OR?: entities_imagesScalarWhereWithAggregatesInput[]
     NOT?: entities_imagesScalarWhereWithAggregatesInput | entities_imagesScalarWhereWithAggregatesInput[]
-    entities_images_id?: IntWithAggregatesFilter<"entities_images"> | number
-    entity_id?: IntWithAggregatesFilter<"entities_images"> | number
-    image_id?: IntWithAggregatesFilter<"entities_images"> | number
+    entities_images_id?: StringWithAggregatesFilter<"entities_images"> | string
+    entity_id?: StringWithAggregatesFilter<"entities_images"> | string
+    image_id?: StringWithAggregatesFilter<"entities_images"> | string
     date_added?: DateTimeWithAggregatesFilter<"entities_images"> | Date | string
     pinned?: BoolWithAggregatesFilter<"entities_images"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"entities_images"> | Date | string | null
@@ -26016,70 +24596,52 @@ export namespace Prisma {
     AND?: entities_referencesWhereInput | entities_referencesWhereInput[]
     OR?: entities_referencesWhereInput[]
     NOT?: entities_referencesWhereInput | entities_referencesWhereInput[]
-    reference_id?: IntFilter<"entities_references"> | number
-    individual_id?: IntNullableFilter<"entities_references"> | number | null
-    group_id?: IntNullableFilter<"entities_references"> | number | null
-    organization_id?: IntNullableFilter<"entities_references"> | number | null
+    reference_id?: StringFilter<"entities_references"> | string
+    entity_id?: StringFilter<"entities_references"> | string
     title?: StringFilter<"entities_references"> | string
     author?: StringFilter<"entities_references"> | string
     url?: StringFilter<"entities_references"> | string
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
   }
 
   export type entities_referencesOrderByWithRelationInput = {
     reference_id?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
+    entity_id?: SortOrder
     title?: SortOrder
     author?: SortOrder
     url?: SortOrder
-    groups?: groupsOrderByWithRelationInput
-    individuals?: individualsOrderByWithRelationInput
-    organizations?: organizationsOrderByWithRelationInput
+    entities?: entitiesOrderByWithRelationInput
   }
 
   export type entities_referencesWhereUniqueInput = Prisma.AtLeast<{
-    reference_id?: number
+    reference_id?: string
     AND?: entities_referencesWhereInput | entities_referencesWhereInput[]
     OR?: entities_referencesWhereInput[]
     NOT?: entities_referencesWhereInput | entities_referencesWhereInput[]
-    individual_id?: IntNullableFilter<"entities_references"> | number | null
-    group_id?: IntNullableFilter<"entities_references"> | number | null
-    organization_id?: IntNullableFilter<"entities_references"> | number | null
+    entity_id?: StringFilter<"entities_references"> | string
     title?: StringFilter<"entities_references"> | string
     author?: StringFilter<"entities_references"> | string
     url?: StringFilter<"entities_references"> | string
-    groups?: XOR<GroupsNullableRelationFilter, groupsWhereInput> | null
-    individuals?: XOR<IndividualsNullableRelationFilter, individualsWhereInput> | null
-    organizations?: XOR<OrganizationsNullableRelationFilter, organizationsWhereInput> | null
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
   }, "reference_id" | "reference_id">
 
   export type entities_referencesOrderByWithAggregationInput = {
     reference_id?: SortOrder
-    individual_id?: SortOrderInput | SortOrder
-    group_id?: SortOrderInput | SortOrder
-    organization_id?: SortOrderInput | SortOrder
+    entity_id?: SortOrder
     title?: SortOrder
     author?: SortOrder
     url?: SortOrder
     _count?: entities_referencesCountOrderByAggregateInput
-    _avg?: entities_referencesAvgOrderByAggregateInput
     _max?: entities_referencesMaxOrderByAggregateInput
     _min?: entities_referencesMinOrderByAggregateInput
-    _sum?: entities_referencesSumOrderByAggregateInput
   }
 
   export type entities_referencesScalarWhereWithAggregatesInput = {
     AND?: entities_referencesScalarWhereWithAggregatesInput | entities_referencesScalarWhereWithAggregatesInput[]
     OR?: entities_referencesScalarWhereWithAggregatesInput[]
     NOT?: entities_referencesScalarWhereWithAggregatesInput | entities_referencesScalarWhereWithAggregatesInput[]
-    reference_id?: IntWithAggregatesFilter<"entities_references"> | number
-    individual_id?: IntNullableWithAggregatesFilter<"entities_references"> | number | null
-    group_id?: IntNullableWithAggregatesFilter<"entities_references"> | number | null
-    organization_id?: IntNullableWithAggregatesFilter<"entities_references"> | number | null
+    reference_id?: StringWithAggregatesFilter<"entities_references"> | string
+    entity_id?: StringWithAggregatesFilter<"entities_references"> | string
     title?: StringWithAggregatesFilter<"entities_references"> | string
     author?: StringWithAggregatesFilter<"entities_references"> | string
     url?: StringWithAggregatesFilter<"entities_references"> | string
@@ -26089,9 +24651,9 @@ export namespace Prisma {
     AND?: entities_sheetsWhereInput | entities_sheetsWhereInput[]
     OR?: entities_sheetsWhereInput[]
     NOT?: entities_sheetsWhereInput | entities_sheetsWhereInput[]
-    entities_sheets_id?: IntFilter<"entities_sheets"> | number
-    entity_id?: IntFilter<"entities_sheets"> | number
-    sheet_id?: IntFilter<"entities_sheets"> | number
+    entities_sheets_id?: StringFilter<"entities_sheets"> | string
+    entity_id?: StringFilter<"entities_sheets"> | string
+    sheet_id?: StringFilter<"entities_sheets"> | string
     date_added?: DateTimeFilter<"entities_sheets"> | Date | string
     pinned?: BoolFilter<"entities_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_sheets"> | Date | string | null
@@ -26111,12 +24673,12 @@ export namespace Prisma {
   }
 
   export type entities_sheetsWhereUniqueInput = Prisma.AtLeast<{
-    entities_sheets_id?: number
+    entities_sheets_id?: string
     AND?: entities_sheetsWhereInput | entities_sheetsWhereInput[]
     OR?: entities_sheetsWhereInput[]
     NOT?: entities_sheetsWhereInput | entities_sheetsWhereInput[]
-    entity_id?: IntFilter<"entities_sheets"> | number
-    sheet_id?: IntFilter<"entities_sheets"> | number
+    entity_id?: StringFilter<"entities_sheets"> | string
+    sheet_id?: StringFilter<"entities_sheets"> | string
     date_added?: DateTimeFilter<"entities_sheets"> | Date | string
     pinned?: BoolFilter<"entities_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_sheets"> | Date | string | null
@@ -26132,19 +24694,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: entities_sheetsCountOrderByAggregateInput
-    _avg?: entities_sheetsAvgOrderByAggregateInput
     _max?: entities_sheetsMaxOrderByAggregateInput
     _min?: entities_sheetsMinOrderByAggregateInput
-    _sum?: entities_sheetsSumOrderByAggregateInput
   }
 
   export type entities_sheetsScalarWhereWithAggregatesInput = {
     AND?: entities_sheetsScalarWhereWithAggregatesInput | entities_sheetsScalarWhereWithAggregatesInput[]
     OR?: entities_sheetsScalarWhereWithAggregatesInput[]
     NOT?: entities_sheetsScalarWhereWithAggregatesInput | entities_sheetsScalarWhereWithAggregatesInput[]
-    entities_sheets_id?: IntWithAggregatesFilter<"entities_sheets"> | number
-    entity_id?: IntWithAggregatesFilter<"entities_sheets"> | number
-    sheet_id?: IntWithAggregatesFilter<"entities_sheets"> | number
+    entities_sheets_id?: StringWithAggregatesFilter<"entities_sheets"> | string
+    entity_id?: StringWithAggregatesFilter<"entities_sheets"> | string
+    sheet_id?: StringWithAggregatesFilter<"entities_sheets"> | string
     date_added?: DateTimeWithAggregatesFilter<"entities_sheets"> | Date | string
     pinned?: BoolWithAggregatesFilter<"entities_sheets"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"entities_sheets"> | Date | string | null
@@ -26154,9 +24714,9 @@ export namespace Prisma {
     AND?: entities_videosWhereInput | entities_videosWhereInput[]
     OR?: entities_videosWhereInput[]
     NOT?: entities_videosWhereInput | entities_videosWhereInput[]
-    entities_videos_id?: IntFilter<"entities_videos"> | number
-    entity_id?: IntFilter<"entities_videos"> | number
-    video_id?: IntFilter<"entities_videos"> | number
+    entities_videos_id?: StringFilter<"entities_videos"> | string
+    entity_id?: StringFilter<"entities_videos"> | string
+    video_id?: StringFilter<"entities_videos"> | string
     date_added?: DateTimeFilter<"entities_videos"> | Date | string
     pinned?: BoolFilter<"entities_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_videos"> | Date | string | null
@@ -26176,12 +24736,12 @@ export namespace Prisma {
   }
 
   export type entities_videosWhereUniqueInput = Prisma.AtLeast<{
-    entities_videos_id?: number
+    entities_videos_id?: string
     AND?: entities_videosWhereInput | entities_videosWhereInput[]
     OR?: entities_videosWhereInput[]
     NOT?: entities_videosWhereInput | entities_videosWhereInput[]
-    entity_id?: IntFilter<"entities_videos"> | number
-    video_id?: IntFilter<"entities_videos"> | number
+    entity_id?: StringFilter<"entities_videos"> | string
+    video_id?: StringFilter<"entities_videos"> | string
     date_added?: DateTimeFilter<"entities_videos"> | Date | string
     pinned?: BoolFilter<"entities_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_videos"> | Date | string | null
@@ -26197,19 +24757,17 @@ export namespace Prisma {
     pinned?: SortOrder
     date_pinned?: SortOrderInput | SortOrder
     _count?: entities_videosCountOrderByAggregateInput
-    _avg?: entities_videosAvgOrderByAggregateInput
     _max?: entities_videosMaxOrderByAggregateInput
     _min?: entities_videosMinOrderByAggregateInput
-    _sum?: entities_videosSumOrderByAggregateInput
   }
 
   export type entities_videosScalarWhereWithAggregatesInput = {
     AND?: entities_videosScalarWhereWithAggregatesInput | entities_videosScalarWhereWithAggregatesInput[]
     OR?: entities_videosScalarWhereWithAggregatesInput[]
     NOT?: entities_videosScalarWhereWithAggregatesInput | entities_videosScalarWhereWithAggregatesInput[]
-    entities_videos_id?: IntWithAggregatesFilter<"entities_videos"> | number
-    entity_id?: IntWithAggregatesFilter<"entities_videos"> | number
-    video_id?: IntWithAggregatesFilter<"entities_videos"> | number
+    entities_videos_id?: StringWithAggregatesFilter<"entities_videos"> | string
+    entity_id?: StringWithAggregatesFilter<"entities_videos"> | string
+    video_id?: StringWithAggregatesFilter<"entities_videos"> | string
     date_added?: DateTimeWithAggregatesFilter<"entities_videos"> | Date | string
     pinned?: BoolWithAggregatesFilter<"entities_videos"> | boolean
     date_pinned?: DateTimeNullableWithAggregatesFilter<"entities_videos"> | Date | string | null
@@ -26219,15 +24777,12 @@ export namespace Prisma {
     AND?: groupsWhereInput | groupsWhereInput[]
     OR?: groupsWhereInput[]
     NOT?: groupsWhereInput | groupsWhereInput[]
-    group_id?: IntFilter<"groups"> | number
+    group_id?: StringFilter<"groups"> | string
     group_handle?: StringFilter<"groups"> | string
     group_name?: StringFilter<"groups"> | string
     group_currentIssue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
   }
 
@@ -26238,14 +24793,11 @@ export namespace Prisma {
     group_currentIssue?: SortOrderInput | SortOrder
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
-    collections?: collectionsOrderByRelationAggregateInput
-    entities?: entitiesOrderByRelationAggregateInput
-    entities_references?: entities_referencesOrderByRelationAggregateInput
     groups_members?: groups_membersOrderByRelationAggregateInput
   }
 
   export type groupsWhereUniqueInput = Prisma.AtLeast<{
-    group_id?: number
+    group_id?: string
     group_handle?: string
     AND?: groupsWhereInput | groupsWhereInput[]
     OR?: groupsWhereInput[]
@@ -26254,9 +24806,6 @@ export namespace Prisma {
     group_currentIssue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
   }, "group_id" | "group_id" | "group_handle">
 
@@ -26268,17 +24817,15 @@ export namespace Prisma {
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
     _count?: groupsCountOrderByAggregateInput
-    _avg?: groupsAvgOrderByAggregateInput
     _max?: groupsMaxOrderByAggregateInput
     _min?: groupsMinOrderByAggregateInput
-    _sum?: groupsSumOrderByAggregateInput
   }
 
   export type groupsScalarWhereWithAggregatesInput = {
     AND?: groupsScalarWhereWithAggregatesInput | groupsScalarWhereWithAggregatesInput[]
     OR?: groupsScalarWhereWithAggregatesInput[]
     NOT?: groupsScalarWhereWithAggregatesInput | groupsScalarWhereWithAggregatesInput[]
-    group_id?: IntWithAggregatesFilter<"groups"> | number
+    group_id?: StringWithAggregatesFilter<"groups"> | string
     group_handle?: StringWithAggregatesFilter<"groups"> | string
     group_name?: StringWithAggregatesFilter<"groups"> | string
     group_currentIssue?: StringNullableWithAggregatesFilter<"groups"> | string | null
@@ -26290,58 +24837,61 @@ export namespace Prisma {
     AND?: groups_membersWhereInput | groups_membersWhereInput[]
     OR?: groups_membersWhereInput[]
     NOT?: groups_membersWhereInput | groups_membersWhereInput[]
-    group_id?: IntFilter<"groups_members"> | number
-    individual_id?: IntFilter<"groups_members"> | number
+    groups_members_id?: StringFilter<"groups_members"> | string
+    group_id?: StringFilter<"groups_members"> | string
+    entity_id?: StringFilter<"groups_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     groups?: XOR<GroupsRelationFilter, groupsWhereInput>
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
   }
 
   export type groups_membersOrderByWithRelationInput = {
+    groups_members_id?: SortOrder
     group_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
+    entities?: entitiesOrderByWithRelationInput
     groups?: groupsOrderByWithRelationInput
-    individuals?: individualsOrderByWithRelationInput
   }
 
   export type groups_membersWhereUniqueInput = Prisma.AtLeast<{
-    group_id_individual_id?: groups_membersGroup_idIndividual_idCompoundUniqueInput
+    groups_members_id?: string
+    group_id_entity_id?: groups_membersGroup_idEntity_idCompoundUniqueInput
     AND?: groups_membersWhereInput | groups_membersWhereInput[]
     OR?: groups_membersWhereInput[]
     NOT?: groups_membersWhereInput | groups_membersWhereInput[]
-    group_id?: IntFilter<"groups_members"> | number
-    individual_id?: IntFilter<"groups_members"> | number
+    group_id?: StringFilter<"groups_members"> | string
+    entity_id?: StringFilter<"groups_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     groups?: XOR<GroupsRelationFilter, groupsWhereInput>
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
-  }, "group_id_individual_id">
+  }, "groups_members_id" | "groups_members_id" | "group_id_entity_id">
 
   export type groups_membersOrderByWithAggregationInput = {
+    groups_members_id?: SortOrder
     group_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
     _count?: groups_membersCountOrderByAggregateInput
-    _avg?: groups_membersAvgOrderByAggregateInput
     _max?: groups_membersMaxOrderByAggregateInput
     _min?: groups_membersMinOrderByAggregateInput
-    _sum?: groups_membersSumOrderByAggregateInput
   }
 
   export type groups_membersScalarWhereWithAggregatesInput = {
     AND?: groups_membersScalarWhereWithAggregatesInput | groups_membersScalarWhereWithAggregatesInput[]
     OR?: groups_membersScalarWhereWithAggregatesInput[]
     NOT?: groups_membersScalarWhereWithAggregatesInput | groups_membersScalarWhereWithAggregatesInput[]
-    group_id?: IntWithAggregatesFilter<"groups_members"> | number
-    individual_id?: IntWithAggregatesFilter<"groups_members"> | number
+    groups_members_id?: StringWithAggregatesFilter<"groups_members"> | string
+    group_id?: StringWithAggregatesFilter<"groups_members"> | string
+    entity_id?: StringWithAggregatesFilter<"groups_members"> | string
   }
 
   export type imagesWhereInput = {
     AND?: imagesWhereInput | imagesWhereInput[]
     OR?: imagesWhereInput[]
     NOT?: imagesWhereInput | imagesWhereInput[]
-    image_id?: IntFilter<"images"> | number
-    image_creator_id?: IntFilter<"images"> | number
+    image_id?: StringFilter<"images"> | string
+    image_creator_id?: StringFilter<"images"> | string
     image_title?: StringFilter<"images"> | string
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
-    image_data_id?: IntFilter<"images"> | number
+    image_data_id?: StringFilter<"images"> | string
     collections_images?: Collections_imagesListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -26362,15 +24912,15 @@ export namespace Prisma {
   }
 
   export type imagesWhereUniqueInput = Prisma.AtLeast<{
-    image_id?: number
+    image_id?: string
     AND?: imagesWhereInput | imagesWhereInput[]
     OR?: imagesWhereInput[]
     NOT?: imagesWhereInput | imagesWhereInput[]
-    image_creator_id?: IntFilter<"images"> | number
+    image_creator_id?: StringFilter<"images"> | string
     image_title?: StringFilter<"images"> | string
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
-    image_data_id?: IntFilter<"images"> | number
+    image_data_id?: StringFilter<"images"> | string
     collections_images?: Collections_imagesListRelationFilter
     entities_images?: Entities_imagesListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -26385,29 +24935,27 @@ export namespace Prisma {
     image_filename?: SortOrder
     image_data_id?: SortOrder
     _count?: imagesCountOrderByAggregateInput
-    _avg?: imagesAvgOrderByAggregateInput
     _max?: imagesMaxOrderByAggregateInput
     _min?: imagesMinOrderByAggregateInput
-    _sum?: imagesSumOrderByAggregateInput
   }
 
   export type imagesScalarWhereWithAggregatesInput = {
     AND?: imagesScalarWhereWithAggregatesInput | imagesScalarWhereWithAggregatesInput[]
     OR?: imagesScalarWhereWithAggregatesInput[]
     NOT?: imagesScalarWhereWithAggregatesInput | imagesScalarWhereWithAggregatesInput[]
-    image_id?: IntWithAggregatesFilter<"images"> | number
-    image_creator_id?: IntWithAggregatesFilter<"images"> | number
+    image_id?: StringWithAggregatesFilter<"images"> | string
+    image_creator_id?: StringWithAggregatesFilter<"images"> | string
     image_title?: StringWithAggregatesFilter<"images"> | string
     image_description?: StringWithAggregatesFilter<"images"> | string
     image_filename?: StringWithAggregatesFilter<"images"> | string
-    image_data_id?: IntWithAggregatesFilter<"images"> | number
+    image_data_id?: StringWithAggregatesFilter<"images"> | string
   }
 
   export type images_dataWhereInput = {
     AND?: images_dataWhereInput | images_dataWhereInput[]
     OR?: images_dataWhereInput[]
     NOT?: images_dataWhereInput | images_dataWhereInput[]
-    image_data_id?: IntFilter<"images_data"> | number
+    image_data_id?: StringFilter<"images_data"> | string
     image_data?: BytesFilter<"images_data"> | Buffer
     images?: ImagesListRelationFilter
   }
@@ -26419,7 +24967,7 @@ export namespace Prisma {
   }
 
   export type images_dataWhereUniqueInput = Prisma.AtLeast<{
-    image_data_id?: number
+    image_data_id?: string
     AND?: images_dataWhereInput | images_dataWhereInput[]
     OR?: images_dataWhereInput[]
     NOT?: images_dataWhereInput | images_dataWhereInput[]
@@ -26431,17 +24979,15 @@ export namespace Prisma {
     image_data_id?: SortOrder
     image_data?: SortOrder
     _count?: images_dataCountOrderByAggregateInput
-    _avg?: images_dataAvgOrderByAggregateInput
     _max?: images_dataMaxOrderByAggregateInput
     _min?: images_dataMinOrderByAggregateInput
-    _sum?: images_dataSumOrderByAggregateInput
   }
 
   export type images_dataScalarWhereWithAggregatesInput = {
     AND?: images_dataScalarWhereWithAggregatesInput | images_dataScalarWhereWithAggregatesInput[]
     OR?: images_dataScalarWhereWithAggregatesInput[]
     NOT?: images_dataScalarWhereWithAggregatesInput | images_dataScalarWhereWithAggregatesInput[]
-    image_data_id?: IntWithAggregatesFilter<"images_data"> | number
+    image_data_id?: StringWithAggregatesFilter<"images_data"> | string
     image_data?: BytesWithAggregatesFilter<"images_data"> | Buffer
   }
 
@@ -26449,38 +24995,28 @@ export namespace Prisma {
     AND?: individualsWhereInput | individualsWhereInput[]
     OR?: individualsWhereInput[]
     NOT?: individualsWhereInput | individualsWhereInput[]
-    individual_id?: IntFilter<"individuals"> | number
-    individual_userName?: StringFilter<"individuals"> | string
+    individual_id?: StringFilter<"individuals"> | string
+    individual_username?: StringFilter<"individuals"> | string
     individual_name?: StringFilter<"individuals"> | string
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
-    groups_members?: Groups_membersListRelationFilter
     user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
-    organizations_members?: Organizations_membersListRelationFilter
   }
 
   export type individualsOrderByWithRelationInput = {
     individual_id?: SortOrder
-    individual_userName?: SortOrder
+    individual_username?: SortOrder
     individual_name?: SortOrder
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
-    collections?: collectionsOrderByRelationAggregateInput
-    entities?: entitiesOrderByRelationAggregateInput
-    entities_references?: entities_referencesOrderByRelationAggregateInput
-    groups_members?: groups_membersOrderByRelationAggregateInput
     user_credentials?: user_credentialsOrderByWithRelationInput
-    organizations_members?: organizations_membersOrderByRelationAggregateInput
   }
 
   export type individualsWhereUniqueInput = Prisma.AtLeast<{
-    individual_id?: number
-    individual_userName?: string
+    individual_id?: string
+    individual_username?: string
     AND?: individualsWhereInput | individualsWhereInput[]
     OR?: individualsWhereInput[]
     NOT?: individualsWhereInput | individualsWhereInput[]
@@ -26488,34 +25024,27 @@ export namespace Prisma {
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
-    groups_members?: Groups_membersListRelationFilter
     user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
-    organizations_members?: Organizations_membersListRelationFilter
-  }, "individual_id" | "individual_id" | "individual_userName">
+  }, "individual_id" | "individual_id" | "individual_username">
 
   export type individualsOrderByWithAggregationInput = {
     individual_id?: SortOrder
-    individual_userName?: SortOrder
+    individual_username?: SortOrder
     individual_name?: SortOrder
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
     _count?: individualsCountOrderByAggregateInput
-    _avg?: individualsAvgOrderByAggregateInput
     _max?: individualsMaxOrderByAggregateInput
     _min?: individualsMinOrderByAggregateInput
-    _sum?: individualsSumOrderByAggregateInput
   }
 
   export type individualsScalarWhereWithAggregatesInput = {
     AND?: individualsScalarWhereWithAggregatesInput | individualsScalarWhereWithAggregatesInput[]
     OR?: individualsScalarWhereWithAggregatesInput[]
     NOT?: individualsScalarWhereWithAggregatesInput | individualsScalarWhereWithAggregatesInput[]
-    individual_id?: IntWithAggregatesFilter<"individuals"> | number
-    individual_userName?: StringWithAggregatesFilter<"individuals"> | string
+    individual_id?: StringWithAggregatesFilter<"individuals"> | string
+    individual_username?: StringWithAggregatesFilter<"individuals"> | string
     individual_name?: StringWithAggregatesFilter<"individuals"> | string
     individual_currentIssue?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_roles?: StringNullableWithAggregatesFilter<"individuals"> | string | null
@@ -26526,15 +25055,12 @@ export namespace Prisma {
     AND?: organizationsWhereInput | organizationsWhereInput[]
     OR?: organizationsWhereInput[]
     NOT?: organizationsWhereInput | organizationsWhereInput[]
-    organization_id?: IntFilter<"organizations"> | number
+    organization_id?: StringFilter<"organizations"> | string
     organization_handle?: StringFilter<"organizations"> | string
     organization_name?: StringFilter<"organizations"> | string
     organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
   }
 
@@ -26545,14 +25071,11 @@ export namespace Prisma {
     organization_currentIssue?: SortOrderInput | SortOrder
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
-    collections?: collectionsOrderByRelationAggregateInput
-    entities?: entitiesOrderByRelationAggregateInput
-    entities_references?: entities_referencesOrderByRelationAggregateInput
     organizations_members?: organizations_membersOrderByRelationAggregateInput
   }
 
   export type organizationsWhereUniqueInput = Prisma.AtLeast<{
-    organization_id?: number
+    organization_id?: string
     organization_handle?: string
     AND?: organizationsWhereInput | organizationsWhereInput[]
     OR?: organizationsWhereInput[]
@@ -26561,9 +25084,6 @@ export namespace Prisma {
     organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
-    collections?: CollectionsListRelationFilter
-    entities?: EntitiesListRelationFilter
-    entities_references?: Entities_referencesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
   }, "organization_id" | "organization_id" | "organization_handle">
 
@@ -26575,17 +25095,15 @@ export namespace Prisma {
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
     _count?: organizationsCountOrderByAggregateInput
-    _avg?: organizationsAvgOrderByAggregateInput
     _max?: organizationsMaxOrderByAggregateInput
     _min?: organizationsMinOrderByAggregateInput
-    _sum?: organizationsSumOrderByAggregateInput
   }
 
   export type organizationsScalarWhereWithAggregatesInput = {
     AND?: organizationsScalarWhereWithAggregatesInput | organizationsScalarWhereWithAggregatesInput[]
     OR?: organizationsScalarWhereWithAggregatesInput[]
     NOT?: organizationsScalarWhereWithAggregatesInput | organizationsScalarWhereWithAggregatesInput[]
-    organization_id?: IntWithAggregatesFilter<"organizations"> | number
+    organization_id?: StringWithAggregatesFilter<"organizations"> | string
     organization_handle?: StringWithAggregatesFilter<"organizations"> | string
     organization_name?: StringWithAggregatesFilter<"organizations"> | string
     organization_currentIssue?: StringNullableWithAggregatesFilter<"organizations"> | string | null
@@ -26597,62 +25115,64 @@ export namespace Prisma {
     AND?: organizations_membersWhereInput | organizations_membersWhereInput[]
     OR?: organizations_membersWhereInput[]
     NOT?: organizations_membersWhereInput | organizations_membersWhereInput[]
-    organization_id?: IntFilter<"organizations_members"> | number
-    individual_id?: IntFilter<"organizations_members"> | number
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    organizations_members_id?: StringFilter<"organizations_members"> | string
+    organization_id?: StringFilter<"organizations_members"> | string
+    entity_id?: StringFilter<"organizations_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     organizations?: XOR<OrganizationsRelationFilter, organizationsWhereInput>
   }
 
   export type organizations_membersOrderByWithRelationInput = {
+    organizations_members_id?: SortOrder
     organization_id?: SortOrder
-    individual_id?: SortOrder
-    individuals?: individualsOrderByWithRelationInput
+    entity_id?: SortOrder
+    entities?: entitiesOrderByWithRelationInput
     organizations?: organizationsOrderByWithRelationInput
   }
 
   export type organizations_membersWhereUniqueInput = Prisma.AtLeast<{
-    organization_id_individual_id?: organizations_membersOrganization_idIndividual_idCompoundUniqueInput
+    organizations_members_id?: string
     AND?: organizations_membersWhereInput | organizations_membersWhereInput[]
     OR?: organizations_membersWhereInput[]
     NOT?: organizations_membersWhereInput | organizations_membersWhereInput[]
-    organization_id?: IntFilter<"organizations_members"> | number
-    individual_id?: IntFilter<"organizations_members"> | number
-    individuals?: XOR<IndividualsRelationFilter, individualsWhereInput>
+    organization_id?: StringFilter<"organizations_members"> | string
+    entity_id?: StringFilter<"organizations_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     organizations?: XOR<OrganizationsRelationFilter, organizationsWhereInput>
-  }, "organization_id_individual_id">
+  }, "organizations_members_id" | "organizations_members_id">
 
   export type organizations_membersOrderByWithAggregationInput = {
+    organizations_members_id?: SortOrder
     organization_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
     _count?: organizations_membersCountOrderByAggregateInput
-    _avg?: organizations_membersAvgOrderByAggregateInput
     _max?: organizations_membersMaxOrderByAggregateInput
     _min?: organizations_membersMinOrderByAggregateInput
-    _sum?: organizations_membersSumOrderByAggregateInput
   }
 
   export type organizations_membersScalarWhereWithAggregatesInput = {
     AND?: organizations_membersScalarWhereWithAggregatesInput | organizations_membersScalarWhereWithAggregatesInput[]
     OR?: organizations_membersScalarWhereWithAggregatesInput[]
     NOT?: organizations_membersScalarWhereWithAggregatesInput | organizations_membersScalarWhereWithAggregatesInput[]
-    organization_id?: IntWithAggregatesFilter<"organizations_members"> | number
-    individual_id?: IntWithAggregatesFilter<"organizations_members"> | number
+    organizations_members_id?: StringWithAggregatesFilter<"organizations_members"> | string
+    organization_id?: StringWithAggregatesFilter<"organizations_members"> | string
+    entity_id?: StringWithAggregatesFilter<"organizations_members"> | string
   }
 
   export type sheetsWhereInput = {
     AND?: sheetsWhereInput | sheetsWhereInput[]
     OR?: sheetsWhereInput[]
     NOT?: sheetsWhereInput | sheetsWhereInput[]
-    sheet_id?: IntFilter<"sheets"> | number
-    sheet_author_id?: IntFilter<"sheets"> | number
+    sheet_id?: StringFilter<"sheets"> | string
+    sheet_author_id?: StringFilter<"sheets"> | string
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
-    sheet_data_id?: IntFilter<"sheets"> | number
+    sheet_data_id?: StringFilter<"sheets"> | string
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
-    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
   }
 
   export type sheetsOrderByWithRelationInput = {
@@ -26664,24 +25184,24 @@ export namespace Prisma {
     sheet_data_id?: SortOrder
     collections_sheets?: collections_sheetsOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
-    sheets_data?: sheets_dataOrderByWithRelationInput
     entities?: entitiesOrderByWithRelationInput
+    sheets_data?: sheets_dataOrderByWithRelationInput
   }
 
   export type sheetsWhereUniqueInput = Prisma.AtLeast<{
-    sheet_id?: number
+    sheet_id?: string
     AND?: sheetsWhereInput | sheetsWhereInput[]
     OR?: sheetsWhereInput[]
     NOT?: sheetsWhereInput | sheetsWhereInput[]
-    sheet_author_id?: IntFilter<"sheets"> | number
+    sheet_author_id?: StringFilter<"sheets"> | string
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
-    sheet_data_id?: IntFilter<"sheets"> | number
+    sheet_data_id?: StringFilter<"sheets"> | string
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
-    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
   }, "sheet_id" | "sheet_id">
 
   export type sheetsOrderByWithAggregationInput = {
@@ -26692,29 +25212,27 @@ export namespace Prisma {
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
     _count?: sheetsCountOrderByAggregateInput
-    _avg?: sheetsAvgOrderByAggregateInput
     _max?: sheetsMaxOrderByAggregateInput
     _min?: sheetsMinOrderByAggregateInput
-    _sum?: sheetsSumOrderByAggregateInput
   }
 
   export type sheetsScalarWhereWithAggregatesInput = {
     AND?: sheetsScalarWhereWithAggregatesInput | sheetsScalarWhereWithAggregatesInput[]
     OR?: sheetsScalarWhereWithAggregatesInput[]
     NOT?: sheetsScalarWhereWithAggregatesInput | sheetsScalarWhereWithAggregatesInput[]
-    sheet_id?: IntWithAggregatesFilter<"sheets"> | number
-    sheet_author_id?: IntWithAggregatesFilter<"sheets"> | number
+    sheet_id?: StringWithAggregatesFilter<"sheets"> | string
+    sheet_author_id?: StringWithAggregatesFilter<"sheets"> | string
     sheet_title?: StringWithAggregatesFilter<"sheets"> | string
     sheet_subject?: StringWithAggregatesFilter<"sheets"> | string
     sheet_filename?: StringWithAggregatesFilter<"sheets"> | string
-    sheet_data_id?: IntWithAggregatesFilter<"sheets"> | number
+    sheet_data_id?: StringWithAggregatesFilter<"sheets"> | string
   }
 
   export type sheets_dataWhereInput = {
     AND?: sheets_dataWhereInput | sheets_dataWhereInput[]
     OR?: sheets_dataWhereInput[]
     NOT?: sheets_dataWhereInput | sheets_dataWhereInput[]
-    sheet_data_id?: IntFilter<"sheets_data"> | number
+    sheet_data_id?: StringFilter<"sheets_data"> | string
     sheet_data?: BytesFilter<"sheets_data"> | Buffer
     sheets?: SheetsListRelationFilter
   }
@@ -26726,7 +25244,7 @@ export namespace Prisma {
   }
 
   export type sheets_dataWhereUniqueInput = Prisma.AtLeast<{
-    sheet_data_id?: number
+    sheet_data_id?: string
     AND?: sheets_dataWhereInput | sheets_dataWhereInput[]
     OR?: sheets_dataWhereInput[]
     NOT?: sheets_dataWhereInput | sheets_dataWhereInput[]
@@ -26738,17 +25256,15 @@ export namespace Prisma {
     sheet_data_id?: SortOrder
     sheet_data?: SortOrder
     _count?: sheets_dataCountOrderByAggregateInput
-    _avg?: sheets_dataAvgOrderByAggregateInput
     _max?: sheets_dataMaxOrderByAggregateInput
     _min?: sheets_dataMinOrderByAggregateInput
-    _sum?: sheets_dataSumOrderByAggregateInput
   }
 
   export type sheets_dataScalarWhereWithAggregatesInput = {
     AND?: sheets_dataScalarWhereWithAggregatesInput | sheets_dataScalarWhereWithAggregatesInput[]
     OR?: sheets_dataScalarWhereWithAggregatesInput[]
     NOT?: sheets_dataScalarWhereWithAggregatesInput | sheets_dataScalarWhereWithAggregatesInput[]
-    sheet_data_id?: IntWithAggregatesFilter<"sheets_data"> | number
+    sheet_data_id?: StringWithAggregatesFilter<"sheets_data"> | string
     sheet_data?: BytesWithAggregatesFilter<"sheets_data"> | Buffer
   }
 
@@ -26756,7 +25272,7 @@ export namespace Prisma {
     AND?: user_credentialsWhereInput | user_credentialsWhereInput[]
     OR?: user_credentialsWhereInput[]
     NOT?: user_credentialsWhereInput | user_credentialsWhereInput[]
-    user_id?: IntFilter<"user_credentials"> | number
+    user_id?: StringFilter<"user_credentials"> | string
     username?: StringFilter<"user_credentials"> | string
     user_password?: StringFilter<"user_credentials"> | string
     user_first_name?: StringNullableFilter<"user_credentials"> | string | null
@@ -26778,7 +25294,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsWhereUniqueInput = Prisma.AtLeast<{
-    user_id?: number
+    user_id?: string
     username?: string
     AND?: user_credentialsWhereInput | user_credentialsWhereInput[]
     OR?: user_credentialsWhereInput[]
@@ -26800,17 +25316,15 @@ export namespace Prisma {
     user_email?: SortOrderInput | SortOrder
     user_phone_number?: SortOrderInput | SortOrder
     _count?: user_credentialsCountOrderByAggregateInput
-    _avg?: user_credentialsAvgOrderByAggregateInput
     _max?: user_credentialsMaxOrderByAggregateInput
     _min?: user_credentialsMinOrderByAggregateInput
-    _sum?: user_credentialsSumOrderByAggregateInput
   }
 
   export type user_credentialsScalarWhereWithAggregatesInput = {
     AND?: user_credentialsScalarWhereWithAggregatesInput | user_credentialsScalarWhereWithAggregatesInput[]
     OR?: user_credentialsScalarWhereWithAggregatesInput[]
     NOT?: user_credentialsScalarWhereWithAggregatesInput | user_credentialsScalarWhereWithAggregatesInput[]
-    user_id?: IntWithAggregatesFilter<"user_credentials"> | number
+    user_id?: StringWithAggregatesFilter<"user_credentials"> | string
     username?: StringWithAggregatesFilter<"user_credentials"> | string
     user_password?: StringWithAggregatesFilter<"user_credentials"> | string
     user_first_name?: StringNullableWithAggregatesFilter<"user_credentials"> | string | null
@@ -26823,12 +25337,12 @@ export namespace Prisma {
     AND?: videosWhereInput | videosWhereInput[]
     OR?: videosWhereInput[]
     NOT?: videosWhereInput | videosWhereInput[]
-    video_id?: IntFilter<"videos"> | number
-    video_creator_id?: IntFilter<"videos"> | number
+    video_id?: StringFilter<"videos"> | string
+    video_creator_id?: StringFilter<"videos"> | string
     video_title?: StringFilter<"videos"> | string
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
-    video_data_id?: IntFilter<"videos"> | number
+    video_data_id?: StringFilter<"videos"> | string
     collections_videos?: Collections_videosListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -26849,15 +25363,15 @@ export namespace Prisma {
   }
 
   export type videosWhereUniqueInput = Prisma.AtLeast<{
-    video_id?: number
+    video_id?: string
     AND?: videosWhereInput | videosWhereInput[]
     OR?: videosWhereInput[]
     NOT?: videosWhereInput | videosWhereInput[]
-    video_creator_id?: IntFilter<"videos"> | number
+    video_creator_id?: StringFilter<"videos"> | string
     video_title?: StringFilter<"videos"> | string
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
-    video_data_id?: IntFilter<"videos"> | number
+    video_data_id?: StringFilter<"videos"> | string
     collections_videos?: Collections_videosListRelationFilter
     entities_videos?: Entities_videosListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -26872,29 +25386,27 @@ export namespace Prisma {
     video_filename?: SortOrder
     video_data_id?: SortOrder
     _count?: videosCountOrderByAggregateInput
-    _avg?: videosAvgOrderByAggregateInput
     _max?: videosMaxOrderByAggregateInput
     _min?: videosMinOrderByAggregateInput
-    _sum?: videosSumOrderByAggregateInput
   }
 
   export type videosScalarWhereWithAggregatesInput = {
     AND?: videosScalarWhereWithAggregatesInput | videosScalarWhereWithAggregatesInput[]
     OR?: videosScalarWhereWithAggregatesInput[]
     NOT?: videosScalarWhereWithAggregatesInput | videosScalarWhereWithAggregatesInput[]
-    video_id?: IntWithAggregatesFilter<"videos"> | number
-    video_creator_id?: IntWithAggregatesFilter<"videos"> | number
+    video_id?: StringWithAggregatesFilter<"videos"> | string
+    video_creator_id?: StringWithAggregatesFilter<"videos"> | string
     video_title?: StringWithAggregatesFilter<"videos"> | string
     video_description?: StringWithAggregatesFilter<"videos"> | string
     video_filename?: StringWithAggregatesFilter<"videos"> | string
-    video_data_id?: IntWithAggregatesFilter<"videos"> | number
+    video_data_id?: StringWithAggregatesFilter<"videos"> | string
   }
 
   export type videos_dataWhereInput = {
     AND?: videos_dataWhereInput | videos_dataWhereInput[]
     OR?: videos_dataWhereInput[]
     NOT?: videos_dataWhereInput | videos_dataWhereInput[]
-    video_data_id?: IntFilter<"videos_data"> | number
+    video_data_id?: StringFilter<"videos_data"> | string
     video_data?: BytesFilter<"videos_data"> | Buffer
     videos?: VideosListRelationFilter
   }
@@ -26906,7 +25418,7 @@ export namespace Prisma {
   }
 
   export type videos_dataWhereUniqueInput = Prisma.AtLeast<{
-    video_data_id?: number
+    video_data_id?: string
     AND?: videos_dataWhereInput | videos_dataWhereInput[]
     OR?: videos_dataWhereInput[]
     NOT?: videos_dataWhereInput | videos_dataWhereInput[]
@@ -26918,136 +25430,115 @@ export namespace Prisma {
     video_data_id?: SortOrder
     video_data?: SortOrder
     _count?: videos_dataCountOrderByAggregateInput
-    _avg?: videos_dataAvgOrderByAggregateInput
     _max?: videos_dataMaxOrderByAggregateInput
     _min?: videos_dataMinOrderByAggregateInput
-    _sum?: videos_dataSumOrderByAggregateInput
   }
 
   export type videos_dataScalarWhereWithAggregatesInput = {
     AND?: videos_dataScalarWhereWithAggregatesInput | videos_dataScalarWhereWithAggregatesInput[]
     OR?: videos_dataScalarWhereWithAggregatesInput[]
     NOT?: videos_dataScalarWhereWithAggregatesInput | videos_dataScalarWhereWithAggregatesInput[]
-    video_data_id?: IntWithAggregatesFilter<"videos_data"> | number
+    video_data_id?: StringWithAggregatesFilter<"videos_data"> | string
     video_data?: BytesWithAggregatesFilter<"videos_data"> | Buffer
   }
 
   export type affiliates_relationsCreateInput = {
-    affiliate_id_1: number
-    affiliate_type_1: number
-    affiliate_id_2: number
-    affiliate_type_2: number
+    affiliate_relation_id: string
+    affiliate_id_1: string
+    affiliate_id_2: string
   }
 
   export type affiliates_relationsUncheckedCreateInput = {
-    affiliate_relation_id?: number
-    affiliate_id_1: number
-    affiliate_type_1: number
-    affiliate_id_2: number
-    affiliate_type_2: number
+    affiliate_relation_id: string
+    affiliate_id_1: string
+    affiliate_id_2: string
   }
 
   export type affiliates_relationsUpdateInput = {
-    affiliate_id_1?: IntFieldUpdateOperationsInput | number
-    affiliate_type_1?: IntFieldUpdateOperationsInput | number
-    affiliate_id_2?: IntFieldUpdateOperationsInput | number
-    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+    affiliate_relation_id?: StringFieldUpdateOperationsInput | string
+    affiliate_id_1?: StringFieldUpdateOperationsInput | string
+    affiliate_id_2?: StringFieldUpdateOperationsInput | string
   }
 
   export type affiliates_relationsUncheckedUpdateInput = {
-    affiliate_relation_id?: IntFieldUpdateOperationsInput | number
-    affiliate_id_1?: IntFieldUpdateOperationsInput | number
-    affiliate_type_1?: IntFieldUpdateOperationsInput | number
-    affiliate_id_2?: IntFieldUpdateOperationsInput | number
-    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+    affiliate_relation_id?: StringFieldUpdateOperationsInput | string
+    affiliate_id_1?: StringFieldUpdateOperationsInput | string
+    affiliate_id_2?: StringFieldUpdateOperationsInput | string
   }
 
   export type affiliates_relationsCreateManyInput = {
-    affiliate_relation_id?: number
-    affiliate_id_1: number
-    affiliate_type_1: number
-    affiliate_id_2: number
-    affiliate_type_2: number
+    affiliate_relation_id: string
+    affiliate_id_1: string
+    affiliate_id_2: string
   }
 
   export type affiliates_relationsUpdateManyMutationInput = {
-    affiliate_id_1?: IntFieldUpdateOperationsInput | number
-    affiliate_type_1?: IntFieldUpdateOperationsInput | number
-    affiliate_id_2?: IntFieldUpdateOperationsInput | number
-    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+    affiliate_relation_id?: StringFieldUpdateOperationsInput | string
+    affiliate_id_1?: StringFieldUpdateOperationsInput | string
+    affiliate_id_2?: StringFieldUpdateOperationsInput | string
   }
 
   export type affiliates_relationsUncheckedUpdateManyInput = {
-    affiliate_relation_id?: IntFieldUpdateOperationsInput | number
-    affiliate_id_1?: IntFieldUpdateOperationsInput | number
-    affiliate_type_1?: IntFieldUpdateOperationsInput | number
-    affiliate_id_2?: IntFieldUpdateOperationsInput | number
-    affiliate_type_2?: IntFieldUpdateOperationsInput | number
+    affiliate_relation_id?: StringFieldUpdateOperationsInput | string
+    affiliate_id_1?: StringFieldUpdateOperationsInput | string
+    affiliate_id_2?: StringFieldUpdateOperationsInput | string
   }
 
   export type collectionsCreateInput = {
+    collection_id: string
     collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
+    entities: entitiesCreateNestedOneWithoutCollectionsInput
     collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
     collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
   }
 
   export type collectionsUncheckedCreateInput = {
-    collection_id?: number
+    collection_id: string
     collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
   }
 
   export type collectionsUpdateInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutCollectionsNestedInput
     collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
     collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
   }
 
   export type collectionsUncheckedUpdateInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
   }
 
   export type collectionsCreateManyInput = {
-    collection_id?: number
+    collection_id: string
     collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
   }
 
   export type collectionsUpdateManyMutationInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type collectionsUncheckedUpdateManyInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type collections_imagesCreateInput = {
+    collections_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27056,15 +25547,16 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedCreateInput = {
-    collections_images_id?: number
-    collection_id: number
-    image_id: number
+    collections_images_id: string
+    collection_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_imagesUpdateInput = {
+    collections_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27073,39 +25565,41 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedUpdateInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_imagesCreateManyInput = {
-    collections_images_id?: number
-    collection_id: number
-    image_id: number
+    collections_images_id: string
+    collection_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_imagesUpdateManyMutationInput = {
+    collections_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_imagesUncheckedUpdateManyInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsCreateInput = {
+    collections_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27114,15 +25608,16 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedCreateInput = {
-    collections_sheets_id?: number
-    collection_id: number
-    sheet_id: number
+    collections_sheets_id: string
+    collection_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_sheetsUpdateInput = {
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27131,39 +25626,41 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedUpdateInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsCreateManyInput = {
-    collections_sheets_id?: number
-    collection_id: number
-    sheet_id: number
+    collections_sheets_id: string
+    collection_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_sheetsUpdateManyMutationInput = {
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsUncheckedUpdateManyInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosCreateInput = {
+    collections_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27172,15 +25669,16 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedCreateInput = {
-    collections_videos_id?: number
-    collection_id: number
-    video_id: number
+    collections_videos_id: string
+    collection_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_videosUpdateInput = {
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27189,107 +25687,116 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedUpdateInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosCreateManyInput = {
-    collections_videos_id?: number
-    collection_id: number
-    video_id: number
+    collections_videos_id: string
+    collection_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_videosUpdateManyMutationInput = {
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosUncheckedUpdateManyInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entitiesCreateInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUpdateInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesCreateManyInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
   }
 
   export type entitiesUpdateManyMutationInput = {
-
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type entitiesUncheckedUpdateManyInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type entities_imagesCreateInput = {
+    entities_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27298,15 +25805,16 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedCreateInput = {
-    entities_images_id?: number
-    entity_id: number
-    image_id: number
+    entities_images_id: string
+    entity_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_imagesUpdateInput = {
+    entities_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27315,103 +25823,96 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedUpdateInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_imagesCreateManyInput = {
-    entities_images_id?: number
-    entity_id: number
-    image_id: number
+    entities_images_id: string
+    entity_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_imagesUpdateManyMutationInput = {
+    entities_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_imagesUncheckedUpdateManyInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_referencesCreateInput = {
+    reference_id: string
     title: string
     author: string
     url: string
-    groups?: groupsCreateNestedOneWithoutEntities_referencesInput
-    individuals?: individualsCreateNestedOneWithoutEntities_referencesInput
-    organizations?: organizationsCreateNestedOneWithoutEntities_referencesInput
+    entities: entitiesCreateNestedOneWithoutEntities_referencesInput
   }
 
   export type entities_referencesUncheckedCreateInput = {
-    reference_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    reference_id: string
+    entity_id: string
     title: string
     author: string
     url: string
   }
 
   export type entities_referencesUpdateInput = {
+    reference_id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    groups?: groupsUpdateOneWithoutEntities_referencesNestedInput
-    individuals?: individualsUpdateOneWithoutEntities_referencesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntities_referencesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutEntities_referencesNestedInput
   }
 
   export type entities_referencesUncheckedUpdateInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    reference_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_referencesCreateManyInput = {
-    reference_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    reference_id: string
+    entity_id: string
     title: string
     author: string
     url: string
   }
 
   export type entities_referencesUpdateManyMutationInput = {
+    reference_id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_referencesUncheckedUpdateManyInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    reference_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_sheetsCreateInput = {
+    entities_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27420,15 +25921,16 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedCreateInput = {
-    entities_sheets_id?: number
-    entity_id: number
-    sheet_id: number
+    entities_sheets_id: string
+    entity_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_sheetsUpdateInput = {
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27437,39 +25939,41 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedUpdateInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_sheetsCreateManyInput = {
-    entities_sheets_id?: number
-    entity_id: number
-    sheet_id: number
+    entities_sheets_id: string
+    entity_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_sheetsUpdateManyMutationInput = {
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_sheetsUncheckedUpdateManyInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosCreateInput = {
+    entities_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -27478,15 +25982,16 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedCreateInput = {
-    entities_videos_id?: number
-    entity_id: number
-    video_id: number
+    entities_videos_id: string
+    entity_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_videosUpdateInput = {
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27495,90 +26000,81 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedUpdateInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosCreateManyInput = {
-    entities_videos_id?: number
-    entity_id: number
-    video_id: number
+    entities_videos_id: string
+    entity_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_videosUpdateManyMutationInput = {
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosUncheckedUpdateManyInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type groupsCreateInput = {
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutGroupsInput
-    entities?: entitiesCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutGroupsInput
     groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
   }
 
   export type groupsUncheckedCreateInput = {
-    group_id?: number
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutGroupsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutGroupsInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type groupsUpdateInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutGroupsNestedInput
     groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
   }
 
   export type groupsUncheckedUpdateInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutGroupsNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
   export type groupsCreateManyInput = {
-    group_id?: number
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue?: string | null
@@ -27587,6 +26083,7 @@ export namespace Prisma {
   }
 
   export type groupsUpdateManyMutationInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27595,7 +26092,7 @@ export namespace Prisma {
   }
 
   export type groupsUncheckedUpdateManyInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27604,40 +26101,47 @@ export namespace Prisma {
   }
 
   export type groups_membersCreateInput = {
+    groups_members_id: string
+    entities: entitiesCreateNestedOneWithoutGroups_membersInput
     groups: groupsCreateNestedOneWithoutGroups_membersInput
-    individuals: individualsCreateNestedOneWithoutGroups_membersInput
   }
 
   export type groups_membersUncheckedCreateInput = {
-    group_id: number
-    individual_id: number
+    groups_members_id: string
+    group_id: string
+    entity_id: string
   }
 
   export type groups_membersUpdateInput = {
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutGroups_membersNestedInput
     groups?: groupsUpdateOneRequiredWithoutGroups_membersNestedInput
-    individuals?: individualsUpdateOneRequiredWithoutGroups_membersNestedInput
   }
 
   export type groups_membersUncheckedUpdateInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: IntFieldUpdateOperationsInput | number
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    group_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type groups_membersCreateManyInput = {
-    group_id: number
-    individual_id: number
+    groups_members_id: string
+    group_id: string
+    entity_id: string
   }
 
   export type groups_membersUpdateManyMutationInput = {
-
+    groups_members_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type groups_membersUncheckedUpdateManyInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: IntFieldUpdateOperationsInput | number
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    group_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type imagesCreateInput = {
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -27648,17 +26152,18 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedCreateInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutImagesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutImagesInput
   }
 
   export type imagesUpdateInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -27669,135 +26174,119 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutImagesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutImagesNestedInput
   }
 
   export type imagesCreateManyInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
   }
 
   export type imagesUpdateManyMutationInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type imagesUncheckedUpdateManyInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type images_dataCreateInput = {
+    image_data_id: string
     image_data: Buffer
     images?: imagesCreateNestedManyWithoutImages_dataInput
   }
 
   export type images_dataUncheckedCreateInput = {
-    image_data_id?: number
+    image_data_id: string
     image_data: Buffer
     images?: imagesUncheckedCreateNestedManyWithoutImages_dataInput
   }
 
   export type images_dataUpdateInput = {
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
     images?: imagesUpdateManyWithoutImages_dataNestedInput
   }
 
   export type images_dataUncheckedUpdateInput = {
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
     images?: imagesUncheckedUpdateManyWithoutImages_dataNestedInput
   }
 
   export type images_dataCreateManyInput = {
-    image_data_id?: number
+    image_data_id: string
     image_data: Buffer
   }
 
   export type images_dataUpdateManyMutationInput = {
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type images_dataUncheckedUpdateManyInput = {
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type individualsCreateInput = {
-    individual_userName: string
+    individual_username: string
     individual_name: string
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
+    user_credentials: user_credentialsCreateNestedOneWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateInput = {
-    individual_id?: number
-    individual_userName: string
+    individual_id: string
+    individual_username: string
     individual_name: string
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUpdateInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
     user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_id?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsCreateManyInput = {
-    individual_id?: number
-    individual_userName: string
+    individual_id: string
+    individual_username: string
     individual_name: string
     individual_currentIssue?: string | null
     individual_roles?: string | null
@@ -27805,7 +26294,7 @@ export namespace Prisma {
   }
 
   export type individualsUpdateManyMutationInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27813,8 +26302,8 @@ export namespace Prisma {
   }
 
   export type individualsUncheckedUpdateManyInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_id?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27822,57 +26311,47 @@ export namespace Prisma {
   }
 
   export type organizationsCreateInput = {
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutOrganizationsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsUncheckedCreateInput = {
-    organization_id?: number
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutOrganizationsInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsUpdateInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutOrganizationsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsUncheckedUpdateInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutOrganizationsNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsCreateManyInput = {
-    organization_id?: number
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue?: string | null
@@ -27881,6 +26360,7 @@ export namespace Prisma {
   }
 
   export type organizationsUpdateManyMutationInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27889,7 +26369,7 @@ export namespace Prisma {
   }
 
   export type organizationsUncheckedUpdateManyInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27898,142 +26378,155 @@ export namespace Prisma {
   }
 
   export type organizations_membersCreateInput = {
-    individuals: individualsCreateNestedOneWithoutOrganizations_membersInput
+    organizations_members_id: string
+    entities: entitiesCreateNestedOneWithoutOrganizations_membersInput
     organizations: organizationsCreateNestedOneWithoutOrganizations_membersInput
   }
 
   export type organizations_membersUncheckedCreateInput = {
-    organization_id: number
-    individual_id: number
+    organizations_members_id: string
+    organization_id: string
+    entity_id: string
   }
 
   export type organizations_membersUpdateInput = {
-    individuals?: individualsUpdateOneRequiredWithoutOrganizations_membersNestedInput
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutOrganizations_membersNestedInput
     organizations?: organizationsUpdateOneRequiredWithoutOrganizations_membersNestedInput
   }
 
   export type organizations_membersUncheckedUpdateInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: IntFieldUpdateOperationsInput | number
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    organization_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type organizations_membersCreateManyInput = {
-    organization_id: number
-    individual_id: number
+    organizations_members_id: string
+    organization_id: string
+    entity_id: string
   }
 
   export type organizations_membersUpdateManyMutationInput = {
-
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type organizations_membersUncheckedUpdateManyInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: IntFieldUpdateOperationsInput | number
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    organization_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheetsCreateInput = {
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
-    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
   export type sheetsUpdateInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
-    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
   export type sheetsCreateManyInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
   }
 
   export type sheetsUpdateManyMutationInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheetsUncheckedUpdateManyInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheets_dataCreateInput = {
+    sheet_data_id: string
     sheet_data: Buffer
     sheets?: sheetsCreateNestedManyWithoutSheets_dataInput
   }
 
   export type sheets_dataUncheckedCreateInput = {
-    sheet_data_id?: number
+    sheet_data_id: string
     sheet_data: Buffer
     sheets?: sheetsUncheckedCreateNestedManyWithoutSheets_dataInput
   }
 
   export type sheets_dataUpdateInput = {
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
     sheets?: sheetsUpdateManyWithoutSheets_dataNestedInput
   }
 
   export type sheets_dataUncheckedUpdateInput = {
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
     sheets?: sheetsUncheckedUpdateManyWithoutSheets_dataNestedInput
   }
 
   export type sheets_dataCreateManyInput = {
-    sheet_data_id?: number
+    sheet_data_id: string
     sheet_data: Buffer
   }
 
   export type sheets_dataUpdateManyMutationInput = {
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type sheets_dataUncheckedUpdateManyInput = {
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type user_credentialsCreateInput = {
+    user_id: string
     username: string
     user_password: string
     user_first_name?: string | null
@@ -28044,7 +26537,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUncheckedCreateInput = {
-    user_id?: number
+    user_id: string
     username: string
     user_password: string
     user_first_name?: string | null
@@ -28055,6 +26548,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUpdateInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28065,7 +26559,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUncheckedUpdateInput = {
-    user_id?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28076,7 +26570,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsCreateManyInput = {
-    user_id?: number
+    user_id: string
     username: string
     user_password: string
     user_first_name?: string | null
@@ -28086,6 +26580,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUpdateManyMutationInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28095,7 +26590,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUncheckedUpdateManyInput = {
-    user_id?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28105,6 +26600,7 @@ export namespace Prisma {
   }
 
   export type videosCreateInput = {
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -28115,17 +26611,18 @@ export namespace Prisma {
   }
 
   export type videosUncheckedCreateInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutVideosInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutVideosInput
   }
 
   export type videosUpdateInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -28136,146 +26633,78 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUncheckedUpdateManyWithoutVideosNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutVideosNestedInput
   }
 
   export type videosCreateManyInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
   }
 
   export type videosUpdateManyMutationInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type videosUncheckedUpdateManyInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type videos_dataCreateInput = {
+    video_data_id: string
     video_data: Buffer
     videos?: videosCreateNestedManyWithoutVideos_dataInput
   }
 
   export type videos_dataUncheckedCreateInput = {
-    video_data_id?: number
+    video_data_id: string
     video_data: Buffer
     videos?: videosUncheckedCreateNestedManyWithoutVideos_dataInput
   }
 
   export type videos_dataUpdateInput = {
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
     videos?: videosUpdateManyWithoutVideos_dataNestedInput
   }
 
   export type videos_dataUncheckedUpdateInput = {
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
     videos?: videosUncheckedUpdateManyWithoutVideos_dataNestedInput
   }
 
   export type videos_dataCreateManyInput = {
-    video_data_id?: number
+    video_data_id: string
     video_data: Buffer
   }
 
   export type videos_dataUpdateManyMutationInput = {
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type videos_dataUncheckedUpdateManyInput = {
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput = {
-    affiliate_id_1: number
-    affiliate_id_2: number
-  }
-
-  export type affiliates_relationsCountOrderByAggregateInput = {
-    affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
-    affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
-  }
-
-  export type affiliates_relationsAvgOrderByAggregateInput = {
-    affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
-    affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
-  }
-
-  export type affiliates_relationsMaxOrderByAggregateInput = {
-    affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
-    affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
-  }
-
-  export type affiliates_relationsMinOrderByAggregateInput = {
-    affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
-    affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
-  }
-
-  export type affiliates_relationsSumOrderByAggregateInput = {
-    affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_type_1?: SortOrder
-    affiliate_id_2?: SortOrder
-    affiliate_type_2?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -28292,30 +26721,49 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput = {
+    affiliate_id_1: string
+    affiliate_id_2: string
   }
 
-  export type IndividualsNullableRelationFilter = {
-    is?: individualsWhereInput | null
-    isNot?: individualsWhereInput | null
+  export type affiliates_relationsCountOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_id_2?: SortOrder
   }
 
-  export type OrganizationsNullableRelationFilter = {
-    is?: organizationsWhereInput | null
-    isNot?: organizationsWhereInput | null
+  export type affiliates_relationsMaxOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_id_2?: SortOrder
   }
 
-  export type GroupsNullableRelationFilter = {
-    is?: groupsWhereInput | null
-    isNot?: groupsWhereInput | null
+  export type affiliates_relationsMinOrderByAggregateInput = {
+    affiliate_relation_id?: SortOrder
+    affiliate_id_1?: SortOrder
+    affiliate_id_2?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type EntitiesRelationFilter = {
+    is?: entitiesWhereInput
+    isNot?: entitiesWhereInput
   }
 
   export type Collections_imagesListRelationFilter = {
@@ -28336,11 +26784,6 @@ export namespace Prisma {
     none?: collections_videosWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type collections_imagesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -28356,72 +26799,19 @@ export namespace Prisma {
   export type collectionsCountOrderByAggregateInput = {
     collection_id?: SortOrder
     collection_name?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
-  }
-
-  export type collectionsAvgOrderByAggregateInput = {
-    collection_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type collectionsMaxOrderByAggregateInput = {
     collection_id?: SortOrder
     collection_name?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type collectionsMinOrderByAggregateInput = {
     collection_id?: SortOrder
     collection_name?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
-  }
-
-  export type collectionsSumOrderByAggregateInput = {
-    collection_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
+    entity_id?: SortOrder
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -28461,6 +26851,11 @@ export namespace Prisma {
     isNot?: imagesWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type collections_imagesCountOrderByAggregateInput = {
     collections_images_id?: SortOrder
     collection_id?: SortOrder
@@ -28468,12 +26863,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type collections_imagesAvgOrderByAggregateInput = {
-    collections_images_id?: SortOrder
-    collection_id?: SortOrder
-    image_id?: SortOrder
   }
 
   export type collections_imagesMaxOrderByAggregateInput = {
@@ -28492,12 +26881,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type collections_imagesSumOrderByAggregateInput = {
-    collections_images_id?: SortOrder
-    collection_id?: SortOrder
-    image_id?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -28550,12 +26933,6 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type collections_sheetsAvgOrderByAggregateInput = {
-    collections_sheets_id?: SortOrder
-    collection_id?: SortOrder
-    sheet_id?: SortOrder
-  }
-
   export type collections_sheetsMaxOrderByAggregateInput = {
     collections_sheets_id?: SortOrder
     collection_id?: SortOrder
@@ -28574,12 +26951,6 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type collections_sheetsSumOrderByAggregateInput = {
-    collections_sheets_id?: SortOrder
-    collection_id?: SortOrder
-    sheet_id?: SortOrder
-  }
-
   export type VideosRelationFilter = {
     is?: videosWhereInput
     isNot?: videosWhereInput
@@ -28592,12 +26963,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type collections_videosAvgOrderByAggregateInput = {
-    collections_videos_id?: SortOrder
-    collection_id?: SortOrder
-    video_id?: SortOrder
   }
 
   export type collections_videosMaxOrderByAggregateInput = {
@@ -28618,16 +26983,33 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type collections_videosSumOrderByAggregateInput = {
-    collections_videos_id?: SortOrder
-    collection_id?: SortOrder
-    video_id?: SortOrder
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type CollectionsListRelationFilter = {
+    every?: collectionsWhereInput
+    some?: collectionsWhereInput
+    none?: collectionsWhereInput
   }
 
   export type Entities_imagesListRelationFilter = {
     every?: entities_imagesWhereInput
     some?: entities_imagesWhereInput
     none?: entities_imagesWhereInput
+  }
+
+  export type Entities_referencesListRelationFilter = {
+    every?: entities_referencesWhereInput
+    some?: entities_referencesWhereInput
+    none?: entities_referencesWhereInput
   }
 
   export type Entities_sheetsListRelationFilter = {
@@ -28642,10 +27024,22 @@ export namespace Prisma {
     none?: entities_videosWhereInput
   }
 
+  export type Groups_membersListRelationFilter = {
+    every?: groups_membersWhereInput
+    some?: groups_membersWhereInput
+    none?: groups_membersWhereInput
+  }
+
   export type ImagesListRelationFilter = {
     every?: imagesWhereInput
     some?: imagesWhereInput
     none?: imagesWhereInput
+  }
+
+  export type Organizations_membersListRelationFilter = {
+    every?: organizations_membersWhereInput
+    some?: organizations_membersWhereInput
+    none?: organizations_membersWhereInput
   }
 
   export type SheetsListRelationFilter = {
@@ -28660,7 +27054,15 @@ export namespace Prisma {
     none?: videosWhereInput
   }
 
+  export type collectionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type entities_imagesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type entities_referencesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28672,7 +27074,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type groups_membersOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type imagesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type organizations_membersOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28686,42 +27096,41 @@ export namespace Prisma {
 
   export type entitiesCountOrderByAggregateInput = {
     entity_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_type?: SortOrder
   }
 
   export type entitiesAvgOrderByAggregateInput = {
-    entity_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_type?: SortOrder
   }
 
   export type entitiesMaxOrderByAggregateInput = {
     entity_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_type?: SortOrder
   }
 
   export type entitiesMinOrderByAggregateInput = {
     entity_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_type?: SortOrder
   }
 
   export type entitiesSumOrderByAggregateInput = {
-    entity_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_type?: SortOrder
   }
 
-  export type EntitiesRelationFilter = {
-    is?: entitiesWhereInput
-    isNot?: entitiesWhereInput
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type entities_imagesCountOrderByAggregateInput = {
@@ -28731,12 +27140,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type entities_imagesAvgOrderByAggregateInput = {
-    entities_images_id?: SortOrder
-    entity_id?: SortOrder
-    image_id?: SortOrder
   }
 
   export type entities_imagesMaxOrderByAggregateInput = {
@@ -28757,34 +27160,17 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type entities_imagesSumOrderByAggregateInput = {
-    entities_images_id?: SortOrder
-    entity_id?: SortOrder
-    image_id?: SortOrder
-  }
-
   export type entities_referencesCountOrderByAggregateInput = {
     reference_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_id?: SortOrder
     title?: SortOrder
     author?: SortOrder
     url?: SortOrder
   }
 
-  export type entities_referencesAvgOrderByAggregateInput = {
-    reference_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
-  }
-
   export type entities_referencesMaxOrderByAggregateInput = {
     reference_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_id?: SortOrder
     title?: SortOrder
     author?: SortOrder
     url?: SortOrder
@@ -28792,19 +27178,10 @@ export namespace Prisma {
 
   export type entities_referencesMinOrderByAggregateInput = {
     reference_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
+    entity_id?: SortOrder
     title?: SortOrder
     author?: SortOrder
     url?: SortOrder
-  }
-
-  export type entities_referencesSumOrderByAggregateInput = {
-    reference_id?: SortOrder
-    individual_id?: SortOrder
-    group_id?: SortOrder
-    organization_id?: SortOrder
   }
 
   export type entities_sheetsCountOrderByAggregateInput = {
@@ -28814,12 +27191,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type entities_sheetsAvgOrderByAggregateInput = {
-    entities_sheets_id?: SortOrder
-    entity_id?: SortOrder
-    sheet_id?: SortOrder
   }
 
   export type entities_sheetsMaxOrderByAggregateInput = {
@@ -28840,12 +27211,6 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type entities_sheetsSumOrderByAggregateInput = {
-    entities_sheets_id?: SortOrder
-    entity_id?: SortOrder
-    sheet_id?: SortOrder
-  }
-
   export type entities_videosCountOrderByAggregateInput = {
     entities_videos_id?: SortOrder
     entity_id?: SortOrder
@@ -28853,12 +27218,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type entities_videosAvgOrderByAggregateInput = {
-    entities_videos_id?: SortOrder
-    entity_id?: SortOrder
-    video_id?: SortOrder
   }
 
   export type entities_videosMaxOrderByAggregateInput = {
@@ -28879,12 +27238,6 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
-  export type entities_videosSumOrderByAggregateInput = {
-    entities_videos_id?: SortOrder
-    entity_id?: SortOrder
-    video_id?: SortOrder
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -28899,46 +27252,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type CollectionsListRelationFilter = {
-    every?: collectionsWhereInput
-    some?: collectionsWhereInput
-    none?: collectionsWhereInput
-  }
-
-  export type EntitiesListRelationFilter = {
-    every?: entitiesWhereInput
-    some?: entitiesWhereInput
-    none?: entitiesWhereInput
-  }
-
-  export type Entities_referencesListRelationFilter = {
-    every?: entities_referencesWhereInput
-    some?: entities_referencesWhereInput
-    none?: entities_referencesWhereInput
-  }
-
-  export type Groups_membersListRelationFilter = {
-    every?: groups_membersWhereInput
-    some?: groups_membersWhereInput
-    none?: groups_membersWhereInput
-  }
-
-  export type collectionsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type entitiesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type entities_referencesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type groups_membersOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type groupsCountOrderByAggregateInput = {
     group_id?: SortOrder
     group_handle?: SortOrder
@@ -28946,10 +27259,6 @@ export namespace Prisma {
     group_currentIssue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
-  }
-
-  export type groupsAvgOrderByAggregateInput = {
-    group_id?: SortOrder
   }
 
   export type groupsMaxOrderByAggregateInput = {
@@ -28968,10 +27277,6 @@ export namespace Prisma {
     group_currentIssue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
-  }
-
-  export type groupsSumOrderByAggregateInput = {
-    group_id?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -28996,39 +27301,27 @@ export namespace Prisma {
     isNot?: groupsWhereInput
   }
 
-  export type IndividualsRelationFilter = {
-    is?: individualsWhereInput
-    isNot?: individualsWhereInput
-  }
-
-  export type groups_membersGroup_idIndividual_idCompoundUniqueInput = {
-    group_id: number
-    individual_id: number
+  export type groups_membersGroup_idEntity_idCompoundUniqueInput = {
+    group_id: string
+    entity_id: string
   }
 
   export type groups_membersCountOrderByAggregateInput = {
+    groups_members_id?: SortOrder
     group_id?: SortOrder
-    individual_id?: SortOrder
-  }
-
-  export type groups_membersAvgOrderByAggregateInput = {
-    group_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type groups_membersMaxOrderByAggregateInput = {
+    groups_members_id?: SortOrder
     group_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type groups_membersMinOrderByAggregateInput = {
+    groups_members_id?: SortOrder
     group_id?: SortOrder
-    individual_id?: SortOrder
-  }
-
-  export type groups_membersSumOrderByAggregateInput = {
-    group_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type Images_dataRelationFilter = {
@@ -29042,12 +27335,6 @@ export namespace Prisma {
     image_title?: SortOrder
     image_description?: SortOrder
     image_filename?: SortOrder
-    image_data_id?: SortOrder
-  }
-
-  export type imagesAvgOrderByAggregateInput = {
-    image_id?: SortOrder
-    image_creator_id?: SortOrder
     image_data_id?: SortOrder
   }
 
@@ -29069,12 +27356,6 @@ export namespace Prisma {
     image_data_id?: SortOrder
   }
 
-  export type imagesSumOrderByAggregateInput = {
-    image_id?: SortOrder
-    image_creator_id?: SortOrder
-    image_data_id?: SortOrder
-  }
-
   export type BytesFilter<$PrismaModel = never> = {
     equals?: Buffer | BytesFieldRefInput<$PrismaModel>
     in?: Buffer[]
@@ -29087,10 +27368,6 @@ export namespace Prisma {
     image_data?: SortOrder
   }
 
-  export type images_dataAvgOrderByAggregateInput = {
-    image_data_id?: SortOrder
-  }
-
   export type images_dataMaxOrderByAggregateInput = {
     image_data_id?: SortOrder
     image_data?: SortOrder
@@ -29099,10 +27376,6 @@ export namespace Prisma {
   export type images_dataMinOrderByAggregateInput = {
     image_data_id?: SortOrder
     image_data?: SortOrder
-  }
-
-  export type images_dataSumOrderByAggregateInput = {
-    image_data_id?: SortOrder
   }
 
   export type BytesWithAggregatesFilter<$PrismaModel = never> = {
@@ -29120,32 +27393,18 @@ export namespace Prisma {
     isNot?: user_credentialsWhereInput
   }
 
-  export type Organizations_membersListRelationFilter = {
-    every?: organizations_membersWhereInput
-    some?: organizations_membersWhereInput
-    none?: organizations_membersWhereInput
-  }
-
-  export type organizations_membersOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type individualsCountOrderByAggregateInput = {
     individual_id?: SortOrder
-    individual_userName?: SortOrder
+    individual_username?: SortOrder
     individual_name?: SortOrder
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
   }
 
-  export type individualsAvgOrderByAggregateInput = {
-    individual_id?: SortOrder
-  }
-
   export type individualsMaxOrderByAggregateInput = {
     individual_id?: SortOrder
-    individual_userName?: SortOrder
+    individual_username?: SortOrder
     individual_name?: SortOrder
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
@@ -29154,15 +27413,11 @@ export namespace Prisma {
 
   export type individualsMinOrderByAggregateInput = {
     individual_id?: SortOrder
-    individual_userName?: SortOrder
+    individual_username?: SortOrder
     individual_name?: SortOrder
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
-  }
-
-  export type individualsSumOrderByAggregateInput = {
-    individual_id?: SortOrder
   }
 
   export type organizationsCountOrderByAggregateInput = {
@@ -29172,10 +27427,6 @@ export namespace Prisma {
     organization_currentIssue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
-  }
-
-  export type organizationsAvgOrderByAggregateInput = {
-    organization_id?: SortOrder
   }
 
   export type organizationsMaxOrderByAggregateInput = {
@@ -29196,43 +27447,27 @@ export namespace Prisma {
     organization_description?: SortOrder
   }
 
-  export type organizationsSumOrderByAggregateInput = {
-    organization_id?: SortOrder
-  }
-
   export type OrganizationsRelationFilter = {
     is?: organizationsWhereInput
     isNot?: organizationsWhereInput
   }
 
-  export type organizations_membersOrganization_idIndividual_idCompoundUniqueInput = {
-    organization_id: number
-    individual_id: number
-  }
-
   export type organizations_membersCountOrderByAggregateInput = {
+    organizations_members_id?: SortOrder
     organization_id?: SortOrder
-    individual_id?: SortOrder
-  }
-
-  export type organizations_membersAvgOrderByAggregateInput = {
-    organization_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type organizations_membersMaxOrderByAggregateInput = {
+    organizations_members_id?: SortOrder
     organization_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type organizations_membersMinOrderByAggregateInput = {
+    organizations_members_id?: SortOrder
     organization_id?: SortOrder
-    individual_id?: SortOrder
-  }
-
-  export type organizations_membersSumOrderByAggregateInput = {
-    organization_id?: SortOrder
-    individual_id?: SortOrder
+    entity_id?: SortOrder
   }
 
   export type Sheets_dataRelationFilter = {
@@ -29246,12 +27481,6 @@ export namespace Prisma {
     sheet_title?: SortOrder
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
-    sheet_data_id?: SortOrder
-  }
-
-  export type sheetsAvgOrderByAggregateInput = {
-    sheet_id?: SortOrder
-    sheet_author_id?: SortOrder
     sheet_data_id?: SortOrder
   }
 
@@ -29273,19 +27502,9 @@ export namespace Prisma {
     sheet_data_id?: SortOrder
   }
 
-  export type sheetsSumOrderByAggregateInput = {
-    sheet_id?: SortOrder
-    sheet_author_id?: SortOrder
-    sheet_data_id?: SortOrder
-  }
-
   export type sheets_dataCountOrderByAggregateInput = {
     sheet_data_id?: SortOrder
     sheet_data?: SortOrder
-  }
-
-  export type sheets_dataAvgOrderByAggregateInput = {
-    sheet_data_id?: SortOrder
   }
 
   export type sheets_dataMaxOrderByAggregateInput = {
@@ -29298,8 +27517,9 @@ export namespace Prisma {
     sheet_data?: SortOrder
   }
 
-  export type sheets_dataSumOrderByAggregateInput = {
-    sheet_data_id?: SortOrder
+  export type IndividualsNullableRelationFilter = {
+    is?: individualsWhereInput | null
+    isNot?: individualsWhereInput | null
   }
 
   export type user_credentialsCountOrderByAggregateInput = {
@@ -29310,10 +27530,6 @@ export namespace Prisma {
     user_last_name?: SortOrder
     user_email?: SortOrder
     user_phone_number?: SortOrder
-  }
-
-  export type user_credentialsAvgOrderByAggregateInput = {
-    user_id?: SortOrder
   }
 
   export type user_credentialsMaxOrderByAggregateInput = {
@@ -29336,10 +27552,6 @@ export namespace Prisma {
     user_phone_number?: SortOrder
   }
 
-  export type user_credentialsSumOrderByAggregateInput = {
-    user_id?: SortOrder
-  }
-
   export type Videos_dataRelationFilter = {
     is?: videos_dataWhereInput
     isNot?: videos_dataWhereInput
@@ -29351,12 +27563,6 @@ export namespace Prisma {
     video_title?: SortOrder
     video_description?: SortOrder
     video_filename?: SortOrder
-    video_data_id?: SortOrder
-  }
-
-  export type videosAvgOrderByAggregateInput = {
-    video_id?: SortOrder
-    video_creator_id?: SortOrder
     video_data_id?: SortOrder
   }
 
@@ -29378,19 +27584,9 @@ export namespace Prisma {
     video_data_id?: SortOrder
   }
 
-  export type videosSumOrderByAggregateInput = {
-    video_id?: SortOrder
-    video_creator_id?: SortOrder
-    video_data_id?: SortOrder
-  }
-
   export type videos_dataCountOrderByAggregateInput = {
     video_data_id?: SortOrder
     video_data?: SortOrder
-  }
-
-  export type videos_dataAvgOrderByAggregateInput = {
-    video_data_id?: SortOrder
   }
 
   export type videos_dataMaxOrderByAggregateInput = {
@@ -29403,34 +27599,14 @@ export namespace Prisma {
     video_data?: SortOrder
   }
 
-  export type videos_dataSumOrderByAggregateInput = {
-    video_data_id?: SortOrder
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type individualsCreateNestedOneWithoutCollectionsInput = {
-    create?: XOR<individualsCreateWithoutCollectionsInput, individualsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutCollectionsInput
-    connect?: individualsWhereUniqueInput
-  }
-
-  export type organizationsCreateNestedOneWithoutCollectionsInput = {
-    create?: XOR<organizationsCreateWithoutCollectionsInput, organizationsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutCollectionsInput
-    connect?: organizationsWhereUniqueInput
-  }
-
-  export type groupsCreateNestedOneWithoutCollectionsInput = {
-    create?: XOR<groupsCreateWithoutCollectionsInput, groupsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutCollectionsInput
-    connect?: groupsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutCollectionsInput = {
+    create?: XOR<entitiesCreateWithoutCollectionsInput, entitiesUncheckedCreateWithoutCollectionsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutCollectionsInput
+    connect?: entitiesWhereUniqueInput
   }
 
   export type collections_imagesCreateNestedManyWithoutCollectionsInput = {
@@ -29475,38 +27651,12 @@ export namespace Prisma {
     connect?: collections_videosWhereUniqueInput | collections_videosWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type individualsUpdateOneWithoutCollectionsNestedInput = {
-    create?: XOR<individualsCreateWithoutCollectionsInput, individualsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutCollectionsInput
-    upsert?: individualsUpsertWithoutCollectionsInput
-    disconnect?: individualsWhereInput | boolean
-    delete?: individualsWhereInput | boolean
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutCollectionsInput, individualsUpdateWithoutCollectionsInput>, individualsUncheckedUpdateWithoutCollectionsInput>
-  }
-
-  export type organizationsUpdateOneWithoutCollectionsNestedInput = {
-    create?: XOR<organizationsCreateWithoutCollectionsInput, organizationsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutCollectionsInput
-    upsert?: organizationsUpsertWithoutCollectionsInput
-    disconnect?: organizationsWhereInput | boolean
-    delete?: organizationsWhereInput | boolean
-    connect?: organizationsWhereUniqueInput
-    update?: XOR<XOR<organizationsUpdateToOneWithWhereWithoutCollectionsInput, organizationsUpdateWithoutCollectionsInput>, organizationsUncheckedUpdateWithoutCollectionsInput>
-  }
-
-  export type groupsUpdateOneWithoutCollectionsNestedInput = {
-    create?: XOR<groupsCreateWithoutCollectionsInput, groupsUncheckedCreateWithoutCollectionsInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutCollectionsInput
-    upsert?: groupsUpsertWithoutCollectionsInput
-    disconnect?: groupsWhereInput | boolean
-    delete?: groupsWhereInput | boolean
-    connect?: groupsWhereUniqueInput
-    update?: XOR<XOR<groupsUpdateToOneWithWhereWithoutCollectionsInput, groupsUpdateWithoutCollectionsInput>, groupsUncheckedUpdateWithoutCollectionsInput>
+  export type entitiesUpdateOneRequiredWithoutCollectionsNestedInput = {
+    create?: XOR<entitiesCreateWithoutCollectionsInput, entitiesUncheckedCreateWithoutCollectionsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutCollectionsInput
+    upsert?: entitiesUpsertWithoutCollectionsInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutCollectionsInput, entitiesUpdateWithoutCollectionsInput>, entitiesUncheckedUpdateWithoutCollectionsInput>
   }
 
   export type collections_imagesUpdateManyWithoutCollectionsNestedInput = {
@@ -29549,14 +27699,6 @@ export namespace Prisma {
     update?: collections_videosUpdateWithWhereUniqueWithoutCollectionsInput | collections_videosUpdateWithWhereUniqueWithoutCollectionsInput[]
     updateMany?: collections_videosUpdateManyWithWhereWithoutCollectionsInput | collections_videosUpdateManyWithWhereWithoutCollectionsInput[]
     deleteMany?: collections_videosScalarWhereInput | collections_videosScalarWhereInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput = {
@@ -29697,22 +27839,11 @@ export namespace Prisma {
     update?: XOR<XOR<videosUpdateToOneWithWhereWithoutCollections_videosInput, videosUpdateWithoutCollections_videosInput>, videosUncheckedUpdateWithoutCollections_videosInput>
   }
 
-  export type groupsCreateNestedOneWithoutEntitiesInput = {
-    create?: XOR<groupsCreateWithoutEntitiesInput, groupsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutEntitiesInput
-    connect?: groupsWhereUniqueInput
-  }
-
-  export type individualsCreateNestedOneWithoutEntitiesInput = {
-    create?: XOR<individualsCreateWithoutEntitiesInput, individualsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutEntitiesInput
-    connect?: individualsWhereUniqueInput
-  }
-
-  export type organizationsCreateNestedOneWithoutEntitiesInput = {
-    create?: XOR<organizationsCreateWithoutEntitiesInput, organizationsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutEntitiesInput
-    connect?: organizationsWhereUniqueInput
+  export type collectionsCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput> | collectionsCreateWithoutEntitiesInput[] | collectionsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: collectionsCreateOrConnectWithoutEntitiesInput | collectionsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: collectionsCreateManyEntitiesInputEnvelope
+    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
   }
 
   export type entities_imagesCreateNestedManyWithoutEntitiesInput = {
@@ -29720,6 +27851,13 @@ export namespace Prisma {
     connectOrCreate?: entities_imagesCreateOrConnectWithoutEntitiesInput | entities_imagesCreateOrConnectWithoutEntitiesInput[]
     createMany?: entities_imagesCreateManyEntitiesInputEnvelope
     connect?: entities_imagesWhereUniqueInput | entities_imagesWhereUniqueInput[]
+  }
+
+  export type entities_referencesCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput> | entities_referencesCreateWithoutEntitiesInput[] | entities_referencesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_referencesCreateOrConnectWithoutEntitiesInput | entities_referencesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: entities_referencesCreateManyEntitiesInputEnvelope
+    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
   }
 
   export type entities_sheetsCreateNestedManyWithoutEntitiesInput = {
@@ -29736,11 +27874,25 @@ export namespace Prisma {
     connect?: entities_videosWhereUniqueInput | entities_videosWhereUniqueInput[]
   }
 
+  export type groups_membersCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput> | groups_membersCreateWithoutEntitiesInput[] | groups_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: groups_membersCreateOrConnectWithoutEntitiesInput | groups_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: groups_membersCreateManyEntitiesInputEnvelope
+    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+  }
+
   export type imagesCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
     createMany?: imagesCreateManyEntitiesInputEnvelope
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type organizations_membersCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput> | organizations_membersCreateWithoutEntitiesInput[] | organizations_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: organizations_membersCreateOrConnectWithoutEntitiesInput | organizations_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: organizations_membersCreateManyEntitiesInputEnvelope
+    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
   }
 
   export type sheetsCreateNestedManyWithoutEntitiesInput = {
@@ -29757,11 +27909,25 @@ export namespace Prisma {
     connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
   }
 
+  export type collectionsUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput> | collectionsCreateWithoutEntitiesInput[] | collectionsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: collectionsCreateOrConnectWithoutEntitiesInput | collectionsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: collectionsCreateManyEntitiesInputEnvelope
+    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+  }
+
   export type entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<entities_imagesCreateWithoutEntitiesInput, entities_imagesUncheckedCreateWithoutEntitiesInput> | entities_imagesCreateWithoutEntitiesInput[] | entities_imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: entities_imagesCreateOrConnectWithoutEntitiesInput | entities_imagesCreateOrConnectWithoutEntitiesInput[]
     createMany?: entities_imagesCreateManyEntitiesInputEnvelope
     connect?: entities_imagesWhereUniqueInput | entities_imagesWhereUniqueInput[]
+  }
+
+  export type entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput> | entities_referencesCreateWithoutEntitiesInput[] | entities_referencesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_referencesCreateOrConnectWithoutEntitiesInput | entities_referencesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: entities_referencesCreateManyEntitiesInputEnvelope
+    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
   }
 
   export type entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -29778,11 +27944,25 @@ export namespace Prisma {
     connect?: entities_videosWhereUniqueInput | entities_videosWhereUniqueInput[]
   }
 
+  export type groups_membersUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput> | groups_membersCreateWithoutEntitiesInput[] | groups_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: groups_membersCreateOrConnectWithoutEntitiesInput | groups_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: groups_membersCreateManyEntitiesInputEnvelope
+    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+  }
+
   export type imagesUncheckedCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
     createMany?: imagesCreateManyEntitiesInputEnvelope
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput> | organizations_membersCreateWithoutEntitiesInput[] | organizations_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: organizations_membersCreateOrConnectWithoutEntitiesInput | organizations_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: organizations_membersCreateManyEntitiesInputEnvelope
+    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
   }
 
   export type sheetsUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -29799,34 +27979,26 @@ export namespace Prisma {
     connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
   }
 
-  export type groupsUpdateOneWithoutEntitiesNestedInput = {
-    create?: XOR<groupsCreateWithoutEntitiesInput, groupsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutEntitiesInput
-    upsert?: groupsUpsertWithoutEntitiesInput
-    disconnect?: groupsWhereInput | boolean
-    delete?: groupsWhereInput | boolean
-    connect?: groupsWhereUniqueInput
-    update?: XOR<XOR<groupsUpdateToOneWithWhereWithoutEntitiesInput, groupsUpdateWithoutEntitiesInput>, groupsUncheckedUpdateWithoutEntitiesInput>
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
-  export type individualsUpdateOneWithoutEntitiesNestedInput = {
-    create?: XOR<individualsCreateWithoutEntitiesInput, individualsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutEntitiesInput
-    upsert?: individualsUpsertWithoutEntitiesInput
-    disconnect?: individualsWhereInput | boolean
-    delete?: individualsWhereInput | boolean
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutEntitiesInput, individualsUpdateWithoutEntitiesInput>, individualsUncheckedUpdateWithoutEntitiesInput>
-  }
-
-  export type organizationsUpdateOneWithoutEntitiesNestedInput = {
-    create?: XOR<organizationsCreateWithoutEntitiesInput, organizationsUncheckedCreateWithoutEntitiesInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutEntitiesInput
-    upsert?: organizationsUpsertWithoutEntitiesInput
-    disconnect?: organizationsWhereInput | boolean
-    delete?: organizationsWhereInput | boolean
-    connect?: organizationsWhereUniqueInput
-    update?: XOR<XOR<organizationsUpdateToOneWithWhereWithoutEntitiesInput, organizationsUpdateWithoutEntitiesInput>, organizationsUncheckedUpdateWithoutEntitiesInput>
+  export type collectionsUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput> | collectionsCreateWithoutEntitiesInput[] | collectionsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: collectionsCreateOrConnectWithoutEntitiesInput | collectionsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: collectionsUpsertWithWhereUniqueWithoutEntitiesInput | collectionsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: collectionsCreateManyEntitiesInputEnvelope
+    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    update?: collectionsUpdateWithWhereUniqueWithoutEntitiesInput | collectionsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: collectionsUpdateManyWithWhereWithoutEntitiesInput | collectionsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
   }
 
   export type entities_imagesUpdateManyWithoutEntitiesNestedInput = {
@@ -29841,6 +28013,20 @@ export namespace Prisma {
     update?: entities_imagesUpdateWithWhereUniqueWithoutEntitiesInput | entities_imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: entities_imagesUpdateManyWithWhereWithoutEntitiesInput | entities_imagesUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: entities_imagesScalarWhereInput | entities_imagesScalarWhereInput[]
+  }
+
+  export type entities_referencesUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput> | entities_referencesCreateWithoutEntitiesInput[] | entities_referencesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_referencesCreateOrConnectWithoutEntitiesInput | entities_referencesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: entities_referencesUpsertWithWhereUniqueWithoutEntitiesInput | entities_referencesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: entities_referencesCreateManyEntitiesInputEnvelope
+    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    update?: entities_referencesUpdateWithWhereUniqueWithoutEntitiesInput | entities_referencesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: entities_referencesUpdateManyWithWhereWithoutEntitiesInput | entities_referencesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
   }
 
   export type entities_sheetsUpdateManyWithoutEntitiesNestedInput = {
@@ -29871,6 +28057,20 @@ export namespace Prisma {
     deleteMany?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
   }
 
+  export type groups_membersUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput> | groups_membersCreateWithoutEntitiesInput[] | groups_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: groups_membersCreateOrConnectWithoutEntitiesInput | groups_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: groups_membersUpsertWithWhereUniqueWithoutEntitiesInput | groups_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: groups_membersCreateManyEntitiesInputEnvelope
+    set?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    disconnect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    delete?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    update?: groups_membersUpdateWithWhereUniqueWithoutEntitiesInput | groups_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: groups_membersUpdateManyWithWhereWithoutEntitiesInput | groups_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
+  }
+
   export type imagesUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
@@ -29883,6 +28083,20 @@ export namespace Prisma {
     update?: imagesUpdateWithWhereUniqueWithoutEntitiesInput | imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: imagesUpdateManyWithWhereWithoutEntitiesInput | imagesUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type organizations_membersUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput> | organizations_membersCreateWithoutEntitiesInput[] | organizations_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: organizations_membersCreateOrConnectWithoutEntitiesInput | organizations_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput | organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: organizations_membersCreateManyEntitiesInputEnvelope
+    set?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    disconnect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    delete?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    update?: organizations_membersUpdateWithWhereUniqueWithoutEntitiesInput | organizations_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: organizations_membersUpdateManyWithWhereWithoutEntitiesInput | organizations_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
   }
 
   export type sheetsUpdateManyWithoutEntitiesNestedInput = {
@@ -29913,6 +28127,20 @@ export namespace Prisma {
     deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
+  export type collectionsUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput> | collectionsCreateWithoutEntitiesInput[] | collectionsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: collectionsCreateOrConnectWithoutEntitiesInput | collectionsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: collectionsUpsertWithWhereUniqueWithoutEntitiesInput | collectionsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: collectionsCreateManyEntitiesInputEnvelope
+    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+    update?: collectionsUpdateWithWhereUniqueWithoutEntitiesInput | collectionsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: collectionsUpdateManyWithWhereWithoutEntitiesInput | collectionsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
+  }
+
   export type entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<entities_imagesCreateWithoutEntitiesInput, entities_imagesUncheckedCreateWithoutEntitiesInput> | entities_imagesCreateWithoutEntitiesInput[] | entities_imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: entities_imagesCreateOrConnectWithoutEntitiesInput | entities_imagesCreateOrConnectWithoutEntitiesInput[]
@@ -29925,6 +28153,20 @@ export namespace Prisma {
     update?: entities_imagesUpdateWithWhereUniqueWithoutEntitiesInput | entities_imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: entities_imagesUpdateManyWithWhereWithoutEntitiesInput | entities_imagesUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: entities_imagesScalarWhereInput | entities_imagesScalarWhereInput[]
+  }
+
+  export type entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput> | entities_referencesCreateWithoutEntitiesInput[] | entities_referencesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_referencesCreateOrConnectWithoutEntitiesInput | entities_referencesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: entities_referencesUpsertWithWhereUniqueWithoutEntitiesInput | entities_referencesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: entities_referencesCreateManyEntitiesInputEnvelope
+    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
+    update?: entities_referencesUpdateWithWhereUniqueWithoutEntitiesInput | entities_referencesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: entities_referencesUpdateManyWithWhereWithoutEntitiesInput | entities_referencesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
   }
 
   export type entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput = {
@@ -29955,6 +28197,20 @@ export namespace Prisma {
     deleteMany?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
   }
 
+  export type groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput> | groups_membersCreateWithoutEntitiesInput[] | groups_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: groups_membersCreateOrConnectWithoutEntitiesInput | groups_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: groups_membersUpsertWithWhereUniqueWithoutEntitiesInput | groups_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: groups_membersCreateManyEntitiesInputEnvelope
+    set?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    disconnect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    delete?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
+    update?: groups_membersUpdateWithWhereUniqueWithoutEntitiesInput | groups_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: groups_membersUpdateManyWithWhereWithoutEntitiesInput | groups_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
+  }
+
   export type imagesUncheckedUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<imagesCreateWithoutEntitiesInput, imagesUncheckedCreateWithoutEntitiesInput> | imagesCreateWithoutEntitiesInput[] | imagesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutEntitiesInput | imagesCreateOrConnectWithoutEntitiesInput[]
@@ -29967,6 +28223,20 @@ export namespace Prisma {
     update?: imagesUpdateWithWhereUniqueWithoutEntitiesInput | imagesUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: imagesUpdateManyWithWhereWithoutEntitiesInput | imagesUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput> | organizations_membersCreateWithoutEntitiesInput[] | organizations_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: organizations_membersCreateOrConnectWithoutEntitiesInput | organizations_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput | organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: organizations_membersCreateManyEntitiesInputEnvelope
+    set?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    disconnect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    delete?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+    update?: organizations_membersUpdateWithWhereUniqueWithoutEntitiesInput | organizations_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: organizations_membersUpdateManyWithWhereWithoutEntitiesInput | organizations_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
   }
 
   export type sheetsUncheckedUpdateManyWithoutEntitiesNestedInput = {
@@ -30025,52 +28295,18 @@ export namespace Prisma {
     update?: XOR<XOR<imagesUpdateToOneWithWhereWithoutEntities_imagesInput, imagesUpdateWithoutEntities_imagesInput>, imagesUncheckedUpdateWithoutEntities_imagesInput>
   }
 
-  export type groupsCreateNestedOneWithoutEntities_referencesInput = {
-    create?: XOR<groupsCreateWithoutEntities_referencesInput, groupsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutEntities_referencesInput
-    connect?: groupsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutEntities_referencesInput = {
+    create?: XOR<entitiesCreateWithoutEntities_referencesInput, entitiesUncheckedCreateWithoutEntities_referencesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutEntities_referencesInput
+    connect?: entitiesWhereUniqueInput
   }
 
-  export type individualsCreateNestedOneWithoutEntities_referencesInput = {
-    create?: XOR<individualsCreateWithoutEntities_referencesInput, individualsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutEntities_referencesInput
-    connect?: individualsWhereUniqueInput
-  }
-
-  export type organizationsCreateNestedOneWithoutEntities_referencesInput = {
-    create?: XOR<organizationsCreateWithoutEntities_referencesInput, organizationsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutEntities_referencesInput
-    connect?: organizationsWhereUniqueInput
-  }
-
-  export type groupsUpdateOneWithoutEntities_referencesNestedInput = {
-    create?: XOR<groupsCreateWithoutEntities_referencesInput, groupsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: groupsCreateOrConnectWithoutEntities_referencesInput
-    upsert?: groupsUpsertWithoutEntities_referencesInput
-    disconnect?: groupsWhereInput | boolean
-    delete?: groupsWhereInput | boolean
-    connect?: groupsWhereUniqueInput
-    update?: XOR<XOR<groupsUpdateToOneWithWhereWithoutEntities_referencesInput, groupsUpdateWithoutEntities_referencesInput>, groupsUncheckedUpdateWithoutEntities_referencesInput>
-  }
-
-  export type individualsUpdateOneWithoutEntities_referencesNestedInput = {
-    create?: XOR<individualsCreateWithoutEntities_referencesInput, individualsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutEntities_referencesInput
-    upsert?: individualsUpsertWithoutEntities_referencesInput
-    disconnect?: individualsWhereInput | boolean
-    delete?: individualsWhereInput | boolean
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutEntities_referencesInput, individualsUpdateWithoutEntities_referencesInput>, individualsUncheckedUpdateWithoutEntities_referencesInput>
-  }
-
-  export type organizationsUpdateOneWithoutEntities_referencesNestedInput = {
-    create?: XOR<organizationsCreateWithoutEntities_referencesInput, organizationsUncheckedCreateWithoutEntities_referencesInput>
-    connectOrCreate?: organizationsCreateOrConnectWithoutEntities_referencesInput
-    upsert?: organizationsUpsertWithoutEntities_referencesInput
-    disconnect?: organizationsWhereInput | boolean
-    delete?: organizationsWhereInput | boolean
-    connect?: organizationsWhereUniqueInput
-    update?: XOR<XOR<organizationsUpdateToOneWithWhereWithoutEntities_referencesInput, organizationsUpdateWithoutEntities_referencesInput>, organizationsUncheckedUpdateWithoutEntities_referencesInput>
+  export type entitiesUpdateOneRequiredWithoutEntities_referencesNestedInput = {
+    create?: XOR<entitiesCreateWithoutEntities_referencesInput, entitiesUncheckedCreateWithoutEntities_referencesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutEntities_referencesInput
+    upsert?: entitiesUpsertWithoutEntities_referencesInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutEntities_referencesInput, entitiesUpdateWithoutEntities_referencesInput>, entitiesUncheckedUpdateWithoutEntities_referencesInput>
   }
 
   export type entitiesCreateNestedOneWithoutEntities_sheetsInput = {
@@ -30129,53 +28365,11 @@ export namespace Prisma {
     update?: XOR<XOR<videosUpdateToOneWithWhereWithoutEntities_videosInput, videosUpdateWithoutEntities_videosInput>, videosUncheckedUpdateWithoutEntities_videosInput>
   }
 
-  export type collectionsCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput> | collectionsCreateWithoutGroupsInput[] | collectionsUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutGroupsInput | collectionsCreateOrConnectWithoutGroupsInput[]
-    createMany?: collectionsCreateManyGroupsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput> | entitiesCreateWithoutGroupsInput[] | entitiesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutGroupsInput | entitiesCreateOrConnectWithoutGroupsInput[]
-    createMany?: entitiesCreateManyGroupsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput> | entities_referencesCreateWithoutGroupsInput[] | entities_referencesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutGroupsInput | entities_referencesCreateOrConnectWithoutGroupsInput[]
-    createMany?: entities_referencesCreateManyGroupsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-  }
-
   export type groups_membersCreateNestedManyWithoutGroupsInput = {
     create?: XOR<groups_membersCreateWithoutGroupsInput, groups_membersUncheckedCreateWithoutGroupsInput> | groups_membersCreateWithoutGroupsInput[] | groups_membersUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: groups_membersCreateOrConnectWithoutGroupsInput | groups_membersCreateOrConnectWithoutGroupsInput[]
     createMany?: groups_membersCreateManyGroupsInputEnvelope
     connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-  }
-
-  export type collectionsUncheckedCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput> | collectionsCreateWithoutGroupsInput[] | collectionsUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutGroupsInput | collectionsCreateOrConnectWithoutGroupsInput[]
-    createMany?: collectionsCreateManyGroupsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesUncheckedCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput> | entitiesCreateWithoutGroupsInput[] | entitiesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutGroupsInput | entitiesCreateOrConnectWithoutGroupsInput[]
-    createMany?: entitiesCreateManyGroupsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesUncheckedCreateNestedManyWithoutGroupsInput = {
-    create?: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput> | entities_referencesCreateWithoutGroupsInput[] | entities_referencesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutGroupsInput | entities_referencesCreateOrConnectWithoutGroupsInput[]
-    createMany?: entities_referencesCreateManyGroupsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
   }
 
   export type groups_membersUncheckedCreateNestedManyWithoutGroupsInput = {
@@ -30187,48 +28381,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type collectionsUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput> | collectionsCreateWithoutGroupsInput[] | collectionsUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutGroupsInput | collectionsCreateOrConnectWithoutGroupsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutGroupsInput | collectionsUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: collectionsCreateManyGroupsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutGroupsInput | collectionsUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutGroupsInput | collectionsUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput> | entitiesCreateWithoutGroupsInput[] | entitiesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutGroupsInput | entitiesCreateOrConnectWithoutGroupsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutGroupsInput | entitiesUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: entitiesCreateManyGroupsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutGroupsInput | entitiesUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutGroupsInput | entitiesUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput> | entities_referencesCreateWithoutGroupsInput[] | entities_referencesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutGroupsInput | entities_referencesCreateOrConnectWithoutGroupsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutGroupsInput | entities_referencesUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: entities_referencesCreateManyGroupsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutGroupsInput | entities_referencesUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutGroupsInput | entities_referencesUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
   }
 
   export type groups_membersUpdateManyWithoutGroupsNestedInput = {
@@ -30245,48 +28397,6 @@ export namespace Prisma {
     deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
   }
 
-  export type collectionsUncheckedUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput> | collectionsCreateWithoutGroupsInput[] | collectionsUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutGroupsInput | collectionsCreateOrConnectWithoutGroupsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutGroupsInput | collectionsUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: collectionsCreateManyGroupsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutGroupsInput | collectionsUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutGroupsInput | collectionsUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput> | entitiesCreateWithoutGroupsInput[] | entitiesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutGroupsInput | entitiesCreateOrConnectWithoutGroupsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutGroupsInput | entitiesUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: entitiesCreateManyGroupsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutGroupsInput | entitiesUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutGroupsInput | entitiesUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutGroupsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput> | entities_referencesCreateWithoutGroupsInput[] | entities_referencesUncheckedCreateWithoutGroupsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutGroupsInput | entities_referencesCreateOrConnectWithoutGroupsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutGroupsInput | entities_referencesUpsertWithWhereUniqueWithoutGroupsInput[]
-    createMany?: entities_referencesCreateManyGroupsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutGroupsInput | entities_referencesUpdateWithWhereUniqueWithoutGroupsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutGroupsInput | entities_referencesUpdateManyWithWhereWithoutGroupsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-  }
-
   export type groups_membersUncheckedUpdateManyWithoutGroupsNestedInput = {
     create?: XOR<groups_membersCreateWithoutGroupsInput, groups_membersUncheckedCreateWithoutGroupsInput> | groups_membersCreateWithoutGroupsInput[] | groups_membersUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: groups_membersCreateOrConnectWithoutGroupsInput | groups_membersCreateOrConnectWithoutGroupsInput[]
@@ -30301,16 +28411,24 @@ export namespace Prisma {
     deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
   }
 
+  export type entitiesCreateNestedOneWithoutGroups_membersInput = {
+    create?: XOR<entitiesCreateWithoutGroups_membersInput, entitiesUncheckedCreateWithoutGroups_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutGroups_membersInput
+    connect?: entitiesWhereUniqueInput
+  }
+
   export type groupsCreateNestedOneWithoutGroups_membersInput = {
     create?: XOR<groupsCreateWithoutGroups_membersInput, groupsUncheckedCreateWithoutGroups_membersInput>
     connectOrCreate?: groupsCreateOrConnectWithoutGroups_membersInput
     connect?: groupsWhereUniqueInput
   }
 
-  export type individualsCreateNestedOneWithoutGroups_membersInput = {
-    create?: XOR<individualsCreateWithoutGroups_membersInput, individualsUncheckedCreateWithoutGroups_membersInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutGroups_membersInput
-    connect?: individualsWhereUniqueInput
+  export type entitiesUpdateOneRequiredWithoutGroups_membersNestedInput = {
+    create?: XOR<entitiesCreateWithoutGroups_membersInput, entitiesUncheckedCreateWithoutGroups_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutGroups_membersInput
+    upsert?: entitiesUpsertWithoutGroups_membersInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutGroups_membersInput, entitiesUpdateWithoutGroups_membersInput>, entitiesUncheckedUpdateWithoutGroups_membersInput>
   }
 
   export type groupsUpdateOneRequiredWithoutGroups_membersNestedInput = {
@@ -30319,14 +28437,6 @@ export namespace Prisma {
     upsert?: groupsUpsertWithoutGroups_membersInput
     connect?: groupsWhereUniqueInput
     update?: XOR<XOR<groupsUpdateToOneWithWhereWithoutGroups_membersInput, groupsUpdateWithoutGroups_membersInput>, groupsUncheckedUpdateWithoutGroups_membersInput>
-  }
-
-  export type individualsUpdateOneRequiredWithoutGroups_membersNestedInput = {
-    create?: XOR<individualsCreateWithoutGroups_membersInput, individualsUncheckedCreateWithoutGroups_membersInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutGroups_membersInput
-    upsert?: individualsUpsertWithoutGroups_membersInput
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutGroups_membersInput, individualsUpdateWithoutGroups_membersInput>, individualsUncheckedUpdateWithoutGroups_membersInput>
   }
 
   export type collections_imagesCreateNestedManyWithoutImagesInput = {
@@ -30487,136 +28597,10 @@ export namespace Prisma {
     deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
   }
 
-  export type collectionsCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput> | collectionsCreateWithoutIndividualsInput[] | collectionsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutIndividualsInput | collectionsCreateOrConnectWithoutIndividualsInput[]
-    createMany?: collectionsCreateManyIndividualsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput> | entitiesCreateWithoutIndividualsInput[] | entitiesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutIndividualsInput | entitiesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: entitiesCreateManyIndividualsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput> | entities_referencesCreateWithoutIndividualsInput[] | entities_referencesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutIndividualsInput | entities_referencesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: entities_referencesCreateManyIndividualsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-  }
-
-  export type groups_membersCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput> | groups_membersCreateWithoutIndividualsInput[] | groups_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: groups_membersCreateOrConnectWithoutIndividualsInput | groups_membersCreateOrConnectWithoutIndividualsInput[]
-    createMany?: groups_membersCreateManyIndividualsInputEnvelope
-    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-  }
-
   export type user_credentialsCreateNestedOneWithoutIndividualsInput = {
     create?: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
     connectOrCreate?: user_credentialsCreateOrConnectWithoutIndividualsInput
     connect?: user_credentialsWhereUniqueInput
-  }
-
-  export type organizations_membersCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
-    createMany?: organizations_membersCreateManyIndividualsInputEnvelope
-    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-  }
-
-  export type collectionsUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput> | collectionsCreateWithoutIndividualsInput[] | collectionsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutIndividualsInput | collectionsCreateOrConnectWithoutIndividualsInput[]
-    createMany?: collectionsCreateManyIndividualsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput> | entitiesCreateWithoutIndividualsInput[] | entitiesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutIndividualsInput | entitiesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: entitiesCreateManyIndividualsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput> | entities_referencesCreateWithoutIndividualsInput[] | entities_referencesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutIndividualsInput | entities_referencesCreateOrConnectWithoutIndividualsInput[]
-    createMany?: entities_referencesCreateManyIndividualsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-  }
-
-  export type groups_membersUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput> | groups_membersCreateWithoutIndividualsInput[] | groups_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: groups_membersCreateOrConnectWithoutIndividualsInput | groups_membersCreateOrConnectWithoutIndividualsInput[]
-    createMany?: groups_membersCreateManyIndividualsInputEnvelope
-    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-  }
-
-  export type organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput = {
-    create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
-    createMany?: organizations_membersCreateManyIndividualsInputEnvelope
-    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-  }
-
-  export type collectionsUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput> | collectionsCreateWithoutIndividualsInput[] | collectionsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutIndividualsInput | collectionsCreateOrConnectWithoutIndividualsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutIndividualsInput | collectionsUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: collectionsCreateManyIndividualsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutIndividualsInput | collectionsUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutIndividualsInput | collectionsUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput> | entitiesCreateWithoutIndividualsInput[] | entitiesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutIndividualsInput | entitiesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutIndividualsInput | entitiesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: entitiesCreateManyIndividualsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutIndividualsInput | entitiesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutIndividualsInput | entitiesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput> | entities_referencesCreateWithoutIndividualsInput[] | entities_referencesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutIndividualsInput | entities_referencesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutIndividualsInput | entities_referencesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: entities_referencesCreateManyIndividualsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutIndividualsInput | entities_referencesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutIndividualsInput | entities_referencesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-  }
-
-  export type groups_membersUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput> | groups_membersCreateWithoutIndividualsInput[] | groups_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: groups_membersCreateOrConnectWithoutIndividualsInput | groups_membersCreateOrConnectWithoutIndividualsInput[]
-    upsert?: groups_membersUpsertWithWhereUniqueWithoutIndividualsInput | groups_membersUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: groups_membersCreateManyIndividualsInputEnvelope
-    set?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    disconnect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    delete?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    update?: groups_membersUpdateWithWhereUniqueWithoutIndividualsInput | groups_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: groups_membersUpdateManyWithWhereWithoutIndividualsInput | groups_membersUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
   }
 
   export type user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput = {
@@ -30627,111 +28611,6 @@ export namespace Prisma {
     update?: XOR<XOR<user_credentialsUpdateToOneWithWhereWithoutIndividualsInput, user_credentialsUpdateWithoutIndividualsInput>, user_credentialsUncheckedUpdateWithoutIndividualsInput>
   }
 
-  export type organizations_membersUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
-    upsert?: organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput | organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: organizations_membersCreateManyIndividualsInputEnvelope
-    set?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    disconnect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    delete?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    update?: organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput | organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: organizations_membersUpdateManyWithWhereWithoutIndividualsInput | organizations_membersUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-  }
-
-  export type collectionsUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput> | collectionsCreateWithoutIndividualsInput[] | collectionsUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutIndividualsInput | collectionsCreateOrConnectWithoutIndividualsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutIndividualsInput | collectionsUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: collectionsCreateManyIndividualsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutIndividualsInput | collectionsUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutIndividualsInput | collectionsUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput> | entitiesCreateWithoutIndividualsInput[] | entitiesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutIndividualsInput | entitiesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutIndividualsInput | entitiesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: entitiesCreateManyIndividualsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutIndividualsInput | entitiesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutIndividualsInput | entitiesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput> | entities_referencesCreateWithoutIndividualsInput[] | entities_referencesUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutIndividualsInput | entities_referencesCreateOrConnectWithoutIndividualsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutIndividualsInput | entities_referencesUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: entities_referencesCreateManyIndividualsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutIndividualsInput | entities_referencesUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutIndividualsInput | entities_referencesUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-  }
-
-  export type groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput> | groups_membersCreateWithoutIndividualsInput[] | groups_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: groups_membersCreateOrConnectWithoutIndividualsInput | groups_membersCreateOrConnectWithoutIndividualsInput[]
-    upsert?: groups_membersUpsertWithWhereUniqueWithoutIndividualsInput | groups_membersUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: groups_membersCreateManyIndividualsInputEnvelope
-    set?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    disconnect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    delete?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    connect?: groups_membersWhereUniqueInput | groups_membersWhereUniqueInput[]
-    update?: groups_membersUpdateWithWhereUniqueWithoutIndividualsInput | groups_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: groups_membersUpdateManyWithWhereWithoutIndividualsInput | groups_membersUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
-  }
-
-  export type organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput = {
-    create?: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput> | organizations_membersCreateWithoutIndividualsInput[] | organizations_membersUncheckedCreateWithoutIndividualsInput[]
-    connectOrCreate?: organizations_membersCreateOrConnectWithoutIndividualsInput | organizations_membersCreateOrConnectWithoutIndividualsInput[]
-    upsert?: organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput | organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput[]
-    createMany?: organizations_membersCreateManyIndividualsInputEnvelope
-    set?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    disconnect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    delete?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-    update?: organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput | organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput[]
-    updateMany?: organizations_membersUpdateManyWithWhereWithoutIndividualsInput | organizations_membersUpdateManyWithWhereWithoutIndividualsInput[]
-    deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-  }
-
-  export type collectionsCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput> | collectionsCreateWithoutOrganizationsInput[] | collectionsUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutOrganizationsInput | collectionsCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: collectionsCreateManyOrganizationsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput> | entitiesCreateWithoutOrganizationsInput[] | entitiesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizationsInput | entitiesCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: entitiesCreateManyOrganizationsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput> | entities_referencesCreateWithoutOrganizationsInput[] | entities_referencesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutOrganizationsInput | entities_referencesCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: entities_referencesCreateManyOrganizationsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-  }
-
   export type organizations_membersCreateNestedManyWithoutOrganizationsInput = {
     create?: XOR<organizations_membersCreateWithoutOrganizationsInput, organizations_membersUncheckedCreateWithoutOrganizationsInput> | organizations_membersCreateWithoutOrganizationsInput[] | organizations_membersUncheckedCreateWithoutOrganizationsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutOrganizationsInput | organizations_membersCreateOrConnectWithoutOrganizationsInput[]
@@ -30739,74 +28618,11 @@ export namespace Prisma {
     connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
   }
 
-  export type collectionsUncheckedCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput> | collectionsCreateWithoutOrganizationsInput[] | collectionsUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutOrganizationsInput | collectionsCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: collectionsCreateManyOrganizationsInputEnvelope
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-  }
-
-  export type entitiesUncheckedCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput> | entitiesCreateWithoutOrganizationsInput[] | entitiesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizationsInput | entitiesCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: entitiesCreateManyOrganizationsInputEnvelope
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-  }
-
-  export type entities_referencesUncheckedCreateNestedManyWithoutOrganizationsInput = {
-    create?: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput> | entities_referencesCreateWithoutOrganizationsInput[] | entities_referencesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutOrganizationsInput | entities_referencesCreateOrConnectWithoutOrganizationsInput[]
-    createMany?: entities_referencesCreateManyOrganizationsInputEnvelope
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-  }
-
   export type organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput = {
     create?: XOR<organizations_membersCreateWithoutOrganizationsInput, organizations_membersUncheckedCreateWithoutOrganizationsInput> | organizations_membersCreateWithoutOrganizationsInput[] | organizations_membersUncheckedCreateWithoutOrganizationsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutOrganizationsInput | organizations_membersCreateOrConnectWithoutOrganizationsInput[]
     createMany?: organizations_membersCreateManyOrganizationsInputEnvelope
     connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
-  }
-
-  export type collectionsUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput> | collectionsCreateWithoutOrganizationsInput[] | collectionsUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutOrganizationsInput | collectionsCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutOrganizationsInput | collectionsUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: collectionsCreateManyOrganizationsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutOrganizationsInput | collectionsUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutOrganizationsInput | collectionsUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput> | entitiesCreateWithoutOrganizationsInput[] | entitiesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizationsInput | entitiesCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutOrganizationsInput | entitiesUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: entitiesCreateManyOrganizationsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutOrganizationsInput | entitiesUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutOrganizationsInput | entitiesUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput> | entities_referencesCreateWithoutOrganizationsInput[] | entities_referencesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutOrganizationsInput | entities_referencesCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutOrganizationsInput | entities_referencesUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: entities_referencesCreateManyOrganizationsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutOrganizationsInput | entities_referencesUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutOrganizationsInput | entities_referencesUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
   }
 
   export type organizations_membersUpdateManyWithoutOrganizationsNestedInput = {
@@ -30823,48 +28639,6 @@ export namespace Prisma {
     deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
   }
 
-  export type collectionsUncheckedUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput> | collectionsCreateWithoutOrganizationsInput[] | collectionsUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: collectionsCreateOrConnectWithoutOrganizationsInput | collectionsCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: collectionsUpsertWithWhereUniqueWithoutOrganizationsInput | collectionsUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: collectionsCreateManyOrganizationsInputEnvelope
-    set?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    disconnect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    delete?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
-    update?: collectionsUpdateWithWhereUniqueWithoutOrganizationsInput | collectionsUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: collectionsUpdateManyWithWhereWithoutOrganizationsInput | collectionsUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput> | entitiesCreateWithoutOrganizationsInput[] | entitiesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizationsInput | entitiesCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: entitiesUpsertWithWhereUniqueWithoutOrganizationsInput | entitiesUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: entitiesCreateManyOrganizationsInputEnvelope
-    set?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    disconnect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    delete?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    connect?: entitiesWhereUniqueInput | entitiesWhereUniqueInput[]
-    update?: entitiesUpdateWithWhereUniqueWithoutOrganizationsInput | entitiesUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: entitiesUpdateManyWithWhereWithoutOrganizationsInput | entitiesUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutOrganizationsNestedInput = {
-    create?: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput> | entities_referencesCreateWithoutOrganizationsInput[] | entities_referencesUncheckedCreateWithoutOrganizationsInput[]
-    connectOrCreate?: entities_referencesCreateOrConnectWithoutOrganizationsInput | entities_referencesCreateOrConnectWithoutOrganizationsInput[]
-    upsert?: entities_referencesUpsertWithWhereUniqueWithoutOrganizationsInput | entities_referencesUpsertWithWhereUniqueWithoutOrganizationsInput[]
-    createMany?: entities_referencesCreateManyOrganizationsInputEnvelope
-    set?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    disconnect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    delete?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    connect?: entities_referencesWhereUniqueInput | entities_referencesWhereUniqueInput[]
-    update?: entities_referencesUpdateWithWhereUniqueWithoutOrganizationsInput | entities_referencesUpdateWithWhereUniqueWithoutOrganizationsInput[]
-    updateMany?: entities_referencesUpdateManyWithWhereWithoutOrganizationsInput | entities_referencesUpdateManyWithWhereWithoutOrganizationsInput[]
-    deleteMany?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-  }
-
   export type organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput = {
     create?: XOR<organizations_membersCreateWithoutOrganizationsInput, organizations_membersUncheckedCreateWithoutOrganizationsInput> | organizations_membersCreateWithoutOrganizationsInput[] | organizations_membersUncheckedCreateWithoutOrganizationsInput[]
     connectOrCreate?: organizations_membersCreateOrConnectWithoutOrganizationsInput | organizations_membersCreateOrConnectWithoutOrganizationsInput[]
@@ -30879,10 +28653,10 @@ export namespace Prisma {
     deleteMany?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
   }
 
-  export type individualsCreateNestedOneWithoutOrganizations_membersInput = {
-    create?: XOR<individualsCreateWithoutOrganizations_membersInput, individualsUncheckedCreateWithoutOrganizations_membersInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutOrganizations_membersInput
-    connect?: individualsWhereUniqueInput
+  export type entitiesCreateNestedOneWithoutOrganizations_membersInput = {
+    create?: XOR<entitiesCreateWithoutOrganizations_membersInput, entitiesUncheckedCreateWithoutOrganizations_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizations_membersInput
+    connect?: entitiesWhereUniqueInput
   }
 
   export type organizationsCreateNestedOneWithoutOrganizations_membersInput = {
@@ -30891,12 +28665,12 @@ export namespace Prisma {
     connect?: organizationsWhereUniqueInput
   }
 
-  export type individualsUpdateOneRequiredWithoutOrganizations_membersNestedInput = {
-    create?: XOR<individualsCreateWithoutOrganizations_membersInput, individualsUncheckedCreateWithoutOrganizations_membersInput>
-    connectOrCreate?: individualsCreateOrConnectWithoutOrganizations_membersInput
-    upsert?: individualsUpsertWithoutOrganizations_membersInput
-    connect?: individualsWhereUniqueInput
-    update?: XOR<XOR<individualsUpdateToOneWithWhereWithoutOrganizations_membersInput, individualsUpdateWithoutOrganizations_membersInput>, individualsUncheckedUpdateWithoutOrganizations_membersInput>
+  export type entitiesUpdateOneRequiredWithoutOrganizations_membersNestedInput = {
+    create?: XOR<entitiesCreateWithoutOrganizations_membersInput, entitiesUncheckedCreateWithoutOrganizations_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutOrganizations_membersInput
+    upsert?: entitiesUpsertWithoutOrganizations_membersInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutOrganizations_membersInput, entitiesUpdateWithoutOrganizations_membersInput>, entitiesUncheckedUpdateWithoutOrganizations_membersInput>
   }
 
   export type organizationsUpdateOneRequiredWithoutOrganizations_membersNestedInput = {
@@ -30921,16 +28695,16 @@ export namespace Prisma {
     connect?: entities_sheetsWhereUniqueInput | entities_sheetsWhereUniqueInput[]
   }
 
-  export type sheets_dataCreateNestedOneWithoutSheetsInput = {
-    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
-    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
-    connect?: sheets_dataWhereUniqueInput
-  }
-
   export type entitiesCreateNestedOneWithoutSheetsInput = {
     create?: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
     connectOrCreate?: entitiesCreateOrConnectWithoutSheetsInput
     connect?: entitiesWhereUniqueInput
+  }
+
+  export type sheets_dataCreateNestedOneWithoutSheetsInput = {
+    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
+    connect?: sheets_dataWhereUniqueInput
   }
 
   export type collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput = {
@@ -30975,20 +28749,20 @@ export namespace Prisma {
     deleteMany?: entities_sheetsScalarWhereInput | entities_sheetsScalarWhereInput[]
   }
 
-  export type sheets_dataUpdateOneRequiredWithoutSheetsNestedInput = {
-    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
-    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
-    upsert?: sheets_dataUpsertWithoutSheetsInput
-    connect?: sheets_dataWhereUniqueInput
-    update?: XOR<XOR<sheets_dataUpdateToOneWithWhereWithoutSheetsInput, sheets_dataUpdateWithoutSheetsInput>, sheets_dataUncheckedUpdateWithoutSheetsInput>
-  }
-
   export type entitiesUpdateOneRequiredWithoutSheetsNestedInput = {
     create?: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
     connectOrCreate?: entitiesCreateOrConnectWithoutSheetsInput
     upsert?: entitiesUpsertWithoutSheetsInput
     connect?: entitiesWhereUniqueInput
     update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutSheetsInput, entitiesUpdateWithoutSheetsInput>, entitiesUncheckedUpdateWithoutSheetsInput>
+  }
+
+  export type sheets_dataUpdateOneRequiredWithoutSheetsNestedInput = {
+    create?: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_dataCreateOrConnectWithoutSheetsInput
+    upsert?: sheets_dataUpsertWithoutSheetsInput
+    connect?: sheets_dataWhereUniqueInput
+    update?: XOR<XOR<sheets_dataUpdateToOneWithWhereWithoutSheetsInput, sheets_dataUpdateWithoutSheetsInput>, sheets_dataUncheckedUpdateWithoutSheetsInput>
   }
 
   export type collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput = {
@@ -31247,44 +29021,6 @@ export namespace Prisma {
     deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -31297,17 +29033,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -31327,31 +29052,15 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -31417,6 +29126,44 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -31465,94 +29212,41 @@ export namespace Prisma {
     _max?: NestedBytesFilter<$PrismaModel>
   }
 
-  export type individualsCreateWithoutCollectionsInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
+  export type entitiesCreateWithoutCollectionsInput = {
+    entity_id: string
+    entity_type?: number
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsUncheckedCreateWithoutCollectionsInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUncheckedCreateWithoutCollectionsInput = {
+    entity_id: string
+    entity_type?: number
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsCreateOrConnectWithoutCollectionsInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutCollectionsInput, individualsUncheckedCreateWithoutCollectionsInput>
-  }
-
-  export type organizationsCreateWithoutCollectionsInput = {
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    entities?: entitiesCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsUncheckedCreateWithoutCollectionsInput = {
-    organization_id?: number
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    entities?: entitiesUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsCreateOrConnectWithoutCollectionsInput = {
-    where: organizationsWhereUniqueInput
-    create: XOR<organizationsCreateWithoutCollectionsInput, organizationsUncheckedCreateWithoutCollectionsInput>
-  }
-
-  export type groupsCreateWithoutCollectionsInput = {
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    entities?: entitiesCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
-  }
-
-  export type groupsUncheckedCreateWithoutCollectionsInput = {
-    group_id?: number
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    entities?: entitiesUncheckedCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
-  }
-
-  export type groupsCreateOrConnectWithoutCollectionsInput = {
-    where: groupsWhereUniqueInput
-    create: XOR<groupsCreateWithoutCollectionsInput, groupsUncheckedCreateWithoutCollectionsInput>
+  export type entitiesCreateOrConnectWithoutCollectionsInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutCollectionsInput, entitiesUncheckedCreateWithoutCollectionsInput>
   }
 
   export type collections_imagesCreateWithoutCollectionsInput = {
+    collections_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31560,8 +29254,8 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedCreateWithoutCollectionsInput = {
-    collections_images_id?: number
-    image_id: number
+    collections_images_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31578,6 +29272,7 @@ export namespace Prisma {
   }
 
   export type collections_sheetsCreateWithoutCollectionsInput = {
+    collections_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31585,8 +29280,8 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedCreateWithoutCollectionsInput = {
-    collections_sheets_id?: number
-    sheet_id: number
+    collections_sheets_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31603,6 +29298,7 @@ export namespace Prisma {
   }
 
   export type collections_videosCreateWithoutCollectionsInput = {
+    collections_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31610,8 +29306,8 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedCreateWithoutCollectionsInput = {
-    collections_videos_id?: number
-    video_id: number
+    collections_videos_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -31627,109 +29323,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type individualsUpsertWithoutCollectionsInput = {
-    update: XOR<individualsUpdateWithoutCollectionsInput, individualsUncheckedUpdateWithoutCollectionsInput>
-    create: XOR<individualsCreateWithoutCollectionsInput, individualsUncheckedCreateWithoutCollectionsInput>
-    where?: individualsWhereInput
+  export type entitiesUpsertWithoutCollectionsInput = {
+    update: XOR<entitiesUpdateWithoutCollectionsInput, entitiesUncheckedUpdateWithoutCollectionsInput>
+    create: XOR<entitiesCreateWithoutCollectionsInput, entitiesUncheckedCreateWithoutCollectionsInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUpdateToOneWithWhereWithoutCollectionsInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutCollectionsInput, individualsUncheckedUpdateWithoutCollectionsInput>
+  export type entitiesUpdateToOneWithWhereWithoutCollectionsInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutCollectionsInput, entitiesUncheckedUpdateWithoutCollectionsInput>
   }
 
-  export type individualsUpdateWithoutCollectionsInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUpdateWithoutCollectionsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type individualsUncheckedUpdateWithoutCollectionsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type organizationsUpsertWithoutCollectionsInput = {
-    update: XOR<organizationsUpdateWithoutCollectionsInput, organizationsUncheckedUpdateWithoutCollectionsInput>
-    create: XOR<organizationsCreateWithoutCollectionsInput, organizationsUncheckedCreateWithoutCollectionsInput>
-    where?: organizationsWhereInput
-  }
-
-  export type organizationsUpdateToOneWithWhereWithoutCollectionsInput = {
-    where?: organizationsWhereInput
-    data: XOR<organizationsUpdateWithoutCollectionsInput, organizationsUncheckedUpdateWithoutCollectionsInput>
-  }
-
-  export type organizationsUpdateWithoutCollectionsInput = {
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
-  }
-
-  export type organizationsUncheckedUpdateWithoutCollectionsInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
-  }
-
-  export type groupsUpsertWithoutCollectionsInput = {
-    update: XOR<groupsUpdateWithoutCollectionsInput, groupsUncheckedUpdateWithoutCollectionsInput>
-    create: XOR<groupsCreateWithoutCollectionsInput, groupsUncheckedCreateWithoutCollectionsInput>
-    where?: groupsWhereInput
-  }
-
-  export type groupsUpdateToOneWithWhereWithoutCollectionsInput = {
-    where?: groupsWhereInput
-    data: XOR<groupsUpdateWithoutCollectionsInput, groupsUncheckedUpdateWithoutCollectionsInput>
-  }
-
-  export type groupsUpdateWithoutCollectionsInput = {
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
-  }
-
-  export type groupsUncheckedUpdateWithoutCollectionsInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    entities?: entitiesUncheckedUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
+  export type entitiesUncheckedUpdateWithoutCollectionsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type collections_imagesUpsertWithWhereUniqueWithoutCollectionsInput = {
@@ -31752,9 +29382,9 @@ export namespace Prisma {
     AND?: collections_imagesScalarWhereInput | collections_imagesScalarWhereInput[]
     OR?: collections_imagesScalarWhereInput[]
     NOT?: collections_imagesScalarWhereInput | collections_imagesScalarWhereInput[]
-    collections_images_id?: IntFilter<"collections_images"> | number
-    collection_id?: IntFilter<"collections_images"> | number
-    image_id?: IntFilter<"collections_images"> | number
+    collections_images_id?: StringFilter<"collections_images"> | string
+    collection_id?: StringFilter<"collections_images"> | string
+    image_id?: StringFilter<"collections_images"> | string
     date_added?: DateTimeFilter<"collections_images"> | Date | string
     pinned?: BoolFilter<"collections_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_images"> | Date | string | null
@@ -31780,9 +29410,9 @@ export namespace Prisma {
     AND?: collections_sheetsScalarWhereInput | collections_sheetsScalarWhereInput[]
     OR?: collections_sheetsScalarWhereInput[]
     NOT?: collections_sheetsScalarWhereInput | collections_sheetsScalarWhereInput[]
-    collections_sheets_id?: IntFilter<"collections_sheets"> | number
-    collection_id?: IntFilter<"collections_sheets"> | number
-    sheet_id?: IntFilter<"collections_sheets"> | number
+    collections_sheets_id?: StringFilter<"collections_sheets"> | string
+    collection_id?: StringFilter<"collections_sheets"> | string
+    sheet_id?: StringFilter<"collections_sheets"> | string
     date_added?: DateTimeFilter<"collections_sheets"> | Date | string
     pinned?: BoolFilter<"collections_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_sheets"> | Date | string | null
@@ -31808,29 +29438,26 @@ export namespace Prisma {
     AND?: collections_videosScalarWhereInput | collections_videosScalarWhereInput[]
     OR?: collections_videosScalarWhereInput[]
     NOT?: collections_videosScalarWhereInput | collections_videosScalarWhereInput[]
-    collections_videos_id?: IntFilter<"collections_videos"> | number
-    collection_id?: IntFilter<"collections_videos"> | number
-    video_id?: IntFilter<"collections_videos"> | number
+    collections_videos_id?: StringFilter<"collections_videos"> | string
+    collection_id?: StringFilter<"collections_videos"> | string
+    video_id?: StringFilter<"collections_videos"> | string
     date_added?: DateTimeFilter<"collections_videos"> | Date | string
     pinned?: BoolFilter<"collections_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"collections_videos"> | Date | string | null
   }
 
   export type collectionsCreateWithoutCollections_imagesInput = {
+    collection_id: string
     collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
+    entities: entitiesCreateNestedOneWithoutCollectionsInput
     collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
   }
 
   export type collectionsUncheckedCreateWithoutCollections_imagesInput = {
-    collection_id?: number
+    collection_id: string
     collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
   }
@@ -31841,6 +29468,7 @@ export namespace Prisma {
   }
 
   export type imagesCreateWithoutCollections_imagesInput = {
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -31850,12 +29478,12 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedCreateWithoutCollections_imagesInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutImagesInput
   }
 
@@ -31876,20 +29504,17 @@ export namespace Prisma {
   }
 
   export type collectionsUpdateWithoutCollections_imagesInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutCollectionsNestedInput
     collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
   }
 
   export type collectionsUncheckedUpdateWithoutCollections_imagesInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
   }
@@ -31906,6 +29531,7 @@ export namespace Prisma {
   }
 
   export type imagesUpdateWithoutCollections_imagesInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -31915,30 +29541,27 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateWithoutCollections_imagesInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     entities_images?: entities_imagesUncheckedUpdateManyWithoutImagesNestedInput
   }
 
   export type collectionsCreateWithoutCollections_sheetsInput = {
+    collection_id: string
     collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
+    entities: entitiesCreateNestedOneWithoutCollectionsInput
     collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
   }
 
   export type collectionsUncheckedCreateWithoutCollections_sheetsInput = {
-    collection_id?: number
+    collection_id: string
     collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
   }
@@ -31949,21 +29572,22 @@ export namespace Prisma {
   }
 
   export type sheetsCreateWithoutCollections_sheetsInput = {
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
-    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutCollections_sheetsInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -31984,20 +29608,17 @@ export namespace Prisma {
   }
 
   export type collectionsUpdateWithoutCollections_sheetsInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutCollectionsNestedInput
     collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
   }
 
   export type collectionsUncheckedUpdateWithoutCollections_sheetsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
     collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
   }
@@ -32014,39 +29635,37 @@ export namespace Prisma {
   }
 
   export type sheetsUpdateWithoutCollections_sheetsInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
-    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutCollections_sheetsInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
   export type collectionsCreateWithoutCollections_videosInput = {
+    collection_id: string
     collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
+    entities: entitiesCreateNestedOneWithoutCollectionsInput
     collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
     collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
   }
 
   export type collectionsUncheckedCreateWithoutCollections_videosInput = {
-    collection_id?: number
+    collection_id: string
     collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
   }
@@ -32057,6 +29676,7 @@ export namespace Prisma {
   }
 
   export type videosCreateWithoutCollections_videosInput = {
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -32066,12 +29686,12 @@ export namespace Prisma {
   }
 
   export type videosUncheckedCreateWithoutCollections_videosInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutVideosInput
   }
 
@@ -32092,20 +29712,17 @@ export namespace Prisma {
   }
 
   export type collectionsUpdateWithoutCollections_videosInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutCollectionsNestedInput
     collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
     collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
   }
 
   export type collectionsUncheckedUpdateWithoutCollections_videosInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collection_id?: StringFieldUpdateOperationsInput | string
     collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
   }
@@ -32122,6 +29739,7 @@ export namespace Prisma {
   }
 
   export type videosUpdateWithoutCollections_videosInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -32131,103 +29749,43 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateWithoutCollections_videosInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     entities_videos?: entities_videosUncheckedUpdateManyWithoutVideosNestedInput
   }
 
-  export type groupsCreateWithoutEntitiesInput = {
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
+  export type collectionsCreateWithoutEntitiesInput = {
+    collection_id: string
+    collection_name: string
+    collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
+    collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
+    collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
   }
 
-  export type groupsUncheckedCreateWithoutEntitiesInput = {
-    group_id?: number
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
+  export type collectionsUncheckedCreateWithoutEntitiesInput = {
+    collection_id: string
+    collection_name: string
+    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
+    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
+    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
   }
 
-  export type groupsCreateOrConnectWithoutEntitiesInput = {
-    where: groupsWhereUniqueInput
-    create: XOR<groupsCreateWithoutEntitiesInput, groupsUncheckedCreateWithoutEntitiesInput>
+  export type collectionsCreateOrConnectWithoutEntitiesInput = {
+    where: collectionsWhereUniqueInput
+    create: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput>
   }
 
-  export type individualsCreateWithoutEntitiesInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
-  }
-
-  export type individualsUncheckedCreateWithoutEntitiesInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
-  }
-
-  export type individualsCreateOrConnectWithoutEntitiesInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutEntitiesInput, individualsUncheckedCreateWithoutEntitiesInput>
-  }
-
-  export type organizationsCreateWithoutEntitiesInput = {
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsUncheckedCreateWithoutEntitiesInput = {
-    organization_id?: number
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsCreateOrConnectWithoutEntitiesInput = {
-    where: organizationsWhereUniqueInput
-    create: XOR<organizationsCreateWithoutEntitiesInput, organizationsUncheckedCreateWithoutEntitiesInput>
+  export type collectionsCreateManyEntitiesInputEnvelope = {
+    data: collectionsCreateManyEntitiesInput | collectionsCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
   }
 
   export type entities_imagesCreateWithoutEntitiesInput = {
+    entities_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32235,8 +29793,8 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedCreateWithoutEntitiesInput = {
-    entities_images_id?: number
-    image_id: number
+    entities_images_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32252,7 +29810,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type entities_referencesCreateWithoutEntitiesInput = {
+    reference_id: string
+    title: string
+    author: string
+    url: string
+  }
+
+  export type entities_referencesUncheckedCreateWithoutEntitiesInput = {
+    reference_id: string
+    title: string
+    author: string
+    url: string
+  }
+
+  export type entities_referencesCreateOrConnectWithoutEntitiesInput = {
+    where: entities_referencesWhereUniqueInput
+    create: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type entities_referencesCreateManyEntitiesInputEnvelope = {
+    data: entities_referencesCreateManyEntitiesInput | entities_referencesCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type entities_sheetsCreateWithoutEntitiesInput = {
+    entities_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32260,8 +29843,8 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedCreateWithoutEntitiesInput = {
-    entities_sheets_id?: number
-    sheet_id: number
+    entities_sheets_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32278,6 +29861,7 @@ export namespace Prisma {
   }
 
   export type entities_videosCreateWithoutEntitiesInput = {
+    entities_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32285,8 +29869,8 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedCreateWithoutEntitiesInput = {
-    entities_videos_id?: number
-    video_id: number
+    entities_videos_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -32302,7 +29886,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type groups_membersCreateWithoutEntitiesInput = {
+    groups_members_id: string
+    groups: groupsCreateNestedOneWithoutGroups_membersInput
+  }
+
+  export type groups_membersUncheckedCreateWithoutEntitiesInput = {
+    groups_members_id: string
+    group_id: string
+  }
+
+  export type groups_membersCreateOrConnectWithoutEntitiesInput = {
+    where: groups_membersWhereUniqueInput
+    create: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type groups_membersCreateManyEntitiesInputEnvelope = {
+    data: groups_membersCreateManyEntitiesInput | groups_membersCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type imagesCreateWithoutEntitiesInput = {
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -32312,11 +29917,11 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedCreateWithoutEntitiesInput = {
-    image_id?: number
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutImagesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutImagesInput
   }
@@ -32331,7 +29936,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type organizations_membersCreateWithoutEntitiesInput = {
+    organizations_members_id: string
+    organizations: organizationsCreateNestedOneWithoutOrganizations_membersInput
+  }
+
+  export type organizations_membersUncheckedCreateWithoutEntitiesInput = {
+    organizations_members_id: string
+    organization_id: string
+  }
+
+  export type organizations_membersCreateOrConnectWithoutEntitiesInput = {
+    where: organizations_membersWhereUniqueInput
+    create: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type organizations_membersCreateManyEntitiesInputEnvelope = {
+    data: organizations_membersCreateManyEntitiesInput | organizations_membersCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type sheetsCreateWithoutEntitiesInput = {
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
@@ -32341,11 +29967,11 @@ export namespace Prisma {
   }
 
   export type sheetsUncheckedCreateWithoutEntitiesInput = {
-    sheet_id?: number
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -32361,6 +29987,7 @@ export namespace Prisma {
   }
 
   export type videosCreateWithoutEntitiesInput = {
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -32370,11 +29997,11 @@ export namespace Prisma {
   }
 
   export type videosUncheckedCreateWithoutEntitiesInput = {
-    video_id?: number
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutVideosInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutVideosInput
   }
@@ -32389,109 +30016,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type groupsUpsertWithoutEntitiesInput = {
-    update: XOR<groupsUpdateWithoutEntitiesInput, groupsUncheckedUpdateWithoutEntitiesInput>
-    create: XOR<groupsCreateWithoutEntitiesInput, groupsUncheckedCreateWithoutEntitiesInput>
-    where?: groupsWhereInput
+  export type collectionsUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: collectionsWhereUniqueInput
+    update: XOR<collectionsUpdateWithoutEntitiesInput, collectionsUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<collectionsCreateWithoutEntitiesInput, collectionsUncheckedCreateWithoutEntitiesInput>
   }
 
-  export type groupsUpdateToOneWithWhereWithoutEntitiesInput = {
-    where?: groupsWhereInput
-    data: XOR<groupsUpdateWithoutEntitiesInput, groupsUncheckedUpdateWithoutEntitiesInput>
+  export type collectionsUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: collectionsWhereUniqueInput
+    data: XOR<collectionsUpdateWithoutEntitiesInput, collectionsUncheckedUpdateWithoutEntitiesInput>
   }
 
-  export type groupsUpdateWithoutEntitiesInput = {
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
+  export type collectionsUpdateManyWithWhereWithoutEntitiesInput = {
+    where: collectionsScalarWhereInput
+    data: XOR<collectionsUpdateManyMutationInput, collectionsUncheckedUpdateManyWithoutEntitiesInput>
   }
 
-  export type groupsUncheckedUpdateWithoutEntitiesInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
-  }
-
-  export type individualsUpsertWithoutEntitiesInput = {
-    update: XOR<individualsUpdateWithoutEntitiesInput, individualsUncheckedUpdateWithoutEntitiesInput>
-    create: XOR<individualsCreateWithoutEntitiesInput, individualsUncheckedCreateWithoutEntitiesInput>
-    where?: individualsWhereInput
-  }
-
-  export type individualsUpdateToOneWithWhereWithoutEntitiesInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutEntitiesInput, individualsUncheckedUpdateWithoutEntitiesInput>
-  }
-
-  export type individualsUpdateWithoutEntitiesInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type individualsUncheckedUpdateWithoutEntitiesInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type organizationsUpsertWithoutEntitiesInput = {
-    update: XOR<organizationsUpdateWithoutEntitiesInput, organizationsUncheckedUpdateWithoutEntitiesInput>
-    create: XOR<organizationsCreateWithoutEntitiesInput, organizationsUncheckedCreateWithoutEntitiesInput>
-    where?: organizationsWhereInput
-  }
-
-  export type organizationsUpdateToOneWithWhereWithoutEntitiesInput = {
-    where?: organizationsWhereInput
-    data: XOR<organizationsUpdateWithoutEntitiesInput, organizationsUncheckedUpdateWithoutEntitiesInput>
-  }
-
-  export type organizationsUpdateWithoutEntitiesInput = {
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
-  }
-
-  export type organizationsUncheckedUpdateWithoutEntitiesInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
+  export type collectionsScalarWhereInput = {
+    AND?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
+    OR?: collectionsScalarWhereInput[]
+    NOT?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
+    collection_id?: StringFilter<"collections"> | string
+    collection_name?: StringFilter<"collections"> | string
+    entity_id?: StringFilter<"collections"> | string
   }
 
   export type entities_imagesUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -32514,12 +30061,39 @@ export namespace Prisma {
     AND?: entities_imagesScalarWhereInput | entities_imagesScalarWhereInput[]
     OR?: entities_imagesScalarWhereInput[]
     NOT?: entities_imagesScalarWhereInput | entities_imagesScalarWhereInput[]
-    entities_images_id?: IntFilter<"entities_images"> | number
-    entity_id?: IntFilter<"entities_images"> | number
-    image_id?: IntFilter<"entities_images"> | number
+    entities_images_id?: StringFilter<"entities_images"> | string
+    entity_id?: StringFilter<"entities_images"> | string
+    image_id?: StringFilter<"entities_images"> | string
     date_added?: DateTimeFilter<"entities_images"> | Date | string
     pinned?: BoolFilter<"entities_images"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_images"> | Date | string | null
+  }
+
+  export type entities_referencesUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: entities_referencesWhereUniqueInput
+    update: XOR<entities_referencesUpdateWithoutEntitiesInput, entities_referencesUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<entities_referencesCreateWithoutEntitiesInput, entities_referencesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type entities_referencesUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: entities_referencesWhereUniqueInput
+    data: XOR<entities_referencesUpdateWithoutEntitiesInput, entities_referencesUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type entities_referencesUpdateManyWithWhereWithoutEntitiesInput = {
+    where: entities_referencesScalarWhereInput
+    data: XOR<entities_referencesUpdateManyMutationInput, entities_referencesUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type entities_referencesScalarWhereInput = {
+    AND?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
+    OR?: entities_referencesScalarWhereInput[]
+    NOT?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
+    reference_id?: StringFilter<"entities_references"> | string
+    entity_id?: StringFilter<"entities_references"> | string
+    title?: StringFilter<"entities_references"> | string
+    author?: StringFilter<"entities_references"> | string
+    url?: StringFilter<"entities_references"> | string
   }
 
   export type entities_sheetsUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -32542,9 +30116,9 @@ export namespace Prisma {
     AND?: entities_sheetsScalarWhereInput | entities_sheetsScalarWhereInput[]
     OR?: entities_sheetsScalarWhereInput[]
     NOT?: entities_sheetsScalarWhereInput | entities_sheetsScalarWhereInput[]
-    entities_sheets_id?: IntFilter<"entities_sheets"> | number
-    entity_id?: IntFilter<"entities_sheets"> | number
-    sheet_id?: IntFilter<"entities_sheets"> | number
+    entities_sheets_id?: StringFilter<"entities_sheets"> | string
+    entity_id?: StringFilter<"entities_sheets"> | string
+    sheet_id?: StringFilter<"entities_sheets"> | string
     date_added?: DateTimeFilter<"entities_sheets"> | Date | string
     pinned?: BoolFilter<"entities_sheets"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_sheets"> | Date | string | null
@@ -32570,12 +30144,37 @@ export namespace Prisma {
     AND?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
     OR?: entities_videosScalarWhereInput[]
     NOT?: entities_videosScalarWhereInput | entities_videosScalarWhereInput[]
-    entities_videos_id?: IntFilter<"entities_videos"> | number
-    entity_id?: IntFilter<"entities_videos"> | number
-    video_id?: IntFilter<"entities_videos"> | number
+    entities_videos_id?: StringFilter<"entities_videos"> | string
+    entity_id?: StringFilter<"entities_videos"> | string
+    video_id?: StringFilter<"entities_videos"> | string
     date_added?: DateTimeFilter<"entities_videos"> | Date | string
     pinned?: BoolFilter<"entities_videos"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_videos"> | Date | string | null
+  }
+
+  export type groups_membersUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: groups_membersWhereUniqueInput
+    update: XOR<groups_membersUpdateWithoutEntitiesInput, groups_membersUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<groups_membersCreateWithoutEntitiesInput, groups_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type groups_membersUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: groups_membersWhereUniqueInput
+    data: XOR<groups_membersUpdateWithoutEntitiesInput, groups_membersUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type groups_membersUpdateManyWithWhereWithoutEntitiesInput = {
+    where: groups_membersScalarWhereInput
+    data: XOR<groups_membersUpdateManyMutationInput, groups_membersUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type groups_membersScalarWhereInput = {
+    AND?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
+    OR?: groups_membersScalarWhereInput[]
+    NOT?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
+    groups_members_id?: StringFilter<"groups_members"> | string
+    group_id?: StringFilter<"groups_members"> | string
+    entity_id?: StringFilter<"groups_members"> | string
   }
 
   export type imagesUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -32598,12 +30197,37 @@ export namespace Prisma {
     AND?: imagesScalarWhereInput | imagesScalarWhereInput[]
     OR?: imagesScalarWhereInput[]
     NOT?: imagesScalarWhereInput | imagesScalarWhereInput[]
-    image_id?: IntFilter<"images"> | number
-    image_creator_id?: IntFilter<"images"> | number
+    image_id?: StringFilter<"images"> | string
+    image_creator_id?: StringFilter<"images"> | string
     image_title?: StringFilter<"images"> | string
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
-    image_data_id?: IntFilter<"images"> | number
+    image_data_id?: StringFilter<"images"> | string
+  }
+
+  export type organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: organizations_membersWhereUniqueInput
+    update: XOR<organizations_membersUpdateWithoutEntitiesInput, organizations_membersUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<organizations_membersCreateWithoutEntitiesInput, organizations_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type organizations_membersUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: organizations_membersWhereUniqueInput
+    data: XOR<organizations_membersUpdateWithoutEntitiesInput, organizations_membersUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type organizations_membersUpdateManyWithWhereWithoutEntitiesInput = {
+    where: organizations_membersScalarWhereInput
+    data: XOR<organizations_membersUpdateManyMutationInput, organizations_membersUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type organizations_membersScalarWhereInput = {
+    AND?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
+    OR?: organizations_membersScalarWhereInput[]
+    NOT?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
+    organizations_members_id?: StringFilter<"organizations_members"> | string
+    organization_id?: StringFilter<"organizations_members"> | string
+    entity_id?: StringFilter<"organizations_members"> | string
   }
 
   export type sheetsUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -32626,12 +30250,12 @@ export namespace Prisma {
     AND?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
     OR?: sheetsScalarWhereInput[]
     NOT?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
-    sheet_id?: IntFilter<"sheets"> | number
-    sheet_author_id?: IntFilter<"sheets"> | number
+    sheet_id?: StringFilter<"sheets"> | string
+    sheet_author_id?: StringFilter<"sheets"> | string
     sheet_title?: StringFilter<"sheets"> | string
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
-    sheet_data_id?: IntFilter<"sheets"> | number
+    sheet_data_id?: StringFilter<"sheets"> | string
   }
 
   export type videosUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -32654,33 +30278,38 @@ export namespace Prisma {
     AND?: videosScalarWhereInput | videosScalarWhereInput[]
     OR?: videosScalarWhereInput[]
     NOT?: videosScalarWhereInput | videosScalarWhereInput[]
-    video_id?: IntFilter<"videos"> | number
-    video_creator_id?: IntFilter<"videos"> | number
+    video_id?: StringFilter<"videos"> | string
+    video_creator_id?: StringFilter<"videos"> | string
     video_title?: StringFilter<"videos"> | string
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
-    video_data_id?: IntFilter<"videos"> | number
+    video_data_id?: StringFilter<"videos"> | string
   }
 
   export type entitiesCreateWithoutEntities_imagesInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_imagesInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
@@ -32691,6 +30320,7 @@ export namespace Prisma {
   }
 
   export type imagesCreateWithoutEntities_imagesInput = {
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -32700,12 +30330,12 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedCreateWithoutEntities_imagesInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
     collections_images?: collections_imagesUncheckedCreateNestedManyWithoutImagesInput
   }
 
@@ -32726,24 +30356,29 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutEntities_imagesInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_imagesInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
@@ -32760,6 +30395,7 @@ export namespace Prisma {
   }
 
   export type imagesUpdateWithoutEntities_imagesInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -32769,226 +30405,111 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateWithoutEntities_imagesInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutImagesNestedInput
   }
 
-  export type groupsCreateWithoutEntities_referencesInput = {
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutGroupsInput
-    entities?: entitiesCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
+  export type entitiesCreateWithoutEntities_referencesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
-  export type groupsUncheckedCreateWithoutEntities_referencesInput = {
-    group_id?: number
-    group_handle: string
-    group_name: string
-    group_currentIssue?: string | null
-    group_stances?: string | null
-    group_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutGroupsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutGroupsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
+  export type entitiesUncheckedCreateWithoutEntities_referencesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type groupsCreateOrConnectWithoutEntities_referencesInput = {
-    where: groupsWhereUniqueInput
-    create: XOR<groupsCreateWithoutEntities_referencesInput, groupsUncheckedCreateWithoutEntities_referencesInput>
+  export type entitiesCreateOrConnectWithoutEntities_referencesInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutEntities_referencesInput, entitiesUncheckedCreateWithoutEntities_referencesInput>
   }
 
-  export type individualsCreateWithoutEntities_referencesInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
+  export type entitiesUpsertWithoutEntities_referencesInput = {
+    update: XOR<entitiesUpdateWithoutEntities_referencesInput, entitiesUncheckedUpdateWithoutEntities_referencesInput>
+    create: XOR<entitiesCreateWithoutEntities_referencesInput, entitiesUncheckedCreateWithoutEntities_referencesInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUncheckedCreateWithoutEntities_referencesInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUpdateToOneWithWhereWithoutEntities_referencesInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutEntities_referencesInput, entitiesUncheckedUpdateWithoutEntities_referencesInput>
   }
 
-  export type individualsCreateOrConnectWithoutEntities_referencesInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutEntities_referencesInput, individualsUncheckedCreateWithoutEntities_referencesInput>
+  export type entitiesUpdateWithoutEntities_referencesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type organizationsCreateWithoutEntities_referencesInput = {
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsUncheckedCreateWithoutEntities_referencesInput = {
-    organization_id?: number
-    organization_handle: string
-    organization_name: string
-    organization_currentIssue?: string | null
-    organization_stances?: string | null
-    organization_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutOrganizationsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
-  }
-
-  export type organizationsCreateOrConnectWithoutEntities_referencesInput = {
-    where: organizationsWhereUniqueInput
-    create: XOR<organizationsCreateWithoutEntities_referencesInput, organizationsUncheckedCreateWithoutEntities_referencesInput>
-  }
-
-  export type groupsUpsertWithoutEntities_referencesInput = {
-    update: XOR<groupsUpdateWithoutEntities_referencesInput, groupsUncheckedUpdateWithoutEntities_referencesInput>
-    create: XOR<groupsCreateWithoutEntities_referencesInput, groupsUncheckedCreateWithoutEntities_referencesInput>
-    where?: groupsWhereInput
-  }
-
-  export type groupsUpdateToOneWithWhereWithoutEntities_referencesInput = {
-    where?: groupsWhereInput
-    data: XOR<groupsUpdateWithoutEntities_referencesInput, groupsUncheckedUpdateWithoutEntities_referencesInput>
-  }
-
-  export type groupsUpdateWithoutEntities_referencesInput = {
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
-  }
-
-  export type groupsUncheckedUpdateWithoutEntities_referencesInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-    group_handle?: StringFieldUpdateOperationsInput | string
-    group_name?: StringFieldUpdateOperationsInput | string
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutGroupsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
-  }
-
-  export type individualsUpsertWithoutEntities_referencesInput = {
-    update: XOR<individualsUpdateWithoutEntities_referencesInput, individualsUncheckedUpdateWithoutEntities_referencesInput>
-    create: XOR<individualsCreateWithoutEntities_referencesInput, individualsUncheckedCreateWithoutEntities_referencesInput>
-    where?: individualsWhereInput
-  }
-
-  export type individualsUpdateToOneWithWhereWithoutEntities_referencesInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutEntities_referencesInput, individualsUncheckedUpdateWithoutEntities_referencesInput>
-  }
-
-  export type individualsUpdateWithoutEntities_referencesInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type individualsUncheckedUpdateWithoutEntities_referencesInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type organizationsUpsertWithoutEntities_referencesInput = {
-    update: XOR<organizationsUpdateWithoutEntities_referencesInput, organizationsUncheckedUpdateWithoutEntities_referencesInput>
-    create: XOR<organizationsCreateWithoutEntities_referencesInput, organizationsUncheckedCreateWithoutEntities_referencesInput>
-    where?: organizationsWhereInput
-  }
-
-  export type organizationsUpdateToOneWithWhereWithoutEntities_referencesInput = {
-    where?: organizationsWhereInput
-    data: XOR<organizationsUpdateWithoutEntities_referencesInput, organizationsUncheckedUpdateWithoutEntities_referencesInput>
-  }
-
-  export type organizationsUpdateWithoutEntities_referencesInput = {
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
-  }
-
-  export type organizationsUncheckedUpdateWithoutEntities_referencesInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-    organization_handle?: StringFieldUpdateOperationsInput | string
-    organization_name?: StringFieldUpdateOperationsInput | string
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
+  export type entitiesUncheckedUpdateWithoutEntities_referencesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesCreateWithoutEntities_sheetsInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_sheetsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
@@ -32999,21 +30520,22 @@ export namespace Prisma {
   }
 
   export type sheetsCreateWithoutEntities_sheetsInput = {
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
-    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutEntities_sheetsInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -33034,24 +30556,29 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutEntities_sheetsInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_sheetsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
@@ -33068,43 +30595,49 @@ export namespace Prisma {
   }
 
   export type sheetsUpdateWithoutEntities_sheetsInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
-    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutEntities_sheetsInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
   export type entitiesCreateWithoutEntities_videosInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutEntities_videosInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
@@ -33115,6 +30648,7 @@ export namespace Prisma {
   }
 
   export type videosCreateWithoutEntities_videosInput = {
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -33124,12 +30658,12 @@ export namespace Prisma {
   }
 
   export type videosUncheckedCreateWithoutEntities_videosInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
     collections_videos?: collections_videosUncheckedCreateNestedManyWithoutVideosInput
   }
 
@@ -33150,24 +30684,29 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutEntities_videosInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutEntities_videosInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
@@ -33184,6 +30723,7 @@ export namespace Prisma {
   }
 
   export type videosUpdateWithoutEntities_videosInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -33193,110 +30733,23 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateWithoutEntities_videosInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUncheckedUpdateManyWithoutVideosNestedInput
   }
 
-  export type collectionsCreateWithoutGroupsInput = {
-    collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsUncheckedCreateWithoutGroupsInput = {
-    collection_id?: number
-    collection_name: string
-    individual_id?: number | null
-    organization_id?: number | null
-    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsCreateOrConnectWithoutGroupsInput = {
-    where: collectionsWhereUniqueInput
-    create: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type collectionsCreateManyGroupsInputEnvelope = {
-    data: collectionsCreateManyGroupsInput | collectionsCreateManyGroupsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entitiesCreateWithoutGroupsInput = {
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
-    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
-    images?: imagesCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
-    videos?: videosCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesUncheckedCreateWithoutGroupsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    organization_id?: number | null
-    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
-    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesCreateOrConnectWithoutGroupsInput = {
-    where: entitiesWhereUniqueInput
-    create: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type entitiesCreateManyGroupsInputEnvelope = {
-    data: entitiesCreateManyGroupsInput | entitiesCreateManyGroupsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entities_referencesCreateWithoutGroupsInput = {
-    title: string
-    author: string
-    url: string
-    individuals?: individualsCreateNestedOneWithoutEntities_referencesInput
-    organizations?: organizationsCreateNestedOneWithoutEntities_referencesInput
-  }
-
-  export type entities_referencesUncheckedCreateWithoutGroupsInput = {
-    reference_id?: number
-    individual_id?: number | null
-    organization_id?: number | null
-    title: string
-    author: string
-    url: string
-  }
-
-  export type entities_referencesCreateOrConnectWithoutGroupsInput = {
-    where: entities_referencesWhereUniqueInput
-    create: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type entities_referencesCreateManyGroupsInputEnvelope = {
-    data: entities_referencesCreateManyGroupsInput | entities_referencesCreateManyGroupsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type groups_membersCreateWithoutGroupsInput = {
-    individuals: individualsCreateNestedOneWithoutGroups_membersInput
+    groups_members_id: string
+    entities: entitiesCreateNestedOneWithoutGroups_membersInput
   }
 
   export type groups_membersUncheckedCreateWithoutGroupsInput = {
-    individual_id: number
+    groups_members_id: string
+    entity_id: string
   }
 
   export type groups_membersCreateOrConnectWithoutGroupsInput = {
@@ -33307,88 +30760,6 @@ export namespace Prisma {
   export type groups_membersCreateManyGroupsInputEnvelope = {
     data: groups_membersCreateManyGroupsInput | groups_membersCreateManyGroupsInput[]
     skipDuplicates?: boolean
-  }
-
-  export type collectionsUpsertWithWhereUniqueWithoutGroupsInput = {
-    where: collectionsWhereUniqueInput
-    update: XOR<collectionsUpdateWithoutGroupsInput, collectionsUncheckedUpdateWithoutGroupsInput>
-    create: XOR<collectionsCreateWithoutGroupsInput, collectionsUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type collectionsUpdateWithWhereUniqueWithoutGroupsInput = {
-    where: collectionsWhereUniqueInput
-    data: XOR<collectionsUpdateWithoutGroupsInput, collectionsUncheckedUpdateWithoutGroupsInput>
-  }
-
-  export type collectionsUpdateManyWithWhereWithoutGroupsInput = {
-    where: collectionsScalarWhereInput
-    data: XOR<collectionsUpdateManyMutationInput, collectionsUncheckedUpdateManyWithoutGroupsInput>
-  }
-
-  export type collectionsScalarWhereInput = {
-    AND?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-    OR?: collectionsScalarWhereInput[]
-    NOT?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
-    collection_id?: IntFilter<"collections"> | number
-    collection_name?: StringFilter<"collections"> | string
-    individual_id?: IntNullableFilter<"collections"> | number | null
-    group_id?: IntNullableFilter<"collections"> | number | null
-    organization_id?: IntNullableFilter<"collections"> | number | null
-  }
-
-  export type entitiesUpsertWithWhereUniqueWithoutGroupsInput = {
-    where: entitiesWhereUniqueInput
-    update: XOR<entitiesUpdateWithoutGroupsInput, entitiesUncheckedUpdateWithoutGroupsInput>
-    create: XOR<entitiesCreateWithoutGroupsInput, entitiesUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type entitiesUpdateWithWhereUniqueWithoutGroupsInput = {
-    where: entitiesWhereUniqueInput
-    data: XOR<entitiesUpdateWithoutGroupsInput, entitiesUncheckedUpdateWithoutGroupsInput>
-  }
-
-  export type entitiesUpdateManyWithWhereWithoutGroupsInput = {
-    where: entitiesScalarWhereInput
-    data: XOR<entitiesUpdateManyMutationInput, entitiesUncheckedUpdateManyWithoutGroupsInput>
-  }
-
-  export type entitiesScalarWhereInput = {
-    AND?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-    OR?: entitiesScalarWhereInput[]
-    NOT?: entitiesScalarWhereInput | entitiesScalarWhereInput[]
-    entity_id?: IntFilter<"entities"> | number
-    individual_id?: IntNullableFilter<"entities"> | number | null
-    group_id?: IntNullableFilter<"entities"> | number | null
-    organization_id?: IntNullableFilter<"entities"> | number | null
-  }
-
-  export type entities_referencesUpsertWithWhereUniqueWithoutGroupsInput = {
-    where: entities_referencesWhereUniqueInput
-    update: XOR<entities_referencesUpdateWithoutGroupsInput, entities_referencesUncheckedUpdateWithoutGroupsInput>
-    create: XOR<entities_referencesCreateWithoutGroupsInput, entities_referencesUncheckedCreateWithoutGroupsInput>
-  }
-
-  export type entities_referencesUpdateWithWhereUniqueWithoutGroupsInput = {
-    where: entities_referencesWhereUniqueInput
-    data: XOR<entities_referencesUpdateWithoutGroupsInput, entities_referencesUncheckedUpdateWithoutGroupsInput>
-  }
-
-  export type entities_referencesUpdateManyWithWhereWithoutGroupsInput = {
-    where: entities_referencesScalarWhereInput
-    data: XOR<entities_referencesUpdateManyMutationInput, entities_referencesUncheckedUpdateManyWithoutGroupsInput>
-  }
-
-  export type entities_referencesScalarWhereInput = {
-    AND?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-    OR?: entities_referencesScalarWhereInput[]
-    NOT?: entities_referencesScalarWhereInput | entities_referencesScalarWhereInput[]
-    reference_id?: IntFilter<"entities_references"> | number
-    individual_id?: IntNullableFilter<"entities_references"> | number | null
-    group_id?: IntNullableFilter<"entities_references"> | number | null
-    organization_id?: IntNullableFilter<"entities_references"> | number | null
-    title?: StringFilter<"entities_references"> | string
-    author?: StringFilter<"entities_references"> | string
-    url?: StringFilter<"entities_references"> | string
   }
 
   export type groups_membersUpsertWithWhereUniqueWithoutGroupsInput = {
@@ -33407,35 +30778,55 @@ export namespace Prisma {
     data: XOR<groups_membersUpdateManyMutationInput, groups_membersUncheckedUpdateManyWithoutGroupsInput>
   }
 
-  export type groups_membersScalarWhereInput = {
-    AND?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
-    OR?: groups_membersScalarWhereInput[]
-    NOT?: groups_membersScalarWhereInput | groups_membersScalarWhereInput[]
-    group_id?: IntFilter<"groups_members"> | number
-    individual_id?: IntFilter<"groups_members"> | number
+  export type entitiesCreateWithoutGroups_membersInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutGroups_membersInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutGroups_membersInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutGroups_membersInput, entitiesUncheckedCreateWithoutGroups_membersInput>
   }
 
   export type groupsCreateWithoutGroups_membersInput = {
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutGroupsInput
-    entities?: entitiesCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutGroupsInput
   }
 
   export type groupsUncheckedCreateWithoutGroups_membersInput = {
-    group_id?: number
+    group_id: string
     group_handle: string
     group_name: string
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutGroupsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutGroupsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutGroupsInput
   }
 
   export type groupsCreateOrConnectWithoutGroups_membersInput = {
@@ -33443,35 +30834,43 @@ export namespace Prisma {
     create: XOR<groupsCreateWithoutGroups_membersInput, groupsUncheckedCreateWithoutGroups_membersInput>
   }
 
-  export type individualsCreateWithoutGroups_membersInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
+  export type entitiesUpsertWithoutGroups_membersInput = {
+    update: XOR<entitiesUpdateWithoutGroups_membersInput, entitiesUncheckedUpdateWithoutGroups_membersInput>
+    create: XOR<entitiesCreateWithoutGroups_membersInput, entitiesUncheckedCreateWithoutGroups_membersInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUncheckedCreateWithoutGroups_membersInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUpdateToOneWithWhereWithoutGroups_membersInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutGroups_membersInput, entitiesUncheckedUpdateWithoutGroups_membersInput>
   }
 
-  export type individualsCreateOrConnectWithoutGroups_membersInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutGroups_membersInput, individualsUncheckedCreateWithoutGroups_membersInput>
+  export type entitiesUpdateWithoutGroups_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutGroups_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type groupsUpsertWithoutGroups_membersInput = {
@@ -33486,66 +30885,25 @@ export namespace Prisma {
   }
 
   export type groupsUpdateWithoutGroups_membersInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutGroupsNestedInput
   }
 
   export type groupsUncheckedUpdateWithoutGroups_membersInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
+    group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: StringFieldUpdateOperationsInput | string
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutGroupsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutGroupsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutGroupsNestedInput
-  }
-
-  export type individualsUpsertWithoutGroups_membersInput = {
-    update: XOR<individualsUpdateWithoutGroups_membersInput, individualsUncheckedUpdateWithoutGroups_membersInput>
-    create: XOR<individualsCreateWithoutGroups_membersInput, individualsUncheckedCreateWithoutGroups_membersInput>
-    where?: individualsWhereInput
-  }
-
-  export type individualsUpdateToOneWithWhereWithoutGroups_membersInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutGroups_membersInput, individualsUncheckedUpdateWithoutGroups_membersInput>
-  }
-
-  export type individualsUpdateWithoutGroups_membersInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
-  }
-
-  export type individualsUncheckedUpdateWithoutGroups_membersInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type collections_imagesCreateWithoutImagesInput = {
+    collections_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -33553,8 +30911,8 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedCreateWithoutImagesInput = {
-    collections_images_id?: number
-    collection_id: number
+    collections_images_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -33571,6 +30929,7 @@ export namespace Prisma {
   }
 
   export type entities_imagesCreateWithoutImagesInput = {
+    entities_images_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -33578,8 +30937,8 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedCreateWithoutImagesInput = {
-    entities_images_id?: number
-    entity_id: number
+    entities_images_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -33596,24 +30955,29 @@ export namespace Prisma {
   }
 
   export type entitiesCreateWithoutImagesInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutImagesInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
@@ -33624,11 +30988,12 @@ export namespace Prisma {
   }
 
   export type images_dataCreateWithoutImagesInput = {
+    image_data_id: string
     image_data: Buffer
   }
 
   export type images_dataUncheckedCreateWithoutImagesInput = {
-    image_data_id?: number
+    image_data_id: string
     image_data: Buffer
   }
 
@@ -33681,24 +31046,29 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutImagesInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutImagesInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
@@ -33715,15 +31085,17 @@ export namespace Prisma {
   }
 
   export type images_dataUpdateWithoutImagesInput = {
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type images_dataUncheckedUpdateWithoutImagesInput = {
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     image_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type imagesCreateWithoutImages_dataInput = {
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -33733,8 +31105,8 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedCreateWithoutImages_dataInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
@@ -33768,114 +31140,8 @@ export namespace Prisma {
     data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutImages_dataInput>
   }
 
-  export type collectionsCreateWithoutIndividualsInput = {
-    collection_name: string
-    organizations?: organizationsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
-    collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsUncheckedCreateWithoutIndividualsInput = {
-    collection_id?: number
-    collection_name: string
-    group_id?: number | null
-    organization_id?: number | null
-    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsCreateOrConnectWithoutIndividualsInput = {
-    where: collectionsWhereUniqueInput
-    create: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type collectionsCreateManyIndividualsInputEnvelope = {
-    data: collectionsCreateManyIndividualsInput | collectionsCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entitiesCreateWithoutIndividualsInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
-    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
-    images?: imagesCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
-    videos?: videosCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesUncheckedCreateWithoutIndividualsInput = {
-    entity_id?: number
-    group_id?: number | null
-    organization_id?: number | null
-    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
-    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesCreateOrConnectWithoutIndividualsInput = {
-    where: entitiesWhereUniqueInput
-    create: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type entitiesCreateManyIndividualsInputEnvelope = {
-    data: entitiesCreateManyIndividualsInput | entitiesCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entities_referencesCreateWithoutIndividualsInput = {
-    title: string
-    author: string
-    url: string
-    groups?: groupsCreateNestedOneWithoutEntities_referencesInput
-    organizations?: organizationsCreateNestedOneWithoutEntities_referencesInput
-  }
-
-  export type entities_referencesUncheckedCreateWithoutIndividualsInput = {
-    reference_id?: number
-    group_id?: number | null
-    organization_id?: number | null
-    title: string
-    author: string
-    url: string
-  }
-
-  export type entities_referencesCreateOrConnectWithoutIndividualsInput = {
-    where: entities_referencesWhereUniqueInput
-    create: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type entities_referencesCreateManyIndividualsInputEnvelope = {
-    data: entities_referencesCreateManyIndividualsInput | entities_referencesCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type groups_membersCreateWithoutIndividualsInput = {
-    groups: groupsCreateNestedOneWithoutGroups_membersInput
-  }
-
-  export type groups_membersUncheckedCreateWithoutIndividualsInput = {
-    group_id: number
-  }
-
-  export type groups_membersCreateOrConnectWithoutIndividualsInput = {
-    where: groups_membersWhereUniqueInput
-    create: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type groups_membersCreateManyIndividualsInputEnvelope = {
-    data: groups_membersCreateManyIndividualsInput | groups_membersCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type user_credentialsCreateWithoutIndividualsInput = {
+    user_id: string
     username: string
     user_password: string
     user_first_name?: string | null
@@ -33885,7 +31151,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUncheckedCreateWithoutIndividualsInput = {
-    user_id?: number
+    user_id: string
     username: string
     user_password: string
     user_first_name?: string | null
@@ -33897,88 +31163,6 @@ export namespace Prisma {
   export type user_credentialsCreateOrConnectWithoutIndividualsInput = {
     where: user_credentialsWhereUniqueInput
     create: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type organizations_membersCreateWithoutIndividualsInput = {
-    organizations: organizationsCreateNestedOneWithoutOrganizations_membersInput
-  }
-
-  export type organizations_membersUncheckedCreateWithoutIndividualsInput = {
-    organization_id: number
-  }
-
-  export type organizations_membersCreateOrConnectWithoutIndividualsInput = {
-    where: organizations_membersWhereUniqueInput
-    create: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type organizations_membersCreateManyIndividualsInputEnvelope = {
-    data: organizations_membersCreateManyIndividualsInput | organizations_membersCreateManyIndividualsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type collectionsUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: collectionsWhereUniqueInput
-    update: XOR<collectionsUpdateWithoutIndividualsInput, collectionsUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<collectionsCreateWithoutIndividualsInput, collectionsUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type collectionsUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: collectionsWhereUniqueInput
-    data: XOR<collectionsUpdateWithoutIndividualsInput, collectionsUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type collectionsUpdateManyWithWhereWithoutIndividualsInput = {
-    where: collectionsScalarWhereInput
-    data: XOR<collectionsUpdateManyMutationInput, collectionsUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type entitiesUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: entitiesWhereUniqueInput
-    update: XOR<entitiesUpdateWithoutIndividualsInput, entitiesUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<entitiesCreateWithoutIndividualsInput, entitiesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type entitiesUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: entitiesWhereUniqueInput
-    data: XOR<entitiesUpdateWithoutIndividualsInput, entitiesUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type entitiesUpdateManyWithWhereWithoutIndividualsInput = {
-    where: entitiesScalarWhereInput
-    data: XOR<entitiesUpdateManyMutationInput, entitiesUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type entities_referencesUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: entities_referencesWhereUniqueInput
-    update: XOR<entities_referencesUpdateWithoutIndividualsInput, entities_referencesUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<entities_referencesCreateWithoutIndividualsInput, entities_referencesUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type entities_referencesUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: entities_referencesWhereUniqueInput
-    data: XOR<entities_referencesUpdateWithoutIndividualsInput, entities_referencesUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type entities_referencesUpdateManyWithWhereWithoutIndividualsInput = {
-    where: entities_referencesScalarWhereInput
-    data: XOR<entities_referencesUpdateManyMutationInput, entities_referencesUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type groups_membersUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: groups_membersWhereUniqueInput
-    update: XOR<groups_membersUpdateWithoutIndividualsInput, groups_membersUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<groups_membersCreateWithoutIndividualsInput, groups_membersUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type groups_membersUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: groups_membersWhereUniqueInput
-    data: XOR<groups_membersUpdateWithoutIndividualsInput, groups_membersUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type groups_membersUpdateManyWithWhereWithoutIndividualsInput = {
-    where: groups_membersScalarWhereInput
-    data: XOR<groups_membersUpdateManyMutationInput, groups_membersUncheckedUpdateManyWithoutIndividualsInput>
   }
 
   export type user_credentialsUpsertWithoutIndividualsInput = {
@@ -33993,6 +31177,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUpdateWithoutIndividualsInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34002,7 +31187,7 @@ export namespace Prisma {
   }
 
   export type user_credentialsUncheckedUpdateWithoutIndividualsInput = {
-    user_id?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     user_password?: StringFieldUpdateOperationsInput | string
     user_first_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34011,125 +31196,14 @@ export namespace Prisma {
     user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type organizations_membersUpsertWithWhereUniqueWithoutIndividualsInput = {
-    where: organizations_membersWhereUniqueInput
-    update: XOR<organizations_membersUpdateWithoutIndividualsInput, organizations_membersUncheckedUpdateWithoutIndividualsInput>
-    create: XOR<organizations_membersCreateWithoutIndividualsInput, organizations_membersUncheckedCreateWithoutIndividualsInput>
-  }
-
-  export type organizations_membersUpdateWithWhereUniqueWithoutIndividualsInput = {
-    where: organizations_membersWhereUniqueInput
-    data: XOR<organizations_membersUpdateWithoutIndividualsInput, organizations_membersUncheckedUpdateWithoutIndividualsInput>
-  }
-
-  export type organizations_membersUpdateManyWithWhereWithoutIndividualsInput = {
-    where: organizations_membersScalarWhereInput
-    data: XOR<organizations_membersUpdateManyMutationInput, organizations_membersUncheckedUpdateManyWithoutIndividualsInput>
-  }
-
-  export type organizations_membersScalarWhereInput = {
-    AND?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-    OR?: organizations_membersScalarWhereInput[]
-    NOT?: organizations_membersScalarWhereInput | organizations_membersScalarWhereInput[]
-    organization_id?: IntFilter<"organizations_members"> | number
-    individual_id?: IntFilter<"organizations_members"> | number
-  }
-
-  export type collectionsCreateWithoutOrganizationsInput = {
-    collection_name: string
-    individuals?: individualsCreateNestedOneWithoutCollectionsInput
-    groups?: groupsCreateNestedOneWithoutCollectionsInput
-    collections_images?: collections_imagesCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsUncheckedCreateWithoutOrganizationsInput = {
-    collection_id?: number
-    collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-    collections_images?: collections_imagesUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutCollectionsInput
-    collections_videos?: collections_videosUncheckedCreateNestedManyWithoutCollectionsInput
-  }
-
-  export type collectionsCreateOrConnectWithoutOrganizationsInput = {
-    where: collectionsWhereUniqueInput
-    create: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type collectionsCreateManyOrganizationsInputEnvelope = {
-    data: collectionsCreateManyOrganizationsInput | collectionsCreateManyOrganizationsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entitiesCreateWithoutOrganizationsInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
-    images?: imagesCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
-    videos?: videosCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesUncheckedCreateWithoutOrganizationsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
-    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
-    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
-    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
-  }
-
-  export type entitiesCreateOrConnectWithoutOrganizationsInput = {
-    where: entitiesWhereUniqueInput
-    create: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type entitiesCreateManyOrganizationsInputEnvelope = {
-    data: entitiesCreateManyOrganizationsInput | entitiesCreateManyOrganizationsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type entities_referencesCreateWithoutOrganizationsInput = {
-    title: string
-    author: string
-    url: string
-    groups?: groupsCreateNestedOneWithoutEntities_referencesInput
-    individuals?: individualsCreateNestedOneWithoutEntities_referencesInput
-  }
-
-  export type entities_referencesUncheckedCreateWithoutOrganizationsInput = {
-    reference_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    title: string
-    author: string
-    url: string
-  }
-
-  export type entities_referencesCreateOrConnectWithoutOrganizationsInput = {
-    where: entities_referencesWhereUniqueInput
-    create: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type entities_referencesCreateManyOrganizationsInputEnvelope = {
-    data: entities_referencesCreateManyOrganizationsInput | entities_referencesCreateManyOrganizationsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type organizations_membersCreateWithoutOrganizationsInput = {
-    individuals: individualsCreateNestedOneWithoutOrganizations_membersInput
+    organizations_members_id: string
+    entities: entitiesCreateNestedOneWithoutOrganizations_membersInput
   }
 
   export type organizations_membersUncheckedCreateWithoutOrganizationsInput = {
-    individual_id: number
+    organizations_members_id: string
+    entity_id: string
   }
 
   export type organizations_membersCreateOrConnectWithoutOrganizationsInput = {
@@ -34140,54 +31214,6 @@ export namespace Prisma {
   export type organizations_membersCreateManyOrganizationsInputEnvelope = {
     data: organizations_membersCreateManyOrganizationsInput | organizations_membersCreateManyOrganizationsInput[]
     skipDuplicates?: boolean
-  }
-
-  export type collectionsUpsertWithWhereUniqueWithoutOrganizationsInput = {
-    where: collectionsWhereUniqueInput
-    update: XOR<collectionsUpdateWithoutOrganizationsInput, collectionsUncheckedUpdateWithoutOrganizationsInput>
-    create: XOR<collectionsCreateWithoutOrganizationsInput, collectionsUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type collectionsUpdateWithWhereUniqueWithoutOrganizationsInput = {
-    where: collectionsWhereUniqueInput
-    data: XOR<collectionsUpdateWithoutOrganizationsInput, collectionsUncheckedUpdateWithoutOrganizationsInput>
-  }
-
-  export type collectionsUpdateManyWithWhereWithoutOrganizationsInput = {
-    where: collectionsScalarWhereInput
-    data: XOR<collectionsUpdateManyMutationInput, collectionsUncheckedUpdateManyWithoutOrganizationsInput>
-  }
-
-  export type entitiesUpsertWithWhereUniqueWithoutOrganizationsInput = {
-    where: entitiesWhereUniqueInput
-    update: XOR<entitiesUpdateWithoutOrganizationsInput, entitiesUncheckedUpdateWithoutOrganizationsInput>
-    create: XOR<entitiesCreateWithoutOrganizationsInput, entitiesUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type entitiesUpdateWithWhereUniqueWithoutOrganizationsInput = {
-    where: entitiesWhereUniqueInput
-    data: XOR<entitiesUpdateWithoutOrganizationsInput, entitiesUncheckedUpdateWithoutOrganizationsInput>
-  }
-
-  export type entitiesUpdateManyWithWhereWithoutOrganizationsInput = {
-    where: entitiesScalarWhereInput
-    data: XOR<entitiesUpdateManyMutationInput, entitiesUncheckedUpdateManyWithoutOrganizationsInput>
-  }
-
-  export type entities_referencesUpsertWithWhereUniqueWithoutOrganizationsInput = {
-    where: entities_referencesWhereUniqueInput
-    update: XOR<entities_referencesUpdateWithoutOrganizationsInput, entities_referencesUncheckedUpdateWithoutOrganizationsInput>
-    create: XOR<entities_referencesCreateWithoutOrganizationsInput, entities_referencesUncheckedCreateWithoutOrganizationsInput>
-  }
-
-  export type entities_referencesUpdateWithWhereUniqueWithoutOrganizationsInput = {
-    where: entities_referencesWhereUniqueInput
-    data: XOR<entities_referencesUpdateWithoutOrganizationsInput, entities_referencesUncheckedUpdateWithoutOrganizationsInput>
-  }
-
-  export type entities_referencesUpdateManyWithWhereWithoutOrganizationsInput = {
-    where: entities_referencesScalarWhereInput
-    data: XOR<entities_referencesUpdateManyMutationInput, entities_referencesUncheckedUpdateManyWithoutOrganizationsInput>
   }
 
   export type organizations_membersUpsertWithWhereUniqueWithoutOrganizationsInput = {
@@ -34206,58 +31232,55 @@ export namespace Prisma {
     data: XOR<organizations_membersUpdateManyMutationInput, organizations_membersUncheckedUpdateManyWithoutOrganizationsInput>
   }
 
-  export type individualsCreateWithoutOrganizations_membersInput = {
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    user_credentials?: user_credentialsCreateNestedOneWithoutIndividualsInput
+  export type entitiesCreateWithoutOrganizations_membersInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsUncheckedCreateWithoutOrganizations_membersInput = {
-    individual_id?: number
-    individual_userName: string
-    individual_name: string
-    individual_currentIssue?: string | null
-    individual_roles?: string | null
-    individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
+  export type entitiesUncheckedCreateWithoutOrganizations_membersInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
-  export type individualsCreateOrConnectWithoutOrganizations_membersInput = {
-    where: individualsWhereUniqueInput
-    create: XOR<individualsCreateWithoutOrganizations_membersInput, individualsUncheckedCreateWithoutOrganizations_membersInput>
+  export type entitiesCreateOrConnectWithoutOrganizations_membersInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutOrganizations_membersInput, entitiesUncheckedCreateWithoutOrganizations_membersInput>
   }
 
   export type organizationsCreateWithoutOrganizations_membersInput = {
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsUncheckedCreateWithoutOrganizations_membersInput = {
-    organization_id?: number
+    organization_id: string
     organization_handle: string
     organization_name: string
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutOrganizationsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsCreateOrConnectWithoutOrganizations_membersInput = {
@@ -34265,41 +31288,43 @@ export namespace Prisma {
     create: XOR<organizationsCreateWithoutOrganizations_membersInput, organizationsUncheckedCreateWithoutOrganizations_membersInput>
   }
 
-  export type individualsUpsertWithoutOrganizations_membersInput = {
-    update: XOR<individualsUpdateWithoutOrganizations_membersInput, individualsUncheckedUpdateWithoutOrganizations_membersInput>
-    create: XOR<individualsCreateWithoutOrganizations_membersInput, individualsUncheckedCreateWithoutOrganizations_membersInput>
-    where?: individualsWhereInput
+  export type entitiesUpsertWithoutOrganizations_membersInput = {
+    update: XOR<entitiesUpdateWithoutOrganizations_membersInput, entitiesUncheckedUpdateWithoutOrganizations_membersInput>
+    create: XOR<entitiesCreateWithoutOrganizations_membersInput, entitiesUncheckedCreateWithoutOrganizations_membersInput>
+    where?: entitiesWhereInput
   }
 
-  export type individualsUpdateToOneWithWhereWithoutOrganizations_membersInput = {
-    where?: individualsWhereInput
-    data: XOR<individualsUpdateWithoutOrganizations_membersInput, individualsUncheckedUpdateWithoutOrganizations_membersInput>
+  export type entitiesUpdateToOneWithWhereWithoutOrganizations_membersInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutOrganizations_membersInput, entitiesUncheckedUpdateWithoutOrganizations_membersInput>
   }
 
-  export type individualsUpdateWithoutOrganizations_membersInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
+  export type entitiesUpdateWithoutOrganizations_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
-  export type individualsUncheckedUpdateWithoutOrganizations_membersInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
-    individual_userName?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
+  export type entitiesUncheckedUpdateWithoutOrganizations_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type organizationsUpsertWithoutOrganizations_membersInput = {
@@ -34314,29 +31339,25 @@ export namespace Prisma {
   }
 
   export type organizationsUpdateWithoutOrganizations_membersInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsUncheckedUpdateWithoutOrganizations_membersInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
+    organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: StringFieldUpdateOperationsInput | string
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutOrganizationsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type collections_sheetsCreateWithoutSheetsInput = {
+    collections_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34344,8 +31365,8 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedCreateWithoutSheetsInput = {
-    collections_sheets_id?: number
-    collection_id: number
+    collections_sheets_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34362,6 +31383,7 @@ export namespace Prisma {
   }
 
   export type entities_sheetsCreateWithoutSheetsInput = {
+    entities_sheets_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34369,8 +31391,8 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedCreateWithoutSheetsInput = {
-    entities_sheets_id?: number
-    entity_id: number
+    entities_sheets_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34386,46 +31408,52 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type sheets_dataCreateWithoutSheetsInput = {
-    sheet_data: Buffer
-  }
-
-  export type sheets_dataUncheckedCreateWithoutSheetsInput = {
-    sheet_data_id?: number
-    sheet_data: Buffer
-  }
-
-  export type sheets_dataCreateOrConnectWithoutSheetsInput = {
-    where: sheets_dataWhereUniqueInput
-    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
-  }
-
   export type entitiesCreateWithoutSheetsInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutSheetsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutSheetsInput = {
     where: entitiesWhereUniqueInput
     create: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
+  }
+
+  export type sheets_dataCreateWithoutSheetsInput = {
+    sheet_data_id: string
+    sheet_data: Buffer
+  }
+
+  export type sheets_dataUncheckedCreateWithoutSheetsInput = {
+    sheet_data_id: string
+    sheet_data: Buffer
+  }
+
+  export type sheets_dataCreateOrConnectWithoutSheetsInput = {
+    where: sheets_dataWhereUniqueInput
+    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
   }
 
   export type collections_sheetsUpsertWithWhereUniqueWithoutSheetsInput = {
@@ -34460,26 +31488,6 @@ export namespace Prisma {
     data: XOR<entities_sheetsUpdateManyMutationInput, entities_sheetsUncheckedUpdateManyWithoutSheetsInput>
   }
 
-  export type sheets_dataUpsertWithoutSheetsInput = {
-    update: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
-    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
-    where?: sheets_dataWhereInput
-  }
-
-  export type sheets_dataUpdateToOneWithWhereWithoutSheetsInput = {
-    where?: sheets_dataWhereInput
-    data: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
-  }
-
-  export type sheets_dataUpdateWithoutSheetsInput = {
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
-  }
-
-  export type sheets_dataUncheckedUpdateWithoutSheetsInput = {
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
-    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
-  }
-
   export type entitiesUpsertWithoutSheetsInput = {
     update: XOR<entitiesUpdateWithoutSheetsInput, entitiesUncheckedUpdateWithoutSheetsInput>
     create: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
@@ -34492,29 +31500,56 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutSheetsInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutSheetsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
+  export type sheets_dataUpsertWithoutSheetsInput = {
+    update: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
+    create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
+    where?: sheets_dataWhereInput
+  }
+
+  export type sheets_dataUpdateToOneWithWhereWithoutSheetsInput = {
+    where?: sheets_dataWhereInput
+    data: XOR<sheets_dataUpdateWithoutSheetsInput, sheets_dataUncheckedUpdateWithoutSheetsInput>
+  }
+
+  export type sheets_dataUpdateWithoutSheetsInput = {
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type sheets_dataUncheckedUpdateWithoutSheetsInput = {
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
   export type sheetsCreateWithoutSheets_dataInput = {
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
@@ -34524,8 +31559,8 @@ export namespace Prisma {
   }
 
   export type sheetsUncheckedCreateWithoutSheets_dataInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
@@ -34560,29 +31595,19 @@ export namespace Prisma {
   }
 
   export type individualsCreateWithoutUser_credentialsInput = {
-    individual_userName: string
+    individual_username: string
     individual_name: string
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
-    collections?: collectionsCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutUser_credentialsInput = {
-    individual_userName: string
+    individual_username: string
     individual_name: string
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
-    collections?: collectionsUncheckedCreateNestedManyWithoutIndividualsInput
-    entities?: entitiesUncheckedCreateNestedManyWithoutIndividualsInput
-    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutIndividualsInput
-    groups_members?: groups_membersUncheckedCreateNestedManyWithoutIndividualsInput
-    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutIndividualsInput
   }
 
   export type individualsCreateOrConnectWithoutUser_credentialsInput = {
@@ -34602,32 +31627,23 @@ export namespace Prisma {
   }
 
   export type individualsUpdateWithoutUser_credentialsInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUpdateManyWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutUser_credentialsInput = {
-    individual_userName?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: StringFieldUpdateOperationsInput | string
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
-    collections?: collectionsUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities?: entitiesUncheckedUpdateManyWithoutIndividualsNestedInput
-    entities_references?: entities_referencesUncheckedUpdateManyWithoutIndividualsNestedInput
-    groups_members?: groups_membersUncheckedUpdateManyWithoutIndividualsNestedInput
-    organizations_members?: organizations_membersUncheckedUpdateManyWithoutIndividualsNestedInput
   }
 
   export type collections_videosCreateWithoutVideosInput = {
+    collections_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34635,8 +31651,8 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedCreateWithoutVideosInput = {
-    collections_videos_id?: number
-    collection_id: number
+    collections_videos_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34653,6 +31669,7 @@ export namespace Prisma {
   }
 
   export type entities_videosCreateWithoutVideosInput = {
+    entities_videos_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34660,8 +31677,8 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedCreateWithoutVideosInput = {
-    entities_videos_id?: number
-    entity_id: number
+    entities_videos_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
@@ -34678,25 +31695,30 @@ export namespace Prisma {
   }
 
   export type entitiesCreateWithoutVideosInput = {
-    groups?: groupsCreateNestedOneWithoutEntitiesInput
-    individuals?: individualsCreateNestedOneWithoutEntitiesInput
-    organizations?: organizationsCreateNestedOneWithoutEntitiesInput
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutVideosInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    organization_id?: number | null
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_images?: entities_imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_videos?: entities_videosUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -34706,11 +31728,12 @@ export namespace Prisma {
   }
 
   export type videos_dataCreateWithoutVideosInput = {
+    video_data_id: string
     video_data: Buffer
   }
 
   export type videos_dataUncheckedCreateWithoutVideosInput = {
-    video_data_id?: number
+    video_data_id: string
     video_data: Buffer
   }
 
@@ -34763,25 +31786,30 @@ export namespace Prisma {
   }
 
   export type entitiesUpdateWithoutVideosInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutVideosInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -34797,15 +31825,17 @@ export namespace Prisma {
   }
 
   export type videos_dataUpdateWithoutVideosInput = {
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type videos_dataUncheckedUpdateWithoutVideosInput = {
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type videosCreateWithoutVideos_dataInput = {
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -34815,8 +31845,8 @@ export namespace Prisma {
   }
 
   export type videosUncheckedCreateWithoutVideos_dataInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
@@ -34851,30 +31881,31 @@ export namespace Prisma {
   }
 
   export type collections_imagesCreateManyCollectionsInput = {
-    collections_images_id?: number
-    image_id: number
+    collections_images_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_sheetsCreateManyCollectionsInput = {
-    collections_sheets_id?: number
-    sheet_id: number
+    collections_sheets_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_videosCreateManyCollectionsInput = {
-    collections_videos_id?: number
-    video_id: number
+    collections_videos_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_imagesUpdateWithoutCollectionsInput = {
+    collections_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34882,22 +31913,23 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedUpdateWithoutCollectionsInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_imagesUncheckedUpdateManyWithoutCollectionsInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsUpdateWithoutCollectionsInput = {
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34905,22 +31937,23 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedUpdateWithoutCollectionsInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsUncheckedUpdateManyWithoutCollectionsInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosUpdateWithoutCollectionsInput = {
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34928,70 +31961,114 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedUpdateWithoutCollectionsInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosUncheckedUpdateManyWithoutCollectionsInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type collectionsCreateManyEntitiesInput = {
+    collection_id: string
+    collection_name: string
+  }
+
   export type entities_imagesCreateManyEntitiesInput = {
-    entities_images_id?: number
-    image_id: number
+    entities_images_id: string
+    image_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
+  export type entities_referencesCreateManyEntitiesInput = {
+    reference_id: string
+    title: string
+    author: string
+    url: string
+  }
+
   export type entities_sheetsCreateManyEntitiesInput = {
-    entities_sheets_id?: number
-    sheet_id: number
+    entities_sheets_id: string
+    sheet_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_videosCreateManyEntitiesInput = {
-    entities_videos_id?: number
-    video_id: number
+    entities_videos_id: string
+    video_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
+  export type groups_membersCreateManyEntitiesInput = {
+    groups_members_id: string
+    group_id: string
+  }
+
   export type imagesCreateManyEntitiesInput = {
-    image_id?: number
+    image_id: string
     image_title: string
     image_description: string
     image_filename: string
-    image_data_id: number
+    image_data_id: string
+  }
+
+  export type organizations_membersCreateManyEntitiesInput = {
+    organizations_members_id: string
+    organization_id: string
   }
 
   export type sheetsCreateManyEntitiesInput = {
-    sheet_id?: number
+    sheet_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
-    sheet_data_id: number
+    sheet_data_id: string
   }
 
   export type videosCreateManyEntitiesInput = {
-    video_id?: number
+    video_id: string
     video_title: string
     video_description: string
     video_filename: string
-    video_data_id: number
+    video_data_id: string
+  }
+
+  export type collectionsUpdateWithoutEntitiesInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
+    collection_name?: StringFieldUpdateOperationsInput | string
+    collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
+    collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
+    collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
+  }
+
+  export type collectionsUncheckedUpdateWithoutEntitiesInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
+    collection_name?: StringFieldUpdateOperationsInput | string
+    collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
+    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
+    collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
+  }
+
+  export type collectionsUncheckedUpdateManyWithoutEntitiesInput = {
+    collection_id?: StringFieldUpdateOperationsInput | string
+    collection_name?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_imagesUpdateWithoutEntitiesInput = {
+    entities_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34999,22 +32076,44 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedUpdateWithoutEntitiesInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_imagesUncheckedUpdateManyWithoutEntitiesInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    image_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    image_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type entities_referencesUpdateWithoutEntitiesInput = {
+    reference_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    author?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_referencesUncheckedUpdateWithoutEntitiesInput = {
+    reference_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    author?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_referencesUncheckedUpdateManyWithoutEntitiesInput = {
+    reference_id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    author?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
   export type entities_sheetsUpdateWithoutEntitiesInput = {
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35022,22 +32121,23 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedUpdateWithoutEntitiesInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_sheetsUncheckedUpdateManyWithoutEntitiesInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    sheet_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosUpdateWithoutEntitiesInput = {
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35045,22 +32145,38 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedUpdateWithoutEntitiesInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosUncheckedUpdateManyWithoutEntitiesInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    video_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    video_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type groups_membersUpdateWithoutEntitiesInput = {
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    groups?: groupsUpdateOneRequiredWithoutGroups_membersNestedInput
+  }
+
+  export type groups_membersUncheckedUpdateWithoutEntitiesInput = {
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    group_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type groups_membersUncheckedUpdateManyWithoutEntitiesInput = {
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    group_id?: StringFieldUpdateOperationsInput | string
+  }
+
   export type imagesUpdateWithoutEntitiesInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -35070,24 +32186,40 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateWithoutEntitiesInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
     collections_images?: collections_imagesUncheckedUpdateManyWithoutImagesNestedInput
     entities_images?: entities_imagesUncheckedUpdateManyWithoutImagesNestedInput
   }
 
   export type imagesUncheckedUpdateManyWithoutEntitiesInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
-    image_data_id?: IntFieldUpdateOperationsInput | number
+    image_data_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type organizations_membersUpdateWithoutEntitiesInput = {
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    organizations?: organizationsUpdateOneRequiredWithoutOrganizations_membersNestedInput
+  }
+
+  export type organizations_membersUncheckedUpdateWithoutEntitiesInput = {
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    organization_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type organizations_membersUncheckedUpdateManyWithoutEntitiesInput = {
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    organization_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheetsUpdateWithoutEntitiesInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
@@ -35097,24 +32229,25 @@ export namespace Prisma {
   }
 
   export type sheetsUncheckedUpdateWithoutEntitiesInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateManyWithoutEntitiesInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
-    sheet_data_id?: IntFieldUpdateOperationsInput | number
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type videosUpdateWithoutEntitiesInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -35124,159 +32257,61 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateWithoutEntitiesInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
+    video_data_id?: StringFieldUpdateOperationsInput | string
     collections_videos?: collections_videosUncheckedUpdateManyWithoutVideosNestedInput
     entities_videos?: entities_videosUncheckedUpdateManyWithoutVideosNestedInput
   }
 
   export type videosUncheckedUpdateManyWithoutEntitiesInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
-    video_data_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type collectionsCreateManyGroupsInput = {
-    collection_id?: number
-    collection_name: string
-    individual_id?: number | null
-    organization_id?: number | null
-  }
-
-  export type entitiesCreateManyGroupsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    organization_id?: number | null
-  }
-
-  export type entities_referencesCreateManyGroupsInput = {
-    reference_id?: number
-    individual_id?: number | null
-    organization_id?: number | null
-    title: string
-    author: string
-    url: string
+    video_data_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type groups_membersCreateManyGroupsInput = {
-    individual_id: number
-  }
-
-  export type collectionsUpdateWithoutGroupsInput = {
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateWithoutGroupsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateManyWithoutGroupsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entitiesUpdateWithoutGroupsInput = {
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
-    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateWithoutGroupsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutGroupsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entities_referencesUpdateWithoutGroupsInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutEntities_referencesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntities_referencesNestedInput
-  }
-
-  export type entities_referencesUncheckedUpdateWithoutGroupsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutGroupsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    groups_members_id: string
+    entity_id: string
   }
 
   export type groups_membersUpdateWithoutGroupsInput = {
-    individuals?: individualsUpdateOneRequiredWithoutGroups_membersNestedInput
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutGroups_membersNestedInput
   }
 
   export type groups_membersUncheckedUpdateWithoutGroupsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type groups_membersUncheckedUpdateManyWithoutGroupsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
+    groups_members_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type collections_imagesCreateManyImagesInput = {
-    collections_images_id?: number
-    collection_id: number
+    collections_images_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_imagesCreateManyImagesInput = {
-    entities_images_id?: number
-    entity_id: number
+    entities_images_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_imagesUpdateWithoutImagesInput = {
+    collections_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35284,22 +32319,23 @@ export namespace Prisma {
   }
 
   export type collections_imagesUncheckedUpdateWithoutImagesInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_imagesUncheckedUpdateManyWithoutImagesInput = {
-    collections_images_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_images_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_imagesUpdateWithoutImagesInput = {
+    entities_images_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35307,30 +32343,31 @@ export namespace Prisma {
   }
 
   export type entities_imagesUncheckedUpdateWithoutImagesInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_imagesUncheckedUpdateManyWithoutImagesInput = {
-    entities_images_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_images_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type imagesCreateManyImages_dataInput = {
-    image_id?: number
-    image_creator_id: number
+    image_id: string
+    image_creator_id: string
     image_title: string
     image_description: string
     image_filename: string
   }
 
   export type imagesUpdateWithoutImages_dataInput = {
+    image_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -35340,8 +32377,8 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateWithoutImages_dataInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
@@ -35350,284 +32387,51 @@ export namespace Prisma {
   }
 
   export type imagesUncheckedUpdateManyWithoutImages_dataInput = {
-    image_id?: IntFieldUpdateOperationsInput | number
-    image_creator_id?: IntFieldUpdateOperationsInput | number
+    image_id?: StringFieldUpdateOperationsInput | string
+    image_creator_id?: StringFieldUpdateOperationsInput | string
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
   }
 
-  export type collectionsCreateManyIndividualsInput = {
-    collection_id?: number
-    collection_name: string
-    group_id?: number | null
-    organization_id?: number | null
-  }
-
-  export type entitiesCreateManyIndividualsInput = {
-    entity_id?: number
-    group_id?: number | null
-    organization_id?: number | null
-  }
-
-  export type entities_referencesCreateManyIndividualsInput = {
-    reference_id?: number
-    group_id?: number | null
-    organization_id?: number | null
-    title: string
-    author: string
-    url: string
-  }
-
-  export type groups_membersCreateManyIndividualsInput = {
-    group_id: number
-  }
-
-  export type organizations_membersCreateManyIndividualsInput = {
-    organization_id: number
-  }
-
-  export type collectionsUpdateWithoutIndividualsInput = {
-    collection_name?: StringFieldUpdateOperationsInput | string
-    organizations?: organizationsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
-    collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateWithoutIndividualsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateManyWithoutIndividualsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entitiesUpdateWithoutIndividualsInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntitiesNestedInput
-    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateWithoutIndividualsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutIndividualsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entities_referencesUpdateWithoutIndividualsInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    groups?: groupsUpdateOneWithoutEntities_referencesNestedInput
-    organizations?: organizationsUpdateOneWithoutEntities_referencesNestedInput
-  }
-
-  export type entities_referencesUncheckedUpdateWithoutIndividualsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutIndividualsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    organization_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type groups_membersUpdateWithoutIndividualsInput = {
-    groups?: groupsUpdateOneRequiredWithoutGroups_membersNestedInput
-  }
-
-  export type groups_membersUncheckedUpdateWithoutIndividualsInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type groups_membersUncheckedUpdateManyWithoutIndividualsInput = {
-    group_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type organizations_membersUpdateWithoutIndividualsInput = {
-    organizations?: organizationsUpdateOneRequiredWithoutOrganizations_membersNestedInput
-  }
-
-  export type organizations_membersUncheckedUpdateWithoutIndividualsInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type organizations_membersUncheckedUpdateManyWithoutIndividualsInput = {
-    organization_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type collectionsCreateManyOrganizationsInput = {
-    collection_id?: number
-    collection_name: string
-    individual_id?: number | null
-    group_id?: number | null
-  }
-
-  export type entitiesCreateManyOrganizationsInput = {
-    entity_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-  }
-
-  export type entities_referencesCreateManyOrganizationsInput = {
-    reference_id?: number
-    individual_id?: number | null
-    group_id?: number | null
-    title: string
-    author: string
-    url: string
-  }
-
   export type organizations_membersCreateManyOrganizationsInput = {
-    individual_id: number
-  }
-
-  export type collectionsUpdateWithoutOrganizationsInput = {
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individuals?: individualsUpdateOneWithoutCollectionsNestedInput
-    groups?: groupsUpdateOneWithoutCollectionsNestedInput
-    collections_images?: collections_imagesUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateWithoutOrganizationsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    collections_images?: collections_imagesUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutCollectionsNestedInput
-    collections_videos?: collections_videosUncheckedUpdateManyWithoutCollectionsNestedInput
-  }
-
-  export type collectionsUncheckedUpdateManyWithoutOrganizationsInput = {
-    collection_id?: IntFieldUpdateOperationsInput | number
-    collection_name?: StringFieldUpdateOperationsInput | string
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entitiesUpdateWithoutOrganizationsInput = {
-    groups?: groupsUpdateOneWithoutEntitiesNestedInput
-    individuals?: individualsUpdateOneWithoutEntitiesNestedInput
-    entities_images?: entities_imagesUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateWithoutOrganizationsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    entities_images?: entities_imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    entities_videos?: entities_videosUncheckedUpdateManyWithoutEntitiesNestedInput
-    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
-    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
-    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
-  }
-
-  export type entitiesUncheckedUpdateManyWithoutOrganizationsInput = {
-    entity_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type entities_referencesUpdateWithoutOrganizationsInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    groups?: groupsUpdateOneWithoutEntities_referencesNestedInput
-    individuals?: individualsUpdateOneWithoutEntities_referencesNestedInput
-  }
-
-  export type entities_referencesUncheckedUpdateWithoutOrganizationsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type entities_referencesUncheckedUpdateManyWithoutOrganizationsInput = {
-    reference_id?: IntFieldUpdateOperationsInput | number
-    individual_id?: NullableIntFieldUpdateOperationsInput | number | null
-    group_id?: NullableIntFieldUpdateOperationsInput | number | null
-    title?: StringFieldUpdateOperationsInput | string
-    author?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    organizations_members_id: string
+    entity_id: string
   }
 
   export type organizations_membersUpdateWithoutOrganizationsInput = {
-    individuals?: individualsUpdateOneRequiredWithoutOrganizations_membersNestedInput
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutOrganizations_membersNestedInput
   }
 
   export type organizations_membersUncheckedUpdateWithoutOrganizationsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type organizations_membersUncheckedUpdateManyWithoutOrganizationsInput = {
-    individual_id?: IntFieldUpdateOperationsInput | number
+    organizations_members_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type collections_sheetsCreateManySheetsInput = {
-    collections_sheets_id?: number
-    collection_id: number
+    collections_sheets_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_sheetsCreateManySheetsInput = {
-    entities_sheets_id?: number
-    entity_id: number
+    entities_sheets_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_sheetsUpdateWithoutSheetsInput = {
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35635,22 +32439,23 @@ export namespace Prisma {
   }
 
   export type collections_sheetsUncheckedUpdateWithoutSheetsInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_sheetsUncheckedUpdateManyWithoutSheetsInput = {
-    collections_sheets_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_sheets_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_sheetsUpdateWithoutSheetsInput = {
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35658,30 +32463,31 @@ export namespace Prisma {
   }
 
   export type entities_sheetsUncheckedUpdateWithoutSheetsInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_sheetsUncheckedUpdateManyWithoutSheetsInput = {
-    entities_sheets_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_sheets_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type sheetsCreateManySheets_dataInput = {
-    sheet_id?: number
-    sheet_author_id: number
+    sheet_id: string
+    sheet_author_id: string
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
   }
 
   export type sheetsUpdateWithoutSheets_dataInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
@@ -35691,8 +32497,8 @@ export namespace Prisma {
   }
 
   export type sheetsUncheckedUpdateWithoutSheets_dataInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
@@ -35701,30 +32507,31 @@ export namespace Prisma {
   }
 
   export type sheetsUncheckedUpdateManyWithoutSheets_dataInput = {
-    sheet_id?: IntFieldUpdateOperationsInput | number
-    sheet_author_id?: IntFieldUpdateOperationsInput | number
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type collections_videosCreateManyVideosInput = {
-    collections_videos_id?: number
-    collection_id: number
+    collections_videos_id: string
+    collection_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type entities_videosCreateManyVideosInput = {
-    entities_videos_id?: number
-    entity_id: number
+    entities_videos_id: string
+    entity_id: string
     date_added: Date | string
     pinned: boolean
     date_pinned?: Date | string | null
   }
 
   export type collections_videosUpdateWithoutVideosInput = {
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35732,22 +32539,23 @@ export namespace Prisma {
   }
 
   export type collections_videosUncheckedUpdateWithoutVideosInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type collections_videosUncheckedUpdateManyWithoutVideosInput = {
-    collections_videos_id?: IntFieldUpdateOperationsInput | number
-    collection_id?: IntFieldUpdateOperationsInput | number
+    collections_videos_id?: StringFieldUpdateOperationsInput | string
+    collection_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosUpdateWithoutVideosInput = {
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35755,30 +32563,31 @@ export namespace Prisma {
   }
 
   export type entities_videosUncheckedUpdateWithoutVideosInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type entities_videosUncheckedUpdateManyWithoutVideosInput = {
-    entities_videos_id?: IntFieldUpdateOperationsInput | number
-    entity_id?: IntFieldUpdateOperationsInput | number
+    entities_videos_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videosCreateManyVideos_dataInput = {
-    video_id?: number
-    video_creator_id: number
+    video_id: string
+    video_creator_id: string
     video_title: string
     video_description: string
     video_filename: string
   }
 
   export type videosUpdateWithoutVideos_dataInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -35788,8 +32597,8 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateWithoutVideos_dataInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -35798,8 +32607,8 @@ export namespace Prisma {
   }
 
   export type videosUncheckedUpdateManyWithoutVideos_dataInput = {
-    video_id?: IntFieldUpdateOperationsInput | number
-    video_creator_id?: IntFieldUpdateOperationsInput | number
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
@@ -35830,10 +32639,6 @@ export namespace Prisma {
      * @deprecated Use Images_dataCountOutputTypeDefaultArgs instead
      */
     export type Images_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Images_dataCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use IndividualsCountOutputTypeDefaultArgs instead
-     */
-    export type IndividualsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = IndividualsCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use OrganizationsCountOutputTypeDefaultArgs instead
      */
