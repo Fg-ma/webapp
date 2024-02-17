@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface Organization {
-  organization_id: number;
+  organization_id: string;
   organization_name: string;
   organization_handle: string;
   organization_currentIssue: string;

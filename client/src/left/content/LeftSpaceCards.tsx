@@ -10,7 +10,7 @@ import { setIds, setPageState } from "@redux/pageState/pageStateActions";
     N/A
 */
 interface IndividualCardProps {
-  id: number;
+  id: string;
   name: string;
   currentIssue: string | null;
 }
@@ -26,7 +26,7 @@ export function IndividualCard({
     dispatch(setPageState("main", "individuals"));
     dispatch(setPageState("individuals", "sheets"));
     dispatch(setIds("main", "individual_id", id));
-    dispatch(setIds("individuals", "collection_id", 0));
+    dispatch(setIds("individuals", "collection_id", null));
   };
 
   return (
@@ -48,7 +48,7 @@ export function IndividualCard({
 }
 
 interface GroupCardProps {
-  id: number;
+  id: string;
   name: string;
   currentIssue: string | null;
   affInCommon: string | null;
@@ -66,7 +66,7 @@ export function GroupCard({
     dispatch(setPageState("main", "groups"));
     dispatch(setPageState("groups", "sheets"));
     dispatch(setIds("main", "group_id", id));
-    dispatch(setIds("groups", "collection_id", 0));
+    dispatch(setIds("groups", "collection_id", null));
   };
 
   return (
@@ -91,7 +91,7 @@ export function GroupCard({
 }
 
 interface OrganizationCardProps {
-  id: number;
+  id: string;
   name: string;
   currentIssue: string | null;
   stances: string | null;
@@ -109,7 +109,7 @@ export function OrganizationCard({
     dispatch(setPageState("main", "organizations"));
     dispatch(setPageState("organizations", "sheets"));
     dispatch(setIds("main", "organization_id", id));
-    dispatch(setIds("organizations", "collection_id", 0));
+    dispatch(setIds("organizations", "collection_id", null));
   };
 
   return (

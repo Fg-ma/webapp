@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
-import { setPageState } from "@redux/pageState/pageStateActions";
+import { setPageState, setIds } from "@redux/pageState/pageStateActions";
 
 const navButtonsVar: Variants = {
   init: {
@@ -72,9 +72,16 @@ export default function PageNav() {
 
   mainPageStyles[mainPageState] = { ...activeStyles };
 
-  function swapPageState(newState: string) {
+  const swapPageState = (newState: string) => {
     dispatch(setPageState("main", newState));
-  }
+  };
+
+  const profileNavFunction = () => {
+    dispatch(setPageState("main", "individuals"));
+    dispatch(setPageState("individuals", "sheets"));
+    dispatch(setIds("main", "individual_id", "user"));
+    dispatch(setIds("individuals", "collection_id", null));
+  };
 
   return (
     <nav
@@ -92,7 +99,10 @@ export default function PageNav() {
           initial="init"
           whileHover="hover"
           transition={transition}
-          onClick={() => swapPageState("profile")}
+          onClick={() => {
+            swapPageState("profile");
+            profileNavFunction();
+          }}
         >
           <button className="rounded-full bg-fg-white-90 h-10 aspect-square text-sm"></button>
           <button style={mainPageStyles["profile"]} className="ml-2">

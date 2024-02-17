@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface Individual {
-  individual_id: number;
+  individual_id: string;
   individual_name: string;
   individual_userName: string;
   individual_currentIssue: string;

@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface Group {
-  group_id: number;
+  group_id: string;
   group_name: string;
   group_currentIssue: string;
   group_description: string;

@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface Group {
-  group_id: number;
+  group_id: string;
   group_name: string;
   group_currentIssue: string;
   group_description: string;
@@ -47,13 +47,13 @@ export default function GroupRecs() {
         id={grpInfo.group_id}
         name={grpInfo.group_name}
         currentIssue={grpInfo.group_currentIssue}
-        affInCommon='placeholder'
+        affInCommon="placeholder"
       />
     );
   });
 
   return (
-    <div id='groupRecs' className='mr-3 h-full overflow-scroll'>
+    <div id="groupRecs" className="mr-3 h-full overflow-scroll">
       {grpRecs}
     </div>
   );
