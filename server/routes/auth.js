@@ -57,13 +57,12 @@ router.post("/login", async (req, res) => {
       res.json({ success: false });
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 router.post("/validate_token", verifyToken, (req, res) => {
-  res.json({ message: "Token is valid", user: req.user });
+  res.json({ message: "Token is valid" });
 });
 
 module.exports = router;

@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./verifyJWT");
 
 // Get entity data from entity type and entity id
-router.get("/entity", async (req, res) => {
-  const id = req.query.id;
+router.get("/entity", verifyToken, async (req, res) => {
+  const entity_id = req.query.entity_id;
 
   try {
-    let entities;
-
-    entities = await req.db.entities.findMany({
+    const entities = await req.db.entities.findMany({
       where: {
-        entity_id: id,
+        entity_id: entity_id === "user" ? req.user.user_id : entity_id,
       },
     });
 
@@ -18,6 +17,20 @@ router.get("/entity", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+/* 
+  Get if a user can edit a certain entities page(NOTE THIS CAN ONLY FOR DISPLAY 
+  PURPOSES AND ITS RESPONSE SHOULDN'T BE USED TO ALLOW USERS TO EDIT PAGES)
+*/
+router.get("/auth", verifyToken, async (req, res) => {
+  const entity_id = req.query.entity_id;
+
+  if (entity_id === "user") {
+    res.send(true);
+  } else {
+    res.send(false);
   }
 });
 
@@ -85,11 +98,25 @@ router.get("/entity_images/:entity_id", async (req, res) => {
 });
 
 // Set an entity's sheet as pinned or not pinned
-router.put("/entity_sheets_pinned", async (req, res) => {
+router.put("/entity_sheets_pinned", verifyToken, async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
-    const result = await req.db.entities_sheets.update({
+    const searchResult = await req.db.entities_sheets.findUnique({
+      where: {
+        entities_sheets_id: relation_id,
+      },
+    });
+
+    if (!searchResult) {
+      return;
+    }
+
+    if (searchResult.entity_id !== req.user.user_id) {
+      return;
+    }
+
+    const updateResult = await req.db.entities_sheets.update({
       where: {
         entities_sheets_id: relation_id,
       },
@@ -99,7 +126,7 @@ router.put("/entity_sheets_pinned", async (req, res) => {
       },
     });
 
-    res.send(result);
+    res.send(updateResult);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -107,10 +134,24 @@ router.put("/entity_sheets_pinned", async (req, res) => {
 });
 
 // Set an entity's video as pinned or not pinned
-router.put("/entity_videos_pinned", async (req, res) => {
+router.put("/entity_videos_pinned", verifyToken, async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
+    const searchResult = await req.db.entities_videos.findUnique({
+      where: {
+        entities_videos_id: relation_id,
+      },
+    });
+
+    if (!searchResult) {
+      return;
+    }
+
+    if (searchResult.entity_id !== req.user.user_id) {
+      return;
+    }
+
     const result = await req.db.entities_videos.update({
       where: {
         entities_videos_id: relation_id,
@@ -129,10 +170,24 @@ router.put("/entity_videos_pinned", async (req, res) => {
 });
 
 // Set an entity's image as pinned or not pinned
-router.put("/entity_images_pinned", async (req, res) => {
+router.put("/entity_images_pinned", verifyToken, async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
+    const searchResult = await req.db.entities_images.findUnique({
+      where: {
+        entities_images_id: relation_id,
+      },
+    });
+
+    if (!searchResult) {
+      return;
+    }
+
+    if (searchResult.entity_id !== req.user.user_id) {
+      return;
+    }
+
     const result = await req.db.entities_images.update({
       where: {
         entities_images_id: relation_id,

@@ -57,13 +57,14 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
 });
 
 // Route to get an organization by ID
-router.get("/:organization_id", async (req, res) => {
+router.get("/:organization_id", verifyToken, async (req, res) => {
   const organization_id = req.params.organization_id;
 
   try {
     const organization = await req.db.organizations.findUnique({
       where: {
-        organization_id: organization_id,
+        organization_id:
+          organization_id === "user" ? req.user.user_id : organization_id,
       },
     });
 

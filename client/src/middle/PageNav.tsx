@@ -77,7 +77,6 @@ export default function PageNav() {
   };
 
   const profileNavFunction = () => {
-    dispatch(setPageState("main", "individuals"));
     dispatch(setPageState("individuals", "sheets"));
     dispatch(setIds("main", "individual_id", "user"));
     dispatch(setIds("individuals", "collection_id", null));

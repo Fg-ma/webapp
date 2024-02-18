@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
@@ -11,6 +11,7 @@ const serverUrl = isDevelopment
 
 interface VideosProps {
   entity_id: string;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface VideoData {
@@ -30,7 +31,7 @@ interface VideoData {
   };
 }
 
-export default function Videos({ entity_id }: VideosProps) {
+export default function Videos({ entity_id, isEditablePage }: VideosProps) {
   /* 
     Description:   
       Queries the database to get the videos that the passed in entity is related 
@@ -77,7 +78,7 @@ export default function Videos({ entity_id }: VideosProps) {
     // Connects to the socket to get the new data when pinned is updated
     videoSocketRef.current?.on(
       "pinnedUpdated",
-      ({ relation, relation_id, pinned, date_pinned }) => {
+      ({ relation_id, pinned, date_pinned }) => {
         setVideosData((prevData) => {
           const updatedData = prevData.map((video) => {
             if (video.entities_videos_id === relation_id) {
@@ -121,6 +122,7 @@ export default function Videos({ entity_id }: VideosProps) {
         pinned={video.pinned}
         relation_id={video.entities_videos_id}
         socket={videoSocketRef.current}
+        isEditablePage={isEditablePage}
       />
     );
   });

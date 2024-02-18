@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MutableRefObject } from "react";
 import Axios from "axios";
 import config from "@config";
 import CollectionButton from "./CollectionButton";
@@ -11,6 +11,7 @@ const serverUrl = isDevelopment
 interface CollectionButtonsProps {
   entityType: string;
   entity_id: number;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface CollectionNames {
@@ -24,6 +25,7 @@ interface CollectionNames {
 export default function CollectionButtons({
   entityType,
   entity_id,
+  isEditablePage,
 }: CollectionButtonsProps) {
   /* 
     Description:   
@@ -71,12 +73,14 @@ export default function CollectionButtons({
     <>
       {collectionNames.length > 0 && (
         <div className="h-11 mb-2 space-x-6 flex items-center justify-start overflow-x-auto w-full">
-          <button
-            className="h-9 aspect-square bg-fg-white-90 rounded bg-cover bg-no-repeat"
-            style={{
-              backgroundImage: 'url("/assets/icons/plus.svg")',
-            }}
-          ></button>
+          {isEditablePage.current && (
+            <button
+              className="h-9 aspect-square bg-fg-white-90 rounded bg-cover bg-no-repeat"
+              style={{
+                backgroundImage: 'url("/assets/icons/plus.svg")',
+              }}
+            ></button>
+          )}
           {collections}
         </div>
       )}

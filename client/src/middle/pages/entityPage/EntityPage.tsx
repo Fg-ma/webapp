@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
@@ -109,6 +109,8 @@ export default function EntityPage({ entityType }: EntityPageProps) {
       return state.page["main"].pagePayload.ids.group_id;
     else if (entityType === "organizations")
       return state.page["main"].pagePayload.ids.organization_id;
+    else if (state.page["main"].pagePayload.ids.individual_id === "user")
+      return "user";
   });
 
   const [entityData, setEntityData] = useState<EntityData | null>(null);
@@ -116,13 +118,53 @@ export default function EntityPage({ entityType }: EntityPageProps) {
     [],
   );
   const [entity, setEntity] = useState<Entity | null>(null);
+  const scrollingEntityContainer = useRef<HTMLDivElement>(null);
+  const isEditablePage = useRef(false);
 
   // Get data from database
   useEffect(() => {
+    if (scrollingEntityContainer.current) {
+      scrollingEntityContainer.current.scrollTop = 0;
+    }
+
+    const fetchEditablePage = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await Axios.get(`${serverUrl}/entities/auth`, {
+          params: {
+            entity_id: entity_id,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        isEditablePage.current = response.data;
+      } catch (error) {
+        console.error("Error fetching entity data:", error);
+      }
+    };
+
     const fetchEntityData = async () => {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
         const response = await Axios.get(
           `${serverUrl}/${entityType}/${entity_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         );
 
         setEntityData(response.data);
@@ -133,9 +175,18 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
     const fetchEntity = async () => {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
         const response = await Axios.get(`${serverUrl}/entities/entity`, {
           params: {
-            id: entity_id,
+            entity_id: entity_id,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -147,10 +198,18 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
     const fetchEntityReferences = async () => {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
         const response = await Axios.get(`${serverUrl}/references`, {
           params: {
             entity_id: entity_id,
-            type: entityType,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -161,6 +220,8 @@ export default function EntityPage({ entityType }: EntityPageProps) {
     };
 
     if (entity_id) {
+      fetchEditablePage();
+
       fetchEntityData();
 
       fetchEntity();
@@ -173,9 +234,15 @@ export default function EntityPage({ entityType }: EntityPageProps) {
     if (!entityData) return null;
 
     const contentMap: ContentMap = {
-      sheets: entity ? <Sheets entity_id={entity.entity_id} /> : null,
-      videos: entity ? <Videos entity_id={entity.entity_id} /> : null,
-      images: entity ? <Images entity_id={entity.entity_id} /> : null,
+      sheets: entity ? (
+        <Sheets entity_id={entity.entity_id} isEditablePage={isEditablePage} />
+      ) : null,
+      videos: entity ? (
+        <Videos entity_id={entity.entity_id} isEditablePage={isEditablePage} />
+      ) : null,
+      images: entity ? (
+        <Images entity_id={entity.entity_id} isEditablePage={isEditablePage} />
+      ) : null,
     };
 
     const collectionsContentMap: CollectionsContentMap = {
@@ -184,6 +251,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
           <Collections
             entity_id={entityData.individual_id}
             collection_id={entity_collection_id}
+            isEditablePage={isEditablePage}
           />
         ) : null,
       groups:
@@ -191,6 +259,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
           <Collections
             entity_id={entityData.group_id}
             collection_id={entity_collection_id}
+            isEditablePage={isEditablePage}
           />
         ) : null,
       organizations:
@@ -198,11 +267,11 @@ export default function EntityPage({ entityType }: EntityPageProps) {
           <Collections
             entity_id={entityData.organization_id}
             collection_id={entity_collection_id}
+            isEditablePage={isEditablePage}
           />
         ) : null,
     };
 
-    console.log;
     return pageState !== "collections"
       ? contentMap[pageState]
       : collectionsContentMap[entityType] || null;
@@ -211,14 +280,21 @@ export default function EntityPage({ entityType }: EntityPageProps) {
   return (
     <div className="h-full w-full rounded-xl overflow-hidden">
       <div className="mr-3" style={{ height: `calc(100% - 2.5rem)` }}>
-        <div className="overflow-y-auto h-full w-full">
+        <div
+          ref={scrollingEntityContainer}
+          className="overflow-y-auto h-full w-full"
+        >
           <div className="ml-8 mr-5 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
             <EntityPageHeader
               entityType={entityType}
               entity={entityData}
               entityReferences={entityReferences}
             />
-            <EntityContentNav entityType={entityType} entity={entityData} />
+            <EntityContentNav
+              entityType={entityType}
+              entity={entityData}
+              isEditablePage={isEditablePage}
+            />
             {renderContent()}
           </div>
         </div>

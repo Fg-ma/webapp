@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
@@ -12,6 +12,7 @@ const serverUrl = isDevelopment
 interface CollectionsProps {
   entity_id: string;
   collection_id: string;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface CollectionItem {
@@ -45,6 +46,7 @@ interface CollectionItem {
 export default function Collections({
   entity_id,
   collection_id,
+  isEditablePage,
 }: CollectionsProps) {
   /* 
     Description:   
@@ -160,6 +162,7 @@ export default function Collections({
           pinned={item.pinned}
           relation_id={item.collections_sheets_id}
           socket={socketRef.current}
+          isEditablePage={isEditablePage}
         />
       );
     } else if (
@@ -175,6 +178,7 @@ export default function Collections({
           pinned={item.pinned}
           relation_id={item.collections_images_id}
           socket={socketRef.current}
+          isEditablePage={isEditablePage}
         />
       );
     } else if (
@@ -190,6 +194,7 @@ export default function Collections({
           pinned={item.pinned}
           relation_id={item.collections_videos_id}
           socket={socketRef.current}
+          isEditablePage={isEditablePage}
         />
       );
     }

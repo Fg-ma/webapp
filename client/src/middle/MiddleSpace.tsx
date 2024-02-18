@@ -45,7 +45,7 @@ export default function MiddleSpace({
           middleSpaceRef={middleSpaceRef}
         />,
       );
-    } else if (mainPageState === "individuals") {
+    } else if (mainPageState === "individuals" || mainPageState === "profile") {
       setMiddleSpaceContent(<EntityPage entityType="individuals" />);
     } else if (mainPageState === "groups") {
       setMiddleSpaceContent(<EntityPage entityType="groups" />);

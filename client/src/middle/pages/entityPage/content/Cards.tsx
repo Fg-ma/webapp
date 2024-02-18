@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { Socket } from "socket.io-client";
@@ -25,6 +25,7 @@ interface SheetProps {
   pinned: boolean;
   relation_id: string;
   socket: Socket | null;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface SheetData {
@@ -43,6 +44,7 @@ export function Sheet({
   pinned = false,
   relation_id,
   socket,
+  isEditablePage,
 }: SheetProps) {
   const dispatch = useDispatch();
 
@@ -91,11 +93,25 @@ export function Sheet({
           date_pinned: date_pinned,
         });
       } else if (type === "entity") {
-        await Axios.put(`${serverUrl}/entities/entity_sheets_pinned`, {
-          relation_id: relation_id,
-          pinned: newPinned,
-          date_pinned: date_pinned,
-        });
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        await Axios.put(
+          `${serverUrl}/entities/entity_sheets_pinned`,
+          {
+            relation_id: relation_id,
+            pinned: newPinned,
+            date_pinned: date_pinned,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
       }
     } catch (error) {
       console.error("Error toggling pinned:", error);
@@ -125,23 +141,34 @@ export function Sheet({
       onClick={handleClick}
     >
       <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
-        <button
-          className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
-          style={{
-            backgroundImage:
-              pinned || hover ? 'url("/assets/icons/pin.svg")' : "none",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            togglePinned();
-          }}
-          onMouseEnter={() => {
-            setHover(true);
-          }}
-          onMouseLeave={() => {
-            setHover(false);
-          }}
-        ></button>
+        {isEditablePage.current ? (
+          <button
+            className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+            style={{
+              backgroundImage:
+                pinned || hover ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePinned();
+            }}
+            onMouseEnter={() => {
+              setHover(true);
+            }}
+            onMouseLeave={() => {
+              setHover(false);
+            }}
+          ></button>
+        ) : (
+          <div
+            className={`aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none ${
+              pinned ? "w-8" : "w-0"
+            }`}
+            style={{
+              backgroundImage: pinned ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+          ></div>
+        )}
       </div>
       {sheetData && (
         <p className="text-base font-bold leading-5 text-center mx-4 h-[3.75rem] line-clamp-3 mb-1">
@@ -161,6 +188,7 @@ interface VideoProps {
   pinned: boolean;
   relation_id: string;
   socket: Socket | null;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface VideoData {
@@ -178,6 +206,7 @@ export function Video({
   pinned = false,
   relation_id,
   socket,
+  isEditablePage,
 }: VideoProps) {
   const dispatch = useDispatch();
 
@@ -220,11 +249,25 @@ export function Video({
           date_pinned: date_pinned,
         });
       } else if (type === "entity") {
-        await Axios.put(`${serverUrl}/entities/entity_videos_pinned`, {
-          relation_id: relation_id,
-          pinned: newPinned,
-          date_pinned: date_pinned,
-        });
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        await Axios.put(
+          `${serverUrl}/entities/entity_videos_pinned`,
+          {
+            relation_id: relation_id,
+            pinned: newPinned,
+            date_pinned: date_pinned,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
       }
     } catch (error) {
       console.error("Error toggling pinned:", error);
@@ -251,23 +294,34 @@ export function Video({
   return (
     <div className="flex flex-col justify-center" onClick={handleClick}>
       <div className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative">
-        <button
-          className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
-          style={{
-            backgroundImage:
-              pinned || hover ? 'url("/assets/icons/pin.svg")' : "none",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            togglePinned();
-          }}
-          onMouseEnter={() => {
-            setHover(true);
-          }}
-          onMouseLeave={() => {
-            setHover(false);
-          }}
-        ></button>
+        {isEditablePage.current ? (
+          <button
+            className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+            style={{
+              backgroundImage:
+                pinned || hover ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePinned();
+            }}
+            onMouseEnter={() => {
+              setHover(true);
+            }}
+            onMouseLeave={() => {
+              setHover(false);
+            }}
+          ></button>
+        ) : (
+          <div
+            className={`aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none ${
+              pinned ? "w-8" : "w-0"
+            }`}
+            style={{
+              backgroundImage: pinned ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+          ></div>
+        )}
       </div>
       <div className="flex justify-start items-center mb-2">
         <div className="bg-fg-white-85 w-8 aspect-square rounded-full"></div>
@@ -317,6 +371,7 @@ interface ImageProps {
   pinned: boolean;
   relation_id: string;
   socket: Socket | null;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface ImageData {
@@ -334,6 +389,7 @@ export function Image({
   pinned = false,
   relation_id,
   socket,
+  isEditablePage,
 }: ImageProps) {
   const dispatch = useDispatch();
 
@@ -380,11 +436,25 @@ export function Image({
           date_pinned: date_pinned,
         });
       } else if (type === "entity") {
-        await Axios.put(`${serverUrl}/entities/entity_images_pinned`, {
-          relation_id: relation_id,
-          pinned: newPinned,
-          date_pinned: date_pinned,
-        });
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        await Axios.put(
+          `${serverUrl}/entities/entity_images_pinned`,
+          {
+            relation_id: relation_id,
+            pinned: newPinned,
+            date_pinned: date_pinned,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
       }
     } catch (error) {
       console.error("Error toggling pinned:", error);
@@ -486,23 +556,34 @@ export function Image({
           updatePopupPosition(e);
         }}
       >
-        <button
-          className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
-          style={{
-            backgroundImage:
-              pinned || pinHover ? 'url("/assets/icons/pin.svg")' : "none",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            togglePinned();
-          }}
-          onMouseEnter={() => {
-            setPinHover(true);
-          }}
-          onMouseLeave={() => {
-            setPinHover(false);
-          }}
-        ></button>
+        {isEditablePage.current ? (
+          <button
+            className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
+            style={{
+              backgroundImage:
+                pinned || pinHover ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePinned();
+            }}
+            onMouseEnter={() => {
+              setPinHover(true);
+            }}
+            onMouseLeave={() => {
+              setPinHover(false);
+            }}
+          ></button>
+        ) : (
+          <div
+            className={`aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none ${
+              pinned ? "w-8" : "w-0"
+            }`}
+            style={{
+              backgroundImage: pinned ? 'url("/assets/icons/pin.svg")' : "none",
+            }}
+          ></div>
+        )}
         {showCreator && (
           <motion.div
             className="bg-fg-white-95 w-10 aspect-square rounded-full absolute -top-3 -left-3"

@@ -55,13 +55,13 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
 });
 
 // Route to get a group by ID
-router.get("/:group_id", async (req, res) => {
+router.get("/:group_id", verifyToken, async (req, res) => {
   const group_id = req.params.group_id;
 
   try {
     const group = await req.db.groups.findUnique({
       where: {
-        group_id: group_id,
+        group_id: group_id === "user" ? req.user.user_id : group_id,
       },
     });
 

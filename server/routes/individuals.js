@@ -55,13 +55,14 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 });
 
 // Route to get an individual by ID
-router.get("/:individual_id", async (req, res) => {
+router.get("/:individual_id", verifyToken, async (req, res) => {
   const individual_id = req.params.individual_id;
 
   try {
     const individual = await req.db.individuals.findUnique({
       where: {
-        individual_id: individual_id,
+        individual_id:
+          individual_id === "user" ? req.user.user_id : individual_id,
       },
     });
 

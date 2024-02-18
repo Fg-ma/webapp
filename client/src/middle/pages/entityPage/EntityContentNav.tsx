@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, Transition, Variants } from "framer-motion";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
@@ -32,6 +32,7 @@ const transition: Transition = {
 interface EntityContentNavProps {
   entityType: string;
   entity: Entity | null;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface Entity {
@@ -69,6 +70,7 @@ interface PageState {
 export default function EntityContentNav({
   entityType,
   entity,
+  isEditablePage,
 }: EntityContentNavProps) {
   /* 
     Description:   
@@ -133,6 +135,7 @@ export default function EntityContentNav({
         <CollectionButtons
           entityType={entityType}
           entity_id={entity[`${entityType.slice(0, -1)}_id`]}
+          isEditablePage={isEditablePage}
         />
       )}
     </>

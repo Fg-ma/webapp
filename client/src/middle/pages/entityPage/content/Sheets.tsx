@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
@@ -11,6 +11,7 @@ const serverUrl = isDevelopment
 
 interface SheetsProps {
   entity_id: string;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface SheetData {
@@ -30,7 +31,7 @@ interface SheetData {
   };
 }
 
-export default function Sheets({ entity_id }: SheetsProps) {
+export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
   /* 
     Description:   
       Queries the database to get the sheets that the passed in entity is related 
@@ -77,7 +78,7 @@ export default function Sheets({ entity_id }: SheetsProps) {
     // Connects to the socket to get the new data when pinned is updated
     sheetSocketRef.current?.on(
       "pinnedUpdated",
-      ({ relation, relation_id, pinned, date_pinned }) => {
+      ({ relation_id, pinned, date_pinned }) => {
         setSheetsData((prevData) => {
           const updatedData = prevData.map((sheet) => {
             if (sheet.entities_sheets_id === relation_id) {
@@ -122,6 +123,7 @@ export default function Sheets({ entity_id }: SheetsProps) {
         pinned={sheet.pinned}
         relation_id={sheet.entities_sheets_id}
         socket={sheetSocketRef.current}
+        isEditablePage={isEditablePage}
       />
     );
   });

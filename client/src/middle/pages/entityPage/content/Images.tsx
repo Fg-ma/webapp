@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
@@ -11,6 +11,7 @@ const serverUrl = isDevelopment
 
 interface ImagesProps {
   entity_id: string;
+  isEditablePage: MutableRefObject<boolean>;
 }
 
 interface ImageData {
@@ -30,7 +31,7 @@ interface ImageData {
   };
 }
 
-export default function Images({ entity_id }: ImagesProps) {
+export default function Images({ entity_id, isEditablePage }: ImagesProps) {
   /* 
     Description:   
       Queries the database to get the images that the passed in entity is related 
@@ -77,7 +78,7 @@ export default function Images({ entity_id }: ImagesProps) {
     // Connects to the socket to get the new data when pinned is updated
     imageSocketRef.current?.on(
       "pinnedUpdated",
-      ({ relation, relation_id, pinned, date_pinned }) => {
+      ({ relation_id, pinned, date_pinned }) => {
         setImagesData((prevData) => {
           const updatedData = prevData.map((image) => {
             if (image.entities_images_id === relation_id) {
@@ -121,6 +122,7 @@ export default function Images({ entity_id }: ImagesProps) {
         pinned={image.pinned}
         relation_id={image.entities_images_id}
         socket={imageSocketRef.current}
+        isEditablePage={isEditablePage}
       />
     );
   });
