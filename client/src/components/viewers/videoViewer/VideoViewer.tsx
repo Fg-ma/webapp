@@ -8,7 +8,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface VideoViewerProps {
-  video_id: number;
+  video_id: string;
 }
 
 interface VideoData {

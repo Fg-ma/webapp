@@ -332,10 +332,10 @@ export default function RightSearchFilter({
                       />
                       <span className="slider round"></span>
                       <div className="inline w-40">
-                        <div className="inline-block w-1/2 text-center">
+                        <div className="inline-block w-1/2 text-center select-none">
                           <span className="rightLabelText newest">Newest</span>
                         </div>
-                        <div className="inline-block w-1/2 text-center">
+                        <div className="inline-block w-1/2 text-center select-none">
                           <span className="rightLabelText oldest">Oldest</span>
                         </div>
                       </div>
@@ -379,12 +379,12 @@ export default function RightSearchFilter({
                       />
                       <span className="slider round"></span>
                       <div className="inline w-40">
-                        <div className="inline-block w-1/2 text-center">
+                        <div className="inline-block w-1/2 text-center select-none">
                           <span className="rightLabelText upVotes">
                             Up Votes
                           </span>
                         </div>
-                        <div className="inline-block w-1/2 text-center">
+                        <div className="inline-block w-1/2 text-center select-none">
                           <span className="rightLabelText downVotes">
                             Down Votes
                           </span>

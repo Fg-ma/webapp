@@ -50,6 +50,12 @@ module.exports = {
       maxWidth: {
         "1/4": "25%",
       },
+      borderWidth: {
+        3: "3px",
+      },
+      padding: {
+        0.75: "0.1875rem",
+      },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],

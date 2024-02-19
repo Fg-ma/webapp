@@ -193,7 +193,7 @@ export default function AdvancedFilterDropdown({
         className="w-full h-8 border border-fg-white-70 bg-white rounded-md inline-flex items-center justify-between"
       >
         <span
-          className={`flex-grow overflow-hidden pl-2`}
+          className={`flex-grow overflow-hidden pl-2 select-none`}
           style={{
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",

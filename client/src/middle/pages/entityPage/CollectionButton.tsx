@@ -19,7 +19,7 @@ const collectionsStyles = {
 
 interface CollectionButtonProps {
   entityType: string;
-  collection_id: number;
+  collection_id: string;
   collection_name: string;
 }
 
@@ -28,7 +28,7 @@ interface CollectionPageState {
     [entityType: string]: {
       pagePayload: {
         ids: {
-          collection_id: number;
+          collection_id: string;
         };
       };
     };

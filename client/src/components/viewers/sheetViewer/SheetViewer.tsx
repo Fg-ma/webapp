@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import Axios from "axios";
 import config from "@config";
-import SheetHeader from "./SheetHeader";
+import SheetHeader from "../sheetViewer/SheetHeader";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

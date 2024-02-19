@@ -8,7 +8,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 interface ImageViewerProps {
-  image_id: number;
+  image_id: string;
 }
 
 interface ImageData {

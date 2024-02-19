@@ -10,16 +10,16 @@ const serverUrl = isDevelopment
 
 interface CollectionButtonsProps {
   entityType: string;
-  entity_id: number;
+  entity_id: string;
   isEditablePage: MutableRefObject<boolean>;
 }
 
 interface CollectionNames {
-  collection_id: number;
+  collection_id: string;
   collection_name: string;
-  individual_id: number | null;
-  group_id: number | null;
-  organization_id: number | null;
+  individual_id: string | null;
+  group_id: string | null;
+  organization_id: string | null;
 }
 
 export default function CollectionButtons({

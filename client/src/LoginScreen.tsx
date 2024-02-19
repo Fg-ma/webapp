@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
+import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
 import { setLoggedIn, setPageState } from "@redux/pageState/pageStateActions";
 
@@ -8,6 +9,37 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
+
+const signInButtonsVar: Variants = {
+  init: {
+    fontSize: "1.5rem",
+    lineHeight: "2rem",
+    padding: "0.25rem",
+  },
+  hover: {
+    fontSize: "1.375rem",
+    lineHeight: "1.875rem",
+    padding: "0.375rem",
+  },
+};
+
+const createAccountButtonVar: Variants = {
+  init: {
+    fontSize: "1.5rem",
+    lineHeight: "2rem",
+  },
+  hover: {
+    fontSize: "1.375rem",
+    lineHeight: "1.875rem",
+  },
+};
+
+const transition: Transition = {
+  transition: {
+    ease: "easeOut",
+    duration: 0.05,
+  },
+};
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
@@ -57,10 +89,10 @@ export default function LoginScreen() {
           },
         },
       )
-        .then((response) => {
+        .then(() => {
           dispatch(setLoggedIn(true));
         })
-        .catch((error) => {
+        .catch(() => {
           return;
         });
     } catch (error) {
@@ -77,14 +109,14 @@ export default function LoginScreen() {
         <div className="flex flex-col items-center justify-center border border-fg-white-65 rounded h-3/4 p-12 w-full">
           <p className="text-5xl mb-16">Webapp</p>
           <input
-            className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4"
+            className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4 focus:outline-none focus:border-2 focus:border-fg-secondary"
             placeholder="Username, email, or phone number"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4"
+            className="text-xl font-K2D h-12 w-full rounded bg-fg-white-95 mb-4 pl-4 focus:outline-none focus:border-2 focus:border-fg-secondary"
             placeholder="Password"
             type="password"
             value={password}
@@ -96,23 +128,33 @@ export default function LoginScreen() {
             <div className="w-5/12 h-0.5 bg-fg-white-65"></div>
           </div>
           <div className="w-full px-10">
-            <div className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-black-25 text-white p-1 mb-6 cursor-pointer">
-              <div className="bg-white rounded-full w-full h-full p-0.5">
+            <motion.div
+              className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-black-25 text-white p-1 mb-6 cursor-pointer"
+              variants={signInButtonsVar}
+              initial="init"
+              whileHover="hover"
+              transition={transition}
+            >
+              <div className="bg-white rounded-full w-full h-full p-0.5 hover:p-0.75">
                 <div className="bg-fg-black-25 rounded-full w-full h-full text-center pt-1">
                   Sign in with Google
                 </div>
               </div>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
               className="text-2xl font-K2D h-14 w-full rounded-full bg-fg-primary text-white p-1 cursor-pointer"
               onClick={handleLogin}
+              variants={signInButtonsVar}
+              initial="init"
+              whileHover="hover"
+              transition={transition}
             >
-              <div className="bg-white rounded-full w-full h-full p-0.5">
+              <div className="bg-white rounded-full w-full h-full p-0.5 hover:p-0.75">
                 <div className="bg-fg-primary rounded-full w-full h-full text-center pt-1">
                   Sign in
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center border border-fg-white-65 rounded h-1/4 px-12 pt-3 pb-4">
@@ -123,12 +165,16 @@ export default function LoginScreen() {
             </p>
           </div>
           <div className="w-full px-10">
-            <button
-              className="border-2 border-fg-primary rounded-full h-14 w-full text-2xl font-K2D cursor-pointer"
+            <motion.button
+              className="border-2 hover:border-3 border-fg-primary rounded-full h-14 w-full text-2xl font-K2D cursor-pointer"
               onClick={handleCreateAccount}
+              variants={createAccountButtonVar}
+              initial="init"
+              whileHover="hover"
+              transition={transition}
             >
               Create an account
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

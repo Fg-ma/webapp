@@ -163,11 +163,11 @@ export default function FilterCard({
       <span
         ref={nameSpanRef}
         className={`
-                    m-2 font-Josefin text-lg select-none truncate underline decoration-2 underline-offset-8
+                    m-2 font-Josefin text-lg select-none truncate
                     ${
                       isFilterSelected
-                        ? "decoration-fg-primary"
-                        : "decoration-transparent"
+                        ? "underline decoration-2 underline-offset-8 decoration-fg-primary"
+                        : "none"
                     }
                 `}
       >

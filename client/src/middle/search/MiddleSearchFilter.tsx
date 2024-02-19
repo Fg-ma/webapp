@@ -266,10 +266,10 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                     />
                     <span className="slider round"></span>
                     <div className="inline w-40">
-                      <div className="inline-block w-1/2 text-center">
+                      <div className="inline-block w-1/2 text-center select-none">
                         <span className="middleLabelText newest">Newest</span>
                       </div>
-                      <div className="inline-block w-1/2 text-center">
+                      <div className="inline-block w-1/2 text-center select-none">
                         <span className="middleLabelText oldest">Oldest</span>
                       </div>
                     </div>
@@ -311,12 +311,12 @@ export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
                     />
                     <span className="slider round"></span>
                     <div className="inline w-40">
-                      <div className="inline-block w-1/2 text-center">
+                      <div className="inline-block w-1/2 text-center select-none">
                         <span className="middleLabelText upVotes">
                           Up Votes
                         </span>
                       </div>
-                      <div className="inline-block w-1/2 text-center">
+                      <div className="inline-block w-1/2 text-center select-none">
                         <span className="middleLabelText downVotes">
                           Down Votes
                         </span>

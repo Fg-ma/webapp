@@ -465,7 +465,7 @@ export default function MiddleAdvancedSearchFilter({
                 placeholder="mm.dd.yyyy"
                 name="from"
                 id="middleDateRange"
-                className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
+                className="w-2/5 bg-white text-center h-8 text-sm px-1 rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                 onChange={handleDateRangeChange}
                 value={formDateRange.from}
               ></input>
@@ -475,7 +475,7 @@ export default function MiddleAdvancedSearchFilter({
                 placeholder="mm.dd.yyyy"
                 name="to"
                 id="dateRange"
-                className="w-2/5 bg-white text-center h-8 text-sm px-1 cursor-pointer rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
+                className="w-2/5 bg-white text-center h-8 text-sm px-1 rounded-md font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
                 onChange={handleDateRangeChange}
                 value={formDateRange.to}
               ></input>

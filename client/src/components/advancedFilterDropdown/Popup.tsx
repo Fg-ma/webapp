@@ -48,11 +48,11 @@ export default function Popup({
         <p className="select-none">pic</p>
       </div>
       <span
-        className={`m-2 font-Josefin text-lg select-none underline decoration-2 underline-offset-8
+        className={`m-2 font-Josefin text-lg select-none
                     ${
                       isFilterSelected
-                        ? "decoration-fg-primary"
-                        : "decoration-transparent"
+                        ? "underline decoration-2 underline-offset-8 decoration-fg-primary"
+                        : "none"
                     }
                 `}
       >
