@@ -19116,8 +19116,22 @@ export namespace Prisma {
 
   export type AggregateSheets = {
     _count: SheetsCountAggregateOutputType | null
+    _avg: SheetsAvgAggregateOutputType | null
+    _sum: SheetsSumAggregateOutputType | null
     _min: SheetsMinAggregateOutputType | null
     _max: SheetsMaxAggregateOutputType | null
+  }
+
+  export type SheetsAvgAggregateOutputType = {
+    sheet_likes: number | null
+    sheet_dislikes: number | null
+    sheet_views: number | null
+  }
+
+  export type SheetsSumAggregateOutputType = {
+    sheet_likes: number | null
+    sheet_dislikes: number | null
+    sheet_views: number | null
   }
 
   export type SheetsMinAggregateOutputType = {
@@ -19127,6 +19141,10 @@ export namespace Prisma {
     sheet_subject: string | null
     sheet_filename: string | null
     sheet_data_id: string | null
+    sheet_likes: number | null
+    sheet_dislikes: number | null
+    sheet_views: number | null
+    sheet_date_posted: Date | null
   }
 
   export type SheetsMaxAggregateOutputType = {
@@ -19136,6 +19154,10 @@ export namespace Prisma {
     sheet_subject: string | null
     sheet_filename: string | null
     sheet_data_id: string | null
+    sheet_likes: number | null
+    sheet_dislikes: number | null
+    sheet_views: number | null
+    sheet_date_posted: Date | null
   }
 
   export type SheetsCountAggregateOutputType = {
@@ -19145,9 +19167,25 @@ export namespace Prisma {
     sheet_subject: number
     sheet_filename: number
     sheet_data_id: number
+    sheet_likes: number
+    sheet_dislikes: number
+    sheet_views: number
+    sheet_date_posted: number
     _all: number
   }
 
+
+  export type SheetsAvgAggregateInputType = {
+    sheet_likes?: true
+    sheet_dislikes?: true
+    sheet_views?: true
+  }
+
+  export type SheetsSumAggregateInputType = {
+    sheet_likes?: true
+    sheet_dislikes?: true
+    sheet_views?: true
+  }
 
   export type SheetsMinAggregateInputType = {
     sheet_id?: true
@@ -19156,6 +19194,10 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_likes?: true
+    sheet_dislikes?: true
+    sheet_views?: true
+    sheet_date_posted?: true
   }
 
   export type SheetsMaxAggregateInputType = {
@@ -19165,6 +19207,10 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_likes?: true
+    sheet_dislikes?: true
+    sheet_views?: true
+    sheet_date_posted?: true
   }
 
   export type SheetsCountAggregateInputType = {
@@ -19174,6 +19220,10 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_likes?: true
+    sheet_dislikes?: true
+    sheet_views?: true
+    sheet_date_posted?: true
     _all?: true
   }
 
@@ -19215,6 +19265,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SheetsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SheetsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SheetsMinAggregateInputType
@@ -19245,6 +19307,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SheetsCountAggregateInputType | true
+    _avg?: SheetsAvgAggregateInputType
+    _sum?: SheetsSumAggregateInputType
     _min?: SheetsMinAggregateInputType
     _max?: SheetsMaxAggregateInputType
   }
@@ -19256,7 +19320,13 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes: number
+    sheet_dislikes: number
+    sheet_views: number
+    sheet_date_posted: Date
     _count: SheetsCountAggregateOutputType | null
+    _avg: SheetsAvgAggregateOutputType | null
+    _sum: SheetsSumAggregateOutputType | null
     _min: SheetsMinAggregateOutputType | null
     _max: SheetsMaxAggregateOutputType | null
   }
@@ -19282,6 +19352,10 @@ export namespace Prisma {
     sheet_subject?: boolean
     sheet_filename?: boolean
     sheet_data_id?: boolean
+    sheet_likes?: boolean
+    sheet_dislikes?: boolean
+    sheet_views?: boolean
+    sheet_date_posted?: boolean
     collections_sheets?: boolean | sheets$collections_sheetsArgs<ExtArgs>
     entities_sheets?: boolean | sheets$entities_sheetsArgs<ExtArgs>
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
@@ -19296,6 +19370,10 @@ export namespace Prisma {
     sheet_subject?: boolean
     sheet_filename?: boolean
     sheet_data_id?: boolean
+    sheet_likes?: boolean
+    sheet_dislikes?: boolean
+    sheet_views?: boolean
+    sheet_date_posted?: boolean
   }
 
   export type sheetsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19322,6 +19400,10 @@ export namespace Prisma {
       sheet_subject: string
       sheet_filename: string
       sheet_data_id: string
+      sheet_likes: number
+      sheet_dislikes: number
+      sheet_views: number
+      sheet_date_posted: Date
     }, ExtArgs["result"]["sheets"]>
     composites: {}
   }
@@ -19729,6 +19811,10 @@ export namespace Prisma {
     readonly sheet_subject: FieldRef<"sheets", 'String'>
     readonly sheet_filename: FieldRef<"sheets", 'String'>
     readonly sheet_data_id: FieldRef<"sheets", 'String'>
+    readonly sheet_likes: FieldRef<"sheets", 'Int'>
+    readonly sheet_dislikes: FieldRef<"sheets", 'Int'>
+    readonly sheet_views: FieldRef<"sheets", 'Int'>
+    readonly sheet_date_posted: FieldRef<"sheets", 'DateTime'>
   }
     
 
@@ -24061,7 +24147,11 @@ export namespace Prisma {
     sheet_title: 'sheet_title',
     sheet_subject: 'sheet_subject',
     sheet_filename: 'sheet_filename',
-    sheet_data_id: 'sheet_data_id'
+    sheet_data_id: 'sheet_data_id',
+    sheet_likes: 'sheet_likes',
+    sheet_dislikes: 'sheet_dislikes',
+    sheet_views: 'sheet_views',
+    sheet_date_posted: 'sheet_date_posted'
   };
 
   export type SheetsScalarFieldEnum = (typeof SheetsScalarFieldEnum)[keyof typeof SheetsScalarFieldEnum]
@@ -25169,6 +25259,10 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_likes?: IntFilter<"sheets"> | number
+    sheet_dislikes?: IntFilter<"sheets"> | number
+    sheet_views?: IntFilter<"sheets"> | number
+    sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -25182,6 +25276,10 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
+    sheet_date_posted?: SortOrder
     collections_sheets?: collections_sheetsOrderByRelationAggregateInput
     entities_sheets?: entities_sheetsOrderByRelationAggregateInput
     entities?: entitiesOrderByWithRelationInput
@@ -25198,6 +25296,10 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_likes?: IntFilter<"sheets"> | number
+    sheet_dislikes?: IntFilter<"sheets"> | number
+    sheet_views?: IntFilter<"sheets"> | number
+    sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
     collections_sheets?: Collections_sheetsListRelationFilter
     entities_sheets?: Entities_sheetsListRelationFilter
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
@@ -25211,9 +25313,15 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
+    sheet_date_posted?: SortOrder
     _count?: sheetsCountOrderByAggregateInput
+    _avg?: sheetsAvgOrderByAggregateInput
     _max?: sheetsMaxOrderByAggregateInput
     _min?: sheetsMinOrderByAggregateInput
+    _sum?: sheetsSumOrderByAggregateInput
   }
 
   export type sheetsScalarWhereWithAggregatesInput = {
@@ -25226,6 +25334,10 @@ export namespace Prisma {
     sheet_subject?: StringWithAggregatesFilter<"sheets"> | string
     sheet_filename?: StringWithAggregatesFilter<"sheets"> | string
     sheet_data_id?: StringWithAggregatesFilter<"sheets"> | string
+    sheet_likes?: IntWithAggregatesFilter<"sheets"> | number
+    sheet_dislikes?: IntWithAggregatesFilter<"sheets"> | number
+    sheet_views?: IntWithAggregatesFilter<"sheets"> | number
+    sheet_date_posted?: DateTimeWithAggregatesFilter<"sheets"> | Date | string
   }
 
   export type sheets_dataWhereInput = {
@@ -26422,6 +26534,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
@@ -26435,6 +26551,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -26444,6 +26564,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
@@ -26457,6 +26581,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
@@ -26468,6 +26596,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
   }
 
   export type sheetsUpdateManyMutationInput = {
@@ -26475,6 +26607,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type sheetsUncheckedUpdateManyInput = {
@@ -26484,6 +26620,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type sheets_dataCreateInput = {
@@ -27482,6 +27622,16 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
+    sheet_date_posted?: SortOrder
+  }
+
+  export type sheetsAvgOrderByAggregateInput = {
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
   }
 
   export type sheetsMaxOrderByAggregateInput = {
@@ -27491,6 +27641,10 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
+    sheet_date_posted?: SortOrder
   }
 
   export type sheetsMinOrderByAggregateInput = {
@@ -27500,6 +27654,16 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
+    sheet_date_posted?: SortOrder
+  }
+
+  export type sheetsSumOrderByAggregateInput = {
+    sheet_likes?: SortOrder
+    sheet_dislikes?: SortOrder
+    sheet_views?: SortOrder
   }
 
   export type sheets_dataCountOrderByAggregateInput = {
@@ -29576,6 +29740,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
@@ -29588,6 +29756,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -29639,6 +29811,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
@@ -29651,6 +29827,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
@@ -29961,6 +30141,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
@@ -29972,6 +30156,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -30256,6 +30444,10 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_likes?: IntFilter<"sheets"> | number
+    sheet_dislikes?: IntFilter<"sheets"> | number
+    sheet_views?: IntFilter<"sheets"> | number
+    sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
   }
 
   export type videosUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -30524,6 +30716,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
@@ -30536,6 +30732,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
 
@@ -30599,6 +30799,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
@@ -30611,6 +30815,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
 
@@ -31553,6 +31761,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsCreateNestedManyWithoutSheetsInput
     entities: entitiesCreateNestedOneWithoutSheetsInput
@@ -31564,6 +31776,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
     collections_sheets?: collections_sheetsUncheckedCreateNestedManyWithoutSheetsInput
     entities_sheets?: entities_sheetsUncheckedCreateNestedManyWithoutSheetsInput
   }
@@ -32036,6 +32252,10 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
   }
 
   export type videosCreateManyEntitiesInput = {
@@ -32223,6 +32443,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
@@ -32234,6 +32458,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
@@ -32244,6 +32472,10 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type videosUpdateWithoutEntitiesInput = {
@@ -32484,6 +32716,10 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
   }
 
   export type sheetsUpdateWithoutSheets_dataInput = {
@@ -32491,6 +32727,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUpdateManyWithoutSheetsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
@@ -32502,6 +32742,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     collections_sheets?: collections_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
     entities_sheets?: entities_sheetsUncheckedUpdateManyWithoutSheetsNestedInput
   }
@@ -32512,6 +32756,10 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type collections_videosCreateManyVideosInput = {

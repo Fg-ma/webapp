@@ -245,7 +245,11 @@ exports.Prisma.SheetsScalarFieldEnum = {
   sheet_title: 'sheet_title',
   sheet_subject: 'sheet_subject',
   sheet_filename: 'sheet_filename',
-  sheet_data_id: 'sheet_data_id'
+  sheet_data_id: 'sheet_data_id',
+  sheet_likes: 'sheet_likes',
+  sheet_dislikes: 'sheet_dislikes',
+  sheet_views: 'sheet_views',
+  sheet_date_posted: 'sheet_date_posted'
 };
 
 exports.Prisma.Sheets_dataScalarFieldEnum = {

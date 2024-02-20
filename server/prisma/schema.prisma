@@ -220,6 +220,10 @@ model sheets {
   sheet_subject      String               @db.Text
   sheet_filename     String               @db.VarChar(256)
   sheet_data_id      String               @db.Char(36)
+  sheet_likes        Int                  @default(0)
+  sheet_dislikes     Int                  @default(0)
+  sheet_views        Int                  @default(0)
+  sheet_date_posted  DateTime             @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
   collections_sheets collections_sheets[]
   entities_sheets    entities_sheets[]
   entities           entities             @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")

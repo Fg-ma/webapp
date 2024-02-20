@@ -77,7 +77,6 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
     <div className="w-full">
       {sheetData.sheet_url && (
         <>
-          <SheetHeader sheetData={sheetData} />
           <Document
             file={sheetData.sheet_url}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -95,6 +94,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
               </div>
             ))}
           </Document>
+          <SheetHeader sheetData={sheetData} />
         </>
       )}
     </div>
