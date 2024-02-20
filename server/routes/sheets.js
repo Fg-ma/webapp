@@ -84,4 +84,30 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
   }
 });
 
+router.post("/like/:sheet_id", async (req, res) => {
+  const sheet_id = req.params.sheet_id;
+
+  try {
+    const getSheetLikes = await req.db.sheets.findUnique({
+      where: {
+        sheet_id: sheet_id,
+      },
+    });
+
+    const result = await req.db.sheets.update({
+      where: {
+        sheet_id: sheet_id,
+      },
+      data: {
+        sheet_likes: getSheetLikes.sheet_likes + 1,
+      },
+    });
+
+    res.status(200).send(String(result.sheet_likes));
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = router;

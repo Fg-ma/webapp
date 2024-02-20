@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import SheetActionSection from "./SheetActionSection";
 
 interface SheetHeaderProps {
+  sheet_id: string;
   sheetData: {
     sheet_title: string;
     sheet_subject: string;
@@ -11,8 +12,9 @@ interface SheetHeaderProps {
   };
 }
 
-export default function SheetHeader({ sheetData }: SheetHeaderProps) {
+export default function SheetHeader({ sheet_id, sheetData }: SheetHeaderProps) {
   let authorElement = null;
+
   if (sheetData.sheet_author) {
     if (sheetData.entity_type === 1) {
       authorElement = (
@@ -112,7 +114,7 @@ export default function SheetHeader({ sheetData }: SheetHeaderProps) {
         <p className="text-base font-K2D pb-1">Views: 67K X 1 Hour Ago</p>
         <p className="text-base font-K2D">Views: 67K X 1 Hour Ago</p>
       </div>
-      <SheetActionSection />
+      <SheetActionSection sheet_id={sheet_id} />
     </div>
   );
 }

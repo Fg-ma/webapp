@@ -94,7 +94,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
               </div>
             ))}
           </Document>
-          <SheetHeader sheetData={sheetData} />
+          <SheetHeader sheet_id={sheet_id} sheetData={sheetData} />
         </>
       )}
     </div>

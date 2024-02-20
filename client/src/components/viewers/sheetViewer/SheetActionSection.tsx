@@ -1,6 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
+import Axios from "axios";
+import config from "@config";
 
-export default function SheetActionSection() {
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+  ? config.development.serverUrl
+  : config.production.serverUrl;
+
+interface SheetActionSectionProps {
+  sheet_id: string;
+}
+
+export default function SheetActionSection({
+  sheet_id,
+}: SheetActionSectionProps) {
   const sheetActionsSectionRef = useRef<HTMLDivElement>(null);
   const handleSlider = useRef<HTMLDivElement>(null);
   const [translateY, setTranslateY] = useState<number>(-85);
@@ -88,6 +101,20 @@ export default function SheetActionSection() {
     };
   }, [isDraggingAllowed.current]);
 
+  const handleLike = async () => {
+    await Axios.post(`${serverUrl}/sheets/like/${sheet_id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleDislike = () => {
+    console.log("dislike");
+  };
+
   return (
     <div
       ref={sheetActionsSectionRef}
@@ -140,7 +167,10 @@ export default function SheetActionSection() {
           </button>
         </div>
         <div className="flex items-center justify-center space-x-2">
-          <button className="bg-fg-white-75 h-8 aspect-square rounded-full flex items-center justify-center">
+          <button
+            className="bg-fg-white-75 h-8 aspect-square rounded-full flex items-center justify-center"
+            onClick={handleLike}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20"
@@ -150,7 +180,10 @@ export default function SheetActionSection() {
               <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
             </svg>
           </button>
-          <button className="bg-fg-white-75 h-8 aspect-square rounded-full flex items-center justify-center">
+          <button
+            className="bg-fg-white-75 h-8 aspect-square rounded-full flex items-center justify-center"
+            onClick={handleDislike}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20"
@@ -189,14 +222,14 @@ export default function SheetActionSection() {
       <div className="w-6 pr-2 h-full">
         <div className="w-4 h-24 handle flex justify-center items-center relative">
           <div
-            className="w-3 aspect-square bg-fg-black-15 hover:bg-fg-black-10 rounded-full absolute left-1/2 -translate-x-1/2 translate-y-1/2 handle"
+            className="w-3 aspect-square bg-fg-black-15 hover:bg-fg-black-10 rounded-full absolute left-1/2 -translate-x-1/2 translate-y-1/2 cursor-pointer handle"
             style={{
               top: `${handleSliderTop}%`,
             }}
           ></div>
           <div
             ref={handleSlider}
-            className="w-2 h-16 bg-fg-white-75 rounded-full handle"
+            className="w-2 h-16 bg-fg-white-75 rounded-full cursor-pointer handle"
           ></div>
         </div>
       </div>
