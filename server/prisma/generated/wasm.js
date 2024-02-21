@@ -119,31 +119,18 @@ exports.Prisma.CollectionsScalarFieldEnum = {
   entity_id: 'entity_id'
 };
 
-exports.Prisma.Collections_imagesScalarFieldEnum = {
-  collections_images_id: 'collections_images_id',
+exports.Prisma.Collections_contentScalarFieldEnum = {
+  collections_content_id: 'collections_content_id',
   collection_id: 'collection_id',
-  image_id: 'image_id',
+  content_id: 'content_id',
   date_added: 'date_added',
   pinned: 'pinned',
   date_pinned: 'date_pinned'
 };
 
-exports.Prisma.Collections_sheetsScalarFieldEnum = {
-  collections_sheets_id: 'collections_sheets_id',
-  collection_id: 'collection_id',
-  sheet_id: 'sheet_id',
-  date_added: 'date_added',
-  pinned: 'pinned',
-  date_pinned: 'date_pinned'
-};
-
-exports.Prisma.Collections_videosScalarFieldEnum = {
-  collections_videos_id: 'collections_videos_id',
-  collection_id: 'collection_id',
-  video_id: 'video_id',
-  date_added: 'date_added',
-  pinned: 'pinned',
-  date_pinned: 'date_pinned'
+exports.Prisma.ContentScalarFieldEnum = {
+  content_id: 'content_id',
+  content_type: 'content_type'
 };
 
 exports.Prisma.EntitiesScalarFieldEnum = {
@@ -151,13 +138,19 @@ exports.Prisma.EntitiesScalarFieldEnum = {
   entity_type: 'entity_type'
 };
 
-exports.Prisma.Entities_imagesScalarFieldEnum = {
-  entities_images_id: 'entities_images_id',
+exports.Prisma.Entities_contentScalarFieldEnum = {
+  entities_content_id: 'entities_content_id',
   entity_id: 'entity_id',
-  image_id: 'image_id',
+  content_id: 'content_id',
   date_added: 'date_added',
   pinned: 'pinned',
   date_pinned: 'date_pinned'
+};
+
+exports.Prisma.Entities_likesScalarFieldEnum = {
+  like_id: 'like_id',
+  entity_id: 'entity_id',
+  content_id: 'content_id'
 };
 
 exports.Prisma.Entities_referencesScalarFieldEnum = {
@@ -166,24 +159,6 @@ exports.Prisma.Entities_referencesScalarFieldEnum = {
   title: 'title',
   author: 'author',
   url: 'url'
-};
-
-exports.Prisma.Entities_sheetsScalarFieldEnum = {
-  entities_sheets_id: 'entities_sheets_id',
-  entity_id: 'entity_id',
-  sheet_id: 'sheet_id',
-  date_added: 'date_added',
-  pinned: 'pinned',
-  date_pinned: 'date_pinned'
-};
-
-exports.Prisma.Entities_videosScalarFieldEnum = {
-  entities_videos_id: 'entities_videos_id',
-  entity_id: 'entity_id',
-  video_id: 'video_id',
-  date_added: 'date_added',
-  pinned: 'pinned',
-  date_pinned: 'date_pinned'
 };
 
 exports.Prisma.GroupsScalarFieldEnum = {
@@ -295,14 +270,12 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   affiliates_relations: 'affiliates_relations',
   collections: 'collections',
-  collections_images: 'collections_images',
-  collections_sheets: 'collections_sheets',
-  collections_videos: 'collections_videos',
+  collections_content: 'collections_content',
+  content: 'content',
   entities: 'entities',
-  entities_images: 'entities_images',
+  entities_content: 'entities_content',
+  entities_likes: 'entities_likes',
   entities_references: 'entities_references',
-  entities_sheets: 'entities_sheets',
-  entities_videos: 'entities_videos',
   groups: 'groups',
   groups_members: 'groups_members',
   images: 'images',

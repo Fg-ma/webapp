@@ -17,67 +17,44 @@ model affiliates_relations {
 }
 
 model collections {
-  collection_id      String               @id @unique(map: "temp_collection_id_UNIQUE") @db.Char(36)
-  collection_name    String               @db.VarChar(256)
-  entity_id          String               @db.Char(36)
-  entities           entities             @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_entity_id_fk")
-  collections_images collections_images[]
-  collections_sheets collections_sheets[]
-  collections_videos collections_videos[]
+  collection_id       String                @id @unique(map: "temp_collection_id_UNIQUE") @db.Char(36)
+  collection_name     String                @db.VarChar(256)
+  entity_id           String                @db.Char(36)
+  entities            entities              @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_entity_id_fk")
+  collections_content collections_content[]
 
   @@index([entity_id], map: "collections_entity_id_fk_idx")
 }
 
-model collections_images {
-  collections_images_id String      @id @unique(map: "temp_collections_images_id_UNIQUE") @db.Char(36)
-  collection_id         String      @db.Char(36)
-  image_id              String      @db.Char(36)
-  date_added            DateTime    @db.Timestamp(0)
-  pinned                Boolean
-  date_pinned           DateTime?   @db.Timestamp(0)
-  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_collection_id_fk")
-  images                images      @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_images_image_id_fk")
+model collections_content {
+  collections_content_id String      @id @unique(map: "collections_content_id_UNIQUE") @db.Char(36)
+  collection_id          String      @db.Char(36)
+  content_id             String      @db.Char(36)
+  date_added             DateTime    @db.Timestamp(0)
+  pinned                 Boolean
+  date_pinned            DateTime?   @db.Timestamp(0)
+  collections            collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_content_collection_id_fk")
+  content                content     @relation(fields: [content_id], references: [content_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_content_content_id_fk")
 
-  @@index([collection_id], map: "collections_images_collection_id_fk_idx")
-  @@index([image_id])
+  @@index([collection_id], map: "collections_content_collection_id_fk_idx")
+  @@index([content_id], map: "collections_content_content_id_fk_idx")
 }
 
-model collections_sheets {
-  collections_sheets_id String      @id @unique(map: "temp_collections_sheets_id_UNIQUE") @db.Char(36)
-  collection_id         String      @db.Char(36)
-  sheet_id              String      @db.Char(36)
-  date_added            DateTime    @db.Timestamp(0)
-  pinned                Boolean
-  date_pinned           DateTime?   @db.Timestamp(0)
-  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_sheets_collection_id_fk")
-  sheets                sheets      @relation(fields: [sheet_id], references: [sheet_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_sheets_sheet_id_fk")
-
-  @@index([collection_id], map: "collections_sheets_collection_id_fk_idx")
-  @@index([sheet_id], map: "collections_sheets_sheet_id_fk_idx")
-}
-
-model collections_videos {
-  collections_videos_id String      @id @unique(map: "temp_collections_videos_id_UNIQUE") @db.Char(36)
-  collection_id         String      @db.Char(36)
-  video_id              String      @db.Char(36)
-  date_added            DateTime    @db.Timestamp(0)
-  pinned                Boolean
-  date_pinned           DateTime?   @db.Timestamp(0)
-  collections           collections @relation(fields: [collection_id], references: [collection_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_videos_collection_id_fk")
-  videos                videos      @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_videos_video_id_fk")
-
-  @@index([collection_id], map: "collections_videos_collection_id_fk_idx")
-  @@index([video_id], map: "collections_videos_video_id_fk_idx")
+model content {
+  content_id          String                @id @unique(map: "media_id_UNIQUE") @db.Char(36)
+  content_type        Int?
+  collections_content collections_content[]
+  entities_content    entities_content[]
+  entities_likes      entities_likes[]
 }
 
 model entities {
   entity_id             String                  @id @unique(map: "temp_entity_id_UNIQUE") @db.Char(36)
   entity_type           Int                     @default(0)
   collections           collections[]
-  entities_images       entities_images[]
+  entities_content      entities_content[]
+  entities_likes        entities_likes[]
   entities_references   entities_references[]
-  entities_sheets       entities_sheets[]
-  entities_videos       entities_videos[]
   groups_members        groups_members[]
   images                images[]
   organizations_members organizations_members[]
@@ -85,18 +62,29 @@ model entities {
   videos                videos[]
 }
 
-model entities_images {
-  entities_images_id String    @id @unique(map: "temp_entities_images_id_UNIQUE") @db.Char(36)
-  entity_id          String    @db.Char(36)
-  image_id           String    @db.Char(36)
-  date_added         DateTime  @db.Timestamp(0)
-  pinned             Boolean
-  date_pinned        DateTime? @db.Timestamp(0)
-  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_images_entity_id_fk")
-  images             images    @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_images_image_id_fk")
+model entities_content {
+  entities_content_id String    @id @unique(map: "entities_content_id_UNIQUE") @db.Char(36)
+  entity_id           String    @db.Char(36)
+  content_id          String    @db.Char(36)
+  date_added          DateTime  @db.Timestamp(0)
+  pinned              Boolean
+  date_pinned         DateTime? @db.Timestamp(0)
+  content             content   @relation(fields: [content_id], references: [content_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_content_content_id")
+  entities            entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_content_entity_id")
 
-  @@index([entity_id], map: "entities_images_entity_id_fk_idx")
-  @@index([image_id], map: "entities_images_image_id_fk_idx")
+  @@index([content_id])
+  @@index([entity_id])
+}
+
+model entities_likes {
+  like_id    String   @id @unique(map: "like_id_UNIQUE") @db.Char(36)
+  entity_id  String   @db.Char(36)
+  content_id String   @db.Char(36)
+  content    content  @relation(fields: [content_id], references: [content_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_likes_content_id_fk")
+  entities   entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_likes_entity_id_fk")
+
+  @@index([content_id], map: "entities_likes_content_id_fk_idx")
+  @@index([entity_id], map: "entities_likes_entity_id_fk_idx")
 }
 
 model entities_references {
@@ -108,34 +96,6 @@ model entities_references {
   entities     entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_references_entity_id_fk")
 
   @@index([entity_id], map: "entities_references_entity_id_fk_idx")
-}
-
-model entities_sheets {
-  entities_sheets_id String    @id @unique(map: "temp_entities_sheets_id_UNIQUE") @db.Char(36)
-  entity_id          String    @db.Char(36)
-  sheet_id           String    @db.Char(36)
-  date_added         DateTime  @db.Timestamp(0)
-  pinned             Boolean
-  date_pinned        DateTime? @db.Timestamp(0)
-  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_sheets_entity_id")
-  sheets             sheets    @relation(fields: [sheet_id], references: [sheet_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_sheets_sheet_id")
-
-  @@index([entity_id])
-  @@index([sheet_id])
-}
-
-model entities_videos {
-  entities_videos_id String    @id @unique(map: "temp_entities_videos_id_UNIQUE") @db.Char(36)
-  entity_id          String    @db.Char(36)
-  video_id           String    @db.Char(36)
-  date_added         DateTime  @db.Timestamp(0)
-  pinned             Boolean
-  date_pinned        DateTime? @db.Timestamp(0)
-  entities           entities  @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_videos_entity_id_fk")
-  videos             videos    @relation(fields: [video_id], references: [video_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_videos_video_id_fk")
-
-  @@index([entity_id], map: "entities_videos_entity_id_fk_idx")
-  @@index([video_id], map: "entities_videos_video_id_fk_idx")
 }
 
 model groups {
@@ -161,16 +121,14 @@ model groups_members {
 }
 
 model images {
-  image_id           String               @id @unique(map: "temp_image_id_UNIQUE") @db.Char(36)
-  image_creator_id   String               @db.Char(36)
-  image_title        String               @db.VarChar(256)
-  image_description  String               @db.Text
-  image_filename     String               @db.VarChar(256)
-  image_data_id      String               @db.Char(36)
-  collections_images collections_images[]
-  entities_images    entities_images[]
-  entities           entities             @relation(fields: [image_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
-  images_data        images_data          @relation(fields: [image_data_id], references: [image_data_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_data_id_fk")
+  image_id          String      @id @unique(map: "temp_image_id_UNIQUE") @db.Char(36)
+  image_creator_id  String      @db.Char(36)
+  image_title       String      @db.VarChar(256)
+  image_description String      @db.Text
+  image_filename    String      @db.VarChar(256)
+  image_data_id     String      @db.Char(36)
+  entities          entities    @relation(fields: [image_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
+  images_data       images_data @relation(fields: [image_data_id], references: [image_data_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_data_id_fk")
 
   @@index([image_creator_id], map: "images_image_creator_id_fk_idx")
   @@index([image_data_id], map: "images_image_data_id_fk_idx")
@@ -214,20 +172,18 @@ model organizations_members {
 }
 
 model sheets {
-  sheet_id           String               @id @unique(map: "temp_sheet_id_UNIQUE") @db.Char(36)
-  sheet_author_id    String               @db.Char(36)
-  sheet_title        String               @db.VarChar(256)
-  sheet_subject      String               @db.Text
-  sheet_filename     String               @db.VarChar(256)
-  sheet_data_id      String               @db.Char(36)
-  sheet_likes        Int                  @default(0)
-  sheet_dislikes     Int                  @default(0)
-  sheet_views        Int                  @default(0)
-  sheet_date_posted  DateTime             @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
-  collections_sheets collections_sheets[]
-  entities_sheets    entities_sheets[]
-  entities           entities             @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
-  sheets_data        sheets_data          @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
+  sheet_id          String      @id @unique(map: "temp_sheet_id_UNIQUE") @db.Char(36)
+  sheet_author_id   String      @db.Char(36)
+  sheet_title       String      @db.VarChar(256)
+  sheet_subject     String      @db.Text
+  sheet_filename    String      @db.VarChar(256)
+  sheet_data_id     String      @db.Char(36)
+  sheet_likes       Int         @default(0)
+  sheet_dislikes    Int         @default(0)
+  sheet_views       Int         @default(0)
+  sheet_date_posted DateTime    @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
+  entities          entities    @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
+  sheets_data       sheets_data @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
 
   @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
   @@index([sheet_author_id], map: "sheets_sheet_author_id_fk_idx")
@@ -251,16 +207,14 @@ model user_credentials {
 }
 
 model videos {
-  video_id           String               @id @unique(map: "temp_video_id_UNIQUE") @db.Char(36)
-  video_creator_id   String               @db.Char(36)
-  video_title        String               @db.VarChar(256)
-  video_description  String               @db.Text
-  video_filename     String               @db.VarChar(256)
-  video_data_id      String               @db.Char(36)
-  collections_videos collections_videos[]
-  entities_videos    entities_videos[]
-  entities           entities             @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
-  videos_data        videos_data          @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
+  video_id          String      @id @unique(map: "temp_video_id_UNIQUE") @db.Char(36)
+  video_creator_id  String      @db.Char(36)
+  video_title       String      @db.VarChar(256)
+  video_description String      @db.Text
+  video_filename    String      @db.VarChar(256)
+  video_data_id     String      @db.Char(36)
+  entities          entities    @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
+  videos_data       videos_data @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
 
   @@index([video_creator_id], map: "videos_video_creator_id_fk_idx")
   @@index([video_data_id], map: "videos_video_data_id_fk_idx")

@@ -17,7 +17,7 @@ interface VideosProps {
 interface VideoData {
   video_id: string;
   entity_id: string;
-  entities_videos_id: string;
+  entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
@@ -81,7 +81,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
       ({ relation_id, pinned, date_pinned }) => {
         setVideosData((prevData) => {
           const updatedData = prevData.map((video) => {
-            if (video.entities_videos_id === relation_id) {
+            if (video.entities_content_id === relation_id) {
               return {
                 ...video,
                 pinned: pinned,
@@ -120,7 +120,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
         type={"entity"}
         video_id={video.video_id}
         pinned={video.pinned}
-        relation_id={video.entities_videos_id}
+        relation_id={video.entities_content_id}
         socket={videoSocketRef.current}
         isEditablePage={isEditablePage}
       />

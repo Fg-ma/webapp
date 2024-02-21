@@ -17,7 +17,7 @@ interface SheetsProps {
 interface SheetData {
   sheet_id: string;
   entity_id: string;
-  entities_sheets_id: string;
+  entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
@@ -81,7 +81,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
       ({ relation_id, pinned, date_pinned }) => {
         setSheetsData((prevData) => {
           const updatedData = prevData.map((sheet) => {
-            if (sheet.entities_sheets_id === relation_id) {
+            if (sheet.entities_content_id === relation_id) {
               return {
                 ...sheet,
                 pinned: pinned,
@@ -104,6 +104,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_sheets/${entity_id}`,
         );
+
         setSheetsData(sortData(response.data));
       } catch (error) {
         console.error("Error fetching image data:", error);
@@ -121,7 +122,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
         sheet_id={sheet.sheet_id}
         author_id={entity_id}
         pinned={sheet.pinned}
-        relation_id={sheet.entities_sheets_id}
+        relation_id={sheet.entities_content_id}
         socket={sheetSocketRef.current}
         isEditablePage={isEditablePage}
       />

@@ -24,6 +24,8 @@ interface SheetData {
   sheet_subject: string;
   entity_type: number;
   sheet_author: any;
+  sheet_likes: number;
+  sheet_dislikes: number;
 }
 
 export default function SheetViewer({ sheet_id }: SheetViewerProps) {
@@ -34,6 +36,8 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
     sheet_subject: "",
     entity_type: 0,
     sheet_author: null,
+    sheet_likes: 0,
+    sheet_dislikes: 0,
   });
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
@@ -61,6 +65,8 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
             sheet_subject: response.data.fullSheet.sheet_subject,
             entity_type: response.data.fullSheet.entities.entity_type,
             sheet_author: response.data.sheetAuthor,
+            sheet_likes: response.data.fullSheet.sheet_likes,
+            sheet_dislikes: response.data.fullSheet.sheet_dislikes,
           });
         }
       } catch (error) {

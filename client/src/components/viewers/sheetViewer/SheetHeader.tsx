@@ -9,6 +9,8 @@ interface SheetHeaderProps {
     entity_type: number;
     sheet_author: any;
     sheet_url: string;
+    sheet_likes: number;
+    sheet_dislikes: number;
   };
 }
 
@@ -114,7 +116,7 @@ export default function SheetHeader({ sheet_id, sheetData }: SheetHeaderProps) {
         <p className="text-base font-K2D pb-1">Views: 67K X 1 Hour Ago</p>
         <p className="text-base font-K2D">Views: 67K X 1 Hour Ago</p>
       </div>
-      <SheetActionSection sheet_id={sheet_id} />
+      <SheetActionSection sheet_id={sheet_id} sheetData={sheetData} />
     </div>
   );
 }

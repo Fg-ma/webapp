@@ -100,7 +100,7 @@ export function Sheet({
         }
 
         await Axios.put(
-          `${serverUrl}/entities/entity_sheets_pinned`,
+          `${serverUrl}/entities/entity_content_pinned`,
           {
             relation_id: relation_id,
             pinned: newPinned,
@@ -256,7 +256,7 @@ export function Video({
         }
 
         await Axios.put(
-          `${serverUrl}/entities/entity_videos_pinned`,
+          `${serverUrl}/entities/entity_content_pinned`,
           {
             relation_id: relation_id,
             pinned: newPinned,
@@ -443,7 +443,7 @@ export function Image({
         }
 
         await Axios.put(
-          `${serverUrl}/entities/entity_images_pinned`,
+          `${serverUrl}/entities/entity_content_pinned`,
           {
             relation_id: relation_id,
             pinned: newPinned,

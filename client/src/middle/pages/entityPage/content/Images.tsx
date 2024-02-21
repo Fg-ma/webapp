@@ -17,7 +17,7 @@ interface ImagesProps {
 interface ImageData {
   image_id: string;
   entity_id: string;
-  entities_images_id: string;
+  entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
@@ -81,7 +81,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
       ({ relation_id, pinned, date_pinned }) => {
         setImagesData((prevData) => {
           const updatedData = prevData.map((image) => {
-            if (image.entities_images_id === relation_id) {
+            if (image.entities_content_id === relation_id) {
               return {
                 ...image,
                 pinned: pinned,
@@ -120,7 +120,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
         type={"entity"}
         image_id={image.image_id}
         pinned={image.pinned}
-        relation_id={image.entities_images_id}
+        relation_id={image.entities_content_id}
         socket={imageSocketRef.current}
         isEditablePage={isEditablePage}
       />
