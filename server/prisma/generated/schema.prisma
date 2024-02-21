@@ -45,6 +45,7 @@ model content {
   content_type        Int?
   collections_content collections_content[]
   entities_content    entities_content[]
+  entities_dislikes   entities_dislikes[]
   entities_likes      entities_likes[]
 }
 
@@ -53,6 +54,7 @@ model entities {
   entity_type           Int                     @default(0)
   collections           collections[]
   entities_content      entities_content[]
+  entities_dislikes     entities_dislikes[]
   entities_likes        entities_likes[]
   entities_references   entities_references[]
   groups_members        groups_members[]
@@ -76,6 +78,17 @@ model entities_content {
   @@index([entity_id])
 }
 
+model entities_dislikes {
+  dislike_id String   @id @unique(map: "dislike_id_UNIQUE") @db.Char(36)
+  entity_id  String   @db.Char(36)
+  content_id String   @db.Char(36)
+  content    content  @relation(fields: [content_id], references: [content_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_dislikes_content_id_fk")
+  entities   entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_dislikes_entity_id_fk")
+
+  @@unique([entity_id, content_id], map: "entities_dislikes_unique_combination")
+  @@index([content_id], map: "entities_dislikes_content_id_fk_idx")
+}
+
 model entities_likes {
   like_id    String   @id @unique(map: "like_id_UNIQUE") @db.Char(36)
   entity_id  String   @db.Char(36)
@@ -83,6 +96,7 @@ model entities_likes {
   content    content  @relation(fields: [content_id], references: [content_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_likes_content_id_fk")
   entities   entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "entities_likes_entity_id_fk")
 
+  @@unique([entity_id, content_id], map: "entities_likes_unique_combination")
   @@index([content_id], map: "entities_likes_content_id_fk_idx")
   @@index([entity_id], map: "entities_likes_entity_id_fk_idx")
 }
@@ -127,6 +141,10 @@ model images {
   image_description String      @db.Text
   image_filename    String      @db.VarChar(256)
   image_data_id     String      @db.Char(36)
+  image_likes       Int         @default(0)
+  image_dislikes    Int         @default(0)
+  image_views       Int         @default(0)
+  image_date_posted DateTime    @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
   entities          entities    @relation(fields: [image_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_creator_id_fk")
   images_data       images_data @relation(fields: [image_data_id], references: [image_data_id], onDelete: NoAction, onUpdate: NoAction, map: "images_image_data_id_fk")
 
@@ -213,6 +231,10 @@ model videos {
   video_description String      @db.Text
   video_filename    String      @db.VarChar(256)
   video_data_id     String      @db.Char(36)
+  video_likes       Int         @default(0)
+  video_dislikes    Int         @default(0)
+  video_views       Int         @default(0)
+  video_date_posted DateTime?   @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
   entities          entities    @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
   videos_data       videos_data @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
 

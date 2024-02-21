@@ -44,6 +44,11 @@ export type entities = $Result.DefaultSelection<Prisma.$entitiesPayload>
  */
 export type entities_content = $Result.DefaultSelection<Prisma.$entities_contentPayload>
 /**
+ * Model entities_dislikes
+ * 
+ */
+export type entities_dislikes = $Result.DefaultSelection<Prisma.$entities_dislikesPayload>
+/**
  * Model entities_likes
  * 
  */
@@ -295,6 +300,16 @@ export class PrismaClient<
     * ```
     */
   get entities_content(): Prisma.entities_contentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.entities_dislikes`: Exposes CRUD operations for the **entities_dislikes** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Entities_dislikes
+    * const entities_dislikes = await prisma.entities_dislikes.findMany()
+    * ```
+    */
+  get entities_dislikes(): Prisma.entities_dislikesDelegate<ExtArgs>;
 
   /**
    * `prisma.entities_likes`: Exposes CRUD operations for the **entities_likes** model.
@@ -911,6 +926,7 @@ export namespace Prisma {
     content: 'content',
     entities: 'entities',
     entities_content: 'entities_content',
+    entities_dislikes: 'entities_dislikes',
     entities_likes: 'entities_likes',
     entities_references: 'entities_references',
     groups: 'groups',
@@ -941,7 +957,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1338,6 +1354,72 @@ export namespace Prisma {
           count: {
             args: Prisma.entities_contentCountArgs<ExtArgs>,
             result: $Utils.Optional<Entities_contentCountAggregateOutputType> | number
+          }
+        }
+      }
+      entities_dislikes: {
+        payload: Prisma.$entities_dislikesPayload<ExtArgs>
+        fields: Prisma.entities_dislikesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.entities_dislikesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.entities_dislikesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          findFirst: {
+            args: Prisma.entities_dislikesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.entities_dislikesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          findMany: {
+            args: Prisma.entities_dislikesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>[]
+          }
+          create: {
+            args: Prisma.entities_dislikesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          createMany: {
+            args: Prisma.entities_dislikesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.entities_dislikesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          update: {
+            args: Prisma.entities_dislikesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          deleteMany: {
+            args: Prisma.entities_dislikesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.entities_dislikesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.entities_dislikesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$entities_dislikesPayload>
+          }
+          aggregate: {
+            args: Prisma.Entities_dislikesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateEntities_dislikes>
+          }
+          groupBy: {
+            args: Prisma.entities_dislikesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Entities_dislikesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.entities_dislikesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Entities_dislikesCountAggregateOutputType> | number
           }
         }
       }
@@ -2450,12 +2532,14 @@ export namespace Prisma {
   export type ContentCountOutputType = {
     collections_content: number
     entities_content: number
+    entities_dislikes: number
     entities_likes: number
   }
 
   export type ContentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_content?: boolean | ContentCountOutputTypeCountCollections_contentArgs
     entities_content?: boolean | ContentCountOutputTypeCountEntities_contentArgs
+    entities_dislikes?: boolean | ContentCountOutputTypeCountEntities_dislikesArgs
     entities_likes?: boolean | ContentCountOutputTypeCountEntities_likesArgs
   }
 
@@ -2491,6 +2575,14 @@ export namespace Prisma {
   /**
    * ContentCountOutputType without action
    */
+  export type ContentCountOutputTypeCountEntities_dislikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: entities_dislikesWhereInput
+  }
+
+
+  /**
+   * ContentCountOutputType without action
+   */
   export type ContentCountOutputTypeCountEntities_likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: entities_likesWhereInput
   }
@@ -2504,6 +2596,7 @@ export namespace Prisma {
   export type EntitiesCountOutputType = {
     collections: number
     entities_content: number
+    entities_dislikes: number
     entities_likes: number
     entities_references: number
     groups_members: number
@@ -2516,6 +2609,7 @@ export namespace Prisma {
   export type EntitiesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | EntitiesCountOutputTypeCountCollectionsArgs
     entities_content?: boolean | EntitiesCountOutputTypeCountEntities_contentArgs
+    entities_dislikes?: boolean | EntitiesCountOutputTypeCountEntities_dislikesArgs
     entities_likes?: boolean | EntitiesCountOutputTypeCountEntities_likesArgs
     entities_references?: boolean | EntitiesCountOutputTypeCountEntities_referencesArgs
     groups_members?: boolean | EntitiesCountOutputTypeCountGroups_membersArgs
@@ -2551,6 +2645,14 @@ export namespace Prisma {
    */
   export type EntitiesCountOutputTypeCountEntities_contentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: entities_contentWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountEntities_dislikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: entities_dislikesWhereInput
   }
 
 
@@ -5667,6 +5769,7 @@ export namespace Prisma {
     content_type?: boolean
     collections_content?: boolean | content$collections_contentArgs<ExtArgs>
     entities_content?: boolean | content$entities_contentArgs<ExtArgs>
+    entities_dislikes?: boolean | content$entities_dislikesArgs<ExtArgs>
     entities_likes?: boolean | content$entities_likesArgs<ExtArgs>
     _count?: boolean | ContentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["content"]>
@@ -5679,6 +5782,7 @@ export namespace Prisma {
   export type contentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections_content?: boolean | content$collections_contentArgs<ExtArgs>
     entities_content?: boolean | content$entities_contentArgs<ExtArgs>
+    entities_dislikes?: boolean | content$entities_dislikesArgs<ExtArgs>
     entities_likes?: boolean | content$entities_likesArgs<ExtArgs>
     _count?: boolean | ContentCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -5689,6 +5793,7 @@ export namespace Prisma {
     objects: {
       collections_content: Prisma.$collections_contentPayload<ExtArgs>[]
       entities_content: Prisma.$entities_contentPayload<ExtArgs>[]
+      entities_dislikes: Prisma.$entities_dislikesPayload<ExtArgs>[]
       entities_likes: Prisma.$entities_likesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6062,6 +6167,8 @@ export namespace Prisma {
     collections_content<T extends content$collections_contentArgs<ExtArgs> = {}>(args?: Subset<T, content$collections_contentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collections_contentPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_content<T extends content$entities_contentArgs<ExtArgs> = {}>(args?: Subset<T, content$entities_contentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_contentPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    entities_dislikes<T extends content$entities_dislikesArgs<ExtArgs> = {}>(args?: Subset<T, content$entities_dislikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_likes<T extends content$entities_likesArgs<ExtArgs> = {}>(args?: Subset<T, content$entities_likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_likesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -6449,6 +6556,27 @@ export namespace Prisma {
 
 
   /**
+   * content.entities_dislikes
+   */
+  export type content$entities_dislikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    where?: entities_dislikesWhereInput
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    cursor?: entities_dislikesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Entities_dislikesScalarFieldEnum | Entities_dislikesScalarFieldEnum[]
+  }
+
+
+  /**
    * content.entities_likes
    */
   export type content$entities_likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6661,6 +6789,7 @@ export namespace Prisma {
     entity_type?: boolean
     collections?: boolean | entities$collectionsArgs<ExtArgs>
     entities_content?: boolean | entities$entities_contentArgs<ExtArgs>
+    entities_dislikes?: boolean | entities$entities_dislikesArgs<ExtArgs>
     entities_likes?: boolean | entities$entities_likesArgs<ExtArgs>
     entities_references?: boolean | entities$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | entities$groups_membersArgs<ExtArgs>
@@ -6679,6 +6808,7 @@ export namespace Prisma {
   export type entitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | entities$collectionsArgs<ExtArgs>
     entities_content?: boolean | entities$entities_contentArgs<ExtArgs>
+    entities_dislikes?: boolean | entities$entities_dislikesArgs<ExtArgs>
     entities_likes?: boolean | entities$entities_likesArgs<ExtArgs>
     entities_references?: boolean | entities$entities_referencesArgs<ExtArgs>
     groups_members?: boolean | entities$groups_membersArgs<ExtArgs>
@@ -6695,6 +6825,7 @@ export namespace Prisma {
     objects: {
       collections: Prisma.$collectionsPayload<ExtArgs>[]
       entities_content: Prisma.$entities_contentPayload<ExtArgs>[]
+      entities_dislikes: Prisma.$entities_dislikesPayload<ExtArgs>[]
       entities_likes: Prisma.$entities_likesPayload<ExtArgs>[]
       entities_references: Prisma.$entities_referencesPayload<ExtArgs>[]
       groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
@@ -7074,6 +7205,8 @@ export namespace Prisma {
     collections<T extends entities$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, entities$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_content<T extends entities$entities_contentArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_contentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_contentPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    entities_dislikes<T extends entities$entities_dislikesArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_dislikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     entities_likes<T extends entities$entities_likesArgs<ExtArgs> = {}>(args?: Subset<T, entities$entities_likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_likesPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -7469,6 +7602,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Entities_contentScalarFieldEnum | Entities_contentScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.entities_dislikes
+   */
+  export type entities$entities_dislikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    where?: entities_dislikesWhereInput
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    cursor?: entities_dislikesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Entities_dislikesScalarFieldEnum | Entities_dislikesScalarFieldEnum[]
   }
 
 
@@ -8565,6 +8719,907 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: entities_contentInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model entities_dislikes
+   */
+
+  export type AggregateEntities_dislikes = {
+    _count: Entities_dislikesCountAggregateOutputType | null
+    _min: Entities_dislikesMinAggregateOutputType | null
+    _max: Entities_dislikesMaxAggregateOutputType | null
+  }
+
+  export type Entities_dislikesMinAggregateOutputType = {
+    dislike_id: string | null
+    entity_id: string | null
+    content_id: string | null
+  }
+
+  export type Entities_dislikesMaxAggregateOutputType = {
+    dislike_id: string | null
+    entity_id: string | null
+    content_id: string | null
+  }
+
+  export type Entities_dislikesCountAggregateOutputType = {
+    dislike_id: number
+    entity_id: number
+    content_id: number
+    _all: number
+  }
+
+
+  export type Entities_dislikesMinAggregateInputType = {
+    dislike_id?: true
+    entity_id?: true
+    content_id?: true
+  }
+
+  export type Entities_dislikesMaxAggregateInputType = {
+    dislike_id?: true
+    entity_id?: true
+    content_id?: true
+  }
+
+  export type Entities_dislikesCountAggregateInputType = {
+    dislike_id?: true
+    entity_id?: true
+    content_id?: true
+    _all?: true
+  }
+
+  export type Entities_dislikesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which entities_dislikes to aggregate.
+     */
+    where?: entities_dislikesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of entities_dislikes to fetch.
+     */
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: entities_dislikesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` entities_dislikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` entities_dislikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned entities_dislikes
+    **/
+    _count?: true | Entities_dislikesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Entities_dislikesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Entities_dislikesMaxAggregateInputType
+  }
+
+  export type GetEntities_dislikesAggregateType<T extends Entities_dislikesAggregateArgs> = {
+        [P in keyof T & keyof AggregateEntities_dislikes]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEntities_dislikes[P]>
+      : GetScalarType<T[P], AggregateEntities_dislikes[P]>
+  }
+
+
+
+
+  export type entities_dislikesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: entities_dislikesWhereInput
+    orderBy?: entities_dislikesOrderByWithAggregationInput | entities_dislikesOrderByWithAggregationInput[]
+    by: Entities_dislikesScalarFieldEnum[] | Entities_dislikesScalarFieldEnum
+    having?: entities_dislikesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Entities_dislikesCountAggregateInputType | true
+    _min?: Entities_dislikesMinAggregateInputType
+    _max?: Entities_dislikesMaxAggregateInputType
+  }
+
+  export type Entities_dislikesGroupByOutputType = {
+    dislike_id: string
+    entity_id: string
+    content_id: string
+    _count: Entities_dislikesCountAggregateOutputType | null
+    _min: Entities_dislikesMinAggregateOutputType | null
+    _max: Entities_dislikesMaxAggregateOutputType | null
+  }
+
+  type GetEntities_dislikesGroupByPayload<T extends entities_dislikesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Entities_dislikesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Entities_dislikesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Entities_dislikesGroupByOutputType[P]>
+            : GetScalarType<T[P], Entities_dislikesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type entities_dislikesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    dislike_id?: boolean
+    entity_id?: boolean
+    content_id?: boolean
+    content?: boolean | contentDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["entities_dislikes"]>
+
+  export type entities_dislikesSelectScalar = {
+    dislike_id?: boolean
+    entity_id?: boolean
+    content_id?: boolean
+  }
+
+  export type entities_dislikesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    content?: boolean | contentDefaultArgs<ExtArgs>
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+  }
+
+
+  export type $entities_dislikesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "entities_dislikes"
+    objects: {
+      content: Prisma.$contentPayload<ExtArgs>
+      entities: Prisma.$entitiesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      dislike_id: string
+      entity_id: string
+      content_id: string
+    }, ExtArgs["result"]["entities_dislikes"]>
+    composites: {}
+  }
+
+
+  type entities_dislikesGetPayload<S extends boolean | null | undefined | entities_dislikesDefaultArgs> = $Result.GetResult<Prisma.$entities_dislikesPayload, S>
+
+  type entities_dislikesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<entities_dislikesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Entities_dislikesCountAggregateInputType | true
+    }
+
+  export interface entities_dislikesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['entities_dislikes'], meta: { name: 'entities_dislikes' } }
+    /**
+     * Find zero or one Entities_dislikes that matches the filter.
+     * @param {entities_dislikesFindUniqueArgs} args - Arguments to find a Entities_dislikes
+     * @example
+     * // Get one Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends entities_dislikesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesFindUniqueArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Entities_dislikes that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {entities_dislikesFindUniqueOrThrowArgs} args - Arguments to find a Entities_dislikes
+     * @example
+     * // Get one Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends entities_dislikesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Entities_dislikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesFindFirstArgs} args - Arguments to find a Entities_dislikes
+     * @example
+     * // Get one Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends entities_dislikesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesFindFirstArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Entities_dislikes that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesFindFirstOrThrowArgs} args - Arguments to find a Entities_dislikes
+     * @example
+     * // Get one Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends entities_dislikesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Entities_dislikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findMany()
+     * 
+     * // Get first 10 Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.findMany({ take: 10 })
+     * 
+     * // Only select the `dislike_id`
+     * const entities_dislikesWithDislike_idOnly = await prisma.entities_dislikes.findMany({ select: { dislike_id: true } })
+     * 
+    **/
+    findMany<T extends entities_dislikesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Entities_dislikes.
+     * @param {entities_dislikesCreateArgs} args - Arguments to create a Entities_dislikes.
+     * @example
+     * // Create one Entities_dislikes
+     * const Entities_dislikes = await prisma.entities_dislikes.create({
+     *   data: {
+     *     // ... data to create a Entities_dislikes
+     *   }
+     * })
+     * 
+    **/
+    create<T extends entities_dislikesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesCreateArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Entities_dislikes.
+     *     @param {entities_dislikesCreateManyArgs} args - Arguments to create many Entities_dislikes.
+     *     @example
+     *     // Create many Entities_dislikes
+     *     const entities_dislikes = await prisma.entities_dislikes.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends entities_dislikesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Entities_dislikes.
+     * @param {entities_dislikesDeleteArgs} args - Arguments to delete one Entities_dislikes.
+     * @example
+     * // Delete one Entities_dislikes
+     * const Entities_dislikes = await prisma.entities_dislikes.delete({
+     *   where: {
+     *     // ... filter to delete one Entities_dislikes
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends entities_dislikesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesDeleteArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Entities_dislikes.
+     * @param {entities_dislikesUpdateArgs} args - Arguments to update one Entities_dislikes.
+     * @example
+     * // Update one Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends entities_dislikesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesUpdateArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Entities_dislikes.
+     * @param {entities_dislikesDeleteManyArgs} args - Arguments to filter Entities_dislikes to delete.
+     * @example
+     * // Delete a few Entities_dislikes
+     * const { count } = await prisma.entities_dislikes.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends entities_dislikesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, entities_dislikesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Entities_dislikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends entities_dislikesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Entities_dislikes.
+     * @param {entities_dislikesUpsertArgs} args - Arguments to update or create a Entities_dislikes.
+     * @example
+     * // Update or create a Entities_dislikes
+     * const entities_dislikes = await prisma.entities_dislikes.upsert({
+     *   create: {
+     *     // ... data to create a Entities_dislikes
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Entities_dislikes we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends entities_dislikesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, entities_dislikesUpsertArgs<ExtArgs>>
+    ): Prisma__entities_dislikesClient<$Result.GetResult<Prisma.$entities_dislikesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Entities_dislikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesCountArgs} args - Arguments to filter Entities_dislikes to count.
+     * @example
+     * // Count the number of Entities_dislikes
+     * const count = await prisma.entities_dislikes.count({
+     *   where: {
+     *     // ... the filter for the Entities_dislikes we want to count
+     *   }
+     * })
+    **/
+    count<T extends entities_dislikesCountArgs>(
+      args?: Subset<T, entities_dislikesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Entities_dislikesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Entities_dislikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Entities_dislikesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Entities_dislikesAggregateArgs>(args: Subset<T, Entities_dislikesAggregateArgs>): Prisma.PrismaPromise<GetEntities_dislikesAggregateType<T>>
+
+    /**
+     * Group by Entities_dislikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {entities_dislikesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends entities_dislikesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: entities_dislikesGroupByArgs['orderBy'] }
+        : { orderBy?: entities_dislikesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, entities_dislikesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEntities_dislikesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the entities_dislikes model
+   */
+  readonly fields: entities_dislikesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for entities_dislikes.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__entities_dislikesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    content<T extends contentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, contentDefaultArgs<ExtArgs>>): Prisma__contentClient<$Result.GetResult<Prisma.$contentPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the entities_dislikes model
+   */ 
+  interface entities_dislikesFieldRefs {
+    readonly dislike_id: FieldRef<"entities_dislikes", 'String'>
+    readonly entity_id: FieldRef<"entities_dislikes", 'String'>
+    readonly content_id: FieldRef<"entities_dislikes", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * entities_dislikes findUnique
+   */
+  export type entities_dislikesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter, which entities_dislikes to fetch.
+     */
+    where: entities_dislikesWhereUniqueInput
+  }
+
+
+  /**
+   * entities_dislikes findUniqueOrThrow
+   */
+  export type entities_dislikesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter, which entities_dislikes to fetch.
+     */
+    where: entities_dislikesWhereUniqueInput
+  }
+
+
+  /**
+   * entities_dislikes findFirst
+   */
+  export type entities_dislikesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter, which entities_dislikes to fetch.
+     */
+    where?: entities_dislikesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of entities_dislikes to fetch.
+     */
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for entities_dislikes.
+     */
+    cursor?: entities_dislikesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` entities_dislikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` entities_dislikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of entities_dislikes.
+     */
+    distinct?: Entities_dislikesScalarFieldEnum | Entities_dislikesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities_dislikes findFirstOrThrow
+   */
+  export type entities_dislikesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter, which entities_dislikes to fetch.
+     */
+    where?: entities_dislikesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of entities_dislikes to fetch.
+     */
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for entities_dislikes.
+     */
+    cursor?: entities_dislikesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` entities_dislikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` entities_dislikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of entities_dislikes.
+     */
+    distinct?: Entities_dislikesScalarFieldEnum | Entities_dislikesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities_dislikes findMany
+   */
+  export type entities_dislikesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter, which entities_dislikes to fetch.
+     */
+    where?: entities_dislikesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of entities_dislikes to fetch.
+     */
+    orderBy?: entities_dislikesOrderByWithRelationInput | entities_dislikesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing entities_dislikes.
+     */
+    cursor?: entities_dislikesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` entities_dislikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` entities_dislikes.
+     */
+    skip?: number
+    distinct?: Entities_dislikesScalarFieldEnum | Entities_dislikesScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities_dislikes create
+   */
+  export type entities_dislikesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a entities_dislikes.
+     */
+    data: XOR<entities_dislikesCreateInput, entities_dislikesUncheckedCreateInput>
+  }
+
+
+  /**
+   * entities_dislikes createMany
+   */
+  export type entities_dislikesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many entities_dislikes.
+     */
+    data: entities_dislikesCreateManyInput | entities_dislikesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * entities_dislikes update
+   */
+  export type entities_dislikesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a entities_dislikes.
+     */
+    data: XOR<entities_dislikesUpdateInput, entities_dislikesUncheckedUpdateInput>
+    /**
+     * Choose, which entities_dislikes to update.
+     */
+    where: entities_dislikesWhereUniqueInput
+  }
+
+
+  /**
+   * entities_dislikes updateMany
+   */
+  export type entities_dislikesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update entities_dislikes.
+     */
+    data: XOR<entities_dislikesUpdateManyMutationInput, entities_dislikesUncheckedUpdateManyInput>
+    /**
+     * Filter which entities_dislikes to update
+     */
+    where?: entities_dislikesWhereInput
+  }
+
+
+  /**
+   * entities_dislikes upsert
+   */
+  export type entities_dislikesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the entities_dislikes to update in case it exists.
+     */
+    where: entities_dislikesWhereUniqueInput
+    /**
+     * In case the entities_dislikes found by the `where` argument doesn't exist, create a new entities_dislikes with this data.
+     */
+    create: XOR<entities_dislikesCreateInput, entities_dislikesUncheckedCreateInput>
+    /**
+     * In case the entities_dislikes was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<entities_dislikesUpdateInput, entities_dislikesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * entities_dislikes delete
+   */
+  export type entities_dislikesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
+    /**
+     * Filter which entities_dislikes to delete.
+     */
+    where: entities_dislikesWhereUniqueInput
+  }
+
+
+  /**
+   * entities_dislikes deleteMany
+   */
+  export type entities_dislikesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which entities_dislikes to delete
+     */
+    where?: entities_dislikesWhereInput
+  }
+
+
+  /**
+   * entities_dislikes without action
+   */
+  export type entities_dislikesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the entities_dislikes
+     */
+    select?: entities_dislikesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: entities_dislikesInclude<ExtArgs> | null
   }
 
 
@@ -12247,8 +13302,22 @@ export namespace Prisma {
 
   export type AggregateImages = {
     _count: ImagesCountAggregateOutputType | null
+    _avg: ImagesAvgAggregateOutputType | null
+    _sum: ImagesSumAggregateOutputType | null
     _min: ImagesMinAggregateOutputType | null
     _max: ImagesMaxAggregateOutputType | null
+  }
+
+  export type ImagesAvgAggregateOutputType = {
+    image_likes: number | null
+    image_dislikes: number | null
+    image_views: number | null
+  }
+
+  export type ImagesSumAggregateOutputType = {
+    image_likes: number | null
+    image_dislikes: number | null
+    image_views: number | null
   }
 
   export type ImagesMinAggregateOutputType = {
@@ -12258,6 +13327,10 @@ export namespace Prisma {
     image_description: string | null
     image_filename: string | null
     image_data_id: string | null
+    image_likes: number | null
+    image_dislikes: number | null
+    image_views: number | null
+    image_date_posted: Date | null
   }
 
   export type ImagesMaxAggregateOutputType = {
@@ -12267,6 +13340,10 @@ export namespace Prisma {
     image_description: string | null
     image_filename: string | null
     image_data_id: string | null
+    image_likes: number | null
+    image_dislikes: number | null
+    image_views: number | null
+    image_date_posted: Date | null
   }
 
   export type ImagesCountAggregateOutputType = {
@@ -12276,9 +13353,25 @@ export namespace Prisma {
     image_description: number
     image_filename: number
     image_data_id: number
+    image_likes: number
+    image_dislikes: number
+    image_views: number
+    image_date_posted: number
     _all: number
   }
 
+
+  export type ImagesAvgAggregateInputType = {
+    image_likes?: true
+    image_dislikes?: true
+    image_views?: true
+  }
+
+  export type ImagesSumAggregateInputType = {
+    image_likes?: true
+    image_dislikes?: true
+    image_views?: true
+  }
 
   export type ImagesMinAggregateInputType = {
     image_id?: true
@@ -12287,6 +13380,10 @@ export namespace Prisma {
     image_description?: true
     image_filename?: true
     image_data_id?: true
+    image_likes?: true
+    image_dislikes?: true
+    image_views?: true
+    image_date_posted?: true
   }
 
   export type ImagesMaxAggregateInputType = {
@@ -12296,6 +13393,10 @@ export namespace Prisma {
     image_description?: true
     image_filename?: true
     image_data_id?: true
+    image_likes?: true
+    image_dislikes?: true
+    image_views?: true
+    image_date_posted?: true
   }
 
   export type ImagesCountAggregateInputType = {
@@ -12305,6 +13406,10 @@ export namespace Prisma {
     image_description?: true
     image_filename?: true
     image_data_id?: true
+    image_likes?: true
+    image_dislikes?: true
+    image_views?: true
+    image_date_posted?: true
     _all?: true
   }
 
@@ -12346,6 +13451,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ImagesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ImagesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ImagesMinAggregateInputType
@@ -12376,6 +13493,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ImagesCountAggregateInputType | true
+    _avg?: ImagesAvgAggregateInputType
+    _sum?: ImagesSumAggregateInputType
     _min?: ImagesMinAggregateInputType
     _max?: ImagesMaxAggregateInputType
   }
@@ -12387,7 +13506,13 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     image_data_id: string
+    image_likes: number
+    image_dislikes: number
+    image_views: number
+    image_date_posted: Date
     _count: ImagesCountAggregateOutputType | null
+    _avg: ImagesAvgAggregateOutputType | null
+    _sum: ImagesSumAggregateOutputType | null
     _min: ImagesMinAggregateOutputType | null
     _max: ImagesMaxAggregateOutputType | null
   }
@@ -12413,6 +13538,10 @@ export namespace Prisma {
     image_description?: boolean
     image_filename?: boolean
     image_data_id?: boolean
+    image_likes?: boolean
+    image_dislikes?: boolean
+    image_views?: boolean
+    image_date_posted?: boolean
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     images_data?: boolean | images_dataDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["images"]>
@@ -12424,6 +13553,10 @@ export namespace Prisma {
     image_description?: boolean
     image_filename?: boolean
     image_data_id?: boolean
+    image_likes?: boolean
+    image_dislikes?: boolean
+    image_views?: boolean
+    image_date_posted?: boolean
   }
 
   export type imagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12445,6 +13578,10 @@ export namespace Prisma {
       image_description: string
       image_filename: string
       image_data_id: string
+      image_likes: number
+      image_dislikes: number
+      image_views: number
+      image_date_posted: Date
     }, ExtArgs["result"]["images"]>
     composites: {}
   }
@@ -12848,6 +13985,10 @@ export namespace Prisma {
     readonly image_description: FieldRef<"images", 'String'>
     readonly image_filename: FieldRef<"images", 'String'>
     readonly image_data_id: FieldRef<"images", 'String'>
+    readonly image_likes: FieldRef<"images", 'Int'>
+    readonly image_dislikes: FieldRef<"images", 'Int'>
+    readonly image_views: FieldRef<"images", 'Int'>
+    readonly image_date_posted: FieldRef<"images", 'DateTime'>
   }
     
 
@@ -19755,8 +20896,22 @@ export namespace Prisma {
 
   export type AggregateVideos = {
     _count: VideosCountAggregateOutputType | null
+    _avg: VideosAvgAggregateOutputType | null
+    _sum: VideosSumAggregateOutputType | null
     _min: VideosMinAggregateOutputType | null
     _max: VideosMaxAggregateOutputType | null
+  }
+
+  export type VideosAvgAggregateOutputType = {
+    video_likes: number | null
+    video_dislikes: number | null
+    video_views: number | null
+  }
+
+  export type VideosSumAggregateOutputType = {
+    video_likes: number | null
+    video_dislikes: number | null
+    video_views: number | null
   }
 
   export type VideosMinAggregateOutputType = {
@@ -19766,6 +20921,10 @@ export namespace Prisma {
     video_description: string | null
     video_filename: string | null
     video_data_id: string | null
+    video_likes: number | null
+    video_dislikes: number | null
+    video_views: number | null
+    video_date_posted: Date | null
   }
 
   export type VideosMaxAggregateOutputType = {
@@ -19775,6 +20934,10 @@ export namespace Prisma {
     video_description: string | null
     video_filename: string | null
     video_data_id: string | null
+    video_likes: number | null
+    video_dislikes: number | null
+    video_views: number | null
+    video_date_posted: Date | null
   }
 
   export type VideosCountAggregateOutputType = {
@@ -19784,9 +20947,25 @@ export namespace Prisma {
     video_description: number
     video_filename: number
     video_data_id: number
+    video_likes: number
+    video_dislikes: number
+    video_views: number
+    video_date_posted: number
     _all: number
   }
 
+
+  export type VideosAvgAggregateInputType = {
+    video_likes?: true
+    video_dislikes?: true
+    video_views?: true
+  }
+
+  export type VideosSumAggregateInputType = {
+    video_likes?: true
+    video_dislikes?: true
+    video_views?: true
+  }
 
   export type VideosMinAggregateInputType = {
     video_id?: true
@@ -19795,6 +20974,10 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_likes?: true
+    video_dislikes?: true
+    video_views?: true
+    video_date_posted?: true
   }
 
   export type VideosMaxAggregateInputType = {
@@ -19804,6 +20987,10 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_likes?: true
+    video_dislikes?: true
+    video_views?: true
+    video_date_posted?: true
   }
 
   export type VideosCountAggregateInputType = {
@@ -19813,6 +21000,10 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_likes?: true
+    video_dislikes?: true
+    video_views?: true
+    video_date_posted?: true
     _all?: true
   }
 
@@ -19854,6 +21045,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: VideosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VideosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: VideosMinAggregateInputType
@@ -19884,6 +21087,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VideosCountAggregateInputType | true
+    _avg?: VideosAvgAggregateInputType
+    _sum?: VideosSumAggregateInputType
     _min?: VideosMinAggregateInputType
     _max?: VideosMaxAggregateInputType
   }
@@ -19895,7 +21100,13 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_likes: number
+    video_dislikes: number
+    video_views: number
+    video_date_posted: Date | null
     _count: VideosCountAggregateOutputType | null
+    _avg: VideosAvgAggregateOutputType | null
+    _sum: VideosSumAggregateOutputType | null
     _min: VideosMinAggregateOutputType | null
     _max: VideosMaxAggregateOutputType | null
   }
@@ -19921,6 +21132,10 @@ export namespace Prisma {
     video_description?: boolean
     video_filename?: boolean
     video_data_id?: boolean
+    video_likes?: boolean
+    video_dislikes?: boolean
+    video_views?: boolean
+    video_date_posted?: boolean
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     videos_data?: boolean | videos_dataDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videos"]>
@@ -19932,6 +21147,10 @@ export namespace Prisma {
     video_description?: boolean
     video_filename?: boolean
     video_data_id?: boolean
+    video_likes?: boolean
+    video_dislikes?: boolean
+    video_views?: boolean
+    video_date_posted?: boolean
   }
 
   export type videosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19953,6 +21172,10 @@ export namespace Prisma {
       video_description: string
       video_filename: string
       video_data_id: string
+      video_likes: number
+      video_dislikes: number
+      video_views: number
+      video_date_posted: Date | null
     }, ExtArgs["result"]["videos"]>
     composites: {}
   }
@@ -20356,6 +21579,10 @@ export namespace Prisma {
     readonly video_description: FieldRef<"videos", 'String'>
     readonly video_filename: FieldRef<"videos", 'String'>
     readonly video_data_id: FieldRef<"videos", 'String'>
+    readonly video_likes: FieldRef<"videos", 'Int'>
+    readonly video_dislikes: FieldRef<"videos", 'Int'>
+    readonly video_views: FieldRef<"videos", 'Int'>
+    readonly video_date_posted: FieldRef<"videos", 'DateTime'>
   }
     
 
@@ -21663,6 +22890,15 @@ export namespace Prisma {
   export type Entities_contentScalarFieldEnum = (typeof Entities_contentScalarFieldEnum)[keyof typeof Entities_contentScalarFieldEnum]
 
 
+  export const Entities_dislikesScalarFieldEnum: {
+    dislike_id: 'dislike_id',
+    entity_id: 'entity_id',
+    content_id: 'content_id'
+  };
+
+  export type Entities_dislikesScalarFieldEnum = (typeof Entities_dislikesScalarFieldEnum)[keyof typeof Entities_dislikesScalarFieldEnum]
+
+
   export const Entities_likesScalarFieldEnum: {
     like_id: 'like_id',
     entity_id: 'entity_id',
@@ -21710,7 +22946,11 @@ export namespace Prisma {
     image_title: 'image_title',
     image_description: 'image_description',
     image_filename: 'image_filename',
-    image_data_id: 'image_data_id'
+    image_data_id: 'image_data_id',
+    image_likes: 'image_likes',
+    image_dislikes: 'image_dislikes',
+    image_views: 'image_views',
+    image_date_posted: 'image_date_posted'
   };
 
   export type ImagesScalarFieldEnum = (typeof ImagesScalarFieldEnum)[keyof typeof ImagesScalarFieldEnum]
@@ -21800,7 +23040,11 @@ export namespace Prisma {
     video_title: 'video_title',
     video_description: 'video_description',
     video_filename: 'video_filename',
-    video_data_id: 'video_data_id'
+    video_data_id: 'video_data_id',
+    video_likes: 'video_likes',
+    video_dislikes: 'video_dislikes',
+    video_views: 'video_views',
+    video_date_posted: 'video_date_posted'
   };
 
   export type VideosScalarFieldEnum = (typeof VideosScalarFieldEnum)[keyof typeof VideosScalarFieldEnum]
@@ -22042,6 +23286,7 @@ export namespace Prisma {
     content_type?: IntNullableFilter<"content"> | number | null
     collections_content?: Collections_contentListRelationFilter
     entities_content?: Entities_contentListRelationFilter
+    entities_dislikes?: Entities_dislikesListRelationFilter
     entities_likes?: Entities_likesListRelationFilter
   }
 
@@ -22050,6 +23295,7 @@ export namespace Prisma {
     content_type?: SortOrderInput | SortOrder
     collections_content?: collections_contentOrderByRelationAggregateInput
     entities_content?: entities_contentOrderByRelationAggregateInput
+    entities_dislikes?: entities_dislikesOrderByRelationAggregateInput
     entities_likes?: entities_likesOrderByRelationAggregateInput
   }
 
@@ -22061,6 +23307,7 @@ export namespace Prisma {
     content_type?: IntNullableFilter<"content"> | number | null
     collections_content?: Collections_contentListRelationFilter
     entities_content?: Entities_contentListRelationFilter
+    entities_dislikes?: Entities_dislikesListRelationFilter
     entities_likes?: Entities_likesListRelationFilter
   }, "content_id" | "content_id">
 
@@ -22090,6 +23337,7 @@ export namespace Prisma {
     entity_type?: IntFilter<"entities"> | number
     collections?: CollectionsListRelationFilter
     entities_content?: Entities_contentListRelationFilter
+    entities_dislikes?: Entities_dislikesListRelationFilter
     entities_likes?: Entities_likesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
@@ -22104,6 +23352,7 @@ export namespace Prisma {
     entity_type?: SortOrder
     collections?: collectionsOrderByRelationAggregateInput
     entities_content?: entities_contentOrderByRelationAggregateInput
+    entities_dislikes?: entities_dislikesOrderByRelationAggregateInput
     entities_likes?: entities_likesOrderByRelationAggregateInput
     entities_references?: entities_referencesOrderByRelationAggregateInput
     groups_members?: groups_membersOrderByRelationAggregateInput
@@ -22121,6 +23370,7 @@ export namespace Prisma {
     entity_type?: IntFilter<"entities"> | number
     collections?: CollectionsListRelationFilter
     entities_content?: Entities_contentListRelationFilter
+    entities_dislikes?: Entities_dislikesListRelationFilter
     entities_likes?: Entities_likesListRelationFilter
     entities_references?: Entities_referencesListRelationFilter
     groups_members?: Groups_membersListRelationFilter
@@ -22211,6 +23461,55 @@ export namespace Prisma {
     date_pinned?: DateTimeNullableWithAggregatesFilter<"entities_content"> | Date | string | null
   }
 
+  export type entities_dislikesWhereInput = {
+    AND?: entities_dislikesWhereInput | entities_dislikesWhereInput[]
+    OR?: entities_dislikesWhereInput[]
+    NOT?: entities_dislikesWhereInput | entities_dislikesWhereInput[]
+    dislike_id?: StringFilter<"entities_dislikes"> | string
+    entity_id?: StringFilter<"entities_dislikes"> | string
+    content_id?: StringFilter<"entities_dislikes"> | string
+    content?: XOR<ContentRelationFilter, contentWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+  }
+
+  export type entities_dislikesOrderByWithRelationInput = {
+    dislike_id?: SortOrder
+    entity_id?: SortOrder
+    content_id?: SortOrder
+    content?: contentOrderByWithRelationInput
+    entities?: entitiesOrderByWithRelationInput
+  }
+
+  export type entities_dislikesWhereUniqueInput = Prisma.AtLeast<{
+    dislike_id?: string
+    entity_id_content_id?: entities_dislikesEntity_idContent_idCompoundUniqueInput
+    AND?: entities_dislikesWhereInput | entities_dislikesWhereInput[]
+    OR?: entities_dislikesWhereInput[]
+    NOT?: entities_dislikesWhereInput | entities_dislikesWhereInput[]
+    entity_id?: StringFilter<"entities_dislikes"> | string
+    content_id?: StringFilter<"entities_dislikes"> | string
+    content?: XOR<ContentRelationFilter, contentWhereInput>
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+  }, "dislike_id" | "dislike_id" | "entity_id_content_id">
+
+  export type entities_dislikesOrderByWithAggregationInput = {
+    dislike_id?: SortOrder
+    entity_id?: SortOrder
+    content_id?: SortOrder
+    _count?: entities_dislikesCountOrderByAggregateInput
+    _max?: entities_dislikesMaxOrderByAggregateInput
+    _min?: entities_dislikesMinOrderByAggregateInput
+  }
+
+  export type entities_dislikesScalarWhereWithAggregatesInput = {
+    AND?: entities_dislikesScalarWhereWithAggregatesInput | entities_dislikesScalarWhereWithAggregatesInput[]
+    OR?: entities_dislikesScalarWhereWithAggregatesInput[]
+    NOT?: entities_dislikesScalarWhereWithAggregatesInput | entities_dislikesScalarWhereWithAggregatesInput[]
+    dislike_id?: StringWithAggregatesFilter<"entities_dislikes"> | string
+    entity_id?: StringWithAggregatesFilter<"entities_dislikes"> | string
+    content_id?: StringWithAggregatesFilter<"entities_dislikes"> | string
+  }
+
   export type entities_likesWhereInput = {
     AND?: entities_likesWhereInput | entities_likesWhereInput[]
     OR?: entities_likesWhereInput[]
@@ -22232,6 +23531,7 @@ export namespace Prisma {
 
   export type entities_likesWhereUniqueInput = Prisma.AtLeast<{
     like_id?: string
+    entity_id_content_id?: entities_likesEntity_idContent_idCompoundUniqueInput
     AND?: entities_likesWhereInput | entities_likesWhereInput[]
     OR?: entities_likesWhereInput[]
     NOT?: entities_likesWhereInput | entities_likesWhereInput[]
@@ -22239,7 +23539,7 @@ export namespace Prisma {
     content_id?: StringFilter<"entities_likes"> | string
     content?: XOR<ContentRelationFilter, contentWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
-  }, "like_id" | "like_id">
+  }, "like_id" | "like_id" | "entity_id_content_id">
 
   export type entities_likesOrderByWithAggregationInput = {
     like_id?: SortOrder
@@ -22433,6 +23733,10 @@ export namespace Prisma {
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
     image_data_id?: StringFilter<"images"> | string
+    image_likes?: IntFilter<"images"> | number
+    image_dislikes?: IntFilter<"images"> | number
+    image_views?: IntFilter<"images"> | number
+    image_date_posted?: DateTimeFilter<"images"> | Date | string
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     images_data?: XOR<Images_dataRelationFilter, images_dataWhereInput>
   }
@@ -22444,6 +23748,10 @@ export namespace Prisma {
     image_description?: SortOrder
     image_filename?: SortOrder
     image_data_id?: SortOrder
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
+    image_date_posted?: SortOrder
     entities?: entitiesOrderByWithRelationInput
     images_data?: images_dataOrderByWithRelationInput
   }
@@ -22458,6 +23766,10 @@ export namespace Prisma {
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
     image_data_id?: StringFilter<"images"> | string
+    image_likes?: IntFilter<"images"> | number
+    image_dislikes?: IntFilter<"images"> | number
+    image_views?: IntFilter<"images"> | number
+    image_date_posted?: DateTimeFilter<"images"> | Date | string
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     images_data?: XOR<Images_dataRelationFilter, images_dataWhereInput>
   }, "image_id" | "image_id">
@@ -22469,9 +23781,15 @@ export namespace Prisma {
     image_description?: SortOrder
     image_filename?: SortOrder
     image_data_id?: SortOrder
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
+    image_date_posted?: SortOrder
     _count?: imagesCountOrderByAggregateInput
+    _avg?: imagesAvgOrderByAggregateInput
     _max?: imagesMaxOrderByAggregateInput
     _min?: imagesMinOrderByAggregateInput
+    _sum?: imagesSumOrderByAggregateInput
   }
 
   export type imagesScalarWhereWithAggregatesInput = {
@@ -22484,6 +23802,10 @@ export namespace Prisma {
     image_description?: StringWithAggregatesFilter<"images"> | string
     image_filename?: StringWithAggregatesFilter<"images"> | string
     image_data_id?: StringWithAggregatesFilter<"images"> | string
+    image_likes?: IntWithAggregatesFilter<"images"> | number
+    image_dislikes?: IntWithAggregatesFilter<"images"> | number
+    image_views?: IntWithAggregatesFilter<"images"> | number
+    image_date_posted?: DateTimeWithAggregatesFilter<"images"> | Date | string
   }
 
   export type images_dataWhereInput = {
@@ -22894,6 +24216,10 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_likes?: IntFilter<"videos"> | number
+    video_dislikes?: IntFilter<"videos"> | number
+    video_views?: IntFilter<"videos"> | number
+    video_date_posted?: DateTimeNullableFilter<"videos"> | Date | string | null
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
   }
@@ -22905,6 +24231,10 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
+    video_date_posted?: SortOrderInput | SortOrder
     entities?: entitiesOrderByWithRelationInput
     videos_data?: videos_dataOrderByWithRelationInput
   }
@@ -22919,6 +24249,10 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_likes?: IntFilter<"videos"> | number
+    video_dislikes?: IntFilter<"videos"> | number
+    video_views?: IntFilter<"videos"> | number
+    video_date_posted?: DateTimeNullableFilter<"videos"> | Date | string | null
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
   }, "video_id" | "video_id">
@@ -22930,9 +24264,15 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
+    video_date_posted?: SortOrderInput | SortOrder
     _count?: videosCountOrderByAggregateInput
+    _avg?: videosAvgOrderByAggregateInput
     _max?: videosMaxOrderByAggregateInput
     _min?: videosMinOrderByAggregateInput
+    _sum?: videosSumOrderByAggregateInput
   }
 
   export type videosScalarWhereWithAggregatesInput = {
@@ -22945,6 +24285,10 @@ export namespace Prisma {
     video_description?: StringWithAggregatesFilter<"videos"> | string
     video_filename?: StringWithAggregatesFilter<"videos"> | string
     video_data_id?: StringWithAggregatesFilter<"videos"> | string
+    video_likes?: IntWithAggregatesFilter<"videos"> | number
+    video_dislikes?: IntWithAggregatesFilter<"videos"> | number
+    video_views?: IntWithAggregatesFilter<"videos"> | number
+    video_date_posted?: DateTimeNullableWithAggregatesFilter<"videos"> | Date | string | null
   }
 
   export type videos_dataWhereInput = {
@@ -23140,6 +24484,7 @@ export namespace Prisma {
     content_type?: number | null
     collections_content?: collections_contentCreateNestedManyWithoutContentInput
     entities_content?: entities_contentCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesCreateNestedManyWithoutContentInput
   }
 
@@ -23148,6 +24493,7 @@ export namespace Prisma {
     content_type?: number | null
     collections_content?: collections_contentUncheckedCreateNestedManyWithoutContentInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutContentInput
   }
 
@@ -23156,6 +24502,7 @@ export namespace Prisma {
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUpdateManyWithoutContentNestedInput
     entities_content?: entities_contentUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUpdateManyWithoutContentNestedInput
   }
 
@@ -23164,6 +24511,7 @@ export namespace Prisma {
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUncheckedUpdateManyWithoutContentNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutContentNestedInput
   }
 
@@ -23187,6 +24535,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -23201,6 +24550,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -23215,6 +24565,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -23229,6 +24580,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -23312,6 +24664,46 @@ export namespace Prisma {
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type entities_dislikesCreateInput = {
+    dislike_id: string
+    content: contentCreateNestedOneWithoutEntities_dislikesInput
+    entities: entitiesCreateNestedOneWithoutEntities_dislikesInput
+  }
+
+  export type entities_dislikesUncheckedCreateInput = {
+    dislike_id: string
+    entity_id: string
+    content_id: string
+  }
+
+  export type entities_dislikesUpdateInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    content?: contentUpdateOneRequiredWithoutEntities_dislikesNestedInput
+    entities?: entitiesUpdateOneRequiredWithoutEntities_dislikesNestedInput
+  }
+
+  export type entities_dislikesUncheckedUpdateInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    content_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_dislikesCreateManyInput = {
+    dislike_id: string
+    entity_id: string
+    content_id: string
+  }
+
+  export type entities_dislikesUpdateManyMutationInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_dislikesUncheckedUpdateManyInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    content_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_likesCreateInput = {
@@ -23521,6 +24913,10 @@ export namespace Prisma {
     image_title: string
     image_description: string
     image_filename: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
     entities: entitiesCreateNestedOneWithoutImagesInput
     images_data: images_dataCreateNestedOneWithoutImagesInput
   }
@@ -23532,6 +24928,10 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     image_data_id: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type imagesUpdateInput = {
@@ -23539,6 +24939,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
     images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
   }
@@ -23550,6 +24954,10 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     image_data_id?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type imagesCreateManyInput = {
@@ -23559,6 +24967,10 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     image_data_id: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type imagesUpdateManyMutationInput = {
@@ -23566,6 +24978,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type imagesUncheckedUpdateManyInput = {
@@ -23575,6 +24991,10 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     image_data_id?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type images_dataCreateInput = {
@@ -23992,6 +25412,10 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
     entities: entitiesCreateNestedOneWithoutVideosInput
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
   }
@@ -24003,6 +25427,10 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type videosUpdateInput = {
@@ -24010,6 +25438,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
   }
@@ -24021,6 +25453,10 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videosCreateManyInput = {
@@ -24030,6 +25466,10 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type videosUpdateManyMutationInput = {
@@ -24037,6 +25477,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videosUncheckedUpdateManyInput = {
@@ -24046,6 +25490,10 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videos_dataCreateInput = {
@@ -24296,6 +25744,12 @@ export namespace Prisma {
     none?: entities_contentWhereInput
   }
 
+  export type Entities_dislikesListRelationFilter = {
+    every?: entities_dislikesWhereInput
+    some?: entities_dislikesWhereInput
+    none?: entities_dislikesWhereInput
+  }
+
   export type Entities_likesListRelationFilter = {
     every?: entities_likesWhereInput
     some?: entities_likesWhereInput
@@ -24303,6 +25757,10 @@ export namespace Prisma {
   }
 
   export type entities_contentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type entities_dislikesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24496,6 +25954,34 @@ export namespace Prisma {
     date_pinned?: SortOrder
   }
 
+  export type entities_dislikesEntity_idContent_idCompoundUniqueInput = {
+    entity_id: string
+    content_id: string
+  }
+
+  export type entities_dislikesCountOrderByAggregateInput = {
+    dislike_id?: SortOrder
+    entity_id?: SortOrder
+    content_id?: SortOrder
+  }
+
+  export type entities_dislikesMaxOrderByAggregateInput = {
+    dislike_id?: SortOrder
+    entity_id?: SortOrder
+    content_id?: SortOrder
+  }
+
+  export type entities_dislikesMinOrderByAggregateInput = {
+    dislike_id?: SortOrder
+    entity_id?: SortOrder
+    content_id?: SortOrder
+  }
+
+  export type entities_likesEntity_idContent_idCompoundUniqueInput = {
+    entity_id: string
+    content_id: string
+  }
+
   export type entities_likesCountOrderByAggregateInput = {
     like_id?: SortOrder
     entity_id?: SortOrder
@@ -24636,6 +26122,16 @@ export namespace Prisma {
     image_description?: SortOrder
     image_filename?: SortOrder
     image_data_id?: SortOrder
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
+    image_date_posted?: SortOrder
+  }
+
+  export type imagesAvgOrderByAggregateInput = {
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
   }
 
   export type imagesMaxOrderByAggregateInput = {
@@ -24645,6 +26141,10 @@ export namespace Prisma {
     image_description?: SortOrder
     image_filename?: SortOrder
     image_data_id?: SortOrder
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
+    image_date_posted?: SortOrder
   }
 
   export type imagesMinOrderByAggregateInput = {
@@ -24654,6 +26154,16 @@ export namespace Prisma {
     image_description?: SortOrder
     image_filename?: SortOrder
     image_data_id?: SortOrder
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
+    image_date_posted?: SortOrder
+  }
+
+  export type imagesSumOrderByAggregateInput = {
+    image_likes?: SortOrder
+    image_dislikes?: SortOrder
+    image_views?: SortOrder
   }
 
   export type BytesFilter<$PrismaModel = never> = {
@@ -24888,6 +26398,16 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
+    video_date_posted?: SortOrder
+  }
+
+  export type videosAvgOrderByAggregateInput = {
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
   }
 
   export type videosMaxOrderByAggregateInput = {
@@ -24897,6 +26417,10 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
+    video_date_posted?: SortOrder
   }
 
   export type videosMinOrderByAggregateInput = {
@@ -24906,6 +26430,16 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
+    video_date_posted?: SortOrder
+  }
+
+  export type videosSumOrderByAggregateInput = {
+    video_likes?: SortOrder
+    video_dislikes?: SortOrder
+    video_views?: SortOrder
   }
 
   export type videos_dataCountOrderByAggregateInput = {
@@ -25037,6 +26571,13 @@ export namespace Prisma {
     connect?: entities_contentWhereUniqueInput | entities_contentWhereUniqueInput[]
   }
 
+  export type entities_dislikesCreateNestedManyWithoutContentInput = {
+    create?: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput> | entities_dislikesCreateWithoutContentInput[] | entities_dislikesUncheckedCreateWithoutContentInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutContentInput | entities_dislikesCreateOrConnectWithoutContentInput[]
+    createMany?: entities_dislikesCreateManyContentInputEnvelope
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+  }
+
   export type entities_likesCreateNestedManyWithoutContentInput = {
     create?: XOR<entities_likesCreateWithoutContentInput, entities_likesUncheckedCreateWithoutContentInput> | entities_likesCreateWithoutContentInput[] | entities_likesUncheckedCreateWithoutContentInput[]
     connectOrCreate?: entities_likesCreateOrConnectWithoutContentInput | entities_likesCreateOrConnectWithoutContentInput[]
@@ -25056,6 +26597,13 @@ export namespace Prisma {
     connectOrCreate?: entities_contentCreateOrConnectWithoutContentInput | entities_contentCreateOrConnectWithoutContentInput[]
     createMany?: entities_contentCreateManyContentInputEnvelope
     connect?: entities_contentWhereUniqueInput | entities_contentWhereUniqueInput[]
+  }
+
+  export type entities_dislikesUncheckedCreateNestedManyWithoutContentInput = {
+    create?: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput> | entities_dislikesCreateWithoutContentInput[] | entities_dislikesUncheckedCreateWithoutContentInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutContentInput | entities_dislikesCreateOrConnectWithoutContentInput[]
+    createMany?: entities_dislikesCreateManyContentInputEnvelope
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
   }
 
   export type entities_likesUncheckedCreateNestedManyWithoutContentInput = {
@@ -25101,6 +26649,20 @@ export namespace Prisma {
     deleteMany?: entities_contentScalarWhereInput | entities_contentScalarWhereInput[]
   }
 
+  export type entities_dislikesUpdateManyWithoutContentNestedInput = {
+    create?: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput> | entities_dislikesCreateWithoutContentInput[] | entities_dislikesUncheckedCreateWithoutContentInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutContentInput | entities_dislikesCreateOrConnectWithoutContentInput[]
+    upsert?: entities_dislikesUpsertWithWhereUniqueWithoutContentInput | entities_dislikesUpsertWithWhereUniqueWithoutContentInput[]
+    createMany?: entities_dislikesCreateManyContentInputEnvelope
+    set?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    disconnect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    delete?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    update?: entities_dislikesUpdateWithWhereUniqueWithoutContentInput | entities_dislikesUpdateWithWhereUniqueWithoutContentInput[]
+    updateMany?: entities_dislikesUpdateManyWithWhereWithoutContentInput | entities_dislikesUpdateManyWithWhereWithoutContentInput[]
+    deleteMany?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
+  }
+
   export type entities_likesUpdateManyWithoutContentNestedInput = {
     create?: XOR<entities_likesCreateWithoutContentInput, entities_likesUncheckedCreateWithoutContentInput> | entities_likesCreateWithoutContentInput[] | entities_likesUncheckedCreateWithoutContentInput[]
     connectOrCreate?: entities_likesCreateOrConnectWithoutContentInput | entities_likesCreateOrConnectWithoutContentInput[]
@@ -25143,6 +26705,20 @@ export namespace Prisma {
     deleteMany?: entities_contentScalarWhereInput | entities_contentScalarWhereInput[]
   }
 
+  export type entities_dislikesUncheckedUpdateManyWithoutContentNestedInput = {
+    create?: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput> | entities_dislikesCreateWithoutContentInput[] | entities_dislikesUncheckedCreateWithoutContentInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutContentInput | entities_dislikesCreateOrConnectWithoutContentInput[]
+    upsert?: entities_dislikesUpsertWithWhereUniqueWithoutContentInput | entities_dislikesUpsertWithWhereUniqueWithoutContentInput[]
+    createMany?: entities_dislikesCreateManyContentInputEnvelope
+    set?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    disconnect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    delete?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    update?: entities_dislikesUpdateWithWhereUniqueWithoutContentInput | entities_dislikesUpdateWithWhereUniqueWithoutContentInput[]
+    updateMany?: entities_dislikesUpdateManyWithWhereWithoutContentInput | entities_dislikesUpdateManyWithWhereWithoutContentInput[]
+    deleteMany?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
+  }
+
   export type entities_likesUncheckedUpdateManyWithoutContentNestedInput = {
     create?: XOR<entities_likesCreateWithoutContentInput, entities_likesUncheckedCreateWithoutContentInput> | entities_likesCreateWithoutContentInput[] | entities_likesUncheckedCreateWithoutContentInput[]
     connectOrCreate?: entities_likesCreateOrConnectWithoutContentInput | entities_likesCreateOrConnectWithoutContentInput[]
@@ -25169,6 +26745,13 @@ export namespace Prisma {
     connectOrCreate?: entities_contentCreateOrConnectWithoutEntitiesInput | entities_contentCreateOrConnectWithoutEntitiesInput[]
     createMany?: entities_contentCreateManyEntitiesInputEnvelope
     connect?: entities_contentWhereUniqueInput | entities_contentWhereUniqueInput[]
+  }
+
+  export type entities_dislikesCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput> | entities_dislikesCreateWithoutEntitiesInput[] | entities_dislikesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutEntitiesInput | entities_dislikesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: entities_dislikesCreateManyEntitiesInputEnvelope
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
   }
 
   export type entities_likesCreateNestedManyWithoutEntitiesInput = {
@@ -25232,6 +26815,13 @@ export namespace Prisma {
     connectOrCreate?: entities_contentCreateOrConnectWithoutEntitiesInput | entities_contentCreateOrConnectWithoutEntitiesInput[]
     createMany?: entities_contentCreateManyEntitiesInputEnvelope
     connect?: entities_contentWhereUniqueInput | entities_contentWhereUniqueInput[]
+  }
+
+  export type entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput> | entities_dislikesCreateWithoutEntitiesInput[] | entities_dislikesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutEntitiesInput | entities_dislikesCreateOrConnectWithoutEntitiesInput[]
+    createMany?: entities_dislikesCreateManyEntitiesInputEnvelope
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
   }
 
   export type entities_likesUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -25317,6 +26907,20 @@ export namespace Prisma {
     update?: entities_contentUpdateWithWhereUniqueWithoutEntitiesInput | entities_contentUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: entities_contentUpdateManyWithWhereWithoutEntitiesInput | entities_contentUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: entities_contentScalarWhereInput | entities_contentScalarWhereInput[]
+  }
+
+  export type entities_dislikesUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput> | entities_dislikesCreateWithoutEntitiesInput[] | entities_dislikesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutEntitiesInput | entities_dislikesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: entities_dislikesUpsertWithWhereUniqueWithoutEntitiesInput | entities_dislikesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: entities_dislikesCreateManyEntitiesInputEnvelope
+    set?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    disconnect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    delete?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    update?: entities_dislikesUpdateWithWhereUniqueWithoutEntitiesInput | entities_dislikesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: entities_dislikesUpdateManyWithWhereWithoutEntitiesInput | entities_dislikesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
   }
 
   export type entities_likesUpdateManyWithoutEntitiesNestedInput = {
@@ -25445,6 +27049,20 @@ export namespace Prisma {
     deleteMany?: entities_contentScalarWhereInput | entities_contentScalarWhereInput[]
   }
 
+  export type entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput> | entities_dislikesCreateWithoutEntitiesInput[] | entities_dislikesUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: entities_dislikesCreateOrConnectWithoutEntitiesInput | entities_dislikesCreateOrConnectWithoutEntitiesInput[]
+    upsert?: entities_dislikesUpsertWithWhereUniqueWithoutEntitiesInput | entities_dislikesUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: entities_dislikesCreateManyEntitiesInputEnvelope
+    set?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    disconnect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    delete?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    connect?: entities_dislikesWhereUniqueInput | entities_dislikesWhereUniqueInput[]
+    update?: entities_dislikesUpdateWithWhereUniqueWithoutEntitiesInput | entities_dislikesUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: entities_dislikesUpdateManyWithWhereWithoutEntitiesInput | entities_dislikesUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
+  }
+
   export type entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<entities_likesCreateWithoutEntitiesInput, entities_likesUncheckedCreateWithoutEntitiesInput> | entities_likesCreateWithoutEntitiesInput[] | entities_likesUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: entities_likesCreateOrConnectWithoutEntitiesInput | entities_likesCreateOrConnectWithoutEntitiesInput[]
@@ -25569,6 +27187,34 @@ export namespace Prisma {
     upsert?: entitiesUpsertWithoutEntities_contentInput
     connect?: entitiesWhereUniqueInput
     update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutEntities_contentInput, entitiesUpdateWithoutEntities_contentInput>, entitiesUncheckedUpdateWithoutEntities_contentInput>
+  }
+
+  export type contentCreateNestedOneWithoutEntities_dislikesInput = {
+    create?: XOR<contentCreateWithoutEntities_dislikesInput, contentUncheckedCreateWithoutEntities_dislikesInput>
+    connectOrCreate?: contentCreateOrConnectWithoutEntities_dislikesInput
+    connect?: contentWhereUniqueInput
+  }
+
+  export type entitiesCreateNestedOneWithoutEntities_dislikesInput = {
+    create?: XOR<entitiesCreateWithoutEntities_dislikesInput, entitiesUncheckedCreateWithoutEntities_dislikesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutEntities_dislikesInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type contentUpdateOneRequiredWithoutEntities_dislikesNestedInput = {
+    create?: XOR<contentCreateWithoutEntities_dislikesInput, contentUncheckedCreateWithoutEntities_dislikesInput>
+    connectOrCreate?: contentCreateOrConnectWithoutEntities_dislikesInput
+    upsert?: contentUpsertWithoutEntities_dislikesInput
+    connect?: contentWhereUniqueInput
+    update?: XOR<XOR<contentUpdateToOneWithWhereWithoutEntities_dislikesInput, contentUpdateWithoutEntities_dislikesInput>, contentUncheckedUpdateWithoutEntities_dislikesInput>
+  }
+
+  export type entitiesUpdateOneRequiredWithoutEntities_dislikesNestedInput = {
+    create?: XOR<entitiesCreateWithoutEntities_dislikesInput, entitiesUncheckedCreateWithoutEntities_dislikesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutEntities_dislikesInput
+    upsert?: entitiesUpsertWithoutEntities_dislikesInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutEntities_dislikesInput, entitiesUpdateWithoutEntities_dislikesInput>, entitiesUncheckedUpdateWithoutEntities_dislikesInput>
   }
 
   export type contentCreateNestedOneWithoutEntities_likesInput = {
@@ -26239,6 +27885,7 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -26252,6 +27899,7 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -26307,6 +27955,7 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -26320,6 +27969,7 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -26378,6 +28028,7 @@ export namespace Prisma {
     content_id: string
     content_type?: number | null
     entities_content?: entities_contentCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesCreateNestedManyWithoutContentInput
   }
 
@@ -26385,6 +28036,7 @@ export namespace Prisma {
     content_id: string
     content_type?: number | null
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutContentInput
   }
 
@@ -26431,6 +28083,7 @@ export namespace Prisma {
     content_id?: StringFieldUpdateOperationsInput | string
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     entities_content?: entities_contentUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUpdateManyWithoutContentNestedInput
   }
 
@@ -26438,6 +28091,7 @@ export namespace Prisma {
     content_id?: StringFieldUpdateOperationsInput | string
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     entities_content?: entities_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutContentNestedInput
   }
 
@@ -26490,6 +28144,26 @@ export namespace Prisma {
 
   export type entities_contentCreateManyContentInputEnvelope = {
     data: entities_contentCreateManyContentInput | entities_contentCreateManyContentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type entities_dislikesCreateWithoutContentInput = {
+    dislike_id: string
+    entities: entitiesCreateNestedOneWithoutEntities_dislikesInput
+  }
+
+  export type entities_dislikesUncheckedCreateWithoutContentInput = {
+    dislike_id: string
+    entity_id: string
+  }
+
+  export type entities_dislikesCreateOrConnectWithoutContentInput = {
+    where: entities_dislikesWhereUniqueInput
+    create: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput>
+  }
+
+  export type entities_dislikesCreateManyContentInputEnvelope = {
+    data: entities_dislikesCreateManyContentInput | entities_dislikesCreateManyContentInput[]
     skipDuplicates?: boolean
   }
 
@@ -26555,6 +28229,31 @@ export namespace Prisma {
     date_added?: DateTimeFilter<"entities_content"> | Date | string
     pinned?: BoolFilter<"entities_content"> | boolean
     date_pinned?: DateTimeNullableFilter<"entities_content"> | Date | string | null
+  }
+
+  export type entities_dislikesUpsertWithWhereUniqueWithoutContentInput = {
+    where: entities_dislikesWhereUniqueInput
+    update: XOR<entities_dislikesUpdateWithoutContentInput, entities_dislikesUncheckedUpdateWithoutContentInput>
+    create: XOR<entities_dislikesCreateWithoutContentInput, entities_dislikesUncheckedCreateWithoutContentInput>
+  }
+
+  export type entities_dislikesUpdateWithWhereUniqueWithoutContentInput = {
+    where: entities_dislikesWhereUniqueInput
+    data: XOR<entities_dislikesUpdateWithoutContentInput, entities_dislikesUncheckedUpdateWithoutContentInput>
+  }
+
+  export type entities_dislikesUpdateManyWithWhereWithoutContentInput = {
+    where: entities_dislikesScalarWhereInput
+    data: XOR<entities_dislikesUpdateManyMutationInput, entities_dislikesUncheckedUpdateManyWithoutContentInput>
+  }
+
+  export type entities_dislikesScalarWhereInput = {
+    AND?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
+    OR?: entities_dislikesScalarWhereInput[]
+    NOT?: entities_dislikesScalarWhereInput | entities_dislikesScalarWhereInput[]
+    dislike_id?: StringFilter<"entities_dislikes"> | string
+    entity_id?: StringFilter<"entities_dislikes"> | string
+    content_id?: StringFilter<"entities_dislikes"> | string
   }
 
   export type entities_likesUpsertWithWhereUniqueWithoutContentInput = {
@@ -26630,6 +28329,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type entities_dislikesCreateWithoutEntitiesInput = {
+    dislike_id: string
+    content: contentCreateNestedOneWithoutEntities_dislikesInput
+  }
+
+  export type entities_dislikesUncheckedCreateWithoutEntitiesInput = {
+    dislike_id: string
+    content_id: string
+  }
+
+  export type entities_dislikesCreateOrConnectWithoutEntitiesInput = {
+    where: entities_dislikesWhereUniqueInput
+    create: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type entities_dislikesCreateManyEntitiesInputEnvelope = {
+    data: entities_dislikesCreateManyEntitiesInput | entities_dislikesCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type entities_likesCreateWithoutEntitiesInput = {
     like_id: string
     content: contentCreateNestedOneWithoutEntities_likesInput
@@ -26699,6 +28418,10 @@ export namespace Prisma {
     image_title: string
     image_description: string
     image_filename: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
     images_data: images_dataCreateNestedOneWithoutImagesInput
   }
 
@@ -26708,6 +28431,10 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     image_data_id: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type imagesCreateOrConnectWithoutEntitiesInput = {
@@ -26779,6 +28506,10 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
   }
 
@@ -26788,6 +28519,10 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type videosCreateOrConnectWithoutEntitiesInput = {
@@ -26839,6 +28574,22 @@ export namespace Prisma {
   export type entities_contentUpdateManyWithWhereWithoutEntitiesInput = {
     where: entities_contentScalarWhereInput
     data: XOR<entities_contentUpdateManyMutationInput, entities_contentUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type entities_dislikesUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: entities_dislikesWhereUniqueInput
+    update: XOR<entities_dislikesUpdateWithoutEntitiesInput, entities_dislikesUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<entities_dislikesCreateWithoutEntitiesInput, entities_dislikesUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type entities_dislikesUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: entities_dislikesWhereUniqueInput
+    data: XOR<entities_dislikesUpdateWithoutEntitiesInput, entities_dislikesUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type entities_dislikesUpdateManyWithWhereWithoutEntitiesInput = {
+    where: entities_dislikesScalarWhereInput
+    data: XOR<entities_dislikesUpdateManyMutationInput, entities_dislikesUncheckedUpdateManyWithoutEntitiesInput>
   }
 
   export type entities_likesUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -26935,6 +28686,10 @@ export namespace Prisma {
     image_description?: StringFilter<"images"> | string
     image_filename?: StringFilter<"images"> | string
     image_data_id?: StringFilter<"images"> | string
+    image_likes?: IntFilter<"images"> | number
+    image_dislikes?: IntFilter<"images"> | number
+    image_views?: IntFilter<"images"> | number
+    image_date_posted?: DateTimeFilter<"images"> | Date | string
   }
 
   export type organizations_membersUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -27020,12 +28775,17 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_likes?: IntFilter<"videos"> | number
+    video_dislikes?: IntFilter<"videos"> | number
+    video_views?: IntFilter<"videos"> | number
+    video_date_posted?: DateTimeNullableFilter<"videos"> | Date | string | null
   }
 
   export type contentCreateWithoutEntities_contentInput = {
     content_id: string
     content_type?: number | null
     collections_content?: collections_contentCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesCreateNestedManyWithoutContentInput
   }
 
@@ -27033,6 +28793,7 @@ export namespace Prisma {
     content_id: string
     content_type?: number | null
     collections_content?: collections_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutContentInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutContentInput
   }
 
@@ -27045,6 +28806,7 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -27058,6 +28820,7 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27087,6 +28850,7 @@ export namespace Prisma {
     content_id?: StringFieldUpdateOperationsInput | string
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUpdateManyWithoutContentNestedInput
   }
 
@@ -27094,6 +28858,7 @@ export namespace Prisma {
     content_id?: StringFieldUpdateOperationsInput | string
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutContentNestedInput
   }
 
@@ -27112,6 +28877,7 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -27125,6 +28891,127 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type contentCreateWithoutEntities_dislikesInput = {
+    content_id: string
+    content_type?: number | null
+    collections_content?: collections_contentCreateNestedManyWithoutContentInput
+    entities_content?: entities_contentCreateNestedManyWithoutContentInput
+    entities_likes?: entities_likesCreateNestedManyWithoutContentInput
+  }
+
+  export type contentUncheckedCreateWithoutEntities_dislikesInput = {
+    content_id: string
+    content_type?: number | null
+    collections_content?: collections_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutContentInput
+  }
+
+  export type contentCreateOrConnectWithoutEntities_dislikesInput = {
+    where: contentWhereUniqueInput
+    create: XOR<contentCreateWithoutEntities_dislikesInput, contentUncheckedCreateWithoutEntities_dislikesInput>
+  }
+
+  export type entitiesCreateWithoutEntities_dislikesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutEntities_dislikesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutEntities_dislikesInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutEntities_dislikesInput, entitiesUncheckedCreateWithoutEntities_dislikesInput>
+  }
+
+  export type contentUpsertWithoutEntities_dislikesInput = {
+    update: XOR<contentUpdateWithoutEntities_dislikesInput, contentUncheckedUpdateWithoutEntities_dislikesInput>
+    create: XOR<contentCreateWithoutEntities_dislikesInput, contentUncheckedCreateWithoutEntities_dislikesInput>
+    where?: contentWhereInput
+  }
+
+  export type contentUpdateToOneWithWhereWithoutEntities_dislikesInput = {
+    where?: contentWhereInput
+    data: XOR<contentUpdateWithoutEntities_dislikesInput, contentUncheckedUpdateWithoutEntities_dislikesInput>
+  }
+
+  export type contentUpdateWithoutEntities_dislikesInput = {
+    content_id?: StringFieldUpdateOperationsInput | string
+    content_type?: NullableIntFieldUpdateOperationsInput | number | null
+    collections_content?: collections_contentUpdateManyWithoutContentNestedInput
+    entities_content?: entities_contentUpdateManyWithoutContentNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutContentNestedInput
+  }
+
+  export type contentUncheckedUpdateWithoutEntities_dislikesInput = {
+    content_id?: StringFieldUpdateOperationsInput | string
+    content_type?: NullableIntFieldUpdateOperationsInput | number | null
+    collections_content?: collections_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutContentNestedInput
+  }
+
+  export type entitiesUpsertWithoutEntities_dislikesInput = {
+    update: XOR<entitiesUpdateWithoutEntities_dislikesInput, entitiesUncheckedUpdateWithoutEntities_dislikesInput>
+    create: XOR<entitiesCreateWithoutEntities_dislikesInput, entitiesUncheckedCreateWithoutEntities_dislikesInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutEntities_dislikesInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutEntities_dislikesInput, entitiesUncheckedUpdateWithoutEntities_dislikesInput>
+  }
+
+  export type entitiesUpdateWithoutEntities_dislikesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutEntities_dislikesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27139,6 +29026,7 @@ export namespace Prisma {
     content_type?: number | null
     collections_content?: collections_contentCreateNestedManyWithoutContentInput
     entities_content?: entities_contentCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutContentInput
   }
 
   export type contentUncheckedCreateWithoutEntities_likesInput = {
@@ -27146,6 +29034,7 @@ export namespace Prisma {
     content_type?: number | null
     collections_content?: collections_contentUncheckedCreateNestedManyWithoutContentInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutContentInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutContentInput
   }
 
   export type contentCreateOrConnectWithoutEntities_likesInput = {
@@ -27158,6 +29047,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
@@ -27171,6 +29061,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27200,6 +29091,7 @@ export namespace Prisma {
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUpdateManyWithoutContentNestedInput
     entities_content?: entities_contentUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutContentNestedInput
   }
 
   export type contentUncheckedUpdateWithoutEntities_likesInput = {
@@ -27207,6 +29099,7 @@ export namespace Prisma {
     content_type?: NullableIntFieldUpdateOperationsInput | number | null
     collections_content?: collections_contentUncheckedUpdateManyWithoutContentNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutContentNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutContentNestedInput
   }
 
   export type entitiesUpsertWithoutEntities_likesInput = {
@@ -27225,6 +29118,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
@@ -27238,6 +29132,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27251,6 +29146,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
@@ -27264,6 +29160,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27293,6 +29190,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
@@ -27306,6 +29204,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27355,6 +29254,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
@@ -27368,6 +29268,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27420,6 +29321,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
@@ -27433,6 +29335,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27475,6 +29378,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -27488,6 +29392,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27532,6 +29437,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -27545,6 +29451,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27579,6 +29486,10 @@ export namespace Prisma {
     image_title: string
     image_description: string
     image_filename: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
     entities: entitiesCreateNestedOneWithoutImagesInput
   }
 
@@ -27588,6 +29499,10 @@ export namespace Prisma {
     image_title: string
     image_description: string
     image_filename: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type imagesCreateOrConnectWithoutImages_dataInput = {
@@ -27713,6 +29628,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -27726,6 +29642,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27778,6 +29695,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -27791,6 +29709,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -27833,6 +29752,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -27846,6 +29766,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -27890,6 +29811,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -27903,6 +29825,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -28035,6 +29958,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
@@ -28048,6 +29972,7 @@ export namespace Prisma {
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
     entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
@@ -28092,6 +30017,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
@@ -28105,6 +30031,7 @@ export namespace Prisma {
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -28139,6 +30066,10 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
     entities: entitiesCreateNestedOneWithoutVideosInput
   }
 
@@ -28148,6 +30079,10 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type videosCreateOrConnectWithoutVideos_dataInput = {
@@ -28224,6 +30159,11 @@ export namespace Prisma {
     date_pinned?: Date | string | null
   }
 
+  export type entities_dislikesCreateManyContentInput = {
+    dislike_id: string
+    entity_id: string
+  }
+
   export type entities_likesCreateManyContentInput = {
     like_id: string
     entity_id: string
@@ -28277,6 +30217,21 @@ export namespace Prisma {
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type entities_dislikesUpdateWithoutContentInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutEntities_dislikesNestedInput
+  }
+
+  export type entities_dislikesUncheckedUpdateWithoutContentInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_dislikesUncheckedUpdateManyWithoutContentInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+  }
+
   export type entities_likesUpdateWithoutContentInput = {
     like_id?: StringFieldUpdateOperationsInput | string
     entities?: entitiesUpdateOneRequiredWithoutEntities_likesNestedInput
@@ -28305,6 +30260,11 @@ export namespace Prisma {
     date_pinned?: Date | string | null
   }
 
+  export type entities_dislikesCreateManyEntitiesInput = {
+    dislike_id: string
+    content_id: string
+  }
+
   export type entities_likesCreateManyEntitiesInput = {
     like_id: string
     content_id: string
@@ -28328,6 +30288,10 @@ export namespace Prisma {
     image_description: string
     image_filename: string
     image_data_id: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type organizations_membersCreateManyEntitiesInput = {
@@ -28353,6 +30317,10 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type collectionsUpdateWithoutEntitiesInput = {
@@ -28394,6 +30362,21 @@ export namespace Prisma {
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
     pinned?: BoolFieldUpdateOperationsInput | boolean
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type entities_dislikesUpdateWithoutEntitiesInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    content?: contentUpdateOneRequiredWithoutEntities_dislikesNestedInput
+  }
+
+  export type entities_dislikesUncheckedUpdateWithoutEntitiesInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    content_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type entities_dislikesUncheckedUpdateManyWithoutEntitiesInput = {
+    dislike_id?: StringFieldUpdateOperationsInput | string
+    content_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type entities_likesUpdateWithoutEntitiesInput = {
@@ -28452,6 +30435,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     images_data?: images_dataUpdateOneRequiredWithoutImagesNestedInput
   }
 
@@ -28461,6 +30448,10 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     image_data_id?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type imagesUncheckedUpdateManyWithoutEntitiesInput = {
@@ -28469,6 +30460,10 @@ export namespace Prisma {
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
     image_data_id?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type organizations_membersUpdateWithoutEntitiesInput = {
@@ -28527,6 +30522,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
   }
 
@@ -28536,6 +30535,10 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videosUncheckedUpdateManyWithoutEntitiesInput = {
@@ -28544,6 +30547,10 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type groups_membersCreateManyGroupsInput = {
@@ -28572,6 +30579,10 @@ export namespace Prisma {
     image_title: string
     image_description: string
     image_filename: string
+    image_likes?: number
+    image_dislikes?: number
+    image_views?: number
+    image_date_posted?: Date | string
   }
 
   export type imagesUpdateWithoutImages_dataInput = {
@@ -28579,6 +30590,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities?: entitiesUpdateOneRequiredWithoutImagesNestedInput
   }
 
@@ -28588,6 +30603,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type imagesUncheckedUpdateManyWithoutImages_dataInput = {
@@ -28596,6 +30615,10 @@ export namespace Prisma {
     image_title?: StringFieldUpdateOperationsInput | string
     image_description?: StringFieldUpdateOperationsInput | string
     image_filename?: StringFieldUpdateOperationsInput | string
+    image_likes?: IntFieldUpdateOperationsInput | number
+    image_dislikes?: IntFieldUpdateOperationsInput | number
+    image_views?: IntFieldUpdateOperationsInput | number
+    image_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type organizations_membersCreateManyOrganizationsInput = {
@@ -28672,6 +30695,10 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
   }
 
   export type videosUpdateWithoutVideos_dataInput = {
@@ -28679,6 +30706,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
   }
 
@@ -28688,6 +30719,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type videosUncheckedUpdateManyWithoutVideos_dataInput = {
@@ -28696,6 +30731,10 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 
@@ -28759,6 +30798,10 @@ export namespace Prisma {
      * @deprecated Use entities_contentDefaultArgs instead
      */
     export type entities_contentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = entities_contentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use entities_dislikesDefaultArgs instead
+     */
+    export type entities_dislikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = entities_dislikesDefaultArgs<ExtArgs>
     /**
      * @deprecated Use entities_likesDefaultArgs instead
      */

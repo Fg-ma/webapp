@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./verifyJWT");
+const { v4: uuid } = require("uuid");
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
@@ -84,26 +86,128 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
   }
 });
 
-router.post("/like/:sheet_id", async (req, res) => {
+router.post("/like/:sheet_id", verifyToken, async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
   try {
+    const existingLikeRelationship = await req.db.entities_likes.findFirst({
+      where: {
+        entity_id: req.user.user_id,
+        content_id: sheet_id,
+      },
+    });
+
+    const existingDislikeRelationship =
+      await req.db.entities_dislikes.findFirst({
+        where: {
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+
+    if (!existingLikeRelationship && !existingDislikeRelationship) {
+      await req.db.entities_likes.create({
+        data: {
+          like_id: uuid(),
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+    } else if (!existingLikeRelationship && existingDislikeRelationship) {
+      await req.db.entities_likes.create({
+        data: {
+          like_id: uuid(),
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+      await req.db.entities_dislikes.delete({
+        where: {
+          dislike_id: existingDislikeRelationship.dislike_id,
+        },
+      });
+    } else if (existingLikeRelationship) {
+      await req.db.entities_likes.delete({
+        where: {
+          like_id: existingLikeRelationship.like_id,
+        },
+      });
+    }
+
     const getSheetLikes = await req.db.sheets.findUnique({
       where: {
         sheet_id: sheet_id,
       },
     });
 
-    const result = await req.db.sheets.update({
+    res.status(200).send({
+      sheet_dislikes: getSheetLikes.sheet_dislikes,
+      sheet_likes: getSheetLikes.sheet_likes,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
+  const sheet_id = req.params.sheet_id;
+
+  try {
+    const existingLikeRelationship = await req.db.entities_likes.findFirst({
       where: {
-        sheet_id: sheet_id,
-      },
-      data: {
-        sheet_likes: getSheetLikes.sheet_likes + 1,
+        entity_id: req.user.user_id,
+        content_id: sheet_id,
       },
     });
 
-    res.status(200).send(String(result.sheet_likes));
+    const existingDislikeRelationship =
+      await req.db.entities_dislikes.findFirst({
+        where: {
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+
+    if (!existingDislikeRelationship && !existingLikeRelationship) {
+      await req.db.entities_dislikes.create({
+        data: {
+          dislike_id: uuid(),
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+    } else if (!existingDislikeRelationship && existingLikeRelationship) {
+      await req.db.entities_dislikes.create({
+        data: {
+          dislike_id: uuid(),
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+      await req.db.entities_likes.delete({
+        where: {
+          like_id: existingLikeRelationship.like_id,
+        },
+      });
+    } else if (existingDislikeRelationship) {
+      await req.db.entities_dislikes.delete({
+        where: {
+          dislike_id: existingDislikeRelationship.dislike_id,
+        },
+      });
+    }
+
+    const getSheetDislikes = await req.db.sheets.findUnique({
+      where: {
+        sheet_id: sheet_id,
+      },
+    });
+
+    res.status(200).send({
+      sheet_dislikes: getSheetDislikes.sheet_dislikes,
+      sheet_likes: getSheetDislikes.sheet_likes,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

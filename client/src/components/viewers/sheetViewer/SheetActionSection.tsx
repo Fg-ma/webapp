@@ -30,9 +30,14 @@ export default function SheetActionSection({
   const [handleSliderTop, setHandleSliderTop] = useState<number>(0);
   const isDraggingAllowed = useRef<boolean>(false);
   const initialDragY = useRef<number>(0);
+  const [likes, setLikes] = useState<number | string>(0);
+  const [dislikes, setDislikes] = useState<number | string>(0);
 
-  // Sets the horizontal position of the action section
+  // Sets the horizontal position of the action section and intial useStates
   useEffect(() => {
+    setLikes(sheetData.sheet_likes);
+    setDislikes(sheetData.sheet_dislikes);
+
     const sheetActionsSectionWidth =
       sheetActionsSectionRef.current?.clientWidth;
     if (sheetActionsSectionWidth) {
@@ -45,7 +50,6 @@ export default function SheetActionSection({
     event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
   ) => {
     event.stopPropagation();
-    event.preventDefault();
     const target = event.target as HTMLElement;
     if (target.classList.contains("handle")) {
       isDraggingAllowed.current = true;
@@ -112,17 +116,45 @@ export default function SheetActionSection({
   }, [isDraggingAllowed.current]);
 
   const handleLike = async () => {
-    await Axios.post(`${serverUrl}/sheets/like/${sheet_id}`)
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    await Axios.post(`${serverUrl}/sheets/like/${sheet_id}`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
-        console.log(response);
+        setLikes(response.data.sheet_likes);
+        setDislikes(response.data.sheet_dislikes);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  const handleDislike = () => {
-    console.log("dislike");
+  const handleDislike = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    await Axios.post(`${serverUrl}/sheets/dislike/${sheet_id}`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setLikes(response.data.sheet_likes);
+        setDislikes(response.data.sheet_dislikes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -189,10 +221,10 @@ export default function SheetActionSection({
             >
               <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
             </svg>
-            {sheetData.sheet_likes}
+            {likes}
           </button>
           <button
-            className="bg-fg-white-75 h-8 aspect-square rounded-full flex items-center justify-center"
+            className="bg-fg-white-75 h-8 w-24 rounded-full flex items-center justify-center"
             onClick={handleDislike}
           >
             <svg
@@ -203,6 +235,7 @@ export default function SheetActionSection({
             >
               <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
             </svg>
+            {dislikes}
           </button>
           <button className="bg-fg-white-75 h-8 rounded-full px-3 flex items-center justify-center">
             <svg

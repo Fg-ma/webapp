@@ -147,6 +147,12 @@ exports.Prisma.Entities_contentScalarFieldEnum = {
   date_pinned: 'date_pinned'
 };
 
+exports.Prisma.Entities_dislikesScalarFieldEnum = {
+  dislike_id: 'dislike_id',
+  entity_id: 'entity_id',
+  content_id: 'content_id'
+};
+
 exports.Prisma.Entities_likesScalarFieldEnum = {
   like_id: 'like_id',
   entity_id: 'entity_id',
@@ -182,7 +188,11 @@ exports.Prisma.ImagesScalarFieldEnum = {
   image_title: 'image_title',
   image_description: 'image_description',
   image_filename: 'image_filename',
-  image_data_id: 'image_data_id'
+  image_data_id: 'image_data_id',
+  image_likes: 'image_likes',
+  image_dislikes: 'image_dislikes',
+  image_views: 'image_views',
+  image_date_posted: 'image_date_posted'
 };
 
 exports.Prisma.Images_dataScalarFieldEnum = {
@@ -248,7 +258,11 @@ exports.Prisma.VideosScalarFieldEnum = {
   video_title: 'video_title',
   video_description: 'video_description',
   video_filename: 'video_filename',
-  video_data_id: 'video_data_id'
+  video_data_id: 'video_data_id',
+  video_likes: 'video_likes',
+  video_dislikes: 'video_dislikes',
+  video_views: 'video_views',
+  video_date_posted: 'video_date_posted'
 };
 
 exports.Prisma.Videos_dataScalarFieldEnum = {
@@ -274,6 +288,7 @@ exports.Prisma.ModelName = {
   content: 'content',
   entities: 'entities',
   entities_content: 'entities_content',
+  entities_dislikes: 'entities_dislikes',
   entities_likes: 'entities_likes',
   entities_references: 'entities_references',
   groups: 'groups',
