@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("./verifyJWT");
 const { v4: uuid } = require("uuid");
+const verifyToken = require("./verifyJWT");
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
@@ -86,6 +86,7 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
   }
 });
 
+// Handles an entity liking a piece of content
 router.post("/like/:sheet_id", verifyToken, async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
@@ -150,6 +151,7 @@ router.post("/like/:sheet_id", verifyToken, async (req, res) => {
   }
 });
 
+// Handles an entity disliking a piece of content
 router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
@@ -208,6 +210,40 @@ router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
       sheet_dislikes: getSheetDislikes.sheet_dislikes,
       sheet_likes: getSheetDislikes.sheet_likes,
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Gets whether or not a certain entity likes a certian piece of content
+router.get("/does_like_or_dislike/:sheet_id", verifyToken, async (req, res) => {
+  const sheet_id = req.params.sheet_id;
+
+  try {
+    const like = await req.db.entities_likes.findFirst({
+      where: {
+        entity_id: req.user.user_id,
+        content_id: sheet_id,
+      },
+    });
+
+    if (like) {
+      res.send({ like: true, dislike: false });
+    } else {
+      const dislike = await req.db.entities_dislikes.findFirst({
+        where: {
+          entity_id: req.user.user_id,
+          content_id: sheet_id,
+        },
+      });
+
+      if (dislike) {
+        res.send({ like: false, dislike: true });
+      } else {
+        res.send({ like: false, dislike: false });
+      }
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
