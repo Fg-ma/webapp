@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Axios from "axios";
+import config from "@config";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 const navButtonsVar: Variants = {
   init: {
@@ -82,6 +89,73 @@ export default function PageNav() {
     dispatch(setIds("individuals", "collection_id", null));
   };
 
+  useEffect(() => {
+    const fetchProfilePictureData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/images/get_user_profile_picture`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        console.log(response);
+
+        //if (response.data) {
+        //  const blobData = new Uint8Array(
+        //    response.data.fullImage.images_data.image_data.data,
+        //  );
+        //
+        //  const extension = response.data.fullImage.image_filename
+        //    .slice(-3)
+        //    .toLowerCase();
+        //
+        //  const mimeType = getMimeType(extension);
+        //
+        //  if (mimeType) {
+        //    const url = URL.createObjectURL(
+        //      new Blob([blobData], { type: mimeType }),
+        //    );
+        //
+        //    //setImageData({
+        //    //  image_url: url,
+        //    //  image_title: response.data.fullImage.image_title,
+        //    //  image_description: response.data.fullImage.image_description,
+        //    //  entity_type: response.data.fullImage.entities.entity_type,
+        //    //  image_creator: response.data.imageCreator,
+        //    //});
+        //  }
+        //}
+      } catch (error) {
+        console.error("Error fetching profile picture data:", error);
+      }
+    };
+
+    fetchProfilePictureData();
+  }, []);
+
+  const getMimeType = (extension: string) => {
+    switch (extension) {
+      case "jpg":
+      case "jpeg":
+        return "image/jpeg";
+      case "png":
+        return "image/png";
+      case "gif":
+        return "image/gif";
+      default:
+        return null;
+    }
+  };
+
   return (
     <nav
       id="pageNav"
@@ -103,7 +177,7 @@ export default function PageNav() {
             profileNavFunction();
           }}
         >
-          <button className="rounded-full bg-fg-white-90 h-10 aspect-square text-sm"></button>
+          <img className="rounded-full bg-fg-white-90 h-10 aspect-square text-sm"></img>
           <button style={mainPageStyles["profile"]} className="ml-2">
             Profile
           </button>

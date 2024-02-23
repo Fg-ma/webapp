@@ -94,6 +94,11 @@ export type organizations = $Result.DefaultSelection<Prisma.$organizationsPayloa
  */
 export type organizations_members = $Result.DefaultSelection<Prisma.$organizations_membersPayload>
 /**
+ * Model profile_pictures
+ * 
+ */
+export type profile_pictures = $Result.DefaultSelection<Prisma.$profile_picturesPayload>
+/**
  * Model sheets
  * 
  */
@@ -400,6 +405,16 @@ export class PrismaClient<
     * ```
     */
   get organizations_members(): Prisma.organizations_membersDelegate<ExtArgs>;
+
+  /**
+   * `prisma.profile_pictures`: Exposes CRUD operations for the **profile_pictures** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Profile_pictures
+    * const profile_pictures = await prisma.profile_pictures.findMany()
+    * ```
+    */
+  get profile_pictures(): Prisma.profile_picturesDelegate<ExtArgs>;
 
   /**
    * `prisma.sheets`: Exposes CRUD operations for the **sheets** model.
@@ -936,6 +951,7 @@ export namespace Prisma {
     individuals: 'individuals',
     organizations: 'organizations',
     organizations_members: 'organizations_members',
+    profile_pictures: 'profile_pictures',
     sheets: 'sheets',
     sheets_data: 'sheets_data',
     user_credentials: 'user_credentials',
@@ -957,7 +973,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2017,6 +2033,72 @@ export namespace Prisma {
           }
         }
       }
+      profile_pictures: {
+        payload: Prisma.$profile_picturesPayload<ExtArgs>
+        fields: Prisma.profile_picturesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.profile_picturesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.profile_picturesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          findFirst: {
+            args: Prisma.profile_picturesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.profile_picturesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          findMany: {
+            args: Prisma.profile_picturesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>[]
+          }
+          create: {
+            args: Prisma.profile_picturesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          createMany: {
+            args: Prisma.profile_picturesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.profile_picturesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          update: {
+            args: Prisma.profile_picturesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          deleteMany: {
+            args: Prisma.profile_picturesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.profile_picturesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.profile_picturesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$profile_picturesPayload>
+          }
+          aggregate: {
+            args: Prisma.Profile_picturesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateProfile_pictures>
+          }
+          groupBy: {
+            args: Prisma.profile_picturesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Profile_picturesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.profile_picturesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Profile_picturesCountAggregateOutputType> | number
+          }
+        }
+      }
       sheets: {
         payload: Prisma.$sheetsPayload<ExtArgs>
         fields: Prisma.sheetsFieldRefs
@@ -2811,6 +2893,60 @@ export namespace Prisma {
    */
   export type OrganizationsCountOutputTypeCountOrganizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: organizations_membersWhereInput
+  }
+
+
+
+  /**
+   * Count Type Profile_picturesCountOutputType
+   */
+
+  export type Profile_picturesCountOutputType = {
+    groups: number
+    individuals: number
+    organizations: number
+  }
+
+  export type Profile_picturesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | Profile_picturesCountOutputTypeCountGroupsArgs
+    individuals?: boolean | Profile_picturesCountOutputTypeCountIndividualsArgs
+    organizations?: boolean | Profile_picturesCountOutputTypeCountOrganizationsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Profile_picturesCountOutputType without action
+   */
+  export type Profile_picturesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Profile_picturesCountOutputType
+     */
+    select?: Profile_picturesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Profile_picturesCountOutputType without action
+   */
+  export type Profile_picturesCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: groupsWhereInput
+  }
+
+
+  /**
+   * Profile_picturesCountOutputType without action
+   */
+  export type Profile_picturesCountOutputTypeCountIndividualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: individualsWhereInput
+  }
+
+
+  /**
+   * Profile_picturesCountOutputType without action
+   */
+  export type Profile_picturesCountOutputTypeCountOrganizationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: organizationsWhereInput
   }
 
 
@@ -11460,6 +11596,7 @@ export namespace Prisma {
     group_currentIssue: string | null
     group_stances: string | null
     group_description: string | null
+    profile_picture_id: string | null
   }
 
   export type GroupsMaxAggregateOutputType = {
@@ -11469,6 +11606,7 @@ export namespace Prisma {
     group_currentIssue: string | null
     group_stances: string | null
     group_description: string | null
+    profile_picture_id: string | null
   }
 
   export type GroupsCountAggregateOutputType = {
@@ -11478,6 +11616,7 @@ export namespace Prisma {
     group_currentIssue: number
     group_stances: number
     group_description: number
+    profile_picture_id: number
     _all: number
   }
 
@@ -11489,6 +11628,7 @@ export namespace Prisma {
     group_currentIssue?: true
     group_stances?: true
     group_description?: true
+    profile_picture_id?: true
   }
 
   export type GroupsMaxAggregateInputType = {
@@ -11498,6 +11638,7 @@ export namespace Prisma {
     group_currentIssue?: true
     group_stances?: true
     group_description?: true
+    profile_picture_id?: true
   }
 
   export type GroupsCountAggregateInputType = {
@@ -11507,6 +11648,7 @@ export namespace Prisma {
     group_currentIssue?: true
     group_stances?: true
     group_description?: true
+    profile_picture_id?: true
     _all?: true
   }
 
@@ -11589,6 +11731,7 @@ export namespace Prisma {
     group_currentIssue: string | null
     group_stances: string | null
     group_description: string | null
+    profile_picture_id: string | null
     _count: GroupsCountAggregateOutputType | null
     _min: GroupsMinAggregateOutputType | null
     _max: GroupsMaxAggregateOutputType | null
@@ -11615,6 +11758,8 @@ export namespace Prisma {
     group_currentIssue?: boolean
     group_stances?: boolean
     group_description?: boolean
+    profile_picture_id?: boolean
+    profile_pictures?: boolean | groups$profile_picturesArgs<ExtArgs>
     groups_members?: boolean | groups$groups_membersArgs<ExtArgs>
     _count?: boolean | GroupsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["groups"]>
@@ -11626,9 +11771,11 @@ export namespace Prisma {
     group_currentIssue?: boolean
     group_stances?: boolean
     group_description?: boolean
+    profile_picture_id?: boolean
   }
 
   export type groupsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile_pictures?: boolean | groups$profile_picturesArgs<ExtArgs>
     groups_members?: boolean | groups$groups_membersArgs<ExtArgs>
     _count?: boolean | GroupsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11637,6 +11784,7 @@ export namespace Prisma {
   export type $groupsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "groups"
     objects: {
+      profile_pictures: Prisma.$profile_picturesPayload<ExtArgs> | null
       groups_members: Prisma.$groups_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11646,6 +11794,7 @@ export namespace Prisma {
       group_currentIssue: string | null
       group_stances: string | null
       group_description: string | null
+      profile_picture_id: string | null
     }, ExtArgs["result"]["groups"]>
     composites: {}
   }
@@ -12011,6 +12160,8 @@ export namespace Prisma {
   export interface Prisma__groupsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    profile_pictures<T extends groups$profile_picturesArgs<ExtArgs> = {}>(args?: Subset<T, groups$profile_picturesArgs<ExtArgs>>): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     groups_members<T extends groups$groups_membersArgs<ExtArgs> = {}>(args?: Subset<T, groups$groups_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groups_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
@@ -12047,6 +12198,7 @@ export namespace Prisma {
     readonly group_currentIssue: FieldRef<"groups", 'String'>
     readonly group_stances: FieldRef<"groups", 'String'>
     readonly group_description: FieldRef<"groups", 'String'>
+    readonly profile_picture_id: FieldRef<"groups", 'String'>
   }
     
 
@@ -12355,6 +12507,22 @@ export namespace Prisma {
      * Filter which groups to delete
      */
     where?: groupsWhereInput
+  }
+
+
+  /**
+   * groups.profile_pictures
+   */
+  export type groups$profile_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    where?: profile_picturesWhereInput
   }
 
 
@@ -15241,6 +15409,7 @@ export namespace Prisma {
     individual_currentIssue: string | null
     individual_roles: string | null
     individual_description: string | null
+    profile_picture_id: string | null
   }
 
   export type IndividualsMaxAggregateOutputType = {
@@ -15250,6 +15419,7 @@ export namespace Prisma {
     individual_currentIssue: string | null
     individual_roles: string | null
     individual_description: string | null
+    profile_picture_id: string | null
   }
 
   export type IndividualsCountAggregateOutputType = {
@@ -15259,6 +15429,7 @@ export namespace Prisma {
     individual_currentIssue: number
     individual_roles: number
     individual_description: number
+    profile_picture_id: number
     _all: number
   }
 
@@ -15270,6 +15441,7 @@ export namespace Prisma {
     individual_currentIssue?: true
     individual_roles?: true
     individual_description?: true
+    profile_picture_id?: true
   }
 
   export type IndividualsMaxAggregateInputType = {
@@ -15279,6 +15451,7 @@ export namespace Prisma {
     individual_currentIssue?: true
     individual_roles?: true
     individual_description?: true
+    profile_picture_id?: true
   }
 
   export type IndividualsCountAggregateInputType = {
@@ -15288,6 +15461,7 @@ export namespace Prisma {
     individual_currentIssue?: true
     individual_roles?: true
     individual_description?: true
+    profile_picture_id?: true
     _all?: true
   }
 
@@ -15370,6 +15544,7 @@ export namespace Prisma {
     individual_currentIssue: string | null
     individual_roles: string | null
     individual_description: string | null
+    profile_picture_id: string | null
     _count: IndividualsCountAggregateOutputType | null
     _min: IndividualsMinAggregateOutputType | null
     _max: IndividualsMaxAggregateOutputType | null
@@ -15396,7 +15571,9 @@ export namespace Prisma {
     individual_currentIssue?: boolean
     individual_roles?: boolean
     individual_description?: boolean
+    profile_picture_id?: boolean
     user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
+    profile_pictures?: boolean | individuals$profile_picturesArgs<ExtArgs>
   }, ExtArgs["result"]["individuals"]>
 
   export type individualsSelectScalar = {
@@ -15406,10 +15583,12 @@ export namespace Prisma {
     individual_currentIssue?: boolean
     individual_roles?: boolean
     individual_description?: boolean
+    profile_picture_id?: boolean
   }
 
   export type individualsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user_credentials?: boolean | user_credentialsDefaultArgs<ExtArgs>
+    profile_pictures?: boolean | individuals$profile_picturesArgs<ExtArgs>
   }
 
 
@@ -15417,6 +15596,7 @@ export namespace Prisma {
     name: "individuals"
     objects: {
       user_credentials: Prisma.$user_credentialsPayload<ExtArgs>
+      profile_pictures: Prisma.$profile_picturesPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       individual_id: string
@@ -15425,6 +15605,7 @@ export namespace Prisma {
       individual_currentIssue: string | null
       individual_roles: string | null
       individual_description: string | null
+      profile_picture_id: string | null
     }, ExtArgs["result"]["individuals"]>
     composites: {}
   }
@@ -15792,6 +15973,8 @@ export namespace Prisma {
 
     user_credentials<T extends user_credentialsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, user_credentialsDefaultArgs<ExtArgs>>): Prisma__user_credentialsClient<$Result.GetResult<Prisma.$user_credentialsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    profile_pictures<T extends individuals$profile_picturesArgs<ExtArgs> = {}>(args?: Subset<T, individuals$profile_picturesArgs<ExtArgs>>): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15826,6 +16009,7 @@ export namespace Prisma {
     readonly individual_currentIssue: FieldRef<"individuals", 'String'>
     readonly individual_roles: FieldRef<"individuals", 'String'>
     readonly individual_description: FieldRef<"individuals", 'String'>
+    readonly profile_picture_id: FieldRef<"individuals", 'String'>
   }
     
 
@@ -16138,6 +16322,22 @@ export namespace Prisma {
 
 
   /**
+   * individuals.profile_pictures
+   */
+  export type individuals$profile_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    where?: profile_picturesWhereInput
+  }
+
+
+  /**
    * individuals without action
    */
   export type individualsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16170,6 +16370,7 @@ export namespace Prisma {
     organization_currentIssue: string | null
     organization_stances: string | null
     organization_description: string | null
+    profile_picture_id: string | null
   }
 
   export type OrganizationsMaxAggregateOutputType = {
@@ -16179,6 +16380,7 @@ export namespace Prisma {
     organization_currentIssue: string | null
     organization_stances: string | null
     organization_description: string | null
+    profile_picture_id: string | null
   }
 
   export type OrganizationsCountAggregateOutputType = {
@@ -16188,6 +16390,7 @@ export namespace Prisma {
     organization_currentIssue: number
     organization_stances: number
     organization_description: number
+    profile_picture_id: number
     _all: number
   }
 
@@ -16199,6 +16402,7 @@ export namespace Prisma {
     organization_currentIssue?: true
     organization_stances?: true
     organization_description?: true
+    profile_picture_id?: true
   }
 
   export type OrganizationsMaxAggregateInputType = {
@@ -16208,6 +16412,7 @@ export namespace Prisma {
     organization_currentIssue?: true
     organization_stances?: true
     organization_description?: true
+    profile_picture_id?: true
   }
 
   export type OrganizationsCountAggregateInputType = {
@@ -16217,6 +16422,7 @@ export namespace Prisma {
     organization_currentIssue?: true
     organization_stances?: true
     organization_description?: true
+    profile_picture_id?: true
     _all?: true
   }
 
@@ -16299,6 +16505,7 @@ export namespace Prisma {
     organization_currentIssue: string | null
     organization_stances: string | null
     organization_description: string | null
+    profile_picture_id: string | null
     _count: OrganizationsCountAggregateOutputType | null
     _min: OrganizationsMinAggregateOutputType | null
     _max: OrganizationsMaxAggregateOutputType | null
@@ -16325,6 +16532,8 @@ export namespace Prisma {
     organization_currentIssue?: boolean
     organization_stances?: boolean
     organization_description?: boolean
+    profile_picture_id?: boolean
+    profile_pictures?: boolean | organizations$profile_picturesArgs<ExtArgs>
     organizations_members?: boolean | organizations$organizations_membersArgs<ExtArgs>
     _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
@@ -16336,9 +16545,11 @@ export namespace Prisma {
     organization_currentIssue?: boolean
     organization_stances?: boolean
     organization_description?: boolean
+    profile_picture_id?: boolean
   }
 
   export type organizationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profile_pictures?: boolean | organizations$profile_picturesArgs<ExtArgs>
     organizations_members?: boolean | organizations$organizations_membersArgs<ExtArgs>
     _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -16347,6 +16558,7 @@ export namespace Prisma {
   export type $organizationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "organizations"
     objects: {
+      profile_pictures: Prisma.$profile_picturesPayload<ExtArgs> | null
       organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16356,6 +16568,7 @@ export namespace Prisma {
       organization_currentIssue: string | null
       organization_stances: string | null
       organization_description: string | null
+      profile_picture_id: string | null
     }, ExtArgs["result"]["organizations"]>
     composites: {}
   }
@@ -16721,6 +16934,8 @@ export namespace Prisma {
   export interface Prisma__organizationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    profile_pictures<T extends organizations$profile_picturesArgs<ExtArgs> = {}>(args?: Subset<T, organizations$profile_picturesArgs<ExtArgs>>): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     organizations_members<T extends organizations$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, organizations$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
@@ -16757,6 +16972,7 @@ export namespace Prisma {
     readonly organization_currentIssue: FieldRef<"organizations", 'String'>
     readonly organization_stances: FieldRef<"organizations", 'String'>
     readonly organization_description: FieldRef<"organizations", 'String'>
+    readonly profile_picture_id: FieldRef<"organizations", 'String'>
   }
     
 
@@ -17065,6 +17281,22 @@ export namespace Prisma {
      * Filter which organizations to delete
      */
     where?: organizationsWhereInput
+  }
+
+
+  /**
+   * organizations.profile_pictures
+   */
+  export type organizations$profile_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    where?: profile_picturesWhereInput
   }
 
 
@@ -18002,6 +18234,977 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: organizations_membersInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model profile_pictures
+   */
+
+  export type AggregateProfile_pictures = {
+    _count: Profile_picturesCountAggregateOutputType | null
+    _min: Profile_picturesMinAggregateOutputType | null
+    _max: Profile_picturesMaxAggregateOutputType | null
+  }
+
+  export type Profile_picturesMinAggregateOutputType = {
+    profile_picture_id: string | null
+    profile_picture_data: Buffer | null
+    profile_picture_filename: string | null
+  }
+
+  export type Profile_picturesMaxAggregateOutputType = {
+    profile_picture_id: string | null
+    profile_picture_data: Buffer | null
+    profile_picture_filename: string | null
+  }
+
+  export type Profile_picturesCountAggregateOutputType = {
+    profile_picture_id: number
+    profile_picture_data: number
+    profile_picture_filename: number
+    _all: number
+  }
+
+
+  export type Profile_picturesMinAggregateInputType = {
+    profile_picture_id?: true
+    profile_picture_data?: true
+    profile_picture_filename?: true
+  }
+
+  export type Profile_picturesMaxAggregateInputType = {
+    profile_picture_id?: true
+    profile_picture_data?: true
+    profile_picture_filename?: true
+  }
+
+  export type Profile_picturesCountAggregateInputType = {
+    profile_picture_id?: true
+    profile_picture_data?: true
+    profile_picture_filename?: true
+    _all?: true
+  }
+
+  export type Profile_picturesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which profile_pictures to aggregate.
+     */
+    where?: profile_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of profile_pictures to fetch.
+     */
+    orderBy?: profile_picturesOrderByWithRelationInput | profile_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: profile_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` profile_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` profile_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned profile_pictures
+    **/
+    _count?: true | Profile_picturesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Profile_picturesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Profile_picturesMaxAggregateInputType
+  }
+
+  export type GetProfile_picturesAggregateType<T extends Profile_picturesAggregateArgs> = {
+        [P in keyof T & keyof AggregateProfile_pictures]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProfile_pictures[P]>
+      : GetScalarType<T[P], AggregateProfile_pictures[P]>
+  }
+
+
+
+
+  export type profile_picturesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: profile_picturesWhereInput
+    orderBy?: profile_picturesOrderByWithAggregationInput | profile_picturesOrderByWithAggregationInput[]
+    by: Profile_picturesScalarFieldEnum[] | Profile_picturesScalarFieldEnum
+    having?: profile_picturesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Profile_picturesCountAggregateInputType | true
+    _min?: Profile_picturesMinAggregateInputType
+    _max?: Profile_picturesMaxAggregateInputType
+  }
+
+  export type Profile_picturesGroupByOutputType = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename: string | null
+    _count: Profile_picturesCountAggregateOutputType | null
+    _min: Profile_picturesMinAggregateOutputType | null
+    _max: Profile_picturesMaxAggregateOutputType | null
+  }
+
+  type GetProfile_picturesGroupByPayload<T extends profile_picturesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Profile_picturesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Profile_picturesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Profile_picturesGroupByOutputType[P]>
+            : GetScalarType<T[P], Profile_picturesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type profile_picturesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    profile_picture_id?: boolean
+    profile_picture_data?: boolean
+    profile_picture_filename?: boolean
+    groups?: boolean | profile_pictures$groupsArgs<ExtArgs>
+    individuals?: boolean | profile_pictures$individualsArgs<ExtArgs>
+    organizations?: boolean | profile_pictures$organizationsArgs<ExtArgs>
+    _count?: boolean | Profile_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["profile_pictures"]>
+
+  export type profile_picturesSelectScalar = {
+    profile_picture_id?: boolean
+    profile_picture_data?: boolean
+    profile_picture_filename?: boolean
+  }
+
+  export type profile_picturesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | profile_pictures$groupsArgs<ExtArgs>
+    individuals?: boolean | profile_pictures$individualsArgs<ExtArgs>
+    organizations?: boolean | profile_pictures$organizationsArgs<ExtArgs>
+    _count?: boolean | Profile_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $profile_picturesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "profile_pictures"
+    objects: {
+      groups: Prisma.$groupsPayload<ExtArgs>[]
+      individuals: Prisma.$individualsPayload<ExtArgs>[]
+      organizations: Prisma.$organizationsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      profile_picture_id: string
+      profile_picture_data: Buffer
+      profile_picture_filename: string | null
+    }, ExtArgs["result"]["profile_pictures"]>
+    composites: {}
+  }
+
+
+  type profile_picturesGetPayload<S extends boolean | null | undefined | profile_picturesDefaultArgs> = $Result.GetResult<Prisma.$profile_picturesPayload, S>
+
+  type profile_picturesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<profile_picturesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Profile_picturesCountAggregateInputType | true
+    }
+
+  export interface profile_picturesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['profile_pictures'], meta: { name: 'profile_pictures' } }
+    /**
+     * Find zero or one Profile_pictures that matches the filter.
+     * @param {profile_picturesFindUniqueArgs} args - Arguments to find a Profile_pictures
+     * @example
+     * // Get one Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends profile_picturesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesFindUniqueArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Profile_pictures that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {profile_picturesFindUniqueOrThrowArgs} args - Arguments to find a Profile_pictures
+     * @example
+     * // Get one Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends profile_picturesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Profile_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesFindFirstArgs} args - Arguments to find a Profile_pictures
+     * @example
+     * // Get one Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends profile_picturesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesFindFirstArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Profile_pictures that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesFindFirstOrThrowArgs} args - Arguments to find a Profile_pictures
+     * @example
+     * // Get one Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends profile_picturesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Profile_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findMany()
+     * 
+     * // Get first 10 Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.findMany({ take: 10 })
+     * 
+     * // Only select the `profile_picture_id`
+     * const profile_picturesWithProfile_picture_idOnly = await prisma.profile_pictures.findMany({ select: { profile_picture_id: true } })
+     * 
+    **/
+    findMany<T extends profile_picturesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Profile_pictures.
+     * @param {profile_picturesCreateArgs} args - Arguments to create a Profile_pictures.
+     * @example
+     * // Create one Profile_pictures
+     * const Profile_pictures = await prisma.profile_pictures.create({
+     *   data: {
+     *     // ... data to create a Profile_pictures
+     *   }
+     * })
+     * 
+    **/
+    create<T extends profile_picturesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesCreateArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Profile_pictures.
+     *     @param {profile_picturesCreateManyArgs} args - Arguments to create many Profile_pictures.
+     *     @example
+     *     // Create many Profile_pictures
+     *     const profile_pictures = await prisma.profile_pictures.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends profile_picturesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Profile_pictures.
+     * @param {profile_picturesDeleteArgs} args - Arguments to delete one Profile_pictures.
+     * @example
+     * // Delete one Profile_pictures
+     * const Profile_pictures = await prisma.profile_pictures.delete({
+     *   where: {
+     *     // ... filter to delete one Profile_pictures
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends profile_picturesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesDeleteArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Profile_pictures.
+     * @param {profile_picturesUpdateArgs} args - Arguments to update one Profile_pictures.
+     * @example
+     * // Update one Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends profile_picturesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesUpdateArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Profile_pictures.
+     * @param {profile_picturesDeleteManyArgs} args - Arguments to filter Profile_pictures to delete.
+     * @example
+     * // Delete a few Profile_pictures
+     * const { count } = await prisma.profile_pictures.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends profile_picturesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, profile_picturesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Profile_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends profile_picturesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Profile_pictures.
+     * @param {profile_picturesUpsertArgs} args - Arguments to update or create a Profile_pictures.
+     * @example
+     * // Update or create a Profile_pictures
+     * const profile_pictures = await prisma.profile_pictures.upsert({
+     *   create: {
+     *     // ... data to create a Profile_pictures
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Profile_pictures we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends profile_picturesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, profile_picturesUpsertArgs<ExtArgs>>
+    ): Prisma__profile_picturesClient<$Result.GetResult<Prisma.$profile_picturesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Profile_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesCountArgs} args - Arguments to filter Profile_pictures to count.
+     * @example
+     * // Count the number of Profile_pictures
+     * const count = await prisma.profile_pictures.count({
+     *   where: {
+     *     // ... the filter for the Profile_pictures we want to count
+     *   }
+     * })
+    **/
+    count<T extends profile_picturesCountArgs>(
+      args?: Subset<T, profile_picturesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Profile_picturesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Profile_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Profile_picturesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Profile_picturesAggregateArgs>(args: Subset<T, Profile_picturesAggregateArgs>): Prisma.PrismaPromise<GetProfile_picturesAggregateType<T>>
+
+    /**
+     * Group by Profile_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {profile_picturesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends profile_picturesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: profile_picturesGroupByArgs['orderBy'] }
+        : { orderBy?: profile_picturesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, profile_picturesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProfile_picturesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the profile_pictures model
+   */
+  readonly fields: profile_picturesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for profile_pictures.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__profile_picturesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    groups<T extends profile_pictures$groupsArgs<ExtArgs> = {}>(args?: Subset<T, profile_pictures$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$groupsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    individuals<T extends profile_pictures$individualsArgs<ExtArgs> = {}>(args?: Subset<T, profile_pictures$individualsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$individualsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    organizations<T extends profile_pictures$organizationsArgs<ExtArgs> = {}>(args?: Subset<T, profile_pictures$organizationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the profile_pictures model
+   */ 
+  interface profile_picturesFieldRefs {
+    readonly profile_picture_id: FieldRef<"profile_pictures", 'String'>
+    readonly profile_picture_data: FieldRef<"profile_pictures", 'Bytes'>
+    readonly profile_picture_filename: FieldRef<"profile_pictures", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * profile_pictures findUnique
+   */
+  export type profile_picturesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which profile_pictures to fetch.
+     */
+    where: profile_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * profile_pictures findUniqueOrThrow
+   */
+  export type profile_picturesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which profile_pictures to fetch.
+     */
+    where: profile_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * profile_pictures findFirst
+   */
+  export type profile_picturesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which profile_pictures to fetch.
+     */
+    where?: profile_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of profile_pictures to fetch.
+     */
+    orderBy?: profile_picturesOrderByWithRelationInput | profile_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for profile_pictures.
+     */
+    cursor?: profile_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` profile_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` profile_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of profile_pictures.
+     */
+    distinct?: Profile_picturesScalarFieldEnum | Profile_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures findFirstOrThrow
+   */
+  export type profile_picturesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which profile_pictures to fetch.
+     */
+    where?: profile_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of profile_pictures to fetch.
+     */
+    orderBy?: profile_picturesOrderByWithRelationInput | profile_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for profile_pictures.
+     */
+    cursor?: profile_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` profile_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` profile_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of profile_pictures.
+     */
+    distinct?: Profile_picturesScalarFieldEnum | Profile_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures findMany
+   */
+  export type profile_picturesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which profile_pictures to fetch.
+     */
+    where?: profile_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of profile_pictures to fetch.
+     */
+    orderBy?: profile_picturesOrderByWithRelationInput | profile_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing profile_pictures.
+     */
+    cursor?: profile_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` profile_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` profile_pictures.
+     */
+    skip?: number
+    distinct?: Profile_picturesScalarFieldEnum | Profile_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures create
+   */
+  export type profile_picturesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a profile_pictures.
+     */
+    data: XOR<profile_picturesCreateInput, profile_picturesUncheckedCreateInput>
+  }
+
+
+  /**
+   * profile_pictures createMany
+   */
+  export type profile_picturesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many profile_pictures.
+     */
+    data: profile_picturesCreateManyInput | profile_picturesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * profile_pictures update
+   */
+  export type profile_picturesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a profile_pictures.
+     */
+    data: XOR<profile_picturesUpdateInput, profile_picturesUncheckedUpdateInput>
+    /**
+     * Choose, which profile_pictures to update.
+     */
+    where: profile_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * profile_pictures updateMany
+   */
+  export type profile_picturesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update profile_pictures.
+     */
+    data: XOR<profile_picturesUpdateManyMutationInput, profile_picturesUncheckedUpdateManyInput>
+    /**
+     * Filter which profile_pictures to update
+     */
+    where?: profile_picturesWhereInput
+  }
+
+
+  /**
+   * profile_pictures upsert
+   */
+  export type profile_picturesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the profile_pictures to update in case it exists.
+     */
+    where: profile_picturesWhereUniqueInput
+    /**
+     * In case the profile_pictures found by the `where` argument doesn't exist, create a new profile_pictures with this data.
+     */
+    create: XOR<profile_picturesCreateInput, profile_picturesUncheckedCreateInput>
+    /**
+     * In case the profile_pictures was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<profile_picturesUpdateInput, profile_picturesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * profile_pictures delete
+   */
+  export type profile_picturesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
+    /**
+     * Filter which profile_pictures to delete.
+     */
+    where: profile_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * profile_pictures deleteMany
+   */
+  export type profile_picturesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which profile_pictures to delete
+     */
+    where?: profile_picturesWhereInput
+  }
+
+
+  /**
+   * profile_pictures.groups
+   */
+  export type profile_pictures$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the groups
+     */
+    select?: groupsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: groupsInclude<ExtArgs> | null
+    where?: groupsWhereInput
+    orderBy?: groupsOrderByWithRelationInput | groupsOrderByWithRelationInput[]
+    cursor?: groupsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GroupsScalarFieldEnum | GroupsScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures.individuals
+   */
+  export type profile_pictures$individualsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the individuals
+     */
+    select?: individualsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: individualsInclude<ExtArgs> | null
+    where?: individualsWhereInput
+    orderBy?: individualsOrderByWithRelationInput | individualsOrderByWithRelationInput[]
+    cursor?: individualsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IndividualsScalarFieldEnum | IndividualsScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures.organizations
+   */
+  export type profile_pictures$organizationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the organizations
+     */
+    select?: organizationsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    where?: organizationsWhereInput
+    orderBy?: organizationsOrderByWithRelationInput | organizationsOrderByWithRelationInput[]
+    cursor?: organizationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrganizationsScalarFieldEnum | OrganizationsScalarFieldEnum[]
+  }
+
+
+  /**
+   * profile_pictures without action
+   */
+  export type profile_picturesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profile_pictures
+     */
+    select?: profile_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: profile_picturesInclude<ExtArgs> | null
   }
 
 
@@ -22925,7 +24128,8 @@ export namespace Prisma {
     group_name: 'group_name',
     group_currentIssue: 'group_currentIssue',
     group_stances: 'group_stances',
-    group_description: 'group_description'
+    group_description: 'group_description',
+    profile_picture_id: 'profile_picture_id'
   };
 
   export type GroupsScalarFieldEnum = (typeof GroupsScalarFieldEnum)[keyof typeof GroupsScalarFieldEnum]
@@ -22970,7 +24174,8 @@ export namespace Prisma {
     individual_name: 'individual_name',
     individual_currentIssue: 'individual_currentIssue',
     individual_roles: 'individual_roles',
-    individual_description: 'individual_description'
+    individual_description: 'individual_description',
+    profile_picture_id: 'profile_picture_id'
   };
 
   export type IndividualsScalarFieldEnum = (typeof IndividualsScalarFieldEnum)[keyof typeof IndividualsScalarFieldEnum]
@@ -22982,7 +24187,8 @@ export namespace Prisma {
     organization_name: 'organization_name',
     organization_currentIssue: 'organization_currentIssue',
     organization_stances: 'organization_stances',
-    organization_description: 'organization_description'
+    organization_description: 'organization_description',
+    profile_picture_id: 'profile_picture_id'
   };
 
   export type OrganizationsScalarFieldEnum = (typeof OrganizationsScalarFieldEnum)[keyof typeof OrganizationsScalarFieldEnum]
@@ -22995,6 +24201,15 @@ export namespace Prisma {
   };
 
   export type Organizations_membersScalarFieldEnum = (typeof Organizations_membersScalarFieldEnum)[keyof typeof Organizations_membersScalarFieldEnum]
+
+
+  export const Profile_picturesScalarFieldEnum: {
+    profile_picture_id: 'profile_picture_id',
+    profile_picture_data: 'profile_picture_data',
+    profile_picture_filename: 'profile_picture_filename'
+  };
+
+  export type Profile_picturesScalarFieldEnum = (typeof Profile_picturesScalarFieldEnum)[keyof typeof Profile_picturesScalarFieldEnum]
 
 
   export const SheetsScalarFieldEnum: {
@@ -23624,6 +24839,8 @@ export namespace Prisma {
     group_currentIssue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
+    profile_picture_id?: StringNullableFilter<"groups"> | string | null
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
     groups_members?: Groups_membersListRelationFilter
   }
 
@@ -23634,6 +24851,8 @@ export namespace Prisma {
     group_currentIssue?: SortOrderInput | SortOrder
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
+    profile_pictures?: profile_picturesOrderByWithRelationInput
     groups_members?: groups_membersOrderByRelationAggregateInput
   }
 
@@ -23647,6 +24866,8 @@ export namespace Prisma {
     group_currentIssue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
+    profile_picture_id?: StringNullableFilter<"groups"> | string | null
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
     groups_members?: Groups_membersListRelationFilter
   }, "group_id" | "group_id" | "group_handle">
 
@@ -23657,6 +24878,7 @@ export namespace Prisma {
     group_currentIssue?: SortOrderInput | SortOrder
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
     _count?: groupsCountOrderByAggregateInput
     _max?: groupsMaxOrderByAggregateInput
     _min?: groupsMinOrderByAggregateInput
@@ -23672,6 +24894,7 @@ export namespace Prisma {
     group_currentIssue?: StringNullableWithAggregatesFilter<"groups"> | string | null
     group_stances?: StringNullableWithAggregatesFilter<"groups"> | string | null
     group_description?: StringNullableWithAggregatesFilter<"groups"> | string | null
+    profile_picture_id?: StringNullableWithAggregatesFilter<"groups"> | string | null
   }
 
   export type groups_membersWhereInput = {
@@ -23858,7 +25081,9 @@ export namespace Prisma {
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
+    profile_picture_id?: StringNullableFilter<"individuals"> | string | null
     user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
   }
 
   export type individualsOrderByWithRelationInput = {
@@ -23868,7 +25093,9 @@ export namespace Prisma {
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
     user_credentials?: user_credentialsOrderByWithRelationInput
+    profile_pictures?: profile_picturesOrderByWithRelationInput
   }
 
   export type individualsWhereUniqueInput = Prisma.AtLeast<{
@@ -23881,7 +25108,9 @@ export namespace Prisma {
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
+    profile_picture_id?: StringNullableFilter<"individuals"> | string | null
     user_credentials?: XOR<User_credentialsRelationFilter, user_credentialsWhereInput>
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
   }, "individual_id" | "individual_id" | "individual_username">
 
   export type individualsOrderByWithAggregationInput = {
@@ -23891,6 +25120,7 @@ export namespace Prisma {
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
     _count?: individualsCountOrderByAggregateInput
     _max?: individualsMaxOrderByAggregateInput
     _min?: individualsMinOrderByAggregateInput
@@ -23906,6 +25136,7 @@ export namespace Prisma {
     individual_currentIssue?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_roles?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_description?: StringNullableWithAggregatesFilter<"individuals"> | string | null
+    profile_picture_id?: StringNullableWithAggregatesFilter<"individuals"> | string | null
   }
 
   export type organizationsWhereInput = {
@@ -23918,6 +25149,8 @@ export namespace Prisma {
     organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
+    profile_picture_id?: StringNullableFilter<"organizations"> | string | null
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
     organizations_members?: Organizations_membersListRelationFilter
   }
 
@@ -23928,6 +25161,8 @@ export namespace Prisma {
     organization_currentIssue?: SortOrderInput | SortOrder
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
+    profile_pictures?: profile_picturesOrderByWithRelationInput
     organizations_members?: organizations_membersOrderByRelationAggregateInput
   }
 
@@ -23941,6 +25176,8 @@ export namespace Prisma {
     organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
+    profile_picture_id?: StringNullableFilter<"organizations"> | string | null
+    profile_pictures?: XOR<Profile_picturesNullableRelationFilter, profile_picturesWhereInput> | null
     organizations_members?: Organizations_membersListRelationFilter
   }, "organization_id" | "organization_id" | "organization_handle">
 
@@ -23951,6 +25188,7 @@ export namespace Prisma {
     organization_currentIssue?: SortOrderInput | SortOrder
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
+    profile_picture_id?: SortOrderInput | SortOrder
     _count?: organizationsCountOrderByAggregateInput
     _max?: organizationsMaxOrderByAggregateInput
     _min?: organizationsMinOrderByAggregateInput
@@ -23966,6 +25204,7 @@ export namespace Prisma {
     organization_currentIssue?: StringNullableWithAggregatesFilter<"organizations"> | string | null
     organization_stances?: StringNullableWithAggregatesFilter<"organizations"> | string | null
     organization_description?: StringNullableWithAggregatesFilter<"organizations"> | string | null
+    profile_picture_id?: StringNullableWithAggregatesFilter<"organizations"> | string | null
   }
 
   export type organizations_membersWhereInput = {
@@ -24014,6 +25253,57 @@ export namespace Prisma {
     organizations_members_id?: StringWithAggregatesFilter<"organizations_members"> | string
     organization_id?: StringWithAggregatesFilter<"organizations_members"> | string
     entity_id?: StringWithAggregatesFilter<"organizations_members"> | string
+  }
+
+  export type profile_picturesWhereInput = {
+    AND?: profile_picturesWhereInput | profile_picturesWhereInput[]
+    OR?: profile_picturesWhereInput[]
+    NOT?: profile_picturesWhereInput | profile_picturesWhereInput[]
+    profile_picture_id?: StringFilter<"profile_pictures"> | string
+    profile_picture_data?: BytesFilter<"profile_pictures"> | Buffer
+    profile_picture_filename?: StringNullableFilter<"profile_pictures"> | string | null
+    groups?: GroupsListRelationFilter
+    individuals?: IndividualsListRelationFilter
+    organizations?: OrganizationsListRelationFilter
+  }
+
+  export type profile_picturesOrderByWithRelationInput = {
+    profile_picture_id?: SortOrder
+    profile_picture_data?: SortOrder
+    profile_picture_filename?: SortOrderInput | SortOrder
+    groups?: groupsOrderByRelationAggregateInput
+    individuals?: individualsOrderByRelationAggregateInput
+    organizations?: organizationsOrderByRelationAggregateInput
+  }
+
+  export type profile_picturesWhereUniqueInput = Prisma.AtLeast<{
+    profile_picture_id?: string
+    AND?: profile_picturesWhereInput | profile_picturesWhereInput[]
+    OR?: profile_picturesWhereInput[]
+    NOT?: profile_picturesWhereInput | profile_picturesWhereInput[]
+    profile_picture_data?: BytesFilter<"profile_pictures"> | Buffer
+    profile_picture_filename?: StringNullableFilter<"profile_pictures"> | string | null
+    groups?: GroupsListRelationFilter
+    individuals?: IndividualsListRelationFilter
+    organizations?: OrganizationsListRelationFilter
+  }, "profile_picture_id" | "profile_picture_id">
+
+  export type profile_picturesOrderByWithAggregationInput = {
+    profile_picture_id?: SortOrder
+    profile_picture_data?: SortOrder
+    profile_picture_filename?: SortOrderInput | SortOrder
+    _count?: profile_picturesCountOrderByAggregateInput
+    _max?: profile_picturesMaxOrderByAggregateInput
+    _min?: profile_picturesMinOrderByAggregateInput
+  }
+
+  export type profile_picturesScalarWhereWithAggregatesInput = {
+    AND?: profile_picturesScalarWhereWithAggregatesInput | profile_picturesScalarWhereWithAggregatesInput[]
+    OR?: profile_picturesScalarWhereWithAggregatesInput[]
+    NOT?: profile_picturesScalarWhereWithAggregatesInput | profile_picturesScalarWhereWithAggregatesInput[]
+    profile_picture_id?: StringWithAggregatesFilter<"profile_pictures"> | string
+    profile_picture_data?: BytesWithAggregatesFilter<"profile_pictures"> | Buffer
+    profile_picture_filename?: StringNullableWithAggregatesFilter<"profile_pictures"> | string | null
   }
 
   export type sheetsWhereInput = {
@@ -24808,6 +26098,7 @@ export namespace Prisma {
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
+    profile_pictures?: profile_picturesCreateNestedOneWithoutGroupsInput
     groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
   }
 
@@ -24818,6 +26109,7 @@ export namespace Prisma {
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
+    profile_picture_id?: string | null
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
   }
 
@@ -24828,6 +26120,7 @@ export namespace Prisma {
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_pictures?: profile_picturesUpdateOneWithoutGroupsNestedInput
     groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
   }
 
@@ -24838,6 +26131,7 @@ export namespace Prisma {
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
     groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
   }
 
@@ -24848,6 +26142,7 @@ export namespace Prisma {
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type groupsUpdateManyMutationInput = {
@@ -24866,6 +26161,7 @@ export namespace Prisma {
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type groups_membersCreateInput = {
@@ -25043,6 +26339,7 @@ export namespace Prisma {
     individual_roles?: string | null
     individual_description?: string | null
     user_credentials: user_credentialsCreateNestedOneWithoutIndividualsInput
+    profile_pictures?: profile_picturesCreateNestedOneWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateInput = {
@@ -25052,6 +26349,7 @@ export namespace Prisma {
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type individualsUpdateInput = {
@@ -25061,6 +26359,7 @@ export namespace Prisma {
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
+    profile_pictures?: profile_picturesUpdateOneWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateInput = {
@@ -25070,6 +26369,7 @@ export namespace Prisma {
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type individualsCreateManyInput = {
@@ -25079,6 +26379,7 @@ export namespace Prisma {
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type individualsUpdateManyMutationInput = {
@@ -25096,6 +26397,7 @@ export namespace Prisma {
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type organizationsCreateInput = {
@@ -25105,6 +26407,7 @@ export namespace Prisma {
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
+    profile_pictures?: profile_picturesCreateNestedOneWithoutOrganizationsInput
     organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
   }
 
@@ -25115,6 +26418,7 @@ export namespace Prisma {
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
+    profile_picture_id?: string | null
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
   }
 
@@ -25125,6 +26429,7 @@ export namespace Prisma {
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_pictures?: profile_picturesUpdateOneWithoutOrganizationsNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
   }
 
@@ -25135,6 +26440,7 @@ export namespace Prisma {
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
   }
 
@@ -25145,6 +26451,7 @@ export namespace Prisma {
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type organizationsUpdateManyMutationInput = {
@@ -25163,6 +26470,7 @@ export namespace Prisma {
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type organizations_membersCreateInput = {
@@ -25203,6 +26511,60 @@ export namespace Prisma {
     organizations_members_id?: StringFieldUpdateOperationsInput | string
     organization_id?: StringFieldUpdateOperationsInput | string
     entity_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type profile_picturesCreateInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsCreateNestedManyWithoutProfile_picturesInput
+    individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesUncheckedCreateInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
+    individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesUpdateInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
+    individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesUncheckedUpdateInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+    individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesCreateManyInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+  }
+
+  export type profile_picturesUpdateManyMutationInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type profile_picturesUncheckedUpdateManyInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type sheetsCreateInput = {
@@ -26038,6 +27400,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type Profile_picturesNullableRelationFilter = {
+    is?: profile_picturesWhereInput | null
+    isNot?: profile_picturesWhereInput | null
+  }
+
   export type groupsCountOrderByAggregateInput = {
     group_id?: SortOrder
     group_handle?: SortOrder
@@ -26045,6 +27412,7 @@ export namespace Prisma {
     group_currentIssue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type groupsMaxOrderByAggregateInput = {
@@ -26054,6 +27422,7 @@ export namespace Prisma {
     group_currentIssue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type groupsMinOrderByAggregateInput = {
@@ -26063,6 +27432,7 @@ export namespace Prisma {
     group_currentIssue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -26210,6 +27580,7 @@ export namespace Prisma {
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type individualsMaxOrderByAggregateInput = {
@@ -26219,6 +27590,7 @@ export namespace Prisma {
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type individualsMinOrderByAggregateInput = {
@@ -26228,6 +27600,7 @@ export namespace Prisma {
     individual_currentIssue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type organizationsCountOrderByAggregateInput = {
@@ -26237,6 +27610,7 @@ export namespace Prisma {
     organization_currentIssue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type organizationsMaxOrderByAggregateInput = {
@@ -26246,6 +27620,7 @@ export namespace Prisma {
     organization_currentIssue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type organizationsMinOrderByAggregateInput = {
@@ -26255,6 +27630,7 @@ export namespace Prisma {
     organization_currentIssue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
+    profile_picture_id?: SortOrder
   }
 
   export type OrganizationsRelationFilter = {
@@ -26278,6 +27654,54 @@ export namespace Prisma {
     organizations_members_id?: SortOrder
     organization_id?: SortOrder
     entity_id?: SortOrder
+  }
+
+  export type GroupsListRelationFilter = {
+    every?: groupsWhereInput
+    some?: groupsWhereInput
+    none?: groupsWhereInput
+  }
+
+  export type IndividualsListRelationFilter = {
+    every?: individualsWhereInput
+    some?: individualsWhereInput
+    none?: individualsWhereInput
+  }
+
+  export type OrganizationsListRelationFilter = {
+    every?: organizationsWhereInput
+    some?: organizationsWhereInput
+    none?: organizationsWhereInput
+  }
+
+  export type groupsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type individualsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type organizationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type profile_picturesCountOrderByAggregateInput = {
+    profile_picture_id?: SortOrder
+    profile_picture_data?: SortOrder
+    profile_picture_filename?: SortOrder
+  }
+
+  export type profile_picturesMaxOrderByAggregateInput = {
+    profile_picture_id?: SortOrder
+    profile_picture_data?: SortOrder
+    profile_picture_filename?: SortOrder
+  }
+
+  export type profile_picturesMinOrderByAggregateInput = {
+    profile_picture_id?: SortOrder
+    profile_picture_data?: SortOrder
+    profile_picture_filename?: SortOrder
   }
 
   export type Sheets_dataRelationFilter = {
@@ -27259,6 +28683,12 @@ export namespace Prisma {
     update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutEntities_referencesInput, entitiesUpdateWithoutEntities_referencesInput>, entitiesUncheckedUpdateWithoutEntities_referencesInput>
   }
 
+  export type profile_picturesCreateNestedOneWithoutGroupsInput = {
+    create?: XOR<profile_picturesCreateWithoutGroupsInput, profile_picturesUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutGroupsInput
+    connect?: profile_picturesWhereUniqueInput
+  }
+
   export type groups_membersCreateNestedManyWithoutGroupsInput = {
     create?: XOR<groups_membersCreateWithoutGroupsInput, groups_membersUncheckedCreateWithoutGroupsInput> | groups_membersCreateWithoutGroupsInput[] | groups_membersUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: groups_membersCreateOrConnectWithoutGroupsInput | groups_membersCreateOrConnectWithoutGroupsInput[]
@@ -27275,6 +28705,16 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type profile_picturesUpdateOneWithoutGroupsNestedInput = {
+    create?: XOR<profile_picturesCreateWithoutGroupsInput, profile_picturesUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutGroupsInput
+    upsert?: profile_picturesUpsertWithoutGroupsInput
+    disconnect?: profile_picturesWhereInput | boolean
+    delete?: profile_picturesWhereInput | boolean
+    connect?: profile_picturesWhereUniqueInput
+    update?: XOR<XOR<profile_picturesUpdateToOneWithWhereWithoutGroupsInput, profile_picturesUpdateWithoutGroupsInput>, profile_picturesUncheckedUpdateWithoutGroupsInput>
   }
 
   export type groups_membersUpdateManyWithoutGroupsNestedInput = {
@@ -27413,12 +28853,34 @@ export namespace Prisma {
     connect?: user_credentialsWhereUniqueInput
   }
 
+  export type profile_picturesCreateNestedOneWithoutIndividualsInput = {
+    create?: XOR<profile_picturesCreateWithoutIndividualsInput, profile_picturesUncheckedCreateWithoutIndividualsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutIndividualsInput
+    connect?: profile_picturesWhereUniqueInput
+  }
+
   export type user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput = {
     create?: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
     connectOrCreate?: user_credentialsCreateOrConnectWithoutIndividualsInput
     upsert?: user_credentialsUpsertWithoutIndividualsInput
     connect?: user_credentialsWhereUniqueInput
     update?: XOR<XOR<user_credentialsUpdateToOneWithWhereWithoutIndividualsInput, user_credentialsUpdateWithoutIndividualsInput>, user_credentialsUncheckedUpdateWithoutIndividualsInput>
+  }
+
+  export type profile_picturesUpdateOneWithoutIndividualsNestedInput = {
+    create?: XOR<profile_picturesCreateWithoutIndividualsInput, profile_picturesUncheckedCreateWithoutIndividualsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutIndividualsInput
+    upsert?: profile_picturesUpsertWithoutIndividualsInput
+    disconnect?: profile_picturesWhereInput | boolean
+    delete?: profile_picturesWhereInput | boolean
+    connect?: profile_picturesWhereUniqueInput
+    update?: XOR<XOR<profile_picturesUpdateToOneWithWhereWithoutIndividualsInput, profile_picturesUpdateWithoutIndividualsInput>, profile_picturesUncheckedUpdateWithoutIndividualsInput>
+  }
+
+  export type profile_picturesCreateNestedOneWithoutOrganizationsInput = {
+    create?: XOR<profile_picturesCreateWithoutOrganizationsInput, profile_picturesUncheckedCreateWithoutOrganizationsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutOrganizationsInput
+    connect?: profile_picturesWhereUniqueInput
   }
 
   export type organizations_membersCreateNestedManyWithoutOrganizationsInput = {
@@ -27433,6 +28895,16 @@ export namespace Prisma {
     connectOrCreate?: organizations_membersCreateOrConnectWithoutOrganizationsInput | organizations_membersCreateOrConnectWithoutOrganizationsInput[]
     createMany?: organizations_membersCreateManyOrganizationsInputEnvelope
     connect?: organizations_membersWhereUniqueInput | organizations_membersWhereUniqueInput[]
+  }
+
+  export type profile_picturesUpdateOneWithoutOrganizationsNestedInput = {
+    create?: XOR<profile_picturesCreateWithoutOrganizationsInput, profile_picturesUncheckedCreateWithoutOrganizationsInput>
+    connectOrCreate?: profile_picturesCreateOrConnectWithoutOrganizationsInput
+    upsert?: profile_picturesUpsertWithoutOrganizationsInput
+    disconnect?: profile_picturesWhereInput | boolean
+    delete?: profile_picturesWhereInput | boolean
+    connect?: profile_picturesWhereUniqueInput
+    update?: XOR<XOR<profile_picturesUpdateToOneWithWhereWithoutOrganizationsInput, profile_picturesUpdateWithoutOrganizationsInput>, profile_picturesUncheckedUpdateWithoutOrganizationsInput>
   }
 
   export type organizations_membersUpdateManyWithoutOrganizationsNestedInput = {
@@ -27489,6 +28961,132 @@ export namespace Prisma {
     upsert?: organizationsUpsertWithoutOrganizations_membersInput
     connect?: organizationsWhereUniqueInput
     update?: XOR<XOR<organizationsUpdateToOneWithWhereWithoutOrganizations_membersInput, organizationsUpdateWithoutOrganizations_membersInput>, organizationsUncheckedUpdateWithoutOrganizations_membersInput>
+  }
+
+  export type groupsCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput> | groupsCreateWithoutProfile_picturesInput[] | groupsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: groupsCreateOrConnectWithoutProfile_picturesInput | groupsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: groupsCreateManyProfile_picturesInputEnvelope
+    connect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+  }
+
+  export type individualsCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput> | individualsCreateWithoutProfile_picturesInput[] | individualsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: individualsCreateOrConnectWithoutProfile_picturesInput | individualsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: individualsCreateManyProfile_picturesInputEnvelope
+    connect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+  }
+
+  export type organizationsCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput> | organizationsCreateWithoutProfile_picturesInput[] | organizationsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutProfile_picturesInput | organizationsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: organizationsCreateManyProfile_picturesInputEnvelope
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+  }
+
+  export type groupsUncheckedCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput> | groupsCreateWithoutProfile_picturesInput[] | groupsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: groupsCreateOrConnectWithoutProfile_picturesInput | groupsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: groupsCreateManyProfile_picturesInputEnvelope
+    connect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+  }
+
+  export type individualsUncheckedCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput> | individualsCreateWithoutProfile_picturesInput[] | individualsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: individualsCreateOrConnectWithoutProfile_picturesInput | individualsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: individualsCreateManyProfile_picturesInputEnvelope
+    connect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+  }
+
+  export type organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput = {
+    create?: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput> | organizationsCreateWithoutProfile_picturesInput[] | organizationsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutProfile_picturesInput | organizationsCreateOrConnectWithoutProfile_picturesInput[]
+    createMany?: organizationsCreateManyProfile_picturesInputEnvelope
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+  }
+
+  export type groupsUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput> | groupsCreateWithoutProfile_picturesInput[] | groupsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: groupsCreateOrConnectWithoutProfile_picturesInput | groupsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: groupsUpsertWithWhereUniqueWithoutProfile_picturesInput | groupsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: groupsCreateManyProfile_picturesInputEnvelope
+    set?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    disconnect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    delete?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    connect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    update?: groupsUpdateWithWhereUniqueWithoutProfile_picturesInput | groupsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: groupsUpdateManyWithWhereWithoutProfile_picturesInput | groupsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: groupsScalarWhereInput | groupsScalarWhereInput[]
+  }
+
+  export type individualsUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput> | individualsCreateWithoutProfile_picturesInput[] | individualsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: individualsCreateOrConnectWithoutProfile_picturesInput | individualsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: individualsUpsertWithWhereUniqueWithoutProfile_picturesInput | individualsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: individualsCreateManyProfile_picturesInputEnvelope
+    set?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    disconnect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    delete?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    connect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    update?: individualsUpdateWithWhereUniqueWithoutProfile_picturesInput | individualsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: individualsUpdateManyWithWhereWithoutProfile_picturesInput | individualsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: individualsScalarWhereInput | individualsScalarWhereInput[]
+  }
+
+  export type organizationsUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput> | organizationsCreateWithoutProfile_picturesInput[] | organizationsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutProfile_picturesInput | organizationsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: organizationsUpsertWithWhereUniqueWithoutProfile_picturesInput | organizationsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: organizationsCreateManyProfile_picturesInputEnvelope
+    set?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    disconnect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    delete?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    update?: organizationsUpdateWithWhereUniqueWithoutProfile_picturesInput | organizationsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: organizationsUpdateManyWithWhereWithoutProfile_picturesInput | organizationsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+  }
+
+  export type groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput> | groupsCreateWithoutProfile_picturesInput[] | groupsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: groupsCreateOrConnectWithoutProfile_picturesInput | groupsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: groupsUpsertWithWhereUniqueWithoutProfile_picturesInput | groupsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: groupsCreateManyProfile_picturesInputEnvelope
+    set?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    disconnect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    delete?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    connect?: groupsWhereUniqueInput | groupsWhereUniqueInput[]
+    update?: groupsUpdateWithWhereUniqueWithoutProfile_picturesInput | groupsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: groupsUpdateManyWithWhereWithoutProfile_picturesInput | groupsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: groupsScalarWhereInput | groupsScalarWhereInput[]
+  }
+
+  export type individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput> | individualsCreateWithoutProfile_picturesInput[] | individualsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: individualsCreateOrConnectWithoutProfile_picturesInput | individualsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: individualsUpsertWithWhereUniqueWithoutProfile_picturesInput | individualsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: individualsCreateManyProfile_picturesInputEnvelope
+    set?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    disconnect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    delete?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    connect?: individualsWhereUniqueInput | individualsWhereUniqueInput[]
+    update?: individualsUpdateWithWhereUniqueWithoutProfile_picturesInput | individualsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: individualsUpdateManyWithWhereWithoutProfile_picturesInput | individualsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: individualsScalarWhereInput | individualsScalarWhereInput[]
+  }
+
+  export type organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput = {
+    create?: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput> | organizationsCreateWithoutProfile_picturesInput[] | organizationsUncheckedCreateWithoutProfile_picturesInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutProfile_picturesInput | organizationsCreateOrConnectWithoutProfile_picturesInput[]
+    upsert?: organizationsUpsertWithWhereUniqueWithoutProfile_picturesInput | organizationsUpsertWithWhereUniqueWithoutProfile_picturesInput[]
+    createMany?: organizationsCreateManyProfile_picturesInputEnvelope
+    set?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    disconnect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    delete?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    update?: organizationsUpdateWithWhereUniqueWithoutProfile_picturesInput | organizationsUpdateWithWhereUniqueWithoutProfile_picturesInput[]
+    updateMany?: organizationsUpdateManyWithWhereWithoutProfile_picturesInput | organizationsUpdateManyWithWhereWithoutProfile_picturesInput[]
+    deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
   }
 
   export type entitiesCreateNestedOneWithoutSheetsInput = {
@@ -29213,6 +30811,27 @@ export namespace Prisma {
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
+  export type profile_picturesCreateWithoutGroupsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesUncheckedCreateWithoutGroupsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesCreateOrConnectWithoutGroupsInput = {
+    where: profile_picturesWhereUniqueInput
+    create: XOR<profile_picturesCreateWithoutGroupsInput, profile_picturesUncheckedCreateWithoutGroupsInput>
+  }
+
   export type groups_membersCreateWithoutGroupsInput = {
     groups_members_id: string
     entities: entitiesCreateNestedOneWithoutGroups_membersInput
@@ -29231,6 +30850,33 @@ export namespace Prisma {
   export type groups_membersCreateManyGroupsInputEnvelope = {
     data: groups_membersCreateManyGroupsInput | groups_membersCreateManyGroupsInput[]
     skipDuplicates?: boolean
+  }
+
+  export type profile_picturesUpsertWithoutGroupsInput = {
+    update: XOR<profile_picturesUpdateWithoutGroupsInput, profile_picturesUncheckedUpdateWithoutGroupsInput>
+    create: XOR<profile_picturesCreateWithoutGroupsInput, profile_picturesUncheckedCreateWithoutGroupsInput>
+    where?: profile_picturesWhereInput
+  }
+
+  export type profile_picturesUpdateToOneWithWhereWithoutGroupsInput = {
+    where?: profile_picturesWhereInput
+    data: XOR<profile_picturesUpdateWithoutGroupsInput, profile_picturesUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type profile_picturesUpdateWithoutGroupsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesUncheckedUpdateWithoutGroupsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
   }
 
   export type groups_membersUpsertWithWhereUniqueWithoutGroupsInput = {
@@ -29289,6 +30935,7 @@ export namespace Prisma {
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
+    profile_pictures?: profile_picturesCreateNestedOneWithoutGroupsInput
   }
 
   export type groupsUncheckedCreateWithoutGroups_membersInput = {
@@ -29298,6 +30945,7 @@ export namespace Prisma {
     group_currentIssue?: string | null
     group_stances?: string | null
     group_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type groupsCreateOrConnectWithoutGroups_membersInput = {
@@ -29362,6 +31010,7 @@ export namespace Prisma {
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_pictures?: profile_picturesUpdateOneWithoutGroupsNestedInput
   }
 
   export type groupsUncheckedUpdateWithoutGroups_membersInput = {
@@ -29371,6 +31020,7 @@ export namespace Prisma {
     group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type entitiesCreateWithoutImagesInput = {
@@ -29556,6 +31206,27 @@ export namespace Prisma {
     create: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
   }
 
+  export type profile_picturesCreateWithoutIndividualsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesUncheckedCreateWithoutIndividualsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
+    organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesCreateOrConnectWithoutIndividualsInput = {
+    where: profile_picturesWhereUniqueInput
+    create: XOR<profile_picturesCreateWithoutIndividualsInput, profile_picturesUncheckedCreateWithoutIndividualsInput>
+  }
+
   export type user_credentialsUpsertWithoutIndividualsInput = {
     update: XOR<user_credentialsUpdateWithoutIndividualsInput, user_credentialsUncheckedUpdateWithoutIndividualsInput>
     create: XOR<user_credentialsCreateWithoutIndividualsInput, user_credentialsUncheckedCreateWithoutIndividualsInput>
@@ -29587,6 +31258,54 @@ export namespace Prisma {
     user_phone_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type profile_picturesUpsertWithoutIndividualsInput = {
+    update: XOR<profile_picturesUpdateWithoutIndividualsInput, profile_picturesUncheckedUpdateWithoutIndividualsInput>
+    create: XOR<profile_picturesCreateWithoutIndividualsInput, profile_picturesUncheckedCreateWithoutIndividualsInput>
+    where?: profile_picturesWhereInput
+  }
+
+  export type profile_picturesUpdateToOneWithWhereWithoutIndividualsInput = {
+    where?: profile_picturesWhereInput
+    data: XOR<profile_picturesUpdateWithoutIndividualsInput, profile_picturesUncheckedUpdateWithoutIndividualsInput>
+  }
+
+  export type profile_picturesUpdateWithoutIndividualsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesUncheckedUpdateWithoutIndividualsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+    organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesCreateWithoutOrganizationsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsCreateNestedManyWithoutProfile_picturesInput
+    individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesUncheckedCreateWithoutOrganizationsInput = {
+    profile_picture_id: string
+    profile_picture_data: Buffer
+    profile_picture_filename?: string | null
+    groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
+    individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
+  }
+
+  export type profile_picturesCreateOrConnectWithoutOrganizationsInput = {
+    where: profile_picturesWhereUniqueInput
+    create: XOR<profile_picturesCreateWithoutOrganizationsInput, profile_picturesUncheckedCreateWithoutOrganizationsInput>
+  }
+
   export type organizations_membersCreateWithoutOrganizationsInput = {
     organizations_members_id: string
     entities: entitiesCreateNestedOneWithoutOrganizations_membersInput
@@ -29605,6 +31324,33 @@ export namespace Prisma {
   export type organizations_membersCreateManyOrganizationsInputEnvelope = {
     data: organizations_membersCreateManyOrganizationsInput | organizations_membersCreateManyOrganizationsInput[]
     skipDuplicates?: boolean
+  }
+
+  export type profile_picturesUpsertWithoutOrganizationsInput = {
+    update: XOR<profile_picturesUpdateWithoutOrganizationsInput, profile_picturesUncheckedUpdateWithoutOrganizationsInput>
+    create: XOR<profile_picturesCreateWithoutOrganizationsInput, profile_picturesUncheckedCreateWithoutOrganizationsInput>
+    where?: profile_picturesWhereInput
+  }
+
+  export type profile_picturesUpdateToOneWithWhereWithoutOrganizationsInput = {
+    where?: profile_picturesWhereInput
+    data: XOR<profile_picturesUpdateWithoutOrganizationsInput, profile_picturesUncheckedUpdateWithoutOrganizationsInput>
+  }
+
+  export type profile_picturesUpdateWithoutOrganizationsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
+    individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
+  }
+
+  export type profile_picturesUncheckedUpdateWithoutOrganizationsInput = {
+    profile_picture_id?: StringFieldUpdateOperationsInput | string
+    profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
+    individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
   }
 
   export type organizations_membersUpsertWithWhereUniqueWithoutOrganizationsInput = {
@@ -29663,6 +31409,7 @@ export namespace Prisma {
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
+    profile_pictures?: profile_picturesCreateNestedOneWithoutOrganizationsInput
   }
 
   export type organizationsUncheckedCreateWithoutOrganizations_membersInput = {
@@ -29672,6 +31419,7 @@ export namespace Prisma {
     organization_currentIssue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type organizationsCreateOrConnectWithoutOrganizations_membersInput = {
@@ -29736,6 +31484,7 @@ export namespace Prisma {
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_pictures?: profile_picturesUpdateOneWithoutOrganizationsNestedInput
   }
 
   export type organizationsUncheckedUpdateWithoutOrganizations_membersInput = {
@@ -29745,6 +31494,182 @@ export namespace Prisma {
     organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type groupsCreateWithoutProfile_picturesInput = {
+    group_id: string
+    group_handle: string
+    group_name: string
+    group_currentIssue?: string | null
+    group_stances?: string | null
+    group_description?: string | null
+    groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
+  }
+
+  export type groupsUncheckedCreateWithoutProfile_picturesInput = {
+    group_id: string
+    group_handle: string
+    group_name: string
+    group_currentIssue?: string | null
+    group_stances?: string | null
+    group_description?: string | null
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
+  }
+
+  export type groupsCreateOrConnectWithoutProfile_picturesInput = {
+    where: groupsWhereUniqueInput
+    create: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type groupsCreateManyProfile_picturesInputEnvelope = {
+    data: groupsCreateManyProfile_picturesInput | groupsCreateManyProfile_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type individualsCreateWithoutProfile_picturesInput = {
+    individual_username: string
+    individual_name: string
+    individual_currentIssue?: string | null
+    individual_roles?: string | null
+    individual_description?: string | null
+    user_credentials: user_credentialsCreateNestedOneWithoutIndividualsInput
+  }
+
+  export type individualsUncheckedCreateWithoutProfile_picturesInput = {
+    individual_id: string
+    individual_username: string
+    individual_name: string
+    individual_currentIssue?: string | null
+    individual_roles?: string | null
+    individual_description?: string | null
+  }
+
+  export type individualsCreateOrConnectWithoutProfile_picturesInput = {
+    where: individualsWhereUniqueInput
+    create: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type individualsCreateManyProfile_picturesInputEnvelope = {
+    data: individualsCreateManyProfile_picturesInput | individualsCreateManyProfile_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type organizationsCreateWithoutProfile_picturesInput = {
+    organization_id: string
+    organization_handle: string
+    organization_name: string
+    organization_currentIssue?: string | null
+    organization_stances?: string | null
+    organization_description?: string | null
+    organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
+  }
+
+  export type organizationsUncheckedCreateWithoutProfile_picturesInput = {
+    organization_id: string
+    organization_handle: string
+    organization_name: string
+    organization_currentIssue?: string | null
+    organization_stances?: string | null
+    organization_description?: string | null
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
+  }
+
+  export type organizationsCreateOrConnectWithoutProfile_picturesInput = {
+    where: organizationsWhereUniqueInput
+    create: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type organizationsCreateManyProfile_picturesInputEnvelope = {
+    data: organizationsCreateManyProfile_picturesInput | organizationsCreateManyProfile_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type groupsUpsertWithWhereUniqueWithoutProfile_picturesInput = {
+    where: groupsWhereUniqueInput
+    update: XOR<groupsUpdateWithoutProfile_picturesInput, groupsUncheckedUpdateWithoutProfile_picturesInput>
+    create: XOR<groupsCreateWithoutProfile_picturesInput, groupsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type groupsUpdateWithWhereUniqueWithoutProfile_picturesInput = {
+    where: groupsWhereUniqueInput
+    data: XOR<groupsUpdateWithoutProfile_picturesInput, groupsUncheckedUpdateWithoutProfile_picturesInput>
+  }
+
+  export type groupsUpdateManyWithWhereWithoutProfile_picturesInput = {
+    where: groupsScalarWhereInput
+    data: XOR<groupsUpdateManyMutationInput, groupsUncheckedUpdateManyWithoutProfile_picturesInput>
+  }
+
+  export type groupsScalarWhereInput = {
+    AND?: groupsScalarWhereInput | groupsScalarWhereInput[]
+    OR?: groupsScalarWhereInput[]
+    NOT?: groupsScalarWhereInput | groupsScalarWhereInput[]
+    group_id?: StringFilter<"groups"> | string
+    group_handle?: StringFilter<"groups"> | string
+    group_name?: StringFilter<"groups"> | string
+    group_currentIssue?: StringNullableFilter<"groups"> | string | null
+    group_stances?: StringNullableFilter<"groups"> | string | null
+    group_description?: StringNullableFilter<"groups"> | string | null
+    profile_picture_id?: StringNullableFilter<"groups"> | string | null
+  }
+
+  export type individualsUpsertWithWhereUniqueWithoutProfile_picturesInput = {
+    where: individualsWhereUniqueInput
+    update: XOR<individualsUpdateWithoutProfile_picturesInput, individualsUncheckedUpdateWithoutProfile_picturesInput>
+    create: XOR<individualsCreateWithoutProfile_picturesInput, individualsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type individualsUpdateWithWhereUniqueWithoutProfile_picturesInput = {
+    where: individualsWhereUniqueInput
+    data: XOR<individualsUpdateWithoutProfile_picturesInput, individualsUncheckedUpdateWithoutProfile_picturesInput>
+  }
+
+  export type individualsUpdateManyWithWhereWithoutProfile_picturesInput = {
+    where: individualsScalarWhereInput
+    data: XOR<individualsUpdateManyMutationInput, individualsUncheckedUpdateManyWithoutProfile_picturesInput>
+  }
+
+  export type individualsScalarWhereInput = {
+    AND?: individualsScalarWhereInput | individualsScalarWhereInput[]
+    OR?: individualsScalarWhereInput[]
+    NOT?: individualsScalarWhereInput | individualsScalarWhereInput[]
+    individual_id?: StringFilter<"individuals"> | string
+    individual_username?: StringFilter<"individuals"> | string
+    individual_name?: StringFilter<"individuals"> | string
+    individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
+    individual_roles?: StringNullableFilter<"individuals"> | string | null
+    individual_description?: StringNullableFilter<"individuals"> | string | null
+    profile_picture_id?: StringNullableFilter<"individuals"> | string | null
+  }
+
+  export type organizationsUpsertWithWhereUniqueWithoutProfile_picturesInput = {
+    where: organizationsWhereUniqueInput
+    update: XOR<organizationsUpdateWithoutProfile_picturesInput, organizationsUncheckedUpdateWithoutProfile_picturesInput>
+    create: XOR<organizationsCreateWithoutProfile_picturesInput, organizationsUncheckedCreateWithoutProfile_picturesInput>
+  }
+
+  export type organizationsUpdateWithWhereUniqueWithoutProfile_picturesInput = {
+    where: organizationsWhereUniqueInput
+    data: XOR<organizationsUpdateWithoutProfile_picturesInput, organizationsUncheckedUpdateWithoutProfile_picturesInput>
+  }
+
+  export type organizationsUpdateManyWithWhereWithoutProfile_picturesInput = {
+    where: organizationsScalarWhereInput
+    data: XOR<organizationsUpdateManyMutationInput, organizationsUncheckedUpdateManyWithoutProfile_picturesInput>
+  }
+
+  export type organizationsScalarWhereInput = {
+    AND?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+    OR?: organizationsScalarWhereInput[]
+    NOT?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+    organization_id?: StringFilter<"organizations"> | string
+    organization_handle?: StringFilter<"organizations"> | string
+    organization_name?: StringFilter<"organizations"> | string
+    organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
+    organization_stances?: StringNullableFilter<"organizations"> | string | null
+    organization_description?: StringNullableFilter<"organizations"> | string | null
+    profile_picture_id?: StringNullableFilter<"organizations"> | string | null
   }
 
   export type entitiesCreateWithoutSheetsInput = {
@@ -29911,6 +31836,7 @@ export namespace Prisma {
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
+    profile_pictures?: profile_picturesCreateNestedOneWithoutIndividualsInput
   }
 
   export type individualsUncheckedCreateWithoutUser_credentialsInput = {
@@ -29919,6 +31845,7 @@ export namespace Prisma {
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
+    profile_picture_id?: string | null
   }
 
   export type individualsCreateOrConnectWithoutUser_credentialsInput = {
@@ -29943,6 +31870,7 @@ export namespace Prisma {
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_pictures?: profile_picturesUpdateOneWithoutIndividualsNestedInput
   }
 
   export type individualsUncheckedUpdateWithoutUser_credentialsInput = {
@@ -29951,6 +31879,7 @@ export namespace Prisma {
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type entitiesCreateWithoutVideosInput = {
@@ -30641,6 +32570,118 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
   }
 
+  export type groupsCreateManyProfile_picturesInput = {
+    group_id: string
+    group_handle: string
+    group_name: string
+    group_currentIssue?: string | null
+    group_stances?: string | null
+    group_description?: string | null
+  }
+
+  export type individualsCreateManyProfile_picturesInput = {
+    individual_id: string
+    individual_username: string
+    individual_name: string
+    individual_currentIssue?: string | null
+    individual_roles?: string | null
+    individual_description?: string | null
+  }
+
+  export type organizationsCreateManyProfile_picturesInput = {
+    organization_id: string
+    organization_handle: string
+    organization_name: string
+    organization_currentIssue?: string | null
+    organization_stances?: string | null
+    organization_description?: string | null
+  }
+
+  export type groupsUpdateWithoutProfile_picturesInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
+    group_handle?: StringFieldUpdateOperationsInput | string
+    group_name?: StringFieldUpdateOperationsInput | string
+    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
+  }
+
+  export type groupsUncheckedUpdateWithoutProfile_picturesInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
+    group_handle?: StringFieldUpdateOperationsInput | string
+    group_name?: StringFieldUpdateOperationsInput | string
+    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    group_description?: NullableStringFieldUpdateOperationsInput | string | null
+    groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
+  }
+
+  export type groupsUncheckedUpdateManyWithoutProfile_picturesInput = {
+    group_id?: StringFieldUpdateOperationsInput | string
+    group_handle?: StringFieldUpdateOperationsInput | string
+    group_name?: StringFieldUpdateOperationsInput | string
+    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    group_description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type individualsUpdateWithoutProfile_picturesInput = {
+    individual_username?: StringFieldUpdateOperationsInput | string
+    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+    user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
+  }
+
+  export type individualsUncheckedUpdateWithoutProfile_picturesInput = {
+    individual_id?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
+    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type individualsUncheckedUpdateManyWithoutProfile_picturesInput = {
+    individual_id?: StringFieldUpdateOperationsInput | string
+    individual_username?: StringFieldUpdateOperationsInput | string
+    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type organizationsUpdateWithoutProfile_picturesInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
+    organization_handle?: StringFieldUpdateOperationsInput | string
+    organization_name?: StringFieldUpdateOperationsInput | string
+    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
+  }
+
+  export type organizationsUncheckedUpdateWithoutProfile_picturesInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
+    organization_handle?: StringFieldUpdateOperationsInput | string
+    organization_name?: StringFieldUpdateOperationsInput | string
+    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
+  }
+
+  export type organizationsUncheckedUpdateManyWithoutProfile_picturesInput = {
+    organization_id?: StringFieldUpdateOperationsInput | string
+    organization_handle?: StringFieldUpdateOperationsInput | string
+    organization_name?: StringFieldUpdateOperationsInput | string
+    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type sheetsCreateManySheets_dataInput = {
     sheet_id: string
     sheet_author_id: string
@@ -30767,6 +32808,10 @@ export namespace Prisma {
      */
     export type OrganizationsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Profile_picturesCountOutputTypeDefaultArgs instead
+     */
+    export type Profile_picturesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Profile_picturesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use Sheets_dataCountOutputTypeDefaultArgs instead
      */
     export type Sheets_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Sheets_dataCountOutputTypeDefaultArgs<ExtArgs>
@@ -30838,6 +32883,10 @@ export namespace Prisma {
      * @deprecated Use organizations_membersDefaultArgs instead
      */
     export type organizations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = organizations_membersDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use profile_picturesDefaultArgs instead
+     */
+    export type profile_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = profile_picturesDefaultArgs<ExtArgs>
     /**
      * @deprecated Use sheetsDefaultArgs instead
      */

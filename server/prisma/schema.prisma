@@ -113,13 +113,17 @@ model entities_references {
 }
 
 model groups {
-  group_id           String           @id @unique(map: "temp_group_id_UNIQUE") @db.Char(36)
-  group_handle       String           @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
-  group_name         String           @db.VarChar(256)
-  group_currentIssue String?          @db.Text
-  group_stances      String?          @db.Text
-  group_description  String?          @db.Text
+  group_id           String            @id @unique(map: "temp_group_id_UNIQUE") @db.Char(36)
+  group_handle       String            @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
+  group_name         String            @db.VarChar(256)
+  group_currentIssue String?           @db.Text
+  group_stances      String?           @db.Text
+  group_description  String?           @db.Text
+  profile_picture_id String?           @db.Char(36)
+  profile_pictures   profile_pictures? @relation(fields: [profile_picture_id], references: [profile_picture_id], onDelete: NoAction, onUpdate: NoAction, map: "groups_profile_picture_id_fk")
   groups_members     groups_members[]
+
+  @@index([profile_picture_id], map: "groups_profile_picture_id_fk_idx")
 }
 
 model groups_members {
@@ -159,13 +163,17 @@ model images_data {
 }
 
 model individuals {
-  individual_id           String           @id @unique(map: "temp_individual_id_UNIQUE") @db.Char(36)
-  individual_username     String           @unique(map: "userName_UNIQUE") @db.VarChar(256)
-  individual_name         String           @db.VarChar(256)
-  individual_currentIssue String?          @db.Text
-  individual_roles        String?          @db.Text
-  individual_description  String?          @db.Text
-  user_credentials        user_credentials @relation(fields: [individual_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_individual_id_fk")
+  individual_id           String            @id @unique(map: "temp_individual_id_UNIQUE") @db.Char(36)
+  individual_username     String            @unique(map: "userName_UNIQUE") @db.VarChar(256)
+  individual_name         String            @db.VarChar(256)
+  individual_currentIssue String?           @db.Text
+  individual_roles        String?           @db.Text
+  individual_description  String?           @db.Text
+  profile_picture_id      String?           @db.Char(36)
+  user_credentials        user_credentials  @relation(fields: [individual_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_individual_id_fk")
+  profile_pictures        profile_pictures? @relation(fields: [profile_picture_id], references: [profile_picture_id], onDelete: NoAction, onUpdate: NoAction, map: "individuals_profile_picture_id_fk")
+
+  @@index([profile_picture_id], map: "individuals_profile_picture_id_fk_idx")
 }
 
 model organizations {
@@ -175,7 +183,11 @@ model organizations {
   organization_currentIssue String?                 @db.Text
   organization_stances      String?                 @db.Text
   organization_description  String?                 @db.Text
+  profile_picture_id        String?                 @db.Char(36)
+  profile_pictures          profile_pictures?       @relation(fields: [profile_picture_id], references: [profile_picture_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_profile_picture_id")
   organizations_members     organizations_members[]
+
+  @@index([profile_picture_id])
 }
 
 model organizations_members {
@@ -187,6 +199,15 @@ model organizations_members {
 
   @@index([entity_id], map: "organizations_members_entity_id_fk_idx")
   @@index([organization_id], map: "organizations_members_organization_id_fk_idx")
+}
+
+model profile_pictures {
+  profile_picture_id       String          @id @unique(map: "profile_picture_id_UNIQUE") @db.Char(36)
+  profile_picture_data     Bytes
+  profile_picture_filename String?         @db.VarChar(256)
+  groups                   groups[]
+  individuals              individuals[]
+  organizations            organizations[]
 }
 
 model sheets {

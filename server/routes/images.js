@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./verifyJWT");
 
 // Route to get an image by ID
 router.get("/:image_id", async (req, res) => {
@@ -72,6 +73,61 @@ router.get("/get_full_image/:image_id", async (req, res) => {
     }
 
     res.send({ fullImage, imageCreator });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
+  console.log(req);
+  try {
+    const entity = await req.db.entity.findUnique({
+      where: {
+        entity_id: req.user.user_id,
+      },
+    });
+
+    console.log(entity);
+
+    let profilePictureId;
+
+    if (entity.entity_type === 1) {
+      profilePictureId = await req.db.individuals.findUnique({
+        where: {
+          individual_id: req.user.user_id,
+        },
+      });
+    } else if (entity.entity_type === 2) {
+      profilePictureId = await req.db.groups.findUnique({
+        where: {
+          group_id: req.user.user_id,
+        },
+      });
+    } else if (entity.entity_type === 3) {
+      profilePictureId = await req.db.organizations.findUnique({
+        where: {
+          organization_id: req.user.user_id,
+        },
+      });
+    }
+
+    console.log(profilePictureId);
+
+    const profilePicture = await req.db.profile_pictures.findUnique({
+      where: {
+        profile_picture_id: profilePictureId.profile_picture_id,
+      },
+    });
+
+    console.log(profilePicture);
+
+    if (!profilePicture) {
+      res.status(404).send(null);
+      return;
+    }
+
+    res.send(profilePicture);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

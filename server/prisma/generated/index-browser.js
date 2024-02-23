@@ -173,7 +173,8 @@ exports.Prisma.GroupsScalarFieldEnum = {
   group_name: 'group_name',
   group_currentIssue: 'group_currentIssue',
   group_stances: 'group_stances',
-  group_description: 'group_description'
+  group_description: 'group_description',
+  profile_picture_id: 'profile_picture_id'
 };
 
 exports.Prisma.Groups_membersScalarFieldEnum = {
@@ -206,7 +207,8 @@ exports.Prisma.IndividualsScalarFieldEnum = {
   individual_name: 'individual_name',
   individual_currentIssue: 'individual_currentIssue',
   individual_roles: 'individual_roles',
-  individual_description: 'individual_description'
+  individual_description: 'individual_description',
+  profile_picture_id: 'profile_picture_id'
 };
 
 exports.Prisma.OrganizationsScalarFieldEnum = {
@@ -215,13 +217,20 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
   organization_name: 'organization_name',
   organization_currentIssue: 'organization_currentIssue',
   organization_stances: 'organization_stances',
-  organization_description: 'organization_description'
+  organization_description: 'organization_description',
+  profile_picture_id: 'profile_picture_id'
 };
 
 exports.Prisma.Organizations_membersScalarFieldEnum = {
   organizations_members_id: 'organizations_members_id',
   organization_id: 'organization_id',
   entity_id: 'entity_id'
+};
+
+exports.Prisma.Profile_picturesScalarFieldEnum = {
+  profile_picture_id: 'profile_picture_id',
+  profile_picture_data: 'profile_picture_data',
+  profile_picture_filename: 'profile_picture_filename'
 };
 
 exports.Prisma.SheetsScalarFieldEnum = {
@@ -298,6 +307,7 @@ exports.Prisma.ModelName = {
   individuals: 'individuals',
   organizations: 'organizations',
   organizations_members: 'organizations_members',
+  profile_pictures: 'profile_pictures',
   sheets: 'sheets',
   sheets_data: 'sheets_data',
   user_credentials: 'user_credentials',
