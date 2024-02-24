@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import config from "@config";
@@ -88,7 +88,9 @@ export default function PageNav() {
     dispatch(setIds("main", "individual_id", "user"));
     dispatch(setIds("individuals", "collection_id", null));
   };
-
+  const [profilePictureData, setProfilePictureData] = useState({
+    profile_picture_url: "",
+  });
   useEffect(() => {
     const fetchProfilePictureData = async () => {
       try {
@@ -99,7 +101,7 @@ export default function PageNav() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/images/get_user_profile_picture`,
+          `${serverUrl}/get_user_profile_picture`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -107,33 +109,27 @@ export default function PageNav() {
           },
         );
 
-        console.log(response);
+        if (response.data) {
+          const blobData = new Uint8Array(
+            response.data.profile_picture_data.data,
+          );
 
-        //if (response.data) {
-        //  const blobData = new Uint8Array(
-        //    response.data.fullImage.images_data.image_data.data,
-        //  );
-        //
-        //  const extension = response.data.fullImage.image_filename
-        //    .slice(-3)
-        //    .toLowerCase();
-        //
-        //  const mimeType = getMimeType(extension);
-        //
-        //  if (mimeType) {
-        //    const url = URL.createObjectURL(
-        //      new Blob([blobData], { type: mimeType }),
-        //    );
-        //
-        //    //setImageData({
-        //    //  image_url: url,
-        //    //  image_title: response.data.fullImage.image_title,
-        //    //  image_description: response.data.fullImage.image_description,
-        //    //  entity_type: response.data.fullImage.entities.entity_type,
-        //    //  image_creator: response.data.imageCreator,
-        //    //});
-        //  }
-        //}
+          const extension = response.data.profile_picture_filename
+            .slice(-3)
+            .toLowerCase();
+
+          const mimeType = getMimeType(extension);
+
+          if (mimeType) {
+            const url = URL.createObjectURL(
+              new Blob([blobData], { type: mimeType }),
+            );
+
+            setProfilePictureData({
+              profile_picture_url: url,
+            });
+          }
+        }
       } catch (error) {
         console.error("Error fetching profile picture data:", error);
       }
@@ -177,7 +173,15 @@ export default function PageNav() {
             profileNavFunction();
           }}
         >
-          <img className="rounded-full bg-fg-white-90 h-10 aspect-square text-sm"></img>
+          {profilePictureData.profile_picture_url && (
+            <div className="h-10 w-10 rounded-full overflow-hidden">
+              <img
+                className="h-full w-full object-cover"
+                src={profilePictureData.profile_picture_url}
+                alt="Profile Picture"
+              />
+            </div>
+          )}
           <button style={mainPageStyles["profile"]} className="ml-2">
             Profile
           </button>

@@ -17,7 +17,7 @@ model affiliates_relations {
 }
 
 model collections {
-  collection_id       String                @id @unique(map: "temp_collection_id_UNIQUE") @db.Char(36)
+  collection_id       String                @id @unique(map: "collection_id_UNIQUE") @db.Char(36)
   collection_name     String                @db.VarChar(256)
   entity_id           String                @db.Char(36)
   entities            entities              @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "collections_entity_id_fk")
@@ -50,7 +50,7 @@ model content {
 }
 
 model entities {
-  entity_id             String                  @id @unique(map: "temp_entity_id_UNIQUE") @db.Char(36)
+  entity_id             String                  @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
   entity_type           Int                     @default(0)
   collections           collections[]
   entities_content      entities_content[]
@@ -102,7 +102,7 @@ model entities_likes {
 }
 
 model entities_references {
-  reference_id String   @id @unique(map: "temp_reference_id_UNIQUE") @db.Char(36)
+  reference_id String   @id @unique(map: "reference_id_UNIQUE") @db.Char(36)
   entity_id    String   @db.Char(36)
   title        String   @db.VarChar(256)
   author       String   @db.VarChar(256)
@@ -113,7 +113,7 @@ model entities_references {
 }
 
 model groups {
-  group_id           String            @id @unique(map: "temp_group_id_UNIQUE") @db.Char(36)
+  group_id           String            @id @unique(map: "group_id_UNIQUE") @db.Char(36)
   group_handle       String            @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
   group_name         String            @db.VarChar(256)
   group_currentIssue String?           @db.Text
@@ -139,7 +139,7 @@ model groups_members {
 }
 
 model images {
-  image_id          String      @id @unique(map: "temp_image_id_UNIQUE") @db.Char(36)
+  image_id          String      @id @unique(map: "image_id_UNIQUE") @db.Char(36)
   image_creator_id  String      @db.Char(36)
   image_title       String      @db.VarChar(256)
   image_description String      @db.Text
@@ -157,13 +157,13 @@ model images {
 }
 
 model images_data {
-  image_data_id String   @id @unique(map: "temp_image_data_id_UNIQUE") @db.Char(36)
+  image_data_id String   @id @unique(map: "image_data_id_UNIQUE") @db.Char(36)
   image_data    Bytes
   images        images[]
 }
 
 model individuals {
-  individual_id           String            @id @unique(map: "temp_individual_id_UNIQUE") @db.Char(36)
+  individual_id           String            @id @unique(map: "individual_id_UNIQUE") @db.Char(36)
   individual_username     String            @unique(map: "userName_UNIQUE") @db.VarChar(256)
   individual_name         String            @db.VarChar(256)
   individual_currentIssue String?           @db.Text
@@ -177,7 +177,7 @@ model individuals {
 }
 
 model organizations {
-  organization_id           String                  @id @unique(map: "temp_organization_id_UNIQUE") @db.Char(36)
+  organization_id           String                  @id @unique(map: "organization_id_UNIQUE") @db.Char(36)
   organization_handle       String                  @unique(map: "organization_handle_UNIQUE") @db.VarChar(256)
   organization_name         String                  @db.VarChar(256)
   organization_currentIssue String?                 @db.Text
@@ -191,7 +191,7 @@ model organizations {
 }
 
 model organizations_members {
-  organizations_members_id String        @id @unique(map: "temp_organizations_members_id_UNIQUE") @db.Char(36)
+  organizations_members_id String        @id @unique(map: "organizations_members_id_UNIQUE") @db.Char(36)
   organization_id          String        @db.Char(36)
   entity_id                String        @db.Char(36)
   entities                 entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "organizations_members_entity_id_fk")
@@ -211,7 +211,7 @@ model profile_pictures {
 }
 
 model sheets {
-  sheet_id          String      @id @unique(map: "temp_sheet_id_UNIQUE") @db.Char(36)
+  sheet_id          String      @id @unique(map: "sheet_id_UNIQUE") @db.Char(36)
   sheet_author_id   String      @db.Char(36)
   sheet_title       String      @db.VarChar(256)
   sheet_subject     String      @db.Text
@@ -224,12 +224,12 @@ model sheets {
   entities          entities    @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
   sheets_data       sheets_data @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
 
-  @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
+  @@index([sheet_data_id], map: "sheets_sheet_data_id_fk_idx")
   @@index([sheet_author_id], map: "sheets_sheet_author_id_fk_idx")
 }
 
 model sheets_data {
-  sheet_data_id String   @id @unique(map: "temp_sheet_data_id_UNIQUE") @db.Char(36)
+  sheet_data_id String   @id @unique(map: "sheet_data_id_UNIQUE") @db.Char(36)
   sheet_data    Bytes
   sheets        sheets[]
 }
@@ -246,7 +246,7 @@ model user_credentials {
 }
 
 model videos {
-  video_id          String      @id @unique(map: "temp_video_id_UNIQUE") @db.Char(36)
+  video_id          String      @id @unique(map: "video_id_UNIQUE") @db.Char(36)
   video_creator_id  String      @db.Char(36)
   video_title       String      @db.VarChar(256)
   video_description String      @db.Text
@@ -264,7 +264,7 @@ model videos {
 }
 
 model videos_data {
-  video_data_id String   @id @unique(map: "temp_video_data_id_UNIQUE") @db.Char(36)
+  video_data_id String   @id @unique(map: "video_data_id_UNIQUE") @db.Char(36)
   video_data    Bytes
   videos        videos[]
 }

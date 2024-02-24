@@ -80,15 +80,13 @@ router.get("/get_full_image/:image_id", async (req, res) => {
 });
 
 router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
-  console.log(req);
+  console.log("woring");
   try {
-    const entity = await req.db.entity.findUnique({
+    const entity = await req.db.entities.findUnique({
       where: {
         entity_id: req.user.user_id,
       },
     });
-
-    console.log(entity);
 
     let profilePictureId;
 
@@ -112,15 +110,11 @@ router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
       });
     }
 
-    console.log(profilePictureId);
-
     const profilePicture = await req.db.profile_pictures.findUnique({
       where: {
         profile_picture_id: profilePictureId.profile_picture_id,
       },
     });
-
-    console.log(profilePicture);
 
     if (!profilePicture) {
       res.status(404).send(null);
