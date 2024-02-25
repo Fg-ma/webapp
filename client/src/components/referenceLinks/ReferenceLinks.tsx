@@ -1,5 +1,5 @@
-import { Transition, Variants, motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
+import { Transition, Variants, motion } from "framer-motion";
 
 const popupContentVar: Variants = {
   init: {
@@ -73,7 +73,7 @@ export default function ReferenceLinks({ references }: ReferenceLinksProps) {
 
   const showPopup = (reference: Reference) => {
     setPopupContent(
-      <div className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50">
+      <div className="p-4 absolute bg-white drop-shadow-md rounded w-max z-50">
         <p className="text-lg font-bold">Title: {reference.title}</p>
         <p className="text-base font-K2D">Author: {reference.author}</p>
         <p className="text-base font-K2D">URL: {reference.url}</p>
@@ -116,7 +116,7 @@ export default function ReferenceLinks({ references }: ReferenceLinksProps) {
       if (prevPopupContent) {
         return (
           <div
-            className="p-3 absolute bg-white drop-shadow-md rounded w-max z-50"
+            className="p-4 absolute bg-white drop-shadow-md rounded w-max z-50"
             style={{
               top: mousePosition.current?.y,
               left: mousePosition.current?.x,

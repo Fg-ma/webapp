@@ -1,11 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
+import { Transition, Variants, motion } from "framer-motion";
 import config from "@config";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
+
+const popupContentVar: Variants = {
+  init: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+};
+
+const transition: Transition = {
+  transition: {
+    duration: 0.25,
+    ease: "easeOut",
+  },
+};
 
 interface ProfilePictureProps {
   size: {
@@ -14,12 +31,40 @@ interface ProfilePictureProps {
   };
   entity_id: string;
   type: string;
+  entity?: {
+    entity_name: string;
+    entity_username: string;
+    entity_current_Issue: string;
+  };
+}
+
+interface Entity {
+  [key: string]: any;
+  individual_id?: string;
+  individual_name?: string;
+  individual_userName?: string;
+  individual_roles?: string;
+  individual_currentIssue?: string;
+  individual_description?: string;
+  group_id?: string;
+  group_name?: string;
+  group_handle?: string;
+  group_stances?: string;
+  group_currentIssue?: string;
+  group_description?: string;
+  organization_id?: string;
+  organization_name?: string;
+  organization_handle?: string;
+  organization_stances?: string;
+  organization_currentIssue?: string;
+  organization_description?: string;
 }
 
 export default function ProfilePicture({
   size,
   entity_id,
   type,
+  entity,
 }: ProfilePictureProps) {
   const [profilePictureData, setProfilePictureData] = useState({
     profile_picture_url: "",
@@ -88,27 +133,110 @@ export default function ProfilePicture({
         return null;
     }
   };
-  console.log(size);
+
+  const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+  const mousePosition = useRef<{ x: string; y: string } | null>(null);
+
+  const showPopup = (entity: Entity) => {
+    setPopupContent(
+      <div className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md z-50">
+        <p className="text-xl font-bold">{entity.entity_name}</p>
+        <p className="text-base font-K2D">{entity.entity_username}</p>
+        <p className="text-base font-K2D overflow-hidden overflow-ellipsis line-clamp-2">
+          {entity.entity_current_Issue}
+        </p>
+      </div>,
+    );
+  };
+
+  const startHoverTimer = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    entity?: Entity,
+  ) => {
+    if (entity) {
+      mousePosition.current = {
+        x: `${event.clientX - 535}px`,
+        y: `${event.clientY - 50}px`,
+      };
+      hoverTimeout.current = setTimeout(() => {
+        showPopup(entity);
+        updatePopupPosition();
+      }, 1500);
+    }
+  };
+
+  const cancelHoverTimer = () => {
+    if (hoverTimeout.current) {
+      clearTimeout(hoverTimeout.current);
+    }
+    setPopupContent(null);
+  };
+
+  const updateMousePosition = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    mousePosition.current = {
+      x: `${event.clientX - 535}px`,
+      y: `${event.clientY - 50}px`,
+    };
+  };
+
+  const updatePopupPosition = () => {
+    setPopupContent((prevPopupContent) => {
+      if (prevPopupContent) {
+        return (
+          <div
+            className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md z-50"
+            style={{
+              top: mousePosition.current?.y,
+              left: mousePosition.current?.x,
+            }}
+          >
+            {prevPopupContent.props.children}
+          </div>
+        );
+      }
+      return null;
+    });
+  };
+
   return (
-    <>
-      <div
-        className={`h-${size.h} w-${size.w} ${
-          type === "rounded-full" ? "rounded-full" : "none"
-        } ${type === "rounded-md" ? "rounded-md" : "none"} overflow-hidden`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={
-            profilePictureData.profile_picture_url ||
-            "/assets/pictures/DefaultProfilePicture.png"
-          }
-          alt={
-            profilePictureData.profile_picture_url
-              ? "Profile Picture"
-              : "Default Profile Picture"
-          }
-        />
-      </div>
-    </>
+    <div
+      className={`h-${size.h} w-${size.w} min-h-${size.h} min-w-${size.w} ${
+        type === "rounded-full" ? "rounded-full" : "none"
+      } ${type === "rounded-md" ? "rounded-md" : "none"} ${
+        type === "rounded-sm" ? "rounded-sm" : "none"
+      } overflow-hidden`}
+      onMouseEnter={(event) => startHoverTimer(event, entity)}
+      onMouseLeave={() => cancelHoverTimer()}
+      onMouseMove={(event) => {
+        updateMousePosition(event);
+        updatePopupPosition();
+      }}
+    >
+      <img
+        className="h-full w-full object-cover"
+        src={
+          profilePictureData.profile_picture_url ||
+          "/assets/pictures/DefaultProfilePicture.png"
+        }
+        alt={
+          profilePictureData.profile_picture_url
+            ? "Profile Picture"
+            : "Default Profile Picture"
+        }
+      />
+      {popupContent && (
+        <motion.div
+          variants={popupContentVar}
+          initial="init"
+          animate="animate"
+          transition={transition}
+        >
+          {popupContent}
+        </motion.div>
+      )}
+    </div>
   );
 }

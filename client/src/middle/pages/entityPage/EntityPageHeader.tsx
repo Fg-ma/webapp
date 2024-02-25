@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import ReferenceLinks from "@components/referenceLinks/ReferenceLinks";
@@ -62,9 +62,87 @@ export default function EntityPageHeader({
       N/A
   */
 
+  const [affiliates, setAffiliates] = useState({
+    individuals: [],
+    groups: [],
+    organizations: [],
+  });
+  const topHeaderRef = useRef<HTMLDivElement>(null);
+  const affiliateProfilePictureRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (affiliateProfilePictureRef.current) {
+      affiliateProfilePictureRef.current.scrollLeft = 0;
+    }
+
+    const fetchIndividualData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/affiliateRelations/get_affiliated_entities`,
+          {
+            params: {
+              entity_id: entity_id,
+            },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        setAffiliates(response.data);
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    fetchIndividualData();
+  }, [entity_id]);
+
+  const renderProfilePictures = (affiliatesArray: any[], type: string) =>
+    affiliatesArray.map((affiliate) => (
+      <ProfilePicture
+        key={affiliate[`${type}_id`]}
+        size={{ w: 8, h: 8 }}
+        entity_id={affiliate[`${type}_id`]}
+        type={
+          type === "individual"
+            ? "rounded-full"
+            : type === "group"
+              ? "rounded-md"
+              : "rounded-sm"
+        }
+        entity={
+          type === "individual"
+            ? {
+                entity_name: affiliate[`${type}_name`],
+                entity_username: affiliate.individual_username,
+                entity_current_Issue: affiliate[`${type}_currentIssue`],
+              }
+            : type === "group"
+              ? {
+                  entity_name: affiliate[`${type}_name`],
+                  entity_username: affiliate.group_handle,
+                  entity_current_Issue: affiliate[`${type}_currentIssue`],
+                }
+              : {
+                  entity_name: affiliate[`${type}_name`],
+                  entity_username: affiliate.organization_handle,
+                  entity_current_Issue: affiliate[`${type}_currentIssue`],
+                }
+        }
+      />
+    ));
+
   return (
     <>
-      <div className="flex items-center h-24">
+      <div ref={topHeaderRef} className="flex items-center h-24">
         <div className="h-24 w-24">
           <ProfilePicture
             size={{ h: 24, w: 24 }}
@@ -76,14 +154,18 @@ export default function EntityPageHeader({
           <p className="text-4xl mb-1">
             {entity?.[`${entityType.slice(0, -1)}_name`]}
           </p>
-          <div className="flex space-x-6">
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-full"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-lg"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-sm"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-lg"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-full"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-full"></div>
-            <div className="h-8 aspect-square bg-fg-white-85 rounded-sm"></div>
+          <div
+            ref={affiliateProfilePictureRef}
+            className="flex space-x-6 overflow-x-auto"
+            style={{
+              maxWidth: topHeaderRef.current
+                ? `${topHeaderRef.current.clientWidth - 120}px`
+                : "100%",
+            }}
+          >
+            {renderProfilePictures(affiliates.individuals, "individual")}
+            {renderProfilePictures(affiliates.groups, "group")}
+            {renderProfilePictures(affiliates.organizations, "organization")}
           </div>
         </div>
       </div>
