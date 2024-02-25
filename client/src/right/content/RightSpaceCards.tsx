@@ -11,7 +11,7 @@ import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 */
 
 interface PapersCardProps {
-  paper_id: number;
+  paper_id: string;
   title: string;
   subject: string;
 }
@@ -41,7 +41,7 @@ export function PapersCard({ paper_id, title, subject }: PapersCardProps) {
 }
 
 interface NewsCardProps {
-  sheet_id: number;
+  sheet_id: string;
   title: string;
   subject: string;
   affResponses?: string | null;

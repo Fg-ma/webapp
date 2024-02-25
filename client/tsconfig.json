@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@config": ["config.js"],
-      "@redux/*": ["src/redux/*"]
+      "@redux/*": ["src/redux/*"],
+      "@components/*": ["src/components/*"]
     },
     "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
@@ -39,7 +39,7 @@ export default function IndividualCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/individuals/get_affiliated_individuals`,
+          `${serverUrl}/affiliateRelations/get_affiliated_individuals`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

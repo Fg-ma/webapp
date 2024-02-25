@@ -26,6 +26,7 @@ module.exports = {
     alias: {
       "@config": path.resolve(__dirname, "config"),
       "@redux": path.resolve(__dirname, "src/redux"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },

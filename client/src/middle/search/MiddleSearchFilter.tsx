@@ -10,7 +10,7 @@ import {
 } from "@redux/filters/filterActions";
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
-import Checkbox from "../../components/checkbox/Checkbox";
+import Checkbox from "@components/checkbox/Checkbox";
 
 const middleAdvancedSearchFilterVar: Variants = {
   init: {

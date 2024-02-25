@@ -1,7 +1,16 @@
 import React from "react";
-import ReferenceLinks from "../../../components/referenceLinks/ReferenceLinks";
+import Axios from "axios";
+import config from "@config";
+import ReferenceLinks from "@components/referenceLinks/ReferenceLinks";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 interface EntityPageHeaderProps {
+  entity_id: string;
   entityType: string;
   entity: Entity | null;
   entityReferences: EntityReferences[];
@@ -40,6 +49,7 @@ interface EntityReferences {
 }
 
 export default function EntityPageHeader({
+  entity_id,
   entityType,
   entity,
   entityReferences,
@@ -54,9 +64,15 @@ export default function EntityPageHeader({
 
   return (
     <>
-      <div className="flex items-center">
-        <div className="w-24 aspect-square rounded-full bg-fg-white-85 mr-8"></div>
-        <div className="h-fit">
+      <div className="flex items-center h-24">
+        <div className="h-24 w-24">
+          <ProfilePicture
+            size={{ h: 24, w: 24 }}
+            entity_id={entity_id}
+            type="rounded-full"
+          />
+        </div>
+        <div className="ml-8 h-fit">
           <p className="text-4xl mb-1">
             {entity?.[`${entityType.slice(0, -1)}_name`]}
           </p>

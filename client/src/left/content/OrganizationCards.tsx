@@ -39,7 +39,7 @@ export default function OrganizationCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/organizations/get_affiliated_organizations`,
+          `${serverUrl}/affiliateRelations/get_affiliated_organizations`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

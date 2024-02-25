@@ -11,7 +11,7 @@ import {
 } from "@redux/filters/filterActions";
 import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
-import Checkbox from "../../components/checkbox/Checkbox";
+import Checkbox from "@components/checkbox/Checkbox";
 
 const rightSearchFilterVar: Variants = {
   init: {

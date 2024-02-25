@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import SheetViewer from "../../../components/viewers/sheetViewer/SheetViewer";
-import VideoViewer from "../../../components/viewers/videoViewer/VideoViewer";
-import ImageViewer from "../../../components/viewers/imageViewer/ImageViewer";
+import SheetViewer from "@components/viewers/sheetViewer/SheetViewer";
+import VideoViewer from "@components/viewers/videoViewer/VideoViewer";
+import ImageViewer from "@components/viewers/imageViewer/ImageViewer";
 
 interface ContentPageProps {
   contentType: string;

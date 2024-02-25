@@ -38,7 +38,7 @@ export default function GroupCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/groups/get_affiliated_groups`,
+          `${serverUrl}/affiliateRelations/get_affiliated_groups`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import RelatedIssuesHeader from "./content/RelatedIssuesHeader";
 import RelatedIssues from "./content/RelatedIssues";
-import SheetViewer from "../components/viewers/sheetViewer/SheetViewer";
+import SheetViewer from "@components/viewers/sheetViewer/SheetViewer";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

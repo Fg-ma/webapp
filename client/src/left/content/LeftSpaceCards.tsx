@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 /* 
   Description:   
@@ -34,8 +35,12 @@ export function IndividualCard({
       className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
-      <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
-        <p>pic</p>
+      <div className="w-14 aspect-square ml-4 mr-5">
+        <ProfilePicture
+          size={{ h: 14, w: 14 }}
+          entity_id={id}
+          type="rounded-full"
+        />
       </div>
       <div className="m-2 truncate">
         <p className="font-Josefin text-xl truncate">{name}</p>
@@ -74,8 +79,12 @@ export function GroupCard({
       className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
-      <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">
-        <p>pic</p>
+      <div className="w-16 aspect-square ml-4 mr-5">
+        <ProfilePicture
+          size={{ h: 16, w: 16 }}
+          entity_id={id}
+          type="rounded-md"
+        />
       </div>
       <div className="m-2 truncate">
         <p className="font-Josefin text-xl truncate">{name}</p>
@@ -117,8 +126,12 @@ export function OrganizationCard({
       className="bg-white w-fill my-4 mx-6 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
-      <div className="w-16 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-md grid place-items-center flex-shrink-0">
-        <p>pic</p>
+      <div className="w-16 aspect-square ml-4 mr-5">
+        <ProfilePicture
+          size={{ h: 16, w: 16 }}
+          entity_id={id}
+          type="rounded-md"
+        />
       </div>
       <div className="m-2 h-full truncate">
         <p className="font-Josefin text-xl truncate">{name}</p>

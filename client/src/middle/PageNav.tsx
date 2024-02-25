@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Axios from "axios";
-import config from "@config";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment
-  ? config.development.serverUrl
-  : config.production.serverUrl;
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 const navButtonsVar: Variants = {
   init: {
@@ -88,69 +82,6 @@ export default function PageNav() {
     dispatch(setIds("main", "individual_id", "user"));
     dispatch(setIds("individuals", "collection_id", null));
   };
-  const [profilePictureData, setProfilePictureData] = useState({
-    profile_picture_url: "",
-  });
-  useEffect(() => {
-    const fetchProfilePictureData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          return;
-        }
-
-        const response = await Axios.get(
-          `${serverUrl}/get_user_profile_picture`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        if (response.data) {
-          const blobData = new Uint8Array(
-            response.data.profile_picture_data.data,
-          );
-
-          const extension = response.data.profile_picture_filename
-            .slice(-3)
-            .toLowerCase();
-
-          const mimeType = getMimeType(extension);
-
-          if (mimeType) {
-            const url = URL.createObjectURL(
-              new Blob([blobData], { type: mimeType }),
-            );
-
-            setProfilePictureData({
-              profile_picture_url: url,
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching profile picture data:", error);
-      }
-    };
-
-    fetchProfilePictureData();
-  }, []);
-
-  const getMimeType = (extension: string) => {
-    switch (extension) {
-      case "jpg":
-      case "jpeg":
-        return "image/jpeg";
-      case "png":
-        return "image/png";
-      case "gif":
-        return "image/gif";
-      default:
-        return null;
-    }
-  };
 
   return (
     <nav
@@ -173,15 +104,11 @@ export default function PageNav() {
             profileNavFunction();
           }}
         >
-          {profilePictureData.profile_picture_url && (
-            <div className="h-10 w-10 rounded-full overflow-hidden">
-              <img
-                className="h-full w-full object-cover"
-                src={profilePictureData.profile_picture_url}
-                alt="Profile Picture"
-              />
-            </div>
-          )}
+          <ProfilePicture
+            size={{ w: 10, h: 10 }}
+            entity_id="user"
+            type="rounded-full"
+          />
           <button style={mainPageStyles["profile"]} className="ml-2">
             Profile
           </button>

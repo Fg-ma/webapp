@@ -103,13 +103,25 @@ export default function EntityPage({ entityType }: EntityPageProps) {
       state.page[entityType].pagePayload.ids.collection_id,
   );
   const entity_id = useSelector((state: EntityPageState) => {
-    if (entityType === "individuals")
+    if (
+      entityType === "individuals" &&
+      state.page["main"].pagePayload.ids.individual_id
+    )
       return state.page["main"].pagePayload.ids.individual_id;
-    else if (entityType === "groups")
+    else if (
+      entityType === "groups" &&
+      state.page["main"].pagePayload.ids.group_id
+    )
       return state.page["main"].pagePayload.ids.group_id;
-    else if (entityType === "organizations")
+    else if (
+      entityType === "organizations" &&
+      state.page["main"].pagePayload.ids.organization_id
+    )
       return state.page["main"].pagePayload.ids.organization_id;
-    else if (state.page["main"].pagePayload.ids.individual_id === "user")
+    else if (
+      state.page["main"].pagePayload.ids.individual_id &&
+      state.page["main"].pagePayload.ids.individual_id === "user"
+    )
       return "user";
   });
 
@@ -285,11 +297,14 @@ export default function EntityPage({ entityType }: EntityPageProps) {
           className="overflow-y-auto h-full w-full"
         >
           <div className="ml-8 mr-5 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
-            <EntityPageHeader
-              entityType={entityType}
-              entity={entityData}
-              entityReferences={entityReferences}
-            />
+            {entity_id && (
+              <EntityPageHeader
+                entity_id={entity_id}
+                entityType={entityType}
+                entity={entityData}
+                entityReferences={entityReferences}
+              />
+            )}
             <EntityContentNav
               entityType={entityType}
               entity={entityData}
