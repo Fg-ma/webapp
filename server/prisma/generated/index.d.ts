@@ -3037,18 +3037,21 @@ export namespace Prisma {
     affiliate_relation_id: string | null
     affiliate_id_1: string | null
     affiliate_id_2: string | null
+    affiliate_relation_date: Date | null
   }
 
   export type Affiliates_relationsMaxAggregateOutputType = {
     affiliate_relation_id: string | null
     affiliate_id_1: string | null
     affiliate_id_2: string | null
+    affiliate_relation_date: Date | null
   }
 
   export type Affiliates_relationsCountAggregateOutputType = {
     affiliate_relation_id: number
     affiliate_id_1: number
     affiliate_id_2: number
+    affiliate_relation_date: number
     _all: number
   }
 
@@ -3057,18 +3060,21 @@ export namespace Prisma {
     affiliate_relation_id?: true
     affiliate_id_1?: true
     affiliate_id_2?: true
+    affiliate_relation_date?: true
   }
 
   export type Affiliates_relationsMaxAggregateInputType = {
     affiliate_relation_id?: true
     affiliate_id_1?: true
     affiliate_id_2?: true
+    affiliate_relation_date?: true
   }
 
   export type Affiliates_relationsCountAggregateInputType = {
     affiliate_relation_id?: true
     affiliate_id_1?: true
     affiliate_id_2?: true
+    affiliate_relation_date?: true
     _all?: true
   }
 
@@ -3148,6 +3154,7 @@ export namespace Prisma {
     affiliate_relation_id: string
     affiliate_id_1: string
     affiliate_id_2: string
+    affiliate_relation_date: Date
     _count: Affiliates_relationsCountAggregateOutputType | null
     _min: Affiliates_relationsMinAggregateOutputType | null
     _max: Affiliates_relationsMaxAggregateOutputType | null
@@ -3171,12 +3178,14 @@ export namespace Prisma {
     affiliate_relation_id?: boolean
     affiliate_id_1?: boolean
     affiliate_id_2?: boolean
+    affiliate_relation_date?: boolean
   }, ExtArgs["result"]["affiliates_relations"]>
 
   export type affiliates_relationsSelectScalar = {
     affiliate_relation_id?: boolean
     affiliate_id_1?: boolean
     affiliate_id_2?: boolean
+    affiliate_relation_date?: boolean
   }
 
 
@@ -3187,6 +3196,7 @@ export namespace Prisma {
       affiliate_relation_id: string
       affiliate_id_1: string
       affiliate_id_2: string
+      affiliate_relation_date: Date
     }, ExtArgs["result"]["affiliates_relations"]>
     composites: {}
   }
@@ -3584,6 +3594,7 @@ export namespace Prisma {
     readonly affiliate_relation_id: FieldRef<"affiliates_relations", 'String'>
     readonly affiliate_id_1: FieldRef<"affiliates_relations", 'String'>
     readonly affiliate_id_2: FieldRef<"affiliates_relations", 'String'>
+    readonly affiliate_relation_date: FieldRef<"affiliates_relations", 'DateTime'>
   }
     
 
@@ -24038,7 +24049,8 @@ export namespace Prisma {
   export const Affiliates_relationsScalarFieldEnum: {
     affiliate_relation_id: 'affiliate_relation_id',
     affiliate_id_1: 'affiliate_id_1',
-    affiliate_id_2: 'affiliate_id_2'
+    affiliate_id_2: 'affiliate_id_2',
+    affiliate_relation_date: 'affiliate_relation_date'
   };
 
   export type Affiliates_relationsScalarFieldEnum = (typeof Affiliates_relationsScalarFieldEnum)[keyof typeof Affiliates_relationsScalarFieldEnum]
@@ -24346,12 +24358,14 @@ export namespace Prisma {
     affiliate_relation_id?: StringFilter<"affiliates_relations"> | string
     affiliate_id_1?: StringFilter<"affiliates_relations"> | string
     affiliate_id_2?: StringFilter<"affiliates_relations"> | string
+    affiliate_relation_date?: DateTimeFilter<"affiliates_relations"> | Date | string
   }
 
   export type affiliates_relationsOrderByWithRelationInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
     affiliate_id_2?: SortOrder
+    affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsWhereUniqueInput = Prisma.AtLeast<{
@@ -24362,12 +24376,14 @@ export namespace Prisma {
     NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
     affiliate_id_1?: StringFilter<"affiliates_relations"> | string
     affiliate_id_2?: StringFilter<"affiliates_relations"> | string
+    affiliate_relation_date?: DateTimeFilter<"affiliates_relations"> | Date | string
   }, "affiliate_relation_id" | "affiliate_relation_id" | "affiliate_id_1_affiliate_id_2">
 
   export type affiliates_relationsOrderByWithAggregationInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
     affiliate_id_2?: SortOrder
+    affiliate_relation_date?: SortOrder
     _count?: affiliates_relationsCountOrderByAggregateInput
     _max?: affiliates_relationsMaxOrderByAggregateInput
     _min?: affiliates_relationsMinOrderByAggregateInput
@@ -24380,6 +24396,7 @@ export namespace Prisma {
     affiliate_relation_id?: StringWithAggregatesFilter<"affiliates_relations"> | string
     affiliate_id_1?: StringWithAggregatesFilter<"affiliates_relations"> | string
     affiliate_id_2?: StringWithAggregatesFilter<"affiliates_relations"> | string
+    affiliate_relation_date?: DateTimeWithAggregatesFilter<"affiliates_relations"> | Date | string
   }
 
   export type collectionsWhereInput = {
@@ -25625,42 +25642,49 @@ export namespace Prisma {
     affiliate_relation_id: string
     affiliate_id_1: string
     affiliate_id_2: string
+    affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUncheckedCreateInput = {
     affiliate_relation_id: string
     affiliate_id_1: string
     affiliate_id_2: string
+    affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUpdateInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
     affiliate_id_1?: StringFieldUpdateOperationsInput | string
     affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsUncheckedUpdateInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
     affiliate_id_1?: StringFieldUpdateOperationsInput | string
     affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsCreateManyInput = {
     affiliate_relation_id: string
     affiliate_id_1: string
     affiliate_id_2: string
+    affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUpdateManyMutationInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
     affiliate_id_1?: StringFieldUpdateOperationsInput | string
     affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsUncheckedUpdateManyInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
     affiliate_id_1?: StringFieldUpdateOperationsInput | string
     affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type collectionsCreateInput = {
@@ -26911,6 +26935,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput = {
     affiliate_id_1: string
     affiliate_id_2: string
@@ -26920,18 +26955,21 @@ export namespace Prisma {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
     affiliate_id_2?: SortOrder
+    affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsMaxOrderByAggregateInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
     affiliate_id_2?: SortOrder
+    affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsMinOrderByAggregateInput = {
     affiliate_relation_id?: SortOrder
     affiliate_id_1?: SortOrder
     affiliate_id_2?: SortOrder
+    affiliate_relation_date?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -26949,6 +26987,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EntitiesRelationFilter = {
@@ -26982,17 +27034,6 @@ export namespace Prisma {
     collection_id?: SortOrder
     collection_name?: SortOrder
     entity_id?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -27051,20 +27092,6 @@ export namespace Prisma {
     date_added?: SortOrder
     pinned?: SortOrder
     date_pinned?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -27885,6 +27912,10 @@ export namespace Prisma {
     set?: string
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type entitiesCreateNestedOneWithoutCollectionsInput = {
     create?: XOR<entitiesCreateWithoutCollectionsInput, entitiesUncheckedCreateWithoutCollectionsInput>
     connectOrCreate?: entitiesCreateOrConnectWithoutCollectionsInput
@@ -27951,10 +27982,6 @@ export namespace Prisma {
     create?: XOR<contentCreateWithoutCollections_contentInput, contentUncheckedCreateWithoutCollections_contentInput>
     connectOrCreate?: contentCreateOrConnectWithoutCollections_contentInput
     connect?: contentWhereUniqueInput
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -29275,6 +29302,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -29303,7 +29341,7 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
     notIn?: Date[] | string[]
@@ -29311,7 +29349,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -29328,20 +29369,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {

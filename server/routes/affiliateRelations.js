@@ -40,9 +40,30 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 
     const individual_ids_list = individual_ids.map((entry) => entry.entity_id);
 
-    const individuals = await req.db.individuals.findMany({
-      where: { individual_id: { in: individual_ids_list } },
-    });
+    const individuals = [];
+
+    for (const ind_id of individual_ids_list) {
+      const individual = await req.db.individuals.findUnique({
+        where: { individual_id: ind_id },
+      });
+
+      const individualAffiliation = await req.db.affiliates_relations.findMany({
+        where: {
+          OR: [
+            { affiliate_id_1: ind_id, affiliate_id_2: user_id },
+            { affiliate_id_1: user_id, affiliate_id_2: ind_id },
+          ],
+        },
+        select: {
+          affiliate_relation_date: true,
+        },
+      });
+
+      individuals.push({
+        ...individual,
+        date: individualAffiliation,
+      });
+    }
 
     const group_ids = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 2 },
@@ -53,9 +74,30 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 
     const group_ids_list = group_ids.map((entry) => entry.entity_id);
 
-    const groups = await req.db.groups.findMany({
-      where: { group_id: { in: group_ids_list } },
-    });
+    const groups = [];
+
+    for (const grp_id of group_ids_list) {
+      const group = await req.db.groups.findUnique({
+        where: { group_id: grp_id },
+      });
+
+      const groupAffiliation = await req.db.affiliates_relations.findMany({
+        where: {
+          OR: [
+            { affiliate_id_1: grp_id, affiliate_id_2: user_id },
+            { affiliate_id_1: user_id, affiliate_id_2: grp_id },
+          ],
+        },
+        select: {
+          affiliate_relation_date: true,
+        },
+      });
+
+      groups.push({
+        ...group,
+        date: groupAffiliation,
+      });
+    }
 
     const organization_ids = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 3 },
@@ -68,9 +110,31 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       (entry) => entry.entity_id
     );
 
-    const organizations = await req.db.organizations.findMany({
-      where: { organization_id: { in: organization_ids_list } },
-    });
+    const organizations = [];
+
+    for (const org_id of organization_ids_list) {
+      const organization = await req.db.organizations.findUnique({
+        where: { organization_id: org_id },
+      });
+
+      const organizationAffiliation =
+        await req.db.affiliates_relations.findMany({
+          where: {
+            OR: [
+              { affiliate_id_1: org_id, affiliate_id_2: user_id },
+              { affiliate_id_1: user_id, affiliate_id_2: org_id },
+            ],
+          },
+          select: {
+            affiliate_relation_date: true,
+          },
+        });
+
+      organizations.push({
+        ...organization,
+        date: organizationAffiliation,
+      });
+    }
 
     res.send({
       individuals: individuals,

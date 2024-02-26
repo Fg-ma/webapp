@@ -48,6 +48,30 @@ interface EntityReferences {
   url: string;
 }
 
+interface Afiliate {
+  type?: string;
+  date: [{ affiliate_relation_date: string }];
+  individual_currentIssue?: string;
+  individual_description?: string;
+  individual_username?: string;
+  individual_id?: string;
+  individual_name?: string;
+  individual_roles?: string;
+  group_currentIssue?: string;
+  group_description?: string;
+  group_handle?: string;
+  group_id?: string;
+  group_name?: string;
+  group_stances?: string;
+  organization_currentIssue?: string;
+  organization_description?: string;
+  organization_handle?: string;
+  organization_id?: string;
+  organization_name?: string;
+  organization_stances?: string;
+  profile_picture_id: string;
+}
+
 export default function EntityPageHeader({
   entity_id,
   entityType,
@@ -62,11 +86,18 @@ export default function EntityPageHeader({
       N/A
   */
 
-  const [affiliates, setAffiliates] = useState({
+  const [affiliates, setAffiliates] = useState<{
+    individuals: Afiliate[];
+    groups: Afiliate[];
+    organizations: Afiliate[];
+  }>({
     individuals: [],
     groups: [],
     organizations: [],
   });
+  const [affiliatesProfilePictures, setAffiliatesProfilePictures] = useState<
+    React.JSX.Element[] | null
+  >(null);
   const topHeaderRef = useRef<HTMLDivElement>(null);
   const affiliateProfilePictureRef = useRef<HTMLDivElement>(null);
 
@@ -105,49 +136,83 @@ export default function EntityPageHeader({
     fetchIndividualData();
   }, [entity_id]);
 
-  const renderProfilePictures = (affiliatesArray: any[], type: string) =>
-    affiliatesArray.map((affiliate) => (
-      <ProfilePicture
-        key={affiliate[`${type}_id`]}
-        size={{ w: 8, h: 8 }}
-        entity_id={affiliate[`${type}_id`]}
-        type={
-          type === "individual"
-            ? "rounded-full"
-            : type === "group"
-              ? "rounded-md"
-              : "rounded-sm"
-        }
-        entity={
-          type === "individual"
-            ? {
-                entity_name: affiliate[`${type}_name`],
-                entity_username: affiliate.individual_username,
-                entity_current_Issue: affiliate[`${type}_currentIssue`],
-              }
-            : type === "group"
+  useEffect(() => {
+    const unsortedArray = [];
+
+    for (const individual of affiliates.individuals) {
+      unsortedArray.push({
+        ...individual,
+        type: "individual",
+      });
+    }
+
+    for (const group of affiliates.groups) {
+      unsortedArray.push({
+        ...group,
+        type: "group",
+      });
+    }
+
+    for (const organization of affiliates.organizations) {
+      unsortedArray.push({
+        ...organization,
+        type: "organization",
+      });
+    }
+
+    const sortedAffiliatesArray = unsortedArray.slice().sort((a, b) => {
+      const dateA = new Date(a.date[0].affiliate_relation_date).getTime();
+      const dateB = new Date(b.date[0].affiliate_relation_date).getTime();
+      return dateA - dateB;
+    });
+
+    setAffiliatesProfilePictures(
+      sortedAffiliatesArray.map((affiliate: Afiliate) => (
+        <ProfilePicture
+          key={String(affiliate[`${affiliate.type}_id` as keyof Afiliate])}
+          size={{ w: 2, h: 2 }}
+          entity_id={String(
+            affiliate[`${affiliate.type}_id` as keyof Afiliate],
+          )}
+          styles={
+            affiliate.type === "individual"
+              ? "rounded-full"
+              : affiliate.type === "group"
+                ? "rounded-md"
+                : "rounded-sm"
+          }
+          entity={
+            affiliate.type === "individual"
               ? {
-                  entity_name: affiliate[`${type}_name`],
-                  entity_username: affiliate.group_handle,
-                  entity_current_Issue: affiliate[`${type}_currentIssue`],
+                  entity_name: affiliate.individual_name,
+                  entity_username: affiliate.individual_username,
+                  entity_current_Issue: affiliate.individual_currentIssue,
                 }
-              : {
-                  entity_name: affiliate[`${type}_name`],
-                  entity_username: affiliate.organization_handle,
-                  entity_current_Issue: affiliate[`${type}_currentIssue`],
-                }
-        }
-      />
-    ));
+              : affiliate.type === "group"
+                ? {
+                    entity_name: affiliate.group_name,
+                    entity_username: affiliate.group_handle,
+                    entity_current_Issue: affiliate.group_currentIssue,
+                  }
+                : {
+                    entity_name: affiliate.organization_name,
+                    entity_username: affiliate.organization_handle,
+                    entity_current_Issue: affiliate.organization_currentIssue,
+                  }
+          }
+        />
+      )),
+    );
+  }, [affiliates]);
 
   return (
     <>
       <div ref={topHeaderRef} className="flex items-center h-24">
         <div className="h-24 w-24">
           <ProfilePicture
-            size={{ h: 24, w: 24 }}
+            size={{ h: 6, w: 6 }}
             entity_id={entity_id}
-            type="rounded-full"
+            styles="rounded-full"
           />
         </div>
         <div className="ml-8 h-fit">
@@ -163,9 +228,7 @@ export default function EntityPageHeader({
                 : "100%",
             }}
           >
-            {renderProfilePictures(affiliates.individuals, "individual")}
-            {renderProfilePictures(affiliates.groups, "group")}
-            {renderProfilePictures(affiliates.organizations, "organization")}
+            {affiliatesProfilePictures}
           </div>
         </div>
       </div>

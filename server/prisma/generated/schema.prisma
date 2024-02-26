@@ -9,9 +9,10 @@ datasource db {
 }
 
 model affiliates_relations {
-  affiliate_relation_id String @id @unique(map: "affiliate_relation_id_UNIQUE") @db.Char(36)
-  affiliate_id_1        String @db.Char(36)
-  affiliate_id_2        String @db.Char(36)
+  affiliate_relation_id   String   @id @unique(map: "affiliate_relation_id_UNIQUE") @db.Char(36)
+  affiliate_id_1          String   @db.Char(36)
+  affiliate_id_2          String   @db.Char(36)
+  affiliate_relation_date DateTime @default(dbgenerated("'2000-01-01 00:00:00'")) @db.Timestamp(0)
 
   @@unique([affiliate_id_1, affiliate_id_2], map: "unique_affiliate_combination")
 }

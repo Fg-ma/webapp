@@ -30,11 +30,11 @@ interface ProfilePictureProps {
     h: number;
   };
   entity_id: string;
-  type: string;
+  styles: string;
   entity?: {
-    entity_name: string;
-    entity_username: string;
-    entity_current_Issue: string;
+    entity_name?: string;
+    entity_username?: string;
+    entity_current_Issue?: string;
   };
 }
 
@@ -63,7 +63,7 @@ interface Entity {
 export default function ProfilePicture({
   size,
   entity_id,
-  type,
+  styles,
   entity,
 }: ProfilePictureProps) {
   const [profilePictureData, setProfilePictureData] = useState({
@@ -203,11 +203,13 @@ export default function ProfilePicture({
 
   return (
     <div
-      className={`h-${size.h} w-${size.w} min-h-${size.h} min-w-${size.w} ${
-        type === "rounded-full" ? "rounded-full" : "none"
-      } ${type === "rounded-md" ? "rounded-md" : "none"} ${
-        type === "rounded-sm" ? "rounded-sm" : "none"
-      } overflow-hidden`}
+      className={`${styles} overflow-hidden cursor-pointer`}
+      style={{
+        height: `${size.h}rem`,
+        minHeight: `${size.h}rem`,
+        width: `${size.w}rem`,
+        minWidth: `${size.w}rem`,
+      }}
       onMouseEnter={(event) => startHoverTimer(event, entity)}
       onMouseLeave={() => cancelHoverTimer()}
       onMouseMove={(event) => {

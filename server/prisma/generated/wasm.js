@@ -110,7 +110,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.Affiliates_relationsScalarFieldEnum = {
   affiliate_relation_id: 'affiliate_relation_id',
   affiliate_id_1: 'affiliate_id_1',
-  affiliate_id_2: 'affiliate_id_2'
+  affiliate_id_2: 'affiliate_id_2',
+  affiliate_relation_date: 'affiliate_relation_date'
 };
 
 exports.Prisma.CollectionsScalarFieldEnum = {

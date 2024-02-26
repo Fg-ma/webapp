@@ -37,9 +37,9 @@ export function IndividualCard({
     >
       <div className="w-14 aspect-square ml-4 mr-5">
         <ProfilePicture
-          size={{ h: 14, w: 14 }}
+          size={{ h: 3.5, w: 3.5 }}
           entity_id={id}
-          type="rounded-full"
+          styles="rounded-full"
         />
       </div>
       <div className="m-2 truncate">
@@ -81,9 +81,9 @@ export function GroupCard({
     >
       <div className="w-16 aspect-square ml-4 mr-5">
         <ProfilePicture
-          size={{ h: 16, w: 16 }}
+          size={{ h: 4, w: 4 }}
           entity_id={id}
-          type="rounded-md"
+          styles="rounded-md"
         />
       </div>
       <div className="m-2 truncate">
@@ -128,9 +128,9 @@ export function OrganizationCard({
     >
       <div className="w-16 aspect-square ml-4 mr-5">
         <ProfilePicture
-          size={{ h: 16, w: 16 }}
+          size={{ h: 4, w: 4 }}
           entity_id={id}
-          type="rounded-md"
+          styles="rounded-md"
         />
       </div>
       <div className="m-2 h-full truncate">

@@ -27,32 +27,16 @@ router.get("/:collection_id", async (req, res) => {
   const collection_id = req.params.collection_id;
 
   try {
-    const collectionDetails = await req.db.$transaction([
-      req.db.collections_sheets.findMany({
-        where: {
-          collection_id: collection_id,
-        },
-        include: {
-          sheets: true,
-        },
-      }),
-      req.db.collections_videos.findMany({
-        where: {
-          collection_id: collection_id,
-        },
-        include: {
-          videos: true,
-        },
-      }),
-      req.db.collections_images.findMany({
-        where: {
-          collection_id: collection_id,
-        },
-        include: {
-          images: true,
-        },
-      }),
-    ]);
+    const collectionDetails = await req.db.collections_content.findMany({
+      where: {
+        collection_id: collection_id,
+      },
+      include: {
+        content: true,
+      },
+    });
+
+    console.log(collectionDetails);
 
     const result = collectionDetails
       .flatMap((item) =>
