@@ -11,7 +11,15 @@ const years = Array.from(
   (_, i) => 1999 + i,
 );
 
-export default function DateCenteredCaption(props) {
+interface DateCenteredCaption {
+  id?: string | undefined;
+  displayMonth: Date;
+  displayIndex?: number | undefined;
+  updateRangeStyles: () => void;
+  dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
+}
+
+export default function DateCenteredCaption(props: DateCenteredCaption) {
   /* 
     Description:   
       Creates the caption for the caption for the date range dropdown. Places the date centered 
@@ -28,14 +36,14 @@ export default function DateCenteredCaption(props) {
     props.displayMonth.getFullYear(),
   );
 
-  const handleDropMonthChange = (newMonthIndex) => {
+  const handleDropMonthChange = (newMonthIndex: number) => {
     props.updateRangeStyles();
     setSelectedMonth(newMonthIndex);
     const newDate = new Date(selectedYear, newMonthIndex);
     goToMonth(newDate);
   };
 
-  const handleDropYearChange = (newYearIndex) => {
+  const handleDropYearChange = (newYearIndex: number) => {
     props.updateRangeStyles();
     const newYear = years[newYearIndex];
     setSelectedYear(newYear);

@@ -7,7 +7,7 @@ import {
   setDateRange,
 } from "@redux/filters/filterActions";
 import AdvancedFilterDropdown from "@components/advancedFilterDropdown/AdvancedFilterDropdown";
-import AdvancedDateRange from "@components/dateRange/AdvancedDateRange";
+import AdvancedDateRange from "@components/dateRangePicker/DateRangePicker";
 
 interface MiddleAdvancedSearchFilterProps {
   handleFilterFormChange: (event: ChangeEvent<HTMLInputElement>) => void;

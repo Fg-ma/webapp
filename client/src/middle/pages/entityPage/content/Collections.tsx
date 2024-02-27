@@ -17,30 +17,46 @@ interface CollectionsProps {
 
 interface CollectionItem {
   collection_id: string;
-  collections_images_id: string | null;
-  collections_sheets_id: string | null;
-  collections_videos_id: string | null;
+  collections_content_id: string;
+  content: {
+    content_id: string;
+    content_type: number;
+  };
+  content_data: {
+    sheet_author_id?: string;
+    sheet_data_id?: string;
+    sheet_date_posted?: string;
+    sheet_dislikes?: number;
+    sheet_filename?: string;
+    sheet_id?: string;
+    sheet_likes?: number;
+    sheet_subject?: string;
+    sheet_title?: string;
+    sheet_views?: number;
+    image_creator_id?: string;
+    image_data_id?: string;
+    image_date_posted?: string;
+    image_description?: string;
+    image_dislikes?: number;
+    image_filename?: string;
+    image_id?: string;
+    image_likes?: number;
+    image_title?: string;
+    image_views?: number;
+    video_creator_id?: string;
+    video_data_id?: string;
+    video_date_posted?: string;
+    video_description?: string;
+    video_dislikes?: number;
+    video_filename?: "test.mkv";
+    video_id?: string;
+    video_likes?: number;
+    video_title?: string;
+    video_views?: number;
+  };
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
-  image_creator_id?: string;
-  sheet_author_id?: string;
-  video_creator_id?: string;
-  image_data_id?: string;
-  sheet_data_id?: string;
-  video_data_id?: string;
-  image_description?: string;
-  sheet_subject?: string;
-  video_description?: string;
-  image_filename?: string;
-  sheet_filename?: string;
-  video_filename?: string;
-  image_id?: string;
-  sheet_id?: string;
-  video_id?: string;
-  image_title?: string;
-  sheet_title?: string;
-  video_title?: string;
 }
 
 export default function Collections({
@@ -99,7 +115,7 @@ export default function Collections({
           const updatedData = prevData.map((item) => {
             if (
               relation === "sheet" &&
-              item.collections_sheets_id === relation_id
+              item.collections_content_id === relation_id
             ) {
               return {
                 ...item,
@@ -108,7 +124,7 @@ export default function Collections({
               };
             } else if (
               relation === "video" &&
-              item.collections_videos_id === relation_id
+              item.collections_content_id === relation_id
             ) {
               return {
                 ...item,
@@ -117,7 +133,7 @@ export default function Collections({
               };
             } else if (
               relation === "image" &&
-              item.collections_images_id === relation_id
+              item.collections_content_id === relation_id
             ) {
               return {
                 ...item,
@@ -141,6 +157,7 @@ export default function Collections({
         const response = await Axios.get(
           `${serverUrl}/collections/${collection_id}`,
         );
+
         setCollectionData(sortData(response.data));
       } catch (error) {
         console.error("Error fetching image data:", error);
@@ -152,47 +169,54 @@ export default function Collections({
 
   // Maps the collection data into the appropriate places
   const collection = collectionData.map((item) => {
-    if (socketRef.current && item.sheet_id && item.collections_sheets_id) {
+    if (
+      socketRef.current &&
+      item.content.content_type === 1 &&
+      item.content_data.sheet_id &&
+      item.collections_content_id
+    ) {
       return (
         <Sheet
-          key={`collectionSheet_${item.sheet_id}`}
+          key={`collectionSheet_${item.content_data.sheet_id}`}
           type={"collection"}
-          sheet_id={item.sheet_id}
+          sheet_id={item.content_data.sheet_id}
           author_id={entity_id}
           pinned={item.pinned}
-          relation_id={item.collections_sheets_id}
+          relation_id={item.collections_content_id}
           socket={socketRef.current}
           isEditablePage={isEditablePage}
         />
       );
     } else if (
       socketRef.current &&
-      item.image_id &&
-      item.collections_images_id
+      item.content.content_type === 2 &&
+      item.content_data.image_id &&
+      item.collections_content_id
     ) {
       return (
         <Image
-          key={`collectionImage_${item.image_id}`}
+          key={`collectionImage_${item.content_data.image_id}`}
           type={"collection"}
-          image_id={item.image_id}
+          image_id={item.content_data.image_id}
           pinned={item.pinned}
-          relation_id={item.collections_images_id}
+          relation_id={item.collections_content_id}
           socket={socketRef.current}
           isEditablePage={isEditablePage}
         />
       );
     } else if (
       socketRef.current &&
-      item.video_id &&
-      item.collections_videos_id
+      item.content.content_type === 3 &&
+      item.content_data.video_id &&
+      item.collections_content_id
     ) {
       return (
         <Video
-          key={`collectionVideo_${item.video_id}`}
+          key={`collectionVideo_${item.content_data.video_id}`}
           type={"collection"}
-          video_id={item.video_id}
+          video_id={item.content_data.video_id}
           pinned={item.pinned}
-          relation_id={item.collections_videos_id}
+          relation_id={item.collections_content_id}
           socket={socketRef.current}
           isEditablePage={isEditablePage}
         />

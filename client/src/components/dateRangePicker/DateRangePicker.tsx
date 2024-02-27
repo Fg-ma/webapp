@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import { setDateRange } from "@redux/filters/filterActions";
 import { useDispatch } from "react-redux";
 import DateCenteredCaption from "./DateCenterCaption";
@@ -22,7 +22,7 @@ const css = `
     color: #F56114;
   }
 
-  .custom-picker .selected {
+  .customDateRangePicker .selected {
     position: relative;
     font-weight: bold;
     color: white;
@@ -32,7 +32,7 @@ const css = `
   }
 `;
 
-const dateRangeVar = {
+const dateRangeVar: Variants = {
   middleInit: {
     opacity: 0,
     y: "-1vh",
@@ -45,21 +45,46 @@ const dateRangeVar = {
     opacity: 1,
     y: 0,
   },
-  transition: {
-    duration: 0.25,
-    ease: "easeOut",
-    delay: 0.275,
-  },
 };
 
-export default function AdvancedDateRange({
+const transition: Transition = {
+  duration: 0.25,
+  ease: "easeOut",
+  delay: 0.275,
+};
+
+interface AdvancedDateRangeProps {
+  filter: string;
+  position: {
+    top?: number;
+    bottom?: number;
+    left: number;
+  };
+  selectedRange: {
+    from: string | object;
+    to: string | object;
+  };
+  setSelectedRange: React.Dispatch<
+    React.SetStateAction<{
+      from: string | object;
+      to: string | object;
+    }>
+  >;
+  updateRangeStyles: () => void;
+  refs: {
+    dateRange: React.RefObject<HTMLDivElement>;
+    dateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
+  };
+}
+
+export default function DateRangePicker({
   filter,
   position,
   selectedRange,
   setSelectedRange,
   updateRangeStyles,
   refs,
-}) {
+}: AdvancedDateRangeProps) {
   /* 
     Description:   
       Creates the date range dropdown via create portal with the date range picker in it.
@@ -69,18 +94,18 @@ export default function AdvancedDateRange({
 
   const dispatch = useDispatch();
 
-  function isValidDateFormat(dateString) {
+  function isValidDateFormat(date: string) {
     const regex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
-    return regex.test(dateString);
+    return regex.test(date);
   }
 
-  const toDateString = (date) => {
+  const toDateString = (date: string) => {
     const inputDateString = String(date).substring(4, 15);
     // Create a Date object from the input string
     const dateObject = new Date(inputDateString);
 
     // Check if the dateObject is a valid date
-    if (isNaN(dateObject.getTime()) && isValidDateFormat(date)) {
+    if (isNaN(dateObject.getTime()) && isValidDateFormat(String(date))) {
       return date;
     }
 
@@ -95,18 +120,18 @@ export default function AdvancedDateRange({
     return formattedDateString;
   };
 
-  const handleDayClick = (day) => {
+  const handleDayClick = (day: object) => {
     if (!selectedRange.from || (selectedRange.from && selectedRange.to)) {
       setSelectedRange({ from: day, to: "" });
-      dispatch(setDateRange(filter, toDateString(day), ""));
+      dispatch(setDateRange(filter, toDateString(String(day)), ""));
     } else {
-      if (day < selectedRange.from) {
+      if (String(day) < selectedRange.from) {
         setSelectedRange({ from: day, to: selectedRange.from });
         dispatch(
           setDateRange(
             filter,
-            toDateString(day),
-            toDateString(selectedRange.from),
+            toDateString(String(day)),
+            toDateString(String(selectedRange.from)),
           ),
         );
       } else {
@@ -114,8 +139,8 @@ export default function AdvancedDateRange({
         dispatch(
           setDateRange(
             filter,
-            toDateString(selectedRange.from),
-            toDateString(day),
+            toDateString(String(selectedRange.from)),
+            toDateString(String(day)),
           ),
         );
       }
@@ -136,18 +161,18 @@ export default function AdvancedDateRange({
                 bottom: `${position.bottom}px`,
                 left: `${position.left}px`,
               }
-          : null
+          : {}
       }
       ref={refs.dateRange}
       variants={dateRangeVar}
       initial={filter === "middle" ? "middleInit" : "rightInit"}
       animate="animate"
       exit={filter === "middle" ? "middleInit" : "rightInit"}
-      transition="transition"
+      transition={transition}
     >
       <style>{css}</style>
       <DayPicker
-        selected={selectedRange}
+        selected={selectedRange as any}
         components={{
           Caption: ({ ...props }) => (
             <DateCenteredCaption
@@ -159,7 +184,7 @@ export default function AdvancedDateRange({
         }}
         mode="range"
         onDayClick={handleDayClick}
-        className="custom-picker"
+        className="customDateRangePicker"
         modifiersClassNames={{
           selected: "selected",
           today: "today",

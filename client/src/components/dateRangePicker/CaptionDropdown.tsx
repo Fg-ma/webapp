@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 
+interface CaptionDropdownProps {
+  options: number[] | string[];
+  value: number;
+  onChange:
+    | ((newMonthIndex: number) => void)
+    | ((newYearIndex: number) => void);
+  type: string;
+  dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
+}
+
 export default function CaptionDropdown({
   options,
   value,
   onChange,
   type,
   dateRangeCaptionDropdownRef,
-}) {
+}: CaptionDropdownProps) {
   /* 
     Description:   
       Creates the month and year dropdowns for the caption of the date range dropdown.
@@ -15,21 +25,24 @@ export default function CaptionDropdown({
   */
 
   const [isCaptionDropOpen, setIsCaptionDropOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
     setIsCaptionDropOpen(!isCaptionDropOpen);
   };
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: number) => {
     setTimeout(() => {
       onChange(option);
       setIsCaptionDropOpen(false);
     }, 0);
   };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsCaptionDropOpen(false);
     }
   };

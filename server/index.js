@@ -11,7 +11,7 @@ const { socket } = require("./socket");
 const individualsRouter = require("./routes/individuals");
 const groupsRouter = require("./routes/groups");
 const organizationsRouter = require("./routes/organizations");
-const sheetsRouter = require("./routes/sheets");
+const sheetsRouter = require("./routes/sheets.ts");
 const videosRouter = require("./routes/videos");
 const imagesRouter = require("./routes/images");
 const collectionsRouter = require("./routes/collections");
@@ -39,55 +39,6 @@ app.use("/entities", entitiesRouter);
 app.use("/references", referencesRouter);
 app.use("/auth", authRouter);
 app.use("/affiliateRelations", affiliateRelations);
-
-//const verifyToken = require("./routes/verifyJWT");
-//app.get("/get_user_profile_picture", verifyToken, async (req, res) => {
-//  try {
-//    const entity = await req.db.entities.findUnique({
-//      where: {
-//        entity_id: req.user.user_id,
-//      },
-//    });
-//
-//    let profilePictureId;
-//
-//    if (entity.entity_type === 1) {
-//      profilePictureId = await req.db.individuals.findUnique({
-//        where: {
-//          individual_id: req.user.user_id,
-//        },
-//      });
-//    } else if (entity.entity_type === 2) {
-//      profilePictureId = await req.db.groups.findUnique({
-//        where: {
-//          group_id: req.user.user_id,
-//        },
-//      });
-//    } else if (entity.entity_type === 3) {
-//      profilePictureId = await req.db.organizations.findUnique({
-//        where: {
-//          organization_id: req.user.user_id,
-//        },
-//      });
-//    }
-//
-//    const profilePicture = await req.db.profile_pictures.findUnique({
-//      where: {
-//        profile_picture_id: profilePictureId.profile_picture_id,
-//      },
-//    });
-//
-//    if (!profilePicture) {
-//      res.status(404).send(null);
-//      return;
-//    }
-//
-//    res.send(profilePicture);
-//  } catch (error) {
-//    console.error(error);
-//    res.status(500).send("Internal Server Error");
-//  }
-//});
 
 app.put("/sheets_updating", upload.single("file"), (req, res) => {
   const id = req.query.id;

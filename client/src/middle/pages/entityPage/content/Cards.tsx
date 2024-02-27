@@ -87,7 +87,7 @@ export function Sheet({
 
     try {
       if (type === "collection") {
-        await Axios.put(`${serverUrl}/collections/collections_sheets_pinned`, {
+        await Axios.put(`${serverUrl}/collections/collections_content_pinned`, {
           relation_id: relation_id,
           pinned: newPinned,
           date_pinned: date_pinned,
@@ -243,7 +243,7 @@ export function Video({
 
     try {
       if (type === "collection") {
-        await Axios.put(`${serverUrl}/collections/collections_videos_pinned`, {
+        await Axios.put(`${serverUrl}/collections/collections_content_pinned`, {
           relation_id: relation_id,
           pinned: newPinned,
           date_pinned: date_pinned,
@@ -430,7 +430,7 @@ export function Image({
 
     try {
       if (type === "collection") {
-        await Axios.put(`${serverUrl}/collections/collections_images_pinned`, {
+        await Axios.put(`${serverUrl}/collections/collections_content_pinned`, {
           relation_id: relation_id,
           pinned: newPinned,
           date_pinned: date_pinned,

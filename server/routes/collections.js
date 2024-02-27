@@ -27,7 +27,7 @@ router.get("/:collection_id", async (req, res) => {
   const collection_id = req.params.collection_id;
 
   try {
-    const collectionDetails = await req.db.collections_content.findMany({
+    const collections = await req.db.collections_content.findMany({
       where: {
         collection_id: collection_id,
       },
@@ -36,29 +36,45 @@ router.get("/:collection_id", async (req, res) => {
       },
     });
 
-    console.log(collectionDetails);
+    const collectionsData = [];
 
-    const result = collectionDetails
-      .flatMap((item) =>
-        item.map((relation) => {
-          return {
-            collection_id: relation.collection_id,
-            collections_sheets_id: relation.collections_sheets_id || null,
-            collections_videos_id: relation.collections_videos_id || null,
-            collections_images_id: relation.collections_images_id || null,
-            collection_name: relation.collection_name,
-            date_added: relation.date_added,
-            pinned: relation.pinned,
-            date_pinned: relation.date_pinned,
-            ...relation.sheets,
-            ...relation.videos,
-            ...relation.images,
-          };
-        })
-      )
-      .filter(Boolean);
+    for (const collection of collections) {
+      if (collection.content.content_type === 1) {
+        const content_data = await req.db.sheets.findUnique({
+          where: {
+            sheet_id: collection.content_id,
+          },
+        });
+        collectionsData.push({
+          ...collection,
+          content_data: { ...content_data },
+        });
+      } else if (collection.content.content_type === 2) {
+        const content_data = await req.db.images.findUnique({
+          where: {
+            image_id: collection.content_id,
+          },
+        });
 
-    res.send(result);
+        collectionsData.push({
+          ...collection,
+          content_data: { ...content_data },
+        });
+      } else if (collection.content.content_type === 3) {
+        const content_data = await req.db.videos.findUnique({
+          where: {
+            video_id: collection.content_id,
+          },
+        });
+
+        collectionsData.push({
+          ...collection,
+          content_data: { ...content_data },
+        });
+      }
+    }
+
+    res.send(collectionsData);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -66,13 +82,13 @@ router.get("/:collection_id", async (req, res) => {
 });
 
 // Set a collection's sheet as pinned or not pinned
-router.put("/collections_sheets_pinned", async (req, res) => {
+router.put("/collections_content_pinned", async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
-    const result = await req.db.collections_sheets.update({
+    const result = await req.db.collections_content.update({
       where: {
-        collections_sheets_id: relation_id,
+        collections_content_id: relation_id,
       },
       data: {
         pinned: pinned,
