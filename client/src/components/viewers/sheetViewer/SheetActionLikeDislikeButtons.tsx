@@ -80,35 +80,36 @@ export default function SheetActionLikeDislikeButtons({
   useEffect(() => {
     setLikes(sheetData.sheet_likes);
     setDislikes(sheetData.sheet_dislikes);
-  }, []);
+    setLikeDislikeState({ like: false, dislike: false });
+  }, [sheet_id, sheetData]);
+
+  const fetchLikesDislikes = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        return;
+      }
+
+      const response = await Axios.get(
+        `${serverUrl}/sheets/does_like_or_dislike/${sheet_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      setLikeDislikeState(response.data);
+    } catch (error) {
+      console.error("Error fetching entity data:", error);
+    }
+  };
 
   // Updates whether or not the user likes the displayed sheet
   useEffect(() => {
-    const fetchLikesDislikes = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          return;
-        }
-
-        const response = await Axios.get(
-          `${serverUrl}/sheets/does_like_or_dislike/${sheet_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        setLikeDislikeState(response.data);
-      } catch (error) {
-        console.error("Error fetching entity data:", error);
-      }
-    };
-
     fetchLikesDislikes();
-  }, [likes, dislikes]);
+  }, [likes, dislikes, sheet_id]);
 
   const handleLike = async () => {
     const token = localStorage.getItem("token");

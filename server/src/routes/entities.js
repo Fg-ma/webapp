@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("./verifyJWT");
+const verifyToken = require("./verifyJWT.js");
 
 // Get entity data from entity type and entity id
 router.get("/entity", verifyToken, async (req, res) => {

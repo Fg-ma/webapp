@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { v4: uuid } = require("uuid");
 const verifyToken = require("./verifyJWT");
+const prismaMiddleware = require("../prismaMiddleware.ts");
+
+router.use(prismaMiddleware);
 
 // Route to get all sheets
 router.get("/", async (req, res) => {

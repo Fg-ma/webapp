@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("./verifyJWT");
+const verifyToken = require("./verifyJWT.js");
 
 // Route to get all organizations
 router.get("/", async (req, res) => {

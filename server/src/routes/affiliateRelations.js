@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("./verifyJWT");
+const verifyToken = require("./verifyJWT.js");
 
 // Route to get all the affiliated entities with a certian entity id
 router.get("/get_affiliated_entities", verifyToken, async (req, res) => {

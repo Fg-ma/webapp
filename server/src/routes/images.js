@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("./verifyJWT");
+const verifyToken = require("./verifyJWT.js");
 
 // Route to get profile picture of an entity
 router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
