@@ -1,10 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const { v4: uuid } = require("uuid");
-const verifyToken = require("./verifyJWT");
-const prismaMiddleware = require("../prismaMiddleware.ts");
-
-router.use(prismaMiddleware);
+import { v4 as uuid } from "uuid";
+import verifyToken from "./verifyJWT";
+import type { FullSheet } from "@FgTypes/types";
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
@@ -50,7 +48,7 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
       },
     });
 
-    const getSheetAuthor = async (fullSheet) => {
+    const getSheetAuthor = async (fullSheet: FullSheet) => {
       if (fullSheet.entities.entity_type === 1) {
         return await req.db.individuals.findUnique({
           where: {
@@ -96,7 +94,7 @@ router.post("/like/:sheet_id", verifyToken, async (req, res) => {
   try {
     const existingLikeRelationship = await req.db.entities_likes.findFirst({
       where: {
-        entity_id: req.user.user_id,
+        entity_id: req.user?.user_id,
         content_id: sheet_id,
       },
     });
@@ -104,7 +102,7 @@ router.post("/like/:sheet_id", verifyToken, async (req, res) => {
     const existingDislikeRelationship =
       await req.db.entities_dislikes.findFirst({
         where: {
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -113,7 +111,7 @@ router.post("/like/:sheet_id", verifyToken, async (req, res) => {
       await req.db.entities_likes.create({
         data: {
           like_id: uuid(),
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -121,7 +119,7 @@ router.post("/like/:sheet_id", verifyToken, async (req, res) => {
       await req.db.entities_likes.create({
         data: {
           like_id: uuid(),
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -161,7 +159,7 @@ router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
   try {
     const existingLikeRelationship = await req.db.entities_likes.findFirst({
       where: {
-        entity_id: req.user.user_id,
+        entity_id: req.user?.user_id,
         content_id: sheet_id,
       },
     });
@@ -169,7 +167,7 @@ router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
     const existingDislikeRelationship =
       await req.db.entities_dislikes.findFirst({
         where: {
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -178,7 +176,7 @@ router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
       await req.db.entities_dislikes.create({
         data: {
           dislike_id: uuid(),
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -186,7 +184,7 @@ router.post("/dislike/:sheet_id", verifyToken, async (req, res) => {
       await req.db.entities_dislikes.create({
         data: {
           dislike_id: uuid(),
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -226,7 +224,7 @@ router.get("/does_like_or_dislike/:sheet_id", verifyToken, async (req, res) => {
   try {
     const like = await req.db.entities_likes.findFirst({
       where: {
-        entity_id: req.user.user_id,
+        entity_id: req.user?.user_id,
         content_id: sheet_id,
       },
     });
@@ -236,7 +234,7 @@ router.get("/does_like_or_dislike/:sheet_id", verifyToken, async (req, res) => {
     } else {
       const dislike = await req.db.entities_dislikes.findFirst({
         where: {
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
           content_id: sheet_id,
         },
       });
@@ -253,4 +251,4 @@ router.get("/does_like_or_dislike/:sheet_id", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

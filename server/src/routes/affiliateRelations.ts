@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("./verifyJWT.js");
+import verifyToken from "./verifyJWT";
+import type { ids } from "@FgTypes/types";
 
 // Route to get all the affiliated entities with a certian entity id
 router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
@@ -10,7 +11,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     let user_id;
 
     if (entity_id === "user") {
-      user_id = req.user.user_id;
+      user_id = req.user?.user_id;
     } else {
       user_id = entity_id;
     }
@@ -31,18 +32,20 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       }
     }
 
-    const individual_ids = await req.db.entities.findMany({
+    const individualIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 1 },
       select: {
         entity_id: true,
       },
     });
 
-    const individual_ids_list = individual_ids.map((entry) => entry.entity_id);
+    const individualIdsList = individualIds.map(
+      (entry: ids) => entry.entity_id
+    );
 
     const individuals = [];
 
-    for (const ind_id of individual_ids_list) {
+    for (const ind_id of individualIdsList) {
       const individual = await req.db.individuals.findUnique({
         where: { individual_id: ind_id },
       });
@@ -65,18 +68,18 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       });
     }
 
-    const group_ids = await req.db.entities.findMany({
+    const groupIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 2 },
       select: {
         entity_id: true,
       },
     });
 
-    const group_ids_list = group_ids.map((entry) => entry.entity_id);
+    const groupIdsList = groupIds.map((entry: ids) => entry.entity_id);
 
     const groups = [];
 
-    for (const grp_id of group_ids_list) {
+    for (const grp_id of groupIdsList) {
       const group = await req.db.groups.findUnique({
         where: { group_id: grp_id },
       });
@@ -99,20 +102,20 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       });
     }
 
-    const organization_ids = await req.db.entities.findMany({
+    const organizationIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 3 },
       select: {
         entity_id: true,
       },
     });
 
-    const organization_ids_list = organization_ids.map(
-      (entry) => entry.entity_id
+    const organizationIdsList = organizationIds.map(
+      (entry: ids) => entry.entity_id
     );
 
     const organizations = [];
 
-    for (const org_id of organization_ids_list) {
+    for (const org_id of organizationIdsList) {
       const organization = await req.db.organizations.findUnique({
         where: { organization_id: org_id },
       });
@@ -150,7 +153,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 // Route to get all the affiliated individuals with a certian entity id
 router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user.user_id;
+    const user_id = req.user?.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
@@ -168,17 +171,19 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
       }
     }
 
-    const individual_ids = await req.db.entities.findMany({
+    const individualIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 1 },
       select: {
         entity_id: true,
       },
     });
 
-    const individual_ids_list = individual_ids.map((entry) => entry.entity_id);
+    const individualIdsList = individualIds.map(
+      (entry: ids) => entry.entity_id
+    );
 
     const individuals = await req.db.individuals.findMany({
-      where: { individual_id: { in: individual_ids_list } },
+      where: { individual_id: { in: individualIdsList } },
     });
 
     res.send(individuals);
@@ -191,7 +196,7 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 // Route to get all the affiliated groups with a certian entity id
 router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user.user_id;
+    const user_id = req.user?.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
@@ -209,17 +214,17 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
       }
     }
 
-    const group_ids = await req.db.entities.findMany({
+    const groupIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 2 },
       select: {
         entity_id: true,
       },
     });
 
-    const group_ids_list = group_ids.map((entry) => entry.entity_id);
+    const groupIdsList = groupIds.map((entry: ids) => entry.entity_id);
 
     const groups = await req.db.groups.findMany({
-      where: { group_id: { in: group_ids_list } },
+      where: { group_id: { in: groupIdsList } },
     });
 
     res.send(groups);
@@ -232,7 +237,7 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
 // Route to get all the affiliated organizations with a certian entity id
 router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user.user_id;
+    const user_id = req.user?.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
@@ -250,19 +255,19 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
       }
     }
 
-    const organization_ids = await req.db.entities.findMany({
+    const organizationIds = await req.db.entities.findMany({
       where: { entity_id: { in: entity_ids }, entity_type: 3 },
       select: {
         entity_id: true,
       },
     });
 
-    const organization_ids_list = organization_ids.map(
-      (entry) => entry.entity_id
+    const organizationIdsList = organizationIds.map(
+      (entry: ids) => entry.entity_id
     );
 
     const organizations = await req.db.organizations.findMany({
-      where: { organization_id: { in: organization_ids_list } },
+      where: { organization_id: { in: organizationIdsList } },
     });
 
     res.send(organizations);
@@ -272,4 +277,4 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

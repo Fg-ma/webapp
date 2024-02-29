@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 // Get collection names and ids from entity id
@@ -147,4 +147,4 @@ router.put("/collections_images_pinned", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

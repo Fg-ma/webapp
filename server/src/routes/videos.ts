@@ -1,5 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
+import type { FullVideo } from "@FgTypes/types";
 
 // Route to get a video by ID
 router.get("/:video_id", async (req, res) => {
@@ -39,7 +40,7 @@ router.get("/get_full_video/:video_id", async (req, res) => {
       },
     });
 
-    const getVideoCreator = async (fullVideo) => {
+    const getVideoCreator = async (fullVideo: FullVideo) => {
       if (fullVideo.entities.entity_type === 1) {
         return await req.db.individuals.findUnique({
           where: {
@@ -78,4 +79,4 @@ router.get("/get_full_video/:video_id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,6 +1,15 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("./verifyJWT.js");
+import verifyToken from "./verifyJWT";
+import type {
+  EntityContent,
+  SheetContent,
+  MergedSheetData,
+  VideoContent,
+  MergedVideoData,
+  ImageContent,
+  MergedImageData,
+} from "@FgTypes/types";
 
 // Get entity data from entity type and entity id
 router.get("/entity", verifyToken, async (req, res) => {
@@ -9,7 +18,7 @@ router.get("/entity", verifyToken, async (req, res) => {
   try {
     const entities = await req.db.entities.findMany({
       where: {
-        entity_id: entity_id === "user" ? req.user.user_id : entity_id,
+        entity_id: entity_id === "user" ? req.user?.user_id : entity_id,
       },
     });
 
@@ -58,12 +67,15 @@ router.get("/entity_sheets/:entity_id", async (req, res) => {
       },
     });
 
-    function mergeData(allEntityContent, sheetContent) {
-      const mergedData = [];
+    function mergeData(
+      allEntityContent: EntityContent[],
+      sheetContent: SheetContent[]
+    ) {
+      const mergedData: MergedSheetData[] = [];
 
-      allEntityContent.forEach((entityContent) => {
+      allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingSheetContent = sheetContent.find(
-          (sheet) => sheet.sheet_id === entityContent.content_id
+          (sheet: SheetContent) => sheet.sheet_id === entityContent.content_id
         );
         if (matchingSheetContent) {
           const mergedObject = { ...entityContent, ...matchingSheetContent };
@@ -104,13 +116,16 @@ router.get("/entity_videos/:entity_id", async (req, res) => {
         content_id: videoEntityContent.content_id,
       },
     });
+    console.log(videoContent);
+    function mergeData(
+      allEntityContent: EntityContent[],
+      videoContent: VideoContent[]
+    ) {
+      const mergedData: MergedVideoData[] = [];
 
-    function mergeData(allEntityContent, videoContent) {
-      const mergedData = [];
-
-      allEntityContent.forEach((entityContent) => {
+      allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingVideoContent = videoContent.find(
-          (video) => video.video_id === entityContent.content_id
+          (video: VideoContent) => video.video_id === entityContent.content_id
         );
         if (matchingVideoContent) {
           const mergedObject = { ...entityContent, ...matchingVideoContent };
@@ -152,12 +167,15 @@ router.get("/entity_images/:entity_id", async (req, res) => {
       },
     });
 
-    function mergeData(allEntityContent, imageContent) {
-      const mergedData = [];
+    function mergeData(
+      allEntityContent: EntityContent[],
+      imageContent: ImageContent[]
+    ) {
+      const mergedData: MergedImageData[] = [];
 
-      allEntityContent.forEach((entityContent) => {
+      allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingImageContent = imageContent.find(
-          (image) => image.image_id === entityContent.content_id
+          (image: ImageContent) => image.image_id === entityContent.content_id
         );
         if (matchingImageContent) {
           const mergedObject = { ...entityContent, ...matchingImageContent };
@@ -190,7 +208,7 @@ router.put("/entity_content_pinned", verifyToken, async (req, res) => {
       return;
     }
 
-    if (searchResult.entity_id !== req.user.user_id) {
+    if (searchResult.entity_id !== req.user?.user_id) {
       return;
     }
 
@@ -211,4 +229,4 @@ router.put("/entity_content_pinned", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

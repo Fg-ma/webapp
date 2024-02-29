@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("./verifyJWT.js");
+import verifyToken from "./verifyJWT";
 
 router.get("/", verifyToken, async (req, res) => {
   const entity_id = req.query.entity_id;
@@ -8,7 +8,7 @@ router.get("/", verifyToken, async (req, res) => {
   try {
     const entitiesReferences = await req.db.entities_references.findMany({
       where: {
-        entity_id: entity_id === "user" ? req.user.user_id : entity_id,
+        entity_id: entity_id === "user" ? req.user?.user_id : entity_id,
       },
     });
 
@@ -19,4 +19,4 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

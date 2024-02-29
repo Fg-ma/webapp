@@ -81,6 +81,11 @@ export default function SheetActionLikeDislikeButtons({
     setLikes(sheetData.sheet_likes);
     setDislikes(sheetData.sheet_dislikes);
     setLikeDislikeState({ like: false, dislike: false });
+  }, []);
+
+  useEffect(() => {
+    setLikes(sheetData.sheet_likes);
+    setDislikes(sheetData.sheet_dislikes);
   }, [sheet_id, sheetData]);
 
   const fetchLikesDislikes = async () => {
@@ -108,6 +113,7 @@ export default function SheetActionLikeDislikeButtons({
 
   // Updates whether or not the user likes the displayed sheet
   useEffect(() => {
+    setLikeDislikeState({ like: false, dislike: false });
     fetchLikesDislikes();
   }, [likes, dislikes, sheet_id]);
 

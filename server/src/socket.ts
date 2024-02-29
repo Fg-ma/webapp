@@ -1,7 +1,8 @@
-const { Server } = require("socket.io");
+import { Server as HttpServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
 
-function socket(server) {
-  const io = new Server(server, {
+function socket(server: HttpServer) {
+  const io = new SocketIOServer(server, {
     cors: {
       origin: ["http://localhost:5000"],
       methods: ["GET", "POST"],
@@ -26,4 +27,4 @@ function socket(server) {
   });
 }
 
-module.exports = { socket };
+export default socket;

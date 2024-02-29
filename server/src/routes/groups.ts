@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("./verifyJWT.js");
+import verifyToken from "./verifyJWT";
 
 // Route to get all groups
 router.get("/", async (req, res) => {
@@ -20,7 +20,7 @@ router.get("/:group_id", verifyToken, async (req, res) => {
   try {
     const group = await req.db.groups.findUnique({
       where: {
-        group_id: group_id === "user" ? req.user.user_id : group_id,
+        group_id: group_id === "user" ? req.user?.user_id : group_id,
       },
     });
 
@@ -36,4 +36,4 @@ router.get("/:group_id", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

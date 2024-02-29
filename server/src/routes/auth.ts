@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const verifyToken = require("./verifyJWT.js");
+import bcrypt from "bcrypt";
+import jwt, { Secret } from "jsonwebtoken";
+import verifyToken from "./verifyJWT";
 
 router.post("/register", async (req, res) => {
   const { newUserUsername, newUserPassword } = req.body;
@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
 
     const token = jwt.sign(
       { username: newUser.username },
-      process.env.TOKEN_KEY,
+      process.env.TOKEN_KEY as Secret,
       { expiresIn: process.env.TOKEN_TIME_OUT }
     );
     res.status(201).json({ success: true, token });
@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
       if (match) {
         const token = jwt.sign(
           { user_id: user.user_id, username: user.username },
-          process.env.TOKEN_KEY,
+          process.env.TOKEN_KEY as Secret,
           { expiresIn: process.env.TOKEN_TIME_OUT }
         );
         res.json({ success: true, token });
@@ -65,4 +65,4 @@ router.post("/validate_token", verifyToken, (req, res) => {
   res.json({ message: "Token is valid" });
 });
 
-module.exports = router;
+export default router;

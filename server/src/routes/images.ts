@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("./verifyJWT.js");
+import verifyToken from "./verifyJWT";
+import type { FullImage } from "@FgTypes/types";
 
 // Route to get profile picture of an entity
 router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
@@ -11,7 +12,7 @@ router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
     if (entity_id === "user") {
       entity = await req.db.entities.findUnique({
         where: {
-          entity_id: req.user.user_id,
+          entity_id: req.user?.user_id,
         },
       });
     } else {
@@ -99,7 +100,7 @@ router.get("/get_full_image/:image_id", async (req, res) => {
       },
     });
 
-    const getImageCreator = async (fullImage) => {
+    const getImageCreator = async (fullImage: FullImage) => {
       if (fullImage.entities.entity_type === 1) {
         return await req.db.individuals.findUnique({
           where: {
@@ -138,4 +139,4 @@ router.get("/get_full_image/:image_id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
