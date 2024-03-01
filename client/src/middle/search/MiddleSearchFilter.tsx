@@ -8,6 +8,10 @@ import {
   clearFilterOptions,
   cancelFilterChanges,
 } from "@redux/filters/filterActions";
+import {
+  MiddleSearchFilterProps,
+  MiddleFilterState,
+} from "@FgTypes/middleTypes";
 import MiddleAddAdvancedSearchFilter from "./MiddleAddAdvancedSearchFilter";
 import MiddleAdvancedSearchFilter from "./MiddleAdvancedSearchFilter";
 import Checkbox from "@components/checkbox/Checkbox";
@@ -29,45 +33,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface MiddleSearchFilterProps {
-  refs: {
-    middleSpaceFilter: React.RefObject<HTMLDivElement>;
-    middleAddAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    middleAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    middleDateRange: React.RefObject<HTMLDivElement>;
-    middleDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
-    middleAdvancedFilterDropdownDropRef: React.RefObject<HTMLDivElement>;
-    middleAdvancedSearchFilterContainer?: React.RefObject<HTMLDivElement>;
-  };
-}
-
-interface MiddleFilterState {
-  filters: {
-    middle: {
-      filterPayload: {
-        isWhatsCurrent: boolean;
-        isAffiliateActivity: boolean;
-        isAllTimeGreats: boolean;
-        isDatePosted: boolean;
-        isDatePostedSwitched: boolean;
-        isPopularity: boolean;
-        isPopularitySwitched: boolean;
-        isAdvancedSearch: boolean;
-        affiliatedFilters: {
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-        author: string;
-        dateRange: {
-          from: string;
-          to: string;
-        };
-      };
-    };
-  };
-}
 
 export default function MiddleSearchFilter({ refs }: MiddleSearchFilterProps) {
   /* 

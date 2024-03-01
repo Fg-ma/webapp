@@ -7,7 +7,7 @@ import {
   setDateRange,
 } from "@redux/filters/filterActions";
 import AdvancedFilterDropdown from "@components/advancedFilterDropdown/AdvancedFilterDropdown";
-import AdvancedDateRange from "@components/dateRangePicker/DateRangePicker";
+import DateRangePicker from "@components/dateRangePicker/DateRangePicker";
 
 interface RightAdvancedSearchFilter {
   page: string;
@@ -78,7 +78,10 @@ export default function RightAdvancedSearchFilter({
   );
   const [isDateRange, setIsDateRange] = useState(false);
   const [position, setPosition] = useState({ bottom: 0, left: 0 });
-  const [selectedRange, setSelectedRange] = useState({ from: "", to: "" });
+  const [selectedRange, setSelectedRange] = useState<{
+    from: string | object;
+    to: string | object;
+  }>({ from: "", to: "" });
   const [typed, setTyped] = useState(false);
   refs.rightDateRangeContainer = useRef<HTMLDivElement>(null);
 
@@ -516,7 +519,7 @@ export default function RightAdvancedSearchFilter({
         </div>
         <AnimatePresence>
           {isDateRange && (
-            <AdvancedDateRange
+            <DateRangePicker
               filter={page}
               position={position}
               selectedRange={selectedRange}

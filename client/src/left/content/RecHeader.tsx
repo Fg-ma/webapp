@@ -1,9 +1,5 @@
 import React from "react";
-
-interface RecHeaderProps {
-  lightness: number;
-  togglePaneHeight: () => void;
-}
+import { RecHeaderProps } from "@FgTypes/leftTypes";
 
 export default function RecHeader({
   lightness,

@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
+import {
+  EntityPageProps,
+  EntityPageState,
+  EntityData,
+  EntityReferences,
+  Entity,
+  ContentMap,
+  CollectionsContentMap,
+} from "@FgTypes/middleTypes";
 import Sheets from "./content/Sheets";
 import Videos from "./content/Videos";
 import Images from "./content/Images";
@@ -14,76 +23,6 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface EntityPageProps {
-  entityType: string;
-}
-
-interface EntityPageState {
-  page: {
-    [key: string]: {
-      pagePayload: {
-        pageState: string;
-        ids: {
-          individual_id: string | null;
-          group_id: string | null;
-          organization_id: string | null;
-          collection_id: string | null;
-        };
-      };
-    };
-  };
-}
-
-interface EntityData {
-  individual_id?: string;
-  individual_name?: string;
-  individual_userName?: string;
-  individual_roles?: string;
-  individual_currentIssue?: string;
-  individual_description?: string;
-  group_id?: string;
-  group_name?: string;
-  group_handle?: string;
-  group_stances?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_handle?: string;
-  organization_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-}
-
-interface EntityReferences {
-  reference_id: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
-  title: string;
-  author: string;
-  url: string;
-}
-
-interface Entity {
-  entity_id: string;
-  entity_type: number;
-}
-
-interface ContentMap {
-  [key: string]: JSX.Element | null;
-  sheets: JSX.Element | null;
-  videos: JSX.Element | null;
-  images: JSX.Element | null;
-}
-
-interface CollectionsContentMap {
-  [key: string]: JSX.Element | null;
-  individuals: JSX.Element | null;
-  groups: JSX.Element | null;
-  organizations: JSX.Element | null;
-}
 
 export default function EntityPage({ entityType }: EntityPageProps) {
   /* 

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import { toggleDrop } from "@redux/filters/filterActions";
+import { MiddleDropProps, MiddleFilterState } from "@FgTypes/middleTypes";
 import MiddleSearchBar from "./MiddleSearchBar";
 
 const dropButtonVar: Variants = {
@@ -41,19 +42,6 @@ const middleSearchBarTransition: Transition = {
     delay: 0.275,
   },
 };
-
-interface MiddleDropProps {
-  middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
-  middleSpaceRef: React.RefObject<HTMLDivElement>;
-}
-
-interface MiddleFilterState {
-  filters: {
-    middle: {
-      isDrop: boolean;
-    };
-  };
-}
 
 export default function MiddleDrop({
   middleSpaceContainerRef,

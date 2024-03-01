@@ -1,35 +1,14 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
+import { ImagesProps, ImageData } from "@FgTypes/middleTypes";
 import { Image } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface ImagesProps {
-  entity_id: string;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface ImageData {
-  image_id: string;
-  entity_id: string;
-  entities_content_id: string;
-  date_added: string;
-  pinned: boolean;
-  date_pinned: string | null;
-  images: {
-    image_id: string;
-    image_data_id: string;
-    image_creator_id: string;
-    image_title: string;
-    image_description: string;
-    image_filename: string;
-  };
-}
 
 export default function Images({ entity_id, isEditablePage }: ImagesProps) {
   /* 

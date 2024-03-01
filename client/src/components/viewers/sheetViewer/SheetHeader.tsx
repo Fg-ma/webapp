@@ -1,18 +1,6 @@
 import React from "react";
+import { SheetHeaderProps } from "@FgTypes/componentTypes";
 import SheetActionSection from "./SheetActionSection";
-
-interface SheetHeaderProps {
-  sheet_id: string;
-  sheetData: {
-    sheet_title: string;
-    sheet_subject: string;
-    entity_type: number;
-    sheet_author: any;
-    sheet_url: string;
-    sheet_likes: number;
-    sheet_dislikes: number;
-  };
-}
 
 export default function SheetHeader({ sheet_id, sheetData }: SheetHeaderProps) {
   let authorElement = null;

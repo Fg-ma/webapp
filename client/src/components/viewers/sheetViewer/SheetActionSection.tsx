@@ -1,25 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import Axios from "axios";
-import config from "@config";
+import { SheetActionSectionProps } from "@FgTypes/componentTypes";
 import SheetActionLikeDislikeButtons from "./SheetActionLikeDislikeButtons";
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment
-  ? config.development.serverUrl
-  : config.production.serverUrl;
-
-interface SheetActionSectionProps {
-  sheet_id: string;
-  sheetData: {
-    sheet_title: string;
-    sheet_subject: string;
-    entity_type: number;
-    sheet_author: any;
-    sheet_url: string;
-    sheet_likes: number;
-    sheet_dislikes: number;
-  };
-}
 
 export default function SheetActionSection({
   sheet_id,

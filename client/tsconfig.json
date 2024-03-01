@@ -4,7 +4,8 @@
     "paths": {
       "@config": ["config.js"],
       "@redux/*": ["src/redux/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@FgTypes/*": ["src/types/*"]
     },
     "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],

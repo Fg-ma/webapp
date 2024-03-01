@@ -1,34 +1,12 @@
-import React, { useState, useEffect, useRef, MouseEventHandler } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import {
   addAdvancedAffiliateFilter,
   removeAdvancedAffiliateFilter,
 } from "@redux/filters/filterActions";
+import { FilterCardProps, FilterState } from "@FgTypes/componentTypes";
 import Popup from "./Popup";
-
-interface FilterCardProps {
-  filter: string;
-  identify: string;
-  name: string;
-  subcategory: string;
-  popupRef: React.RefObject<HTMLDivElement>;
-}
-
-interface FilterState {
-  filters: {
-    [filter: string]: {
-      filterPayload: {
-        affiliatedFilters: {
-          [key: string]: string[];
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-      };
-    };
-  };
-}
 
 export default function FilterCard({
   filter,

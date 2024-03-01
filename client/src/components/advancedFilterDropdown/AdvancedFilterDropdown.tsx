@@ -4,6 +4,10 @@ import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import Axios from "axios";
 import config from "@config";
 import FilterCard from "./FilterCard";
+import {
+  AdvancedFilterDropdownProps,
+  FilterState,
+} from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -44,28 +48,6 @@ const dropdownTransition: Transition = {
     delay: 0.275,
   },
 };
-
-interface AdvancedFilterDropdownProps {
-  filter: string;
-  subcategory: string;
-  advancedFilterDropdownDropRef: React.RefObject<HTMLDivElement>;
-  searchFilterRef: React.RefObject<HTMLDivElement>;
-}
-
-interface FilterState {
-  filters: {
-    [filter: string]: {
-      filterPayload: {
-        affiliatedFilters: {
-          [key: string]: string[];
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-      };
-    };
-  };
-}
 
 export default function AdvancedFilterDropdown({
   filter,

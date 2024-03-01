@@ -1,7 +1,8 @@
-import React, { MutableRefObject } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, Transition, Variants } from "framer-motion";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
+import { EntityContentNavProps, PageState } from "@FgTypes/middleTypes";
 import CollectionButtons from "./CollectionButtons";
 
 const indNavButtonsVar: Variants = {
@@ -28,44 +29,6 @@ const transition: Transition = {
     duration: 0.1,
   },
 };
-
-interface EntityContentNavProps {
-  entityType: string;
-  entity: Entity | null;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface Entity {
-  [key: string]: any;
-  individual_id?: string;
-  individual_name?: string;
-  individual_userName?: string;
-  individual_roles?: string;
-  individual_currentIssue?: string;
-  individual_description?: string;
-  group_id?: string;
-  group_name?: string;
-  group_handle?: string;
-  group_stances?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_handle?: string;
-  organization_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-}
-
-interface PageState {
-  page: {
-    [entityType: string]: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
 
 export default function EntityContentNav({
   entityType,

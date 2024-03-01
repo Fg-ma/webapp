@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
-interface CaptionDropdownProps {
-  options: number[] | string[];
-  value: number;
-  onChange:
-    | ((newMonthIndex: number) => void)
-    | ((newYearIndex: number) => void);
-  type: string;
-  dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
-}
+import { CaptionDropdownProps } from "@FgTypes/componentTypes";
 
 export default function CaptionDropdown({
   options,

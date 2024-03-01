@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
+import { EntityPageHeaderProps, Afiliate } from "@FgTypes/middleTypes";
 import ReferenceLinks from "@components/referenceLinks/ReferenceLinks";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
@@ -8,69 +9,6 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface EntityPageHeaderProps {
-  entity_id: string;
-  entityType: string;
-  entity: Entity | null;
-  entityReferences: EntityReferences[];
-}
-
-interface Entity {
-  [key: string]: any;
-  individual_id?: string;
-  individual_name?: string;
-  individual_userName?: string;
-  individual_roles?: string;
-  individual_currentIssue?: string;
-  individual_description?: string;
-  group_id?: string;
-  group_name?: string;
-  group_handle?: string;
-  group_stances?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_handle?: string;
-  organization_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-}
-
-interface EntityReferences {
-  reference_id: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
-  title: string;
-  author: string;
-  url: string;
-}
-
-interface Afiliate {
-  type?: string;
-  date: [{ affiliate_relation_date: string }];
-  individual_currentIssue?: string;
-  individual_description?: string;
-  individual_username?: string;
-  individual_id?: string;
-  individual_name?: string;
-  individual_roles?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  group_handle?: string;
-  group_id?: string;
-  group_name?: string;
-  group_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-  organization_handle?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_stances?: string;
-  profile_picture_id: string;
-}
 
 export default function EntityPageHeader({
   entity_id,

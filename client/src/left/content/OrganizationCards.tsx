@@ -2,20 +2,12 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
+import { Organization } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface Organization {
-  organization_id: string;
-  organization_name: string;
-  organization_handle: string;
-  organization_currentIssue: string;
-  organization_description: string;
-  organization_stances: string;
-}
 
 export default function OrganizationCards() {
   /* 

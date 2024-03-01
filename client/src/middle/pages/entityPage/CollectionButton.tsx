@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
+import {
+  CollectionButtonProps,
+  CollectionPageState,
+} from "@FgTypes/middleTypes";
 
 const collectionsStyles = {
   init: {
@@ -16,24 +20,6 @@ const collectionsStyles = {
     textDecorationColor: "rgb(44, 146, 245)",
   },
 };
-
-interface CollectionButtonProps {
-  entityType: string;
-  collection_id: string;
-  collection_name: string;
-}
-
-interface CollectionPageState {
-  page: {
-    [entityType: string]: {
-      pagePayload: {
-        ids: {
-          collection_id: string;
-        };
-      };
-    };
-  };
-}
 
 export default function CollectionButton({
   entityType,

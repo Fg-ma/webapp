@@ -2,6 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
+import {
+  IndividualCardProps,
+  GroupCardProps,
+  OrganizationCardProps,
+} from "@FgTypes/leftTypes";
 
 /* 
   Description:   
@@ -10,11 +15,6 @@ import ProfilePicture from "@components/profilePicture/ProfilePicture";
   Unique Properties:
     N/A
 */
-interface IndividualCardProps {
-  id: string;
-  name: string;
-  currentIssue: string | null;
-}
 
 export function IndividualCard({
   id,
@@ -50,13 +50,6 @@ export function IndividualCard({
       </div>
     </div>
   );
-}
-
-interface GroupCardProps {
-  id: string;
-  name: string;
-  currentIssue: string | null;
-  affInCommon: string | null;
 }
 
 export function GroupCard({
@@ -97,13 +90,6 @@ export function GroupCard({
       </div>
     </div>
   );
-}
-
-interface OrganizationCardProps {
-  id: string;
-  name: string;
-  currentIssue: string | null;
-  stances: string | null;
 }
 
 export function OrganizationCard({

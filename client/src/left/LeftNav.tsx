@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, Transition, Variants } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
+import { LeftState } from "@FgTypes/leftTypes";
 
 const navButtonsVar: Variants = {
   init: {
@@ -27,16 +28,6 @@ const transition: Transition = {
     duration: 0.1,
   },
 };
-
-interface LeftState {
-  page: {
-    left: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
 
 export default function LeftNav() {
   /* 

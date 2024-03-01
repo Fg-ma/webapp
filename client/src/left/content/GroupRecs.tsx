@@ -2,19 +2,12 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
+import { Group } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface Group {
-  group_id: string;
-  group_name: string;
-  group_currentIssue: string;
-  group_description: string;
-  group_stances: string;
-}
 
 export default function GroupRecs() {
   /* 

@@ -1,9 +1,5 @@
 import React from "react";
-
-interface CheckboxProps {
-  checked: boolean;
-  hovering: boolean;
-}
+import { CheckboxProps } from "@FgTypes/componentTypes";
 
 export default function Checkbox({ checked, hovering }: CheckboxProps) {
   return (

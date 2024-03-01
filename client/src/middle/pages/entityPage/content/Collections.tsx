@@ -1,63 +1,14 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
+import { CollectionsProps, CollectionItem } from "@FgTypes/middleTypes";
 import { Sheet, Video, Image } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface CollectionsProps {
-  entity_id: string;
-  collection_id: string;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface CollectionItem {
-  collection_id: string;
-  collections_content_id: string;
-  content: {
-    content_id: string;
-    content_type: number;
-  };
-  content_data: {
-    sheet_author_id?: string;
-    sheet_data_id?: string;
-    sheet_date_posted?: string;
-    sheet_dislikes?: number;
-    sheet_filename?: string;
-    sheet_id?: string;
-    sheet_likes?: number;
-    sheet_subject?: string;
-    sheet_title?: string;
-    sheet_views?: number;
-    image_creator_id?: string;
-    image_data_id?: string;
-    image_date_posted?: string;
-    image_description?: string;
-    image_dislikes?: number;
-    image_filename?: string;
-    image_id?: string;
-    image_likes?: number;
-    image_title?: string;
-    image_views?: number;
-    video_creator_id?: string;
-    video_data_id?: string;
-    video_date_posted?: string;
-    video_description?: string;
-    video_dislikes?: number;
-    video_filename?: "test.mkv";
-    video_id?: string;
-    video_likes?: number;
-    video_title?: string;
-    video_views?: number;
-  };
-  date_added: string;
-  pinned: boolean;
-  date_pinned: string | null;
-}
 
 export default function Collections({
   entity_id,

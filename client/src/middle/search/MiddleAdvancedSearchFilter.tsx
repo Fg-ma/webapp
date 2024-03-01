@@ -6,47 +6,12 @@ import {
   clearAdvancedAffiliateFilter,
   setDateRange,
 } from "@redux/filters/filterActions";
+import {
+  MiddleAdvancedSearchFilterProps,
+  MiddleFilterState,
+} from "@FgTypes/middleTypes";
 import AdvancedFilterDropdown from "@components/advancedFilterDropdown/AdvancedFilterDropdown";
-import AdvancedDateRange from "@components/dateRangePicker/DateRangePicker";
-
-interface MiddleAdvancedSearchFilterProps {
-  handleFilterFormChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  refs: {
-    middleAdvancedSearchFilterContainer: React.RefObject<HTMLDivElement>;
-    middleAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    middleDateRange: React.RefObject<HTMLDivElement>;
-    middleDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
-    middleAdvancedFilterDropdownDropRef: React.RefObject<HTMLDivElement>;
-    middleDateRangeContainer?: React.RefObject<HTMLDivElement>;
-  };
-}
-
-interface MiddleFilterState {
-  filters: {
-    middle: {
-      filterPayload: {
-        isWhatsCurrent: boolean;
-        isAffiliateActivity: boolean;
-        isAllTimeGreats: boolean;
-        isDatePosted: boolean;
-        isDatePostedSwitched: boolean;
-        isPopularity: boolean;
-        isPopularitySwitched: boolean;
-        isAdvancedSearch: boolean;
-        affiliatedFilters: {
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-        author: string;
-        dateRange: {
-          from: string;
-          to: string;
-        };
-      };
-    };
-  };
-}
+import DateRangePicker from "@components/dateRangePicker/DateRangePicker";
 
 export default function MiddleAdvancedSearchFilter({
   handleFilterFormChange,
@@ -69,7 +34,10 @@ export default function MiddleAdvancedSearchFilter({
   );
   const [isDateRange, setIsDateRange] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
-  const [selectedRange, setSelectedRange] = useState({ from: "", to: "" });
+  const [selectedRange, setSelectedRange] = useState<{
+    from: string | object;
+    to: string | object;
+  }>({ from: "", to: "" });
   const [typed, setTyped] = useState(false);
   refs.middleDateRangeContainer = useRef<HTMLDivElement>(null);
 
@@ -507,7 +475,7 @@ export default function MiddleAdvancedSearchFilter({
           </div>
           <AnimatePresence>
             {isDateRange && (
-              <AdvancedDateRange
+              <DateRangePicker
                 filter={"middle"}
                 position={position}
                 selectedRange={selectedRange}

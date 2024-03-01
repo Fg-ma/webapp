@@ -1,19 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-
-interface PopupProps {
-  name: string;
-  position: {
-    top: number;
-    left: number;
-  };
-  onMouseEnter: (event: MouseEvent) => void;
-  onMouseLeave: () => void;
-  handleFilterClick: () => void;
-  popupRef: React.RefObject<HTMLDivElement>;
-  isFilterSelected: boolean;
-  subcategory: string;
-}
+import { PopupProps } from "@FgTypes/componentTypes";
 
 export default function Popup({
   name,

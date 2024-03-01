@@ -1,33 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setPageState } from "@redux/pageState/pageStateActions";
-
-interface EntityPageFooterProps {
-  entityType: string;
-  entity: EntityData | null;
-}
-
-interface EntityData {
-  [key: string]: any;
-  individual_id?: string;
-  individual_name?: string;
-  individual_userName?: string;
-  individual_roles?: string;
-  individual_currentIssue?: string;
-  individual_description?: string;
-  group_id?: string;
-  group_name?: string;
-  group_handle?: string;
-  group_stances?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_handle?: string;
-  organization_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-}
+import { EntityPageFooterProps, EntityData } from "@FgTypes/middleTypes";
 
 export default function EntityPageFooter({
   entityType,

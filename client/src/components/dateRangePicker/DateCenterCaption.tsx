@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { useNavigation } from "react-day-picker";
 import CaptionDropdown from "./CaptionDropdown";
+import { DateCenteredCaptionProps } from "@FgTypes/componentTypes";
 
 const months = Array.from({ length: 12 }, (_, i) =>
   format(new Date(0, i), "MMMM"),
@@ -11,15 +12,7 @@ const years = Array.from(
   (_, i) => 1999 + i,
 );
 
-interface DateCenteredCaption {
-  id?: string | undefined;
-  displayMonth: Date;
-  displayIndex?: number | undefined;
-  updateRangeStyles: () => void;
-  dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
-}
-
-export default function DateCenteredCaption(props: DateCenteredCaption) {
+export default function DateCenteredCaption(props: DateCenteredCaptionProps) {
   /* 
     Description:   
       Creates the caption for the caption for the date range dropdown. Places the date centered 

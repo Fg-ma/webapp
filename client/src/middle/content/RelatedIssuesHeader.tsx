@@ -1,9 +1,5 @@
 import React from "react";
-
-interface RelatedIssuesHeaderProps {
-  lightness: number;
-  togglePaneHeight: () => void;
-}
+import { RelatedIssuesHeaderProps } from "@FgTypes/middleTypes";
 
 export default function RelatedIssuesHeader({
   lightness,

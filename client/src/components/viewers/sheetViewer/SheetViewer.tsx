@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import Axios from "axios";
 import config from "@config";
+import { SheetViewerProps, SheetData } from "@FgTypes/componentTypes";
 import SheetHeader from "../sheetViewer/SheetHeader";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -13,20 +14,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url,
 ).toString();
-
-interface SheetViewerProps {
-  sheet_id: string;
-}
-
-interface SheetData {
-  sheet_url: string;
-  sheet_title: string;
-  sheet_subject: string;
-  entity_type: number;
-  sheet_author: any;
-  sheet_likes: number;
-  sheet_dislikes: number;
-}
 
 export default function SheetViewer({ sheet_id }: SheetViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);

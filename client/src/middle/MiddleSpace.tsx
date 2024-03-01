@@ -1,23 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { MiddleSpaceProps, MainState } from "@FgTypes/middleTypes";
 import HomePage from "./pages/homePage/HomePage";
 import EntityPage from "./pages/entityPage/EntityPage";
 import ContentPage from "./pages/contentPage/ContentPage";
 import "./middleSpace.css";
-
-interface MiddleSpaceProps {
-  middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
-}
-
-interface MainState {
-  page: {
-    main: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
 
 export default function MiddleSpace({
   middleSpaceContainerRef,

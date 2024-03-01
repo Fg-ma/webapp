@@ -1,35 +1,14 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
+import { SheetsProps, SheetData } from "@FgTypes/middleTypes";
 import { Sheet } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface SheetsProps {
-  entity_id: string;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface SheetData {
-  sheet_id: string;
-  entity_id: string;
-  entities_content_id: string;
-  date_added: string;
-  pinned: boolean;
-  date_pinned: string | null;
-  sheets: {
-    sheet_id: string;
-    sheet_data_id: string;
-    sheet_author_id: string;
-    sheet_filename: string;
-    sheet_title: string;
-    sheet_subject: string;
-  };
-}
 
 export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
   /* 

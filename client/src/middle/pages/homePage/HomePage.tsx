@@ -1,11 +1,7 @@
 import React, { useRef } from "react";
+import { HomePageProps } from "@FgTypes/middleTypes";
 import MiddleVerticalSplitPane from "../../MiddleVerticalSplitPane";
 import MiddleDrop from "../../search/MiddleDrop";
-
-interface HomePageProps {
-  middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
-  middleSpaceRef: React.RefObject<HTMLDivElement>;
-}
 
 export default function HomePage({
   middleSpaceContainerRef,

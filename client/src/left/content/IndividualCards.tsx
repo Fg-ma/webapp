@@ -2,20 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
+import { Individual } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface Individual {
-  individual_id: string;
-  individual_name: string;
-  individual_userName: string;
-  individual_currentIssue: string;
-  individual_description: string;
-  individual_roles: string;
-}
 
 export default function IndividualCards() {
   /* 

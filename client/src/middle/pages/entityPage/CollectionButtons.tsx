@@ -1,26 +1,13 @@
-import React, { useState, useEffect, MutableRefObject } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
+import { CollectionButtonsProps, CollectionNames } from "@FgTypes/middleTypes";
 import CollectionButton from "./CollectionButton";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface CollectionButtonsProps {
-  entityType: string;
-  entity_id: string;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface CollectionNames {
-  collection_id: string;
-  collection_name: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
-}
 
 export default function CollectionButtons({
   entityType,

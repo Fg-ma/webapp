@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
+import { MiddleSearchBarProps, MiddleFilterState } from "@FgTypes/middleTypes";
 import MiddleSearchFilter from "./MiddleSearchFilter";
 
 const middleSearchFilterVar: Variants = {
@@ -21,19 +22,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface MiddleSearchBarProps {
-  middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
-  middleSpaceRef: React.RefObject<HTMLDivElement>;
-}
-
-interface MiddleFilterState {
-  filters: {
-    middle: {
-      isDropFilter: boolean;
-    };
-  };
-}
 
 export default function MiddleSearchBar({
   middleSpaceContainerRef,

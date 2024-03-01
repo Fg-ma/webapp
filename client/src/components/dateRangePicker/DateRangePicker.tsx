@@ -6,6 +6,7 @@ import { motion, Variants, Transition } from "framer-motion";
 import { setDateRange } from "@redux/filters/filterActions";
 import { useDispatch } from "react-redux";
 import DateCenteredCaption from "./DateCenterCaption";
+import { DateRangePickerProps } from "@FgTypes/componentTypes";
 
 const css = `
   .custom-picker {
@@ -53,30 +54,6 @@ const transition: Transition = {
   delay: 0.275,
 };
 
-interface AdvancedDateRangeProps {
-  filter: string;
-  position: {
-    top?: number;
-    bottom?: number;
-    left: number;
-  };
-  selectedRange: {
-    from: string | object;
-    to: string | object;
-  };
-  setSelectedRange: React.Dispatch<
-    React.SetStateAction<{
-      from: string | object;
-      to: string | object;
-    }>
-  >;
-  updateRangeStyles: () => void;
-  refs: {
-    dateRange: React.RefObject<HTMLDivElement>;
-    dateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
-  };
-}
-
 export default function DateRangePicker({
   filter,
   position,
@@ -84,7 +61,7 @@ export default function DateRangePicker({
   setSelectedRange,
   updateRangeStyles,
   refs,
-}: AdvancedDateRangeProps) {
+}: DateRangePickerProps) {
   /* 
     Description:   
       Creates the date range dropdown via create portal with the date range picker in it.

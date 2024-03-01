@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState, setIds } from "@redux/pageState/pageStateActions";
+import { MainState } from "@FgTypes/middleTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 const navButtonsVar: Variants = {
@@ -28,16 +29,6 @@ const transition: Transition = {
     duration: 0.1,
   },
 };
-
-interface MainState {
-  page: {
-    main: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
 
 export default function PageNav() {
   /* 

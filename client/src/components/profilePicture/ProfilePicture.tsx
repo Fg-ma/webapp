@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { Transition, Variants, motion } from "framer-motion";
 import config from "@config";
+import { ProfilePictureProps, Entity } from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -23,42 +24,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface ProfilePictureProps {
-  size: {
-    w: number;
-    h: number;
-  };
-  entity_id: string;
-  styles: string;
-  entity?: {
-    entity_name?: string;
-    entity_username?: string;
-    entity_current_Issue?: string;
-  };
-}
-
-interface Entity {
-  [key: string]: any;
-  individual_id?: string;
-  individual_name?: string;
-  individual_userName?: string;
-  individual_roles?: string;
-  individual_currentIssue?: string;
-  individual_description?: string;
-  group_id?: string;
-  group_name?: string;
-  group_handle?: string;
-  group_stances?: string;
-  group_currentIssue?: string;
-  group_description?: string;
-  organization_id?: string;
-  organization_name?: string;
-  organization_handle?: string;
-  organization_stances?: string;
-  organization_currentIssue?: string;
-  organization_description?: string;
-}
 
 export default function ProfilePicture({
   size,

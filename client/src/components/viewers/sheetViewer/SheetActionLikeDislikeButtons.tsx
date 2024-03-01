@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
+import { SheetActionLikeDislikeButtonsProps } from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -51,19 +52,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface SheetActionLikeDislikeButtonsProps {
-  sheet_id: string;
-  sheetData: {
-    sheet_title: string;
-    sheet_subject: string;
-    entity_type: number;
-    sheet_author: any;
-    sheet_url: string;
-    sheet_likes: number;
-    sheet_dislikes: number;
-  };
-}
 
 export default function SheetActionLikeDislikeButtons({
   sheet_id,

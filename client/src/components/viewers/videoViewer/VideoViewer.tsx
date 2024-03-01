@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
+import { VideoViewerProps, VideoData } from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface VideoViewerProps {
-  video_id: string;
-}
-
-interface VideoData {
-  video_url: string;
-  video_title: string;
-  video_description: string;
-  entity_type: number;
-  video_creator: any;
-}
 
 export default function VideoViewer({ video_id }: VideoViewerProps) {
   const [videoData, setVideoData] = useState<VideoData>({

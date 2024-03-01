@@ -1,35 +1,14 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { io, Socket } from "socket.io-client";
 import config from "@config";
+import { VideosProps, VideoData } from "@FgTypes/middleTypes";
 import { Video } from "./Cards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface VideosProps {
-  entity_id: string;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface VideoData {
-  video_id: string;
-  entity_id: string;
-  entities_content_id: string;
-  date_added: string;
-  pinned: boolean;
-  date_pinned: string | null;
-  videos: {
-    video_id: string;
-    video_data_id: string;
-    video_creator_id: string;
-    video_filename: string;
-    video_title: string;
-    video_description: string;
-  };
-}
 
 export default function Videos({ entity_id, isEditablePage }: VideosProps) {
   /* 

@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
+import { ImageViewerProps, ImageData } from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface ImageViewerProps {
-  image_id: string;
-}
-
-interface ImageData {
-  image_url: string;
-  image_title: string;
-  image_description: string;
-  entity_type: number;
-  image_creator: any;
-}
 
 export default function ImageViewer({ image_id }: ImageViewerProps) {
   const [imageData, setImageData] = useState<ImageData>({

@@ -7,20 +7,7 @@ import OrganizationCards from "./content/OrganizationCards";
 import IndividualRecs from "./content/IndividualRecs";
 import GroupRecs from "./content/GroupRecs";
 import OrganizationRecs from "./content/OrganizationRecs";
-
-interface LeftState {
-  page: {
-    left: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
-
-interface LeftVerticalSplitPaneProps {
-  leftSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
-}
+import { LeftState, LeftVerticalSplitPaneProps } from "@FgTypes/leftTypes";
 
 export default function LeftVerticalSplitPane({
   leftSpaceContentContainerRef,

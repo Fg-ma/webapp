@@ -1,26 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { ContentPageProps, ContentIDState } from "@FgTypes/middleTypes";
 import SheetViewer from "@components/viewers/sheetViewer/SheetViewer";
 import VideoViewer from "@components/viewers/videoViewer/VideoViewer";
 import ImageViewer from "@components/viewers/imageViewer/ImageViewer";
-
-interface ContentPageProps {
-  contentType: string;
-}
-
-interface ContentIDState {
-  page: {
-    main: {
-      pagePayload: {
-        ids: {
-          sheet_id: string;
-          video_id: string;
-          image_id: string;
-        };
-      };
-    };
-  };
-}
 
 export default function ContentPage({ contentType }: ContentPageProps) {
   const content_id: string = useSelector((state: ContentIDState) => {

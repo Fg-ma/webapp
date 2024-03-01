@@ -1,10 +1,17 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
-import { Socket } from "socket.io-client";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
+import {
+  SheetProps,
+  SheetData,
+  ImageProps,
+  ImageData,
+  VideoProps,
+  VideoData,
+} from "@FgTypes/middleTypes";
 
 /* 
   Description:   
@@ -17,25 +24,6 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface SheetProps {
-  type: string;
-  sheet_id: string;
-  author_id: string;
-  pinned: boolean;
-  relation_id: string;
-  socket: Socket | null;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface SheetData {
-  sheet_id: string;
-  sheet_data_id: string;
-  sheet_author_id: string;
-  sheet_filename: string;
-  sheet_title: string;
-  sheet_subject: string;
-}
 
 export function Sheet({
   type,
@@ -180,24 +168,6 @@ export function Sheet({
       </p>
     </div>
   );
-}
-
-interface VideoProps {
-  type: string;
-  video_id: string;
-  pinned: boolean;
-  relation_id: string;
-  socket: Socket | null;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface VideoData {
-  video_id: string;
-  video_data_id: string;
-  video_creator_id: string;
-  video_filename: string;
-  video_title: string;
-  video_description: string;
 }
 
 export function Video({
@@ -364,24 +334,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface ImageProps {
-  type: string;
-  image_id: string;
-  pinned: boolean;
-  relation_id: string;
-  socket: Socket | null;
-  isEditablePage: MutableRefObject<boolean>;
-}
-
-interface ImageData {
-  image_id: string;
-  image_data_id: string;
-  image_creator_id: string;
-  image_filename: string;
-  image_title: string;
-  image_description: string;
-}
 
 export function Image({
   type,

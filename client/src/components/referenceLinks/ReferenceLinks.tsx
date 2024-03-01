@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Transition, Variants, motion } from "framer-motion";
+import { ReferenceLinksProps, Reference } from "@FgTypes/componentTypes";
 
 const popupContentVar: Variants = {
   init: {
@@ -16,20 +17,6 @@ const transition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface Reference {
-  reference_id: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
-  title: string;
-  author: string;
-  url: string;
-}
-
-interface ReferenceLinksProps {
-  references: Reference[];
-}
 
 export default function ReferenceLinks({ references }: ReferenceLinksProps) {
   /* 
