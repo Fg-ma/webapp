@@ -15,6 +15,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Route to get a sheet thumbnail by sheet_id
+router.get("/get_sheet_thumbnail", async (req, res) => {
+  const sheet_id = req.query.sheet_id;
+
+  try {
+    const sheet = await req.db.sheets.findUnique({
+      where: { sheet_id: sheet_id },
+    });
+
+    const sheetThumbnail = await req.db.sheets_thumbnails.findUnique({
+      where: {
+        sheet_thumbnail_id: sheet.sheet_thumbnail_id,
+      },
+    });
+
+    res.send(sheetThumbnail);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // Route to get a sheet by ID
 router.get("/:sheet_id", async (req, res) => {
   const sheet_id = req.params.sheet_id;

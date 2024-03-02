@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import ProfilePicture from "@components/profilePicture/ProfilePicture";
 import {
   IndividualCardProps,
   GroupCardProps,
   OrganizationCardProps,
 } from "@FgTypes/leftTypes";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 /* 
   Description:   
@@ -39,7 +39,9 @@ export function IndividualCard({
         <ProfilePicture
           size={{ h: 3.5, w: 3.5 }}
           entity_id={id}
+          entity_type={1}
           styles="rounded-full"
+          clickable={false}
         />
       </div>
       <div className="m-2 truncate">
@@ -76,7 +78,9 @@ export function GroupCard({
         <ProfilePicture
           size={{ h: 4, w: 4 }}
           entity_id={id}
+          entity_type={2}
           styles="rounded-md"
+          clickable={false}
         />
       </div>
       <div className="m-2 truncate">
@@ -116,7 +120,9 @@ export function OrganizationCard({
         <ProfilePicture
           size={{ h: 4, w: 4 }}
           entity_id={id}
+          entity_type={3}
           styles="rounded-md"
+          clickable={false}
         />
       </div>
       <div className="m-2 h-full truncate">

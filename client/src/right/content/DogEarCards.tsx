@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
+import { CoverSheet } from "@FgTypes/rightTypes";
 import { DogEarCard } from "./RightSpaceCards";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
-
-interface CoverSheet {
-  sheet_id: number;
-  sheet_data_id: number;
-  sheet_author_id: number;
-  sheet_filename: string;
-  sheet_title: string;
-  sheet_subject: string;
-}
 
 export default function DogEarCards() {
   /* 
@@ -45,6 +37,7 @@ export default function DogEarCards() {
     return (
       <DogEarCard
         key={issueInfo.sheet_id}
+        sheet_id={issueInfo.sheet_id}
         title={issueInfo.sheet_title}
         subject={issueInfo.sheet_subject}
       />

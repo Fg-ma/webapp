@@ -6,61 +6,18 @@ import {
   clearAdvancedAffiliateFilter,
   setDateRange,
 } from "@redux/filters/filterActions";
+import {
+  RightAdvancedSearchFilterProps,
+  RightFilterState,
+} from "@FgTypes/rightTypes";
 import AdvancedFilterDropdown from "@components/advancedFilterDropdown/AdvancedFilterDropdown";
 import DateRangePicker from "@components/dateRangePicker/DateRangePicker";
-
-interface RightAdvancedSearchFilter {
-  page: string;
-  handleFilterFormChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  refs: {
-    rightSpaceFilter: React.RefObject<HTMLDivElement>;
-    rightAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    rightDateRange: React.RefObject<HTMLDivElement>;
-    rightDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
-    rightAdvancedFilterDropdownDrop: React.RefObject<HTMLDivElement>;
-    rightDateRangeContainer?: React.RefObject<HTMLDivElement>;
-  };
-}
-
-interface RightFilterState {
-  filters: {
-    [filter: string]: {
-      filterPayload: {
-        isWhatsCurrent: boolean;
-        isAffiliateActivity: boolean;
-        isAllTimeGreats: boolean;
-        isDatePosted: boolean;
-        isDatePostedSwitched: boolean;
-        isPopularity: boolean;
-        isPopularitySwitched: boolean;
-        isAdvancedSearch: boolean;
-        isIndividuals?: boolean;
-        isGroups?: boolean;
-        isOrganizations?: boolean;
-        isNewestMessages?: boolean;
-        isOldestMessages?: boolean;
-        isNewestAffiliate?: boolean;
-        isOldestAffiliate?: boolean;
-        affiliatedFilters: {
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-        author: string;
-        dateRange: {
-          from: string;
-          to: string;
-        };
-      };
-    };
-  };
-}
 
 export default function RightAdvancedSearchFilter({
   page,
   handleFilterFormChange,
   refs,
-}: RightAdvancedSearchFilter) {
+}: RightAdvancedSearchFilterProps) {
   /* 
     Description:   
       Creates the card for the advanced right search filter.

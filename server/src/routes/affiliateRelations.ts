@@ -18,18 +18,14 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
-        OR: [{ affiliate_id_1: user_id }, { affiliate_id_2: user_id }],
+        affiliate_id_root: user_id,
       },
     });
 
     const entity_ids = [];
 
     for (const relation of affiliates_relations) {
-      if (relation.affiliate_id_1 !== user_id) {
-        entity_ids.push(relation.affiliate_id_1);
-      } else if (relation.affiliate_id_2 !== user_id) {
-        entity_ids.push(relation.affiliate_id_2);
-      }
+      entity_ids.push(relation.affiliate_id_target);
     }
 
     const individualIds = await req.db.entities.findMany({
@@ -52,10 +48,8 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 
       const individualAffiliation = await req.db.affiliates_relations.findMany({
         where: {
-          OR: [
-            { affiliate_id_1: ind_id, affiliate_id_2: user_id },
-            { affiliate_id_1: user_id, affiliate_id_2: ind_id },
-          ],
+          affiliate_id_root: user_id,
+          affiliate_id_target: ind_id,
         },
         select: {
           affiliate_relation_date: true,
@@ -86,10 +80,8 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 
       const groupAffiliation = await req.db.affiliates_relations.findMany({
         where: {
-          OR: [
-            { affiliate_id_1: grp_id, affiliate_id_2: user_id },
-            { affiliate_id_1: user_id, affiliate_id_2: grp_id },
-          ],
+          affiliate_id_root: user_id,
+          affiliate_id_target: grp_id,
         },
         select: {
           affiliate_relation_date: true,
@@ -123,10 +115,8 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       const organizationAffiliation =
         await req.db.affiliates_relations.findMany({
           where: {
-            OR: [
-              { affiliate_id_1: org_id, affiliate_id_2: user_id },
-              { affiliate_id_1: user_id, affiliate_id_2: org_id },
-            ],
+            affiliate_id_root: user_id,
+            affiliate_id_target: org_id,
           },
           select: {
             affiliate_relation_date: true,
@@ -157,18 +147,14 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
-        OR: [{ affiliate_id_1: user_id }, { affiliate_id_2: user_id }],
+        affiliate_id_root: user_id,
       },
     });
 
     const entity_ids = [];
 
     for (const relation of affiliates_relations) {
-      if (relation.affiliate_id_1 !== user_id) {
-        entity_ids.push(relation.affiliate_id_1);
-      } else if (relation.affiliate_id_2 !== user_id) {
-        entity_ids.push(relation.affiliate_id_2);
-      }
+      entity_ids.push(relation.affiliate_id_target);
     }
 
     const individualIds = await req.db.entities.findMany({
@@ -199,19 +185,13 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
     const user_id = req.user?.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
-      where: {
-        OR: [{ affiliate_id_1: user_id }, { affiliate_id_2: user_id }],
-      },
+      where: { affiliate_id_root: user_id },
     });
 
     const entity_ids = [];
 
     for (const relation of affiliates_relations) {
-      if (relation.affiliate_id_1 !== user_id) {
-        entity_ids.push(relation.affiliate_id_1);
-      } else if (relation.affiliate_id_2 !== user_id) {
-        entity_ids.push(relation.affiliate_id_2);
-      }
+      entity_ids.push(relation.affiliate_id_target);
     }
 
     const groupIds = await req.db.entities.findMany({
@@ -240,19 +220,13 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
     const user_id = req.user?.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
-      where: {
-        OR: [{ affiliate_id_1: user_id }, { affiliate_id_2: user_id }],
-      },
+      where: { affiliate_id_root: user_id },
     });
 
     const entity_ids = [];
 
     for (const relation of affiliates_relations) {
-      if (relation.affiliate_id_1 !== user_id) {
-        entity_ids.push(relation.affiliate_id_1);
-      } else if (relation.affiliate_id_2 !== user_id) {
-        entity_ids.push(relation.affiliate_id_2);
-      }
+      entity_ids.push(relation.affiliate_id_root);
     }
 
     const organizationIds = await req.db.entities.findMany({

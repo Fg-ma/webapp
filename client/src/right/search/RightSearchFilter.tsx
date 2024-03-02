@@ -9,6 +9,7 @@ import {
   clearFilterOptions,
   cancelFilterChanges,
 } from "@redux/filters/filterActions";
+import { RightSearchFilterProps, RightFilterState } from "@FgTypes/rightTypes";
 import RightAddAdvancedSearchFilter from "./RightAddAdvancedSearchFilter";
 import RightAdvancedSearchFilter from "./RightAdvancedSearchFilter";
 import Checkbox from "@components/checkbox/Checkbox";
@@ -48,60 +49,6 @@ const rightAdvancedSearchFilterTransition: Transition = {
     ease: "easeOut",
   },
 };
-
-interface RightSearchFilterProps {
-  page: string;
-  rightSpaceFilterGeometry: {
-    width: number;
-    position: {
-      bottom: number;
-      left: number;
-    };
-  };
-  refs: {
-    rightAddAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    rightAdvancedSearchFilter: React.RefObject<HTMLDivElement>;
-    rightDateRange: React.RefObject<HTMLDivElement>;
-    rightDateRangeCaptionDropdown: React.RefObject<HTMLDivElement>;
-    rightSpaceFilter: React.RefObject<HTMLDivElement>;
-    rightSpaceSearchBar: React.RefObject<HTMLDivElement>;
-    rightAdvancedFilterDropdownDrop: React.RefObject<HTMLDivElement>;
-  };
-}
-
-interface RightFilterState {
-  filters: {
-    [filter: string]: {
-      filterPayload: {
-        isWhatsCurrent: boolean;
-        isAffiliateActivity: boolean;
-        isAllTimeGreats: boolean;
-        isDatePosted: boolean;
-        isDatePostedSwitched: boolean;
-        isPopularity: boolean;
-        isPopularitySwitched: boolean;
-        isAdvancedSearch: boolean;
-        isIndividuals?: boolean;
-        isGroups?: boolean;
-        isOrganizations?: boolean;
-        isNewestMessages?: boolean;
-        isOldestMessages?: boolean;
-        isNewestAffiliate?: boolean;
-        isOldestAffiliate?: boolean;
-        affiliatedFilters: {
-          ind: string[];
-          grp: string[];
-          org: string[];
-        };
-        author: string;
-        dateRange: {
-          from: string;
-          to: string;
-        };
-      };
-    };
-  };
-}
 
 export default function RightSearchFilter({
   page,

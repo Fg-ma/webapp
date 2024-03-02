@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
 import { closeDrop } from "@redux/filters/filterActions";
+import { RightState } from "@FgTypes/rightTypes";
 
 const navButtonsVar: Variants = {
   init: {
@@ -28,16 +29,6 @@ const transition: Transition = {
     duration: 0.1,
   },
 };
-
-interface RightState {
-  page: {
-    right: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
 
 export default function RightNav() {
   /* 

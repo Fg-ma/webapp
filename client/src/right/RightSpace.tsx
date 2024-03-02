@@ -8,16 +8,7 @@ import ExploreCards from "./content/ExploreCards";
 import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
-
-interface RightState {
-  page: {
-    right: {
-      pagePayload: {
-        pageState: string;
-      };
-    };
-  };
-}
+import { RightState } from "@FgTypes/rightTypes";
 
 export default function RightSpace() {
   /* 

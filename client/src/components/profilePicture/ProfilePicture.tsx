@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { Transition, Variants, motion } from "framer-motion";
 import config from "@config";
+import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { ProfilePictureProps, Entity } from "@FgTypes/componentTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -28,11 +30,15 @@ const transition: Transition = {
 export default function ProfilePicture({
   size,
   entity_id,
+  entity_type,
   styles,
   entity,
+  clickable,
 }: ProfilePictureProps) {
+  const dispatch = useDispatch();
+
   const [profilePictureData, setProfilePictureData] = useState({
-    profile_picture_url: "",
+    profilePictureUrl: "",
   });
 
   useEffect(() => {
@@ -73,7 +79,7 @@ export default function ProfilePicture({
             );
 
             setProfilePictureData({
-              profile_picture_url: url,
+              profilePictureUrl: url,
             });
           }
         }
@@ -166,9 +172,30 @@ export default function ProfilePicture({
     });
   };
 
+  const handleClick = () => {
+    if (clickable) {
+      if (entity_type === 1) {
+        dispatch(setPageState("main", "individuals"));
+        dispatch(setPageState("individuals", "sheets"));
+        dispatch(setIds("main", "individual_id", entity_id));
+        dispatch(setIds("individuals", "collection_id", null));
+      } else if (entity_type === 2) {
+        dispatch(setPageState("main", "groups"));
+        dispatch(setPageState("groups", "sheets"));
+        dispatch(setIds("main", "group_id", entity_id));
+        dispatch(setIds("groups", "collection_id", null));
+      } else if (entity_type === 3) {
+        dispatch(setPageState("main", "organizations"));
+        dispatch(setPageState("organizations", "sheets"));
+        dispatch(setIds("main", "organization_id", entity_id));
+        dispatch(setIds("organizations", "collection_id", null));
+      }
+    }
+  };
+
   return (
     <div
-      className={`${styles} overflow-hidden cursor-pointer`}
+      className={`${styles} overflow-hidden ${clickable && "cursor-pointer"}`}
       style={{
         height: `${size.h}rem`,
         minHeight: `${size.h}rem`,
@@ -181,15 +208,16 @@ export default function ProfilePicture({
         updateMousePosition(event);
         updatePopupPosition();
       }}
+      onClick={handleClick}
     >
       <img
         className="h-full w-full object-cover"
         src={
-          profilePictureData.profile_picture_url ||
+          profilePictureData.profilePictureUrl ||
           "/assets/pictures/DefaultProfilePicture.png"
         }
         alt={
-          profilePictureData.profile_picture_url
+          profilePictureData.profilePictureUrl
             ? "Profile Picture"
             : "Default Profile Picture"
         }

@@ -1,6 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
+import {
+  PapersCardProps,
+  NewsCardProps,
+  MessagesCardProps,
+  DogEarCardProps,
+} from "@FgTypes/rightTypes";
+import SheetThumbnail from "@components/thumbnails/SheetThumbnail";
 
 /* 
   Description:   
@@ -9,12 +16,6 @@ import { setIds, setPageState } from "@redux/pageState/pageStateActions";
   Unique Properties:
     N/A
 */
-
-interface PapersCardProps {
-  paper_id: string;
-  title: string;
-  subject: string;
-}
 
 export function PapersCard({ paper_id, title, subject }: PapersCardProps) {
   const dispatch = useDispatch();
@@ -40,13 +41,6 @@ export function PapersCard({ paper_id, title, subject }: PapersCardProps) {
   );
 }
 
-interface NewsCardProps {
-  sheet_id: string;
-  title: string;
-  subject: string;
-  affResponses?: string | null;
-}
-
 export function NewsCard({
   sheet_id,
   title,
@@ -65,9 +59,13 @@ export function NewsCard({
       className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md"
       onClick={handleClick}
     >
-      <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
-        <p>pic</p>
-      </div>
+      {sheet_id && (
+        <SheetThumbnail
+          sheet_id={sheet_id}
+          size={{ h: 7, w: 7 }}
+          styles="ml-3 rounded-sm"
+        />
+      )}
       <div className="m-2 w-2/3 space-y-1">
         <p className="font-Josefin text-lg font-bold line-clamp-2">{title}</p>
         <div>
@@ -81,11 +79,6 @@ export function NewsCard({
       </div>
     </div>
   );
-}
-
-interface MessagesCardProps {
-  name: string;
-  lastMessage: string | null;
 }
 
 export function MessagesCard({ name, lastMessage = null }: MessagesCardProps) {
@@ -104,22 +97,31 @@ export function MessagesCard({ name, lastMessage = null }: MessagesCardProps) {
   );
 }
 
-interface DogEarCard {
-  title: string;
-  subject: string;
-  affResponses?: string | null;
-}
-
 export function DogEarCard({
+  sheet_id,
   title,
   subject,
   affResponses = null,
-}: DogEarCard) {
+}: DogEarCardProps) {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setPageState("main", "sheets"));
+    dispatch(setIds("main", "sheet_id", sheet_id));
+  };
+
   return (
-    <div className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md">
-      <div className="w-28 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
-        <p>pic</p>
-      </div>
+    <div
+      className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md"
+      onClick={handleClick}
+    >
+      {sheet_id && (
+        <SheetThumbnail
+          sheet_id={sheet_id}
+          size={{ h: 7, w: 7 }}
+          styles="ml-3 rounded-sm"
+        />
+      )}
       <div className="m-2 w-2/3 space-y-1">
         <p className="font-Josefin text-lg font-bold line-clamp-2">{title}</p>
         <div>

@@ -112,6 +112,13 @@ export default function EntityPageHeader({
           entity_id={String(
             affiliate[`${affiliate.type}_id` as keyof Afiliate],
           )}
+          entity_type={
+            affiliate.type === "individual"
+              ? 1
+              : affiliate.type === "group"
+                ? 2
+                : 3
+          }
           styles={
             affiliate.type === "individual"
               ? "rounded-full"
@@ -138,6 +145,7 @@ export default function EntityPageHeader({
                     entity_current_Issue: affiliate.organization_currentIssue,
                   }
           }
+          clickable={true}
         />
       )),
     );
@@ -150,7 +158,17 @@ export default function EntityPageHeader({
           <ProfilePicture
             size={{ h: 6, w: 6 }}
             entity_id={entity_id}
-            styles="rounded-full"
+            entity_type={
+              entityType === "individuals" ? 1 : entityType === "groups" ? 2 : 3
+            }
+            styles={
+              entityType === "individuals"
+                ? "rounded-full"
+                : entityType === "groups"
+                  ? "rounded-xl"
+                  : "rounded-md"
+            }
+            clickable={false}
           />
         </div>
         <div className="ml-8 h-fit">
@@ -158,15 +176,23 @@ export default function EntityPageHeader({
             {entity?.[`${entityType.slice(0, -1)}_name`]}
           </p>
           <div
-            ref={affiliateProfilePictureRef}
-            className="flex space-x-6 overflow-x-auto"
+            className="flex flex-row h-8"
             style={{
               maxWidth: topHeaderRef.current
                 ? `${topHeaderRef.current.clientWidth - 120}px`
                 : "100%",
             }}
           >
-            {affiliatesProfilePictures}
+            <div
+              ref={affiliateProfilePictureRef}
+              className="flex space-x-6 overflow-x-auto w-5/6"
+            >
+              {affiliatesProfilePictures}
+            </div>
+            <div
+              className="w-1/6 h-8 bg-red-500"
+              style={{ boxShadow: "-4px 0 6px -1px rgba(0, 0, 0, 0.1)" }}
+            ></div>
           </div>
         </div>
       </div>

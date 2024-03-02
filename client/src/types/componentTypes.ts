@@ -130,12 +130,14 @@ export interface ProfilePictureProps {
     h: number;
   };
   entity_id: string;
+  entity_type: number;
   styles: string;
   entity?: {
     entity_name?: string;
     entity_username?: string;
     entity_current_Issue?: string;
   };
+  clickable: boolean;
 }
 
 export interface Entity {
@@ -277,4 +279,14 @@ export interface VideoData {
   video_description: string;
   entity_type: number;
   video_creator: any;
+}
+
+/* 
+  SheetThumbnail.tsx
+*/
+
+export interface SheetThumbnailProps {
+  sheet_id: string;
+  size: { h: number; w: number };
+  styles: string;
 }

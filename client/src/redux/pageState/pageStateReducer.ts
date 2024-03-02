@@ -1,33 +1,7 @@
 import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
+import { PageState, PageStateAction } from "@FgTypes/reduxTypes";
 
-interface State {
-  [key: string]: {
-    pagePayload: {
-      pageState: string;
-      isLoggedIn?: boolean;
-      ids?: {
-        individual_id?: number | null;
-        group_id?: number | null;
-        organization_id?: number | null;
-        paper_id?: number | null;
-        sheet_id?: number | null;
-        video_id?: number | null;
-        image_id?: number | null;
-        collection_id?: number | null;
-      };
-    };
-  };
-}
-
-type Action =
-  | { type: typeof SET_PAGE_STATE; payload: { page: string; newState: string } }
-  | {
-      type: typeof SET_IDS;
-      payload: { page: string; id: string; value: string | null };
-    }
-  | { type: typeof SET_LOGGED_IN; payload: { isLoggedIn: boolean } };
-
-const initialState: State = {
+const initialState: PageState = {
   login: {
     pagePayload: {
       pageState: "login",
@@ -86,8 +60,8 @@ const initialState: State = {
 
 export default function pageStateReducer(
   state = initialState,
-  action: Action,
-): State {
+  action: PageStateAction,
+): PageState {
   switch (action.type) {
     case SET_PAGE_STATE: {
       const { page, newState } = action.payload;

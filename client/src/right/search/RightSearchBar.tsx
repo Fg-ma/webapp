@@ -3,18 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import RightSearchFilter from "./RightSearchFilter";
 import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
-
-interface RightSearchBarProps {
-  page: string;
-}
-
-interface PageState {
-  filters: {
-    [filter: string]: {
-      isDropFilter: boolean;
-    };
-  };
-}
+import { RightSearchBarProps, RightPageState } from "@FgTypes/rightTypes";
 
 export default function RightSearchBar({ page }: RightSearchBarProps) {
   /* 
@@ -27,7 +16,7 @@ export default function RightSearchBar({ page }: RightSearchBarProps) {
 
   const dispatch = useDispatch();
   const dropFilter = useSelector(
-    (state: PageState) => state.filters[page].isDropFilter,
+    (state: RightPageState) => state.filters[page].isDropFilter,
   );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");

@@ -1,11 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleAdvancedSearch } from "@redux/filters/filterActions";
-
-interface RightAddAdvancedSearchFilterProps {
-  page: string;
-  rightAddAdvancedSearchFilterRef: React.RefObject<HTMLDivElement>;
-}
+import { RightAddAdvancedSearchFilterProps } from "@FgTypes/rightTypes";
 
 export default function RightAddAdvancedSearchFilter({
   page,

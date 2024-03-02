@@ -10,11 +10,11 @@ datasource db {
 
 model affiliates_relations {
   affiliate_relation_id   String   @id @unique(map: "affiliate_relation_id_UNIQUE") @db.Char(36)
-  affiliate_id_1          String   @db.Char(36)
-  affiliate_id_2          String   @db.Char(36)
+  affiliate_id_root       String   @db.Char(36)
+  affiliate_id_target     String   @db.Char(36)
   affiliate_relation_date DateTime @default(dbgenerated("'2000-01-01 00:00:00'")) @db.Timestamp(0)
 
-  @@unique([affiliate_id_1, affiliate_id_2], map: "unique_affiliate_combination")
+  @@unique([affiliate_id_root, affiliate_id_target], map: "unique_affiliate_combination")
 }
 
 model collections {
@@ -212,27 +212,37 @@ model profile_pictures {
 }
 
 model sheets {
-  sheet_id          String      @id @unique(map: "sheet_id_UNIQUE") @db.Char(36)
-  sheet_author_id   String      @db.Char(36)
-  sheet_title       String      @db.VarChar(256)
-  sheet_subject     String      @db.Text
-  sheet_filename    String      @db.VarChar(256)
-  sheet_data_id     String      @db.Char(36)
-  sheet_likes       Int         @default(0)
-  sheet_dislikes    Int         @default(0)
-  sheet_views       Int         @default(0)
-  sheet_date_posted DateTime    @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
-  entities          entities    @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
-  sheets_data       sheets_data @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
+  sheet_id           String             @id @unique(map: "sheet_id_UNIQUE") @db.Char(36)
+  sheet_author_id    String             @db.Char(36)
+  sheet_title        String             @db.VarChar(256)
+  sheet_subject      String             @db.Text
+  sheet_filename     String             @db.VarChar(256)
+  sheet_data_id      String             @db.Char(36)
+  sheet_thumbnail_id String?            @db.Char(36)
+  sheet_likes        Int                @default(0)
+  sheet_dislikes     Int                @default(0)
+  sheet_views        Int                @default(0)
+  sheet_date_posted  DateTime           @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
+  entities           entities           @relation(fields: [sheet_author_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_author_id_fk")
+  sheets_data        sheets_data        @relation(fields: [sheet_data_id], references: [sheet_data_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_data_id_fk")
+  sheets_thumbnails  sheets_thumbnails? @relation(fields: [sheet_thumbnail_id], references: [sheet_thumbnail_id], onDelete: NoAction, onUpdate: NoAction, map: "sheets_sheet_thumbnail_id")
 
   @@index([sheet_data_id], map: "Sheets_sheet_data_id_fk_idx")
   @@index([sheet_author_id], map: "sheets_sheet_author_id_fk_idx")
+  @@index([sheet_thumbnail_id], map: "sheets_sheet_tumbnail_id_idx")
 }
 
 model sheets_data {
   sheet_data_id String   @id @unique(map: "sheet_data_id_UNIQUE") @db.Char(36)
   sheet_data    Bytes
   sheets        sheets[]
+}
+
+model sheets_thumbnails {
+  sheet_thumbnail_id       String   @id @unique(map: "sheet_thumbnail_id_UNIQUE") @db.Char(36)
+  sheet_thumbnail_data     Bytes
+  sheet_thumbnail_filename String   @db.VarChar(265)
+  sheets                   sheets[]
 }
 
 model user_credentials {
@@ -247,25 +257,35 @@ model user_credentials {
 }
 
 model videos {
-  video_id          String      @id @unique(map: "video_id_UNIQUE") @db.Char(36)
-  video_creator_id  String      @db.Char(36)
-  video_title       String      @db.VarChar(256)
-  video_description String      @db.Text
-  video_filename    String      @db.VarChar(256)
-  video_data_id     String      @db.Char(36)
-  video_likes       Int         @default(0)
-  video_dislikes    Int         @default(0)
-  video_views       Int         @default(0)
-  video_date_posted DateTime?   @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
-  entities          entities    @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
-  videos_data       videos_data @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
+  video_id           String             @id @unique(map: "video_id_UNIQUE") @db.Char(36)
+  video_creator_id   String             @db.Char(36)
+  video_title        String             @db.VarChar(256)
+  video_description  String             @db.Text
+  video_filename     String             @db.VarChar(256)
+  video_data_id      String             @db.Char(36)
+  video_thumbnail_id String?            @db.Char(36)
+  video_likes        Int                @default(0)
+  video_dislikes     Int                @default(0)
+  video_views        Int                @default(0)
+  video_date_posted  DateTime?          @default(dbgenerated("'2000-01-01 01:01:01'")) @db.Timestamp(0)
+  entities           entities           @relation(fields: [video_creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_creator_id_fk")
+  videos_data        videos_data        @relation(fields: [video_data_id], references: [video_data_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_data_id_fk")
+  videos_thumbnails  videos_thumbnails? @relation(fields: [video_thumbnail_id], references: [video_thumbnail_id], onDelete: NoAction, onUpdate: NoAction, map: "videos_video_thumbnail_id_fk")
 
   @@index([video_creator_id], map: "videos_video_creator_id_fk_idx")
   @@index([video_data_id], map: "videos_video_data_id_fk_idx")
+  @@index([video_thumbnail_id], map: "videos_video_thumbnail_id_fk_idx")
 }
 
 model videos_data {
   video_data_id String   @id @unique(map: "video_data_id_UNIQUE") @db.Char(36)
   video_data    Bytes
   videos        videos[]
+}
+
+model videos_thumbnails {
+  video_thumbnail_id       String   @id @unique(map: "videos_thumbnails_id_UNIQUE") @db.Char(36)
+  video_thumbnail_data     Bytes
+  video_thumbnail_filename String   @db.VarChar(256)
+  videos                   videos[]
 }

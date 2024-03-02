@@ -109,8 +109,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.Affiliates_relationsScalarFieldEnum = {
   affiliate_relation_id: 'affiliate_relation_id',
-  affiliate_id_1: 'affiliate_id_1',
-  affiliate_id_2: 'affiliate_id_2',
+  affiliate_id_root: 'affiliate_id_root',
+  affiliate_id_target: 'affiliate_id_target',
   affiliate_relation_date: 'affiliate_relation_date'
 };
 
@@ -241,6 +241,7 @@ exports.Prisma.SheetsScalarFieldEnum = {
   sheet_subject: 'sheet_subject',
   sheet_filename: 'sheet_filename',
   sheet_data_id: 'sheet_data_id',
+  sheet_thumbnail_id: 'sheet_thumbnail_id',
   sheet_likes: 'sheet_likes',
   sheet_dislikes: 'sheet_dislikes',
   sheet_views: 'sheet_views',
@@ -250,6 +251,12 @@ exports.Prisma.SheetsScalarFieldEnum = {
 exports.Prisma.Sheets_dataScalarFieldEnum = {
   sheet_data_id: 'sheet_data_id',
   sheet_data: 'sheet_data'
+};
+
+exports.Prisma.Sheets_thumbnailsScalarFieldEnum = {
+  sheet_thumbnail_id: 'sheet_thumbnail_id',
+  sheet_thumbnail_data: 'sheet_thumbnail_data',
+  sheet_thumbnail_filename: 'sheet_thumbnail_filename'
 };
 
 exports.Prisma.User_credentialsScalarFieldEnum = {
@@ -269,6 +276,7 @@ exports.Prisma.VideosScalarFieldEnum = {
   video_description: 'video_description',
   video_filename: 'video_filename',
   video_data_id: 'video_data_id',
+  video_thumbnail_id: 'video_thumbnail_id',
   video_likes: 'video_likes',
   video_dislikes: 'video_dislikes',
   video_views: 'video_views',
@@ -278,6 +286,12 @@ exports.Prisma.VideosScalarFieldEnum = {
 exports.Prisma.Videos_dataScalarFieldEnum = {
   video_data_id: 'video_data_id',
   video_data: 'video_data'
+};
+
+exports.Prisma.Videos_thumbnailsScalarFieldEnum = {
+  video_thumbnail_id: 'video_thumbnail_id',
+  video_thumbnail_data: 'video_thumbnail_data',
+  video_thumbnail_filename: 'video_thumbnail_filename'
 };
 
 exports.Prisma.SortOrder = {
@@ -311,9 +325,11 @@ exports.Prisma.ModelName = {
   profile_pictures: 'profile_pictures',
   sheets: 'sheets',
   sheets_data: 'sheets_data',
+  sheets_thumbnails: 'sheets_thumbnails',
   user_credentials: 'user_credentials',
   videos: 'videos',
-  videos_data: 'videos_data'
+  videos_data: 'videos_data',
+  videos_thumbnails: 'videos_thumbnails'
 };
 
 /**

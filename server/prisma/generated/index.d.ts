@@ -109,6 +109,11 @@ export type sheets = $Result.DefaultSelection<Prisma.$sheetsPayload>
  */
 export type sheets_data = $Result.DefaultSelection<Prisma.$sheets_dataPayload>
 /**
+ * Model sheets_thumbnails
+ * 
+ */
+export type sheets_thumbnails = $Result.DefaultSelection<Prisma.$sheets_thumbnailsPayload>
+/**
  * Model user_credentials
  * 
  */
@@ -123,6 +128,11 @@ export type videos = $Result.DefaultSelection<Prisma.$videosPayload>
  * 
  */
 export type videos_data = $Result.DefaultSelection<Prisma.$videos_dataPayload>
+/**
+ * Model videos_thumbnails
+ * 
+ */
+export type videos_thumbnails = $Result.DefaultSelection<Prisma.$videos_thumbnailsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -437,6 +447,16 @@ export class PrismaClient<
   get sheets_data(): Prisma.sheets_dataDelegate<ExtArgs>;
 
   /**
+   * `prisma.sheets_thumbnails`: Exposes CRUD operations for the **sheets_thumbnails** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sheets_thumbnails
+    * const sheets_thumbnails = await prisma.sheets_thumbnails.findMany()
+    * ```
+    */
+  get sheets_thumbnails(): Prisma.sheets_thumbnailsDelegate<ExtArgs>;
+
+  /**
    * `prisma.user_credentials`: Exposes CRUD operations for the **user_credentials** model.
     * Example usage:
     * ```ts
@@ -465,6 +485,16 @@ export class PrismaClient<
     * ```
     */
   get videos_data(): Prisma.videos_dataDelegate<ExtArgs>;
+
+  /**
+   * `prisma.videos_thumbnails`: Exposes CRUD operations for the **videos_thumbnails** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videos_thumbnails
+    * const videos_thumbnails = await prisma.videos_thumbnails.findMany()
+    * ```
+    */
+  get videos_thumbnails(): Prisma.videos_thumbnailsDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -954,9 +984,11 @@ export namespace Prisma {
     profile_pictures: 'profile_pictures',
     sheets: 'sheets',
     sheets_data: 'sheets_data',
+    sheets_thumbnails: 'sheets_thumbnails',
     user_credentials: 'user_credentials',
     videos: 'videos',
-    videos_data: 'videos_data'
+    videos_data: 'videos_data',
+    videos_thumbnails: 'videos_thumbnails'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -973,7 +1005,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'user_credentials' | 'videos' | 'videos_data'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2231,6 +2263,72 @@ export namespace Prisma {
           }
         }
       }
+      sheets_thumbnails: {
+        payload: Prisma.$sheets_thumbnailsPayload<ExtArgs>
+        fields: Prisma.sheets_thumbnailsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.sheets_thumbnailsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.sheets_thumbnailsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          findFirst: {
+            args: Prisma.sheets_thumbnailsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.sheets_thumbnailsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          findMany: {
+            args: Prisma.sheets_thumbnailsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>[]
+          }
+          create: {
+            args: Prisma.sheets_thumbnailsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          createMany: {
+            args: Prisma.sheets_thumbnailsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.sheets_thumbnailsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          update: {
+            args: Prisma.sheets_thumbnailsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          deleteMany: {
+            args: Prisma.sheets_thumbnailsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.sheets_thumbnailsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.sheets_thumbnailsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sheets_thumbnailsPayload>
+          }
+          aggregate: {
+            args: Prisma.Sheets_thumbnailsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSheets_thumbnails>
+          }
+          groupBy: {
+            args: Prisma.sheets_thumbnailsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Sheets_thumbnailsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.sheets_thumbnailsCountArgs<ExtArgs>,
+            result: $Utils.Optional<Sheets_thumbnailsCountAggregateOutputType> | number
+          }
+        }
+      }
       user_credentials: {
         payload: Prisma.$user_credentialsPayload<ExtArgs>
         fields: Prisma.user_credentialsFieldRefs
@@ -2426,6 +2524,72 @@ export namespace Prisma {
           count: {
             args: Prisma.videos_dataCountArgs<ExtArgs>,
             result: $Utils.Optional<Videos_dataCountAggregateOutputType> | number
+          }
+        }
+      }
+      videos_thumbnails: {
+        payload: Prisma.$videos_thumbnailsPayload<ExtArgs>
+        fields: Prisma.videos_thumbnailsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.videos_thumbnailsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.videos_thumbnailsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          findFirst: {
+            args: Prisma.videos_thumbnailsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.videos_thumbnailsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          findMany: {
+            args: Prisma.videos_thumbnailsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>[]
+          }
+          create: {
+            args: Prisma.videos_thumbnailsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          createMany: {
+            args: Prisma.videos_thumbnailsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.videos_thumbnailsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          update: {
+            args: Prisma.videos_thumbnailsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          deleteMany: {
+            args: Prisma.videos_thumbnailsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.videos_thumbnailsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.videos_thumbnailsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$videos_thumbnailsPayload>
+          }
+          aggregate: {
+            args: Prisma.Videos_thumbnailsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateVideos_thumbnails>
+          }
+          groupBy: {
+            args: Prisma.videos_thumbnailsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Videos_thumbnailsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.videos_thumbnailsCountArgs<ExtArgs>,
+            result: $Utils.Optional<Videos_thumbnailsCountAggregateOutputType> | number
           }
         }
       }
@@ -2986,6 +3150,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type Sheets_thumbnailsCountOutputType
+   */
+
+  export type Sheets_thumbnailsCountOutputType = {
+    sheets: number
+  }
+
+  export type Sheets_thumbnailsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sheets?: boolean | Sheets_thumbnailsCountOutputTypeCountSheetsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Sheets_thumbnailsCountOutputType without action
+   */
+  export type Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sheets_thumbnailsCountOutputType
+     */
+    select?: Sheets_thumbnailsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Sheets_thumbnailsCountOutputType without action
+   */
+  export type Sheets_thumbnailsCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sheetsWhereInput
+  }
+
+
+
+  /**
    * Count Type Videos_dataCountOutputType
    */
 
@@ -3020,6 +3218,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type Videos_thumbnailsCountOutputType
+   */
+
+  export type Videos_thumbnailsCountOutputType = {
+    videos: number
+  }
+
+  export type Videos_thumbnailsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos?: boolean | Videos_thumbnailsCountOutputTypeCountVideosArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Videos_thumbnailsCountOutputType without action
+   */
+  export type Videos_thumbnailsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videos_thumbnailsCountOutputType
+     */
+    select?: Videos_thumbnailsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Videos_thumbnailsCountOutputType without action
+   */
+  export type Videos_thumbnailsCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videosWhereInput
+  }
+
+
+
+  /**
    * Models
    */
 
@@ -3035,22 +3267,22 @@ export namespace Prisma {
 
   export type Affiliates_relationsMinAggregateOutputType = {
     affiliate_relation_id: string | null
-    affiliate_id_1: string | null
-    affiliate_id_2: string | null
+    affiliate_id_root: string | null
+    affiliate_id_target: string | null
     affiliate_relation_date: Date | null
   }
 
   export type Affiliates_relationsMaxAggregateOutputType = {
     affiliate_relation_id: string | null
-    affiliate_id_1: string | null
-    affiliate_id_2: string | null
+    affiliate_id_root: string | null
+    affiliate_id_target: string | null
     affiliate_relation_date: Date | null
   }
 
   export type Affiliates_relationsCountAggregateOutputType = {
     affiliate_relation_id: number
-    affiliate_id_1: number
-    affiliate_id_2: number
+    affiliate_id_root: number
+    affiliate_id_target: number
     affiliate_relation_date: number
     _all: number
   }
@@ -3058,22 +3290,22 @@ export namespace Prisma {
 
   export type Affiliates_relationsMinAggregateInputType = {
     affiliate_relation_id?: true
-    affiliate_id_1?: true
-    affiliate_id_2?: true
+    affiliate_id_root?: true
+    affiliate_id_target?: true
     affiliate_relation_date?: true
   }
 
   export type Affiliates_relationsMaxAggregateInputType = {
     affiliate_relation_id?: true
-    affiliate_id_1?: true
-    affiliate_id_2?: true
+    affiliate_id_root?: true
+    affiliate_id_target?: true
     affiliate_relation_date?: true
   }
 
   export type Affiliates_relationsCountAggregateInputType = {
     affiliate_relation_id?: true
-    affiliate_id_1?: true
-    affiliate_id_2?: true
+    affiliate_id_root?: true
+    affiliate_id_target?: true
     affiliate_relation_date?: true
     _all?: true
   }
@@ -3152,8 +3384,8 @@ export namespace Prisma {
 
   export type Affiliates_relationsGroupByOutputType = {
     affiliate_relation_id: string
-    affiliate_id_1: string
-    affiliate_id_2: string
+    affiliate_id_root: string
+    affiliate_id_target: string
     affiliate_relation_date: Date
     _count: Affiliates_relationsCountAggregateOutputType | null
     _min: Affiliates_relationsMinAggregateOutputType | null
@@ -3176,15 +3408,15 @@ export namespace Prisma {
 
   export type affiliates_relationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     affiliate_relation_id?: boolean
-    affiliate_id_1?: boolean
-    affiliate_id_2?: boolean
+    affiliate_id_root?: boolean
+    affiliate_id_target?: boolean
     affiliate_relation_date?: boolean
   }, ExtArgs["result"]["affiliates_relations"]>
 
   export type affiliates_relationsSelectScalar = {
     affiliate_relation_id?: boolean
-    affiliate_id_1?: boolean
-    affiliate_id_2?: boolean
+    affiliate_id_root?: boolean
+    affiliate_id_target?: boolean
     affiliate_relation_date?: boolean
   }
 
@@ -3194,8 +3426,8 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       affiliate_relation_id: string
-      affiliate_id_1: string
-      affiliate_id_2: string
+      affiliate_id_root: string
+      affiliate_id_target: string
       affiliate_relation_date: Date
     }, ExtArgs["result"]["affiliates_relations"]>
     composites: {}
@@ -3592,8 +3824,8 @@ export namespace Prisma {
    */ 
   interface affiliates_relationsFieldRefs {
     readonly affiliate_relation_id: FieldRef<"affiliates_relations", 'String'>
-    readonly affiliate_id_1: FieldRef<"affiliates_relations", 'String'>
-    readonly affiliate_id_2: FieldRef<"affiliates_relations", 'String'>
+    readonly affiliate_id_root: FieldRef<"affiliates_relations", 'String'>
+    readonly affiliate_id_target: FieldRef<"affiliates_relations", 'String'>
     readonly affiliate_relation_date: FieldRef<"affiliates_relations", 'DateTime'>
   }
     
@@ -19251,6 +19483,7 @@ export namespace Prisma {
     sheet_subject: string | null
     sheet_filename: string | null
     sheet_data_id: string | null
+    sheet_thumbnail_id: string | null
     sheet_likes: number | null
     sheet_dislikes: number | null
     sheet_views: number | null
@@ -19264,6 +19497,7 @@ export namespace Prisma {
     sheet_subject: string | null
     sheet_filename: string | null
     sheet_data_id: string | null
+    sheet_thumbnail_id: string | null
     sheet_likes: number | null
     sheet_dislikes: number | null
     sheet_views: number | null
@@ -19277,6 +19511,7 @@ export namespace Prisma {
     sheet_subject: number
     sheet_filename: number
     sheet_data_id: number
+    sheet_thumbnail_id: number
     sheet_likes: number
     sheet_dislikes: number
     sheet_views: number
@@ -19304,6 +19539,7 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_thumbnail_id?: true
     sheet_likes?: true
     sheet_dislikes?: true
     sheet_views?: true
@@ -19317,6 +19553,7 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_thumbnail_id?: true
     sheet_likes?: true
     sheet_dislikes?: true
     sheet_views?: true
@@ -19330,6 +19567,7 @@ export namespace Prisma {
     sheet_subject?: true
     sheet_filename?: true
     sheet_data_id?: true
+    sheet_thumbnail_id?: true
     sheet_likes?: true
     sheet_dislikes?: true
     sheet_views?: true
@@ -19430,6 +19668,7 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_thumbnail_id: string | null
     sheet_likes: number
     sheet_dislikes: number
     sheet_views: number
@@ -19462,12 +19701,14 @@ export namespace Prisma {
     sheet_subject?: boolean
     sheet_filename?: boolean
     sheet_data_id?: boolean
+    sheet_thumbnail_id?: boolean
     sheet_likes?: boolean
     sheet_dislikes?: boolean
     sheet_views?: boolean
     sheet_date_posted?: boolean
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
+    sheets_thumbnails?: boolean | sheets$sheets_thumbnailsArgs<ExtArgs>
   }, ExtArgs["result"]["sheets"]>
 
   export type sheetsSelectScalar = {
@@ -19477,6 +19718,7 @@ export namespace Prisma {
     sheet_subject?: boolean
     sheet_filename?: boolean
     sheet_data_id?: boolean
+    sheet_thumbnail_id?: boolean
     sheet_likes?: boolean
     sheet_dislikes?: boolean
     sheet_views?: boolean
@@ -19486,6 +19728,7 @@ export namespace Prisma {
   export type sheetsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     sheets_data?: boolean | sheets_dataDefaultArgs<ExtArgs>
+    sheets_thumbnails?: boolean | sheets$sheets_thumbnailsArgs<ExtArgs>
   }
 
 
@@ -19494,6 +19737,7 @@ export namespace Prisma {
     objects: {
       entities: Prisma.$entitiesPayload<ExtArgs>
       sheets_data: Prisma.$sheets_dataPayload<ExtArgs>
+      sheets_thumbnails: Prisma.$sheets_thumbnailsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       sheet_id: string
@@ -19502,6 +19746,7 @@ export namespace Prisma {
       sheet_subject: string
       sheet_filename: string
       sheet_data_id: string
+      sheet_thumbnail_id: string | null
       sheet_likes: number
       sheet_dislikes: number
       sheet_views: number
@@ -19875,6 +20120,8 @@ export namespace Prisma {
 
     sheets_data<T extends sheets_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sheets_dataDefaultArgs<ExtArgs>>): Prisma__sheets_dataClient<$Result.GetResult<Prisma.$sheets_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    sheets_thumbnails<T extends sheets$sheets_thumbnailsArgs<ExtArgs> = {}>(args?: Subset<T, sheets$sheets_thumbnailsArgs<ExtArgs>>): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19909,6 +20156,7 @@ export namespace Prisma {
     readonly sheet_subject: FieldRef<"sheets", 'String'>
     readonly sheet_filename: FieldRef<"sheets", 'String'>
     readonly sheet_data_id: FieldRef<"sheets", 'String'>
+    readonly sheet_thumbnail_id: FieldRef<"sheets", 'String'>
     readonly sheet_likes: FieldRef<"sheets", 'Int'>
     readonly sheet_dislikes: FieldRef<"sheets", 'Int'>
     readonly sheet_views: FieldRef<"sheets", 'Int'>
@@ -20221,6 +20469,22 @@ export namespace Prisma {
      * Filter which sheets to delete
      */
     where?: sheetsWhereInput
+  }
+
+
+  /**
+   * sheets.sheets_thumbnails
+   */
+  export type sheets$sheets_thumbnailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    where?: sheets_thumbnailsWhereInput
   }
 
 
@@ -21144,6 +21408,925 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: sheets_dataInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model sheets_thumbnails
+   */
+
+  export type AggregateSheets_thumbnails = {
+    _count: Sheets_thumbnailsCountAggregateOutputType | null
+    _min: Sheets_thumbnailsMinAggregateOutputType | null
+    _max: Sheets_thumbnailsMaxAggregateOutputType | null
+  }
+
+  export type Sheets_thumbnailsMinAggregateOutputType = {
+    sheet_thumbnail_id: string | null
+    sheet_thumbnail_data: Buffer | null
+    sheet_thumbnail_filename: string | null
+  }
+
+  export type Sheets_thumbnailsMaxAggregateOutputType = {
+    sheet_thumbnail_id: string | null
+    sheet_thumbnail_data: Buffer | null
+    sheet_thumbnail_filename: string | null
+  }
+
+  export type Sheets_thumbnailsCountAggregateOutputType = {
+    sheet_thumbnail_id: number
+    sheet_thumbnail_data: number
+    sheet_thumbnail_filename: number
+    _all: number
+  }
+
+
+  export type Sheets_thumbnailsMinAggregateInputType = {
+    sheet_thumbnail_id?: true
+    sheet_thumbnail_data?: true
+    sheet_thumbnail_filename?: true
+  }
+
+  export type Sheets_thumbnailsMaxAggregateInputType = {
+    sheet_thumbnail_id?: true
+    sheet_thumbnail_data?: true
+    sheet_thumbnail_filename?: true
+  }
+
+  export type Sheets_thumbnailsCountAggregateInputType = {
+    sheet_thumbnail_id?: true
+    sheet_thumbnail_data?: true
+    sheet_thumbnail_filename?: true
+    _all?: true
+  }
+
+  export type Sheets_thumbnailsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sheets_thumbnails to aggregate.
+     */
+    where?: sheets_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_thumbnails to fetch.
+     */
+    orderBy?: sheets_thumbnailsOrderByWithRelationInput | sheets_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: sheets_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned sheets_thumbnails
+    **/
+    _count?: true | Sheets_thumbnailsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Sheets_thumbnailsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Sheets_thumbnailsMaxAggregateInputType
+  }
+
+  export type GetSheets_thumbnailsAggregateType<T extends Sheets_thumbnailsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSheets_thumbnails]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSheets_thumbnails[P]>
+      : GetScalarType<T[P], AggregateSheets_thumbnails[P]>
+  }
+
+
+
+
+  export type sheets_thumbnailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sheets_thumbnailsWhereInput
+    orderBy?: sheets_thumbnailsOrderByWithAggregationInput | sheets_thumbnailsOrderByWithAggregationInput[]
+    by: Sheets_thumbnailsScalarFieldEnum[] | Sheets_thumbnailsScalarFieldEnum
+    having?: sheets_thumbnailsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Sheets_thumbnailsCountAggregateInputType | true
+    _min?: Sheets_thumbnailsMinAggregateInputType
+    _max?: Sheets_thumbnailsMaxAggregateInputType
+  }
+
+  export type Sheets_thumbnailsGroupByOutputType = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+    _count: Sheets_thumbnailsCountAggregateOutputType | null
+    _min: Sheets_thumbnailsMinAggregateOutputType | null
+    _max: Sheets_thumbnailsMaxAggregateOutputType | null
+  }
+
+  type GetSheets_thumbnailsGroupByPayload<T extends sheets_thumbnailsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Sheets_thumbnailsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Sheets_thumbnailsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Sheets_thumbnailsGroupByOutputType[P]>
+            : GetScalarType<T[P], Sheets_thumbnailsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type sheets_thumbnailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    sheet_thumbnail_id?: boolean
+    sheet_thumbnail_data?: boolean
+    sheet_thumbnail_filename?: boolean
+    sheets?: boolean | sheets_thumbnails$sheetsArgs<ExtArgs>
+    _count?: boolean | Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sheets_thumbnails"]>
+
+  export type sheets_thumbnailsSelectScalar = {
+    sheet_thumbnail_id?: boolean
+    sheet_thumbnail_data?: boolean
+    sheet_thumbnail_filename?: boolean
+  }
+
+  export type sheets_thumbnailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sheets?: boolean | sheets_thumbnails$sheetsArgs<ExtArgs>
+    _count?: boolean | Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $sheets_thumbnailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "sheets_thumbnails"
+    objects: {
+      sheets: Prisma.$sheetsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      sheet_thumbnail_id: string
+      sheet_thumbnail_data: Buffer
+      sheet_thumbnail_filename: string
+    }, ExtArgs["result"]["sheets_thumbnails"]>
+    composites: {}
+  }
+
+
+  type sheets_thumbnailsGetPayload<S extends boolean | null | undefined | sheets_thumbnailsDefaultArgs> = $Result.GetResult<Prisma.$sheets_thumbnailsPayload, S>
+
+  type sheets_thumbnailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<sheets_thumbnailsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Sheets_thumbnailsCountAggregateInputType | true
+    }
+
+  export interface sheets_thumbnailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['sheets_thumbnails'], meta: { name: 'sheets_thumbnails' } }
+    /**
+     * Find zero or one Sheets_thumbnails that matches the filter.
+     * @param {sheets_thumbnailsFindUniqueArgs} args - Arguments to find a Sheets_thumbnails
+     * @example
+     * // Get one Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends sheets_thumbnailsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsFindUniqueArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Sheets_thumbnails that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {sheets_thumbnailsFindUniqueOrThrowArgs} args - Arguments to find a Sheets_thumbnails
+     * @example
+     * // Get one Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends sheets_thumbnailsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Sheets_thumbnails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsFindFirstArgs} args - Arguments to find a Sheets_thumbnails
+     * @example
+     * // Get one Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends sheets_thumbnailsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsFindFirstArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Sheets_thumbnails that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsFindFirstOrThrowArgs} args - Arguments to find a Sheets_thumbnails
+     * @example
+     * // Get one Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends sheets_thumbnailsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Sheets_thumbnails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findMany()
+     * 
+     * // Get first 10 Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.findMany({ take: 10 })
+     * 
+     * // Only select the `sheet_thumbnail_id`
+     * const sheets_thumbnailsWithSheet_thumbnail_idOnly = await prisma.sheets_thumbnails.findMany({ select: { sheet_thumbnail_id: true } })
+     * 
+    **/
+    findMany<T extends sheets_thumbnailsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Sheets_thumbnails.
+     * @param {sheets_thumbnailsCreateArgs} args - Arguments to create a Sheets_thumbnails.
+     * @example
+     * // Create one Sheets_thumbnails
+     * const Sheets_thumbnails = await prisma.sheets_thumbnails.create({
+     *   data: {
+     *     // ... data to create a Sheets_thumbnails
+     *   }
+     * })
+     * 
+    **/
+    create<T extends sheets_thumbnailsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsCreateArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Sheets_thumbnails.
+     *     @param {sheets_thumbnailsCreateManyArgs} args - Arguments to create many Sheets_thumbnails.
+     *     @example
+     *     // Create many Sheets_thumbnails
+     *     const sheets_thumbnails = await prisma.sheets_thumbnails.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends sheets_thumbnailsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Sheets_thumbnails.
+     * @param {sheets_thumbnailsDeleteArgs} args - Arguments to delete one Sheets_thumbnails.
+     * @example
+     * // Delete one Sheets_thumbnails
+     * const Sheets_thumbnails = await prisma.sheets_thumbnails.delete({
+     *   where: {
+     *     // ... filter to delete one Sheets_thumbnails
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends sheets_thumbnailsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsDeleteArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Sheets_thumbnails.
+     * @param {sheets_thumbnailsUpdateArgs} args - Arguments to update one Sheets_thumbnails.
+     * @example
+     * // Update one Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends sheets_thumbnailsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsUpdateArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Sheets_thumbnails.
+     * @param {sheets_thumbnailsDeleteManyArgs} args - Arguments to filter Sheets_thumbnails to delete.
+     * @example
+     * // Delete a few Sheets_thumbnails
+     * const { count } = await prisma.sheets_thumbnails.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends sheets_thumbnailsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sheets_thumbnailsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sheets_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends sheets_thumbnailsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Sheets_thumbnails.
+     * @param {sheets_thumbnailsUpsertArgs} args - Arguments to update or create a Sheets_thumbnails.
+     * @example
+     * // Update or create a Sheets_thumbnails
+     * const sheets_thumbnails = await prisma.sheets_thumbnails.upsert({
+     *   create: {
+     *     // ... data to create a Sheets_thumbnails
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sheets_thumbnails we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends sheets_thumbnailsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, sheets_thumbnailsUpsertArgs<ExtArgs>>
+    ): Prisma__sheets_thumbnailsClient<$Result.GetResult<Prisma.$sheets_thumbnailsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Sheets_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsCountArgs} args - Arguments to filter Sheets_thumbnails to count.
+     * @example
+     * // Count the number of Sheets_thumbnails
+     * const count = await prisma.sheets_thumbnails.count({
+     *   where: {
+     *     // ... the filter for the Sheets_thumbnails we want to count
+     *   }
+     * })
+    **/
+    count<T extends sheets_thumbnailsCountArgs>(
+      args?: Subset<T, sheets_thumbnailsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Sheets_thumbnailsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sheets_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Sheets_thumbnailsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Sheets_thumbnailsAggregateArgs>(args: Subset<T, Sheets_thumbnailsAggregateArgs>): Prisma.PrismaPromise<GetSheets_thumbnailsAggregateType<T>>
+
+    /**
+     * Group by Sheets_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sheets_thumbnailsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends sheets_thumbnailsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: sheets_thumbnailsGroupByArgs['orderBy'] }
+        : { orderBy?: sheets_thumbnailsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, sheets_thumbnailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSheets_thumbnailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the sheets_thumbnails model
+   */
+  readonly fields: sheets_thumbnailsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for sheets_thumbnails.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__sheets_thumbnailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    sheets<T extends sheets_thumbnails$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, sheets_thumbnails$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the sheets_thumbnails model
+   */ 
+  interface sheets_thumbnailsFieldRefs {
+    readonly sheet_thumbnail_id: FieldRef<"sheets_thumbnails", 'String'>
+    readonly sheet_thumbnail_data: FieldRef<"sheets_thumbnails", 'Bytes'>
+    readonly sheet_thumbnail_filename: FieldRef<"sheets_thumbnails", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * sheets_thumbnails findUnique
+   */
+  export type sheets_thumbnailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_thumbnails to fetch.
+     */
+    where: sheets_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_thumbnails findUniqueOrThrow
+   */
+  export type sheets_thumbnailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_thumbnails to fetch.
+     */
+    where: sheets_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_thumbnails findFirst
+   */
+  export type sheets_thumbnailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_thumbnails to fetch.
+     */
+    where?: sheets_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_thumbnails to fetch.
+     */
+    orderBy?: sheets_thumbnailsOrderByWithRelationInput | sheets_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sheets_thumbnails.
+     */
+    cursor?: sheets_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sheets_thumbnails.
+     */
+    distinct?: Sheets_thumbnailsScalarFieldEnum | Sheets_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_thumbnails findFirstOrThrow
+   */
+  export type sheets_thumbnailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_thumbnails to fetch.
+     */
+    where?: sheets_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_thumbnails to fetch.
+     */
+    orderBy?: sheets_thumbnailsOrderByWithRelationInput | sheets_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sheets_thumbnails.
+     */
+    cursor?: sheets_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sheets_thumbnails.
+     */
+    distinct?: Sheets_thumbnailsScalarFieldEnum | Sheets_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_thumbnails findMany
+   */
+  export type sheets_thumbnailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which sheets_thumbnails to fetch.
+     */
+    where?: sheets_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sheets_thumbnails to fetch.
+     */
+    orderBy?: sheets_thumbnailsOrderByWithRelationInput | sheets_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing sheets_thumbnails.
+     */
+    cursor?: sheets_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sheets_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sheets_thumbnails.
+     */
+    skip?: number
+    distinct?: Sheets_thumbnailsScalarFieldEnum | Sheets_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_thumbnails create
+   */
+  export type sheets_thumbnailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a sheets_thumbnails.
+     */
+    data: XOR<sheets_thumbnailsCreateInput, sheets_thumbnailsUncheckedCreateInput>
+  }
+
+
+  /**
+   * sheets_thumbnails createMany
+   */
+  export type sheets_thumbnailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many sheets_thumbnails.
+     */
+    data: sheets_thumbnailsCreateManyInput | sheets_thumbnailsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * sheets_thumbnails update
+   */
+  export type sheets_thumbnailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a sheets_thumbnails.
+     */
+    data: XOR<sheets_thumbnailsUpdateInput, sheets_thumbnailsUncheckedUpdateInput>
+    /**
+     * Choose, which sheets_thumbnails to update.
+     */
+    where: sheets_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_thumbnails updateMany
+   */
+  export type sheets_thumbnailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update sheets_thumbnails.
+     */
+    data: XOR<sheets_thumbnailsUpdateManyMutationInput, sheets_thumbnailsUncheckedUpdateManyInput>
+    /**
+     * Filter which sheets_thumbnails to update
+     */
+    where?: sheets_thumbnailsWhereInput
+  }
+
+
+  /**
+   * sheets_thumbnails upsert
+   */
+  export type sheets_thumbnailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the sheets_thumbnails to update in case it exists.
+     */
+    where: sheets_thumbnailsWhereUniqueInput
+    /**
+     * In case the sheets_thumbnails found by the `where` argument doesn't exist, create a new sheets_thumbnails with this data.
+     */
+    create: XOR<sheets_thumbnailsCreateInput, sheets_thumbnailsUncheckedCreateInput>
+    /**
+     * In case the sheets_thumbnails was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<sheets_thumbnailsUpdateInput, sheets_thumbnailsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * sheets_thumbnails delete
+   */
+  export type sheets_thumbnailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter which sheets_thumbnails to delete.
+     */
+    where: sheets_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * sheets_thumbnails deleteMany
+   */
+  export type sheets_thumbnailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sheets_thumbnails to delete
+     */
+    where?: sheets_thumbnailsWhereInput
+  }
+
+
+  /**
+   * sheets_thumbnails.sheets
+   */
+  export type sheets_thumbnails$sheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets
+     */
+    select?: sheetsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheetsInclude<ExtArgs> | null
+    where?: sheetsWhereInput
+    orderBy?: sheetsOrderByWithRelationInput | sheetsOrderByWithRelationInput[]
+    cursor?: sheetsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SheetsScalarFieldEnum | SheetsScalarFieldEnum[]
+  }
+
+
+  /**
+   * sheets_thumbnails without action
+   */
+  export type sheets_thumbnailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sheets_thumbnails
+     */
+    select?: sheets_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: sheets_thumbnailsInclude<ExtArgs> | null
   }
 
 
@@ -22135,6 +23318,7 @@ export namespace Prisma {
     video_description: string | null
     video_filename: string | null
     video_data_id: string | null
+    video_thumbnail_id: string | null
     video_likes: number | null
     video_dislikes: number | null
     video_views: number | null
@@ -22148,6 +23332,7 @@ export namespace Prisma {
     video_description: string | null
     video_filename: string | null
     video_data_id: string | null
+    video_thumbnail_id: string | null
     video_likes: number | null
     video_dislikes: number | null
     video_views: number | null
@@ -22161,6 +23346,7 @@ export namespace Prisma {
     video_description: number
     video_filename: number
     video_data_id: number
+    video_thumbnail_id: number
     video_likes: number
     video_dislikes: number
     video_views: number
@@ -22188,6 +23374,7 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_thumbnail_id?: true
     video_likes?: true
     video_dislikes?: true
     video_views?: true
@@ -22201,6 +23388,7 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_thumbnail_id?: true
     video_likes?: true
     video_dislikes?: true
     video_views?: true
@@ -22214,6 +23402,7 @@ export namespace Prisma {
     video_description?: true
     video_filename?: true
     video_data_id?: true
+    video_thumbnail_id?: true
     video_likes?: true
     video_dislikes?: true
     video_views?: true
@@ -22314,6 +23503,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_thumbnail_id: string | null
     video_likes: number
     video_dislikes: number
     video_views: number
@@ -22346,12 +23536,14 @@ export namespace Prisma {
     video_description?: boolean
     video_filename?: boolean
     video_data_id?: boolean
+    video_thumbnail_id?: boolean
     video_likes?: boolean
     video_dislikes?: boolean
     video_views?: boolean
     video_date_posted?: boolean
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     videos_data?: boolean | videos_dataDefaultArgs<ExtArgs>
+    videos_thumbnails?: boolean | videos$videos_thumbnailsArgs<ExtArgs>
   }, ExtArgs["result"]["videos"]>
 
   export type videosSelectScalar = {
@@ -22361,6 +23553,7 @@ export namespace Prisma {
     video_description?: boolean
     video_filename?: boolean
     video_data_id?: boolean
+    video_thumbnail_id?: boolean
     video_likes?: boolean
     video_dislikes?: boolean
     video_views?: boolean
@@ -22370,6 +23563,7 @@ export namespace Prisma {
   export type videosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     videos_data?: boolean | videos_dataDefaultArgs<ExtArgs>
+    videos_thumbnails?: boolean | videos$videos_thumbnailsArgs<ExtArgs>
   }
 
 
@@ -22378,6 +23572,7 @@ export namespace Prisma {
     objects: {
       entities: Prisma.$entitiesPayload<ExtArgs>
       videos_data: Prisma.$videos_dataPayload<ExtArgs>
+      videos_thumbnails: Prisma.$videos_thumbnailsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       video_id: string
@@ -22386,6 +23581,7 @@ export namespace Prisma {
       video_description: string
       video_filename: string
       video_data_id: string
+      video_thumbnail_id: string | null
       video_likes: number
       video_dislikes: number
       video_views: number
@@ -22759,6 +23955,8 @@ export namespace Prisma {
 
     videos_data<T extends videos_dataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, videos_dataDefaultArgs<ExtArgs>>): Prisma__videos_dataClient<$Result.GetResult<Prisma.$videos_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    videos_thumbnails<T extends videos$videos_thumbnailsArgs<ExtArgs> = {}>(args?: Subset<T, videos$videos_thumbnailsArgs<ExtArgs>>): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22793,6 +23991,7 @@ export namespace Prisma {
     readonly video_description: FieldRef<"videos", 'String'>
     readonly video_filename: FieldRef<"videos", 'String'>
     readonly video_data_id: FieldRef<"videos", 'String'>
+    readonly video_thumbnail_id: FieldRef<"videos", 'String'>
     readonly video_likes: FieldRef<"videos", 'Int'>
     readonly video_dislikes: FieldRef<"videos", 'Int'>
     readonly video_views: FieldRef<"videos", 'Int'>
@@ -23105,6 +24304,22 @@ export namespace Prisma {
      * Filter which videos to delete
      */
     where?: videosWhereInput
+  }
+
+
+  /**
+   * videos.videos_thumbnails
+   */
+  export type videos$videos_thumbnailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    where?: videos_thumbnailsWhereInput
   }
 
 
@@ -24033,6 +25248,925 @@ export namespace Prisma {
 
 
   /**
+   * Model videos_thumbnails
+   */
+
+  export type AggregateVideos_thumbnails = {
+    _count: Videos_thumbnailsCountAggregateOutputType | null
+    _min: Videos_thumbnailsMinAggregateOutputType | null
+    _max: Videos_thumbnailsMaxAggregateOutputType | null
+  }
+
+  export type Videos_thumbnailsMinAggregateOutputType = {
+    video_thumbnail_id: string | null
+    video_thumbnail_data: Buffer | null
+    video_thumbnail_filename: string | null
+  }
+
+  export type Videos_thumbnailsMaxAggregateOutputType = {
+    video_thumbnail_id: string | null
+    video_thumbnail_data: Buffer | null
+    video_thumbnail_filename: string | null
+  }
+
+  export type Videos_thumbnailsCountAggregateOutputType = {
+    video_thumbnail_id: number
+    video_thumbnail_data: number
+    video_thumbnail_filename: number
+    _all: number
+  }
+
+
+  export type Videos_thumbnailsMinAggregateInputType = {
+    video_thumbnail_id?: true
+    video_thumbnail_data?: true
+    video_thumbnail_filename?: true
+  }
+
+  export type Videos_thumbnailsMaxAggregateInputType = {
+    video_thumbnail_id?: true
+    video_thumbnail_data?: true
+    video_thumbnail_filename?: true
+  }
+
+  export type Videos_thumbnailsCountAggregateInputType = {
+    video_thumbnail_id?: true
+    video_thumbnail_data?: true
+    video_thumbnail_filename?: true
+    _all?: true
+  }
+
+  export type Videos_thumbnailsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_thumbnails to aggregate.
+     */
+    where?: videos_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_thumbnails to fetch.
+     */
+    orderBy?: videos_thumbnailsOrderByWithRelationInput | videos_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: videos_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned videos_thumbnails
+    **/
+    _count?: true | Videos_thumbnailsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Videos_thumbnailsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Videos_thumbnailsMaxAggregateInputType
+  }
+
+  export type GetVideos_thumbnailsAggregateType<T extends Videos_thumbnailsAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideos_thumbnails]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideos_thumbnails[P]>
+      : GetScalarType<T[P], AggregateVideos_thumbnails[P]>
+  }
+
+
+
+
+  export type videos_thumbnailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videos_thumbnailsWhereInput
+    orderBy?: videos_thumbnailsOrderByWithAggregationInput | videos_thumbnailsOrderByWithAggregationInput[]
+    by: Videos_thumbnailsScalarFieldEnum[] | Videos_thumbnailsScalarFieldEnum
+    having?: videos_thumbnailsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Videos_thumbnailsCountAggregateInputType | true
+    _min?: Videos_thumbnailsMinAggregateInputType
+    _max?: Videos_thumbnailsMaxAggregateInputType
+  }
+
+  export type Videos_thumbnailsGroupByOutputType = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+    _count: Videos_thumbnailsCountAggregateOutputType | null
+    _min: Videos_thumbnailsMinAggregateOutputType | null
+    _max: Videos_thumbnailsMaxAggregateOutputType | null
+  }
+
+  type GetVideos_thumbnailsGroupByPayload<T extends videos_thumbnailsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Videos_thumbnailsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Videos_thumbnailsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Videos_thumbnailsGroupByOutputType[P]>
+            : GetScalarType<T[P], Videos_thumbnailsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type videos_thumbnailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    video_thumbnail_id?: boolean
+    video_thumbnail_data?: boolean
+    video_thumbnail_filename?: boolean
+    videos?: boolean | videos_thumbnails$videosArgs<ExtArgs>
+    _count?: boolean | Videos_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videos_thumbnails"]>
+
+  export type videos_thumbnailsSelectScalar = {
+    video_thumbnail_id?: boolean
+    video_thumbnail_data?: boolean
+    video_thumbnail_filename?: boolean
+  }
+
+  export type videos_thumbnailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos?: boolean | videos_thumbnails$videosArgs<ExtArgs>
+    _count?: boolean | Videos_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $videos_thumbnailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "videos_thumbnails"
+    objects: {
+      videos: Prisma.$videosPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      video_thumbnail_id: string
+      video_thumbnail_data: Buffer
+      video_thumbnail_filename: string
+    }, ExtArgs["result"]["videos_thumbnails"]>
+    composites: {}
+  }
+
+
+  type videos_thumbnailsGetPayload<S extends boolean | null | undefined | videos_thumbnailsDefaultArgs> = $Result.GetResult<Prisma.$videos_thumbnailsPayload, S>
+
+  type videos_thumbnailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<videos_thumbnailsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Videos_thumbnailsCountAggregateInputType | true
+    }
+
+  export interface videos_thumbnailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['videos_thumbnails'], meta: { name: 'videos_thumbnails' } }
+    /**
+     * Find zero or one Videos_thumbnails that matches the filter.
+     * @param {videos_thumbnailsFindUniqueArgs} args - Arguments to find a Videos_thumbnails
+     * @example
+     * // Get one Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends videos_thumbnailsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsFindUniqueArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Videos_thumbnails that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {videos_thumbnailsFindUniqueOrThrowArgs} args - Arguments to find a Videos_thumbnails
+     * @example
+     * // Get one Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends videos_thumbnailsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Videos_thumbnails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsFindFirstArgs} args - Arguments to find a Videos_thumbnails
+     * @example
+     * // Get one Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends videos_thumbnailsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsFindFirstArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Videos_thumbnails that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsFindFirstOrThrowArgs} args - Arguments to find a Videos_thumbnails
+     * @example
+     * // Get one Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends videos_thumbnailsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Videos_thumbnails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findMany()
+     * 
+     * // Get first 10 Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.findMany({ take: 10 })
+     * 
+     * // Only select the `video_thumbnail_id`
+     * const videos_thumbnailsWithVideo_thumbnail_idOnly = await prisma.videos_thumbnails.findMany({ select: { video_thumbnail_id: true } })
+     * 
+    **/
+    findMany<T extends videos_thumbnailsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Videos_thumbnails.
+     * @param {videos_thumbnailsCreateArgs} args - Arguments to create a Videos_thumbnails.
+     * @example
+     * // Create one Videos_thumbnails
+     * const Videos_thumbnails = await prisma.videos_thumbnails.create({
+     *   data: {
+     *     // ... data to create a Videos_thumbnails
+     *   }
+     * })
+     * 
+    **/
+    create<T extends videos_thumbnailsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsCreateArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Videos_thumbnails.
+     *     @param {videos_thumbnailsCreateManyArgs} args - Arguments to create many Videos_thumbnails.
+     *     @example
+     *     // Create many Videos_thumbnails
+     *     const videos_thumbnails = await prisma.videos_thumbnails.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends videos_thumbnailsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Videos_thumbnails.
+     * @param {videos_thumbnailsDeleteArgs} args - Arguments to delete one Videos_thumbnails.
+     * @example
+     * // Delete one Videos_thumbnails
+     * const Videos_thumbnails = await prisma.videos_thumbnails.delete({
+     *   where: {
+     *     // ... filter to delete one Videos_thumbnails
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends videos_thumbnailsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsDeleteArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Videos_thumbnails.
+     * @param {videos_thumbnailsUpdateArgs} args - Arguments to update one Videos_thumbnails.
+     * @example
+     * // Update one Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends videos_thumbnailsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsUpdateArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Videos_thumbnails.
+     * @param {videos_thumbnailsDeleteManyArgs} args - Arguments to filter Videos_thumbnails to delete.
+     * @example
+     * // Delete a few Videos_thumbnails
+     * const { count } = await prisma.videos_thumbnails.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends videos_thumbnailsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, videos_thumbnailsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends videos_thumbnailsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Videos_thumbnails.
+     * @param {videos_thumbnailsUpsertArgs} args - Arguments to update or create a Videos_thumbnails.
+     * @example
+     * // Update or create a Videos_thumbnails
+     * const videos_thumbnails = await prisma.videos_thumbnails.upsert({
+     *   create: {
+     *     // ... data to create a Videos_thumbnails
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Videos_thumbnails we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends videos_thumbnailsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, videos_thumbnailsUpsertArgs<ExtArgs>>
+    ): Prisma__videos_thumbnailsClient<$Result.GetResult<Prisma.$videos_thumbnailsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Videos_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsCountArgs} args - Arguments to filter Videos_thumbnails to count.
+     * @example
+     * // Count the number of Videos_thumbnails
+     * const count = await prisma.videos_thumbnails.count({
+     *   where: {
+     *     // ... the filter for the Videos_thumbnails we want to count
+     *   }
+     * })
+    **/
+    count<T extends videos_thumbnailsCountArgs>(
+      args?: Subset<T, videos_thumbnailsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Videos_thumbnailsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Videos_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Videos_thumbnailsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Videos_thumbnailsAggregateArgs>(args: Subset<T, Videos_thumbnailsAggregateArgs>): Prisma.PrismaPromise<GetVideos_thumbnailsAggregateType<T>>
+
+    /**
+     * Group by Videos_thumbnails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_thumbnailsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends videos_thumbnailsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: videos_thumbnailsGroupByArgs['orderBy'] }
+        : { orderBy?: videos_thumbnailsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, videos_thumbnailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideos_thumbnailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the videos_thumbnails model
+   */
+  readonly fields: videos_thumbnailsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for videos_thumbnails.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__videos_thumbnailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    videos<T extends videos_thumbnails$videosArgs<ExtArgs> = {}>(args?: Subset<T, videos_thumbnails$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the videos_thumbnails model
+   */ 
+  interface videos_thumbnailsFieldRefs {
+    readonly video_thumbnail_id: FieldRef<"videos_thumbnails", 'String'>
+    readonly video_thumbnail_data: FieldRef<"videos_thumbnails", 'Bytes'>
+    readonly video_thumbnail_filename: FieldRef<"videos_thumbnails", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * videos_thumbnails findUnique
+   */
+  export type videos_thumbnailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_thumbnails to fetch.
+     */
+    where: videos_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * videos_thumbnails findUniqueOrThrow
+   */
+  export type videos_thumbnailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_thumbnails to fetch.
+     */
+    where: videos_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * videos_thumbnails findFirst
+   */
+  export type videos_thumbnailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_thumbnails to fetch.
+     */
+    where?: videos_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_thumbnails to fetch.
+     */
+    orderBy?: videos_thumbnailsOrderByWithRelationInput | videos_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_thumbnails.
+     */
+    cursor?: videos_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_thumbnails.
+     */
+    distinct?: Videos_thumbnailsScalarFieldEnum | Videos_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * videos_thumbnails findFirstOrThrow
+   */
+  export type videos_thumbnailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_thumbnails to fetch.
+     */
+    where?: videos_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_thumbnails to fetch.
+     */
+    orderBy?: videos_thumbnailsOrderByWithRelationInput | videos_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_thumbnails.
+     */
+    cursor?: videos_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_thumbnails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_thumbnails.
+     */
+    distinct?: Videos_thumbnailsScalarFieldEnum | Videos_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * videos_thumbnails findMany
+   */
+  export type videos_thumbnailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_thumbnails to fetch.
+     */
+    where?: videos_thumbnailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_thumbnails to fetch.
+     */
+    orderBy?: videos_thumbnailsOrderByWithRelationInput | videos_thumbnailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing videos_thumbnails.
+     */
+    cursor?: videos_thumbnailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_thumbnails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_thumbnails.
+     */
+    skip?: number
+    distinct?: Videos_thumbnailsScalarFieldEnum | Videos_thumbnailsScalarFieldEnum[]
+  }
+
+
+  /**
+   * videos_thumbnails create
+   */
+  export type videos_thumbnailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a videos_thumbnails.
+     */
+    data: XOR<videos_thumbnailsCreateInput, videos_thumbnailsUncheckedCreateInput>
+  }
+
+
+  /**
+   * videos_thumbnails createMany
+   */
+  export type videos_thumbnailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many videos_thumbnails.
+     */
+    data: videos_thumbnailsCreateManyInput | videos_thumbnailsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * videos_thumbnails update
+   */
+  export type videos_thumbnailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a videos_thumbnails.
+     */
+    data: XOR<videos_thumbnailsUpdateInput, videos_thumbnailsUncheckedUpdateInput>
+    /**
+     * Choose, which videos_thumbnails to update.
+     */
+    where: videos_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * videos_thumbnails updateMany
+   */
+  export type videos_thumbnailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update videos_thumbnails.
+     */
+    data: XOR<videos_thumbnailsUpdateManyMutationInput, videos_thumbnailsUncheckedUpdateManyInput>
+    /**
+     * Filter which videos_thumbnails to update
+     */
+    where?: videos_thumbnailsWhereInput
+  }
+
+
+  /**
+   * videos_thumbnails upsert
+   */
+  export type videos_thumbnailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the videos_thumbnails to update in case it exists.
+     */
+    where: videos_thumbnailsWhereUniqueInput
+    /**
+     * In case the videos_thumbnails found by the `where` argument doesn't exist, create a new videos_thumbnails with this data.
+     */
+    create: XOR<videos_thumbnailsCreateInput, videos_thumbnailsUncheckedCreateInput>
+    /**
+     * In case the videos_thumbnails was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<videos_thumbnailsUpdateInput, videos_thumbnailsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * videos_thumbnails delete
+   */
+  export type videos_thumbnailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+    /**
+     * Filter which videos_thumbnails to delete.
+     */
+    where: videos_thumbnailsWhereUniqueInput
+  }
+
+
+  /**
+   * videos_thumbnails deleteMany
+   */
+  export type videos_thumbnailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_thumbnails to delete
+     */
+    where?: videos_thumbnailsWhereInput
+  }
+
+
+  /**
+   * videos_thumbnails.videos
+   */
+  export type videos_thumbnails$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos
+     */
+    select?: videosSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videosInclude<ExtArgs> | null
+    where?: videosWhereInput
+    orderBy?: videosOrderByWithRelationInput | videosOrderByWithRelationInput[]
+    cursor?: videosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideosScalarFieldEnum | VideosScalarFieldEnum[]
+  }
+
+
+  /**
+   * videos_thumbnails without action
+   */
+  export type videos_thumbnailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_thumbnails
+     */
+    select?: videos_thumbnailsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: videos_thumbnailsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -24048,8 +26182,8 @@ export namespace Prisma {
 
   export const Affiliates_relationsScalarFieldEnum: {
     affiliate_relation_id: 'affiliate_relation_id',
-    affiliate_id_1: 'affiliate_id_1',
-    affiliate_id_2: 'affiliate_id_2',
+    affiliate_id_root: 'affiliate_id_root',
+    affiliate_id_target: 'affiliate_id_target',
     affiliate_relation_date: 'affiliate_relation_date'
   };
 
@@ -24231,6 +26365,7 @@ export namespace Prisma {
     sheet_subject: 'sheet_subject',
     sheet_filename: 'sheet_filename',
     sheet_data_id: 'sheet_data_id',
+    sheet_thumbnail_id: 'sheet_thumbnail_id',
     sheet_likes: 'sheet_likes',
     sheet_dislikes: 'sheet_dislikes',
     sheet_views: 'sheet_views',
@@ -24246,6 +26381,15 @@ export namespace Prisma {
   };
 
   export type Sheets_dataScalarFieldEnum = (typeof Sheets_dataScalarFieldEnum)[keyof typeof Sheets_dataScalarFieldEnum]
+
+
+  export const Sheets_thumbnailsScalarFieldEnum: {
+    sheet_thumbnail_id: 'sheet_thumbnail_id',
+    sheet_thumbnail_data: 'sheet_thumbnail_data',
+    sheet_thumbnail_filename: 'sheet_thumbnail_filename'
+  };
+
+  export type Sheets_thumbnailsScalarFieldEnum = (typeof Sheets_thumbnailsScalarFieldEnum)[keyof typeof Sheets_thumbnailsScalarFieldEnum]
 
 
   export const User_credentialsScalarFieldEnum: {
@@ -24268,6 +26412,7 @@ export namespace Prisma {
     video_description: 'video_description',
     video_filename: 'video_filename',
     video_data_id: 'video_data_id',
+    video_thumbnail_id: 'video_thumbnail_id',
     video_likes: 'video_likes',
     video_dislikes: 'video_dislikes',
     video_views: 'video_views',
@@ -24283,6 +26428,15 @@ export namespace Prisma {
   };
 
   export type Videos_dataScalarFieldEnum = (typeof Videos_dataScalarFieldEnum)[keyof typeof Videos_dataScalarFieldEnum]
+
+
+  export const Videos_thumbnailsScalarFieldEnum: {
+    video_thumbnail_id: 'video_thumbnail_id',
+    video_thumbnail_data: 'video_thumbnail_data',
+    video_thumbnail_filename: 'video_thumbnail_filename'
+  };
+
+  export type Videos_thumbnailsScalarFieldEnum = (typeof Videos_thumbnailsScalarFieldEnum)[keyof typeof Videos_thumbnailsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -24356,33 +26510,33 @@ export namespace Prisma {
     OR?: affiliates_relationsWhereInput[]
     NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
     affiliate_relation_id?: StringFilter<"affiliates_relations"> | string
-    affiliate_id_1?: StringFilter<"affiliates_relations"> | string
-    affiliate_id_2?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_root?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_target?: StringFilter<"affiliates_relations"> | string
     affiliate_relation_date?: DateTimeFilter<"affiliates_relations"> | Date | string
   }
 
   export type affiliates_relationsOrderByWithRelationInput = {
     affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_id_2?: SortOrder
+    affiliate_id_root?: SortOrder
+    affiliate_id_target?: SortOrder
     affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsWhereUniqueInput = Prisma.AtLeast<{
     affiliate_relation_id?: string
-    affiliate_id_1_affiliate_id_2?: affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput
+    affiliate_id_root_affiliate_id_target?: affiliates_relationsAffiliate_id_rootAffiliate_id_targetCompoundUniqueInput
     AND?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
     OR?: affiliates_relationsWhereInput[]
     NOT?: affiliates_relationsWhereInput | affiliates_relationsWhereInput[]
-    affiliate_id_1?: StringFilter<"affiliates_relations"> | string
-    affiliate_id_2?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_root?: StringFilter<"affiliates_relations"> | string
+    affiliate_id_target?: StringFilter<"affiliates_relations"> | string
     affiliate_relation_date?: DateTimeFilter<"affiliates_relations"> | Date | string
-  }, "affiliate_relation_id" | "affiliate_relation_id" | "affiliate_id_1_affiliate_id_2">
+  }, "affiliate_relation_id" | "affiliate_relation_id" | "affiliate_id_root_affiliate_id_target">
 
   export type affiliates_relationsOrderByWithAggregationInput = {
     affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_id_2?: SortOrder
+    affiliate_id_root?: SortOrder
+    affiliate_id_target?: SortOrder
     affiliate_relation_date?: SortOrder
     _count?: affiliates_relationsCountOrderByAggregateInput
     _max?: affiliates_relationsMaxOrderByAggregateInput
@@ -24394,8 +26548,8 @@ export namespace Prisma {
     OR?: affiliates_relationsScalarWhereWithAggregatesInput[]
     NOT?: affiliates_relationsScalarWhereWithAggregatesInput | affiliates_relationsScalarWhereWithAggregatesInput[]
     affiliate_relation_id?: StringWithAggregatesFilter<"affiliates_relations"> | string
-    affiliate_id_1?: StringWithAggregatesFilter<"affiliates_relations"> | string
-    affiliate_id_2?: StringWithAggregatesFilter<"affiliates_relations"> | string
+    affiliate_id_root?: StringWithAggregatesFilter<"affiliates_relations"> | string
+    affiliate_id_target?: StringWithAggregatesFilter<"affiliates_relations"> | string
     affiliate_relation_date?: DateTimeWithAggregatesFilter<"affiliates_relations"> | Date | string
   }
 
@@ -25333,12 +27487,14 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_thumbnail_id?: StringNullableFilter<"sheets"> | string | null
     sheet_likes?: IntFilter<"sheets"> | number
     sheet_dislikes?: IntFilter<"sheets"> | number
     sheet_views?: IntFilter<"sheets"> | number
     sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
+    sheets_thumbnails?: XOR<Sheets_thumbnailsNullableRelationFilter, sheets_thumbnailsWhereInput> | null
   }
 
   export type sheetsOrderByWithRelationInput = {
@@ -25348,12 +27504,14 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_thumbnail_id?: SortOrderInput | SortOrder
     sheet_likes?: SortOrder
     sheet_dislikes?: SortOrder
     sheet_views?: SortOrder
     sheet_date_posted?: SortOrder
     entities?: entitiesOrderByWithRelationInput
     sheets_data?: sheets_dataOrderByWithRelationInput
+    sheets_thumbnails?: sheets_thumbnailsOrderByWithRelationInput
   }
 
   export type sheetsWhereUniqueInput = Prisma.AtLeast<{
@@ -25366,12 +27524,14 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_thumbnail_id?: StringNullableFilter<"sheets"> | string | null
     sheet_likes?: IntFilter<"sheets"> | number
     sheet_dislikes?: IntFilter<"sheets"> | number
     sheet_views?: IntFilter<"sheets"> | number
     sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     sheets_data?: XOR<Sheets_dataRelationFilter, sheets_dataWhereInput>
+    sheets_thumbnails?: XOR<Sheets_thumbnailsNullableRelationFilter, sheets_thumbnailsWhereInput> | null
   }, "sheet_id" | "sheet_id">
 
   export type sheetsOrderByWithAggregationInput = {
@@ -25381,6 +27541,7 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_thumbnail_id?: SortOrderInput | SortOrder
     sheet_likes?: SortOrder
     sheet_dislikes?: SortOrder
     sheet_views?: SortOrder
@@ -25402,6 +27563,7 @@ export namespace Prisma {
     sheet_subject?: StringWithAggregatesFilter<"sheets"> | string
     sheet_filename?: StringWithAggregatesFilter<"sheets"> | string
     sheet_data_id?: StringWithAggregatesFilter<"sheets"> | string
+    sheet_thumbnail_id?: StringNullableWithAggregatesFilter<"sheets"> | string | null
     sheet_likes?: IntWithAggregatesFilter<"sheets"> | number
     sheet_dislikes?: IntWithAggregatesFilter<"sheets"> | number
     sheet_views?: IntWithAggregatesFilter<"sheets"> | number
@@ -25446,6 +27608,51 @@ export namespace Prisma {
     NOT?: sheets_dataScalarWhereWithAggregatesInput | sheets_dataScalarWhereWithAggregatesInput[]
     sheet_data_id?: StringWithAggregatesFilter<"sheets_data"> | string
     sheet_data?: BytesWithAggregatesFilter<"sheets_data"> | Buffer
+  }
+
+  export type sheets_thumbnailsWhereInput = {
+    AND?: sheets_thumbnailsWhereInput | sheets_thumbnailsWhereInput[]
+    OR?: sheets_thumbnailsWhereInput[]
+    NOT?: sheets_thumbnailsWhereInput | sheets_thumbnailsWhereInput[]
+    sheet_thumbnail_id?: StringFilter<"sheets_thumbnails"> | string
+    sheet_thumbnail_data?: BytesFilter<"sheets_thumbnails"> | Buffer
+    sheet_thumbnail_filename?: StringFilter<"sheets_thumbnails"> | string
+    sheets?: SheetsListRelationFilter
+  }
+
+  export type sheets_thumbnailsOrderByWithRelationInput = {
+    sheet_thumbnail_id?: SortOrder
+    sheet_thumbnail_data?: SortOrder
+    sheet_thumbnail_filename?: SortOrder
+    sheets?: sheetsOrderByRelationAggregateInput
+  }
+
+  export type sheets_thumbnailsWhereUniqueInput = Prisma.AtLeast<{
+    sheet_thumbnail_id?: string
+    AND?: sheets_thumbnailsWhereInput | sheets_thumbnailsWhereInput[]
+    OR?: sheets_thumbnailsWhereInput[]
+    NOT?: sheets_thumbnailsWhereInput | sheets_thumbnailsWhereInput[]
+    sheet_thumbnail_data?: BytesFilter<"sheets_thumbnails"> | Buffer
+    sheet_thumbnail_filename?: StringFilter<"sheets_thumbnails"> | string
+    sheets?: SheetsListRelationFilter
+  }, "sheet_thumbnail_id" | "sheet_thumbnail_id">
+
+  export type sheets_thumbnailsOrderByWithAggregationInput = {
+    sheet_thumbnail_id?: SortOrder
+    sheet_thumbnail_data?: SortOrder
+    sheet_thumbnail_filename?: SortOrder
+    _count?: sheets_thumbnailsCountOrderByAggregateInput
+    _max?: sheets_thumbnailsMaxOrderByAggregateInput
+    _min?: sheets_thumbnailsMinOrderByAggregateInput
+  }
+
+  export type sheets_thumbnailsScalarWhereWithAggregatesInput = {
+    AND?: sheets_thumbnailsScalarWhereWithAggregatesInput | sheets_thumbnailsScalarWhereWithAggregatesInput[]
+    OR?: sheets_thumbnailsScalarWhereWithAggregatesInput[]
+    NOT?: sheets_thumbnailsScalarWhereWithAggregatesInput | sheets_thumbnailsScalarWhereWithAggregatesInput[]
+    sheet_thumbnail_id?: StringWithAggregatesFilter<"sheets_thumbnails"> | string
+    sheet_thumbnail_data?: BytesWithAggregatesFilter<"sheets_thumbnails"> | Buffer
+    sheet_thumbnail_filename?: StringWithAggregatesFilter<"sheets_thumbnails"> | string
   }
 
   export type user_credentialsWhereInput = {
@@ -25523,12 +27730,14 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_thumbnail_id?: StringNullableFilter<"videos"> | string | null
     video_likes?: IntFilter<"videos"> | number
     video_dislikes?: IntFilter<"videos"> | number
     video_views?: IntFilter<"videos"> | number
     video_date_posted?: DateTimeNullableFilter<"videos"> | Date | string | null
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
+    videos_thumbnails?: XOR<Videos_thumbnailsNullableRelationFilter, videos_thumbnailsWhereInput> | null
   }
 
   export type videosOrderByWithRelationInput = {
@@ -25538,12 +27747,14 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_thumbnail_id?: SortOrderInput | SortOrder
     video_likes?: SortOrder
     video_dislikes?: SortOrder
     video_views?: SortOrder
     video_date_posted?: SortOrderInput | SortOrder
     entities?: entitiesOrderByWithRelationInput
     videos_data?: videos_dataOrderByWithRelationInput
+    videos_thumbnails?: videos_thumbnailsOrderByWithRelationInput
   }
 
   export type videosWhereUniqueInput = Prisma.AtLeast<{
@@ -25556,12 +27767,14 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_thumbnail_id?: StringNullableFilter<"videos"> | string | null
     video_likes?: IntFilter<"videos"> | number
     video_dislikes?: IntFilter<"videos"> | number
     video_views?: IntFilter<"videos"> | number
     video_date_posted?: DateTimeNullableFilter<"videos"> | Date | string | null
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     videos_data?: XOR<Videos_dataRelationFilter, videos_dataWhereInput>
+    videos_thumbnails?: XOR<Videos_thumbnailsNullableRelationFilter, videos_thumbnailsWhereInput> | null
   }, "video_id" | "video_id">
 
   export type videosOrderByWithAggregationInput = {
@@ -25571,6 +27784,7 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_thumbnail_id?: SortOrderInput | SortOrder
     video_likes?: SortOrder
     video_dislikes?: SortOrder
     video_views?: SortOrder
@@ -25592,6 +27806,7 @@ export namespace Prisma {
     video_description?: StringWithAggregatesFilter<"videos"> | string
     video_filename?: StringWithAggregatesFilter<"videos"> | string
     video_data_id?: StringWithAggregatesFilter<"videos"> | string
+    video_thumbnail_id?: StringNullableWithAggregatesFilter<"videos"> | string | null
     video_likes?: IntWithAggregatesFilter<"videos"> | number
     video_dislikes?: IntWithAggregatesFilter<"videos"> | number
     video_views?: IntWithAggregatesFilter<"videos"> | number
@@ -25638,52 +27853,97 @@ export namespace Prisma {
     video_data?: BytesWithAggregatesFilter<"videos_data"> | Buffer
   }
 
+  export type videos_thumbnailsWhereInput = {
+    AND?: videos_thumbnailsWhereInput | videos_thumbnailsWhereInput[]
+    OR?: videos_thumbnailsWhereInput[]
+    NOT?: videos_thumbnailsWhereInput | videos_thumbnailsWhereInput[]
+    video_thumbnail_id?: StringFilter<"videos_thumbnails"> | string
+    video_thumbnail_data?: BytesFilter<"videos_thumbnails"> | Buffer
+    video_thumbnail_filename?: StringFilter<"videos_thumbnails"> | string
+    videos?: VideosListRelationFilter
+  }
+
+  export type videos_thumbnailsOrderByWithRelationInput = {
+    video_thumbnail_id?: SortOrder
+    video_thumbnail_data?: SortOrder
+    video_thumbnail_filename?: SortOrder
+    videos?: videosOrderByRelationAggregateInput
+  }
+
+  export type videos_thumbnailsWhereUniqueInput = Prisma.AtLeast<{
+    video_thumbnail_id?: string
+    AND?: videos_thumbnailsWhereInput | videos_thumbnailsWhereInput[]
+    OR?: videos_thumbnailsWhereInput[]
+    NOT?: videos_thumbnailsWhereInput | videos_thumbnailsWhereInput[]
+    video_thumbnail_data?: BytesFilter<"videos_thumbnails"> | Buffer
+    video_thumbnail_filename?: StringFilter<"videos_thumbnails"> | string
+    videos?: VideosListRelationFilter
+  }, "video_thumbnail_id" | "video_thumbnail_id">
+
+  export type videos_thumbnailsOrderByWithAggregationInput = {
+    video_thumbnail_id?: SortOrder
+    video_thumbnail_data?: SortOrder
+    video_thumbnail_filename?: SortOrder
+    _count?: videos_thumbnailsCountOrderByAggregateInput
+    _max?: videos_thumbnailsMaxOrderByAggregateInput
+    _min?: videos_thumbnailsMinOrderByAggregateInput
+  }
+
+  export type videos_thumbnailsScalarWhereWithAggregatesInput = {
+    AND?: videos_thumbnailsScalarWhereWithAggregatesInput | videos_thumbnailsScalarWhereWithAggregatesInput[]
+    OR?: videos_thumbnailsScalarWhereWithAggregatesInput[]
+    NOT?: videos_thumbnailsScalarWhereWithAggregatesInput | videos_thumbnailsScalarWhereWithAggregatesInput[]
+    video_thumbnail_id?: StringWithAggregatesFilter<"videos_thumbnails"> | string
+    video_thumbnail_data?: BytesWithAggregatesFilter<"videos_thumbnails"> | Buffer
+    video_thumbnail_filename?: StringWithAggregatesFilter<"videos_thumbnails"> | string
+  }
+
   export type affiliates_relationsCreateInput = {
     affiliate_relation_id: string
-    affiliate_id_1: string
-    affiliate_id_2: string
+    affiliate_id_root: string
+    affiliate_id_target: string
     affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUncheckedCreateInput = {
     affiliate_relation_id: string
-    affiliate_id_1: string
-    affiliate_id_2: string
+    affiliate_id_root: string
+    affiliate_id_target: string
     affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUpdateInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
-    affiliate_id_1?: StringFieldUpdateOperationsInput | string
-    affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_id_root?: StringFieldUpdateOperationsInput | string
+    affiliate_id_target?: StringFieldUpdateOperationsInput | string
     affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsUncheckedUpdateInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
-    affiliate_id_1?: StringFieldUpdateOperationsInput | string
-    affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_id_root?: StringFieldUpdateOperationsInput | string
+    affiliate_id_target?: StringFieldUpdateOperationsInput | string
     affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsCreateManyInput = {
     affiliate_relation_id: string
-    affiliate_id_1: string
-    affiliate_id_2: string
+    affiliate_id_root: string
+    affiliate_id_target: string
     affiliate_relation_date?: Date | string
   }
 
   export type affiliates_relationsUpdateManyMutationInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
-    affiliate_id_1?: StringFieldUpdateOperationsInput | string
-    affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_id_root?: StringFieldUpdateOperationsInput | string
+    affiliate_id_target?: StringFieldUpdateOperationsInput | string
     affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type affiliates_relationsUncheckedUpdateManyInput = {
     affiliate_relation_id?: StringFieldUpdateOperationsInput | string
-    affiliate_id_1?: StringFieldUpdateOperationsInput | string
-    affiliate_id_2?: StringFieldUpdateOperationsInput | string
+    affiliate_id_root?: StringFieldUpdateOperationsInput | string
+    affiliate_id_target?: StringFieldUpdateOperationsInput | string
     affiliate_relation_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26602,6 +28862,7 @@ export namespace Prisma {
     sheet_date_posted?: Date | string
     entities: entitiesCreateNestedOneWithoutSheetsInput
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
+    sheets_thumbnails?: sheets_thumbnailsCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateInput = {
@@ -26611,6 +28872,7 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -26628,6 +28890,7 @@ export namespace Prisma {
     sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_thumbnails?: sheets_thumbnailsUpdateOneWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateInput = {
@@ -26637,6 +28900,7 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -26650,6 +28914,7 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -26674,6 +28939,7 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -26717,6 +28983,52 @@ export namespace Prisma {
   export type sheets_dataUncheckedUpdateManyInput = {
     sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type sheets_thumbnailsCreateInput = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+    sheets?: sheetsCreateNestedManyWithoutSheets_thumbnailsInput
+  }
+
+  export type sheets_thumbnailsUncheckedCreateInput = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+    sheets?: sheetsUncheckedCreateNestedManyWithoutSheets_thumbnailsInput
+  }
+
+  export type sheets_thumbnailsUpdateInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheets?: sheetsUpdateManyWithoutSheets_thumbnailsNestedInput
+  }
+
+  export type sheets_thumbnailsUncheckedUpdateInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheets?: sheetsUncheckedUpdateManyWithoutSheets_thumbnailsNestedInput
+  }
+
+  export type sheets_thumbnailsCreateManyInput = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+  }
+
+  export type sheets_thumbnailsUpdateManyMutationInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type sheets_thumbnailsUncheckedUpdateManyInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type user_credentialsCreateInput = {
@@ -26804,6 +29116,7 @@ export namespace Prisma {
     video_date_posted?: Date | string | null
     entities: entitiesCreateNestedOneWithoutVideosInput
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
+    videos_thumbnails?: videos_thumbnailsCreateNestedOneWithoutVideosInput
   }
 
   export type videosUncheckedCreateInput = {
@@ -26813,6 +29126,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -26830,6 +29144,7 @@ export namespace Prisma {
     video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
+    videos_thumbnails?: videos_thumbnailsUpdateOneWithoutVideosNestedInput
   }
 
   export type videosUncheckedUpdateInput = {
@@ -26839,6 +29154,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -26852,6 +29168,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -26876,6 +29193,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -26921,6 +29239,52 @@ export namespace Prisma {
     video_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
+  export type videos_thumbnailsCreateInput = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+    videos?: videosCreateNestedManyWithoutVideos_thumbnailsInput
+  }
+
+  export type videos_thumbnailsUncheckedCreateInput = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+    videos?: videosUncheckedCreateNestedManyWithoutVideos_thumbnailsInput
+  }
+
+  export type videos_thumbnailsUpdateInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    videos?: videosUpdateManyWithoutVideos_thumbnailsNestedInput
+  }
+
+  export type videos_thumbnailsUncheckedUpdateInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    videos?: videosUncheckedUpdateManyWithoutVideos_thumbnailsNestedInput
+  }
+
+  export type videos_thumbnailsCreateManyInput = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+  }
+
+  export type videos_thumbnailsUpdateManyMutationInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type videos_thumbnailsUncheckedUpdateManyInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -26946,29 +29310,29 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type affiliates_relationsAffiliate_id_1Affiliate_id_2CompoundUniqueInput = {
-    affiliate_id_1: string
-    affiliate_id_2: string
+  export type affiliates_relationsAffiliate_id_rootAffiliate_id_targetCompoundUniqueInput = {
+    affiliate_id_root: string
+    affiliate_id_target: string
   }
 
   export type affiliates_relationsCountOrderByAggregateInput = {
     affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_id_2?: SortOrder
+    affiliate_id_root?: SortOrder
+    affiliate_id_target?: SortOrder
     affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsMaxOrderByAggregateInput = {
     affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_id_2?: SortOrder
+    affiliate_id_root?: SortOrder
+    affiliate_id_target?: SortOrder
     affiliate_relation_date?: SortOrder
   }
 
   export type affiliates_relationsMinOrderByAggregateInput = {
     affiliate_relation_id?: SortOrder
-    affiliate_id_1?: SortOrder
-    affiliate_id_2?: SortOrder
+    affiliate_id_root?: SortOrder
+    affiliate_id_target?: SortOrder
     affiliate_relation_date?: SortOrder
   }
 
@@ -27736,6 +30100,11 @@ export namespace Prisma {
     isNot?: sheets_dataWhereInput
   }
 
+  export type Sheets_thumbnailsNullableRelationFilter = {
+    is?: sheets_thumbnailsWhereInput | null
+    isNot?: sheets_thumbnailsWhereInput | null
+  }
+
   export type sheetsCountOrderByAggregateInput = {
     sheet_id?: SortOrder
     sheet_author_id?: SortOrder
@@ -27743,6 +30112,7 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_thumbnail_id?: SortOrder
     sheet_likes?: SortOrder
     sheet_dislikes?: SortOrder
     sheet_views?: SortOrder
@@ -27762,6 +30132,7 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_thumbnail_id?: SortOrder
     sheet_likes?: SortOrder
     sheet_dislikes?: SortOrder
     sheet_views?: SortOrder
@@ -27775,6 +30146,7 @@ export namespace Prisma {
     sheet_subject?: SortOrder
     sheet_filename?: SortOrder
     sheet_data_id?: SortOrder
+    sheet_thumbnail_id?: SortOrder
     sheet_likes?: SortOrder
     sheet_dislikes?: SortOrder
     sheet_views?: SortOrder
@@ -27800,6 +30172,24 @@ export namespace Prisma {
   export type sheets_dataMinOrderByAggregateInput = {
     sheet_data_id?: SortOrder
     sheet_data?: SortOrder
+  }
+
+  export type sheets_thumbnailsCountOrderByAggregateInput = {
+    sheet_thumbnail_id?: SortOrder
+    sheet_thumbnail_data?: SortOrder
+    sheet_thumbnail_filename?: SortOrder
+  }
+
+  export type sheets_thumbnailsMaxOrderByAggregateInput = {
+    sheet_thumbnail_id?: SortOrder
+    sheet_thumbnail_data?: SortOrder
+    sheet_thumbnail_filename?: SortOrder
+  }
+
+  export type sheets_thumbnailsMinOrderByAggregateInput = {
+    sheet_thumbnail_id?: SortOrder
+    sheet_thumbnail_data?: SortOrder
+    sheet_thumbnail_filename?: SortOrder
   }
 
   export type IndividualsNullableRelationFilter = {
@@ -27842,6 +30232,11 @@ export namespace Prisma {
     isNot?: videos_dataWhereInput
   }
 
+  export type Videos_thumbnailsNullableRelationFilter = {
+    is?: videos_thumbnailsWhereInput | null
+    isNot?: videos_thumbnailsWhereInput | null
+  }
+
   export type videosCountOrderByAggregateInput = {
     video_id?: SortOrder
     video_creator_id?: SortOrder
@@ -27849,6 +30244,7 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_thumbnail_id?: SortOrder
     video_likes?: SortOrder
     video_dislikes?: SortOrder
     video_views?: SortOrder
@@ -27868,6 +30264,7 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_thumbnail_id?: SortOrder
     video_likes?: SortOrder
     video_dislikes?: SortOrder
     video_views?: SortOrder
@@ -27881,6 +30278,7 @@ export namespace Prisma {
     video_description?: SortOrder
     video_filename?: SortOrder
     video_data_id?: SortOrder
+    video_thumbnail_id?: SortOrder
     video_likes?: SortOrder
     video_dislikes?: SortOrder
     video_views?: SortOrder
@@ -27906,6 +30304,24 @@ export namespace Prisma {
   export type videos_dataMinOrderByAggregateInput = {
     video_data_id?: SortOrder
     video_data?: SortOrder
+  }
+
+  export type videos_thumbnailsCountOrderByAggregateInput = {
+    video_thumbnail_id?: SortOrder
+    video_thumbnail_data?: SortOrder
+    video_thumbnail_filename?: SortOrder
+  }
+
+  export type videos_thumbnailsMaxOrderByAggregateInput = {
+    video_thumbnail_id?: SortOrder
+    video_thumbnail_data?: SortOrder
+    video_thumbnail_filename?: SortOrder
+  }
+
+  export type videos_thumbnailsMinOrderByAggregateInput = {
+    video_thumbnail_id?: SortOrder
+    video_thumbnail_data?: SortOrder
+    video_thumbnail_filename?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -29128,6 +31544,12 @@ export namespace Prisma {
     connect?: sheets_dataWhereUniqueInput
   }
 
+  export type sheets_thumbnailsCreateNestedOneWithoutSheetsInput = {
+    create?: XOR<sheets_thumbnailsCreateWithoutSheetsInput, sheets_thumbnailsUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_thumbnailsCreateOrConnectWithoutSheetsInput
+    connect?: sheets_thumbnailsWhereUniqueInput
+  }
+
   export type entitiesUpdateOneRequiredWithoutSheetsNestedInput = {
     create?: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
     connectOrCreate?: entitiesCreateOrConnectWithoutSheetsInput
@@ -29142,6 +31564,16 @@ export namespace Prisma {
     upsert?: sheets_dataUpsertWithoutSheetsInput
     connect?: sheets_dataWhereUniqueInput
     update?: XOR<XOR<sheets_dataUpdateToOneWithWhereWithoutSheetsInput, sheets_dataUpdateWithoutSheetsInput>, sheets_dataUncheckedUpdateWithoutSheetsInput>
+  }
+
+  export type sheets_thumbnailsUpdateOneWithoutSheetsNestedInput = {
+    create?: XOR<sheets_thumbnailsCreateWithoutSheetsInput, sheets_thumbnailsUncheckedCreateWithoutSheetsInput>
+    connectOrCreate?: sheets_thumbnailsCreateOrConnectWithoutSheetsInput
+    upsert?: sheets_thumbnailsUpsertWithoutSheetsInput
+    disconnect?: sheets_thumbnailsWhereInput | boolean
+    delete?: sheets_thumbnailsWhereInput | boolean
+    connect?: sheets_thumbnailsWhereUniqueInput
+    update?: XOR<XOR<sheets_thumbnailsUpdateToOneWithWhereWithoutSheetsInput, sheets_thumbnailsUpdateWithoutSheetsInput>, sheets_thumbnailsUncheckedUpdateWithoutSheetsInput>
   }
 
   export type sheetsCreateNestedManyWithoutSheets_dataInput = {
@@ -29183,6 +31615,48 @@ export namespace Prisma {
     connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
     update?: sheetsUpdateWithWhereUniqueWithoutSheets_dataInput | sheetsUpdateWithWhereUniqueWithoutSheets_dataInput[]
     updateMany?: sheetsUpdateManyWithWhereWithoutSheets_dataInput | sheetsUpdateManyWithWhereWithoutSheets_dataInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type sheetsCreateNestedManyWithoutSheets_thumbnailsInput = {
+    create?: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput> | sheetsCreateWithoutSheets_thumbnailsInput[] | sheetsUncheckedCreateWithoutSheets_thumbnailsInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_thumbnailsInput | sheetsCreateOrConnectWithoutSheets_thumbnailsInput[]
+    createMany?: sheetsCreateManySheets_thumbnailsInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type sheetsUncheckedCreateNestedManyWithoutSheets_thumbnailsInput = {
+    create?: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput> | sheetsCreateWithoutSheets_thumbnailsInput[] | sheetsUncheckedCreateWithoutSheets_thumbnailsInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_thumbnailsInput | sheetsCreateOrConnectWithoutSheets_thumbnailsInput[]
+    createMany?: sheetsCreateManySheets_thumbnailsInputEnvelope
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type sheetsUpdateManyWithoutSheets_thumbnailsNestedInput = {
+    create?: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput> | sheetsCreateWithoutSheets_thumbnailsInput[] | sheetsUncheckedCreateWithoutSheets_thumbnailsInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_thumbnailsInput | sheetsCreateOrConnectWithoutSheets_thumbnailsInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutSheets_thumbnailsInput | sheetsUpsertWithWhereUniqueWithoutSheets_thumbnailsInput[]
+    createMany?: sheetsCreateManySheets_thumbnailsInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutSheets_thumbnailsInput | sheetsUpdateWithWhereUniqueWithoutSheets_thumbnailsInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutSheets_thumbnailsInput | sheetsUpdateManyWithWhereWithoutSheets_thumbnailsInput[]
+    deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutSheets_thumbnailsNestedInput = {
+    create?: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput> | sheetsCreateWithoutSheets_thumbnailsInput[] | sheetsUncheckedCreateWithoutSheets_thumbnailsInput[]
+    connectOrCreate?: sheetsCreateOrConnectWithoutSheets_thumbnailsInput | sheetsCreateOrConnectWithoutSheets_thumbnailsInput[]
+    upsert?: sheetsUpsertWithWhereUniqueWithoutSheets_thumbnailsInput | sheetsUpsertWithWhereUniqueWithoutSheets_thumbnailsInput[]
+    createMany?: sheetsCreateManySheets_thumbnailsInputEnvelope
+    set?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    disconnect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    delete?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+    update?: sheetsUpdateWithWhereUniqueWithoutSheets_thumbnailsInput | sheetsUpdateWithWhereUniqueWithoutSheets_thumbnailsInput[]
+    updateMany?: sheetsUpdateManyWithWhereWithoutSheets_thumbnailsInput | sheetsUpdateManyWithWhereWithoutSheets_thumbnailsInput[]
     deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
   }
 
@@ -29230,6 +31704,12 @@ export namespace Prisma {
     connect?: videos_dataWhereUniqueInput
   }
 
+  export type videos_thumbnailsCreateNestedOneWithoutVideosInput = {
+    create?: XOR<videos_thumbnailsCreateWithoutVideosInput, videos_thumbnailsUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: videos_thumbnailsCreateOrConnectWithoutVideosInput
+    connect?: videos_thumbnailsWhereUniqueInput
+  }
+
   export type entitiesUpdateOneRequiredWithoutVideosNestedInput = {
     create?: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
     connectOrCreate?: entitiesCreateOrConnectWithoutVideosInput
@@ -29244,6 +31724,16 @@ export namespace Prisma {
     upsert?: videos_dataUpsertWithoutVideosInput
     connect?: videos_dataWhereUniqueInput
     update?: XOR<XOR<videos_dataUpdateToOneWithWhereWithoutVideosInput, videos_dataUpdateWithoutVideosInput>, videos_dataUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type videos_thumbnailsUpdateOneWithoutVideosNestedInput = {
+    create?: XOR<videos_thumbnailsCreateWithoutVideosInput, videos_thumbnailsUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: videos_thumbnailsCreateOrConnectWithoutVideosInput
+    upsert?: videos_thumbnailsUpsertWithoutVideosInput
+    disconnect?: videos_thumbnailsWhereInput | boolean
+    delete?: videos_thumbnailsWhereInput | boolean
+    connect?: videos_thumbnailsWhereUniqueInput
+    update?: XOR<XOR<videos_thumbnailsUpdateToOneWithWhereWithoutVideosInput, videos_thumbnailsUpdateWithoutVideosInput>, videos_thumbnailsUncheckedUpdateWithoutVideosInput>
   }
 
   export type videosCreateNestedManyWithoutVideos_dataInput = {
@@ -29285,6 +31775,48 @@ export namespace Prisma {
     connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
     update?: videosUpdateWithWhereUniqueWithoutVideos_dataInput | videosUpdateWithWhereUniqueWithoutVideos_dataInput[]
     updateMany?: videosUpdateManyWithWhereWithoutVideos_dataInput | videosUpdateManyWithWhereWithoutVideos_dataInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type videosCreateNestedManyWithoutVideos_thumbnailsInput = {
+    create?: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput> | videosCreateWithoutVideos_thumbnailsInput[] | videosUncheckedCreateWithoutVideos_thumbnailsInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutVideos_thumbnailsInput | videosCreateOrConnectWithoutVideos_thumbnailsInput[]
+    createMany?: videosCreateManyVideos_thumbnailsInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type videosUncheckedCreateNestedManyWithoutVideos_thumbnailsInput = {
+    create?: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput> | videosCreateWithoutVideos_thumbnailsInput[] | videosUncheckedCreateWithoutVideos_thumbnailsInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutVideos_thumbnailsInput | videosCreateOrConnectWithoutVideos_thumbnailsInput[]
+    createMany?: videosCreateManyVideos_thumbnailsInputEnvelope
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+  }
+
+  export type videosUpdateManyWithoutVideos_thumbnailsNestedInput = {
+    create?: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput> | videosCreateWithoutVideos_thumbnailsInput[] | videosUncheckedCreateWithoutVideos_thumbnailsInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutVideos_thumbnailsInput | videosCreateOrConnectWithoutVideos_thumbnailsInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutVideos_thumbnailsInput | videosUpsertWithWhereUniqueWithoutVideos_thumbnailsInput[]
+    createMany?: videosCreateManyVideos_thumbnailsInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutVideos_thumbnailsInput | videosUpdateWithWhereUniqueWithoutVideos_thumbnailsInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutVideos_thumbnailsInput | videosUpdateManyWithWhereWithoutVideos_thumbnailsInput[]
+    deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
+  }
+
+  export type videosUncheckedUpdateManyWithoutVideos_thumbnailsNestedInput = {
+    create?: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput> | videosCreateWithoutVideos_thumbnailsInput[] | videosUncheckedCreateWithoutVideos_thumbnailsInput[]
+    connectOrCreate?: videosCreateOrConnectWithoutVideos_thumbnailsInput | videosCreateOrConnectWithoutVideos_thumbnailsInput[]
+    upsert?: videosUpsertWithWhereUniqueWithoutVideos_thumbnailsInput | videosUpsertWithWhereUniqueWithoutVideos_thumbnailsInput[]
+    createMany?: videosCreateManyVideos_thumbnailsInputEnvelope
+    set?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    disconnect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    delete?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    connect?: videosWhereUniqueInput | videosWhereUniqueInput[]
+    update?: videosUpdateWithWhereUniqueWithoutVideos_thumbnailsInput | videosUpdateWithWhereUniqueWithoutVideos_thumbnailsInput[]
+    updateMany?: videosUpdateManyWithWhereWithoutVideos_thumbnailsInput | videosUpdateManyWithWhereWithoutVideos_thumbnailsInput[]
     deleteMany?: videosScalarWhereInput | videosScalarWhereInput[]
   }
 
@@ -30102,6 +32634,7 @@ export namespace Prisma {
     sheet_views?: number
     sheet_date_posted?: Date | string
     sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
+    sheets_thumbnails?: sheets_thumbnailsCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutEntitiesInput = {
@@ -30110,6 +32643,7 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -30136,6 +32670,7 @@ export namespace Prisma {
     video_views?: number
     video_date_posted?: Date | string | null
     videos_data: videos_dataCreateNestedOneWithoutVideosInput
+    videos_thumbnails?: videos_thumbnailsCreateNestedOneWithoutVideosInput
   }
 
   export type videosUncheckedCreateWithoutEntitiesInput = {
@@ -30144,6 +32679,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -30368,6 +32904,7 @@ export namespace Prisma {
     sheet_subject?: StringFilter<"sheets"> | string
     sheet_filename?: StringFilter<"sheets"> | string
     sheet_data_id?: StringFilter<"sheets"> | string
+    sheet_thumbnail_id?: StringNullableFilter<"sheets"> | string | null
     sheet_likes?: IntFilter<"sheets"> | number
     sheet_dislikes?: IntFilter<"sheets"> | number
     sheet_views?: IntFilter<"sheets"> | number
@@ -30400,6 +32937,7 @@ export namespace Prisma {
     video_description?: StringFilter<"videos"> | string
     video_filename?: StringFilter<"videos"> | string
     video_data_id?: StringFilter<"videos"> | string
+    video_thumbnail_id?: StringNullableFilter<"videos"> | string | null
     video_likes?: IntFilter<"videos"> | number
     video_dislikes?: IntFilter<"videos"> | number
     video_views?: IntFilter<"videos"> | number
@@ -31747,6 +34285,23 @@ export namespace Prisma {
     create: XOR<sheets_dataCreateWithoutSheetsInput, sheets_dataUncheckedCreateWithoutSheetsInput>
   }
 
+  export type sheets_thumbnailsCreateWithoutSheetsInput = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+  }
+
+  export type sheets_thumbnailsUncheckedCreateWithoutSheetsInput = {
+    sheet_thumbnail_id: string
+    sheet_thumbnail_data: Buffer
+    sheet_thumbnail_filename: string
+  }
+
+  export type sheets_thumbnailsCreateOrConnectWithoutSheetsInput = {
+    where: sheets_thumbnailsWhereUniqueInput
+    create: XOR<sheets_thumbnailsCreateWithoutSheetsInput, sheets_thumbnailsUncheckedCreateWithoutSheetsInput>
+  }
+
   export type entitiesUpsertWithoutSheetsInput = {
     update: XOR<entitiesUpdateWithoutSheetsInput, entitiesUncheckedUpdateWithoutSheetsInput>
     create: XOR<entitiesCreateWithoutSheetsInput, entitiesUncheckedCreateWithoutSheetsInput>
@@ -31807,6 +34362,29 @@ export namespace Prisma {
     sheet_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
+  export type sheets_thumbnailsUpsertWithoutSheetsInput = {
+    update: XOR<sheets_thumbnailsUpdateWithoutSheetsInput, sheets_thumbnailsUncheckedUpdateWithoutSheetsInput>
+    create: XOR<sheets_thumbnailsCreateWithoutSheetsInput, sheets_thumbnailsUncheckedCreateWithoutSheetsInput>
+    where?: sheets_thumbnailsWhereInput
+  }
+
+  export type sheets_thumbnailsUpdateToOneWithWhereWithoutSheetsInput = {
+    where?: sheets_thumbnailsWhereInput
+    data: XOR<sheets_thumbnailsUpdateWithoutSheetsInput, sheets_thumbnailsUncheckedUpdateWithoutSheetsInput>
+  }
+
+  export type sheets_thumbnailsUpdateWithoutSheetsInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type sheets_thumbnailsUncheckedUpdateWithoutSheetsInput = {
+    sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
   export type sheetsCreateWithoutSheets_dataInput = {
     sheet_id: string
     sheet_title: string
@@ -31817,6 +34395,7 @@ export namespace Prisma {
     sheet_views?: number
     sheet_date_posted?: Date | string
     entities: entitiesCreateNestedOneWithoutSheetsInput
+    sheets_thumbnails?: sheets_thumbnailsCreateNestedOneWithoutSheetsInput
   }
 
   export type sheetsUncheckedCreateWithoutSheets_dataInput = {
@@ -31825,6 +34404,7 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -31855,6 +34435,58 @@ export namespace Prisma {
   export type sheetsUpdateManyWithWhereWithoutSheets_dataInput = {
     where: sheetsScalarWhereInput
     data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutSheets_dataInput>
+  }
+
+  export type sheetsCreateWithoutSheets_thumbnailsInput = {
+    sheet_id: string
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
+    entities: entitiesCreateNestedOneWithoutSheetsInput
+    sheets_data: sheets_dataCreateNestedOneWithoutSheetsInput
+  }
+
+  export type sheetsUncheckedCreateWithoutSheets_thumbnailsInput = {
+    sheet_id: string
+    sheet_author_id: string
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
+  }
+
+  export type sheetsCreateOrConnectWithoutSheets_thumbnailsInput = {
+    where: sheetsWhereUniqueInput
+    create: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput>
+  }
+
+  export type sheetsCreateManySheets_thumbnailsInputEnvelope = {
+    data: sheetsCreateManySheets_thumbnailsInput | sheetsCreateManySheets_thumbnailsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type sheetsUpsertWithWhereUniqueWithoutSheets_thumbnailsInput = {
+    where: sheetsWhereUniqueInput
+    update: XOR<sheetsUpdateWithoutSheets_thumbnailsInput, sheetsUncheckedUpdateWithoutSheets_thumbnailsInput>
+    create: XOR<sheetsCreateWithoutSheets_thumbnailsInput, sheetsUncheckedCreateWithoutSheets_thumbnailsInput>
+  }
+
+  export type sheetsUpdateWithWhereUniqueWithoutSheets_thumbnailsInput = {
+    where: sheetsWhereUniqueInput
+    data: XOR<sheetsUpdateWithoutSheets_thumbnailsInput, sheetsUncheckedUpdateWithoutSheets_thumbnailsInput>
+  }
+
+  export type sheetsUpdateManyWithWhereWithoutSheets_thumbnailsInput = {
+    where: sheetsScalarWhereInput
+    data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutSheets_thumbnailsInput>
   }
 
   export type individualsCreateWithoutUser_credentialsInput = {
@@ -31957,6 +34589,23 @@ export namespace Prisma {
     create: XOR<videos_dataCreateWithoutVideosInput, videos_dataUncheckedCreateWithoutVideosInput>
   }
 
+  export type videos_thumbnailsCreateWithoutVideosInput = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+  }
+
+  export type videos_thumbnailsUncheckedCreateWithoutVideosInput = {
+    video_thumbnail_id: string
+    video_thumbnail_data: Buffer
+    video_thumbnail_filename: string
+  }
+
+  export type videos_thumbnailsCreateOrConnectWithoutVideosInput = {
+    where: videos_thumbnailsWhereUniqueInput
+    create: XOR<videos_thumbnailsCreateWithoutVideosInput, videos_thumbnailsUncheckedCreateWithoutVideosInput>
+  }
+
   export type entitiesUpsertWithoutVideosInput = {
     update: XOR<entitiesUpdateWithoutVideosInput, entitiesUncheckedUpdateWithoutVideosInput>
     create: XOR<entitiesCreateWithoutVideosInput, entitiesUncheckedCreateWithoutVideosInput>
@@ -32017,6 +34666,29 @@ export namespace Prisma {
     video_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
+  export type videos_thumbnailsUpsertWithoutVideosInput = {
+    update: XOR<videos_thumbnailsUpdateWithoutVideosInput, videos_thumbnailsUncheckedUpdateWithoutVideosInput>
+    create: XOR<videos_thumbnailsCreateWithoutVideosInput, videos_thumbnailsUncheckedCreateWithoutVideosInput>
+    where?: videos_thumbnailsWhereInput
+  }
+
+  export type videos_thumbnailsUpdateToOneWithWhereWithoutVideosInput = {
+    where?: videos_thumbnailsWhereInput
+    data: XOR<videos_thumbnailsUpdateWithoutVideosInput, videos_thumbnailsUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type videos_thumbnailsUpdateWithoutVideosInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type videos_thumbnailsUncheckedUpdateWithoutVideosInput = {
+    video_thumbnail_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
+    video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+  }
+
   export type videosCreateWithoutVideos_dataInput = {
     video_id: string
     video_title: string
@@ -32027,6 +34699,7 @@ export namespace Prisma {
     video_views?: number
     video_date_posted?: Date | string | null
     entities: entitiesCreateNestedOneWithoutVideosInput
+    videos_thumbnails?: videos_thumbnailsCreateNestedOneWithoutVideosInput
   }
 
   export type videosUncheckedCreateWithoutVideos_dataInput = {
@@ -32035,6 +34708,7 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -32065,6 +34739,58 @@ export namespace Prisma {
   export type videosUpdateManyWithWhereWithoutVideos_dataInput = {
     where: videosScalarWhereInput
     data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutVideos_dataInput>
+  }
+
+  export type videosCreateWithoutVideos_thumbnailsInput = {
+    video_id: string
+    video_title: string
+    video_description: string
+    video_filename: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
+    entities: entitiesCreateNestedOneWithoutVideosInput
+    videos_data: videos_dataCreateNestedOneWithoutVideosInput
+  }
+
+  export type videosUncheckedCreateWithoutVideos_thumbnailsInput = {
+    video_id: string
+    video_creator_id: string
+    video_title: string
+    video_description: string
+    video_filename: string
+    video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
+  }
+
+  export type videosCreateOrConnectWithoutVideos_thumbnailsInput = {
+    where: videosWhereUniqueInput
+    create: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput>
+  }
+
+  export type videosCreateManyVideos_thumbnailsInputEnvelope = {
+    data: videosCreateManyVideos_thumbnailsInput | videosCreateManyVideos_thumbnailsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type videosUpsertWithWhereUniqueWithoutVideos_thumbnailsInput = {
+    where: videosWhereUniqueInput
+    update: XOR<videosUpdateWithoutVideos_thumbnailsInput, videosUncheckedUpdateWithoutVideos_thumbnailsInput>
+    create: XOR<videosCreateWithoutVideos_thumbnailsInput, videosUncheckedCreateWithoutVideos_thumbnailsInput>
+  }
+
+  export type videosUpdateWithWhereUniqueWithoutVideos_thumbnailsInput = {
+    where: videosWhereUniqueInput
+    data: XOR<videosUpdateWithoutVideos_thumbnailsInput, videosUncheckedUpdateWithoutVideos_thumbnailsInput>
+  }
+
+  export type videosUpdateManyWithWhereWithoutVideos_thumbnailsInput = {
+    where: videosScalarWhereInput
+    data: XOR<videosUpdateManyMutationInput, videosUncheckedUpdateManyWithoutVideos_thumbnailsInput>
   }
 
   export type collections_contentCreateManyCollectionsInput = {
@@ -32261,6 +34987,7 @@ export namespace Prisma {
     sheet_subject: string
     sheet_filename: string
     sheet_data_id: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -32273,6 +35000,7 @@ export namespace Prisma {
     video_description: string
     video_filename: string
     video_data_id: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -32447,6 +35175,7 @@ export namespace Prisma {
     sheet_views?: IntFieldUpdateOperationsInput | number
     sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_thumbnails?: sheets_thumbnailsUpdateOneWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutEntitiesInput = {
@@ -32455,6 +35184,7 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -32467,6 +35197,7 @@ export namespace Prisma {
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
     sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -32483,6 +35214,7 @@ export namespace Prisma {
     video_views?: IntFieldUpdateOperationsInput | number
     video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
+    videos_thumbnails?: videos_thumbnailsUpdateOneWithoutVideosNestedInput
   }
 
   export type videosUncheckedUpdateWithoutEntitiesInput = {
@@ -32491,6 +35223,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -32503,6 +35236,7 @@ export namespace Prisma {
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
     video_data_id?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -32715,6 +35449,7 @@ export namespace Prisma {
     sheet_title: string
     sheet_subject: string
     sheet_filename: string
+    sheet_thumbnail_id?: string | null
     sheet_likes?: number
     sheet_dislikes?: number
     sheet_views?: number
@@ -32731,6 +35466,7 @@ export namespace Prisma {
     sheet_views?: IntFieldUpdateOperationsInput | number
     sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_thumbnails?: sheets_thumbnailsUpdateOneWithoutSheetsNestedInput
   }
 
   export type sheetsUncheckedUpdateWithoutSheets_dataInput = {
@@ -32739,6 +35475,7 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -32751,6 +35488,59 @@ export namespace Prisma {
     sheet_title?: StringFieldUpdateOperationsInput | string
     sheet_subject?: StringFieldUpdateOperationsInput | string
     sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type sheetsCreateManySheets_thumbnailsInput = {
+    sheet_id: string
+    sheet_author_id: string
+    sheet_title: string
+    sheet_subject: string
+    sheet_filename: string
+    sheet_data_id: string
+    sheet_likes?: number
+    sheet_dislikes?: number
+    sheet_views?: number
+    sheet_date_posted?: Date | string
+  }
+
+  export type sheetsUpdateWithoutSheets_thumbnailsInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    entities?: entitiesUpdateOneRequiredWithoutSheetsNestedInput
+    sheets_data?: sheets_dataUpdateOneRequiredWithoutSheetsNestedInput
+  }
+
+  export type sheetsUncheckedUpdateWithoutSheets_thumbnailsInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
+    sheet_likes?: IntFieldUpdateOperationsInput | number
+    sheet_dislikes?: IntFieldUpdateOperationsInput | number
+    sheet_views?: IntFieldUpdateOperationsInput | number
+    sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type sheetsUncheckedUpdateManyWithoutSheets_thumbnailsInput = {
+    sheet_id?: StringFieldUpdateOperationsInput | string
+    sheet_author_id?: StringFieldUpdateOperationsInput | string
+    sheet_title?: StringFieldUpdateOperationsInput | string
+    sheet_subject?: StringFieldUpdateOperationsInput | string
+    sheet_filename?: StringFieldUpdateOperationsInput | string
+    sheet_data_id?: StringFieldUpdateOperationsInput | string
     sheet_likes?: IntFieldUpdateOperationsInput | number
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
@@ -32763,6 +35553,7 @@ export namespace Prisma {
     video_title: string
     video_description: string
     video_filename: string
+    video_thumbnail_id?: string | null
     video_likes?: number
     video_dislikes?: number
     video_views?: number
@@ -32779,6 +35570,7 @@ export namespace Prisma {
     video_views?: IntFieldUpdateOperationsInput | number
     video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
+    videos_thumbnails?: videos_thumbnailsUpdateOneWithoutVideosNestedInput
   }
 
   export type videosUncheckedUpdateWithoutVideos_dataInput = {
@@ -32787,6 +35579,7 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -32799,6 +35592,59 @@ export namespace Prisma {
     video_title?: StringFieldUpdateOperationsInput | string
     video_description?: StringFieldUpdateOperationsInput | string
     video_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_id?: NullableStringFieldUpdateOperationsInput | string | null
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videosCreateManyVideos_thumbnailsInput = {
+    video_id: string
+    video_creator_id: string
+    video_title: string
+    video_description: string
+    video_filename: string
+    video_data_id: string
+    video_likes?: number
+    video_dislikes?: number
+    video_views?: number
+    video_date_posted?: Date | string | null
+  }
+
+  export type videosUpdateWithoutVideos_thumbnailsInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    entities?: entitiesUpdateOneRequiredWithoutVideosNestedInput
+    videos_data?: videos_dataUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type videosUncheckedUpdateWithoutVideos_thumbnailsInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    video_data_id?: StringFieldUpdateOperationsInput | string
+    video_likes?: IntFieldUpdateOperationsInput | number
+    video_dislikes?: IntFieldUpdateOperationsInput | number
+    video_views?: IntFieldUpdateOperationsInput | number
+    video_date_posted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videosUncheckedUpdateManyWithoutVideos_thumbnailsInput = {
+    video_id?: StringFieldUpdateOperationsInput | string
+    video_creator_id?: StringFieldUpdateOperationsInput | string
+    video_title?: StringFieldUpdateOperationsInput | string
+    video_description?: StringFieldUpdateOperationsInput | string
+    video_filename?: StringFieldUpdateOperationsInput | string
+    video_data_id?: StringFieldUpdateOperationsInput | string
     video_likes?: IntFieldUpdateOperationsInput | number
     video_dislikes?: IntFieldUpdateOperationsInput | number
     video_views?: IntFieldUpdateOperationsInput | number
@@ -32843,9 +35689,17 @@ export namespace Prisma {
      */
     export type Sheets_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Sheets_dataCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Sheets_thumbnailsCountOutputTypeDefaultArgs instead
+     */
+    export type Sheets_thumbnailsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use Videos_dataCountOutputTypeDefaultArgs instead
      */
     export type Videos_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Videos_dataCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use Videos_thumbnailsCountOutputTypeDefaultArgs instead
+     */
+    export type Videos_thumbnailsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Videos_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use affiliates_relationsDefaultArgs instead
      */
@@ -32923,6 +35777,10 @@ export namespace Prisma {
      */
     export type sheets_dataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sheets_dataDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use sheets_thumbnailsDefaultArgs instead
+     */
+    export type sheets_thumbnailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sheets_thumbnailsDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use user_credentialsDefaultArgs instead
      */
     export type user_credentialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = user_credentialsDefaultArgs<ExtArgs>
@@ -32934,6 +35792,10 @@ export namespace Prisma {
      * @deprecated Use videos_dataDefaultArgs instead
      */
     export type videos_dataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = videos_dataDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use videos_thumbnailsDefaultArgs instead
+     */
+    export type videos_thumbnailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = videos_thumbnailsDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

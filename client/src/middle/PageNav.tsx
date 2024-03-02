@@ -98,7 +98,9 @@ export default function PageNav() {
           <ProfilePicture
             size={{ w: 2.5, h: 2.5 }}
             entity_id="user"
+            entity_type={1}
             styles="rounded-full"
+            clickable={false}
           />
           <button style={mainPageStyles["profile"]} className="ml-2">
             Profile
