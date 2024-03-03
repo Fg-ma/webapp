@@ -557,3 +557,21 @@ export interface MiddleSearchFilterProps {
     middleAdvancedSearchFilterContainer?: React.RefObject<HTMLDivElement>;
   };
 }
+
+/* 
+  AffiliatedEntitiesScroll.tsx
+*/
+
+export interface AffiliatedEntitiesScrollProps {
+  affiliatesProfilePictures: React.JSX.Element[] | null;
+  affiliateProfilePictureRef: React.RefObject<HTMLDivElement>;
+  topHeaderRef: React.RefObject<HTMLDivElement>;
+}
+
+/* 
+  AffiliateWithButton.tsx
+*/
+
+export interface AffiliateWithButtonProps {
+  entity_id: string;
+}

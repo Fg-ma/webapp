@@ -3,6 +3,35 @@ const router = express.Router();
 import verifyToken from "./verifyJWT";
 import type { ids } from "@FgTypes/types";
 
+// Route to get an entity's affiliation status with the current user
+router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
+  const entity_id = req.query.entity_id;
+
+  try {
+    if (entity_id !== "user") {
+      const relation = await req.db.affiliates_relations.findUnique({
+        where: {
+          affiliate_id_root_affiliate_id_target: {
+            affiliate_id_root: req.user.user_id,
+            affiliate_id_target: entity_id,
+          },
+        },
+      });
+
+      if (relation) {
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    } else {
+      res.send(false);
+    }
+  } catch (error) {
+    console.error("Error fetching individual data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // Route to get all the affiliated entities with a certian entity id
 router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
   const entity_id = req.query.entity_id;
@@ -11,7 +40,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     let user_id;
 
     if (entity_id === "user") {
-      user_id = req.user?.user_id;
+      user_id = req.user.user_id;
     } else {
       user_id = entity_id;
     }
@@ -143,7 +172,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
 // Route to get all the affiliated individuals with a certian entity id
 router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user?.user_id;
+    const user_id = req.user.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
@@ -182,7 +211,7 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 // Route to get all the affiliated groups with a certian entity id
 router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user?.user_id;
+    const user_id = req.user.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: { affiliate_id_root: user_id },
@@ -217,7 +246,7 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
 // Route to get all the affiliated organizations with a certian entity id
 router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
   try {
-    const user_id = req.user?.user_id;
+    const user_id = req.user.user_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: { affiliate_id_root: user_id },

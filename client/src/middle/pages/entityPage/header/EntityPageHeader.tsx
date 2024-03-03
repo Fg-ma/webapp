@@ -4,6 +4,8 @@ import config from "@config";
 import { EntityPageHeaderProps, Afiliate } from "@FgTypes/middleTypes";
 import ReferenceLinks from "@components/referenceLinks/ReferenceLinks";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
+import AffiliatedEntitiesScroll from "./AffiliatedEntitiesScroll";
+import AffiliateButton from "./AffiliateButton";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -175,25 +177,11 @@ export default function EntityPageHeader({
           <p className="text-4xl mb-1">
             {entity?.[`${entityType.slice(0, -1)}_name`]}
           </p>
-          <div
-            className="flex flex-row h-8"
-            style={{
-              maxWidth: topHeaderRef.current
-                ? `${topHeaderRef.current.clientWidth - 120}px`
-                : "100%",
-            }}
-          >
-            <div
-              ref={affiliateProfilePictureRef}
-              className="flex space-x-6 overflow-x-auto w-5/6"
-            >
-              {affiliatesProfilePictures}
-            </div>
-            <div
-              className="w-1/6 h-8 bg-red-500"
-              style={{ boxShadow: "-4px 0 6px -1px rgba(0, 0, 0, 0.1)" }}
-            ></div>
-          </div>
+          <AffiliatedEntitiesScroll
+            affiliatesProfilePictures={affiliatesProfilePictures}
+            affiliateProfilePictureRef={affiliateProfilePictureRef}
+            topHeaderRef={topHeaderRef}
+          />
         </div>
       </div>
       <div className="text-xl mt-4">
@@ -224,10 +212,8 @@ export default function EntityPageHeader({
         </p>
       )}
       {entityReferences && <ReferenceLinks references={entityReferences} />}
-      <div className="space-x-6 font-K2D mt-6 flex items-center justify-center">
-        <button className="w-1/4 h-9 rounded-md bg-fg-primary text-white">
-          Affiliate with
-        </button>
+      <div className="space-x-6 font-K2D mt-6 flex items-center justify-left">
+        <AffiliateButton entity_id={entity_id} />
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Message</button>
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95 flex items-center justify-center">

@@ -15,7 +15,7 @@ import Sheets from "./content/Sheets";
 import Videos from "./content/Videos";
 import Images from "./content/Images";
 import Collections from "./content/Collections";
-import EntityPageHeader from "./EntityPageHeader";
+import EntityPageHeader from "./header/EntityPageHeader";
 import EntityContentNav from "./EntityContentNav";
 import EntityPageFooter from "./EntityPageFooter";
 
