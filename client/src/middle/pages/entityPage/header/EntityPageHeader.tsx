@@ -174,7 +174,11 @@ export default function EntityPageHeader({
           />
         </div>
         <div className="ml-8 h-fit">
-          <p className="text-4xl mb-1">
+          <p
+            className={`text-4xl ${
+              affiliatesProfilePictures?.length === 0 ? "mt-2" : "mb-1"
+            }`}
+          >
             {entity?.[`${entityType.slice(0, -1)}_name`]}
           </p>
           <AffiliatedEntitiesScroll

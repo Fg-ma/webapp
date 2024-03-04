@@ -81,78 +81,82 @@ export default function AffiliatedEntitiesScroll({
   };
 
   return (
-    <div
-      className="flex flex-row h-8"
-      style={{
-        maxWidth: topHeaderRef.current
-          ? `${topHeaderRef.current.clientWidth - 125}px`
-          : "100%",
-      }}
-    >
-      {showLeftScroll && (
-        <motion.div
-          className="w-10 h-8 bg-white flex items-center justify-center z-10"
+    <>
+      {affiliatesProfilePictures?.length !== 0 && (
+        <div
+          className="flex flex-row h-8"
           style={{
-            boxShadow: "16px 0 8px 10px rgba(255, 255, 255, 1)",
+            maxWidth: topHeaderRef.current
+              ? `${topHeaderRef.current.clientWidth - 125}px`
+              : "100%",
           }}
-          variants={scrollButtonsVar}
-          initial="leftInit"
-          animate={showLeftScroll ? "leftAnimate" : "leftInit"}
-          transition={transition}
         >
-          <motion.button
-            className="bg-fg-white-95 w-8 aspect-square rounded-full"
-            variants={scrollButtonsVar}
-            whileHover="hover"
-            onClick={scrollToLeft}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="32"
-              viewBox="0 -960 960 960"
-              width="32"
+          {showLeftScroll && (
+            <motion.div
+              className="w-10 h-8 bg-white flex items-center justify-center z-10"
+              style={{
+                boxShadow: "16px 0 8px 10px rgba(255, 255, 255, 1)",
+              }}
+              variants={scrollButtonsVar}
+              initial="leftInit"
+              animate={showLeftScroll ? "leftAnimate" : "leftInit"}
+              transition={transition}
             >
-              <path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z" />
-            </svg>
-          </motion.button>
-        </motion.div>
-      )}
-      <div
-        ref={affiliateProfilePictureRef}
-        className="flex space-x-6 overflow-x-auto grow"
-        onScroll={handleScroll}
-      >
-        {affiliatesProfilePictures}
-      </div>
-      {showRightScroll && (
-        <motion.div
-          className="w-10 h-8 bg-white flex items-center justify-center z-10"
-          style={{
-            boxShadow: "-16px 0 8px 10px rgba(255, 255, 255, 1)",
-          }}
-          variants={scrollButtonsVar}
-          initial="rightInit"
-          animate={showRightScroll ? "rightAnimate" : "rightInit"}
-          transition={transition}
-        >
-          <motion.button
-            className="bg-fg-white-95 w-8 aspect-square rounded-full"
-            variants={scrollButtonsVar}
-            whileHover="hover"
-            onClick={scrollToRight}
+              <motion.button
+                className="bg-fg-white-95 w-8 aspect-square rounded-full"
+                variants={scrollButtonsVar}
+                whileHover="hover"
+                onClick={scrollToLeft}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="32"
+                  viewBox="0 -960 960 960"
+                  width="32"
+                >
+                  <path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z" />
+                </svg>
+              </motion.button>
+            </motion.div>
+          )}
+          <div
+            ref={affiliateProfilePictureRef}
+            className="flex space-x-6 overflow-x-auto grow"
+            onScroll={handleScroll}
           >
-            <svg
-              className="ml-0.25"
-              xmlns="http://www.w3.org/2000/svg"
-              height="32"
-              viewBox="0 -960 960 960"
-              width="32"
+            {affiliatesProfilePictures}
+          </div>
+          {showRightScroll && (
+            <motion.div
+              className="w-10 h-8 bg-white flex items-center justify-center z-10"
+              style={{
+                boxShadow: "-16px 0 8px 10px rgba(255, 255, 255, 1)",
+              }}
+              variants={scrollButtonsVar}
+              initial="rightInit"
+              animate={showRightScroll ? "rightAnimate" : "rightInit"}
+              transition={transition}
             >
-              <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
-            </svg>
-          </motion.button>
-        </motion.div>
+              <motion.button
+                className="bg-fg-white-95 w-8 aspect-square rounded-full"
+                variants={scrollButtonsVar}
+                whileHover="hover"
+                onClick={scrollToRight}
+              >
+                <svg
+                  className="ml-0.25"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="32"
+                  viewBox="0 -960 960 960"
+                  width="32"
+                >
+                  <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                </svg>
+              </motion.button>
+            </motion.div>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

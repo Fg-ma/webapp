@@ -1,7 +1,88 @@
 import express from "express";
 const router = express.Router();
+import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
 import type { ids } from "@FgTypes/types";
+
+// Set a new affiliate relation
+router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
+  const entity_id = req.query.entity_id;
+
+  try {
+    const currentDate = new Date().toISOString();
+
+    const newAffiliateRelation = await req.db.affiliates_relations.create({
+      data: {
+        affiliate_relation_id: uuid(),
+        affiliate_id_root: req.user.user_id,
+        affiliate_id_target: entity_id,
+        affiliate_relation_date: currentDate,
+      },
+    });
+
+    const entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: entity_id,
+      },
+    });
+
+    res.send({
+      newAffiliateRelation: {
+        ...newAffiliateRelation,
+        entity_type: entity.entity_type,
+        action: "newRelation",
+      },
+      isAffiliated: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Delete an existing affiliate relation
+router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
+  const entity_id = req.query.entity_id;
+
+  try {
+    const existingRelation = await req.db.affiliates_relations.findUnique({
+      where: {
+        affiliate_id_root_affiliate_id_target: {
+          affiliate_id_root: req.user.user_id,
+          affiliate_id_target: entity_id,
+        },
+      },
+    });
+
+    if (!existingRelation) {
+      return res.status(404).send("Relation not found");
+    }
+
+    await req.db.affiliates_relations.delete({
+      where: {
+        affiliate_relation_id: existingRelation.affiliate_relation_id,
+      },
+    });
+
+    const entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: entity_id,
+      },
+    });
+
+    res.send({
+      deletedAffiliateRelation: {
+        ...existingRelation,
+        entity_type: entity.entity_type,
+        action: "deletedRelation",
+      },
+      isAffiliated: false,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // Route to get an entity's affiliation status with the current user
 router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
@@ -201,7 +282,22 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
       where: { individual_id: { in: individualIdsList } },
     });
 
-    res.send(individuals);
+    const individualsWithAffiliateDate = individuals.map((individual: any) => {
+      const relation = affiliates_relations.find(
+        (rel: any) => rel.affiliate_id_target === individual.individual_id
+      );
+
+      if (relation) {
+        return {
+          ...individual,
+          affiliate_relation_date: relation.affiliate_relation_date,
+        };
+      }
+
+      return individual;
+    });
+
+    res.send(individualsWithAffiliateDate);
   } catch (error) {
     console.error("Error fetching individual data:", error);
     res.status(500).send("Internal Server Error");

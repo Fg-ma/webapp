@@ -9,6 +9,7 @@ import CreateAccountScreen from "./CreateAccountScreen";
 import "./app.css";
 import "./scrollbar.css";
 import "./filterSwitches.css";
+import { AffiliateContextProvider } from "./middle/pages/entityPage/header/AffiliateContext";
 
 interface LoginState {
   page: {
@@ -48,20 +49,22 @@ export default function App() {
   }
 
   return (
-    <div id="base" className="h-screen w-screen">
-      <div id="pageSpace" className="flex justify-between mx-12 mt-16 h-full">
-        <LeftSpace />
+    <AffiliateContextProvider>
+      <div id="base" className="h-screen w-screen">
+        <div id="pageSpace" className="flex justify-between mx-12 mt-16 h-full">
+          <LeftSpace />
 
-        <div
-          ref={middleSpaceContainerRef}
-          style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-        >
-          <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
-          <PageNav />
+          <div
+            ref={middleSpaceContainerRef}
+            style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+          >
+            <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
+            <PageNav />
+          </div>
+
+          <RightSpace />
         </div>
-
-        <RightSpace />
       </div>
-    </div>
+    </AffiliateContextProvider>
   );
 }

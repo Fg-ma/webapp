@@ -196,7 +196,7 @@ router.get("/entity_images/:entity_id", async (req, res) => {
 // Set an entity's content(sheets, images, and videos) as pinned or not pinned
 router.put("/entity_content_pinned", verifyToken, async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
-  console.log(relation_id, pinned, date_pinned);
+
   try {
     const searchResult = await req.db.entities_content.findUnique({
       where: {
