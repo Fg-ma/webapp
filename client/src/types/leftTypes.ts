@@ -15,6 +15,7 @@ export interface Group {
   group_currentIssue: string;
   group_description: string;
   group_stances: string;
+  animate?: boolean;
 }
 
 export interface Individual {
@@ -24,6 +25,7 @@ export interface Individual {
   individual_currentIssue: string;
   individual_description: string;
   individual_roles: string;
+  animate?: boolean;
 }
 
 export interface Organization {
@@ -33,6 +35,7 @@ export interface Organization {
   organization_currentIssue: string;
   organization_description: string;
   organization_stances: string;
+  animate?: boolean;
 }
 
 /*
@@ -77,6 +80,7 @@ export interface IndividualCardProps {
   id: string;
   name: string;
   currentIssue: string | null;
+  animate?: boolean;
 }
 
 export interface GroupCardProps {
@@ -84,6 +88,7 @@ export interface GroupCardProps {
   name: string;
   currentIssue: string | null;
   affInCommon: string | null;
+  animate?: boolean;
 }
 
 export interface OrganizationCardProps {
@@ -91,6 +96,7 @@ export interface OrganizationCardProps {
   name: string;
   currentIssue: string | null;
   stances: string | null;
+  animate?: boolean;
 }
 
 /* 

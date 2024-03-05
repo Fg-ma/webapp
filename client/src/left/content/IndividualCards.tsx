@@ -18,6 +18,7 @@ export default function IndividualCards() {
     Unique Properties:
       N/A
   */
+
   const { affiliateRelation } = useAffiliateContext();
   const [individuals, setIndividuals] = useState<Individual[]>([]);
 
@@ -40,7 +41,9 @@ export default function IndividualCards() {
           },
         );
 
-        setIndividuals((prev) => [response.data, ...prev]);
+        const newIndividual = { ...response.data, animate: true };
+
+        setIndividuals((prev) => [newIndividual, ...prev]);
       } catch (error) {
         console.error("Error fetching individual data:", error);
       }
@@ -114,6 +117,7 @@ export default function IndividualCards() {
         id={indInfo.individual_id}
         name={indInfo.individual_name}
         currentIssue={indInfo.individual_currentIssue}
+        animate={indInfo.animate ? true : false}
       />
     );
   });

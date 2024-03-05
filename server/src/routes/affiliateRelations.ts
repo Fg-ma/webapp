@@ -332,7 +332,22 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
       where: { group_id: { in: groupIdsList } },
     });
 
-    res.send(groups);
+    const groupsWithAffiliateDate = groups.map((group: any) => {
+      const relation = affiliates_relations.find(
+        (rel: any) => rel.affiliate_id_target === group.group_id
+      );
+
+      if (relation) {
+        return {
+          ...group,
+          affiliate_relation_date: relation.affiliate_relation_date,
+        };
+      }
+
+      return group;
+    });
+
+    res.send(groupsWithAffiliateDate);
   } catch (error) {
     console.error("Error fetching individual data:", error);
     res.status(500).send("Internal Server Error");
@@ -351,7 +366,7 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
     const entity_ids = [];
 
     for (const relation of affiliates_relations) {
-      entity_ids.push(relation.affiliate_id_root);
+      entity_ids.push(relation.affiliate_id_target);
     }
 
     const organizationIds = await req.db.entities.findMany({
@@ -369,7 +384,24 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
       where: { organization_id: { in: organizationIdsList } },
     });
 
-    res.send(organizations);
+    const organizationsWithAffiliateDate = organizations.map(
+      (organization: any) => {
+        const relation = affiliates_relations.find(
+          (rel: any) => rel.affiliate_id_target === organization.organization_id
+        );
+
+        if (relation) {
+          return {
+            ...organization,
+            affiliate_relation_date: relation.affiliate_relation_date,
+          };
+        }
+
+        return organization;
+      }
+    );
+
+    res.send(organizationsWithAffiliateDate);
   } catch (error) {
     console.error("Error fetching individual data:", error);
     res.status(500).send("Internal Server Error");

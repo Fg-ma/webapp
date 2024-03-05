@@ -3,6 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
 import { Group } from "@FgTypes/leftTypes";
+import { useAffiliateContext } from "../../middle/pages/entityPage/header/AffiliateContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -18,7 +19,67 @@ export default function GroupCards() {
       It queries for any affiliates that the user may have in common with the group.
   */
 
+  const { affiliateRelation } = useAffiliateContext();
   const [groups, setGroups] = useState<Group[]>([]);
+
+  useEffect(() => {
+    const fetchNewRelationData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/groups/${affiliateRelation.affiliate_id_target}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const newGroup = { ...response.data, animate: true };
+
+        setGroups((prev) => [newGroup, ...prev]);
+      } catch (error) {
+        console.error("Error fetching group data:", error);
+      }
+    };
+
+    if (
+      affiliateRelation?.entity_type === 2 &&
+      affiliateRelation?.action === "newRelation"
+    ) {
+      fetchNewRelationData();
+    } else if (
+      affiliateRelation?.entity_type === 2 &&
+      affiliateRelation?.action === "deletedRelation"
+    ) {
+      const newIndividuals = groups.filter(
+        (group) => group.group_id !== affiliateRelation.affiliate_id_target,
+      );
+
+      setGroups(newIndividuals);
+    }
+  }, [affiliateRelation]);
+
+  const sortData = (data: any) => {
+    const parseDate = (dateString: string | null) =>
+      dateString
+        ? new Date(dateString).getTime()
+        : new Date("2000-01-01T01:01:01.000Z").getTime();
+
+    data.sort(
+      (a: any, b: any) =>
+        parseDate(b.affiliate_relation_date) -
+        parseDate(a.affiliate_relation_date),
+    );
+
+    return [...data];
+  };
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -39,7 +100,7 @@ export default function GroupCards() {
           },
         );
 
-        setGroups(response.data);
+        setGroups(sortData(response.data));
       } catch (error) {
         console.error("Error fetching group data:", error);
       }
@@ -56,6 +117,7 @@ export default function GroupCards() {
         name={grpInfo.group_name}
         currentIssue={grpInfo.group_currentIssue}
         affInCommon="placeholder"
+        animate={grpInfo.animate}
       />
     );
   });
