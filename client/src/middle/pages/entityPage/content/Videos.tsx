@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { VideosProps, VideoData } from "@FgTypes/middleTypes";
 import { Video } from "./Cards";
+import { usePinned } from "./PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,18 +19,8 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
       N/A
   */
 
+  const { pinnedState } = usePinned();
   const [videosData, setVideosData] = useState<VideoData[]>([]);
-  const videoSocketRef = useRef<Socket | null>(null);
-
-  // Connect socket
-  useEffect(() => {
-    const socket = io as any;
-    videoSocketRef.current = socket.connect(serverUrl);
-
-    return () => {
-      videoSocketRef.current?.disconnect();
-    };
-  }, []);
 
   // Sorts the video data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
   const sortData = (data: VideoData[]) => {
@@ -52,32 +42,8 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
     return [...pinnedRows, ...notPinnedRows];
   };
 
-  // Gets video data and connects to socket
+  // Gets video data
   useEffect(() => {
-    // Connects to the socket to get the new data when pinned is updated
-    videoSocketRef.current?.on(
-      "pinnedUpdated",
-      ({ relation_id, pinned, date_pinned }) => {
-        setVideosData((prevData) => {
-          const updatedData = prevData.map((video) => {
-            if (video.entities_content_id === relation_id) {
-              return {
-                ...video,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            }
-            return video;
-          });
-
-          const sortedData = sortData(updatedData);
-
-          return sortedData;
-        });
-      },
-    );
-
-    // Gets original video data
     const fetchVideosData = async () => {
       try {
         const response = await Axios.get(
@@ -92,6 +58,33 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
     fetchVideosData();
   }, [entity_id]);
 
+  // Handle when a video is pinned
+  useEffect(() => {
+    const fetchNewPinnedData = async (filteredVideoData: any) => {
+      try {
+        const response = await Axios.get(
+          `${serverUrl}/entities/entity_video_by_entities_content_id/${pinnedState.relation_id}`,
+        );
+
+        if (response.data.pinned === true) {
+          setVideosData([response.data, ...filteredVideoData]);
+        } else if (response.data.pinned === false) {
+          setVideosData(sortData([response.data, ...filteredVideoData]));
+        }
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    if (pinnedState.type === "video" && pinnedState.relation_id) {
+      const filteredVideoData = videosData.filter(
+        (video) => video.entities_content_id !== pinnedState.relation_id,
+      );
+
+      fetchNewPinnedData(filteredVideoData);
+    }
+  }, [pinnedState]);
+
   const videos = videosData.map((video) => {
     return (
       <Video
@@ -100,7 +93,6 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
         video_id={video.video_id}
         pinned={video.pinned}
         relation_id={video.entities_content_id}
-        socket={videoSocketRef.current}
         isEditablePage={isEditablePage}
       />
     );

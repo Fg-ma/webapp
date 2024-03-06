@@ -4,6 +4,7 @@ import Axios from "axios";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
+import { usePinned } from "./PinnedContext";
 import {
   SheetProps,
   SheetData,
@@ -31,11 +32,11 @@ export function Sheet({
   author_id,
   pinned = false,
   relation_id,
-  socket,
   isEditablePage,
 }: SheetProps) {
   const dispatch = useDispatch();
 
+  const { setPinnedState } = usePinned();
   const [sheetData, setSheetData] = useState<SheetData>();
   const [hover, setHover] = useState(false);
   const isAuthor = useRef<boolean | null>(null);
@@ -106,15 +107,9 @@ export function Sheet({
     }
 
     try {
-      socket?.emit(
-        "togglePinned",
-        "sheet",
-        relation_id,
-        newPinned,
-        date_pinned,
-      );
+      setPinnedState({ relation_id: relation_id, type: "sheet" });
     } catch (error) {
-      console.error("Error with socket:", error);
+      console.error("Error toggling pinned:", error);
     }
   };
 
@@ -175,11 +170,11 @@ export function Video({
   video_id,
   pinned = false,
   relation_id,
-  socket,
   isEditablePage,
 }: VideoProps) {
   const dispatch = useDispatch();
 
+  const { setPinnedState } = usePinned();
   const [videoData, setVideoData] = useState<VideoData>();
   const [hover, setHover] = useState(false);
 
@@ -244,13 +239,7 @@ export function Video({
     }
 
     try {
-      socket?.emit(
-        "togglePinned",
-        "video",
-        relation_id,
-        newPinned,
-        date_pinned,
-      );
+      setPinnedState({ relation_id: relation_id, type: "video" });
     } catch (error) {
       console.error("Error with socket:", error);
     }
@@ -340,11 +329,11 @@ export function Image({
   image_id,
   pinned = false,
   relation_id,
-  socket,
   isEditablePage,
 }: ImageProps) {
   const dispatch = useDispatch();
 
+  const { setPinnedState } = usePinned();
   const [imageData, setImageData] = useState<ImageData>();
   const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
   const [showCreator, setShowCreator] = useState(false);
@@ -413,13 +402,7 @@ export function Image({
     }
 
     try {
-      socket?.emit(
-        "togglePinned",
-        "image",
-        relation_id,
-        newPinned,
-        date_pinned,
-      );
+      setPinnedState({ relation_id: relation_id, type: "image" });
     } catch (error) {
       console.error("Error with socket:", error);
     }

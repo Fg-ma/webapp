@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { SheetsProps, SheetData } from "@FgTypes/middleTypes";
 import { Sheet } from "./Cards";
+import { usePinned } from "./PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,18 +19,8 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
       N/A
   */
 
+  const { pinnedState } = usePinned();
   const [sheetsData, setSheetsData] = useState<SheetData[]>([]);
-  const sheetSocketRef = useRef<Socket | null>(null);
-
-  // Connect socket
-  useEffect(() => {
-    const socket = io as any;
-    sheetSocketRef.current = socket.connect(serverUrl);
-
-    return () => {
-      sheetSocketRef.current?.disconnect();
-    };
-  }, []);
 
   // Sorts the sheet data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
   const sortData = (data: SheetData[]) => {
@@ -52,32 +42,8 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
     return [...pinnedRows, ...notPinnedRows];
   };
 
-  // Gets sheet data and connects to socket
+  // Gets sheet data
   useEffect(() => {
-    // Connects to the socket to get the new data when pinned is updated
-    sheetSocketRef.current?.on(
-      "pinnedUpdated",
-      ({ relation_id, pinned, date_pinned }) => {
-        setSheetsData((prevData) => {
-          const updatedData = prevData.map((sheet) => {
-            if (sheet.entities_content_id === relation_id) {
-              return {
-                ...sheet,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            }
-            return sheet;
-          });
-
-          const sortedData = sortData(updatedData);
-
-          return sortedData;
-        });
-      },
-    );
-
-    // Gets original sheet data
     const fetchSheetsData = async () => {
       try {
         const response = await Axios.get(
@@ -93,6 +59,33 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
     fetchSheetsData();
   }, [entity_id]);
 
+  // Handle when a sheet is pinned
+  useEffect(() => {
+    const fetchNewPinnedData = async (filteredSheetData: any) => {
+      try {
+        const response = await Axios.get(
+          `${serverUrl}/entities/entity_sheet_by_entities_content_id/${pinnedState.relation_id}`,
+        );
+
+        if (response.data.pinned === true) {
+          setSheetsData([response.data, ...filteredSheetData]);
+        } else if (response.data.pinned === false) {
+          setSheetsData(sortData([response.data, ...filteredSheetData]));
+        }
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    if (pinnedState.type === "sheet" && pinnedState.relation_id) {
+      const filteredSheetData = sheetsData.filter(
+        (sheet) => sheet.entities_content_id !== pinnedState.relation_id,
+      );
+
+      fetchNewPinnedData(filteredSheetData);
+    }
+  }, [pinnedState]);
+
   const sheets = sheetsData.map((sheet) => {
     return (
       <Sheet
@@ -102,7 +95,6 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
         author_id={entity_id}
         pinned={sheet.pinned}
         relation_id={sheet.entities_content_id}
-        socket={sheetSocketRef.current}
         isEditablePage={isEditablePage}
       />
     );

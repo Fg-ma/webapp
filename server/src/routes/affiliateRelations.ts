@@ -2,38 +2,40 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { ids } from "@FgTypes/types";
+import type { group, ids, organization, relation } from "@FgTypes/types";
 
 // Set a new affiliate relation
 router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
   const entity_id = req.query.entity_id;
 
   try {
-    const currentDate = new Date().toISOString();
+    if (entity_id !== req.user.user_id) {
+      const currentDate = new Date().toISOString();
 
-    const newAffiliateRelation = await req.db.affiliates_relations.create({
-      data: {
-        affiliate_relation_id: uuid(),
-        affiliate_id_root: req.user.user_id,
-        affiliate_id_target: entity_id,
-        affiliate_relation_date: currentDate,
-      },
-    });
+      const newAffiliateRelation = await req.db.affiliates_relations.create({
+        data: {
+          affiliate_relation_id: uuid(),
+          affiliate_id_root: req.user.user_id,
+          affiliate_id_target: entity_id,
+          affiliate_relation_date: currentDate,
+        },
+      });
 
-    const entity = await req.db.entities.findUnique({
-      where: {
-        entity_id: entity_id,
-      },
-    });
+      const entity = await req.db.entities.findUnique({
+        where: {
+          entity_id: entity_id,
+        },
+      });
 
-    res.send({
-      newAffiliateRelation: {
-        ...newAffiliateRelation,
-        entity_type: entity.entity_type,
-        action: "newRelation",
-      },
-      isAffiliated: true,
-    });
+      res.send({
+        newAffiliateRelation: {
+          ...newAffiliateRelation,
+          entity_type: entity.entity_type,
+          action: "newRelation",
+        },
+        isAffiliated: true,
+      });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -284,7 +286,7 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 
     const individualsWithAffiliateDate = individuals.map((individual: any) => {
       const relation = affiliates_relations.find(
-        (rel: any) => rel.affiliate_id_target === individual.individual_id
+        (rel: relation) => rel.affiliate_id_target === individual.individual_id
       );
 
       if (relation) {
@@ -332,9 +334,9 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
       where: { group_id: { in: groupIdsList } },
     });
 
-    const groupsWithAffiliateDate = groups.map((group: any) => {
+    const groupsWithAffiliateDate = groups.map((group: group) => {
       const relation = affiliates_relations.find(
-        (rel: any) => rel.affiliate_id_target === group.group_id
+        (rel: relation) => rel.affiliate_id_target === group.group_id
       );
 
       if (relation) {
@@ -385,9 +387,10 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
     });
 
     const organizationsWithAffiliateDate = organizations.map(
-      (organization: any) => {
+      (organization: organization) => {
         const relation = affiliates_relations.find(
-          (rel: any) => rel.affiliate_id_target === organization.organization_id
+          (rel: relation) =>
+            rel.affiliate_id_target === organization.organization_id
         );
 
         if (relation) {

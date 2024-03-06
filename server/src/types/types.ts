@@ -4,6 +4,43 @@ export interface ids {
   entity_id: number;
 }
 
+export interface relation {
+  affiliate_relation_id: string;
+  affiliate_id_root: string;
+  affiliate_id_target: string;
+  affiliate_relation_date: string;
+}
+
+export interface individual {
+  individual_id: string;
+  individual_username: string;
+  individual_name: string | null;
+  individual_currentIssue: string | null;
+  individual_roles: string | null;
+  individual_description: string | null;
+  profile_picture_id: string | null;
+}
+
+export interface group {
+  group_id: string;
+  group_handle: string;
+  group_name: string | null;
+  group_currentIssue: string | null;
+  group_stances: string | null;
+  group_description: string | null;
+  profile_picture_id: string | null;
+}
+
+export interface organization {
+  organization_id: string;
+  organization_handle: string;
+  organization_name: string | null;
+  organization_currentIssue: string | null;
+  organization_stances: string | null;
+  organization_description: string | null;
+  profile_picture_id: string | null;
+}
+
 // entities.ts
 
 export interface EntityContent {

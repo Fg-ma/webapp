@@ -63,7 +63,7 @@ router.get("/entity_sheets/:entity_id", async (req, res) => {
 
     const sheetContent = await req.db.sheets.findMany({
       where: {
-        content_id: sheetEntityContent.content_id,
+        sheet_id: sheetEntityContent.content_id,
       },
     });
 
@@ -93,6 +93,35 @@ router.get("/entity_sheets/:entity_id", async (req, res) => {
   }
 });
 
+// Get a sheet by entities_content_id
+router.get(
+  "/entity_sheet_by_entities_content_id/:entities_content_id",
+  async (req, res) => {
+    const entities_content_id = req.params.entities_content_id;
+
+    try {
+      const entityContent = await req.db.entities_content.findUnique({
+        where: {
+          entities_content_id: entities_content_id,
+        },
+      });
+
+      const sheetContent = await req.db.sheets.findUnique({
+        where: {
+          sheet_id: entityContent.content_id,
+        },
+      });
+
+      const mergedObject = { ...entityContent, ...sheetContent };
+
+      res.send(mergedObject);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
 // Get all the videos belonging to an entity
 router.get("/entity_videos/:entity_id", async (req, res) => {
   const entity_id = req.params.entity_id;
@@ -113,10 +142,10 @@ router.get("/entity_videos/:entity_id", async (req, res) => {
 
     const videoContent = await req.db.videos.findMany({
       where: {
-        content_id: videoEntityContent.content_id,
+        video_id: videoEntityContent.content_id,
       },
     });
-    console.log(videoContent);
+
     function mergeData(
       allEntityContent: EntityContent[],
       videoContent: VideoContent[]
@@ -143,6 +172,35 @@ router.get("/entity_videos/:entity_id", async (req, res) => {
   }
 });
 
+// Get a video by entities_content_id
+router.get(
+  "/entity_video_by_entities_content_id/:entities_content_id",
+  async (req, res) => {
+    const entities_content_id = req.params.entities_content_id;
+
+    try {
+      const entityContent = await req.db.entities_content.findUnique({
+        where: {
+          entities_content_id: entities_content_id,
+        },
+      });
+
+      const videoContent = await req.db.videos.findUnique({
+        where: {
+          video_id: entityContent.content_id,
+        },
+      });
+
+      const mergedObject = { ...entityContent, ...videoContent };
+
+      res.send(mergedObject);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
 // Get all the images belonging to an entity
 router.get("/entity_images/:entity_id", async (req, res) => {
   const entity_id = req.params.entity_id;
@@ -163,7 +221,7 @@ router.get("/entity_images/:entity_id", async (req, res) => {
 
     const imageContent = await req.db.images.findMany({
       where: {
-        content_id: imageEntityContent.content_id,
+        image_id: imageEntityContent.content_id,
       },
     });
 
@@ -192,6 +250,35 @@ router.get("/entity_images/:entity_id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// Get a image by entities_content_id
+router.get(
+  "/entity_image_by_entities_content_id/:entities_content_id",
+  async (req, res) => {
+    const entities_content_id = req.params.entities_content_id;
+
+    try {
+      const entityContent = await req.db.entities_content.findUnique({
+        where: {
+          entities_content_id: entities_content_id,
+        },
+      });
+
+      const imageContent = await req.db.images.findUnique({
+        where: {
+          image_id: entityContent.content_id,
+        },
+      });
+
+      const mergedObject = { ...entityContent, ...imageContent };
+
+      res.send(mergedObject);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
 
 // Set an entity's content(sheets, images, and videos) as pinned or not pinned
 router.put("/entity_content_pinned", verifyToken, async (req, res) => {

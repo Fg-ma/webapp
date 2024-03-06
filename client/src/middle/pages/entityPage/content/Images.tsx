@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { ImagesProps, ImageData } from "@FgTypes/middleTypes";
 import { Image } from "./Cards";
+import { usePinned } from "./PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,18 +19,8 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
       N/A
   */
 
+  const { pinnedState } = usePinned();
   const [imagesData, setImagesData] = useState<ImageData[]>([]);
-  const imageSocketRef = useRef<Socket | null>(null);
-
-  // Connect socket
-  useEffect(() => {
-    const socket = io as any;
-    imageSocketRef.current = socket.connect(serverUrl);
-
-    return () => {
-      imageSocketRef.current?.disconnect();
-    };
-  }, []);
 
   // Sorts the image data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
   const sortData = (data: ImageData[]) => {
@@ -52,32 +42,8 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
     return [...pinnedRows, ...notPinnedRows];
   };
 
-  // Gets image data and connects to socket
+  // Gets image data
   useEffect(() => {
-    // Connects to the socket to get the new data when pinned is updated
-    imageSocketRef.current?.on(
-      "pinnedUpdated",
-      ({ relation_id, pinned, date_pinned }) => {
-        setImagesData((prevData) => {
-          const updatedData = prevData.map((image) => {
-            if (image.entities_content_id === relation_id) {
-              return {
-                ...image,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            }
-            return image;
-          });
-
-          const sortedData = sortData(updatedData);
-
-          return sortedData;
-        });
-      },
-    );
-
-    // Gets original image data
     const fetchImagesData = async () => {
       try {
         const response = await Axios.get(
@@ -92,6 +58,33 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
     fetchImagesData();
   }, [entity_id]);
 
+  // Handle when a image is pinned
+  useEffect(() => {
+    const fetchNewPinnedData = async (filteredSheetData: any) => {
+      try {
+        const response = await Axios.get(
+          `${serverUrl}/entities/entity_image_by_entities_content_id/${pinnedState.relation_id}`,
+        );
+
+        if (response.data.pinned === true) {
+          setImagesData([response.data, ...filteredSheetData]);
+        } else if (response.data.pinned === false) {
+          setImagesData(sortData([response.data, ...filteredSheetData]));
+        }
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    if (pinnedState.type === "image" && pinnedState.relation_id) {
+      const filteredImageData = imagesData.filter(
+        (image) => image.entities_content_id !== pinnedState.relation_id,
+      );
+
+      fetchNewPinnedData(filteredImageData);
+    }
+  }, [pinnedState]);
+
   const images = imagesData.map((image) => {
     return (
       <Image
@@ -100,7 +93,6 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
         image_id={image.image_id}
         pinned={image.pinned}
         relation_id={image.entities_content_id}
-        socket={imageSocketRef.current}
         isEditablePage={isEditablePage}
       />
     );

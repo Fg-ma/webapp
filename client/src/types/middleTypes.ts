@@ -154,7 +154,6 @@ export interface SheetProps {
   author_id: string;
   pinned: boolean;
   relation_id: string;
-  socket: Socket | null;
   isEditablePage: MutableRefObject<boolean>;
 }
 
@@ -172,7 +171,6 @@ export interface VideoProps {
   video_id: string;
   pinned: boolean;
   relation_id: string;
-  socket: Socket | null;
   isEditablePage: MutableRefObject<boolean>;
 }
 
@@ -190,7 +188,6 @@ export interface ImageProps {
   image_id: string;
   pinned: boolean;
   relation_id: string;
-  socket: Socket | null;
   isEditablePage: MutableRefObject<boolean>;
 }
 
