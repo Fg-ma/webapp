@@ -25,24 +25,24 @@ const transition: Transition = {
 
 export default function AffiliatedEntitiesScroll({
   affiliatesProfilePictures,
-  affiliateProfilePictureRef,
+  affiliateProfilePicturesRef,
   topHeaderRef,
 }: AffiliatedEntitiesScrollProps) {
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
 
   const handleScroll = () => {
-    if (affiliateProfilePictureRef.current) {
-      if (affiliateProfilePictureRef.current.scrollLeft > 0) {
+    if (affiliateProfilePicturesRef.current) {
+      if (affiliateProfilePicturesRef.current.scrollLeft > 0) {
         setShowLeftScroll(true);
       } else {
         setShowLeftScroll(false);
       }
 
       if (
-        affiliateProfilePictureRef.current.scrollLeft +
-          affiliateProfilePictureRef.current.clientWidth <
-        affiliateProfilePictureRef.current.scrollWidth
+        affiliateProfilePicturesRef.current.scrollLeft +
+          affiliateProfilePicturesRef.current.clientWidth <
+        affiliateProfilePicturesRef.current.scrollWidth
       ) {
         setShowRightScroll(true);
       } else {
@@ -52,31 +52,31 @@ export default function AffiliatedEntitiesScroll({
   };
 
   const scrollToRight = () => {
-    if (affiliateProfilePictureRef.current) {
-      const scrollWidth = affiliateProfilePictureRef.current.scrollWidth;
-      const clientWidth = affiliateProfilePictureRef.current.clientWidth;
+    if (affiliateProfilePicturesRef.current) {
+      const scrollWidth = affiliateProfilePicturesRef.current.scrollWidth;
+      const clientWidth = affiliateProfilePicturesRef.current.clientWidth;
       const maxScroll = scrollWidth - clientWidth;
       const scrollStep = clientWidth;
 
       let newScrollLeft =
-        affiliateProfilePictureRef.current.scrollLeft + scrollStep;
+        affiliateProfilePicturesRef.current.scrollLeft + scrollStep;
 
       newScrollLeft = Math.min(newScrollLeft, maxScroll);
 
-      affiliateProfilePictureRef.current.scrollLeft = newScrollLeft;
+      affiliateProfilePicturesRef.current.scrollLeft = newScrollLeft;
     }
   };
 
   const scrollToLeft = () => {
-    if (affiliateProfilePictureRef.current) {
-      const scrollStep = affiliateProfilePictureRef.current.clientWidth;
+    if (affiliateProfilePicturesRef.current) {
+      const scrollStep = affiliateProfilePicturesRef.current.clientWidth;
 
       let newScrollLeft =
-        affiliateProfilePictureRef.current.scrollLeft - scrollStep;
+        affiliateProfilePicturesRef.current.scrollLeft - scrollStep;
 
       newScrollLeft = Math.max(newScrollLeft, 0);
 
-      affiliateProfilePictureRef.current.scrollLeft = newScrollLeft;
+      affiliateProfilePicturesRef.current.scrollLeft = newScrollLeft;
     }
   };
 
@@ -120,7 +120,7 @@ export default function AffiliatedEntitiesScroll({
             </motion.div>
           )}
           <div
-            ref={affiliateProfilePictureRef}
+            ref={affiliateProfilePicturesRef}
             className="flex space-x-6 overflow-x-auto grow"
             onScroll={handleScroll}
           >

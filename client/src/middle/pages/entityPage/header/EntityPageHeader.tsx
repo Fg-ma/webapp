@@ -39,11 +39,11 @@ export default function EntityPageHeader({
     React.JSX.Element[] | null
   >(null);
   const topHeaderRef = useRef<HTMLDivElement>(null);
-  const affiliateProfilePictureRef = useRef<HTMLDivElement>(null);
+  const affiliateProfilePicturesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (affiliateProfilePictureRef.current) {
-      affiliateProfilePictureRef.current.scrollLeft = 0;
+    if (affiliateProfilePicturesRef.current) {
+      affiliateProfilePicturesRef.current.scrollLeft = 0;
     }
 
     const fetchIndividualData = async () => {
@@ -183,7 +183,7 @@ export default function EntityPageHeader({
           </p>
           <AffiliatedEntitiesScroll
             affiliatesProfilePictures={affiliatesProfilePictures}
-            affiliateProfilePictureRef={affiliateProfilePictureRef}
+            affiliateProfilePicturesRef={affiliateProfilePicturesRef}
             topHeaderRef={topHeaderRef}
           />
         </div>

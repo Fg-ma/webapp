@@ -561,7 +561,7 @@ export interface MiddleSearchFilterProps {
 
 export interface AffiliatedEntitiesScrollProps {
   affiliatesProfilePictures: React.JSX.Element[] | null;
-  affiliateProfilePictureRef: React.RefObject<HTMLDivElement>;
+  affiliateProfilePicturesRef: React.RefObject<HTMLDivElement>;
   topHeaderRef: React.RefObject<HTMLDivElement>;
 }
 
