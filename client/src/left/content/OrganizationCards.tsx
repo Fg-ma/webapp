@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
 import { Organization } from "@FgTypes/leftTypes";
-import { useAffiliateContext } from "../../middle/pages/entityPage/header/AffiliateContext";
+import { useAffiliateContext } from "@context/AffiliateContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

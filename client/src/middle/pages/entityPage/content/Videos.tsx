@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { VideosProps, VideoData } from "@FgTypes/middleTypes";
 import { Video } from "./Cards";
-import { usePinned } from "./PinnedContext";
+import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -60,7 +60,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
 
   // Handle when a video is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredVideoData: any) => {
+    const fetchNewPinnedData = async (filteredVideoData: VideoData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_video_by_entities_content_id/${pinnedState.relation_id}`,

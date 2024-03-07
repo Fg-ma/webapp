@@ -28,6 +28,7 @@ module.exports = {
       "@redux": path.resolve(__dirname, "src/redux"),
       "@components": path.resolve(__dirname, "src/components"),
       "@FgTypes": path.resolve(__dirname, "src/types"),
+      "@context": path.resolve(__dirname, "src/context"),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },

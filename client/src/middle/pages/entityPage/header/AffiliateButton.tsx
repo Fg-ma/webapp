@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import config from "@config";
 import { AffiliateWithButtonProps } from "@FgTypes/middleTypes";
-import { useAffiliateContext } from "./AffiliateContext";
+import { useAffiliateContext } from "@context/AffiliateContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

@@ -4,7 +4,7 @@ import Axios from "axios";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import { usePinned } from "./PinnedContext";
+import { usePinned } from "@context/PinnedContext";
 import {
   SheetProps,
   SheetData,

@@ -9,8 +9,6 @@ import CreateAccountScreen from "./CreateAccountScreen";
 import "./app.css";
 import "./scrollbar.css";
 import "./filterSwitches.css";
-import { AffiliateContextProvider } from "./middle/pages/entityPage/header/AffiliateContext";
-import { PinnedProvider } from "./middle/pages/entityPage/content/PinnedContext";
 
 interface LoginState {
   page: {
@@ -50,27 +48,20 @@ export default function App() {
   }
 
   return (
-    <PinnedProvider>
-      <AffiliateContextProvider>
-        <div id="base" className="h-screen w-screen">
-          <div
-            id="pageSpace"
-            className="flex justify-between mx-12 mt-16 h-full"
-          >
-            <LeftSpace />
+    <div id="base" className="h-screen w-screen">
+      <div id="pageSpace" className="flex justify-between mx-12 mt-16 h-full">
+        <LeftSpace />
 
-            <div
-              ref={middleSpaceContainerRef}
-              style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-            >
-              <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
-              <PageNav />
-            </div>
-
-            <RightSpace />
-          </div>
+        <div
+          ref={middleSpaceContainerRef}
+          style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+        >
+          <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
+          <PageNav />
         </div>
-      </AffiliateContextProvider>
-    </PinnedProvider>
+
+        <RightSpace />
+      </div>
+    </div>
   );
 }

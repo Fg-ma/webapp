@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { ImagesProps, ImageData } from "@FgTypes/middleTypes";
 import { Image } from "./Cards";
-import { usePinned } from "./PinnedContext";
+import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -60,7 +60,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
 
   // Handle when a image is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredSheetData: any) => {
+    const fetchNewPinnedData = async (filteredSheetData: ImageData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_image_by_entities_content_id/${pinnedState.relation_id}`,

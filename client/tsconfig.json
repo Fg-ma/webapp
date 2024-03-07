@@ -5,7 +5,8 @@
       "@config": ["config.js"],
       "@redux/*": ["src/redux/*"],
       "@components/*": ["src/components/*"],
-      "@FgTypes/*": ["src/types/*"]
+      "@FgTypes/*": ["src/types/*"],
+      "@context/*": ["src/context/*"]
     },
     "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],

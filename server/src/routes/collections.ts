@@ -45,6 +45,7 @@ router.get("/:collection_id", async (req, res) => {
             sheet_id: collection.content_id,
           },
         });
+
         collectionsData.push({
           ...collection,
           content_data: { ...content_data },
@@ -146,5 +147,110 @@ router.put("/collections_images_pinned", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// Get a sheet by collections_content_id
+router.get(
+  "/collection_sheet_by_collections_content_id/:collections_content_id",
+  async (req, res) => {
+    const collections_content_id = req.params.collections_content_id;
+
+    try {
+      const collectionContent = await req.db.collections_content.findUnique({
+        where: {
+          collections_content_id: collections_content_id,
+        },
+        include: {
+          content: true,
+        },
+      });
+
+      const sheetContent = await req.db.sheets.findUnique({
+        where: {
+          sheet_id: collectionContent.content_id,
+        },
+      });
+
+      const collectionSheetData = {
+        ...collectionContent,
+        content_data: { ...sheetContent },
+      };
+
+      res.send(collectionSheetData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
+// Get a video by collections_content_id
+router.get(
+  "/collection_video_by_collections_content_id/:collections_content_id",
+  async (req, res) => {
+    const collections_content_id = req.params.collections_content_id;
+
+    try {
+      const collectionContent = await req.db.collections_content.findUnique({
+        where: {
+          collections_content_id: collections_content_id,
+        },
+        include: {
+          content: true,
+        },
+      });
+
+      const videoContent = await req.db.videos.findUnique({
+        where: {
+          video_id: collectionContent.content_id,
+        },
+      });
+
+      const collectionVideoData = {
+        ...collectionContent,
+        content_data: { ...videoContent },
+      };
+
+      res.send(collectionVideoData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
+// Get a image by collections_content_id
+router.get(
+  "/collection_image_by_collections_content_id/:collections_content_id",
+  async (req, res) => {
+    const collections_content_id = req.params.collections_content_id;
+
+    try {
+      const collectionContent = await req.db.collections_content.findUnique({
+        where: {
+          collections_content_id: collections_content_id,
+        },
+        include: {
+          content: true,
+        },
+      });
+
+      const imageContent = await req.db.images.findUnique({
+        where: {
+          image_id: collectionContent.content_id,
+        },
+      });
+
+      const collectionImageData = {
+        ...collectionContent,
+        content_data: { ...imageContent },
+      };
+
+      res.send(collectionImageData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
 
 export default router;

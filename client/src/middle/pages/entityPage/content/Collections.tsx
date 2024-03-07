@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { io, Socket } from "socket.io-client";
 import config from "@config";
 import { CollectionsProps, CollectionItem } from "@FgTypes/middleTypes";
 import { Sheet, Video, Image } from "./Cards";
+import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -20,21 +20,11 @@ export default function Collections({
       Queries the database to get the collection data which is then processed 
       into sheets, images, and videos depending on what is in each collection.
     Unique Properties:
-      Uses sockets to live update the pinned itmes in a collection
+      N/A
   */
 
+  const { pinnedState } = usePinned();
   const [collectionData, setCollectionData] = useState<CollectionItem[]>([]);
-  const socketRef = useRef<Socket | null>(null);
-
-  // Connect socket
-  useEffect(() => {
-    const socket = io as any;
-    socketRef.current = socket.connect(serverUrl);
-
-    return () => {
-      socketRef.current?.disconnect();
-    };
-  }, []);
 
   // Sorts the collection data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
   const sortData = (data: CollectionItem[]) => {
@@ -56,53 +46,8 @@ export default function Collections({
     return [...pinnedRows, ...notPinnedRows];
   };
 
-  // Gets collection data and connects to socket
+  // Gets collection data
   useEffect(() => {
-    // Connects to the socket to get the new data when pinned is updated
-    socketRef.current?.on(
-      "pinnedUpdated",
-      ({ relation, relation_id, pinned, date_pinned }) => {
-        setCollectionData((prevData) => {
-          const updatedData = prevData.map((item) => {
-            if (
-              relation === "sheet" &&
-              item.collections_content_id === relation_id
-            ) {
-              return {
-                ...item,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            } else if (
-              relation === "video" &&
-              item.collections_content_id === relation_id
-            ) {
-              return {
-                ...item,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            } else if (
-              relation === "image" &&
-              item.collections_content_id === relation_id
-            ) {
-              return {
-                ...item,
-                pinned: pinned,
-                date_pinned: date_pinned,
-              };
-            }
-            return item;
-          });
-
-          const sortedData = sortData(updatedData);
-
-          return sortedData;
-        });
-      },
-    );
-
-    // Gets original collection data
     const fetchCollectionsData = async () => {
       try {
         const response = await Axios.get(
@@ -118,10 +63,36 @@ export default function Collections({
     fetchCollectionsData();
   }, [collection_id]);
 
+  // Handle when content is pinned
+  useEffect(() => {
+    const fetchNewPinnedData = async (filteredSheetData: CollectionItem[]) => {
+      try {
+        const response = await Axios.get(
+          `${serverUrl}/collections/collection_${pinnedState.type}_by_collections_content_id/${pinnedState.relation_id}`,
+        );
+
+        if (response.data.pinned === true) {
+          setCollectionData([response.data, ...filteredSheetData]);
+        } else if (response.data.pinned === false) {
+          setCollectionData(sortData([response.data, ...filteredSheetData]));
+        }
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    if (pinnedState.relation_id) {
+      const filteredData = collectionData.filter(
+        (content) => content.collections_content_id !== pinnedState.relation_id,
+      );
+
+      fetchNewPinnedData(filteredData);
+    }
+  }, [pinnedState]);
+
   // Maps the collection data into the appropriate places
   const collection = collectionData.map((item) => {
     if (
-      socketRef.current &&
       item.content.content_type === 1 &&
       item.content_data.sheet_id &&
       item.collections_content_id
@@ -134,12 +105,10 @@ export default function Collections({
           author_id={entity_id}
           pinned={item.pinned}
           relation_id={item.collections_content_id}
-          socket={socketRef.current}
           isEditablePage={isEditablePage}
         />
       );
     } else if (
-      socketRef.current &&
       item.content.content_type === 2 &&
       item.content_data.image_id &&
       item.collections_content_id
@@ -151,12 +120,10 @@ export default function Collections({
           image_id={item.content_data.image_id}
           pinned={item.pinned}
           relation_id={item.collections_content_id}
-          socket={socketRef.current}
           isEditablePage={isEditablePage}
         />
       );
     } else if (
-      socketRef.current &&
       item.content.content_type === 3 &&
       item.content_data.video_id &&
       item.collections_content_id
@@ -168,7 +135,6 @@ export default function Collections({
           video_id={item.content_data.video_id}
           pinned={item.pinned}
           relation_id={item.collections_content_id}
-          socket={socketRef.current}
           isEditablePage={isEditablePage}
         />
       );

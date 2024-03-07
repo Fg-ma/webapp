@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
 import { Individual } from "@FgTypes/leftTypes";
-import { useAffiliateContext } from "../../middle/pages/entityPage/header/AffiliateContext";
+import { useAffiliateContext } from "@context/AffiliateContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -53,6 +53,7 @@ export default function IndividualCards() {
       affiliateRelation?.entity_type === 1 &&
       affiliateRelation?.action === "newRelation"
     ) {
+      console.log(affiliateRelation);
       fetchNewRelationData();
     } else if (
       affiliateRelation?.entity_type === 1 &&

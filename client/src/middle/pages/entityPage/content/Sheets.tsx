@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { SheetsProps, SheetData } from "@FgTypes/middleTypes";
 import { Sheet } from "./Cards";
-import { usePinned } from "./PinnedContext";
+import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -61,7 +61,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
 
   // Handle when a sheet is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredSheetData: any) => {
+    const fetchNewPinnedData = async (filteredSheetData: SheetData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_sheet_by_entities_content_id/${pinnedState.relation_id}`,
