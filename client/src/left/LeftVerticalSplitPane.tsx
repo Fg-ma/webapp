@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import RecHeader from "./content/RecHeader";
 import IndividualCards from "./content/IndividualCards";
@@ -180,12 +180,15 @@ export default function LeftVerticalSplitPane({
   };
 
   return (
-    <div className="leftVerticalSplitPane">
-      <div className="leftPane" style={{ height: paneHeight }}>
+    <div className="flex flex-col relative w-full h-full">
+      <div
+        className="overflow-auto box-border mr-3 scrollbar-Fg"
+        style={{ height: paneHeight }}
+      >
         {renderContent()}
       </div>
       <div
-        className="leftResizer"
+        className="cursor-ns-resize select-none"
         onMouseDown={(e) => {
           handleStart(e.clientY);
         }}
@@ -201,8 +204,7 @@ export default function LeftVerticalSplitPane({
         />
       </div>
       <div
-        id="leftBottomPane"
-        className="leftPane"
+        className="mr-3 bg-fg-white-95 overflow-auto box-border"
         style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
       >
         {renderRecs()}

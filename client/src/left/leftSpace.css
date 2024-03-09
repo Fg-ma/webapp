@@ -1,26 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Split pane section */
-.leftVerticalSplitPane {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.leftPane {
-  overflow: auto;
-  box-sizing: border-box;
-}
-
-.leftResizer {
-  cursor: ns-resize;
-  user-select: none;
-}
-
-#leftBottomPane {
-  @apply bg-fg-white-95;
-}

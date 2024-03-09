@@ -45,7 +45,7 @@ export default function NewsCards() {
   });
 
   return (
-    <div id="newsCards" className="h-full mr-3 overflow-scroll">
+    <div id="newsCards" className="h-full">
       {newsCards}
     </div>
   );

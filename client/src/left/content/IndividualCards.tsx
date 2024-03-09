@@ -53,7 +53,6 @@ export default function IndividualCards() {
       affiliateRelation?.entity_type === 1 &&
       affiliateRelation?.action === "newRelation"
     ) {
-      console.log(affiliateRelation);
       fetchNewRelationData();
     } else if (
       affiliateRelation?.entity_type === 1 &&
@@ -123,9 +122,5 @@ export default function IndividualCards() {
     );
   });
 
-  return (
-    <div id="individualCards" className="h-full mr-3 overflow-scroll">
-      {indCards}
-    </div>
-  );
+  return <div className="h-max">{indCards}</div>;
 }

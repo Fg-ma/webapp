@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { HomePageProps } from "@FgTypes/middleTypes";
-import MiddleVerticalSplitPane from "../../MiddleVerticalSplitPane";
+import MiddleVerticalSplitPane from "./MiddleVerticalSplitPane";
 import MiddleDrop from "../../search/MiddleDrop";
 
 export default function HomePage({

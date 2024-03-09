@@ -53,7 +53,7 @@ export default function RightSpace() {
     >
       <RightNav />
       <div
-        id="rightSpaceContentContainer"
+        className="mr-3 overflow-auto"
         style={{ height: `calc(100% - 7rem)` }}
       >
         {renderContent()}

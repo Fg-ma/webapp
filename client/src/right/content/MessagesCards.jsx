@@ -22,7 +22,7 @@ export default function IndividualCards() {
   });
 
   return (
-    <div id="messagesCards" className="h-full mr-3 overflow-scroll">
+    <div id="messagesCards" className="h-full">
       {messCards}
     </div>
   );

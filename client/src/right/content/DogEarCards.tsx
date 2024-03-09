@@ -45,7 +45,7 @@ export default function DogEarCards() {
   });
 
   return (
-    <div id="dogEarCards" className="h-full mr-3 overflow-scroll">
+    <div id="dogEarCards" className="h-full">
       {dogEarCards}
     </div>
   );

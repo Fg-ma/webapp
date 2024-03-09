@@ -123,7 +123,7 @@ export default function GroupCards() {
   });
 
   return (
-    <div id="groupCards" className="h-full mr-3 overflow-scroll">
+    <div id="groupCards" className="h-max">
       {grpCards}
     </div>
   );

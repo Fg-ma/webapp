@@ -46,7 +46,7 @@ export default function GroupRecs() {
   });
 
   return (
-    <div id="groupRecs" className="mr-3 h-full overflow-scroll">
+    <div id="groupRecs" className="h-max">
       {grpRecs}
     </div>
   );

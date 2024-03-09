@@ -59,7 +59,7 @@ export default function ExploreCards() {
   });
 
   return (
-    <div id="exploreCards" className="h-full mr-3 overflow-scroll">
+    <div id="exploreCards" className="h-full">
       {exploreCards}
     </div>
   );

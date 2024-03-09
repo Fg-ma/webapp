@@ -45,7 +45,7 @@ export default function IndividualRecs() {
   });
 
   return (
-    <div id="individualRecs" className="mr-3 h-full overflow-scroll">
+    <div id="individualRecs" className="h-max">
       {indRecs}
     </div>
   );

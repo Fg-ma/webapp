@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
@@ -45,9 +45,5 @@ export default function OrganizationRecs() {
     );
   });
 
-  return (
-    <div id="organizationRecs" className="mr-3 h-full overflow-scroll">
-      {orgRecs}
-    </div>
-  );
+  return <div className="h-max">{orgRecs}</div>;
 }

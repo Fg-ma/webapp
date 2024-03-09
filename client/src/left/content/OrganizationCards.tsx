@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
@@ -22,6 +22,7 @@ export default function OrganizationCards() {
   const { affiliateRelation } = useAffiliateContext();
   const [organizations, setOrganizations] = useState<Organization[]>([]);
 
+  // Handle live updates to affiliation status
   useEffect(() => {
     const fetchNewRelationData = async () => {
       try {
@@ -124,9 +125,5 @@ export default function OrganizationCards() {
     );
   });
 
-  return (
-    <div id="organizationCards" className="h-full mr-3 overflow-scroll">
-      {orgCards}
-    </div>
-  );
+  return <div className="h-max">{orgCards}</div>;
 }
