@@ -16,12 +16,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.9.1
- * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
+ * Prisma Client JS version: 5.10.2
+ * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
  */
 Prisma.prismaVersion = {
-  client: "5.9.1",
-  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
+  client: "5.10.2",
+  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -132,6 +132,24 @@ exports.Prisma.Collections_contentScalarFieldEnum = {
 exports.Prisma.ContentScalarFieldEnum = {
   content_id: 'content_id',
   content_type: 'content_type'
+};
+
+exports.Prisma.ConversationsScalarFieldEnum = {
+  conversation_id: 'conversation_id',
+  conversation_name: 'conversation_name',
+  conversation_creation_date: 'conversation_creation_date'
+};
+
+exports.Prisma.Conversations_membersScalarFieldEnum = {
+  conversation_id: 'conversation_id',
+  member_id: 'member_id'
+};
+
+exports.Prisma.Conversations_messages_logsScalarFieldEnum = {
+  conversation_id: 'conversation_id',
+  entity_id: 'entity_id',
+  message: 'message',
+  message_time: 'message_time'
 };
 
 exports.Prisma.EntitiesScalarFieldEnum = {
@@ -310,6 +328,9 @@ exports.Prisma.ModelName = {
   collections: 'collections',
   collections_content: 'collections_content',
   content: 'content',
+  conversations: 'conversations',
+  conversations_members: 'conversations_members',
+  conversations_messages_logs: 'conversations_messages_logs',
   entities: 'entities',
   entities_content: 'entities_content',
   entities_dislikes: 'entities_dislikes',

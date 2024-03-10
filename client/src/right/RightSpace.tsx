@@ -8,7 +8,7 @@ import ExploreCards from "./content/ExploreCards";
 import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
-import { RightState } from "@FgTypes/rightTypes";
+import { RightState, MainState } from "@FgTypes/rightTypes";
 
 export default function RightSpace() {
   /* 
@@ -21,6 +21,9 @@ export default function RightSpace() {
 
   const rightPage = useSelector(
     (state: RightState) => state.page.right.pagePayload.pageState,
+  );
+  const mainPageState = useSelector(
+    (state: MainState) => state.page.main.pagePayload.pageState,
   );
 
   const renderContent = () => {
@@ -51,14 +54,17 @@ export default function RightSpace() {
           "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
       }}
     >
-      <RightNav />
+      <RightNav mainPageState={mainPageState} />
       <div
         className="mr-3 overflow-auto"
         style={{ height: `calc(100% - 7rem)` }}
       >
         {renderContent()}
       </div>
-      <RightSearchBar page={rightPage} />
+      <RightSearchBar
+        page={rightPage}
+        isFilter={mainPageState !== "messages" ? true : false}
+      />
     </div>
   );
 }

@@ -394,7 +394,7 @@ export default function MiddleAdvancedSearchFilter({
               placeholder="Author..."
               name="author"
               id="middleAuthor"
-              className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary"
+              className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary border border-fg-white-85"
               onChange={handleFilterFormChange}
               value={formAuthor}
             ></input>
@@ -427,7 +427,7 @@ export default function MiddleAdvancedSearchFilter({
             ref={refs.middleDateRangeContainer}
             className="w-full flex items-center justify-start -mt-1"
           >
-            <div className="grow bg-white rounded-md flex items-center justify-start">
+            <div className="grow bg-white rounded-md flex items-center justify-start border border-fg-white-85">
               <input
                 type="text"
                 placeholder="mm.dd.yyyy"

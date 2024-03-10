@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
 import { closeDrop } from "@redux/filters/filterActions";
-import { RightState } from "@FgTypes/rightTypes";
+import { RightState, MessageState, RightNavProps } from "@FgTypes/rightTypes";
 
 const navButtonsVar: Variants = {
   init: {
@@ -30,7 +30,7 @@ const transition: Transition = {
   },
 };
 
-export default function RightNav() {
+export default function RightNav({ mainPageState }: RightNavProps) {
   /* 
     Description:   
       A navbar that cycles between news, explore, messages, and dog ears. The currently 
@@ -44,6 +44,9 @@ export default function RightNav() {
   const rightPage = useSelector(
     (state: RightState) => state.page.right.pagePayload.pageState,
   );
+  const messagePage = useSelector(
+    (state: MessageState) => state.page.messages.pagePayload.pageState,
+  );
 
   const deactiveStyles: React.CSSProperties = {};
   const activeStyles: React.CSSProperties = {
@@ -53,20 +56,33 @@ export default function RightNav() {
     textDecorationThickness: "2px",
     paddingBottom: "0.25rem",
   };
-  const rightStyles: Record<string, React.CSSProperties> = {
+  const styles: Record<string, React.CSSProperties> = {
     papers: deactiveStyles,
     news: deactiveStyles,
     explore: deactiveStyles,
     messages: deactiveStyles,
     dogEars: deactiveStyles,
+    conversations: deactiveStyles,
+    contacts: deactiveStyles,
   };
-  rightStyles[rightPage] = { ...activeStyles };
 
-  const navItems = ["papers", "news", "explore", "dogEars"];
+  let navItems: string[] = [];
 
-  function swapRightState(state: string) {
-    dispatch(closeDrop(state, "isDropFilter"));
-    dispatch(setPageState("right", state));
+  if (mainPageState !== "messages") {
+    styles[rightPage] = { ...activeStyles };
+    navItems = ["papers", "news", "explore", "dogEars"];
+  } else if (mainPageState === "messages") {
+    styles[messagePage] = { ...activeStyles };
+    navItems = ["conversations", "contacts"];
+  }
+
+  function swapState(state: string) {
+    if (mainPageState !== "messages") {
+      dispatch(closeDrop(state, "isDropFilter"));
+      dispatch(setPageState("right", state));
+    } else if (mainPageState === "messages") {
+      dispatch(setPageState("messages", state));
+    }
   }
 
   return (
@@ -83,9 +99,9 @@ export default function RightNav() {
             initial="init"
             whileHover="hover"
             transition={transition}
-            onClick={() => swapRightState(navItem)}
+            onClick={() => swapState(navItem)}
           >
-            <button className="w-full" style={rightStyles[navItem]}>
+            <button className="w-full" style={styles[navItem]}>
               {navItem !== "dogEars"
                 ? navItem.charAt(0).toUpperCase() + navItem.slice(1)
                 : "Dog-Ears"}

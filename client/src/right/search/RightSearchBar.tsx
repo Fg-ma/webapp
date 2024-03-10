@@ -5,7 +5,10 @@ import RightSearchFilter from "./RightSearchFilter";
 import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
 import { RightSearchBarProps, RightPageState } from "@FgTypes/rightTypes";
 
-export default function RightSearchBar({ page }: RightSearchBarProps) {
+export default function RightSearchBar({
+  page,
+  isFilter,
+}: RightSearchBarProps) {
   /* 
     Description:   
       Creates the RightSearchBar with a submit button, text input, and filter button.
@@ -57,8 +60,20 @@ export default function RightSearchBar({ page }: RightSearchBarProps) {
     }
   };
 
+  // Reset the searchbar when page changes
+  useEffect(() => {
+    setInputValue("");
+  }, [page]);
+
+  // Handles geometry calcutions and closing the dropdown when the mouse clicks out of it
   useEffect(() => {
     calculateRightSpaceFilterGeometry();
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, [dropFilter]);
 
   useEffect(() => {
@@ -137,21 +152,12 @@ export default function RightSearchBar({ page }: RightSearchBarProps) {
     }
   };
 
-  // Handles closing the dropdown when the mouse clicks out of it
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [dropFilter]);
-
   return (
     <div
       ref={refs.rightSpaceSearchBar}
       className="h-16 w-full bg-fg-white-90 flex justify-center items-center"
     >
-      <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center">
+      <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center border border-fg-white-85">
         <input
           key="searchArrow"
           type="submit"
@@ -174,17 +180,19 @@ export default function RightSearchBar({ page }: RightSearchBarProps) {
           onChange={handleInputChange}
           value={inputValue}
         />
-        <div className="w-16 h-full bg-fg-white-95 flex justify-center items-center">
-          <input
-            id="rightFilterButton"
-            type="button"
-            className="h-8 aspect-square bg-cover bg-no-repeat cursor-pointer"
-            style={{
-              backgroundImage: `url("assets/icons/filter.svg")`,
-            }}
-            onClick={handleFilterDrop}
-          />
-        </div>
+        {isFilter && (
+          <div className="w-16 h-full bg-fg-white-95 flex justify-center items-center">
+            <input
+              id="rightFilterButton"
+              type="button"
+              className="h-8 aspect-square bg-cover bg-no-repeat cursor-pointer"
+              style={{
+                backgroundImage: `url("assets/icons/filter.svg")`,
+              }}
+              onClick={handleFilterDrop}
+            />
+          </div>
+        )}
       </form>
       <AnimatePresence>
         {dropFilter && (

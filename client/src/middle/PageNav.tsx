@@ -74,6 +74,10 @@ export default function PageNav() {
     dispatch(setIds("individuals", "collection_id", null));
   };
 
+  const messagesNavFunction = (newState: string) => {
+    dispatch(setPageState("main", newState));
+  };
+
   return (
     <nav
       id="pageNav"
@@ -130,7 +134,7 @@ export default function PageNav() {
           initial="init"
           whileHover="hover"
           transition={transition}
-          onClick={() => swapPageState("messages")}
+          onClick={() => messagesNavFunction("messages")}
         >
           <button
             className="w-7 aspect-square bg-no-repeat bg-center bg-cover"

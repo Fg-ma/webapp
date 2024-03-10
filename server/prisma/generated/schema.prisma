@@ -50,19 +50,51 @@ model content {
   entities_likes      entities_likes[]
 }
 
+model conversations {
+  conversation_id             String                       @id @unique(map: "conversation_id_UNIQUE") @db.Char(36)
+  conversation_name           String?                      @db.VarChar(256)
+  conversation_creation_date  DateTime                     @db.Timestamp(0)
+  conversations_members       conversations_members[]
+  conversations_messages_logs conversations_messages_logs?
+}
+
+model conversations_members {
+  conversation_id String        @db.Char(36)
+  member_id       String        @db.Char(36)
+  conversations   conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_conversation_id_fk")
+  entities        entities      @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_member_id_fk")
+
+  @@id([conversation_id, member_id])
+  @@unique([conversation_id, member_id], map: "UNIQUE_ID_COMBO")
+  @@index([member_id], map: "conversations_members_member_id_fk_idx")
+}
+
+model conversations_messages_logs {
+  conversation_id String        @id @db.Char(36)
+  entity_id       String        @db.Char(36)
+  message         String        @db.VarChar(512)
+  message_time    DateTime      @db.Timestamp(0)
+  conversations   conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_conversation_id_fk")
+  entities        entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_entity_id_fk")
+
+  @@index([entity_id], map: "conversations_messages_logs_entity_id_fk_idx")
+}
+
 model entities {
-  entity_id             String                  @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
-  entity_type           Int                     @default(0)
-  collections           collections[]
-  entities_content      entities_content[]
-  entities_dislikes     entities_dislikes[]
-  entities_likes        entities_likes[]
-  entities_references   entities_references[]
-  groups_members        groups_members[]
-  images                images[]
-  organizations_members organizations_members[]
-  sheets                sheets[]
-  videos                videos[]
+  entity_id                   String                        @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
+  entity_type                 Int                           @default(0)
+  collections                 collections[]
+  conversations_members       conversations_members[]
+  conversations_messages_logs conversations_messages_logs[]
+  entities_content            entities_content[]
+  entities_dislikes           entities_dislikes[]
+  entities_likes              entities_likes[]
+  entities_references         entities_references[]
+  groups_members              groups_members[]
+  images                      images[]
+  organizations_members       organizations_members[]
+  sheets                      sheets[]
+  videos                      videos[]
 }
 
 model entities_content {
@@ -116,7 +148,7 @@ model entities_references {
 model groups {
   group_id           String            @id @unique(map: "group_id_UNIQUE") @db.Char(36)
   group_handle       String            @unique(map: "group_handle_UNIQUE") @db.VarChar(256)
-  group_name         String            @db.VarChar(256)
+  group_name         String?           @db.VarChar(256)
   group_currentIssue String?           @db.Text
   group_stances      String?           @db.Text
   group_description  String?           @db.Text
@@ -180,7 +212,7 @@ model individuals {
 model organizations {
   organization_id           String                  @id @unique(map: "organization_id_UNIQUE") @db.Char(36)
   organization_handle       String                  @unique(map: "organization_handle_UNIQUE") @db.VarChar(256)
-  organization_name         String                  @db.VarChar(256)
+  organization_name         String?                 @db.VarChar(256)
   organization_currentIssue String?                 @db.Text
   organization_stances      String?                 @db.Text
   organization_description  String?                 @db.Text

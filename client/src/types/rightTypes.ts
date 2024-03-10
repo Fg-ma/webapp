@@ -59,10 +59,34 @@ export interface RightFilterState {
   Global RightState
 */
 
+export interface RightNavProps {
+  mainPageState: string;
+}
+
+export interface MessageState {
+  page: {
+    messages: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
+
 /* 
-  RightSpace.tsx
-  Global RightState
+RightSpace.tsx
+Global RightState
 */
+
+export interface MainState {
+  page: {
+    main: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
 
 /* 
   DogEarCards.tsx
@@ -149,6 +173,7 @@ export interface RightAdvancedSearchFilterProps {
 
 export interface RightSearchBarProps {
   page: string;
+  isFilter: boolean;
 }
 
 export interface RightPageState {

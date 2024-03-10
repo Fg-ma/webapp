@@ -393,7 +393,7 @@ export default function RightAdvancedSearchFilter({
                 placeholder="Author..."
                 name="author"
                 id="rightAuthor"
-                className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d"
+                className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d focus:outline-none focus:border-2 focus:border-fg-secondary border border-fg-white-85"
                 onChange={handleFilterFormChange}
                 value={formAuthor}
               ></input>
@@ -428,7 +428,7 @@ export default function RightAdvancedSearchFilter({
           ref={refs.rightDateRangeContainer}
           className="flex items-center justify-center mx-2"
         >
-          <div className="grow bg-white rounded-md flex items-center justify-start">
+          <div className="grow bg-white rounded-md flex items-center justify-start border border-fg-white-85">
             <input
               type="text"
               placeholder="mm.dd.yyyy"

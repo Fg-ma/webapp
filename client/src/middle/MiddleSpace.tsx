@@ -5,6 +5,7 @@ import HomePage from "./pages/homePage/HomePage";
 import EntityPage from "./pages/entityPage/EntityPage";
 import ContentPage from "./pages/contentPage/ContentPage";
 import "./middleSpace.css";
+import MessagesPage from "./pages/messagesPage/MessagesPage";
 
 export default function MiddleSpace({
   middleSpaceContainerRef,
@@ -44,6 +45,8 @@ export default function MiddleSpace({
       setMiddleSpaceContent(<ContentPage contentType="videos" />);
     } else if (mainPageState === "images") {
       setMiddleSpaceContent(<ContentPage contentType="images" />);
+    } else if (mainPageState === "messages") {
+      setMiddleSpaceContent(<MessagesPage />);
     }
   }, [mainPageState]);
 

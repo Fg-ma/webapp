@@ -572,3 +572,50 @@ export interface AffiliatedEntitiesScrollProps {
 export interface AffiliateWithButtonProps {
   entity_id: string;
 }
+
+/*
+  MessagePage.tsx
+*/
+
+export interface Message {
+  content: string;
+  sender: string;
+  isUser: boolean;
+}
+
+/*
+  MessagesConversationBody.tsx
+*/
+
+export interface MessagesConversationBodyProps {
+  conversation: Message[];
+  conversationSize: number;
+}
+
+/*
+  MessagesTextField.tsx
+*/
+
+export interface MessagesTextFieldProps {
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  messageSocket: Socket;
+}
+
+/*
+  UserBubble.tsx
+*/
+
+export interface UserBubbleProps {
+  message: string;
+}
+
+/*
+  RecipientsBubbles.tsx
+*/
+
+export interface RecipientsBubblesProps {
+  message: string;
+  conversationSize: number;
+  sender: string;
+}

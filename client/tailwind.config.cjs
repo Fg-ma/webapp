@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         "fg-primary": "#F56114",
+        "fg-primary-desaturated": "#F57E41",
         "fg-secondary": "#2C92F5",
         "fg-white-95": "#F3F3F3",
         "fg-white-90": "#E6E6E6",
@@ -43,9 +44,13 @@ module.exports = {
       },
       rotate: {
         225: "225deg",
+        220: "220deg",
+        20: "20deg",
       },
       spacing: {
         "-3.25": "-0.8125rem",
+        3.5: "0.875rem",
+        4.5: "1.125rem",
         0.25: "0.0625rem",
       },
       maxWidth: {
