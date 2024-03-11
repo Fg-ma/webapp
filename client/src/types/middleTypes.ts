@@ -583,6 +583,18 @@ export interface Message {
   isUser: boolean;
 }
 
+export interface ConverationId {
+  page: {
+    main: {
+      pagePayload: {
+        ids: {
+          conversation_id: string | null;
+        };
+      };
+    };
+  };
+}
+
 /*
   MessagesConversationBody.tsx
 */
@@ -598,6 +610,7 @@ export interface MessagesConversationBodyProps {
 
 export interface MessagesTextFieldProps {
   inputValue: string;
+  conversation_id: string | null;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messageSocket: Socket;
 }

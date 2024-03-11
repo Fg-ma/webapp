@@ -5,18 +5,18 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.header("Authorization");
 
   if (!authHeader) {
-    return;
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   const [bearer, token] = authHeader.split(" ");
 
   if (bearer !== "Bearer" || !token) {
-    return;
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   jwt.verify(token, process.env.TOKEN_KEY as Secret, (err, user) => {
     if (err || !user) {
-      return;
+      return res.status(401).json({ error: "Unauthorized" });
     }
 
     req.user = user;

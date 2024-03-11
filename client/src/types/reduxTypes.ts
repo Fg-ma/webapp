@@ -111,14 +111,15 @@ export interface PageState {
       pageState: string;
       isLoggedIn?: boolean;
       ids?: {
-        individual_id?: number | null;
-        group_id?: number | null;
-        organization_id?: number | null;
-        paper_id?: number | null;
-        sheet_id?: number | null;
-        video_id?: number | null;
-        image_id?: number | null;
-        collection_id?: number | null;
+        individual_id?: string | null;
+        group_id?: string | null;
+        organization_id?: string | null;
+        paper_id?: string | null;
+        sheet_id?: string | null;
+        video_id?: string | null;
+        image_id?: string | null;
+        collection_id?: string | null;
+        conversation_id?: string | null;
       };
     };
   };

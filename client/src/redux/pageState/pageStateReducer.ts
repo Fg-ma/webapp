@@ -19,6 +19,7 @@ const initialState: PageState = {
         sheet_id: null,
         video_id: null,
         image_id: null,
+        conversation_id: null,
       },
     },
   },

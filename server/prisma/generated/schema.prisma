@@ -51,11 +51,12 @@ model content {
 }
 
 model conversations {
-  conversation_id             String                       @id @unique(map: "conversation_id_UNIQUE") @db.Char(36)
-  conversation_name           String?                      @db.VarChar(256)
-  conversation_creation_date  DateTime                     @db.Timestamp(0)
+  conversation_id             String                        @id @unique(map: "conversation_id_UNIQUE") @db.Char(36)
+  conversation_name           String?                       @db.VarChar(256)
+  conversation_creation_date  DateTime                      @db.Timestamp(0)
+  last_message                String?                       @db.VarChar(512)
   conversations_members       conversations_members[]
-  conversations_messages_logs conversations_messages_logs?
+  conversations_messages_logs conversations_messages_logs[]
 }
 
 model conversations_members {
@@ -70,13 +71,15 @@ model conversations_members {
 }
 
 model conversations_messages_logs {
-  conversation_id String        @id @db.Char(36)
-  entity_id       String        @db.Char(36)
-  message         String        @db.VarChar(512)
-  message_time    DateTime      @db.Timestamp(0)
-  conversations   conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_conversation_id_fk")
-  entities        entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_entity_id_fk")
+  conversations_messages_logs_id String        @id @db.Char(36)
+  conversation_id                String        @db.Char(36)
+  entity_id                      String        @db.Char(36)
+  message                        String        @db.VarChar(512)
+  message_date                   DateTime      @db.Timestamp(0)
+  conversations                  conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_conversation_id_fk")
+  entities                       entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_entity_id_fk")
 
+  @@index([conversation_id], map: "conversations_messages_logs_conversation_id_fk_idx")
   @@index([entity_id], map: "conversations_messages_logs_entity_id_fk_idx")
 }
 

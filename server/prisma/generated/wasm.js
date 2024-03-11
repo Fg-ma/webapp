@@ -137,7 +137,8 @@ exports.Prisma.ContentScalarFieldEnum = {
 exports.Prisma.ConversationsScalarFieldEnum = {
   conversation_id: 'conversation_id',
   conversation_name: 'conversation_name',
-  conversation_creation_date: 'conversation_creation_date'
+  conversation_creation_date: 'conversation_creation_date',
+  last_message: 'last_message'
 };
 
 exports.Prisma.Conversations_membersScalarFieldEnum = {
@@ -146,10 +147,11 @@ exports.Prisma.Conversations_membersScalarFieldEnum = {
 };
 
 exports.Prisma.Conversations_messages_logsScalarFieldEnum = {
+  conversations_messages_logs_id: 'conversations_messages_logs_id',
   conversation_id: 'conversation_id',
   entity_id: 'entity_id',
   message: 'message',
-  message_time: 'message_time'
+  message_date: 'message_date'
 };
 
 exports.Prisma.EntitiesScalarFieldEnum = {

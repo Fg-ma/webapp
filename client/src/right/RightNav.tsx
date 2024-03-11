@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
 import { closeDrop } from "@redux/filters/filterActions";
-import { RightState, MessageState, RightNavProps } from "@FgTypes/rightTypes";
+import { RightState, MessagesState, RightNavProps } from "@FgTypes/rightTypes";
 
 const navButtonsVar: Variants = {
   init: {
@@ -44,8 +44,8 @@ export default function RightNav({ mainPageState }: RightNavProps) {
   const rightPage = useSelector(
     (state: RightState) => state.page.right.pagePayload.pageState,
   );
-  const messagePage = useSelector(
-    (state: MessageState) => state.page.messages.pagePayload.pageState,
+  const messagesPage = useSelector(
+    (state: MessagesState) => state.page.messages.pagePayload.pageState,
   );
 
   const deactiveStyles: React.CSSProperties = {};
@@ -72,7 +72,7 @@ export default function RightNav({ mainPageState }: RightNavProps) {
     styles[rightPage] = { ...activeStyles };
     navItems = ["papers", "news", "explore", "dogEars"];
   } else if (mainPageState === "messages") {
-    styles[messagePage] = { ...activeStyles };
+    styles[messagesPage] = { ...activeStyles };
     navItems = ["conversations", "contacts"];
   }
 

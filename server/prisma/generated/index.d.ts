@@ -3097,10 +3097,12 @@ export namespace Prisma {
 
   export type ConversationsCountOutputType = {
     conversations_members: number
+    conversations_messages_logs: number
   }
 
   export type ConversationsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversations_members?: boolean | ConversationsCountOutputTypeCountConversations_membersArgs
+    conversations_messages_logs?: boolean | ConversationsCountOutputTypeCountConversations_messages_logsArgs
   }
 
   // Custom InputTypes
@@ -3121,6 +3123,14 @@ export namespace Prisma {
    */
   export type ConversationsCountOutputTypeCountConversations_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: conversations_membersWhereInput
+  }
+
+
+  /**
+   * ConversationsCountOutputType without action
+   */
+  export type ConversationsCountOutputTypeCountConversations_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: conversations_messages_logsWhereInput
   }
 
 
@@ -7316,18 +7326,21 @@ export namespace Prisma {
     conversation_id: string | null
     conversation_name: string | null
     conversation_creation_date: Date | null
+    last_message: string | null
   }
 
   export type ConversationsMaxAggregateOutputType = {
     conversation_id: string | null
     conversation_name: string | null
     conversation_creation_date: Date | null
+    last_message: string | null
   }
 
   export type ConversationsCountAggregateOutputType = {
     conversation_id: number
     conversation_name: number
     conversation_creation_date: number
+    last_message: number
     _all: number
   }
 
@@ -7336,18 +7349,21 @@ export namespace Prisma {
     conversation_id?: true
     conversation_name?: true
     conversation_creation_date?: true
+    last_message?: true
   }
 
   export type ConversationsMaxAggregateInputType = {
     conversation_id?: true
     conversation_name?: true
     conversation_creation_date?: true
+    last_message?: true
   }
 
   export type ConversationsCountAggregateInputType = {
     conversation_id?: true
     conversation_name?: true
     conversation_creation_date?: true
+    last_message?: true
     _all?: true
   }
 
@@ -7427,6 +7443,7 @@ export namespace Prisma {
     conversation_id: string
     conversation_name: string | null
     conversation_creation_date: Date
+    last_message: string | null
     _count: ConversationsCountAggregateOutputType | null
     _min: ConversationsMinAggregateOutputType | null
     _max: ConversationsMaxAggregateOutputType | null
@@ -7450,6 +7467,7 @@ export namespace Prisma {
     conversation_id?: boolean
     conversation_name?: boolean
     conversation_creation_date?: boolean
+    last_message?: boolean
     conversations_members?: boolean | conversations$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | conversations$conversations_messages_logsArgs<ExtArgs>
     _count?: boolean | ConversationsCountOutputTypeDefaultArgs<ExtArgs>
@@ -7459,6 +7477,7 @@ export namespace Prisma {
     conversation_id?: boolean
     conversation_name?: boolean
     conversation_creation_date?: boolean
+    last_message?: boolean
   }
 
   export type conversationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7472,12 +7491,13 @@ export namespace Prisma {
     name: "conversations"
     objects: {
       conversations_members: Prisma.$conversations_membersPayload<ExtArgs>[]
-      conversations_messages_logs: Prisma.$conversations_messages_logsPayload<ExtArgs> | null
+      conversations_messages_logs: Prisma.$conversations_messages_logsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       conversation_id: string
       conversation_name: string | null
       conversation_creation_date: Date
+      last_message: string | null
     }, ExtArgs["result"]["conversations"]>
     composites: {}
   }
@@ -7845,7 +7865,7 @@ export namespace Prisma {
 
     conversations_members<T extends conversations$conversations_membersArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    conversations_messages_logs<T extends conversations$conversations_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_messages_logsArgs<ExtArgs>>): Prisma__conversations_messages_logsClient<$Result.GetResult<Prisma.$conversations_messages_logsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    conversations_messages_logs<T extends conversations$conversations_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7878,6 +7898,7 @@ export namespace Prisma {
     readonly conversation_id: FieldRef<"conversations", 'String'>
     readonly conversation_name: FieldRef<"conversations", 'String'>
     readonly conversation_creation_date: FieldRef<"conversations", 'DateTime'>
+    readonly last_message: FieldRef<"conversations", 'String'>
   }
     
 
@@ -8223,6 +8244,11 @@ export namespace Prisma {
      */
     include?: conversations_messages_logsInclude<ExtArgs> | null
     where?: conversations_messages_logsWhereInput
+    orderBy?: conversations_messages_logsOrderByWithRelationInput | conversations_messages_logsOrderByWithRelationInput[]
+    cursor?: conversations_messages_logsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Conversations_messages_logsScalarFieldEnum | Conversations_messages_logsScalarFieldEnum[]
   }
 
 
@@ -9143,47 +9169,53 @@ export namespace Prisma {
   }
 
   export type Conversations_messages_logsMinAggregateOutputType = {
+    conversations_messages_logs_id: string | null
     conversation_id: string | null
     entity_id: string | null
     message: string | null
-    message_time: Date | null
+    message_date: Date | null
   }
 
   export type Conversations_messages_logsMaxAggregateOutputType = {
+    conversations_messages_logs_id: string | null
     conversation_id: string | null
     entity_id: string | null
     message: string | null
-    message_time: Date | null
+    message_date: Date | null
   }
 
   export type Conversations_messages_logsCountAggregateOutputType = {
+    conversations_messages_logs_id: number
     conversation_id: number
     entity_id: number
     message: number
-    message_time: number
+    message_date: number
     _all: number
   }
 
 
   export type Conversations_messages_logsMinAggregateInputType = {
+    conversations_messages_logs_id?: true
     conversation_id?: true
     entity_id?: true
     message?: true
-    message_time?: true
+    message_date?: true
   }
 
   export type Conversations_messages_logsMaxAggregateInputType = {
+    conversations_messages_logs_id?: true
     conversation_id?: true
     entity_id?: true
     message?: true
-    message_time?: true
+    message_date?: true
   }
 
   export type Conversations_messages_logsCountAggregateInputType = {
+    conversations_messages_logs_id?: true
     conversation_id?: true
     entity_id?: true
     message?: true
-    message_time?: true
+    message_date?: true
     _all?: true
   }
 
@@ -9260,10 +9292,11 @@ export namespace Prisma {
   }
 
   export type Conversations_messages_logsGroupByOutputType = {
+    conversations_messages_logs_id: string
     conversation_id: string
     entity_id: string
     message: string
-    message_time: Date
+    message_date: Date
     _count: Conversations_messages_logsCountAggregateOutputType | null
     _min: Conversations_messages_logsMinAggregateOutputType | null
     _max: Conversations_messages_logsMaxAggregateOutputType | null
@@ -9284,19 +9317,21 @@ export namespace Prisma {
 
 
   export type conversations_messages_logsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    conversations_messages_logs_id?: boolean
     conversation_id?: boolean
     entity_id?: boolean
     message?: boolean
-    message_time?: boolean
+    message_date?: boolean
     conversations?: boolean | conversationsDefaultArgs<ExtArgs>
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conversations_messages_logs"]>
 
   export type conversations_messages_logsSelectScalar = {
+    conversations_messages_logs_id?: boolean
     conversation_id?: boolean
     entity_id?: boolean
     message?: boolean
-    message_time?: boolean
+    message_date?: boolean
   }
 
   export type conversations_messages_logsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9312,10 +9347,11 @@ export namespace Prisma {
       entities: Prisma.$entitiesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      conversations_messages_logs_id: string
       conversation_id: string
       entity_id: string
       message: string
-      message_time: Date
+      message_date: Date
     }, ExtArgs["result"]["conversations_messages_logs"]>
     composites: {}
   }
@@ -9408,8 +9444,8 @@ export namespace Prisma {
      * // Get first 10 Conversations_messages_logs
      * const conversations_messages_logs = await prisma.conversations_messages_logs.findMany({ take: 10 })
      * 
-     * // Only select the `conversation_id`
-     * const conversations_messages_logsWithConversation_idOnly = await prisma.conversations_messages_logs.findMany({ select: { conversation_id: true } })
+     * // Only select the `conversations_messages_logs_id`
+     * const conversations_messages_logsWithConversations_messages_logs_idOnly = await prisma.conversations_messages_logs.findMany({ select: { conversations_messages_logs_id: true } })
      * 
     **/
     findMany<T extends conversations_messages_logsFindManyArgs<ExtArgs>>(
@@ -9713,10 +9749,11 @@ export namespace Prisma {
    * Fields of the conversations_messages_logs model
    */ 
   interface conversations_messages_logsFieldRefs {
+    readonly conversations_messages_logs_id: FieldRef<"conversations_messages_logs", 'String'>
     readonly conversation_id: FieldRef<"conversations_messages_logs", 'String'>
     readonly entity_id: FieldRef<"conversations_messages_logs", 'String'>
     readonly message: FieldRef<"conversations_messages_logs", 'String'>
-    readonly message_time: FieldRef<"conversations_messages_logs", 'DateTime'>
+    readonly message_date: FieldRef<"conversations_messages_logs", 'DateTime'>
   }
     
 
@@ -29326,7 +29363,8 @@ export namespace Prisma {
   export const ConversationsScalarFieldEnum: {
     conversation_id: 'conversation_id',
     conversation_name: 'conversation_name',
-    conversation_creation_date: 'conversation_creation_date'
+    conversation_creation_date: 'conversation_creation_date',
+    last_message: 'last_message'
   };
 
   export type ConversationsScalarFieldEnum = (typeof ConversationsScalarFieldEnum)[keyof typeof ConversationsScalarFieldEnum]
@@ -29341,10 +29379,11 @@ export namespace Prisma {
 
 
   export const Conversations_messages_logsScalarFieldEnum: {
+    conversations_messages_logs_id: 'conversations_messages_logs_id',
     conversation_id: 'conversation_id',
     entity_id: 'entity_id',
     message: 'message',
-    message_time: 'message_time'
+    message_date: 'message_date'
   };
 
   export type Conversations_messages_logsScalarFieldEnum = (typeof Conversations_messages_logsScalarFieldEnum)[keyof typeof Conversations_messages_logsScalarFieldEnum]
@@ -29853,16 +29892,18 @@ export namespace Prisma {
     conversation_id?: StringFilter<"conversations"> | string
     conversation_name?: StringNullableFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
+    last_message?: StringNullableFilter<"conversations"> | string | null
     conversations_members?: Conversations_membersListRelationFilter
-    conversations_messages_logs?: XOR<Conversations_messages_logsNullableRelationFilter, conversations_messages_logsWhereInput> | null
+    conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }
 
   export type conversationsOrderByWithRelationInput = {
     conversation_id?: SortOrder
     conversation_name?: SortOrderInput | SortOrder
     conversation_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
     conversations_members?: conversations_membersOrderByRelationAggregateInput
-    conversations_messages_logs?: conversations_messages_logsOrderByWithRelationInput
+    conversations_messages_logs?: conversations_messages_logsOrderByRelationAggregateInput
   }
 
   export type conversationsWhereUniqueInput = Prisma.AtLeast<{
@@ -29872,14 +29913,16 @@ export namespace Prisma {
     NOT?: conversationsWhereInput | conversationsWhereInput[]
     conversation_name?: StringNullableFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
+    last_message?: StringNullableFilter<"conversations"> | string | null
     conversations_members?: Conversations_membersListRelationFilter
-    conversations_messages_logs?: XOR<Conversations_messages_logsNullableRelationFilter, conversations_messages_logsWhereInput> | null
+    conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }, "conversation_id" | "conversation_id">
 
   export type conversationsOrderByWithAggregationInput = {
     conversation_id?: SortOrder
     conversation_name?: SortOrderInput | SortOrder
     conversation_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
     _count?: conversationsCountOrderByAggregateInput
     _max?: conversationsMaxOrderByAggregateInput
     _min?: conversationsMinOrderByAggregateInput
@@ -29892,6 +29935,7 @@ export namespace Prisma {
     conversation_id?: StringWithAggregatesFilter<"conversations"> | string
     conversation_name?: StringNullableWithAggregatesFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeWithAggregatesFilter<"conversations"> | Date | string
+    last_message?: StringNullableWithAggregatesFilter<"conversations"> | string | null
   }
 
   export type conversations_membersWhereInput = {
@@ -29942,40 +29986,44 @@ export namespace Prisma {
     AND?: conversations_messages_logsWhereInput | conversations_messages_logsWhereInput[]
     OR?: conversations_messages_logsWhereInput[]
     NOT?: conversations_messages_logsWhereInput | conversations_messages_logsWhereInput[]
+    conversations_messages_logs_id?: StringFilter<"conversations_messages_logs"> | string
     conversation_id?: StringFilter<"conversations_messages_logs"> | string
     entity_id?: StringFilter<"conversations_messages_logs"> | string
     message?: StringFilter<"conversations_messages_logs"> | string
-    message_time?: DateTimeFilter<"conversations_messages_logs"> | Date | string
+    message_date?: DateTimeFilter<"conversations_messages_logs"> | Date | string
     conversations?: XOR<ConversationsRelationFilter, conversationsWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
   }
 
   export type conversations_messages_logsOrderByWithRelationInput = {
+    conversations_messages_logs_id?: SortOrder
     conversation_id?: SortOrder
     entity_id?: SortOrder
     message?: SortOrder
-    message_time?: SortOrder
+    message_date?: SortOrder
     conversations?: conversationsOrderByWithRelationInput
     entities?: entitiesOrderByWithRelationInput
   }
 
   export type conversations_messages_logsWhereUniqueInput = Prisma.AtLeast<{
-    conversation_id?: string
+    conversations_messages_logs_id?: string
     AND?: conversations_messages_logsWhereInput | conversations_messages_logsWhereInput[]
     OR?: conversations_messages_logsWhereInput[]
     NOT?: conversations_messages_logsWhereInput | conversations_messages_logsWhereInput[]
+    conversation_id?: StringFilter<"conversations_messages_logs"> | string
     entity_id?: StringFilter<"conversations_messages_logs"> | string
     message?: StringFilter<"conversations_messages_logs"> | string
-    message_time?: DateTimeFilter<"conversations_messages_logs"> | Date | string
+    message_date?: DateTimeFilter<"conversations_messages_logs"> | Date | string
     conversations?: XOR<ConversationsRelationFilter, conversationsWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
-  }, "conversation_id">
+  }, "conversations_messages_logs_id">
 
   export type conversations_messages_logsOrderByWithAggregationInput = {
+    conversations_messages_logs_id?: SortOrder
     conversation_id?: SortOrder
     entity_id?: SortOrder
     message?: SortOrder
-    message_time?: SortOrder
+    message_date?: SortOrder
     _count?: conversations_messages_logsCountOrderByAggregateInput
     _max?: conversations_messages_logsMaxOrderByAggregateInput
     _min?: conversations_messages_logsMinOrderByAggregateInput
@@ -29985,10 +30033,11 @@ export namespace Prisma {
     AND?: conversations_messages_logsScalarWhereWithAggregatesInput | conversations_messages_logsScalarWhereWithAggregatesInput[]
     OR?: conversations_messages_logsScalarWhereWithAggregatesInput[]
     NOT?: conversations_messages_logsScalarWhereWithAggregatesInput | conversations_messages_logsScalarWhereWithAggregatesInput[]
+    conversations_messages_logs_id?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
     conversation_id?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
     entity_id?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
     message?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
-    message_time?: DateTimeWithAggregatesFilter<"conversations_messages_logs"> | Date | string
+    message_date?: DateTimeWithAggregatesFilter<"conversations_messages_logs"> | Date | string
   }
 
   export type entitiesWhereInput = {
@@ -31390,50 +31439,57 @@ export namespace Prisma {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
+    last_message?: string | null
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
-    conversations_messages_logs?: conversations_messages_logsCreateNestedOneWithoutConversationsInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
 
   export type conversationsUncheckedCreateInput = {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
+    last_message?: string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
-    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedOneWithoutConversationsInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
 
   export type conversationsUpdateInput = {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
-    conversations_messages_logs?: conversations_messages_logsUpdateOneWithoutConversationsNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
 
   export type conversationsUncheckedUpdateInput = {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
-    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateOneWithoutConversationsNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
   export type conversationsCreateManyInput = {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
+    last_message?: string | null
   }
 
   export type conversationsUpdateManyMutationInput = {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type conversationsUncheckedUpdateManyInput = {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type conversations_membersCreateInput = {
@@ -31471,50 +31527,57 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsCreateInput = {
+    conversations_messages_logs_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
     conversations: conversationsCreateNestedOneWithoutConversations_messages_logsInput
     entities: entitiesCreateNestedOneWithoutConversations_messages_logsInput
   }
 
   export type conversations_messages_logsUncheckedCreateInput = {
+    conversations_messages_logs_id: string
     conversation_id: string
     entity_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
   }
 
   export type conversations_messages_logsUpdateInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: conversationsUpdateOneRequiredWithoutConversations_messages_logsNestedInput
     entities?: entitiesUpdateOneRequiredWithoutConversations_messages_logsNestedInput
   }
 
   export type conversations_messages_logsUncheckedUpdateInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     entity_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type conversations_messages_logsCreateManyInput = {
+    conversations_messages_logs_id: string
     conversation_id: string
     entity_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
   }
 
   export type conversations_messages_logsUpdateManyMutationInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type conversations_messages_logsUncheckedUpdateManyInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     entity_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type entitiesCreateInput = {
@@ -33001,12 +33064,17 @@ export namespace Prisma {
     none?: conversations_membersWhereInput
   }
 
-  export type Conversations_messages_logsNullableRelationFilter = {
-    is?: conversations_messages_logsWhereInput | null
-    isNot?: conversations_messages_logsWhereInput | null
+  export type Conversations_messages_logsListRelationFilter = {
+    every?: conversations_messages_logsWhereInput
+    some?: conversations_messages_logsWhereInput
+    none?: conversations_messages_logsWhereInput
   }
 
   export type conversations_membersOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type conversations_messages_logsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33014,18 +33082,21 @@ export namespace Prisma {
     conversation_id?: SortOrder
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
+    last_message?: SortOrder
   }
 
   export type conversationsMaxOrderByAggregateInput = {
     conversation_id?: SortOrder
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
+    last_message?: SortOrder
   }
 
   export type conversationsMinOrderByAggregateInput = {
     conversation_id?: SortOrder
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
+    last_message?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -33071,24 +33142,27 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsCountOrderByAggregateInput = {
+    conversations_messages_logs_id?: SortOrder
     conversation_id?: SortOrder
     entity_id?: SortOrder
     message?: SortOrder
-    message_time?: SortOrder
+    message_date?: SortOrder
   }
 
   export type conversations_messages_logsMaxOrderByAggregateInput = {
+    conversations_messages_logs_id?: SortOrder
     conversation_id?: SortOrder
     entity_id?: SortOrder
     message?: SortOrder
-    message_time?: SortOrder
+    message_date?: SortOrder
   }
 
   export type conversations_messages_logsMinOrderByAggregateInput = {
+    conversations_messages_logs_id?: SortOrder
     conversation_id?: SortOrder
     entity_id?: SortOrder
     message?: SortOrder
-    message_time?: SortOrder
+    message_date?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -33106,12 +33180,6 @@ export namespace Prisma {
     every?: collectionsWhereInput
     some?: collectionsWhereInput
     none?: collectionsWhereInput
-  }
-
-  export type Conversations_messages_logsListRelationFilter = {
-    every?: conversations_messages_logsWhereInput
-    some?: conversations_messages_logsWhereInput
-    none?: conversations_messages_logsWhereInput
   }
 
   export type Entities_referencesListRelationFilter = {
@@ -33151,10 +33219,6 @@ export namespace Prisma {
   }
 
   export type collectionsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type conversations_messages_logsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -34117,10 +34181,11 @@ export namespace Prisma {
     connect?: conversations_membersWhereUniqueInput | conversations_membersWhereUniqueInput[]
   }
 
-  export type conversations_messages_logsCreateNestedOneWithoutConversationsInput = {
-    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
-    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput
-    connect?: conversations_messages_logsWhereUniqueInput
+  export type conversations_messages_logsCreateNestedManyWithoutConversationsInput = {
+    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput> | conversations_messages_logsCreateWithoutConversationsInput[] | conversations_messages_logsUncheckedCreateWithoutConversationsInput[]
+    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput | conversations_messages_logsCreateOrConnectWithoutConversationsInput[]
+    createMany?: conversations_messages_logsCreateManyConversationsInputEnvelope
+    connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
   }
 
   export type conversations_membersUncheckedCreateNestedManyWithoutConversationsInput = {
@@ -34130,10 +34195,11 @@ export namespace Prisma {
     connect?: conversations_membersWhereUniqueInput | conversations_membersWhereUniqueInput[]
   }
 
-  export type conversations_messages_logsUncheckedCreateNestedOneWithoutConversationsInput = {
-    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
-    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput
-    connect?: conversations_messages_logsWhereUniqueInput
+  export type conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput = {
+    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput> | conversations_messages_logsCreateWithoutConversationsInput[] | conversations_messages_logsUncheckedCreateWithoutConversationsInput[]
+    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput | conversations_messages_logsCreateOrConnectWithoutConversationsInput[]
+    createMany?: conversations_messages_logsCreateManyConversationsInputEnvelope
+    connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -34154,14 +34220,18 @@ export namespace Prisma {
     deleteMany?: conversations_membersScalarWhereInput | conversations_membersScalarWhereInput[]
   }
 
-  export type conversations_messages_logsUpdateOneWithoutConversationsNestedInput = {
-    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
-    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput
-    upsert?: conversations_messages_logsUpsertWithoutConversationsInput
-    disconnect?: conversations_messages_logsWhereInput | boolean
-    delete?: conversations_messages_logsWhereInput | boolean
-    connect?: conversations_messages_logsWhereUniqueInput
-    update?: XOR<XOR<conversations_messages_logsUpdateToOneWithWhereWithoutConversationsInput, conversations_messages_logsUpdateWithoutConversationsInput>, conversations_messages_logsUncheckedUpdateWithoutConversationsInput>
+  export type conversations_messages_logsUpdateManyWithoutConversationsNestedInput = {
+    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput> | conversations_messages_logsCreateWithoutConversationsInput[] | conversations_messages_logsUncheckedCreateWithoutConversationsInput[]
+    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput | conversations_messages_logsCreateOrConnectWithoutConversationsInput[]
+    upsert?: conversations_messages_logsUpsertWithWhereUniqueWithoutConversationsInput | conversations_messages_logsUpsertWithWhereUniqueWithoutConversationsInput[]
+    createMany?: conversations_messages_logsCreateManyConversationsInputEnvelope
+    set?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    disconnect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    delete?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    update?: conversations_messages_logsUpdateWithWhereUniqueWithoutConversationsInput | conversations_messages_logsUpdateWithWhereUniqueWithoutConversationsInput[]
+    updateMany?: conversations_messages_logsUpdateManyWithWhereWithoutConversationsInput | conversations_messages_logsUpdateManyWithWhereWithoutConversationsInput[]
+    deleteMany?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
   }
 
   export type conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput = {
@@ -34178,14 +34248,18 @@ export namespace Prisma {
     deleteMany?: conversations_membersScalarWhereInput | conversations_membersScalarWhereInput[]
   }
 
-  export type conversations_messages_logsUncheckedUpdateOneWithoutConversationsNestedInput = {
-    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
-    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput
-    upsert?: conversations_messages_logsUpsertWithoutConversationsInput
-    disconnect?: conversations_messages_logsWhereInput | boolean
-    delete?: conversations_messages_logsWhereInput | boolean
-    connect?: conversations_messages_logsWhereUniqueInput
-    update?: XOR<XOR<conversations_messages_logsUpdateToOneWithWhereWithoutConversationsInput, conversations_messages_logsUpdateWithoutConversationsInput>, conversations_messages_logsUncheckedUpdateWithoutConversationsInput>
+  export type conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput = {
+    create?: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput> | conversations_messages_logsCreateWithoutConversationsInput[] | conversations_messages_logsUncheckedCreateWithoutConversationsInput[]
+    connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput | conversations_messages_logsCreateOrConnectWithoutConversationsInput[]
+    upsert?: conversations_messages_logsUpsertWithWhereUniqueWithoutConversationsInput | conversations_messages_logsUpsertWithWhereUniqueWithoutConversationsInput[]
+    createMany?: conversations_messages_logsCreateManyConversationsInputEnvelope
+    set?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    disconnect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    delete?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+    update?: conversations_messages_logsUpdateWithWhereUniqueWithoutConversationsInput | conversations_messages_logsUpdateWithWhereUniqueWithoutConversationsInput[]
+    updateMany?: conversations_messages_logsUpdateManyWithWhereWithoutConversationsInput | conversations_messages_logsUpdateManyWithWhereWithoutConversationsInput[]
+    deleteMany?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
   }
 
   export type conversationsCreateNestedOneWithoutConversations_membersInput = {
@@ -36189,20 +36263,27 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsCreateWithoutConversationsInput = {
+    conversations_messages_logs_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
     entities: entitiesCreateNestedOneWithoutConversations_messages_logsInput
   }
 
   export type conversations_messages_logsUncheckedCreateWithoutConversationsInput = {
+    conversations_messages_logs_id: string
     entity_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
   }
 
   export type conversations_messages_logsCreateOrConnectWithoutConversationsInput = {
     where: conversations_messages_logsWhereUniqueInput
     create: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type conversations_messages_logsCreateManyConversationsInputEnvelope = {
+    data: conversations_messages_logsCreateManyConversationsInput | conversations_messages_logsCreateManyConversationsInput[]
+    skipDuplicates?: boolean
   }
 
   export type conversations_membersUpsertWithWhereUniqueWithoutConversationsInput = {
@@ -36229,41 +36310,47 @@ export namespace Prisma {
     member_id?: StringFilter<"conversations_members"> | string
   }
 
-  export type conversations_messages_logsUpsertWithoutConversationsInput = {
+  export type conversations_messages_logsUpsertWithWhereUniqueWithoutConversationsInput = {
+    where: conversations_messages_logsWhereUniqueInput
     update: XOR<conversations_messages_logsUpdateWithoutConversationsInput, conversations_messages_logsUncheckedUpdateWithoutConversationsInput>
     create: XOR<conversations_messages_logsCreateWithoutConversationsInput, conversations_messages_logsUncheckedCreateWithoutConversationsInput>
-    where?: conversations_messages_logsWhereInput
   }
 
-  export type conversations_messages_logsUpdateToOneWithWhereWithoutConversationsInput = {
-    where?: conversations_messages_logsWhereInput
+  export type conversations_messages_logsUpdateWithWhereUniqueWithoutConversationsInput = {
+    where: conversations_messages_logsWhereUniqueInput
     data: XOR<conversations_messages_logsUpdateWithoutConversationsInput, conversations_messages_logsUncheckedUpdateWithoutConversationsInput>
   }
 
-  export type conversations_messages_logsUpdateWithoutConversationsInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    entities?: entitiesUpdateOneRequiredWithoutConversations_messages_logsNestedInput
+  export type conversations_messages_logsUpdateManyWithWhereWithoutConversationsInput = {
+    where: conversations_messages_logsScalarWhereInput
+    data: XOR<conversations_messages_logsUpdateManyMutationInput, conversations_messages_logsUncheckedUpdateManyWithoutConversationsInput>
   }
 
-  export type conversations_messages_logsUncheckedUpdateWithoutConversationsInput = {
-    entity_id?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type conversations_messages_logsScalarWhereInput = {
+    AND?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
+    OR?: conversations_messages_logsScalarWhereInput[]
+    NOT?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
+    conversations_messages_logs_id?: StringFilter<"conversations_messages_logs"> | string
+    conversation_id?: StringFilter<"conversations_messages_logs"> | string
+    entity_id?: StringFilter<"conversations_messages_logs"> | string
+    message?: StringFilter<"conversations_messages_logs"> | string
+    message_date?: DateTimeFilter<"conversations_messages_logs"> | Date | string
   }
 
   export type conversationsCreateWithoutConversations_membersInput = {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
-    conversations_messages_logs?: conversations_messages_logsCreateNestedOneWithoutConversationsInput
+    last_message?: string | null
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
 
   export type conversationsUncheckedCreateWithoutConversations_membersInput = {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
-    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedOneWithoutConversationsInput
+    last_message?: string | null
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
 
   export type conversationsCreateOrConnectWithoutConversations_membersInput = {
@@ -36323,14 +36410,16 @@ export namespace Prisma {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    conversations_messages_logs?: conversations_messages_logsUpdateOneWithoutConversationsNestedInput
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
 
   export type conversationsUncheckedUpdateWithoutConversations_membersInput = {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateOneWithoutConversationsNestedInput
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
   export type entitiesUpsertWithoutConversations_membersInput = {
@@ -36380,6 +36469,7 @@ export namespace Prisma {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
+    last_message?: string | null
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
   }
 
@@ -36387,6 +36477,7 @@ export namespace Prisma {
     conversation_id: string
     conversation_name?: string | null
     conversation_creation_date: Date | string
+    last_message?: string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
   }
 
@@ -36447,6 +36538,7 @@ export namespace Prisma {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36454,6 +36546,7 @@ export namespace Prisma {
     conversation_id?: StringFieldUpdateOperationsInput | string
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36541,15 +36634,17 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsCreateWithoutEntitiesInput = {
+    conversations_messages_logs_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
     conversations: conversationsCreateNestedOneWithoutConversations_messages_logsInput
   }
 
   export type conversations_messages_logsUncheckedCreateWithoutEntitiesInput = {
+    conversations_messages_logs_id: string
     conversation_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
   }
 
   export type conversations_messages_logsCreateOrConnectWithoutEntitiesInput = {
@@ -36853,16 +36948,6 @@ export namespace Prisma {
   export type conversations_messages_logsUpdateManyWithWhereWithoutEntitiesInput = {
     where: conversations_messages_logsScalarWhereInput
     data: XOR<conversations_messages_logsUpdateManyMutationInput, conversations_messages_logsUncheckedUpdateManyWithoutEntitiesInput>
-  }
-
-  export type conversations_messages_logsScalarWhereInput = {
-    AND?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
-    OR?: conversations_messages_logsScalarWhereInput[]
-    NOT?: conversations_messages_logsScalarWhereInput | conversations_messages_logsScalarWhereInput[]
-    conversation_id?: StringFilter<"conversations_messages_logs"> | string
-    entity_id?: StringFilter<"conversations_messages_logs"> | string
-    message?: StringFilter<"conversations_messages_logs"> | string
-    message_time?: DateTimeFilter<"conversations_messages_logs"> | Date | string
   }
 
   export type entities_contentUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -39149,6 +39234,13 @@ export namespace Prisma {
     member_id: string
   }
 
+  export type conversations_messages_logsCreateManyConversationsInput = {
+    conversations_messages_logs_id: string
+    entity_id: string
+    message: string
+    message_date: Date | string
+  }
+
   export type conversations_membersUpdateWithoutConversationsInput = {
     entities?: entitiesUpdateOneRequiredWithoutConversations_membersNestedInput
   }
@@ -39161,6 +39253,27 @@ export namespace Prisma {
     member_id?: StringFieldUpdateOperationsInput | string
   }
 
+  export type conversations_messages_logsUpdateWithoutConversationsInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    entities?: entitiesUpdateOneRequiredWithoutConversations_messages_logsNestedInput
+  }
+
+  export type conversations_messages_logsUncheckedUpdateWithoutConversationsInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type conversations_messages_logsUncheckedUpdateManyWithoutConversationsInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type collectionsCreateManyEntitiesInput = {
     collection_id: string
     collection_name: string
@@ -39171,9 +39284,10 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsCreateManyEntitiesInput = {
+    conversations_messages_logs_id: string
     conversation_id: string
     message: string
-    message_time: Date | string
+    message_date: Date | string
   }
 
   export type entities_contentCreateManyEntitiesInput = {
@@ -39279,21 +39393,24 @@ export namespace Prisma {
   }
 
   export type conversations_messages_logsUpdateWithoutEntitiesInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: conversationsUpdateOneRequiredWithoutConversations_messages_logsNestedInput
   }
 
   export type conversations_messages_logsUncheckedUpdateWithoutEntitiesInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type conversations_messages_logsUncheckedUpdateManyWithoutEntitiesInput = {
+    conversations_messages_logs_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    message_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type entities_contentUpdateWithoutEntitiesInput = {

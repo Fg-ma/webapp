@@ -8,7 +8,9 @@ import ExploreCards from "./content/ExploreCards";
 import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
-import { RightState, MainState } from "@FgTypes/rightTypes";
+import { RightState, MainState, MessagesState } from "@FgTypes/rightTypes";
+import Conversations from "./content/Conversations";
+import Contacts from "./content/Contacts";
 
 export default function RightSpace() {
   /* 
@@ -22,24 +24,36 @@ export default function RightSpace() {
   const rightPage = useSelector(
     (state: RightState) => state.page.right.pagePayload.pageState,
   );
+  const messagesPage = useSelector(
+    (state: MessagesState) => state.page.messages.pagePayload.pageState,
+  );
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
 
   const renderContent = () => {
-    switch (rightPage) {
-      case "papers":
-        return <PapersCards />;
-      case "news":
-        return <NewsCards />;
-      case "explore":
-        return <ExploreCards />;
-      case "messages":
-        return <MessagesCards />;
-      case "dogEars":
-        return <DogEarCards />;
-      default:
-        return <NewsCards />;
+    if (mainPageState !== "messages") {
+      switch (rightPage) {
+        case "papers":
+          return <PapersCards />;
+        case "news":
+          return <NewsCards />;
+        case "explore":
+          return <ExploreCards />;
+        case "messages":
+          return <MessagesCards />;
+        case "dogEars":
+          return <DogEarCards />;
+        default:
+          return <NewsCards />;
+      }
+    } else if (mainPageState === "messages") {
+      switch (messagesPage) {
+        case "conversations":
+          return <Conversations />;
+        case "contacts":
+          return <Contacts />;
+      }
     }
   };
 

@@ -63,7 +63,7 @@ export interface RightNavProps {
   mainPageState: string;
 }
 
-export interface MessageState {
+export interface MessagesState {
   page: {
     messages: {
       pagePayload: {
@@ -140,6 +140,13 @@ export interface DogEarCardProps {
   affResponses?: string | null;
 }
 
+export interface ConversationsCardProps {
+  conversation_id: string;
+  conversation_name: string | null;
+  last_message: string | null;
+  members?: string[];
+}
+
 /* 
   RightAddAdvancedSearchFilter.tsx
 */
@@ -210,61 +217,29 @@ export interface RightSearchFilterProps {
 }
 
 /* 
-
+  Conversations.tsx
 */
+interface Members {
+  conversation_id: string;
+  member_id: string;
+  individual_data?: {
+    individual_name: string | null;
+    individual_username: string;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
 
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
-
-/* 
-
-*/
+export interface Conversation {
+  conversation_id: string;
+  conversation_name: string | null;
+  conversation_creation_date: string;
+  last_message: string | null;
+  members: Members[];
+}

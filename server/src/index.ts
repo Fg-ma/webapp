@@ -17,6 +17,7 @@ import entitiesRouter from "./routes/entities";
 import referencesRouter from "./routes/references";
 import authRouter from "./routes/auth";
 import affiliateRelations from "./routes/affiliateRelations";
+import conversationsRouter from "./routes/conversations";
 import prismaMiddleware from "./prismaMiddleware";
 
 app.use(cors());
@@ -37,6 +38,7 @@ app.use("/entities", entitiesRouter);
 app.use("/references", referencesRouter);
 app.use("/auth", authRouter);
 app.use("/affiliateRelations", affiliateRelations);
+app.use("/conversations", conversationsRouter);
 
 server.listen(process.env.SERVER_PORT, () => {
   console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);

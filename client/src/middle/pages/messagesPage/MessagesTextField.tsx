@@ -1,8 +1,16 @@
 import React, { useEffect, useRef } from "react";
+import Axios from "axios";
+import config from "@config";
 import { MessagesTextFieldProps } from "@FgTypes/middleTypes";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const serverUrl = isDevelopment
+  ? config.development.serverUrl
+  : config.production.serverUrl;
 
 export default function MessagesTextField({
   inputValue,
+  conversation_id,
   setInputValue,
   messageSocket,
 }: MessagesTextFieldProps) {
@@ -57,12 +65,38 @@ export default function MessagesTextField({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!inputValue || !contentEditableRef.current) return;
 
-    messageSocket.emit("sendMessage", inputValue, "James", false);
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    messageSocket.emit(
+      "sendMessage",
+      token,
+      conversation_id,
+      inputValue,
+      "James",
+      false,
+    );
+
+    await Axios.put(
+      `${serverUrl}/conversations/new_conversation_message`,
+      {
+        conversation_id: conversation_id,
+        message: inputValue,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     setInputValue("");
     contentEditableRef.current.innerText = placeholder;
