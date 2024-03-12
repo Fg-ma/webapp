@@ -15,6 +15,7 @@ export interface Group {
   group_currentIssue: string;
   group_description: string;
   group_stances: string;
+  affiliate_relation_date: string;
   animate?: boolean;
 }
 
@@ -25,6 +26,7 @@ export interface Individual {
   individual_currentIssue: string;
   individual_description: string;
   individual_roles: string;
+  affiliate_relation_date: string;
   animate?: boolean;
 }
 
@@ -35,6 +37,7 @@ export interface Organization {
   organization_currentIssue: string;
   organization_description: string;
   organization_stances: string;
+  affiliate_relation_date: string;
   animate?: boolean;
 }
 

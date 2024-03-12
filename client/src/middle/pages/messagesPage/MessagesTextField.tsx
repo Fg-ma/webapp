@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Axios from "axios";
 import config from "@config";
 import { MessagesTextFieldProps } from "@FgTypes/middleTypes";
+import { useLastMessageContext } from "@context/LastMessageContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -13,9 +14,10 @@ export default function MessagesTextField({
   conversation_id,
   setInputValue,
   messageSocket,
+  messagesPageRef,
 }: MessagesTextFieldProps) {
   const placeholder = "Search...";
-
+  const { setLastMessage } = useLastMessageContext();
   const contentEditableRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = () => {
@@ -68,7 +70,7 @@ export default function MessagesTextField({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!inputValue || !contentEditableRef.current) return;
+    if (!inputValue || !contentEditableRef.current || !conversation_id) return;
 
     const token = localStorage.getItem("token");
 
@@ -76,14 +78,7 @@ export default function MessagesTextField({
       return;
     }
 
-    messageSocket.emit(
-      "sendMessage",
-      token,
-      conversation_id,
-      inputValue,
-      "James",
-      false,
-    );
+    messageSocket.emit("sendMessage", token, conversation_id, inputValue);
 
     await Axios.put(
       `${serverUrl}/conversations/new_conversation_message`,
@@ -97,6 +92,15 @@ export default function MessagesTextField({
         },
       },
     );
+
+    setLastMessage({
+      conversation_id: conversation_id,
+      last_message: inputValue,
+    });
+
+    if (messagesPageRef.current) {
+      messagesPageRef.current.scrollTop = messagesPageRef.current.scrollHeight;
+    }
 
     setInputValue("");
     contentEditableRef.current.innerText = placeholder;
@@ -113,7 +117,8 @@ export default function MessagesTextField({
           ref={contentEditableRef}
           role="textbox"
           contentEditable
-          className="w-full rounded-2xl px-3 pt-2 pb-1 outline-none text-xl"
+          className="rounded-2xl px-3 pt-2 pb-1 outline-none text-xl"
+          style={{ width: "calc(100% - 2.5rem)" }}
           onFocus={handleFocus}
           onBlur={handleBlur}
         ></div>

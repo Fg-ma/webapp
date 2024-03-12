@@ -18924,7 +18924,7 @@ export namespace Prisma {
   export type IndividualsGroupByOutputType = {
     individual_id: string
     individual_username: string
-    individual_name: string
+    individual_name: string | null
     individual_currentIssue: string | null
     individual_roles: string | null
     individual_description: string | null
@@ -18985,7 +18985,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       individual_id: string
       individual_username: string
-      individual_name: string
+      individual_name: string | null
       individual_currentIssue: string | null
       individual_roles: string | null
       individual_description: string | null
@@ -30579,7 +30579,7 @@ export namespace Prisma {
     NOT?: individualsWhereInput | individualsWhereInput[]
     individual_id?: StringFilter<"individuals"> | string
     individual_username?: StringFilter<"individuals"> | string
-    individual_name?: StringFilter<"individuals"> | string
+    individual_name?: StringNullableFilter<"individuals"> | string | null
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
@@ -30591,7 +30591,7 @@ export namespace Prisma {
   export type individualsOrderByWithRelationInput = {
     individual_id?: SortOrder
     individual_username?: SortOrder
-    individual_name?: SortOrder
+    individual_name?: SortOrderInput | SortOrder
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
@@ -30606,7 +30606,7 @@ export namespace Prisma {
     AND?: individualsWhereInput | individualsWhereInput[]
     OR?: individualsWhereInput[]
     NOT?: individualsWhereInput | individualsWhereInput[]
-    individual_name?: StringFilter<"individuals"> | string
+    individual_name?: StringNullableFilter<"individuals"> | string | null
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
@@ -30618,7 +30618,7 @@ export namespace Prisma {
   export type individualsOrderByWithAggregationInput = {
     individual_id?: SortOrder
     individual_username?: SortOrder
-    individual_name?: SortOrder
+    individual_name?: SortOrderInput | SortOrder
     individual_currentIssue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
@@ -30634,7 +30634,7 @@ export namespace Prisma {
     NOT?: individualsScalarWhereWithAggregatesInput | individualsScalarWhereWithAggregatesInput[]
     individual_id?: StringWithAggregatesFilter<"individuals"> | string
     individual_username?: StringWithAggregatesFilter<"individuals"> | string
-    individual_name?: StringWithAggregatesFilter<"individuals"> | string
+    individual_name?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_currentIssue?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_roles?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_description?: StringNullableWithAggregatesFilter<"individuals"> | string | null
@@ -32102,7 +32102,7 @@ export namespace Prisma {
 
   export type individualsCreateInput = {
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -32113,7 +32113,7 @@ export namespace Prisma {
   export type individualsUncheckedCreateInput = {
     individual_id: string
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -32122,7 +32122,7 @@ export namespace Prisma {
 
   export type individualsUpdateInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32133,7 +32133,7 @@ export namespace Prisma {
   export type individualsUncheckedUpdateInput = {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32143,7 +32143,7 @@ export namespace Prisma {
   export type individualsCreateManyInput = {
     individual_id: string
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -32152,7 +32152,7 @@ export namespace Prisma {
 
   export type individualsUpdateManyMutationInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32161,7 +32161,7 @@ export namespace Prisma {
   export type individualsUncheckedUpdateManyInput = {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38379,7 +38379,7 @@ export namespace Prisma {
 
   export type individualsCreateWithoutProfile_picturesInput = {
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -38389,7 +38389,7 @@ export namespace Prisma {
   export type individualsUncheckedCreateWithoutProfile_picturesInput = {
     individual_id: string
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -38486,7 +38486,7 @@ export namespace Prisma {
     NOT?: individualsScalarWhereInput | individualsScalarWhereInput[]
     individual_id?: StringFilter<"individuals"> | string
     individual_username?: StringFilter<"individuals"> | string
-    individual_name?: StringFilter<"individuals"> | string
+    individual_name?: StringNullableFilter<"individuals"> | string | null
     individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
@@ -38784,7 +38784,7 @@ export namespace Prisma {
 
   export type individualsCreateWithoutUser_credentialsInput = {
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -38793,7 +38793,7 @@ export namespace Prisma {
 
   export type individualsUncheckedCreateWithoutUser_credentialsInput = {
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -38818,7 +38818,7 @@ export namespace Prisma {
 
   export type individualsUpdateWithoutUser_credentialsInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38827,7 +38827,7 @@ export namespace Prisma {
 
   export type individualsUncheckedUpdateWithoutUser_credentialsInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39732,7 +39732,7 @@ export namespace Prisma {
   export type individualsCreateManyProfile_picturesInput = {
     individual_id: string
     individual_username: string
-    individual_name: string
+    individual_name?: string | null
     individual_currentIssue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
@@ -39778,7 +39778,7 @@ export namespace Prisma {
 
   export type individualsUpdateWithoutProfile_picturesInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39788,7 +39788,7 @@ export namespace Prisma {
   export type individualsUncheckedUpdateWithoutProfile_picturesInput = {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39797,7 +39797,7 @@ export namespace Prisma {
   export type individualsUncheckedUpdateManyWithoutProfile_picturesInput = {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
-    individual_name?: StringFieldUpdateOperationsInput | string
+    individual_name?: NullableStringFieldUpdateOperationsInput | string | null
     individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null

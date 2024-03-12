@@ -144,7 +144,8 @@ export interface ConversationsCardProps {
   conversation_id: string;
   conversation_name: string | null;
   last_message: string | null;
-  members?: string[];
+  members: string[];
+  conversation_creation_date: string;
 }
 
 /* 

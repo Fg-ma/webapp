@@ -42,7 +42,7 @@ export default function RelatedIssues() {
   });
 
   return (
-    <div id="individualRecs" className="mr-3 h-full overflow-scroll">
+    <div id="individualRecs" className="h-full">
       {relIssues}
     </div>
   );
@@ -53,7 +53,7 @@ function RelatedIssuesCard({
   affResponses = null,
 }: RelatedIssuesCardProps) {
   return (
-    <div className="bg-white w-fill my-4 mr-5 ml-8 h-24 flex items-center rounded-md">
+    <div className="bg-white w-fill my-4 ml-9 h-24 flex items-center rounded-md">
       <div className="w-16 aspect-square overflow-clip bg-fg-white-85 ml-3 rounded-sm grid place-items-center">
         <p>pic</p>
       </div>

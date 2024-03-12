@@ -27,8 +27,13 @@ export default function ContentPage({ contentType }: ContentPageProps) {
   };
 
   return (
-    <div className="h-full mr-3 overflow-y-auto">
-      <div className="ml-8 mr-5 my-8">{renderContent()}</div>
+    <div
+      className="h-full overflow-y-auto"
+      style={{
+        scrollbarGutter: "stable",
+      }}
+    >
+      <div className="ml-8 my-8">{renderContent()}</div>
     </div>
   );
 }

@@ -15,7 +15,8 @@ import {
   SET_PAGE_STATE,
   SET_IDS,
   SET_LOGGED_IN,
-} from "../redux/pageState/pageStateTypes";
+  SET_CONVERSATION,
+} from "@redux/pageState/pageStateTypes";
 
 // Global
 
@@ -121,6 +122,11 @@ export interface PageState {
         collection_id?: string | null;
         conversation_id?: string | null;
       };
+      conversation?: {
+        conversation_name: string | null;
+        members: string[] | null;
+        conversation_creation_date: string | null;
+      };
     };
   };
 }
@@ -131,4 +137,12 @@ export type PageStateAction =
       type: typeof SET_IDS;
       payload: { page: string; id: string; value: string | null };
     }
-  | { type: typeof SET_LOGGED_IN; payload: { isLoggedIn: boolean } };
+  | { type: typeof SET_LOGGED_IN; payload: { isLoggedIn: boolean } }
+  | {
+      type: typeof SET_CONVERSATION;
+      payload: {
+        conversation_name: string;
+        members: string[];
+        conversation_creation_date: string;
+      };
+    };

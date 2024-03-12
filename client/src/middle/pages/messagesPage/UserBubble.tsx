@@ -27,10 +27,10 @@ export default function UserBubble({ message }: UserBubbleProps) {
   return (
     <div className="w-full h-max flex items-center justify-end pt-5">
       <div className="font-K2D text-lg relative max-w-md w-max h-max bg-fg-primary-desaturated font-bold rounded-3xl px-5 py-2 mr-4 text-white">
-        {messageLines.map((line, index) => (
+        {result.map((line, index) => (
           <span
             key={index}
-            className="block w-full max-w-full flex-wrap z-20 relative"
+            className="block w-full max-w-full flex-wrap z-20 relative break-words"
           >
             {line === "" ? <br /> : line}
           </span>

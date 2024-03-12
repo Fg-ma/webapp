@@ -69,14 +69,14 @@ export default function OrganizationCards() {
     }
   }, [affiliateRelation]);
 
-  const sortData = (data: any) => {
+  const sortData = (data: Organization[]) => {
     const parseDate = (dateString: string | null) =>
       dateString
         ? new Date(dateString).getTime()
         : new Date("2000-01-01T01:01:01.000Z").getTime();
 
     data.sort(
-      (a: any, b: any) =>
+      (a: Organization, b: Organization) =>
         parseDate(b.affiliate_relation_date) -
         parseDate(a.affiliate_relation_date),
     );

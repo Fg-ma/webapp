@@ -70,8 +70,8 @@ export default function RightSpace() {
     >
       <RightNav mainPageState={mainPageState} />
       <div
-        className="mr-3 overflow-auto"
-        style={{ height: `calc(100% - 7rem)` }}
+        className="overflow-auto"
+        style={{ height: `calc(100% - 7rem)`, scrollbarGutter: "stable" }}
       >
         {renderContent()}
       </div>

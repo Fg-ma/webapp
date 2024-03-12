@@ -157,10 +157,10 @@ export default function MiddleVerticalSplitPane({
   return (
     <div className="flex flex-col w-full h-full relative">
       <div
-        className="mr-3 overflow-auto box-border"
-        style={{ height: paneHeight }}
+        className="overflow-auto box-border"
+        style={{ height: paneHeight, scrollbarGutter: "stable" }}
       >
-        <div className="ml-8 mr-5 my-8">
+        <div className="ml-8 my-8">
           <SheetViewer sheet_id="1065caad-caee-11ee-83a1-00ff8797c34e" />
           <input type="file" onChange={fileToBlobFunc} />
         </div>
@@ -183,7 +183,10 @@ export default function MiddleVerticalSplitPane({
       </div>
       <div
         className="overflow-auto box-border bg-fg-white-95"
-        style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
+        style={{
+          height: `calc(100% - ${paneHeight} - 2.25rem)`,
+          scrollbarGutter: "stable",
+        }}
       >
         <RelatedIssues />
       </div>

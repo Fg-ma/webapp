@@ -35,7 +35,7 @@ export default function RecipientsBubbles({
           {result.map((line, index) => (
             <span
               key={index}
-              className="block w-full max-w-full flex-wrap z-20 relative"
+              className="block w-full max-w-full flex-wrap z-20 relative break-words"
             >
               {line === "" ? <br /> : line}
             </span>

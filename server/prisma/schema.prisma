@@ -54,7 +54,7 @@ model conversations {
   conversation_id             String                        @id @unique(map: "conversation_id_UNIQUE") @db.Char(36)
   conversation_name           String?                       @db.VarChar(256)
   conversation_creation_date  DateTime                      @db.Timestamp(0)
-  last_message                String?                       @db.VarChar(512)
+  last_message                String?                       @db.Text
   conversations_members       conversations_members[]
   conversations_messages_logs conversations_messages_logs[]
 }
@@ -74,7 +74,7 @@ model conversations_messages_logs {
   conversations_messages_logs_id String        @id @db.Char(36)
   conversation_id                String        @db.Char(36)
   entity_id                      String        @db.Char(36)
-  message                        String        @db.VarChar(512)
+  message                        String        @db.Text
   message_date                   DateTime      @db.Timestamp(0)
   conversations                  conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_conversation_id_fk")
   entities                       entities      @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_messages_logs_entity_id_fk")
@@ -201,7 +201,7 @@ model images_data {
 model individuals {
   individual_id           String            @id @unique(map: "individual_id_UNIQUE") @db.Char(36)
   individual_username     String            @unique(map: "userName_UNIQUE") @db.VarChar(256)
-  individual_name         String            @db.VarChar(256)
+  individual_name         String?           @db.VarChar(256)
   individual_currentIssue String?           @db.Text
   individual_roles        String?           @db.Text
   individual_description  String?           @db.Text

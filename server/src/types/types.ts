@@ -1,17 +1,11 @@
-// affiliateRelations.ts
+// Global
 
-export interface ids {
-  entity_id: number;
+export interface Entity {
+  entity_id: string;
+  entity_type: number;
 }
 
-export interface relation {
-  affiliate_relation_id: string;
-  affiliate_id_root: string;
-  affiliate_id_target: string;
-  affiliate_relation_date: string;
-}
-
-export interface individual {
+export interface Individual {
   individual_id: string;
   individual_username: string;
   individual_name: string | null;
@@ -21,7 +15,7 @@ export interface individual {
   profile_picture_id: string | null;
 }
 
-export interface group {
+export interface Group {
   group_id: string;
   group_handle: string;
   group_name: string | null;
@@ -31,7 +25,7 @@ export interface group {
   profile_picture_id: string | null;
 }
 
-export interface organization {
+export interface Organization {
   organization_id: string;
   organization_handle: string;
   organization_name: string | null;
@@ -41,7 +35,24 @@ export interface organization {
   profile_picture_id: string | null;
 }
 
-// entities.ts
+/*
+  affiliateRelations.ts
+  Global Entity
+  Global Individual
+  Global Group
+  Global Organization
+*/
+
+export interface Relation {
+  affiliate_relation_id: string;
+  affiliate_id_root: string;
+  affiliate_id_target: string;
+  affiliate_relation_date: string;
+}
+
+/*
+  entities.ts
+*/
 
 export interface EntityContent {
   entities_content_id: string;
@@ -97,7 +108,9 @@ export interface ImageContent {
 
 export interface MergedImageData extends EntityContent, ImageContent {}
 
-// images.ts
+/*
+  images.ts
+*/
 
 export interface FullImage {
   image_id: string;
@@ -117,7 +130,9 @@ export interface FullImage {
   entities: { entity_id: string; entity_type: number };
 }
 
-// sheets.ts
+/*
+  sheets.ts
+*/
 
 export interface FullSheet {
   sheet_id: string;
@@ -140,7 +155,9 @@ export interface FullSheet {
   };
 }
 
-// videos.ts
+/*
+  videos.ts
+*/
 
 export interface FullVideo {
   video_id: string;
@@ -161,4 +178,44 @@ export interface FullVideo {
     entity_id: string;
     entity_type: number;
   };
+}
+
+/*
+  conversations.ts
+  Global Individual
+  Global Group
+  Global Organization
+*/
+
+export interface ConversationMember {
+  conversation_id: string;
+  member_id: string;
+  individual_data?: {
+    individual_username: string;
+    individual_name: string | null;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
+
+export interface Conversation {
+  conversation_id: string;
+  conversation_name: string;
+  conversation_creation_date: string;
+  last_message: string;
+  members?: ConversationMember[];
+}
+
+export interface Message {
+  conversations_messages_logs_id: string;
+  conversation_id: string;
+  entity_id: string;
+  message: string;
+  message_date: string;
 }

@@ -66,14 +66,14 @@ export default function GroupCards() {
     }
   }, [affiliateRelation]);
 
-  const sortData = (data: any) => {
+  const sortData = (data: Group[]) => {
     const parseDate = (dateString: string | null) =>
       dateString
         ? new Date(dateString).getTime()
         : new Date("2000-01-01T01:01:01.000Z").getTime();
 
     data.sort(
-      (a: any, b: any) =>
+      (a: Group, b: Group) =>
         parseDate(b.affiliate_relation_date) -
         parseDate(a.affiliate_relation_date),
     );

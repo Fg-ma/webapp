@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setIds, setPageState } from "@redux/pageState/pageStateActions";
+import {
+  setConversation,
+  setIds,
+  setPageState,
+} from "@redux/pageState/pageStateActions";
 import {
   PapersCardProps,
   NewsCardProps,
@@ -28,7 +32,7 @@ export function PapersCard({ paper_id, title, subject }: PapersCardProps) {
 
   return (
     <div
-      className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md cursor-pointer"
+      className="bg-white my-4 ml-9 h-36 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
       <img></img>
@@ -57,7 +61,7 @@ export function NewsCard({
 
   return (
     <div
-      className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md cursor-pointer"
+      className="bg-white my-4 ml-9 h-36 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
       {sheet_id && (
@@ -84,7 +88,7 @@ export function NewsCard({
 
 export function MessagesCard({ name, lastMessage = null }: MessagesCardProps) {
   return (
-    <div className="bg-white w-fill my-4 mx-6 h-20 py-2.5 flex items-center rounded-md cursor-pointer">
+    <div className="bg-white my-4 ml-9 h-20 py-2.5 flex items-center rounded-md cursor-pointer">
       <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
         <p>pic</p>
       </div>
@@ -113,7 +117,7 @@ export function DogEarCard({
 
   return (
     <div
-      className="bg-white w-fill my-4 mx-6 h-36 flex items-center rounded-md cursor-pointer"
+      className="bg-white my-4 ml-9 h-36 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
       {sheet_id && (
@@ -143,30 +147,35 @@ export function ConversationsCard({
   conversation_name,
   last_message,
   members,
+  conversation_creation_date,
 }: ConversationsCardProps) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(setPageState("main", "messages"));
     dispatch(setIds("main", "conversation_id", conversation_id));
+    dispatch(
+      setConversation(conversation_name, members, conversation_creation_date),
+    );
   };
 
   return (
     <div
-      className="bg-white w-fill my-4 mx-6 h-20 flex items-center rounded-md cursor-pointer"
+      className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
-      <div className="mx-4 my-2 space-y-1">
-        <p className="font-Josefin text-lg font-bold line-clamp-1 leading-5 pt-2">
+      <div
+        className="mx-5 my-2 space-y-1"
+        style={{ width: "calc(100% - 2.5rem)" }}
+      >
+        <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
           {conversation_name
             ? conversation_name
             : members && members.join(", ")}
         </p>
-        <div>
-          <p className="font-Josefin text-base text-fg-black-30 line-clamp-2">
-            {last_message}
-          </p>
-        </div>
+        <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
+          {last_message}
+        </p>
       </div>
     </div>
   );

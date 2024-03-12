@@ -3,6 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { Conversation } from "@FgTypes/rightTypes";
 import { ConversationsCard } from "./RightSpaceCards";
+import { useLastMessageContext } from "@context/LastMessageContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -10,6 +11,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Conversations() {
+  const { lastMessage } = useLastMessageContext();
   const [conversations, setConversations] = useState<Conversation[]>([]);
 
   const sortData = (data: Conversation[]) => {
@@ -54,6 +56,20 @@ export default function Conversations() {
     fetchConversations();
   }, []);
 
+  useEffect(() => {
+    const updatedConversations = conversations.map((conversation) => {
+      if (conversation.conversation_id === lastMessage.conversation_id) {
+        return {
+          ...conversation,
+          last_message: lastMessage.last_message,
+        };
+      }
+      return conversation;
+    });
+
+    setConversations(updatedConversations);
+  }, [lastMessage]);
+
   const conversationCards = conversations.map((conversation) => {
     let conversationMembersNames: string[] = [];
     for (const member of conversation.members) {
@@ -91,6 +107,7 @@ export default function Conversations() {
         conversation_name={conversation.conversation_name}
         last_message={conversation.last_message}
         members={conversationMembersNames}
+        conversation_creation_date={conversation.conversation_creation_date}
       />
     );
   });

@@ -1,4 +1,9 @@
-import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
+import {
+  SET_PAGE_STATE,
+  SET_IDS,
+  SET_LOGGED_IN,
+  SET_CONVERSATION,
+} from "./pageStateTypes";
 import { PageState, PageStateAction } from "@FgTypes/reduxTypes";
 
 const initialState: PageState = {
@@ -20,6 +25,11 @@ const initialState: PageState = {
         video_id: null,
         image_id: null,
         conversation_id: null,
+      },
+      conversation: {
+        conversation_name: null,
+        members: null,
+        conversation_creation_date: null,
       },
     },
   },
@@ -112,6 +122,27 @@ export default function pageStateReducer(
           pagePayload: {
             ...state.login.pagePayload,
             isLoggedIn: isLoggedIn,
+          },
+        },
+      };
+    }
+
+    case SET_CONVERSATION: {
+      const { conversation_name, members, conversation_creation_date } =
+        action.payload;
+
+      return {
+        ...state,
+        main: {
+          ...state.main,
+          pagePayload: {
+            ...state.main.pagePayload,
+            conversation: {
+              ...initialState.main.pagePayload.conversation,
+              conversation_name: conversation_name,
+              members: members,
+              conversation_creation_date: conversation_creation_date,
+            },
           },
         },
       };

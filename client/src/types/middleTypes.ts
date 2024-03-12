@@ -581,6 +581,7 @@ export interface Message {
   content: string;
   sender: string;
   isUser: boolean;
+  message_date: string;
 }
 
 export interface ConverationId {
@@ -613,6 +614,7 @@ export interface MessagesTextFieldProps {
   conversation_id: string | null;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messageSocket: Socket;
+  messagesPageRef: React.RefObject<HTMLDivElement>;
 }
 
 /*
@@ -631,4 +633,22 @@ export interface RecipientsBubblesProps {
   message: string;
   conversationSize: number;
   sender: string;
+}
+
+/*
+  MessagesConversationHeader.tsx
+*/
+
+export interface ConversationMeta {
+  page: {
+    main: {
+      pagePayload: {
+        conversation: {
+          conversation_name: string | null;
+          members: string[] | null;
+          conversation_creation_date: string | null;
+        };
+      };
+    };
+  };
 }

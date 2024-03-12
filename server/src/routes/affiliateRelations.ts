@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { group, ids, organization, relation } from "@FgTypes/types";
+import type { Entity, Group, Organization, Relation } from "@FgTypes/types";
 
 // Set a new affiliate relation
 router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
@@ -148,7 +148,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     });
 
     const individualIdsList = individualIds.map(
-      (entry: ids) => entry.entity_id
+      (entry: Entity) => entry.entity_id
     );
 
     const individuals = [];
@@ -181,7 +181,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
       },
     });
 
-    const groupIdsList = groupIds.map((entry: ids) => entry.entity_id);
+    const groupIdsList = groupIds.map((entry: Entity) => entry.entity_id);
 
     const groups = [];
 
@@ -214,7 +214,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     });
 
     const organizationIdsList = organizationIds.map(
-      (entry: ids) => entry.entity_id
+      (entry: Entity) => entry.entity_id
     );
 
     const organizations = [];
@@ -277,7 +277,7 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
     });
 
     const individualIdsList = individualIds.map(
-      (entry: ids) => entry.entity_id
+      (entry: Entity) => entry.entity_id
     );
 
     const individuals = await req.db.individuals.findMany({
@@ -286,7 +286,7 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
 
     const individualsWithAffiliateDate = individuals.map((individual: any) => {
       const relation = affiliates_relations.find(
-        (rel: relation) => rel.affiliate_id_target === individual.individual_id
+        (rel: Relation) => rel.affiliate_id_target === individual.individual_id
       );
 
       if (relation) {
@@ -328,15 +328,15 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
       },
     });
 
-    const groupIdsList = groupIds.map((entry: ids) => entry.entity_id);
+    const groupIdsList = groupIds.map((entry: Entity) => entry.entity_id);
 
     const groups = await req.db.groups.findMany({
       where: { group_id: { in: groupIdsList } },
     });
 
-    const groupsWithAffiliateDate = groups.map((group: group) => {
+    const groupsWithAffiliateDate = groups.map((group: Group) => {
       const relation = affiliates_relations.find(
-        (rel: relation) => rel.affiliate_id_target === group.group_id
+        (rel: Relation) => rel.affiliate_id_target === group.group_id
       );
 
       if (relation) {
@@ -379,7 +379,7 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
     });
 
     const organizationIdsList = organizationIds.map(
-      (entry: ids) => entry.entity_id
+      (entry: Entity) => entry.entity_id
     );
 
     const organizations = await req.db.organizations.findMany({
@@ -387,9 +387,9 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
     });
 
     const organizationsWithAffiliateDate = organizations.map(
-      (organization: organization) => {
+      (organization: Organization) => {
         const relation = affiliates_relations.find(
-          (rel: relation) =>
+          (rel: Relation) =>
             rel.affiliate_id_target === organization.organization_id
         );
 

@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 import jwt, { Secret } from "jsonwebtoken";
 import verifyToken from "./verifyJWT";
 
@@ -10,15 +11,18 @@ router.post("/register", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(newUserPassword, 10);
 
+    const user_id = uuid();
+
     const newUser = await req.db.user_credentials.create({
       data: {
+        user_id: user_id,
         username: newUserUsername,
         user_password: hashedPassword,
       },
     });
 
     const token = jwt.sign(
-      { username: newUser.username },
+      { user_id: user_id, username: newUser.username, entity_type: 1 },
       process.env.TOKEN_KEY as Secret,
       { expiresIn: process.env.TOKEN_TIME_OUT }
     );
@@ -44,7 +48,7 @@ router.post("/login", async (req, res) => {
 
       if (match) {
         const token = jwt.sign(
-          { user_id: user.user_id, username: user.username },
+          { user_id: user.user_id, username: user.username, entity_type: 1 },
           process.env.TOKEN_KEY as Secret,
           { expiresIn: process.env.TOKEN_TIME_OUT }
         );

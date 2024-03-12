@@ -1,4 +1,9 @@
-import { SET_PAGE_STATE, SET_IDS, SET_LOGGED_IN } from "./pageStateTypes";
+import {
+  SET_PAGE_STATE,
+  SET_IDS,
+  SET_LOGGED_IN,
+  SET_CONVERSATION,
+} from "./pageStateTypes";
 
 export const setPageState = (page: string, newState: string) => ({
   type: SET_PAGE_STATE,
@@ -13,4 +18,13 @@ export const setIds = (page: string, id: string, value: string | null) => ({
 export const setLoggedIn = (isLoggedIn: boolean) => ({
   type: SET_LOGGED_IN,
   payload: { isLoggedIn },
+});
+
+export const setConversation = (
+  conversation_name: string | null,
+  members: string[],
+  conversation_creation_date: string,
+) => ({
+  type: SET_CONVERSATION,
+  payload: { conversation_name, members, conversation_creation_date },
 });

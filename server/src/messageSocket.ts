@@ -36,24 +36,18 @@ export default function messageSocket(server: HttpServer) {
   });
 
   io.on("connection", (socket: Socket) => {
-    console.log(`User Connected: ${socket.id}`);
-
     socket.on(
       "sendMessage",
-      async (
-        token: string,
-        conversation_id: string,
-        message: string,
-        sender: string,
-        isUser: string
-      ) => {
+      async (token: string, conversation_id: string, message: string) => {
         const isInConversation = await verifyUser(token, conversation_id);
+        const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+        const message_date = new Date().toISOString();
 
-        if (isInConversation) {
+        if (isInConversation && typeof user !== "string") {
           io.to(conversation_id).emit("newMessage", {
             content: message,
-            sender: sender,
-            isUser: isUser,
+            sender: user.username,
+            message_date: message_date,
           });
         } else {
           console.log("Authorization denied");
@@ -78,7 +72,7 @@ export default function messageSocket(server: HttpServer) {
     });
 
     socket.on("disconnect", () => {
-      console.log("User Disconnected", socket.id);
+      return;
     });
   });
 }

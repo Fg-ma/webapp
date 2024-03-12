@@ -14,48 +14,28 @@ const serverUrl = isDevelopment
 
 export default function MessagesPage() {
   const messageSocket = io(serverUrl);
-  const [isMessagesPageOverflowing, setIsMessagesPageOverflowing] =
-    useState(false);
   const [inputValue, setInputValue] = useState("");
   const conversationSize = useRef(3);
   const [conversation, setConversation] = useState<Message[]>([]);
-  const MessagesPageRef = useRef<HTMLDivElement>(null);
+  const messagesPageRef = useRef<HTMLDivElement>(null);
   const conversation_id = useSelector(
     (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
   );
   const [previousConversationId, setPreviousConversationId] = useState<
     string | null
   >(null);
+  const token = localStorage.getItem("token");
 
   const joinConversation = (conversation_id: string) => {
-    const token = localStorage.getItem("token");
-
     if (!token) {
       return;
     }
 
-    messageSocket.emit(
-      "joinConversation",
-      token,
-      conversation_id,
-      (response: any) => {
-        if (response.error) {
-          console.error("Error joining conversation:", response.error);
-        }
-      },
-    );
+    messageSocket.emit("joinConversation", token, conversation_id);
   };
 
   const leaveConversation = (conversation_id: string) => {
-    messageSocket.emit(
-      "leaveConversation",
-      conversation_id,
-      (response: any) => {
-        if (response.error) {
-          console.error("Error leaving conversation:", response.error);
-        }
-      },
-    );
+    messageSocket.emit("leaveConversation", conversation_id);
   };
 
   useEffect(() => {
@@ -68,18 +48,38 @@ export default function MessagesPage() {
     }
 
     // Handle incoming messages from the server
-    messageSocket.on("newMessage", (newMessage: Message) => {
-      setConversation((prevConversation) => [...prevConversation, newMessage]);
+    messageSocket.on("newMessage", async (newMessage: Message) => {
+      if (!token) {
+        return;
+      }
+
+      const response = await Axios.get(`${serverUrl}/conversations/isUser`, {
+        params: {
+          sender: newMessage.sender,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const message = {
+        content: newMessage.content,
+        sender: response.data.sender,
+        isUser: response.data.isUser,
+        message_date: newMessage.message_date,
+      };
+
+      setConversation((prevConversation) => [...prevConversation, message]);
     });
 
-    const sortData = (data: any[]) => {
+    const sortData = (data: Message[]) => {
       const parseDate = (dateString: string | null) =>
         dateString
           ? new Date(dateString).getTime()
           : new Date("2000-01-01T01:01:01.000Z").getTime();
 
       data.sort(
-        (a, b) => parseDate(b.message_date) - parseDate(a.message_date),
+        (a, b) => parseDate(a.message_date) - parseDate(b.message_date),
       );
 
       return [...data];
@@ -87,8 +87,6 @@ export default function MessagesPage() {
 
     const fetchConversationData = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         if (!token) {
           return;
         }
@@ -111,9 +109,18 @@ export default function MessagesPage() {
       }
     };
 
-    fetchConversationData();
+    if (conversation_id) {
+      fetchConversationData();
+    }
 
     setPreviousConversationId(conversation_id);
+
+    return () => {
+      if (conversation_id) {
+        leaveConversation(conversation_id);
+      }
+      messageSocket.off("newMessage");
+    };
   }, [conversation_id]);
 
   // Establish socket connection
@@ -123,52 +130,39 @@ export default function MessagesPage() {
     });
 
     return () => {
-      if (conversation_id) {
-        leaveConversation(conversation_id);
-      }
-      messageSocket.off("newMessage");
       messageSocket.disconnect();
     };
   }, []);
 
-  // Check if the child is overflowing
-  useEffect(() => {
-    if (!MessagesPageRef.current) return;
-
-    setIsMessagesPageOverflowing(
-      MessagesPageRef.current.scrollHeight >
-        MessagesPageRef.current.clientHeight,
-    );
-  }, [inputValue]);
-
   // Set intial scroll to bottom
   useEffect(() => {
-    if (!MessagesPageRef.current) return;
+    const timeout = setTimeout(() => {
+      if (!messagesPageRef.current) return;
+      messagesPageRef.current.scrollTop = messagesPageRef.current.scrollHeight;
+    }, 50);
 
-    MessagesPageRef.current.scrollTop = MessagesPageRef.current.scrollHeight;
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [conversation_id]);
 
   return (
     <div
-      className={`w-full h-full ${
-        isMessagesPageOverflowing ? "pr-3 pl-5" : "px-5"
-      }`}
+      ref={messagesPageRef}
+      className="flex flex-col pl-9 w-full h-full overflow-y-auto overflow-x-hidden"
+      style={{
+        scrollbarGutter: "stable",
+      }}
     >
-      <div
-        ref={MessagesPageRef}
-        className="flex flex-col w-full h-full overflow-y-auto"
-      >
-        <MessagesConversationBody
-          conversation={conversation}
-          conversationSize={conversationSize.current}
-        />
-        <MessagesTextField
-          inputValue={inputValue}
-          conversation_id={conversation_id}
-          setInputValue={setInputValue}
-          messageSocket={messageSocket}
-        />
-      </div>
+      <MessagesConversationBody
+        conversation={conversation}
+        conversationSize={conversationSize.current}
+      />
+      <MessagesTextField
+        inputValue={inputValue}
+        conversation_id={conversation_id}
+        setInputValue={setInputValue}
+        messageSocket={messageSocket}
+        messagesPageRef={messagesPageRef}
+      />
     </div>
   );
 }
