@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import config from "@config";
 import { Conversation } from "@FgTypes/rightTypes";
-import { ConversationsCard } from "./RightSpaceCards";
+import { ConversationCard } from "./RightSpaceCards";
 import { useLastMessageContext } from "@context/LastMessageContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -15,18 +15,27 @@ export default function Conversations() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
 
   const sortData = (data: Conversation[]) => {
+    const byLastMessage = data.filter(
+      (item) => item.last_message_date !== null,
+    );
+    const byCreationDate = data.filter(
+      (item) => item.last_message_date === null,
+    );
     const parseDate = (dateString: string | null) =>
       dateString
         ? new Date(dateString).getTime()
         : new Date("2000-01-01T01:01:01.000Z").getTime();
 
-    data.sort(
+    byLastMessage.sort(
+      (a, b) => parseDate(b.last_message_date) - parseDate(a.last_message_date),
+    );
+    byCreationDate.sort(
       (a, b) =>
         parseDate(b.conversation_creation_date) -
         parseDate(a.conversation_creation_date),
     );
 
-    return [...data];
+    return [...byLastMessage, ...byCreationDate];
   };
 
   useEffect(() => {
@@ -67,6 +76,19 @@ export default function Conversations() {
       return conversation;
     });
 
+    const indexToUpdate = updatedConversations.findIndex(
+      (conversation) =>
+        conversation.conversation_id === lastMessage.conversation_id,
+    );
+
+    if (indexToUpdate !== -1) {
+      const updatedConversation = updatedConversations.splice(
+        indexToUpdate,
+        1,
+      )[0];
+      updatedConversations.unshift(updatedConversation);
+    }
+
     setConversations(updatedConversations);
   }, [lastMessage]);
 
@@ -101,7 +123,7 @@ export default function Conversations() {
     }
 
     return (
-      <ConversationsCard
+      <ConversationCard
         key={conversation.conversation_id}
         conversation_id={conversation.conversation_id}
         conversation_name={conversation.conversation_name}

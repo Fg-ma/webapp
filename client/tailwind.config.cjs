@@ -61,6 +61,7 @@ module.exports = {
       },
       padding: {
         0.75: "0.1875rem",
+        30: "6.5rem",
       },
     },
   },

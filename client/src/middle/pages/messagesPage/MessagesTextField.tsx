@@ -15,6 +15,7 @@ export default function MessagesTextField({
   setInputValue,
   messageSocket,
   messagesPageRef,
+  textFieldSnap,
 }: MessagesTextFieldProps) {
   const placeholder = "Search...";
   const { setLastMessage } = useLastMessageContext();
@@ -37,6 +38,14 @@ export default function MessagesTextField({
       );
     };
   }, []);
+
+  // Reset on conversation change
+  useEffect(() => {
+    if (!contentEditableRef.current) return;
+
+    setInputValue("");
+    contentEditableRef.current.innerText = placeholder;
+  }, [conversation_id]);
 
   // Set placeholder if div is empty
   useEffect(() => {
@@ -107,10 +116,14 @@ export default function MessagesTextField({
   };
 
   return (
-    <div className="flex items-center justify-center h-max my-8">
+    <div
+      className={`flex items-center justify-center h-max my-8 shadow ${
+        !textFieldSnap && "absolute bottom-0 left-1/2 -translate-x-1/2 z-50"
+      }`}
+      style={{ width: textFieldSnap ? "87.5%" : "calc(87.5% - 4.5rem)" }}
+    >
       <form
-        className="h-max rounded-md flex items-end bg-white border border-fg-white-85"
-        style={{ width: "87.5%" }}
+        className="w-full h-max rounded-md flex items-end bg-white border border-fg-white-85"
         onSubmit={handleSubmit}
       >
         <div
@@ -126,7 +139,7 @@ export default function MessagesTextField({
           key="sumbitMessage"
           type="submit"
           value=""
-          className="w-8 h-8 bg-cover bg-no-repeat mr-2 mb-1 cursor-pointer"
+          className="w-8 h-8 bg-cover bg-no-repeat mr-2 mb-1 cursor-pointer fill-black"
           style={{
             backgroundImage: 'url("assets/icons/submit.svg")',
           }}

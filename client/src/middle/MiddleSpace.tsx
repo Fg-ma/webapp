@@ -46,7 +46,7 @@ export default function MiddleSpace({
     } else if (mainPageState === "images") {
       setMiddleSpaceContent(<ContentPage contentType="images" />);
     } else if (mainPageState === "messages") {
-      setMiddleSpaceContent(<MessagesPage />);
+      setMiddleSpaceContent(<MessagesPage middleSpaceRef={middleSpaceRef} />);
     }
   }, [mainPageState]);
 

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Axios from "axios";
 import io from "socket.io-client";
 import config from "@config";
-import { Message, ConverationId } from "@FgTypes/middleTypes";
+import { Message, ConverationId, MessagePageProps } from "@FgTypes/middleTypes";
 import MessagesTextField from "./MessagesTextField";
 import MessagesConversationBody from "./MessagesConversationBody";
 
@@ -12,18 +12,19 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function MessagesPage() {
+export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
   const messageSocket = io(serverUrl);
   const [inputValue, setInputValue] = useState("");
-  const conversationSize = useRef(3);
   const [conversation, setConversation] = useState<Message[]>([]);
+  const [textFieldSnap, setTextFieldSnap] = useState(true);
+  const [previousConversationId, setPreviousConversationId] = useState<
+    string | null
+  >(null);
+  const conversationSize = useRef(3);
   const messagesPageRef = useRef<HTMLDivElement>(null);
   const conversation_id = useSelector(
     (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
   );
-  const [previousConversationId, setPreviousConversationId] = useState<
-    string | null
-  >(null);
   const token = localStorage.getItem("token");
 
   const joinConversation = (conversation_id: string) => {
@@ -139,15 +140,42 @@ export default function MessagesPage() {
     const timeout = setTimeout(() => {
       if (!messagesPageRef.current) return;
       messagesPageRef.current.scrollTop = messagesPageRef.current.scrollHeight;
+      handleScroll();
     }, 50);
 
     return () => clearTimeout(timeout);
   }, [conversation_id]);
 
+  const handleScroll = () => {
+    if (!messagesPageRef.current || !middleSpaceRef.current) return;
+
+    if (
+      messagesPageRef.current.scrollTop >=
+      messagesPageRef.current.scrollHeight -
+        middleSpaceRef.current.clientHeight -
+        32
+    ) {
+      setTextFieldSnap(true);
+    } else {
+      setTextFieldSnap(false);
+    }
+  };
+
+  // Handles snapping the MessageTextField component
+  useEffect(() => {
+    messagesPageRef.current?.addEventListener("scroll", handleScroll);
+
+    return () => {
+      messagesPageRef.current?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div
       ref={messagesPageRef}
-      className="flex flex-col pl-9 w-full h-full overflow-y-auto overflow-x-hidden"
+      className={`flex flex-col pl-9 w-full h-full overflow-y-auto overflow-x-hidden items-center ${
+        !textFieldSnap && "pb-30"
+      }`}
       style={{
         scrollbarGutter: "stable",
       }}
@@ -162,6 +190,7 @@ export default function MessagesPage() {
         setInputValue={setInputValue}
         messageSocket={messageSocket}
         messagesPageRef={messagesPageRef}
+        textFieldSnap={textFieldSnap}
       />
     </div>
   );

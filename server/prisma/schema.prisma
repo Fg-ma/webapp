@@ -41,6 +41,23 @@ model collections_content {
   @@index([content_id], map: "collections_content_content_id_fk_idx")
 }
 
+model contacts {
+  contact_id                                    String    @id @unique(map: "contact_id_UNIQUE") @db.Char(36)
+  conversation_id                               String    @unique(map: "conversation_id_UNIQUE") @db.Char(36)
+  contact_id_root                               String    @db.Char(36)
+  contact_id_target                             String    @db.Char(36)
+  contact_creation_date                         DateTime  @db.Timestamp(0)
+  last_message                                  String?   @db.Text
+  last_contact_date                             DateTime? @db.Timestamp(0)
+  entities_contacts_contact_id_rootToentities   entities  @relation("contacts_contact_id_rootToentities", fields: [contact_id_root], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_root_fk")
+  entities_contacts_contact_id_targetToentities entities  @relation("contacts_contact_id_targetToentities", fields: [contact_id_target], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_target_fk")
+
+  @@unique([contact_id, conversation_id], map: "unique_contact_ids")
+  @@unique([contact_id_root, contact_id_target], map: "unique_contact_members")
+  @@index([contact_id_root], map: "contacts_contact_id_root_fk_idx")
+  @@index([contact_id_target])
+}
+
 model content {
   content_id          String                @id @unique(map: "media_id_UNIQUE") @db.Char(36)
   content_type        Int?
@@ -55,17 +72,18 @@ model conversations {
   conversation_name           String?                       @db.VarChar(256)
   conversation_creation_date  DateTime                      @db.Timestamp(0)
   last_message                String?                       @db.Text
+  last_message_date           DateTime?                     @db.Timestamp(0)
   conversations_members       conversations_members[]
   conversations_messages_logs conversations_messages_logs[]
 }
 
 model conversations_members {
-  conversation_id String        @db.Char(36)
-  member_id       String        @db.Char(36)
-  conversations   conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_conversation_id_fk")
-  entities        entities      @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_member_id_fk")
+  conversations_members_id String        @id @unique(map: "conversations_members_id_UNIQUE") @db.Char(36)
+  conversation_id          String        @db.Char(36)
+  member_id                String        @db.Char(36)
+  conversations            conversations @relation(fields: [conversation_id], references: [conversation_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_conversation_id_fk")
+  entities                 entities      @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_members_member_id_fk")
 
-  @@id([conversation_id, member_id])
   @@unique([conversation_id, member_id], map: "UNIQUE_ID_COMBO")
   @@index([member_id], map: "conversations_members_member_id_fk_idx")
 }
@@ -84,20 +102,22 @@ model conversations_messages_logs {
 }
 
 model entities {
-  entity_id                   String                        @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
-  entity_type                 Int                           @default(0)
-  collections                 collections[]
-  conversations_members       conversations_members[]
-  conversations_messages_logs conversations_messages_logs[]
-  entities_content            entities_content[]
-  entities_dislikes           entities_dislikes[]
-  entities_likes              entities_likes[]
-  entities_references         entities_references[]
-  groups_members              groups_members[]
-  images                      images[]
-  organizations_members       organizations_members[]
-  sheets                      sheets[]
-  videos                      videos[]
+  entity_id                                     String                        @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
+  entity_type                                   Int                           @default(0)
+  collections                                   collections[]
+  contacts_contacts_contact_id_rootToentities   contacts[]                    @relation("contacts_contact_id_rootToentities")
+  contacts_contacts_contact_id_targetToentities contacts[]                    @relation("contacts_contact_id_targetToentities")
+  conversations_members                         conversations_members[]
+  conversations_messages_logs                   conversations_messages_logs[]
+  entities_content                              entities_content[]
+  entities_dislikes                             entities_dislikes[]
+  entities_likes                                entities_likes[]
+  entities_references                           entities_references[]
+  groups_members                                groups_members[]
+  images                                        images[]
+  organizations_members                         organizations_members[]
+  sheets                                        sheets[]
+  videos                                        videos[]
 }
 
 model entities_content {

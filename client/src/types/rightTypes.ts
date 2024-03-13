@@ -88,6 +88,16 @@ export interface MainState {
   };
 }
 
+export interface MainSecondaryState {
+  page: {
+    main: {
+      pagePayload: {
+        secondaryPageState: string;
+      };
+    };
+  };
+}
+
 /* 
   DogEarCards.tsx
 */
@@ -128,11 +138,6 @@ export interface NewsCardProps {
   affResponses?: string | null;
 }
 
-export interface MessagesCardProps {
-  name: string;
-  lastMessage: string | null;
-}
-
 export interface DogEarCardProps {
   sheet_id: string;
   title: string;
@@ -140,12 +145,21 @@ export interface DogEarCardProps {
   affResponses?: string | null;
 }
 
-export interface ConversationsCardProps {
+export interface ConversationCardProps {
   conversation_id: string;
   conversation_name: string | null;
   last_message: string | null;
   members: string[];
   conversation_creation_date: string;
+}
+
+export interface ContactCardProps {
+  contact_id: string;
+  conversation_id: string;
+  conversation_name: string | null;
+  contact_name: string | null;
+  last_message: string | null;
+  contact_creation_date: string;
 }
 
 /* 
@@ -242,5 +256,22 @@ export interface Conversation {
   conversation_name: string | null;
   conversation_creation_date: string;
   last_message: string | null;
+  last_message_date: string | null;
   members: Members[];
+}
+
+/*
+  Contacts.tsx
+*/
+
+export interface Contact {
+  contact_id: string;
+  conversation_name: string | null;
+  conversation_id: string;
+  contact_name: string | null;
+  contact_id_root: string;
+  contact_id_target: string;
+  contact_creation_date: string;
+  last_message: string | null;
+  last_contact_date: string | null;
 }

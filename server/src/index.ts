@@ -5,6 +5,7 @@ import express, { json } from "express";
 const app = express();
 import cors from "cors";
 import { createServer } from "http";
+import prismaMiddleware from "./prismaMiddleware";
 import messageSocket from "./messageSocket";
 import individualsRouter from "./routes/individuals";
 import groupsRouter from "./routes/groups";
@@ -18,7 +19,7 @@ import referencesRouter from "./routes/references";
 import authRouter from "./routes/auth";
 import affiliateRelations from "./routes/affiliateRelations";
 import conversationsRouter from "./routes/conversations";
-import prismaMiddleware from "./prismaMiddleware";
+import contactsRouter from "./routes/contacts";
 
 app.use(cors());
 app.use(json());
@@ -39,6 +40,7 @@ app.use("/references", referencesRouter);
 app.use("/auth", authRouter);
 app.use("/affiliateRelations", affiliateRelations);
 app.use("/conversations", conversationsRouter);
+app.use("/contacts", contactsRouter);
 
 server.listen(process.env.SERVER_PORT, () => {
   console.log(`SERVER Server running on port ${process.env.SERVER_PORT}`);

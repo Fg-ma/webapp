@@ -29,6 +29,11 @@ export type collections = $Result.DefaultSelection<Prisma.$collectionsPayload>
  */
 export type collections_content = $Result.DefaultSelection<Prisma.$collections_contentPayload>
 /**
+ * Model contacts
+ * 
+ */
+export type contacts = $Result.DefaultSelection<Prisma.$contactsPayload>
+/**
  * Model content
  * 
  */
@@ -300,6 +305,16 @@ export class PrismaClient<
     * ```
     */
   get collections_content(): Prisma.collections_contentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.contacts`: Exposes CRUD operations for the **contacts** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contacts
+    * const contacts = await prisma.contacts.findMany()
+    * ```
+    */
+  get contacts(): Prisma.contactsDelegate<ExtArgs>;
 
   /**
    * `prisma.content`: Exposes CRUD operations for the **content** model.
@@ -1013,6 +1028,7 @@ export namespace Prisma {
     affiliates_relations: 'affiliates_relations',
     collections: 'collections',
     collections_content: 'collections_content',
+    contacts: 'contacts',
     content: 'content',
     conversations: 'conversations',
     conversations_members: 'conversations_members',
@@ -1053,7 +1069,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1252,6 +1268,72 @@ export namespace Prisma {
           count: {
             args: Prisma.collections_contentCountArgs<ExtArgs>,
             result: $Utils.Optional<Collections_contentCountAggregateOutputType> | number
+          }
+        }
+      }
+      contacts: {
+        payload: Prisma.$contactsPayload<ExtArgs>
+        fields: Prisma.contactsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.contactsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.contactsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          findFirst: {
+            args: Prisma.contactsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.contactsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          findMany: {
+            args: Prisma.contactsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>[]
+          }
+          create: {
+            args: Prisma.contactsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          createMany: {
+            args: Prisma.contactsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.contactsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          update: {
+            args: Prisma.contactsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          deleteMany: {
+            args: Prisma.contactsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.contactsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.contactsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contactsPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateContacts>
+          }
+          groupBy: {
+            args: Prisma.contactsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ContactsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.contactsCountArgs<ExtArgs>,
+            result: $Utils.Optional<ContactsCountAggregateOutputType> | number
           }
         }
       }
@@ -3141,6 +3223,8 @@ export namespace Prisma {
 
   export type EntitiesCountOutputType = {
     collections: number
+    contacts_contacts_contact_id_rootToentities: number
+    contacts_contacts_contact_id_targetToentities: number
     conversations_members: number
     conversations_messages_logs: number
     entities_content: number
@@ -3156,6 +3240,8 @@ export namespace Prisma {
 
   export type EntitiesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | EntitiesCountOutputTypeCountCollectionsArgs
+    contacts_contacts_contact_id_rootToentities?: boolean | EntitiesCountOutputTypeCountContacts_contacts_contact_id_rootToentitiesArgs
+    contacts_contacts_contact_id_targetToentities?: boolean | EntitiesCountOutputTypeCountContacts_contacts_contact_id_targetToentitiesArgs
     conversations_members?: boolean | EntitiesCountOutputTypeCountConversations_membersArgs
     conversations_messages_logs?: boolean | EntitiesCountOutputTypeCountConversations_messages_logsArgs
     entities_content?: boolean | EntitiesCountOutputTypeCountEntities_contentArgs
@@ -3187,6 +3273,22 @@ export namespace Prisma {
    */
   export type EntitiesCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: collectionsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountContacts_contacts_contact_id_rootToentitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contactsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountContacts_contacts_contact_id_targetToentitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contactsWhereInput
   }
 
 
@@ -6293,6 +6395,951 @@ export namespace Prisma {
 
 
   /**
+   * Model contacts
+   */
+
+  export type AggregateContacts = {
+    _count: ContactsCountAggregateOutputType | null
+    _min: ContactsMinAggregateOutputType | null
+    _max: ContactsMaxAggregateOutputType | null
+  }
+
+  export type ContactsMinAggregateOutputType = {
+    contact_id: string | null
+    conversation_id: string | null
+    contact_id_root: string | null
+    contact_id_target: string | null
+    contact_creation_date: Date | null
+    last_message: string | null
+    last_contact_date: Date | null
+  }
+
+  export type ContactsMaxAggregateOutputType = {
+    contact_id: string | null
+    conversation_id: string | null
+    contact_id_root: string | null
+    contact_id_target: string | null
+    contact_creation_date: Date | null
+    last_message: string | null
+    last_contact_date: Date | null
+  }
+
+  export type ContactsCountAggregateOutputType = {
+    contact_id: number
+    conversation_id: number
+    contact_id_root: number
+    contact_id_target: number
+    contact_creation_date: number
+    last_message: number
+    last_contact_date: number
+    _all: number
+  }
+
+
+  export type ContactsMinAggregateInputType = {
+    contact_id?: true
+    conversation_id?: true
+    contact_id_root?: true
+    contact_id_target?: true
+    contact_creation_date?: true
+    last_message?: true
+    last_contact_date?: true
+  }
+
+  export type ContactsMaxAggregateInputType = {
+    contact_id?: true
+    conversation_id?: true
+    contact_id_root?: true
+    contact_id_target?: true
+    contact_creation_date?: true
+    last_message?: true
+    last_contact_date?: true
+  }
+
+  export type ContactsCountAggregateInputType = {
+    contact_id?: true
+    conversation_id?: true
+    contact_id_root?: true
+    contact_id_target?: true
+    contact_creation_date?: true
+    last_message?: true
+    last_contact_date?: true
+    _all?: true
+  }
+
+  export type ContactsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contacts to aggregate.
+     */
+    where?: contactsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts to fetch.
+     */
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: contactsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned contacts
+    **/
+    _count?: true | ContactsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactsMaxAggregateInputType
+  }
+
+  export type GetContactsAggregateType<T extends ContactsAggregateArgs> = {
+        [P in keyof T & keyof AggregateContacts]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContacts[P]>
+      : GetScalarType<T[P], AggregateContacts[P]>
+  }
+
+
+
+
+  export type contactsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contactsWhereInput
+    orderBy?: contactsOrderByWithAggregationInput | contactsOrderByWithAggregationInput[]
+    by: ContactsScalarFieldEnum[] | ContactsScalarFieldEnum
+    having?: contactsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactsCountAggregateInputType | true
+    _min?: ContactsMinAggregateInputType
+    _max?: ContactsMaxAggregateInputType
+  }
+
+  export type ContactsGroupByOutputType = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_id_target: string
+    contact_creation_date: Date
+    last_message: string | null
+    last_contact_date: Date | null
+    _count: ContactsCountAggregateOutputType | null
+    _min: ContactsMinAggregateOutputType | null
+    _max: ContactsMaxAggregateOutputType | null
+  }
+
+  type GetContactsGroupByPayload<T extends contactsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactsGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type contactsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    contact_id?: boolean
+    conversation_id?: boolean
+    contact_id_root?: boolean
+    contact_id_target?: boolean
+    contact_creation_date?: boolean
+    last_message?: boolean
+    last_contact_date?: boolean
+    entities_contacts_contact_id_rootToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+    entities_contacts_contact_id_targetToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contacts"]>
+
+  export type contactsSelectScalar = {
+    contact_id?: boolean
+    conversation_id?: boolean
+    contact_id_root?: boolean
+    contact_id_target?: boolean
+    contact_creation_date?: boolean
+    last_message?: boolean
+    last_contact_date?: boolean
+  }
+
+  export type contactsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entities_contacts_contact_id_rootToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+    entities_contacts_contact_id_targetToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+  }
+
+
+  export type $contactsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "contacts"
+    objects: {
+      entities_contacts_contact_id_rootToentities: Prisma.$entitiesPayload<ExtArgs>
+      entities_contacts_contact_id_targetToentities: Prisma.$entitiesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      contact_id: string
+      conversation_id: string
+      contact_id_root: string
+      contact_id_target: string
+      contact_creation_date: Date
+      last_message: string | null
+      last_contact_date: Date | null
+    }, ExtArgs["result"]["contacts"]>
+    composites: {}
+  }
+
+
+  type contactsGetPayload<S extends boolean | null | undefined | contactsDefaultArgs> = $Result.GetResult<Prisma.$contactsPayload, S>
+
+  type contactsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<contactsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ContactsCountAggregateInputType | true
+    }
+
+  export interface contactsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['contacts'], meta: { name: 'contacts' } }
+    /**
+     * Find zero or one Contacts that matches the filter.
+     * @param {contactsFindUniqueArgs} args - Arguments to find a Contacts
+     * @example
+     * // Get one Contacts
+     * const contacts = await prisma.contacts.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends contactsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsFindUniqueArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Contacts that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {contactsFindUniqueOrThrowArgs} args - Arguments to find a Contacts
+     * @example
+     * // Get one Contacts
+     * const contacts = await prisma.contacts.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends contactsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Contacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsFindFirstArgs} args - Arguments to find a Contacts
+     * @example
+     * // Get one Contacts
+     * const contacts = await prisma.contacts.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends contactsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsFindFirstArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Contacts that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsFindFirstOrThrowArgs} args - Arguments to find a Contacts
+     * @example
+     * // Get one Contacts
+     * const contacts = await prisma.contacts.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends contactsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Contacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contacts
+     * const contacts = await prisma.contacts.findMany()
+     * 
+     * // Get first 10 Contacts
+     * const contacts = await prisma.contacts.findMany({ take: 10 })
+     * 
+     * // Only select the `contact_id`
+     * const contactsWithContact_idOnly = await prisma.contacts.findMany({ select: { contact_id: true } })
+     * 
+    **/
+    findMany<T extends contactsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Contacts.
+     * @param {contactsCreateArgs} args - Arguments to create a Contacts.
+     * @example
+     * // Create one Contacts
+     * const Contacts = await prisma.contacts.create({
+     *   data: {
+     *     // ... data to create a Contacts
+     *   }
+     * })
+     * 
+    **/
+    create<T extends contactsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsCreateArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Contacts.
+     *     @param {contactsCreateManyArgs} args - Arguments to create many Contacts.
+     *     @example
+     *     // Create many Contacts
+     *     const contacts = await prisma.contacts.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends contactsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Contacts.
+     * @param {contactsDeleteArgs} args - Arguments to delete one Contacts.
+     * @example
+     * // Delete one Contacts
+     * const Contacts = await prisma.contacts.delete({
+     *   where: {
+     *     // ... filter to delete one Contacts
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends contactsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsDeleteArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Contacts.
+     * @param {contactsUpdateArgs} args - Arguments to update one Contacts.
+     * @example
+     * // Update one Contacts
+     * const contacts = await prisma.contacts.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends contactsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsUpdateArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Contacts.
+     * @param {contactsDeleteManyArgs} args - Arguments to filter Contacts to delete.
+     * @example
+     * // Delete a few Contacts
+     * const { count } = await prisma.contacts.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends contactsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contactsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contacts
+     * const contacts = await prisma.contacts.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends contactsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Contacts.
+     * @param {contactsUpsertArgs} args - Arguments to update or create a Contacts.
+     * @example
+     * // Update or create a Contacts
+     * const contacts = await prisma.contacts.upsert({
+     *   create: {
+     *     // ... data to create a Contacts
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contacts we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends contactsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, contactsUpsertArgs<ExtArgs>>
+    ): Prisma__contactsClient<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsCountArgs} args - Arguments to filter Contacts to count.
+     * @example
+     * // Count the number of Contacts
+     * const count = await prisma.contacts.count({
+     *   where: {
+     *     // ... the filter for the Contacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends contactsCountArgs>(
+      args?: Subset<T, contactsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactsAggregateArgs>(args: Subset<T, ContactsAggregateArgs>): Prisma.PrismaPromise<GetContactsAggregateType<T>>
+
+    /**
+     * Group by Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contactsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends contactsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: contactsGroupByArgs['orderBy'] }
+        : { orderBy?: contactsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, contactsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the contacts model
+   */
+  readonly fields: contactsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for contacts.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__contactsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    entities_contacts_contact_id_rootToentities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    entities_contacts_contact_id_targetToentities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the contacts model
+   */ 
+  interface contactsFieldRefs {
+    readonly contact_id: FieldRef<"contacts", 'String'>
+    readonly conversation_id: FieldRef<"contacts", 'String'>
+    readonly contact_id_root: FieldRef<"contacts", 'String'>
+    readonly contact_id_target: FieldRef<"contacts", 'String'>
+    readonly contact_creation_date: FieldRef<"contacts", 'DateTime'>
+    readonly last_message: FieldRef<"contacts", 'String'>
+    readonly last_contact_date: FieldRef<"contacts", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * contacts findUnique
+   */
+  export type contactsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts to fetch.
+     */
+    where: contactsWhereUniqueInput
+  }
+
+
+  /**
+   * contacts findUniqueOrThrow
+   */
+  export type contactsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts to fetch.
+     */
+    where: contactsWhereUniqueInput
+  }
+
+
+  /**
+   * contacts findFirst
+   */
+  export type contactsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts to fetch.
+     */
+    where?: contactsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts to fetch.
+     */
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contacts.
+     */
+    cursor?: contactsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contacts.
+     */
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts findFirstOrThrow
+   */
+  export type contactsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts to fetch.
+     */
+    where?: contactsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts to fetch.
+     */
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contacts.
+     */
+    cursor?: contactsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contacts.
+     */
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts findMany
+   */
+  export type contactsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts to fetch.
+     */
+    where?: contactsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts to fetch.
+     */
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing contacts.
+     */
+    cursor?: contactsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts.
+     */
+    skip?: number
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts create
+   */
+  export type contactsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a contacts.
+     */
+    data: XOR<contactsCreateInput, contactsUncheckedCreateInput>
+  }
+
+
+  /**
+   * contacts createMany
+   */
+  export type contactsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many contacts.
+     */
+    data: contactsCreateManyInput | contactsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * contacts update
+   */
+  export type contactsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a contacts.
+     */
+    data: XOR<contactsUpdateInput, contactsUncheckedUpdateInput>
+    /**
+     * Choose, which contacts to update.
+     */
+    where: contactsWhereUniqueInput
+  }
+
+
+  /**
+   * contacts updateMany
+   */
+  export type contactsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update contacts.
+     */
+    data: XOR<contactsUpdateManyMutationInput, contactsUncheckedUpdateManyInput>
+    /**
+     * Filter which contacts to update
+     */
+    where?: contactsWhereInput
+  }
+
+
+  /**
+   * contacts upsert
+   */
+  export type contactsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the contacts to update in case it exists.
+     */
+    where: contactsWhereUniqueInput
+    /**
+     * In case the contacts found by the `where` argument doesn't exist, create a new contacts with this data.
+     */
+    create: XOR<contactsCreateInput, contactsUncheckedCreateInput>
+    /**
+     * In case the contacts was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<contactsUpdateInput, contactsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * contacts delete
+   */
+  export type contactsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    /**
+     * Filter which contacts to delete.
+     */
+    where: contactsWhereUniqueInput
+  }
+
+
+  /**
+   * contacts deleteMany
+   */
+  export type contactsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contacts to delete
+     */
+    where?: contactsWhereInput
+  }
+
+
+  /**
+   * contacts without action
+   */
+  export type contactsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model content
    */
 
@@ -7327,6 +8374,7 @@ export namespace Prisma {
     conversation_name: string | null
     conversation_creation_date: Date | null
     last_message: string | null
+    last_message_date: Date | null
   }
 
   export type ConversationsMaxAggregateOutputType = {
@@ -7334,6 +8382,7 @@ export namespace Prisma {
     conversation_name: string | null
     conversation_creation_date: Date | null
     last_message: string | null
+    last_message_date: Date | null
   }
 
   export type ConversationsCountAggregateOutputType = {
@@ -7341,6 +8390,7 @@ export namespace Prisma {
     conversation_name: number
     conversation_creation_date: number
     last_message: number
+    last_message_date: number
     _all: number
   }
 
@@ -7350,6 +8400,7 @@ export namespace Prisma {
     conversation_name?: true
     conversation_creation_date?: true
     last_message?: true
+    last_message_date?: true
   }
 
   export type ConversationsMaxAggregateInputType = {
@@ -7357,6 +8408,7 @@ export namespace Prisma {
     conversation_name?: true
     conversation_creation_date?: true
     last_message?: true
+    last_message_date?: true
   }
 
   export type ConversationsCountAggregateInputType = {
@@ -7364,6 +8416,7 @@ export namespace Prisma {
     conversation_name?: true
     conversation_creation_date?: true
     last_message?: true
+    last_message_date?: true
     _all?: true
   }
 
@@ -7444,6 +8497,7 @@ export namespace Prisma {
     conversation_name: string | null
     conversation_creation_date: Date
     last_message: string | null
+    last_message_date: Date | null
     _count: ConversationsCountAggregateOutputType | null
     _min: ConversationsMinAggregateOutputType | null
     _max: ConversationsMaxAggregateOutputType | null
@@ -7468,6 +8522,7 @@ export namespace Prisma {
     conversation_name?: boolean
     conversation_creation_date?: boolean
     last_message?: boolean
+    last_message_date?: boolean
     conversations_members?: boolean | conversations$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | conversations$conversations_messages_logsArgs<ExtArgs>
     _count?: boolean | ConversationsCountOutputTypeDefaultArgs<ExtArgs>
@@ -7478,6 +8533,7 @@ export namespace Prisma {
     conversation_name?: boolean
     conversation_creation_date?: boolean
     last_message?: boolean
+    last_message_date?: boolean
   }
 
   export type conversationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7498,6 +8554,7 @@ export namespace Prisma {
       conversation_name: string | null
       conversation_creation_date: Date
       last_message: string | null
+      last_message_date: Date | null
     }, ExtArgs["result"]["conversations"]>
     composites: {}
   }
@@ -7899,6 +8956,7 @@ export namespace Prisma {
     readonly conversation_name: FieldRef<"conversations", 'String'>
     readonly conversation_creation_date: FieldRef<"conversations", 'DateTime'>
     readonly last_message: FieldRef<"conversations", 'String'>
+    readonly last_message_date: FieldRef<"conversations", 'DateTime'>
   }
     
 
@@ -8279,16 +9337,19 @@ export namespace Prisma {
   }
 
   export type Conversations_membersMinAggregateOutputType = {
+    conversations_members_id: string | null
     conversation_id: string | null
     member_id: string | null
   }
 
   export type Conversations_membersMaxAggregateOutputType = {
+    conversations_members_id: string | null
     conversation_id: string | null
     member_id: string | null
   }
 
   export type Conversations_membersCountAggregateOutputType = {
+    conversations_members_id: number
     conversation_id: number
     member_id: number
     _all: number
@@ -8296,16 +9357,19 @@ export namespace Prisma {
 
 
   export type Conversations_membersMinAggregateInputType = {
+    conversations_members_id?: true
     conversation_id?: true
     member_id?: true
   }
 
   export type Conversations_membersMaxAggregateInputType = {
+    conversations_members_id?: true
     conversation_id?: true
     member_id?: true
   }
 
   export type Conversations_membersCountAggregateInputType = {
+    conversations_members_id?: true
     conversation_id?: true
     member_id?: true
     _all?: true
@@ -8384,6 +9448,7 @@ export namespace Prisma {
   }
 
   export type Conversations_membersGroupByOutputType = {
+    conversations_members_id: string
     conversation_id: string
     member_id: string
     _count: Conversations_membersCountAggregateOutputType | null
@@ -8406,6 +9471,7 @@ export namespace Prisma {
 
 
   export type conversations_membersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    conversations_members_id?: boolean
     conversation_id?: boolean
     member_id?: boolean
     conversations?: boolean | conversationsDefaultArgs<ExtArgs>
@@ -8413,6 +9479,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["conversations_members"]>
 
   export type conversations_membersSelectScalar = {
+    conversations_members_id?: boolean
     conversation_id?: boolean
     member_id?: boolean
   }
@@ -8430,6 +9497,7 @@ export namespace Prisma {
       entities: Prisma.$entitiesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      conversations_members_id: string
       conversation_id: string
       member_id: string
     }, ExtArgs["result"]["conversations_members"]>
@@ -8524,8 +9592,8 @@ export namespace Prisma {
      * // Get first 10 Conversations_members
      * const conversations_members = await prisma.conversations_members.findMany({ take: 10 })
      * 
-     * // Only select the `conversation_id`
-     * const conversations_membersWithConversation_idOnly = await prisma.conversations_members.findMany({ select: { conversation_id: true } })
+     * // Only select the `conversations_members_id`
+     * const conversations_membersWithConversations_members_idOnly = await prisma.conversations_members.findMany({ select: { conversations_members_id: true } })
      * 
     **/
     findMany<T extends conversations_membersFindManyArgs<ExtArgs>>(
@@ -8829,6 +9897,7 @@ export namespace Prisma {
    * Fields of the conversations_members model
    */ 
   interface conversations_membersFieldRefs {
+    readonly conversations_members_id: FieldRef<"conversations_members", 'String'>
     readonly conversation_id: FieldRef<"conversations_members", 'String'>
     readonly member_id: FieldRef<"conversations_members", 'String'>
   }
@@ -10256,6 +11325,8 @@ export namespace Prisma {
     entity_id?: boolean
     entity_type?: boolean
     collections?: boolean | entities$collectionsArgs<ExtArgs>
+    contacts_contacts_contact_id_rootToentities?: boolean | entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs>
+    contacts_contacts_contact_id_targetToentities?: boolean | entities$contacts_contacts_contact_id_targetToentitiesArgs<ExtArgs>
     conversations_members?: boolean | entities$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | entities$conversations_messages_logsArgs<ExtArgs>
     entities_content?: boolean | entities$entities_contentArgs<ExtArgs>
@@ -10277,6 +11348,8 @@ export namespace Prisma {
 
   export type entitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collections?: boolean | entities$collectionsArgs<ExtArgs>
+    contacts_contacts_contact_id_rootToentities?: boolean | entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs>
+    contacts_contacts_contact_id_targetToentities?: boolean | entities$contacts_contacts_contact_id_targetToentitiesArgs<ExtArgs>
     conversations_members?: boolean | entities$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | entities$conversations_messages_logsArgs<ExtArgs>
     entities_content?: boolean | entities$entities_contentArgs<ExtArgs>
@@ -10296,6 +11369,8 @@ export namespace Prisma {
     name: "entities"
     objects: {
       collections: Prisma.$collectionsPayload<ExtArgs>[]
+      contacts_contacts_contact_id_rootToentities: Prisma.$contactsPayload<ExtArgs>[]
+      contacts_contacts_contact_id_targetToentities: Prisma.$contactsPayload<ExtArgs>[]
       conversations_members: Prisma.$conversations_membersPayload<ExtArgs>[]
       conversations_messages_logs: Prisma.$conversations_messages_logsPayload<ExtArgs>[]
       entities_content: Prisma.$entities_contentPayload<ExtArgs>[]
@@ -10678,6 +11753,10 @@ export namespace Prisma {
 
     collections<T extends entities$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, entities$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$collectionsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    contacts_contacts_contact_id_rootToentities<T extends entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs> = {}>(args?: Subset<T, entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    contacts_contacts_contact_id_targetToentities<T extends entities$contacts_contacts_contact_id_targetToentitiesArgs<ExtArgs> = {}>(args?: Subset<T, entities$contacts_contacts_contact_id_targetToentitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     conversations_members<T extends entities$conversations_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$conversations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     conversations_messages_logs<T extends entities$conversations_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, entities$conversations_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
@@ -11059,6 +12138,48 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CollectionsScalarFieldEnum | CollectionsScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.contacts_contacts_contact_id_rootToentities
+   */
+  export type entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    where?: contactsWhereInput
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    cursor?: contactsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.contacts_contacts_contact_id_targetToentities
+   */
+  export type entities$contacts_contacts_contact_id_targetToentitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    where?: contactsWhereInput
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    cursor?: contactsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
   }
 
 
@@ -29352,6 +30473,19 @@ export namespace Prisma {
   export type Collections_contentScalarFieldEnum = (typeof Collections_contentScalarFieldEnum)[keyof typeof Collections_contentScalarFieldEnum]
 
 
+  export const ContactsScalarFieldEnum: {
+    contact_id: 'contact_id',
+    conversation_id: 'conversation_id',
+    contact_id_root: 'contact_id_root',
+    contact_id_target: 'contact_id_target',
+    contact_creation_date: 'contact_creation_date',
+    last_message: 'last_message',
+    last_contact_date: 'last_contact_date'
+  };
+
+  export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typeof ContactsScalarFieldEnum]
+
+
   export const ContentScalarFieldEnum: {
     content_id: 'content_id',
     content_type: 'content_type'
@@ -29364,13 +30498,15 @@ export namespace Prisma {
     conversation_id: 'conversation_id',
     conversation_name: 'conversation_name',
     conversation_creation_date: 'conversation_creation_date',
-    last_message: 'last_message'
+    last_message: 'last_message',
+    last_message_date: 'last_message_date'
   };
 
   export type ConversationsScalarFieldEnum = (typeof ConversationsScalarFieldEnum)[keyof typeof ConversationsScalarFieldEnum]
 
 
   export const Conversations_membersScalarFieldEnum: {
+    conversations_members_id: 'conversations_members_id',
     conversation_id: 'conversation_id',
     member_id: 'member_id'
   };
@@ -29834,6 +30970,76 @@ export namespace Prisma {
     date_pinned?: DateTimeNullableWithAggregatesFilter<"collections_content"> | Date | string | null
   }
 
+  export type contactsWhereInput = {
+    AND?: contactsWhereInput | contactsWhereInput[]
+    OR?: contactsWhereInput[]
+    NOT?: contactsWhereInput | contactsWhereInput[]
+    contact_id?: StringFilter<"contacts"> | string
+    conversation_id?: StringFilter<"contacts"> | string
+    contact_id_root?: StringFilter<"contacts"> | string
+    contact_id_target?: StringFilter<"contacts"> | string
+    contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
+    last_message?: StringNullableFilter<"contacts"> | string | null
+    last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+    entities_contacts_contact_id_rootToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    entities_contacts_contact_id_targetToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+  }
+
+  export type contactsOrderByWithRelationInput = {
+    contact_id?: SortOrder
+    conversation_id?: SortOrder
+    contact_id_root?: SortOrder
+    contact_id_target?: SortOrder
+    contact_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
+    last_contact_date?: SortOrderInput | SortOrder
+    entities_contacts_contact_id_rootToentities?: entitiesOrderByWithRelationInput
+    entities_contacts_contact_id_targetToentities?: entitiesOrderByWithRelationInput
+  }
+
+  export type contactsWhereUniqueInput = Prisma.AtLeast<{
+    contact_id?: string
+    conversation_id?: string
+    contact_id_conversation_id?: contactsContact_idConversation_idCompoundUniqueInput
+    contact_id_root_contact_id_target?: contactsContact_id_rootContact_id_targetCompoundUniqueInput
+    AND?: contactsWhereInput | contactsWhereInput[]
+    OR?: contactsWhereInput[]
+    NOT?: contactsWhereInput | contactsWhereInput[]
+    contact_id_root?: StringFilter<"contacts"> | string
+    contact_id_target?: StringFilter<"contacts"> | string
+    contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
+    last_message?: StringNullableFilter<"contacts"> | string | null
+    last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+    entities_contacts_contact_id_rootToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    entities_contacts_contact_id_targetToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+  }, "contact_id" | "contact_id" | "conversation_id" | "contact_id_conversation_id" | "contact_id_root_contact_id_target">
+
+  export type contactsOrderByWithAggregationInput = {
+    contact_id?: SortOrder
+    conversation_id?: SortOrder
+    contact_id_root?: SortOrder
+    contact_id_target?: SortOrder
+    contact_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
+    last_contact_date?: SortOrderInput | SortOrder
+    _count?: contactsCountOrderByAggregateInput
+    _max?: contactsMaxOrderByAggregateInput
+    _min?: contactsMinOrderByAggregateInput
+  }
+
+  export type contactsScalarWhereWithAggregatesInput = {
+    AND?: contactsScalarWhereWithAggregatesInput | contactsScalarWhereWithAggregatesInput[]
+    OR?: contactsScalarWhereWithAggregatesInput[]
+    NOT?: contactsScalarWhereWithAggregatesInput | contactsScalarWhereWithAggregatesInput[]
+    contact_id?: StringWithAggregatesFilter<"contacts"> | string
+    conversation_id?: StringWithAggregatesFilter<"contacts"> | string
+    contact_id_root?: StringWithAggregatesFilter<"contacts"> | string
+    contact_id_target?: StringWithAggregatesFilter<"contacts"> | string
+    contact_creation_date?: DateTimeWithAggregatesFilter<"contacts"> | Date | string
+    last_message?: StringNullableWithAggregatesFilter<"contacts"> | string | null
+    last_contact_date?: DateTimeNullableWithAggregatesFilter<"contacts"> | Date | string | null
+  }
+
   export type contentWhereInput = {
     AND?: contentWhereInput | contentWhereInput[]
     OR?: contentWhereInput[]
@@ -29893,6 +31099,7 @@ export namespace Prisma {
     conversation_name?: StringNullableFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
     last_message?: StringNullableFilter<"conversations"> | string | null
+    last_message_date?: DateTimeNullableFilter<"conversations"> | Date | string | null
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }
@@ -29902,6 +31109,7 @@ export namespace Prisma {
     conversation_name?: SortOrderInput | SortOrder
     conversation_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
+    last_message_date?: SortOrderInput | SortOrder
     conversations_members?: conversations_membersOrderByRelationAggregateInput
     conversations_messages_logs?: conversations_messages_logsOrderByRelationAggregateInput
   }
@@ -29914,6 +31122,7 @@ export namespace Prisma {
     conversation_name?: StringNullableFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
     last_message?: StringNullableFilter<"conversations"> | string | null
+    last_message_date?: DateTimeNullableFilter<"conversations"> | Date | string | null
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }, "conversation_id" | "conversation_id">
@@ -29923,6 +31132,7 @@ export namespace Prisma {
     conversation_name?: SortOrderInput | SortOrder
     conversation_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
+    last_message_date?: SortOrderInput | SortOrder
     _count?: conversationsCountOrderByAggregateInput
     _max?: conversationsMaxOrderByAggregateInput
     _min?: conversationsMinOrderByAggregateInput
@@ -29936,12 +31146,14 @@ export namespace Prisma {
     conversation_name?: StringNullableWithAggregatesFilter<"conversations"> | string | null
     conversation_creation_date?: DateTimeWithAggregatesFilter<"conversations"> | Date | string
     last_message?: StringNullableWithAggregatesFilter<"conversations"> | string | null
+    last_message_date?: DateTimeNullableWithAggregatesFilter<"conversations"> | Date | string | null
   }
 
   export type conversations_membersWhereInput = {
     AND?: conversations_membersWhereInput | conversations_membersWhereInput[]
     OR?: conversations_membersWhereInput[]
     NOT?: conversations_membersWhereInput | conversations_membersWhereInput[]
+    conversations_members_id?: StringFilter<"conversations_members"> | string
     conversation_id?: StringFilter<"conversations_members"> | string
     member_id?: StringFilter<"conversations_members"> | string
     conversations?: XOR<ConversationsRelationFilter, conversationsWhereInput>
@@ -29949,6 +31161,7 @@ export namespace Prisma {
   }
 
   export type conversations_membersOrderByWithRelationInput = {
+    conversations_members_id?: SortOrder
     conversation_id?: SortOrder
     member_id?: SortOrder
     conversations?: conversationsOrderByWithRelationInput
@@ -29956,6 +31169,7 @@ export namespace Prisma {
   }
 
   export type conversations_membersWhereUniqueInput = Prisma.AtLeast<{
+    conversations_members_id?: string
     conversation_id_member_id?: conversations_membersConversation_idMember_idCompoundUniqueInput
     AND?: conversations_membersWhereInput | conversations_membersWhereInput[]
     OR?: conversations_membersWhereInput[]
@@ -29964,9 +31178,10 @@ export namespace Prisma {
     member_id?: StringFilter<"conversations_members"> | string
     conversations?: XOR<ConversationsRelationFilter, conversationsWhereInput>
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
-  }, "conversation_id_member_id" | "conversation_id_member_id">
+  }, "conversations_members_id" | "conversations_members_id" | "conversation_id_member_id">
 
   export type conversations_membersOrderByWithAggregationInput = {
+    conversations_members_id?: SortOrder
     conversation_id?: SortOrder
     member_id?: SortOrder
     _count?: conversations_membersCountOrderByAggregateInput
@@ -29978,6 +31193,7 @@ export namespace Prisma {
     AND?: conversations_membersScalarWhereWithAggregatesInput | conversations_membersScalarWhereWithAggregatesInput[]
     OR?: conversations_membersScalarWhereWithAggregatesInput[]
     NOT?: conversations_membersScalarWhereWithAggregatesInput | conversations_membersScalarWhereWithAggregatesInput[]
+    conversations_members_id?: StringWithAggregatesFilter<"conversations_members"> | string
     conversation_id?: StringWithAggregatesFilter<"conversations_members"> | string
     member_id?: StringWithAggregatesFilter<"conversations_members"> | string
   }
@@ -30047,6 +31263,8 @@ export namespace Prisma {
     entity_id?: StringFilter<"entities"> | string
     entity_type?: IntFilter<"entities"> | number
     collections?: CollectionsListRelationFilter
+    contacts_contacts_contact_id_rootToentities?: ContactsListRelationFilter
+    contacts_contacts_contact_id_targetToentities?: ContactsListRelationFilter
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
     entities_content?: Entities_contentListRelationFilter
@@ -30064,6 +31282,8 @@ export namespace Prisma {
     entity_id?: SortOrder
     entity_type?: SortOrder
     collections?: collectionsOrderByRelationAggregateInput
+    contacts_contacts_contact_id_rootToentities?: contactsOrderByRelationAggregateInput
+    contacts_contacts_contact_id_targetToentities?: contactsOrderByRelationAggregateInput
     conversations_members?: conversations_membersOrderByRelationAggregateInput
     conversations_messages_logs?: conversations_messages_logsOrderByRelationAggregateInput
     entities_content?: entities_contentOrderByRelationAggregateInput
@@ -30084,6 +31304,8 @@ export namespace Prisma {
     NOT?: entitiesWhereInput | entitiesWhereInput[]
     entity_type?: IntFilter<"entities"> | number
     collections?: CollectionsListRelationFilter
+    contacts_contacts_contact_id_rootToentities?: ContactsListRelationFilter
+    contacts_contacts_contact_id_targetToentities?: ContactsListRelationFilter
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
     entities_content?: Entities_contentListRelationFilter
@@ -31384,6 +32606,74 @@ export namespace Prisma {
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type contactsCreateInput = {
+    contact_id: string
+    conversation_id: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+    entities_contacts_contact_id_rootToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput
+    entities_contacts_contact_id_targetToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput
+  }
+
+  export type contactsUncheckedCreateInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsUpdateInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    entities_contacts_contact_id_rootToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput
+    entities_contacts_contact_id_targetToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput
+  }
+
+  export type contactsUncheckedUpdateInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsCreateManyInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsUpdateManyMutationInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsUncheckedUpdateManyInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type contentCreateInput = {
     content_id: string
     content_type?: number | null
@@ -31440,6 +32730,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
@@ -31449,6 +32740,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
@@ -31458,6 +32750,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
@@ -31467,6 +32760,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
@@ -31476,6 +32770,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
   }
 
   export type conversationsUpdateManyMutationInput = {
@@ -31483,6 +32778,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type conversationsUncheckedUpdateManyInput = {
@@ -31490,38 +32786,45 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type conversations_membersCreateInput = {
+    conversations_members_id: string
     conversations: conversationsCreateNestedOneWithoutConversations_membersInput
     entities: entitiesCreateNestedOneWithoutConversations_membersInput
   }
 
   export type conversations_membersUncheckedCreateInput = {
+    conversations_members_id: string
     conversation_id: string
     member_id: string
   }
 
   export type conversations_membersUpdateInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversations?: conversationsUpdateOneRequiredWithoutConversations_membersNestedInput
     entities?: entitiesUpdateOneRequiredWithoutConversations_membersNestedInput
   }
 
   export type conversations_membersUncheckedUpdateInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type conversations_membersCreateManyInput = {
+    conversations_members_id: string
     conversation_id: string
     member_id: string
   }
 
   export type conversations_membersUpdateManyMutationInput = {
-
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type conversations_membersUncheckedUpdateManyInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
   }
@@ -31584,6 +32887,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -31601,6 +32906,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -31618,6 +32925,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -31635,6 +32944,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -32964,6 +34275,77 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type contactsContact_idConversation_idCompoundUniqueInput = {
+    contact_id: string
+    conversation_id: string
+  }
+
+  export type contactsContact_id_rootContact_id_targetCompoundUniqueInput = {
+    contact_id_root: string
+    contact_id_target: string
+  }
+
+  export type contactsCountOrderByAggregateInput = {
+    contact_id?: SortOrder
+    conversation_id?: SortOrder
+    contact_id_root?: SortOrder
+    contact_id_target?: SortOrder
+    contact_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_contact_date?: SortOrder
+  }
+
+  export type contactsMaxOrderByAggregateInput = {
+    contact_id?: SortOrder
+    conversation_id?: SortOrder
+    contact_id_root?: SortOrder
+    contact_id_target?: SortOrder
+    contact_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_contact_date?: SortOrder
+  }
+
+  export type contactsMinOrderByAggregateInput = {
+    contact_id?: SortOrder
+    conversation_id?: SortOrder
+    contact_id_root?: SortOrder
+    contact_id_target?: SortOrder
+    contact_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_contact_date?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -33044,20 +34426,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type Conversations_membersListRelationFilter = {
     every?: conversations_membersWhereInput
     some?: conversations_membersWhereInput
@@ -33083,6 +34451,7 @@ export namespace Prisma {
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
+    last_message_date?: SortOrder
   }
 
   export type conversationsMaxOrderByAggregateInput = {
@@ -33090,6 +34459,7 @@ export namespace Prisma {
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
+    last_message_date?: SortOrder
   }
 
   export type conversationsMinOrderByAggregateInput = {
@@ -33097,23 +34467,7 @@ export namespace Prisma {
     conversation_name?: SortOrder
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    last_message_date?: SortOrder
   }
 
   export type ConversationsRelationFilter = {
@@ -33127,16 +34481,19 @@ export namespace Prisma {
   }
 
   export type conversations_membersCountOrderByAggregateInput = {
+    conversations_members_id?: SortOrder
     conversation_id?: SortOrder
     member_id?: SortOrder
   }
 
   export type conversations_membersMaxOrderByAggregateInput = {
+    conversations_members_id?: SortOrder
     conversation_id?: SortOrder
     member_id?: SortOrder
   }
 
   export type conversations_membersMinOrderByAggregateInput = {
+    conversations_members_id?: SortOrder
     conversation_id?: SortOrder
     member_id?: SortOrder
   }
@@ -33182,6 +34539,12 @@ export namespace Prisma {
     none?: collectionsWhereInput
   }
 
+  export type ContactsListRelationFilter = {
+    every?: contactsWhereInput
+    some?: contactsWhereInput
+    none?: contactsWhereInput
+  }
+
   export type Entities_referencesListRelationFilter = {
     every?: entities_referencesWhereInput
     some?: entities_referencesWhereInput
@@ -33219,6 +34582,10 @@ export namespace Prisma {
   }
 
   export type collectionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type contactsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33998,6 +35365,38 @@ export namespace Prisma {
     update?: XOR<XOR<contentUpdateToOneWithWhereWithoutCollections_contentInput, contentUpdateWithoutCollections_contentInput>, contentUncheckedUpdateWithoutCollections_contentInput>
   }
 
+  export type entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    create?: XOR<entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutContacts_contacts_contact_id_rootToentitiesInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    create?: XOR<entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutContacts_contacts_contact_id_targetToentitiesInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput = {
+    create?: XOR<entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutContacts_contacts_contact_id_rootToentitiesInput
+    upsert?: entitiesUpsertWithoutContacts_contacts_contact_id_rootToentitiesInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput>, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput = {
+    create?: XOR<entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutContacts_contacts_contact_id_targetToentitiesInput
+    upsert?: entitiesUpsertWithoutContacts_contacts_contact_id_targetToentitiesInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+  }
+
   export type collections_contentCreateNestedManyWithoutContentInput = {
     create?: XOR<collections_contentCreateWithoutContentInput, collections_contentUncheckedCreateWithoutContentInput> | collections_contentCreateWithoutContentInput[] | collections_contentUncheckedCreateWithoutContentInput[]
     connectOrCreate?: collections_contentCreateOrConnectWithoutContentInput | collections_contentCreateOrConnectWithoutContentInput[]
@@ -34202,10 +35601,6 @@ export namespace Prisma {
     connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type conversations_membersUpdateManyWithoutConversationsNestedInput = {
     create?: XOR<conversations_membersCreateWithoutConversationsInput, conversations_membersUncheckedCreateWithoutConversationsInput> | conversations_membersCreateWithoutConversationsInput[] | conversations_membersUncheckedCreateWithoutConversationsInput[]
     connectOrCreate?: conversations_membersCreateOrConnectWithoutConversationsInput | conversations_membersCreateOrConnectWithoutConversationsInput[]
@@ -34325,6 +35720,20 @@ export namespace Prisma {
     connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
   }
 
+  export type contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_rootToentitiesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+  }
+
+  export type contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_targetToentitiesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+  }
+
   export type conversations_membersCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<conversations_membersCreateWithoutEntitiesInput, conversations_membersUncheckedCreateWithoutEntitiesInput> | conversations_membersCreateWithoutEntitiesInput[] | conversations_membersUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: conversations_membersCreateOrConnectWithoutEntitiesInput | conversations_membersCreateOrConnectWithoutEntitiesInput[]
@@ -34407,6 +35816,20 @@ export namespace Prisma {
     connectOrCreate?: collectionsCreateOrConnectWithoutEntitiesInput | collectionsCreateOrConnectWithoutEntitiesInput[]
     createMany?: collectionsCreateManyEntitiesInputEnvelope
     connect?: collectionsWhereUniqueInput | collectionsWhereUniqueInput[]
+  }
+
+  export type contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_rootToentitiesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+  }
+
+  export type contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_targetToentitiesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
   }
 
   export type conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -34506,6 +35929,34 @@ export namespace Prisma {
     update?: collectionsUpdateWithWhereUniqueWithoutEntitiesInput | collectionsUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: collectionsUpdateManyWithWhereWithoutEntitiesInput | collectionsUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
+  }
+
+  export type contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_rootToentitiesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
+  }
+
+  export type contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_targetToentitiesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
   }
 
   export type conversations_membersUpdateManyWithoutEntitiesNestedInput = {
@@ -34674,6 +36125,34 @@ export namespace Prisma {
     update?: collectionsUpdateWithWhereUniqueWithoutEntitiesInput | collectionsUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: collectionsUpdateManyWithWhereWithoutEntitiesInput | collectionsUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: collectionsScalarWhereInput | collectionsScalarWhereInput[]
+  }
+
+  export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_rootToentitiesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput | contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
+  }
+
+  export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput = {
+    create?: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput> | contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[] | contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    createMany?: contactsCreateManyEntities_contacts_contact_id_targetToentitiesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_targetToentitiesInput | contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_targetToentitiesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
   }
 
   export type conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput = {
@@ -35734,33 +37213,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -35790,6 +37242,33 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -35839,6 +37318,8 @@ export namespace Prisma {
   export type entitiesCreateWithoutCollectionsInput = {
     entity_id: string
     entity_type?: number
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -35855,6 +37336,8 @@ export namespace Prisma {
   export type entitiesUncheckedCreateWithoutCollectionsInput = {
     entity_id: string
     entity_type?: number
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -35913,6 +37396,8 @@ export namespace Prisma {
   export type entitiesUpdateWithoutCollectionsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -35929,6 +37414,8 @@ export namespace Prisma {
   export type entitiesUncheckedUpdateWithoutCollectionsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -36056,6 +37543,182 @@ export namespace Prisma {
     entities_content?: entities_contentUncheckedUpdateManyWithoutContentNestedInput
     entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutContentNestedInput
     entities_likes?: entities_likesUncheckedUpdateManyWithoutContentNestedInput
+  }
+
+  export type entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    entity_id: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type entitiesUpsertWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    update: XOR<entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+    create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUpsertWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    update: XOR<entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+    create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type collections_contentCreateWithoutContentInput = {
@@ -36245,10 +37908,12 @@ export namespace Prisma {
   }
 
   export type conversations_membersCreateWithoutConversationsInput = {
+    conversations_members_id: string
     entities: entitiesCreateNestedOneWithoutConversations_membersInput
   }
 
   export type conversations_membersUncheckedCreateWithoutConversationsInput = {
+    conversations_members_id: string
     member_id: string
   }
 
@@ -36306,6 +37971,7 @@ export namespace Prisma {
     AND?: conversations_membersScalarWhereInput | conversations_membersScalarWhereInput[]
     OR?: conversations_membersScalarWhereInput[]
     NOT?: conversations_membersScalarWhereInput | conversations_membersScalarWhereInput[]
+    conversations_members_id?: StringFilter<"conversations_members"> | string
     conversation_id?: StringFilter<"conversations_members"> | string
     member_id?: StringFilter<"conversations_members"> | string
   }
@@ -36342,6 +38008,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
 
@@ -36350,6 +38017,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
 
@@ -36362,6 +38030,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
@@ -36378,6 +38048,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -36411,6 +38083,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36419,6 +38092,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36437,6 +38111,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
@@ -36453,6 +38129,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -36470,6 +38148,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
   }
 
@@ -36478,6 +38157,7 @@ export namespace Prisma {
     conversation_name?: string | null
     conversation_creation_date: Date | string
     last_message?: string | null
+    last_message_date?: Date | string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
   }
 
@@ -36490,6 +38170,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
@@ -36506,6 +38188,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -36539,6 +38223,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36547,6 +38232,7 @@ export namespace Prisma {
     conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
@@ -36565,6 +38251,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
@@ -36581,6 +38269,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -36615,11 +38305,69 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+    entities_contacts_contact_id_targetToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput
+  }
+
+  export type contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    where: contactsWhereUniqueInput
+    create: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type contactsCreateManyEntities_contacts_contact_id_rootToentitiesInputEnvelope = {
+    data: contactsCreateManyEntities_contacts_contact_id_rootToentitiesInput | contactsCreateManyEntities_contacts_contact_id_rootToentitiesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+    entities_contacts_contact_id_rootToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput
+  }
+
+  export type contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    where: contactsWhereUniqueInput
+    create: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type contactsCreateManyEntities_contacts_contact_id_targetToentitiesInputEnvelope = {
+    data: contactsCreateManyEntities_contacts_contact_id_targetToentitiesInput | contactsCreateManyEntities_contacts_contact_id_targetToentitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type conversations_membersCreateWithoutEntitiesInput = {
+    conversations_members_id: string
     conversations: conversationsCreateNestedOneWithoutConversations_membersInput
   }
 
   export type conversations_membersUncheckedCreateWithoutEntitiesInput = {
+    conversations_members_id: string
     conversation_id: string
   }
 
@@ -36918,6 +38666,51 @@ export namespace Prisma {
     entity_id?: StringFilter<"collections"> | string
   }
 
+  export type contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    where: contactsWhereUniqueInput
+    update: XOR<contactsUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput>
+    create: XOR<contactsCreateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    where: contactsWhereUniqueInput
+    data: XOR<contactsUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput, contactsUncheckedUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    where: contactsScalarWhereInput
+    data: XOR<contactsUpdateManyMutationInput, contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesInput>
+  }
+
+  export type contactsScalarWhereInput = {
+    AND?: contactsScalarWhereInput | contactsScalarWhereInput[]
+    OR?: contactsScalarWhereInput[]
+    NOT?: contactsScalarWhereInput | contactsScalarWhereInput[]
+    contact_id?: StringFilter<"contacts"> | string
+    conversation_id?: StringFilter<"contacts"> | string
+    contact_id_root?: StringFilter<"contacts"> | string
+    contact_id_target?: StringFilter<"contacts"> | string
+    contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
+    last_message?: StringNullableFilter<"contacts"> | string | null
+    last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+  }
+
+  export type contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    where: contactsWhereUniqueInput
+    update: XOR<contactsUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput>
+    create: XOR<contactsCreateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type contactsUpdateWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    where: contactsWhereUniqueInput
+    data: XOR<contactsUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput, contactsUncheckedUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    where: contactsScalarWhereInput
+    data: XOR<contactsUpdateManyMutationInput, contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesInput>
+  }
+
   export type conversations_membersUpsertWithWhereUniqueWithoutEntitiesInput = {
     where: conversations_membersWhereUniqueInput
     update: XOR<conversations_membersUpdateWithoutEntitiesInput, conversations_membersUncheckedUpdateWithoutEntitiesInput>
@@ -37198,6 +38991,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
@@ -37214,6 +39009,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37273,6 +39070,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
@@ -37289,6 +39088,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -37326,6 +39127,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -37342,6 +39145,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37401,6 +39206,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -37417,6 +39224,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -37454,6 +39263,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -37470,6 +39281,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37529,6 +39342,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -37545,6 +39360,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -37561,6 +39378,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -37577,6 +39396,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37609,6 +39430,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -37625,6 +39448,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -37725,6 +39550,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -37741,6 +39568,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37798,6 +39627,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -37814,6 +39645,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -37861,6 +39694,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -37877,6 +39712,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -37924,6 +39761,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -37940,6 +39779,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -38215,6 +40056,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -38231,6 +40074,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -38288,6 +40133,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -38304,6 +40151,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -38526,6 +40375,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -38542,6 +40393,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -38606,6 +40459,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -38622,6 +40477,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -38838,6 +40695,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
@@ -38854,6 +40713,8 @@ export namespace Prisma {
     entity_id: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
@@ -38918,6 +40779,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
@@ -38934,6 +40797,8 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
@@ -39231,6 +41096,7 @@ export namespace Prisma {
   }
 
   export type conversations_membersCreateManyConversationsInput = {
+    conversations_members_id: string
     member_id: string
   }
 
@@ -39242,14 +41108,17 @@ export namespace Prisma {
   }
 
   export type conversations_membersUpdateWithoutConversationsInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     entities?: entitiesUpdateOneRequiredWithoutConversations_membersNestedInput
   }
 
   export type conversations_membersUncheckedUpdateWithoutConversationsInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type conversations_membersUncheckedUpdateManyWithoutConversationsInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -39279,7 +41148,26 @@ export namespace Prisma {
     collection_name: string
   }
 
+  export type contactsCreateManyEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsCreateManyEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
   export type conversations_membersCreateManyEntitiesInput = {
+    conversations_members_id: string
     conversation_id: string
   }
 
@@ -39380,15 +41268,72 @@ export namespace Prisma {
     collection_name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type contactsUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    entities_contacts_contact_id_targetToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput
+  }
+
+  export type contactsUncheckedUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    entities_contacts_contact_id_rootToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput
+  }
+
+  export type contactsUncheckedUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type conversations_membersUpdateWithoutEntitiesInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversations?: conversationsUpdateOneRequiredWithoutConversations_membersNestedInput
   }
 
   export type conversations_membersUncheckedUpdateWithoutEntitiesInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type conversations_membersUncheckedUpdateManyWithoutEntitiesInput = {
+    conversations_members_id?: StringFieldUpdateOperationsInput | string
     conversation_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -40105,6 +42050,10 @@ export namespace Prisma {
      * @deprecated Use collections_contentDefaultArgs instead
      */
     export type collections_contentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = collections_contentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use contactsDefaultArgs instead
+     */
+    export type contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = contactsDefaultArgs<ExtArgs>
     /**
      * @deprecated Use contentDefaultArgs instead
      */

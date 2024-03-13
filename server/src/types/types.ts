@@ -35,6 +35,14 @@ export interface Organization {
   profile_picture_id: string | null;
 }
 
+export interface Conversation {
+  conversation_id: string;
+  conversation_name: string;
+  conversation_creation_date: string;
+  last_message: string;
+  members?: ConversationMember[];
+}
+
 /*
   affiliateRelations.ts
   Global Entity
@@ -185,6 +193,7 @@ export interface FullVideo {
   Global Individual
   Global Group
   Global Organization
+  Global Conversation
 */
 
 export interface ConversationMember {
@@ -204,18 +213,31 @@ export interface ConversationMember {
   };
 }
 
-export interface Conversation {
-  conversation_id: string;
-  conversation_name: string;
-  conversation_creation_date: string;
-  last_message: string;
-  members?: ConversationMember[];
-}
-
 export interface Message {
   conversations_messages_logs_id: string;
   conversation_id: string;
   entity_id: string;
   message: string;
   message_date: string;
+}
+
+/*
+  contacts.ts
+  Global Entity
+  Global Organization
+  Global Group
+  Global Individual
+  Global Conversation
+*/
+
+export interface Contact {
+  contact_id: string;
+  conversation_name: string | null;
+  conversation_id: string;
+  contact_name: string | null;
+  contact_id_root: string;
+  contact_id_target: string;
+  contact_creation_date: string;
+  last_message: string | null;
+  last_message_date: string | null;
 }

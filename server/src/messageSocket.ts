@@ -60,7 +60,6 @@ export default function messageSocket(server: HttpServer) {
 
       if (isInConversation) {
         socket.join(conversation_id);
-        console.log(`${socket.id} joined room: ${conversation_id}`);
       } else {
         console.log("Authorization denied");
       }
@@ -68,7 +67,6 @@ export default function messageSocket(server: HttpServer) {
 
     socket.on("leaveConversation", (conversation_id) => {
       socket.leave(conversation_id);
-      console.log(`${socket.id} left room: ${conversation_id}`);
     });
 
     socket.on("disconnect", () => {

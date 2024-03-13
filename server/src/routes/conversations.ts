@@ -188,13 +188,15 @@ router.put("/new_conversation_message", verifyToken, async (req, res) => {
     let result = "Authorization error";
 
     if (isInConversation) {
+      const currentTime = new Date().toISOString();
+
       result = await req.db.conversations_messages_logs.create({
         data: {
           conversations_messages_logs_id: uuid(),
           conversation_id: conversation_id,
           entity_id: req.user.user_id,
           message: message,
-          message_date: new Date().toISOString(),
+          message_date: currentTime,
         },
       });
 
@@ -204,8 +206,21 @@ router.put("/new_conversation_message", verifyToken, async (req, res) => {
         },
         data: {
           last_message: message,
+          last_message_date: currentTime,
         },
       });
+
+      try {
+        await req.db.contacts.update({
+          where: {
+            conversation_id: conversation_id,
+          },
+          data: {
+            last_message: message,
+            last_contact_date: currentTime,
+          },
+        });
+      } catch {}
     }
 
     res.send(result);

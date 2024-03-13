@@ -3,10 +3,19 @@ import {
   SET_IDS,
   SET_LOGGED_IN,
   SET_CONVERSATION,
+  SET_SECONDARY_PAGE_STATE,
 } from "./pageStateTypes";
 
 export const setPageState = (page: string, newState: string) => ({
   type: SET_PAGE_STATE,
+  payload: { page, newState },
+});
+
+export const setSecondaryPageState = (
+  page: string,
+  newState: string | null,
+) => ({
+  type: SET_SECONDARY_PAGE_STATE,
   payload: { page, newState },
 });
 

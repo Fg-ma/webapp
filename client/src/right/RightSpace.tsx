@@ -5,10 +5,14 @@ import RightSearchBar from "./search/RightSearchBar";
 import RightNav from "./RightNav";
 import NewsCards from "./content/NewsCards";
 import ExploreCards from "./content/ExploreCards";
-import MessagesCards from "./content/MessagesCards";
 import DogEarCards from "./content/DogEarCards";
 import PapersCards from "./content/PapersCards";
-import { RightState, MainState, MessagesState } from "@FgTypes/rightTypes";
+import {
+  RightState,
+  MainState,
+  MessagesState,
+  MainSecondaryState,
+} from "@FgTypes/rightTypes";
 import Conversations from "./content/Conversations";
 import Contacts from "./content/Contacts";
 
@@ -30,9 +34,13 @@ export default function RightSpace() {
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
+  const mainSecondaryPageState = useSelector(
+    (state: MainSecondaryState) =>
+      state.page.main.pagePayload.secondaryPageState,
+  );
 
   const renderContent = () => {
-    if (mainPageState !== "messages") {
+    if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
       switch (rightPage) {
         case "papers":
           return <PapersCards />;
@@ -40,14 +48,15 @@ export default function RightSpace() {
           return <NewsCards />;
         case "explore":
           return <ExploreCards />;
-        case "messages":
-          return <MessagesCards />;
         case "dogEars":
           return <DogEarCards />;
         default:
           return <NewsCards />;
       }
-    } else if (mainPageState === "messages") {
+    } else if (
+      mainPageState === "messages" ||
+      mainSecondaryPageState === "messages"
+    ) {
       switch (messagesPage) {
         case "conversations":
           return <Conversations />;

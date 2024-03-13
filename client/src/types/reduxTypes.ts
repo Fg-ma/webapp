@@ -16,6 +16,7 @@ import {
   SET_IDS,
   SET_LOGGED_IN,
   SET_CONVERSATION,
+  SET_SECONDARY_PAGE_STATE,
 } from "@redux/pageState/pageStateTypes";
 
 // Global
@@ -110,6 +111,7 @@ export interface PageState {
   [key: string]: {
     pagePayload: {
       pageState: string;
+      secondaryPageState?: string | null;
       isLoggedIn?: boolean;
       ids?: {
         individual_id?: string | null;
@@ -145,4 +147,8 @@ export type PageStateAction =
         members: string[];
         conversation_creation_date: string;
       };
+    }
+  | {
+      type: typeof SET_SECONDARY_PAGE_STATE;
+      payload: { page: string; newState: string };
     };

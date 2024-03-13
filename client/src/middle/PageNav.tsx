@@ -1,8 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
-import { setPageState, setIds } from "@redux/pageState/pageStateActions";
-import { MainState } from "@FgTypes/middleTypes";
+import {
+  setPageState,
+  setIds,
+  setSecondaryPageState,
+} from "@redux/pageState/pageStateActions";
+import { ConverationId, MainState } from "@FgTypes/middleTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 const navButtonsVar: Variants = {
@@ -44,6 +48,9 @@ export default function PageNav() {
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
+  const conversation_id = useSelector(
+    (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
+  );
 
   const deactiveStyles: React.CSSProperties = {};
   const activeStyles: React.CSSProperties = {
@@ -66,16 +73,21 @@ export default function PageNav() {
 
   const swapPageState = (newState: string) => {
     dispatch(setPageState("main", newState));
+    dispatch(setSecondaryPageState("main", null));
   };
 
   const profileNavFunction = () => {
     dispatch(setPageState("individuals", "sheets"));
+    dispatch(setSecondaryPageState("main", null));
     dispatch(setIds("main", "individual_id", "user"));
     dispatch(setIds("individuals", "collection_id", null));
   };
 
   const messagesNavFunction = (newState: string) => {
-    dispatch(setPageState("main", newState));
+    dispatch(setSecondaryPageState("main", newState));
+    if (conversation_id) {
+      dispatch(setPageState("main", newState));
+    }
   };
 
   return (

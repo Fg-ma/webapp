@@ -73,6 +73,18 @@ export interface MiddleFilterState {
   };
 }
 
+export interface ConverationId {
+  page: {
+    main: {
+      pagePayload: {
+        ids: {
+          conversation_id: string | null;
+        };
+      };
+    };
+  };
+}
+
 /*
   MiddleSpace.tsx
   Global Mainstate
@@ -93,6 +105,7 @@ export interface MiddleVerticalSplitPaneProps {
 /*
   PageNav.tsx
   Global MainState
+  Global ConversationId
 */
 
 /*
@@ -575,25 +588,18 @@ export interface AffiliateWithButtonProps {
 
 /*
   MessagePage.tsx
+  Global ConversationId
 */
+
+export interface MessagePageProps {
+  middleSpaceRef: React.RefObject<HTMLDivElement>;
+}
 
 export interface Message {
   content: string;
   sender: string;
   isUser: boolean;
   message_date: string;
-}
-
-export interface ConverationId {
-  page: {
-    main: {
-      pagePayload: {
-        ids: {
-          conversation_id: string | null;
-        };
-      };
-    };
-  };
 }
 
 /*
@@ -615,6 +621,7 @@ export interface MessagesTextFieldProps {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messageSocket: Socket;
   messagesPageRef: React.RefObject<HTMLDivElement>;
+  textFieldSnap: boolean;
 }
 
 /*

@@ -129,6 +129,16 @@ exports.Prisma.Collections_contentScalarFieldEnum = {
   date_pinned: 'date_pinned'
 };
 
+exports.Prisma.ContactsScalarFieldEnum = {
+  contact_id: 'contact_id',
+  conversation_id: 'conversation_id',
+  contact_id_root: 'contact_id_root',
+  contact_id_target: 'contact_id_target',
+  contact_creation_date: 'contact_creation_date',
+  last_message: 'last_message',
+  last_contact_date: 'last_contact_date'
+};
+
 exports.Prisma.ContentScalarFieldEnum = {
   content_id: 'content_id',
   content_type: 'content_type'
@@ -138,10 +148,12 @@ exports.Prisma.ConversationsScalarFieldEnum = {
   conversation_id: 'conversation_id',
   conversation_name: 'conversation_name',
   conversation_creation_date: 'conversation_creation_date',
-  last_message: 'last_message'
+  last_message: 'last_message',
+  last_message_date: 'last_message_date'
 };
 
 exports.Prisma.Conversations_membersScalarFieldEnum = {
+  conversations_members_id: 'conversations_members_id',
   conversation_id: 'conversation_id',
   member_id: 'member_id'
 };
@@ -329,6 +341,7 @@ exports.Prisma.ModelName = {
   affiliates_relations: 'affiliates_relations',
   collections: 'collections',
   collections_content: 'collections_content',
+  contacts: 'contacts',
   content: 'content',
   conversations: 'conversations',
   conversations_members: 'conversations_members',

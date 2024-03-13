@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion, Variants, Transition } from "framer-motion";
 import { setPageState } from "@redux/pageState/pageStateActions";
 import { closeDrop } from "@redux/filters/filterActions";
-import { RightState, MessagesState, RightNavProps } from "@FgTypes/rightTypes";
+import {
+  RightState,
+  MessagesState,
+  RightNavProps,
+  MainSecondaryState,
+} from "@FgTypes/rightTypes";
 
 const navButtonsVar: Variants = {
   init: {
@@ -47,6 +52,10 @@ export default function RightNav({ mainPageState }: RightNavProps) {
   const messagesPage = useSelector(
     (state: MessagesState) => state.page.messages.pagePayload.pageState,
   );
+  const mainSecondaryPageState = useSelector(
+    (state: MainSecondaryState) =>
+      state.page.main.pagePayload.secondaryPageState,
+  );
 
   const deactiveStyles: React.CSSProperties = {};
   const activeStyles: React.CSSProperties = {
@@ -68,10 +77,13 @@ export default function RightNav({ mainPageState }: RightNavProps) {
 
   let navItems: string[] = [];
 
-  if (mainPageState !== "messages") {
+  if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
     styles[rightPage] = { ...activeStyles };
     navItems = ["papers", "news", "explore", "dogEars"];
-  } else if (mainPageState === "messages") {
+  } else if (
+    mainPageState === "messages" ||
+    mainSecondaryPageState === "messages"
+  ) {
     styles[messagesPage] = { ...activeStyles };
     navItems = ["conversations", "contacts"];
   }

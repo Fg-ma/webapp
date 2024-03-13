@@ -8,9 +8,9 @@ import {
 import {
   PapersCardProps,
   NewsCardProps,
-  MessagesCardProps,
   DogEarCardProps,
-  ConversationsCardProps,
+  ConversationCardProps,
+  ContactCardProps,
 } from "@FgTypes/rightTypes";
 import SheetThumbnail from "@components/thumbnails/SheetThumbnail";
 
@@ -86,22 +86,6 @@ export function NewsCard({
   );
 }
 
-export function MessagesCard({ name, lastMessage = null }: MessagesCardProps) {
-  return (
-    <div className="bg-white my-4 ml-9 h-20 py-2.5 flex items-center rounded-md cursor-pointer">
-      <div className="w-14 aspect-square bg-fg-white-85 ml-4 mr-5 rounded-full grid place-items-center flex-shrink-0">
-        <p>pic</p>
-      </div>
-      <div className="m-2">
-        <p className="font-Josefin text-xl truncate">{name}</p>
-        <p className="font-K2D text-sm text-fg-black-30 line-clamp-2">
-          {lastMessage}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export function DogEarCard({
   sheet_id,
   title,
@@ -142,13 +126,13 @@ export function DogEarCard({
   );
 }
 
-export function ConversationsCard({
+export function ConversationCard({
   conversation_id,
   conversation_name,
   last_message,
   members,
   conversation_creation_date,
-}: ConversationsCardProps) {
+}: ConversationCardProps) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -172,6 +156,52 @@ export function ConversationsCard({
           {conversation_name
             ? conversation_name
             : members && members.join(", ")}
+        </p>
+        <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
+          {last_message}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export function ContactCard({
+  contact_id,
+  conversation_id,
+  conversation_name,
+  contact_name,
+  last_message,
+  contact_creation_date,
+}: ContactCardProps) {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setPageState("main", "messages"));
+    dispatch(setIds("main", "conversation_id", conversation_id));
+    if (contact_name) {
+      dispatch(
+        setConversation(
+          conversation_name,
+          [contact_name],
+          contact_creation_date,
+        ),
+      );
+    } else {
+      dispatch(setConversation(conversation_name, [], contact_creation_date));
+    }
+  };
+
+  return (
+    <div
+      className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
+      onClick={handleClick}
+    >
+      <div
+        className="mx-5 my-2 space-y-1"
+        style={{ width: "calc(100% - 2.5rem)" }}
+      >
+        <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
+          {contact_name}
         </p>
         <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
           {last_message}
