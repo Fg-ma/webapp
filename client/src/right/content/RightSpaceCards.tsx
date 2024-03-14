@@ -166,7 +166,6 @@ export function ConversationCard({
 }
 
 export function ContactCard({
-  contact_id,
   conversation_id,
   conversation_name,
   contact_name,

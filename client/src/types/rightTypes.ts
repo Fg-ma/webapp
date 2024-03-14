@@ -154,7 +154,6 @@ export interface ConversationCardProps {
 }
 
 export interface ContactCardProps {
-  contact_id: string;
   conversation_id: string;
   conversation_name: string | null;
   contact_name: string | null;

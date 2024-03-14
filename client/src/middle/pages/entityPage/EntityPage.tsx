@@ -229,30 +229,31 @@ export default function EntityPage({ entityType }: EntityPageProps) {
   };
 
   return (
-    <div className="h-full w-full rounded-xl overflow-hidden">
-      <div className="mr-3" style={{ height: `calc(100% - 2.5rem)` }}>
-        <div
-          ref={scrollingEntityContainer}
-          className="overflow-y-auto h-full w-full"
-        >
-          <div className="ml-8 mr-5 px-6 my-8 py-8 bg-white rounded-lg overflow-hidden">
-            {entity_id && (
-              <EntityPageHeader
-                entity_id={entity_id}
-                entityType={entityType}
-                entity={entityData}
-                entityReferences={entityReferences}
-              />
-            )}
-            <EntityContentNav
+    <div className="h-full w-full">
+      <div
+        ref={scrollingEntityContainer}
+        className="overflow-y-auto w-full pl-9"
+        style={{ height: `calc(100% - 2.5rem)`, scrollbarGutter: "stable" }}
+      >
+        <div className="px-6 my-8 py-8 bg-white rounded-lg">
+          {entity_id && (
+            <EntityPageHeader
+              entity_id={entity_id}
               entityType={entityType}
               entity={entityData}
-              isEditablePage={isEditablePage}
+              entityReferences={entityReferences}
+              scrollingEntityContainer={scrollingEntityContainer}
             />
-            {renderContent()}
-          </div>
+          )}
+          <EntityContentNav
+            entityType={entityType}
+            entity={entityData}
+            isEditablePage={isEditablePage}
+          />
+          {renderContent()}
         </div>
       </div>
+
       <EntityPageFooter entityType={entityType} entity={entityData} />
     </div>
   );

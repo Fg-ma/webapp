@@ -210,16 +210,15 @@ export default function AdvancedFilterDropdown({
           {isOpen && (
             <motion.div
               ref={advancedFilterDropdownDropRef}
-              className="py-1 px-3 bg-white rounded-md shadow-md"
+              className="pl-7 bg-white rounded-md shadow-md overflow-y-auto max-h-80 max-w-xs w-80 h-80 smallScrollbar"
+              style={{ scrollbarGutter: "stable" }}
               variants={dropdownVar}
               initial="init"
               animate="animate"
               exit="init"
               transition={dropdownTransition}
             >
-              <div className="overflow-y-scroll overflow-x-visible max-h-80 max-w-xs w-80 h-80">
-                {filterCards}
-              </div>
+              {filterCards}
             </motion.div>
           )}
         </AnimatePresence>

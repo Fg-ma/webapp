@@ -2,6 +2,7 @@ import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
+import { ConversationMember } from "@FgTypes/types";
 
 const verifyUser = async (token: string, conversation_id: string) => {
   try {
@@ -27,9 +28,9 @@ const verifyUser = async (token: string, conversation_id: string) => {
   }
 };
 
-export default function messageSocket(server: HttpServer) {
+export default function liveUpdatesSocket(server: HttpServer) {
   const io = new SocketIOServer(server, {
-    path: "/message-socket",
+    path: "/live-updates-socket",
     cors: {
       origin: ["http://localhost:5000"],
       methods: ["GET", "POST"],
@@ -38,36 +39,55 @@ export default function messageSocket(server: HttpServer) {
 
   io.on("connection", (socket: Socket) => {
     socket.on(
-      "sendMessage",
+      "outgoingMessage",
       async (token: string, conversation_id: string, message: string) => {
         const isInConversation = await verifyUser(token, conversation_id);
         const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
-        const message_date = new Date().toISOString();
+
+        const recipients = await prisma.conversations_members.findMany({
+          where: {
+            conversation_id: conversation_id,
+          },
+        });
 
         if (isInConversation && typeof user !== "string") {
-          io.to(conversation_id).emit("newMessage", {
-            content: message,
-            sender: user.username,
-            message_date: message_date,
-          });
+          const validRecipients = recipients.filter(
+            (recipient) => recipient.member_id !== user.user_id
+          );
+
+          const validRecipientIds = validRecipients.map(
+            (recipient: ConversationMember) => recipient.member_id
+          );
+
+          for (const index in validRecipientIds) {
+            io.to(validRecipientIds[index]).emit("incomingMessage", {
+              content: message,
+              conversation_id: conversation_id,
+            });
+          }
         } else {
           console.log("Authorization denied");
         }
       }
     );
 
-    socket.on("joinConversation", async (token, conversation_id) => {
-      const isInConversation = await verifyUser(token, conversation_id);
+    socket.on("joinSession", async (token) => {
+      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
-      if (isInConversation) {
-        socket.join(conversation_id);
+      if (user && typeof user !== "string") {
+        socket.join(user.user_id);
       } else {
         console.log("Authorization denied");
       }
     });
 
-    socket.on("leaveConversation", (conversation_id) => {
-      socket.leave(conversation_id);
+    socket.on("leaveSession", (token) => {
+      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+      if (user && typeof user !== "string") {
+        socket.leave(user.user_id);
+      } else {
+        console.log("Authorization denied");
+      }
     });
 
     socket.on("disconnect", () => {

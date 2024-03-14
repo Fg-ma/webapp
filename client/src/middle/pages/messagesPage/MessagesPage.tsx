@@ -13,7 +13,9 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
-  const messageSocket = io(serverUrl);
+  const messageSocket = io(serverUrl, {
+    path: "/message-socket",
+  });
   const [inputValue, setInputValue] = useState("");
   const [conversation, setConversation] = useState<Message[]>([]);
   const [textFieldSnap, setTextFieldSnap] = useState(true);

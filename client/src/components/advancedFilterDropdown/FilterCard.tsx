@@ -124,7 +124,7 @@ export default function FilterCard({
   return (
     <motion.div
       id={`${subcategory}_${identify}`}
-      className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md"
+      className="bg-white my-1 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md"
       onMouseEnter={handleMouseEnter as any}
       onMouseLeave={handleMouseLeave}
       onClick={!popupState.visible ? handleFilterClick : () => {}}

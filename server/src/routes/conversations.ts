@@ -353,7 +353,7 @@ router.get(
   }
 );
 
-// Get a conversation by id only if the user is in the conversation
+// Gets if the user sent a message
 router.get("/isUser", verifyToken, async (req, res) => {
   const { sender } = req.query;
 
@@ -419,6 +419,203 @@ router.get("/isUser", verifyToken, async (req, res) => {
         sender: sender,
         isUser: isUser,
       });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Starts a new conversation if necessary then gets the neccssary information for a conversation
+router.get("/message_button", verifyToken, async (req, res) => {
+  const { entity_id } = req.query;
+
+  try {
+    const userConversations = await req.db.conversations_members.findMany({
+      where: {
+        member_id: req.user.user_id,
+      },
+    });
+
+    const entityConversations = await req.db.conversations_members.findMany({
+      where: {
+        member_id: entity_id,
+      },
+    });
+
+    const sharedConversations = userConversations.filter(
+      (userConv: ConversationMember) =>
+        entityConversations.some(
+          (entityConv: ConversationMember) =>
+            entityConv.conversation_id === userConv.conversation_id
+        )
+    );
+
+    const sharedConversationsIds = sharedConversations.map(
+      (conversation: ConversationMember) => conversation.conversation_id
+    );
+
+    const fullSharedConversations = await req.db.conversations_members.findMany(
+      {
+        where: {
+          conversation_id: { in: sharedConversationsIds },
+        },
+      }
+    );
+
+    let desiredConversation = fullSharedConversations.filter(
+      (
+        conversation: ConversationMember,
+        index: number,
+        conversationArray: ConversationMember[]
+      ) => {
+        const count = conversationArray.filter(
+          (conv: ConversationMember) =>
+            conv.conversation_id === conversation.conversation_id
+        ).length;
+
+        return (
+          count === 2 &&
+          conversationArray[index].member_id === req.user.user_id &&
+          conversationArray.find(
+            (conv: ConversationMember) =>
+              conv.member_id === entity_id &&
+              conv.conversation_id === conversation.conversation_id
+          )
+        );
+      }
+    );
+
+    let conversationsData;
+
+    if (desiredConversation.length === 0) {
+      const currentTime = new Date().toISOString();
+      const conversation_id = uuid();
+
+      conversationsData = [
+        await req.db.conversations.create({
+          data: {
+            conversation_id: conversation_id,
+            conversation_creation_date: currentTime,
+          },
+        }),
+      ];
+
+      await req.db.conversations_members.create({
+        data: {
+          conversations_members_id: uuid(),
+          conversation_id: conversation_id,
+          member_id: req.user.user_id,
+        },
+      });
+
+      await req.db.conversations_members.create({
+        data: {
+          conversations_members_id: uuid(),
+          conversation_id: conversation_id,
+          member_id: entity_id,
+        },
+      });
+
+      desiredConversation = [{ conversation_id: conversation_id }];
+    } else {
+      conversationsData = await req.db.conversations.findMany({
+        where: {
+          conversation_id: desiredConversation[0].conversation_id,
+        },
+      });
+    }
+
+    const entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: entity_id,
+      },
+    });
+
+    if (entity.entity_type === 1) {
+      const entityData = await req.db.individuals.findUnique({
+        where: {
+          individual_id: entity_id,
+        },
+      });
+
+      if (entityData.individual_name) {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.individual_name],
+        });
+      } else {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.individual_username],
+        });
+      }
+    } else if (entity.entity_type === 2) {
+      const entityData = await req.db.groups.findUnique({
+        where: {
+          group_id: entity_id,
+        },
+      });
+
+      if (entityData.group_name) {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.group_name],
+        });
+      } else {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.group_handle],
+        });
+      }
+    } else if (entity.entity_type === 3) {
+      const entityData = await req.db.organizations.findUnique({
+        where: {
+          organization_id: entity_id,
+        },
+      });
+
+      if (entityData.organization_name) {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.organization_name],
+        });
+      } else {
+        res.send({
+          conversation_id: desiredConversation[0].conversation_id,
+          conversation_name: conversationsData[0].conversation_name
+            ? conversationsData[0].conversation_name
+            : null,
+          conversation_creation_date:
+            conversationsData[0].conversation_creation_date,
+          members: [entityData.organization_handle],
+        });
+      }
     }
   } catch (error) {
     console.error(error);

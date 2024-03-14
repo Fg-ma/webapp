@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useSocketContext } from "./context/LiveUpdatesContext";
 import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
@@ -30,6 +31,7 @@ export default function App() {
       so it can reference its width and set its own width to be 80% of that.
   */
 
+  const { liveUpdatesSocket } = useSocketContext();
   const isLoggedIn = useSelector(
     (state: LoginState) => state.page.login.pagePayload.isLoggedIn,
   );
@@ -37,6 +39,19 @@ export default function App() {
     (state: LoginState) => state.page.login.pagePayload.pageState,
   );
   const middleSpaceContainerRef = useRef<HTMLDivElement>(null);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    liveUpdatesSocket?.emit("joinSession", token);
+
+    return () => {
+      liveUpdatesSocket?.emit("leaveSession", token);
+    };
+  }, [isLoggedIn]);
 
   if (!isLoggedIn) {
     switch (loginPageState) {

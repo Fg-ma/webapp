@@ -108,6 +108,16 @@ export interface MiddleVerticalSplitPaneProps {
   Global ConversationId
 */
 
+export interface MainSecondaryState {
+  page: {
+    main: {
+      pagePayload: {
+        secondaryPageState: string | null;
+      };
+    };
+  };
+}
+
 /*
   RelatedIssues.tsx
 */
@@ -471,6 +481,7 @@ export interface EntityPageHeaderProps {
   entityType: string;
   entity: EntityData | null;
   entityReferences: EntityReferences[];
+  scrollingEntityContainer: React.RefObject<HTMLDivElement>;
 }
 
 export interface Afiliate {
@@ -658,4 +669,25 @@ export interface ConversationMeta {
       };
     };
   };
+}
+
+/*
+  MessageButton.tsx
+*/
+
+export interface MessageButtonProps {
+  entity_id: string;
+}
+
+/*
+  ContactDropdown.tsx
+*/
+
+export interface ContactDropdownProps {
+  scrollingEntityContainer: React.RefObject<HTMLDivElement>;
+}
+
+export interface ContactDropdownPortalProps {
+  contactDropdownPortalContainerRef: React.RefObject<HTMLDivElement>;
+  scrollingEntityContainer: React.RefObject<HTMLDivElement>;
 }

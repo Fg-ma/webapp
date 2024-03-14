@@ -84,16 +84,30 @@ export default function pageStateReducer(
     case SET_PAGE_STATE: {
       const { page, newState } = action.payload;
 
-      return {
-        ...state,
-        [page]: {
-          ...state[page],
-          pagePayload: {
-            ...state[page].pagePayload,
-            pageState: newState,
+      if (page === "main") {
+        return {
+          ...state,
+          [page]: {
+            ...state[page],
+            pagePayload: {
+              ...state[page].pagePayload,
+              secondaryPageState: null,
+              pageState: newState,
+            },
           },
-        },
-      };
+        };
+      } else {
+        return {
+          ...state,
+          [page]: {
+            ...state[page],
+            pagePayload: {
+              ...state[page].pagePayload,
+              pageState: newState,
+            },
+          },
+        };
+      }
     }
 
     case SET_SECONDARY_PAGE_STATE: {

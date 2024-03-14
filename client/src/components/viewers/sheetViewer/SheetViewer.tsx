@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import Axios from "axios";
 import config from "@config";
@@ -17,6 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 export default function SheetViewer({ sheet_id }: SheetViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
+  const [pageWidth, setPageWidth] = useState(0);
   const [sheetData, setSheetData] = useState<SheetData>({
     sheet_url: "",
     sheet_title: "",
@@ -26,6 +27,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
     sheet_likes: 0,
     sheet_dislikes: 0,
   });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -66,20 +68,38 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
     }
   }, [sheet_id]);
 
+  // Handle width of pdf changes
+  useEffect(() => {
+    const resizePages = () => {
+      if (!containerRef.current) return;
+
+      setPageWidth(containerRef.current.clientWidth);
+    };
+
+    window.addEventListener("resize", resizePages);
+    resizePages();
+
+    return () => {
+      window.removeEventListener("resize", resizePages);
+    };
+  }, [numPages]);
+
   return (
-    <div className="w-full">
+    <div className="w-full" ref={containerRef}>
       {sheetData.sheet_url && (
         <>
           <Document
+            className="w-full"
             file={sheetData.sheet_url}
             onLoadSuccess={onDocumentLoadSuccess}
           >
             {Array.from({ length: numPages }, (_, index) => (
               <div
                 key={`page${index + 1}`}
-                className="mb-6 rounded-md overflow-hidden"
+                className="mb-6 rounded-md overflow-hidden w-full"
               >
                 <Page
+                  width={pageWidth}
                   pageNumber={index + 1}
                   renderTextLayer={false}
                   renderAnnotationLayer={false}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import config from "@config";
+import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Contact } from "@FgTypes/rightTypes";
 import { ContactCard } from "./RightSpaceCards";
 import { useLastMessageContext } from "@context/LastMessageContext";
@@ -11,6 +12,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Contacts() {
+  const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
   const [contacts, setContacts] = useState<Contact[]>([]);
 
@@ -87,11 +89,46 @@ export default function Contacts() {
     setContacts(updatedContacts);
   }, [lastMessage]);
 
+  // Establish incomingMessage live update socket connection
+  useEffect(() => {
+    liveUpdatesSocket?.on(
+      "incomingMessage",
+      (incomingMessage: { content: string; conversation_id: string }) => {
+        setContacts((prevContacts) => {
+          const updatedContacts = prevContacts.map((contact) => {
+            if (contact.conversation_id === incomingMessage.conversation_id) {
+              return {
+                ...contact,
+                last_message: incomingMessage.content,
+              };
+            }
+            return contact;
+          });
+
+          const indexToUpdate = updatedContacts.findIndex(
+            (contact) =>
+              contact.conversation_id === incomingMessage.conversation_id,
+          );
+
+          if (indexToUpdate !== -1) {
+            const updatedContact = updatedContacts.splice(indexToUpdate, 1)[0];
+            updatedContacts.unshift(updatedContact);
+          }
+
+          return updatedContacts;
+        });
+      },
+    );
+
+    return () => {
+      liveUpdatesSocket?.off("incomingMessage");
+    };
+  }, []);
+
   const contactCards = contacts.map((contact) => {
     return (
       <ContactCard
         key={contact.contact_id}
-        contact_id={contact.contact_id}
         conversation_id={contact.conversation_id}
         conversation_name={contact.conversation_name}
         contact_name={contact.contact_name}
@@ -100,6 +137,6 @@ export default function Contacts() {
       />
     );
   });
-  console.log(contacts);
+
   return <div>{contactCards}</div>;
 }

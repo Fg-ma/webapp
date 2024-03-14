@@ -6,7 +6,11 @@ import {
   setIds,
   setSecondaryPageState,
 } from "@redux/pageState/pageStateActions";
-import { ConverationId, MainState } from "@FgTypes/middleTypes";
+import {
+  ConverationId,
+  MainSecondaryState,
+  MainState,
+} from "@FgTypes/middleTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 const navButtonsVar: Variants = {
@@ -48,6 +52,10 @@ export default function PageNav() {
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
+  const mainSecondaryPageState = useSelector(
+    (state: MainSecondaryState) =>
+      state.page.main.pagePayload.secondaryPageState,
+  );
   const conversation_id = useSelector(
     (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
   );
@@ -69,7 +77,11 @@ export default function PageNav() {
     settings: deactiveStyles,
   };
 
-  mainPageStyles[mainPageState] = { ...activeStyles };
+  if (mainSecondaryPageState === "messages") {
+    mainPageStyles[mainSecondaryPageState] = { ...activeStyles };
+  } else {
+    mainPageStyles[mainPageState] = { ...activeStyles };
+  }
 
   const swapPageState = (newState: string) => {
     dispatch(setPageState("main", newState));

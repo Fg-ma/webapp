@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import config from "@config";
+import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Conversation } from "@FgTypes/rightTypes";
 import { ConversationCard } from "./RightSpaceCards";
 import { useLastMessageContext } from "@context/LastMessageContext";
@@ -11,6 +12,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Conversations() {
+  const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
   const [conversations, setConversations] = useState<Conversation[]>([]);
 
@@ -65,6 +67,7 @@ export default function Conversations() {
     fetchConversations();
   }, []);
 
+  // Update last message and message position
   useEffect(() => {
     const updatedConversations = conversations.map((conversation) => {
       if (conversation.conversation_id === lastMessage.conversation_id) {
@@ -91,6 +94,47 @@ export default function Conversations() {
 
     setConversations(updatedConversations);
   }, [lastMessage]);
+
+  // Establish incomingMessage live update socket connection
+  useEffect(() => {
+    liveUpdatesSocket?.on(
+      "incomingMessage",
+      (incomingMessage: { content: string; conversation_id: string }) => {
+        setConversations((prevConversations) => {
+          const updatedConversations = prevConversations.map((conversation) => {
+            if (
+              conversation.conversation_id === incomingMessage.conversation_id
+            ) {
+              return {
+                ...conversation,
+                last_message: incomingMessage.content,
+              };
+            }
+            return conversation;
+          });
+
+          const indexToUpdate = updatedConversations.findIndex(
+            (conversation) =>
+              conversation.conversation_id === incomingMessage.conversation_id,
+          );
+
+          if (indexToUpdate !== -1) {
+            const updatedConversation = updatedConversations.splice(
+              indexToUpdate,
+              1,
+            )[0];
+            updatedConversations.unshift(updatedConversation);
+          }
+
+          return updatedConversations;
+        });
+      },
+    );
+
+    return () => {
+      liveUpdatesSocket?.off("incomingMessage");
+    };
+  }, []);
 
   const conversationCards = conversations.map((conversation) => {
     let conversationMembersNames: string[] = [];

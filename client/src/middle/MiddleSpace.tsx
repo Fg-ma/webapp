@@ -54,7 +54,7 @@ export default function MiddleSpace({
     <div
       ref={middleSpaceRef}
       id="middleSpace"
-      className="bg-fg-white-95 rounded-md h-4/5 w-full max-w-full relative"
+      className="bg-fg-white-95 rounded-md h-4/5 w-full max-w-full relative overflow-hidden"
       style={{
         boxShadow:
           "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",

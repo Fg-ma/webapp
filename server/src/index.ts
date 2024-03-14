@@ -7,6 +7,7 @@ import cors from "cors";
 import { createServer } from "http";
 import prismaMiddleware from "./prismaMiddleware";
 import messageSocket from "./messageSocket";
+import liveUpdatesSocket from "./liveUpdatesSocket";
 import individualsRouter from "./routes/individuals";
 import groupsRouter from "./routes/groups";
 import organizationsRouter from "./routes/organizations";
@@ -26,6 +27,7 @@ app.use(json());
 app.use(prismaMiddleware);
 
 const server = createServer(app);
+liveUpdatesSocket(server);
 messageSocket(server);
 
 app.use("/individuals", individualsRouter);

@@ -3,6 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { MessagesTextFieldProps } from "@FgTypes/middleTypes";
 import { useLastMessageContext } from "@context/LastMessageContext";
+import { useSocketContext } from "@context/LiveUpdatesContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -18,6 +19,7 @@ export default function MessagesTextField({
   textFieldSnap,
 }: MessagesTextFieldProps) {
   const placeholder = "Search...";
+  const { liveUpdatesSocket } = useSocketContext();
   const { setLastMessage } = useLastMessageContext();
   const contentEditableRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +91,13 @@ export default function MessagesTextField({
 
     messageSocket.emit("sendMessage", token, conversation_id, inputValue);
 
+    liveUpdatesSocket?.emit(
+      "outgoingMessage",
+      token,
+      conversation_id,
+      inputValue,
+    );
+
     await Axios.put(
       `${serverUrl}/conversations/new_conversation_message`,
       {
@@ -117,7 +126,7 @@ export default function MessagesTextField({
 
   return (
     <div
-      className={`flex items-center justify-center h-max my-8 shadow ${
+      className={`flex items-center rounded-md justify-center h-max my-8 shadow ${
         !textFieldSnap && "absolute bottom-0 left-1/2 -translate-x-1/2 z-50"
       }`}
       style={{ width: textFieldSnap ? "87.5%" : "calc(87.5% - 4.5rem)" }}

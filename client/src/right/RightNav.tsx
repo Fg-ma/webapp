@@ -89,10 +89,13 @@ export default function RightNav({ mainPageState }: RightNavProps) {
   }
 
   function swapState(state: string) {
-    if (mainPageState !== "messages") {
+    if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
       dispatch(closeDrop(state, "isDropFilter"));
       dispatch(setPageState("right", state));
-    } else if (mainPageState === "messages") {
+    } else if (
+      mainPageState === "messages" ||
+      mainSecondaryPageState === "messages"
+    ) {
       dispatch(setPageState("messages", state));
     }
   }

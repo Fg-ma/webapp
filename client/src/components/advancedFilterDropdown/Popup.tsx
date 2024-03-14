@@ -24,7 +24,7 @@ export default function Popup({
   return createPortal(
     <div
       id={`${subcategory}Popup_${name}`}
-      className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max fixed z-10 overflow-visible cursor-pointer flex items-center rounded-md"
+      className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max absolute z-10 overflow-visible cursor-pointer flex items-center rounded-md shadow-md"
       style={{ top: `${position.top}px`, left: `${position.left}px` }}
       onMouseEnter={onMouseEnter as any}
       onMouseLeave={onMouseLeave}

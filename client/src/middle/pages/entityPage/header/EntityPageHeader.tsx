@@ -6,6 +6,8 @@ import ReferenceLinks from "@components/referenceLinks/ReferenceLinks";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 import AffiliatedEntitiesScroll from "./AffiliatedEntitiesScroll";
 import AffiliateButton from "./AffiliateButton";
+import MessageButton from "./MessageButton";
+import ContactDropdown from "./ContactDropdown";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -17,6 +19,7 @@ export default function EntityPageHeader({
   entityType,
   entity,
   entityReferences,
+  scrollingEntityContainer,
 }: EntityPageHeaderProps) {
   /* 
     Description:   
@@ -218,25 +221,9 @@ export default function EntityPageHeader({
       {entityReferences && <ReferenceLinks references={entityReferences} />}
       <div className="space-x-6 font-K2D mt-6 flex items-center justify-left">
         <AffiliateButton entity_id={entity_id} />
-        <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Message</button>
+        <MessageButton entity_id={entity_id} />
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
-        <button className="w-1/4 h-9 rounded-md bg-fg-white-95 flex items-center justify-center">
-          <span className="ml-5 grow">Contact</span>
-          <svg
-            className="w-6 aspect-square mr-1.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </button>
+        <ContactDropdown scrollingEntityContainer={scrollingEntityContainer} />
       </div>
     </>
   );
