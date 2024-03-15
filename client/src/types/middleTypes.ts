@@ -684,10 +684,22 @@ export interface MessageButtonProps {
 */
 
 export interface ContactDropdownProps {
+  entity_id: string;
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;
 }
 
 export interface ContactDropdownPortalProps {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  entity_id: string;
   contactDropdownPortalContainerRef: React.RefObject<HTMLDivElement>;
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;
+  contactDropdownRef: React.RefObject<HTMLDivElement>;
+}
+
+/*
+  CreateContactButton.tsx
+*/
+
+export interface CreateContactButtonProps {
+  entity_id: string;
 }

@@ -32,6 +32,7 @@ export interface AdvancedFilterDropdownProps {
 */
 
 export interface FilterCardProps {
+  entity_id: string;
   filter: string;
   identify: string;
   name: string;

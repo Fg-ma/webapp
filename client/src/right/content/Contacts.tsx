@@ -17,26 +17,33 @@ export default function Contacts() {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
   const sortData = (data: Contact[]) => {
-    const byLastContact = data.filter(
-      (item) => item.last_contact_date !== null,
-    );
-    const byCreationDate = data.filter(
-      (item) => item.last_contact_date === null,
-    );
     const parseDate = (dateString: string | null) =>
       dateString
         ? new Date(dateString).getTime()
         : new Date("2000-01-01T01:01:01.000Z").getTime();
 
-    byLastContact.sort(
-      (a, b) => parseDate(b.last_contact_date) - parseDate(a.last_contact_date),
-    );
-    byCreationDate.sort(
-      (a, b) =>
-        parseDate(b.contact_creation_date) - parseDate(a.contact_creation_date),
-    );
+    const sortedData = [...data];
 
-    return [...byLastContact, ...byCreationDate];
+    sortedData.sort((a, b) => {
+      if (a.last_contact_date !== null && b.last_contact_date !== null) {
+        return parseDate(b.last_contact_date) - parseDate(a.last_contact_date);
+      } else if (a.last_contact_date !== null && b.last_contact_date === null) {
+        return (
+          parseDate(b.contact_creation_date) - parseDate(a.last_contact_date)
+        );
+      } else if (a.last_contact_date === null && b.last_contact_date !== null) {
+        return (
+          parseDate(b.last_contact_date) - parseDate(a.contact_creation_date)
+        );
+      } else {
+        return (
+          parseDate(b.contact_creation_date) -
+          parseDate(a.contact_creation_date)
+        );
+      }
+    });
+
+    return [...sortedData];
   };
 
   useEffect(() => {

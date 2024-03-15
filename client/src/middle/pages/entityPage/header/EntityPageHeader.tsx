@@ -223,7 +223,10 @@ export default function EntityPageHeader({
         <AffiliateButton entity_id={entity_id} />
         <MessageButton entity_id={entity_id} />
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
-        <ContactDropdown scrollingEntityContainer={scrollingEntityContainer} />
+        <ContactDropdown
+          entity_id={entity_id}
+          scrollingEntityContainer={scrollingEntityContainer}
+        />
       </div>
     </>
   );

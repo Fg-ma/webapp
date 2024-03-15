@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
+
 import {
   ContactDropdownProps,
   ContactDropdownPortalProps,
 } from "@FgTypes/middleTypes";
+import CreateContactButton from "./CreateContactButton";
 
 const dropIconVar: Variants = {
   init: {
@@ -42,10 +44,12 @@ const dropdownTransition: Transition = {
 };
 
 export default function ContactDropdown({
+  entity_id,
   scrollingEntityContainer,
 }: ContactDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const contactDropdownPortalContainerRef = useRef<HTMLDivElement>(null);
+  const contactDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -72,7 +76,7 @@ export default function ContactDropdown({
   };
 
   return (
-    <div className="w-1/4 relative">
+    <div ref={contactDropdownRef} className="w-1/4 relative">
       <button
         className="w-full h-9 rounded-md bg-fg-white-95 flex items-center justify-center"
         onClick={toggleDropdown}
@@ -104,10 +108,13 @@ export default function ContactDropdown({
         <AnimatePresence>
           {isOpen && (
             <ContactDropdownPortal
+              setIsOpen={setIsOpen}
+              entity_id={entity_id}
               contactDropdownPortalContainerRef={
                 contactDropdownPortalContainerRef
               }
               scrollingEntityContainer={scrollingEntityContainer}
+              contactDropdownRef={contactDropdownRef}
             />
           )}
         </AnimatePresence>
@@ -117,11 +124,33 @@ export default function ContactDropdown({
 }
 
 function ContactDropdownPortal({
+  setIsOpen,
+  entity_id,
   contactDropdownPortalContainerRef,
   scrollingEntityContainer,
+  contactDropdownRef,
 }: ContactDropdownPortalProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node) &&
+      contactDropdownRef.current &&
+      !contactDropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const positionDropdown = () => {
@@ -166,9 +195,8 @@ function ContactDropdownPortal({
   return createPortal(
     <motion.div
       ref={dropdownRef}
-      className="py-4 pl-7 bg-white rounded-md shadow-md overflow-y-auto max-h-64 max-w-64 w-64 h-max smallScrollbar absolute z-50 flex flex-col space-y-3"
+      className="bg-white rounded-md shadow-md max-h-64 max-w-64 w-64 h-max absolute z-50 flex flex-col overflow-hidden"
       style={{
-        scrollbarGutter: "stable",
         top: `${position.top}px`,
         left: `${position.left}px`,
       }}
@@ -178,30 +206,24 @@ function ContactDropdownPortal({
       exit="init"
       transition={dropdownTransition}
     >
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
-      <button className="h-11 min-h-11 items-center font-K2D bg-fg-white-95 rounded-md w-full">
-        Create Contact
-      </button>
+      <div
+        className="h-1 bg-white mx-7 mb-1 z-10 w-full"
+        style={{
+          boxShadow: "0 3px 6px 8px rgba(255, 255, 255, 1)",
+        }}
+      ></div>
+      <div
+        className="pl-7 overflow-y-auto grow smallScrollbar flex flex-col space-y-3 py-3"
+        style={{ scrollbarGutter: "stable" }}
+      >
+        <CreateContactButton entity_id={entity_id} />
+      </div>
+      <div
+        className="h-1 bg-white mx-7 mt-1 w-full"
+        style={{
+          boxShadow: "0 -3px 6px 8px rgba(255, 255, 255, 1)",
+        }}
+      ></div>
     </motion.div>,
     document.body,
   );

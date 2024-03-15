@@ -229,7 +229,15 @@ export default function EntityPage({ entityType }: EntityPageProps) {
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full overflow-hidden rounded-md flex flex-col relative">
+      <div
+        className="h-5 absolute top-0 left-0 right-0 mx-8 z-50"
+        style={{
+          background: `linear-gradient(to bottom, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0) 100%)`,
+          filter: "blur(4px)",
+          width: `calc(100% - 4rem)`,
+        }}
+      ></div>
       <div
         ref={scrollingEntityContainer}
         className="overflow-y-auto w-full pl-9"

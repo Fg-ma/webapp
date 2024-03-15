@@ -11,7 +11,7 @@ export default function HomePage({
 
   return (
     <div className="h-full">
-      <div className="absolute inset-0 left-1/2 transform -translate-x-1/2 z-10 -top-6 h-fit">
+      <div className="absolute inset-0 left-1/2 transform -translate-x-1/2 z-50 -top-6 h-fit">
         <MiddleDrop
           middleSpaceContainerRef={middleSpaceContainerRef}
           middleSpaceRef={middleSpaceRef}

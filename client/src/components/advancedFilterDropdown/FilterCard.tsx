@@ -7,8 +7,10 @@ import {
 } from "@redux/filters/filterActions";
 import { FilterCardProps, FilterState } from "@FgTypes/componentTypes";
 import Popup from "./Popup";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 export default function FilterCard({
+  entity_id,
   filter,
   identify,
   name,
@@ -131,17 +133,23 @@ export default function FilterCard({
       whileHover={{ backgroundColor: "rgb(44, 146, 245)" }}
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
-      <div
-        className={`w-12 aspect-square bg-fg-white-85 mr-2 grid place-items-center flex-shrink-0
-                ${subcategory === "ind" ? "rounded-full" : "rounded-md"}
-                `}
-      >
-        <p className="select-none">pic</p>
-      </div>
+      <ProfilePicture
+        size={{ w: 3, h: 3 }}
+        entity_id={entity_id}
+        entity_type={subcategory === "ind" ? 1 : subcategory === "grp" ? 2 : 3}
+        styles={
+          subcategory === "ind"
+            ? "rounded-full"
+            : subcategory === "grp"
+              ? "rounded-md"
+              : "rounded-sm"
+        }
+        clickable={false}
+      />
       <span
         ref={nameSpanRef}
         className={`
-                    m-2 font-Josefin text-lg select-none truncate
+                    m-2 ml-4 font-Josefin text-lg select-none truncate
                     ${
                       isFilterSelected
                         ? "underline decoration-2 underline-offset-8 decoration-fg-primary"

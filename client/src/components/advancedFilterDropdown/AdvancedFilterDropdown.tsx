@@ -8,6 +8,7 @@ import {
   AdvancedFilterDropdownProps,
   FilterState,
 } from "@FgTypes/componentTypes";
+import { Group, Individual, Organization } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -69,7 +70,7 @@ export default function AdvancedFilterDropdown({
   */
 
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<(Individual | Group | Organization)[]>([]);
   const [placeholder, setPlaceholder] = useState("");
   const [expandedFilter, setExpandedFilter] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -82,26 +83,70 @@ export default function AdvancedFilterDropdown({
     `advanced-filter-${Math.random().toString(36).substring(7)}`,
   );
 
+  const sortData = (data: (Individual | Group | Organization)[]) => {
+    const parseDate = (dateString: string | null) =>
+      dateString
+        ? new Date(dateString).getTime()
+        : new Date("2000-01-01T01:01:01.000Z").getTime();
+
+    data.sort(
+      (a, b) =>
+        parseDate(b.affiliate_relation_date) -
+        parseDate(a.affiliate_relation_date),
+    );
+
+    return [...data];
+  };
+
   // Gets the data for the filter cards
   useEffect(() => {
     const fetchFilterCardData = async () => {
       if (subcategory == "ind") {
-        const response = await Axios.get(`${serverUrl}/individuals`);
-        setData(response.data);
+        const response = await Axios.get(
+          `${serverUrl}/affiliateRelations/get_affiliated_individuals`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        setData(sortData(response.data));
         setPlaceholder("--Individuals--");
         setExpandedFilter("individual");
       } else if (subcategory == "grp") {
-        const response = await Axios.get(`${serverUrl}/groups`);
-        setData(response.data);
+        const response = await Axios.get(
+          `${serverUrl}/affiliateRelations/get_affiliated_groups`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        setData(sortData(response.data));
         setPlaceholder("--Groups--");
         setExpandedFilter("group");
       } else if (subcategory == "org") {
-        const response = await Axios.get(`${serverUrl}/organizations`);
-        setData(response.data);
+        const response = await Axios.get(
+          `${serverUrl}/affiliateRelations/get_affiliated_organizations`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        setData(sortData(response.data));
         setPlaceholder("--Organizations--");
         setExpandedFilter("organization");
       }
     };
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.error("Token not found in local storage");
+      return;
+    }
 
     fetchFilterCardData();
   }, []);
@@ -113,10 +158,31 @@ export default function AdvancedFilterDropdown({
   const filterCards = data.map((filterInfo) => {
     return (
       <FilterCard
-        key={filterInfo[`${expandedFilter}_id`]}
+        key={
+          filterInfo[
+            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
+          ] as string
+        }
+        entity_id={
+          filterInfo[
+            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
+          ] as string
+        }
         filter={filter}
-        identify={filterInfo[`${expandedFilter}_id`]}
-        name={filterInfo[`${expandedFilter}_name`]}
+        identify={
+          filterInfo[
+            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
+          ] as string
+        }
+        name={
+          filterInfo[
+            `${expandedFilter}_name` as keyof (
+              | Individual
+              | Group
+              | Organization
+            )
+          ] as string
+        }
         subcategory={subcategory}
         popupRef={popupRef}
       />
@@ -210,15 +276,31 @@ export default function AdvancedFilterDropdown({
           {isOpen && (
             <motion.div
               ref={advancedFilterDropdownDropRef}
-              className="pl-7 bg-white rounded-md shadow-md overflow-y-auto max-h-80 max-w-xs w-80 h-80 smallScrollbar"
-              style={{ scrollbarGutter: "stable" }}
+              className="bg-white rounded-md shadow-md max-h-80 max-w-xs w-80 h-max flex flex-col overflow-hidden"
               variants={dropdownVar}
               initial="init"
               animate="animate"
               exit="init"
               transition={dropdownTransition}
             >
-              {filterCards}
+              <div
+                className="h-1 bg-white mx-7 z-10 mb-2 w-full"
+                style={{
+                  boxShadow: "0 2px 6px 8px rgba(255, 255, 255, 1)",
+                }}
+              ></div>
+              <div
+                className="pl-7 overflow-y-auto grow smallScrollbar flex flex-col w-full"
+                style={{ scrollbarGutter: "stable" }}
+              >
+                {filterCards}
+              </div>
+              <div
+                className="h-1 bg-white mx-7 mt-2 w-full"
+                style={{
+                  boxShadow: "0 -2px 6px 8px rgba(255, 255, 255, 1)",
+                }}
+              ></div>
             </motion.div>
           )}
         </AnimatePresence>

@@ -17,27 +17,35 @@ export default function Conversations() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
 
   const sortData = (data: Conversation[]) => {
-    const byLastMessage = data.filter(
-      (item) => item.last_message_date !== null,
-    );
-    const byCreationDate = data.filter(
-      (item) => item.last_message_date === null,
-    );
     const parseDate = (dateString: string | null) =>
       dateString
         ? new Date(dateString).getTime()
         : new Date("2000-01-01T01:01:01.000Z").getTime();
 
-    byLastMessage.sort(
-      (a, b) => parseDate(b.last_message_date) - parseDate(a.last_message_date),
-    );
-    byCreationDate.sort(
-      (a, b) =>
-        parseDate(b.conversation_creation_date) -
-        parseDate(a.conversation_creation_date),
-    );
+    const sortedData = [...data];
 
-    return [...byLastMessage, ...byCreationDate];
+    sortedData.sort((a, b) => {
+      if (a.last_message_date !== null && b.last_message_date !== null) {
+        return parseDate(b.last_message_date) - parseDate(a.last_message_date);
+      } else if (a.last_message_date !== null && b.last_message_date === null) {
+        return (
+          parseDate(b.conversation_creation_date) -
+          parseDate(a.last_message_date)
+        );
+      } else if (a.last_message_date === null && b.last_message_date !== null) {
+        return (
+          parseDate(b.last_message_date) -
+          parseDate(a.conversation_creation_date)
+        );
+      } else {
+        return (
+          parseDate(b.conversation_creation_date) -
+          parseDate(a.conversation_creation_date)
+        );
+      }
+    });
+
+    return [...sortedData];
   };
 
   useEffect(() => {

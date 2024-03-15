@@ -58,6 +58,13 @@ export default function MiddleSearchBar({
     ? `${middleSpaceContainerWidth * 0.8}px`
     : "0px";
 
+  // Closes filter if opened on load
+  useEffect(() => {
+    if (dropFilter) {
+      dispatch(toggleDrop("middle", "isDropFilter"));
+    }
+  }, []);
+
   const handleInputFocus = () => {
     setIsInputFocused(true);
   };

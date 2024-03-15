@@ -157,6 +157,14 @@ export default function MiddleVerticalSplitPane({
   return (
     <div className="flex flex-col w-full h-full relative">
       <div
+        className="h-5 absolute top-0 left-0 right-0 mx-8 z-40"
+        style={{
+          background: `linear-gradient(to bottom, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0) 100%)`,
+          filter: "blur(4px)",
+          width: `calc(100% - 4rem)`,
+        }}
+      ></div>
+      <div
         className="overflow-auto box-border"
         style={{ height: paneHeight, scrollbarGutter: "stable" }}
       >
@@ -190,6 +198,14 @@ export default function MiddleVerticalSplitPane({
       >
         <RelatedIssues />
       </div>
+      <div
+        className="h-3 absolute bottom-0 left-0 right-0 mx-8 z-40"
+        style={{
+          background: `linear-gradient(to top, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0.35) 50%, rgba(243, 243, 243, 0) 100%)`,
+          filter: "blur(4px)",
+          width: `calc(100% - 4rem)`,
+        }}
+      ></div>
     </div>
   );
 }

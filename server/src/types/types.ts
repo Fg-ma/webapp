@@ -188,14 +188,6 @@ export interface FullVideo {
   };
 }
 
-/*
-  conversations.ts
-  Global Individual
-  Global Group
-  Global Organization
-  Global Conversation
-*/
-
 export interface ConversationMember {
   conversation_id: string;
   member_id: string;
@@ -213,6 +205,15 @@ export interface ConversationMember {
   };
 }
 
+/*
+  conversations.ts
+  Global Individual
+  Global Group
+  Global Organization
+  Global Conversation
+  Global ConversationMember
+*/
+
 export interface Message {
   conversations_messages_logs_id: string;
   conversation_id: string;
@@ -228,6 +229,7 @@ export interface Message {
   Global Group
   Global Individual
   Global Conversation
+  Global ConversationMember
 */
 
 export interface Contact {
