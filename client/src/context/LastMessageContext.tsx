@@ -1,17 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
-
-type LastMessageContextType = {
-  lastMessage: {
-    conversation_id: string;
-    last_message: string;
-  };
-  setLastMessage: React.Dispatch<
-    React.SetStateAction<{
-      conversation_id: string;
-      last_message: string;
-    }>
-  >;
-};
+import {
+  LastMessageContextProviderProps,
+  LastMessageContextType,
+} from "@FgTypes/contextTypes";
 
 const LastMessageContext = createContext<LastMessageContextType | undefined>(
   undefined,
@@ -27,13 +18,9 @@ export const useLastMessageContext = () => {
   return context;
 };
 
-type LastMessageContextProviderProps = {
-  children: React.ReactNode;
-};
-
-export const LastMessageContextProvider: React.FC<
-  LastMessageContextProviderProps
-> = ({ children }) => {
+export function LastMessageContextProvider({
+  children,
+}: LastMessageContextProviderProps) {
   const [lastMessage, setLastMessage] = useState<{
     conversation_id: string;
     last_message: string;
@@ -47,6 +34,6 @@ export const LastMessageContextProvider: React.FC<
       {children}
     </LastMessageContext.Provider>
   );
-};
+}
 
 export default LastMessageContext;

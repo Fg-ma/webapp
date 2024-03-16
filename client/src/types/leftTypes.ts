@@ -12,6 +12,7 @@ export interface LeftState {
 export interface Group {
   group_id: string;
   group_name: string;
+  group_handle: string;
   group_currentIssue: string;
   group_description: string;
   group_stances: string;
@@ -22,7 +23,7 @@ export interface Group {
 export interface Individual {
   individual_id: string;
   individual_name: string;
-  individual_userName: string;
+  individual_username: string;
   individual_currentIssue: string;
   individual_description: string;
   individual_roles: string;

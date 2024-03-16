@@ -1,25 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
-
-type AffiliateContextType = {
-  affiliateRelation: {
-    action: string;
-    affiliate_id_root: string;
-    affiliate_id_target: string;
-    affiliate_relation_date: string;
-    affiliate_relation_id: string;
-    entity_type: number;
-  };
-  setAffiliateRelation: React.Dispatch<
-    React.SetStateAction<{
-      action: string;
-      affiliate_id_root: string;
-      affiliate_id_target: string;
-      affiliate_relation_date: string;
-      affiliate_relation_id: string;
-      entity_type: number;
-    }>
-  >;
-};
+import {
+  AffiliateContextProviderProps,
+  AffiliateContextType,
+} from "@FgTypes/contextTypes";
 
 const AffiliateContext = createContext<AffiliateContextType | undefined>(
   undefined,
@@ -35,13 +18,9 @@ export const useAffiliateContext = () => {
   return context;
 };
 
-type AffiliateContextProviderProps = {
-  children: React.ReactNode;
-};
-
-export const AffiliateContextProvider: React.FC<
-  AffiliateContextProviderProps
-> = ({ children }) => {
+export function AffiliateContextProvider({
+  children,
+}: AffiliateContextProviderProps) {
   const [affiliateRelation, setAffiliateRelation] = useState<{
     action: string;
     affiliate_id_root: string;
@@ -65,6 +44,6 @@ export const AffiliateContextProvider: React.FC<
       {children}
     </AffiliateContext.Provider>
   );
-};
+}
 
 export default AffiliateContext;

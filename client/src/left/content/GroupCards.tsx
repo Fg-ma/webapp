@@ -4,6 +4,8 @@ import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
 import { Group } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
+import { useIndexedDBContext } from "@context/IDBContext";
+import { AFFILIATED_GROUPS_TABLE } from "@IDB/IDBService";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,7 +21,12 @@ export default function GroupCards() {
       It queries for any affiliates that the user may have in common with the group.
   */
 
-  const { affiliateRelation } = useAffiliateContext();
+  const {
+    storeAffiliatedEntities,
+    getStoredAffiliatedEntities,
+    deleteStoredAffiliatedEntities,
+  } = useIndexedDBContext();
+  const { affiliateRelation, setAffiliateRelation } = useAffiliateContext();
   const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
@@ -44,9 +51,31 @@ export default function GroupCards() {
         const newGroup = { ...response.data, animate: true };
 
         setGroups((prev) => [newGroup, ...prev]);
+
+        const storedGroups = groups.map((group) => ({
+          ...group,
+          animate: false,
+        }));
+
+        await deleteStoredAffiliatedEntities(AFFILIATED_GROUPS_TABLE);
+        await storeAffiliatedEntities(AFFILIATED_GROUPS_TABLE, [
+          { ...response.data },
+          ...storedGroups,
+        ]);
       } catch (error) {
         console.error("Error fetching group data:", error);
       }
+    };
+
+    const deleteOldRelationData = async () => {
+      const newGroups = groups.filter(
+        (group) => group.group_id !== affiliateRelation.affiliate_id_target,
+      );
+
+      setGroups(newGroups);
+
+      await deleteStoredAffiliatedEntities(AFFILIATED_GROUPS_TABLE);
+      await storeAffiliatedEntities(AFFILIATED_GROUPS_TABLE, newGroups);
     };
 
     if (
@@ -54,15 +83,27 @@ export default function GroupCards() {
       affiliateRelation?.action === "newRelation"
     ) {
       fetchNewRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_id_root: "",
+        affiliate_id_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     } else if (
       affiliateRelation?.entity_type === 2 &&
       affiliateRelation?.action === "deletedRelation"
     ) {
-      const newIndividuals = groups.filter(
-        (group) => group.group_id !== affiliateRelation.affiliate_id_target,
-      );
-
-      setGroups(newIndividuals);
+      deleteOldRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_id_root: "",
+        affiliate_id_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     }
   }, [affiliateRelation]);
 
@@ -83,26 +124,37 @@ export default function GroupCards() {
 
   useEffect(() => {
     const fetchGroupData = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedAffiliates = await getStoredAffiliatedEntities(
+        AFFILIATED_GROUPS_TABLE,
+      );
 
-        if (!token) {
-          console.error("Token not found in local storage");
-          return;
-        }
+      if (storedAffiliates.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await Axios.get(
-          `${serverUrl}/affiliateRelations/get_affiliated_groups`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/affiliateRelations/get_affiliated_groups`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          },
-        );
+          );
 
-        setGroups(sortData(response.data));
-      } catch (error) {
-        console.error("Error fetching group data:", error);
+          const sortedData = sortData(response.data);
+
+          setGroups(sortedData);
+          await storeAffiliatedEntities(AFFILIATED_GROUPS_TABLE, sortedData);
+        } catch (error) {
+          console.error("Error fetching group data:", error);
+        }
+      } else {
+        setGroups(storedAffiliates as Group[]);
       }
     };
 
@@ -114,7 +166,7 @@ export default function GroupCards() {
       <GroupCard
         key={grpInfo.group_id}
         id={grpInfo.group_id}
-        name={grpInfo.group_name}
+        name={grpInfo.group_name ? grpInfo.group_name : grpInfo.group_handle}
         currentIssue={grpInfo.group_currentIssue}
         affInCommon="placeholder"
         animate={grpInfo.animate}

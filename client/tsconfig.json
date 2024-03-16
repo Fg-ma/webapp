@@ -6,7 +6,11 @@
       "@redux/*": ["src/redux/*"],
       "@components/*": ["src/components/*"],
       "@FgTypes/*": ["src/types/*"],
-      "@context/*": ["src/context/*"]
+      "@context/*": ["src/context/*"],
+      "@IDB/*": ["src/IDB/*"],
+      "@left/*": ["src/left/*"],
+      "@middle/*": ["src/middle/*"],
+      "@right/*": ["src/right/*"]
     },
     "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],

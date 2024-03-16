@@ -43,6 +43,7 @@ export default function EntityPageHeader({
   >(null);
   const topHeaderRef = useRef<HTMLDivElement>(null);
   const affiliateProfilePicturesRef = useRef<HTMLDivElement>(null);
+  const affiliatedEntitiesScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (affiliateProfilePicturesRef.current) {
@@ -176,23 +177,35 @@ export default function EntityPageHeader({
             clickable={false}
           />
         </div>
-        <div className="ml-8 h-fit">
+        <div className="ml-8 h-fit grow">
           <p
             className={`text-4xl ${
               affiliatesProfilePictures?.length === 0 ? "mt-2" : "mb-1"
             }`}
           >
-            {entity?.[`${entityType.slice(0, -1)}_name`]}
+            {entity?.[`${entityType.slice(0, -1)}_name`]
+              ? entity?.[`${entityType.slice(0, -1)}_name`]
+              : entity?.[`${entityType.slice(0, -1)}_username`]
+                ? entity?.[`${entityType.slice(0, -1)}_username`]
+                : entity?.[`${entityType.slice(0, -1)}_handle`]}
           </p>
-          <AffiliatedEntitiesScroll
-            affiliatesProfilePictures={affiliatesProfilePictures}
-            affiliateProfilePicturesRef={affiliateProfilePicturesRef}
-            topHeaderRef={topHeaderRef}
-          />
+          <div ref={affiliatedEntitiesScrollRef} className="w-full">
+            <AffiliatedEntitiesScroll
+              affiliatesProfilePictures={affiliatesProfilePictures}
+              affiliateProfilePicturesRef={affiliateProfilePicturesRef}
+              affiliatedEntitiesScrollRef={affiliatedEntitiesScrollRef}
+              topHeaderRef={topHeaderRef}
+            />
+          </div>
         </div>
       </div>
       <div className="text-xl mt-4">
-        {entity?.[`${entityType.slice(0, -1)}_userName`]}
+        {entity?.[`${entityType.slice(0, -1)}_username`] && (
+          <div className="flex items-center justify-start">
+            <p className="pb-1">@</p>
+            <p>{entity[`${entityType.slice(0, -1)}_username`]}</p>
+          </div>
+        )}
         {entity?.[`${entityType.slice(0, -1)}_handle`] && (
           <div className="flex items-center justify-start">
             <p className="pb-1">@</p>

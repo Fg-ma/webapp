@@ -1,14 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-
-interface PinnedContextType {
-  pinnedState: { relation_id: string; type: string };
-  setPinnedState: React.Dispatch<
-    React.SetStateAction<{
-      relation_id: string;
-      type: string;
-    }>
-  >;
-}
+import { PinnedProviderProps, PinnedContextType } from "@FgTypes/contextTypes";
 
 const PinnedContext = createContext<PinnedContextType | undefined>(undefined);
 
@@ -20,7 +11,7 @@ export function usePinned() {
   return context;
 }
 
-export function PinnedProvider({ children }: { children: React.ReactNode }) {
+export function PinnedProvider({ children }: PinnedProviderProps) {
   const [pinnedState, setPinnedState] = useState<{
     relation_id: string;
     type: string;

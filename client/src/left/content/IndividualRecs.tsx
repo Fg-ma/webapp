@@ -38,7 +38,11 @@ export default function IndividualRecs() {
       <IndividualCard
         key={indInfo.individual_id}
         id={indInfo.individual_id}
-        name={indInfo.individual_name}
+        name={
+          indInfo.individual_name
+            ? indInfo.individual_name
+            : indInfo.individual_username
+        }
         currentIssue={indInfo.individual_currentIssue}
       />
     );

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect } from "react";
 import io, { Socket } from "socket.io-client";
 import config from "@config";
+import { LiveUpdatesSocketProviderProps } from "@FgTypes/contextTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -23,9 +24,7 @@ export const useSocketContext = () => {
 
 export function LiveUpdatesSocketProvider({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: LiveUpdatesSocketProviderProps) {
   const liveUpdatesSocket = io(serverUrl, {
     path: "/live-updates-socket",
   });

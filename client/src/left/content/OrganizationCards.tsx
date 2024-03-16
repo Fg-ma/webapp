@@ -4,6 +4,8 @@ import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
 import { Organization } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
+import { AFFILIATED_ORGANIZATIONS_TABLE } from "@IDB/IDBService";
+import { useIndexedDBContext } from "@context/IDBContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,7 +21,12 @@ export default function OrganizationCards() {
       N/A
   */
 
-  const { affiliateRelation } = useAffiliateContext();
+  const {
+    storeAffiliatedEntities,
+    getStoredAffiliatedEntities,
+    deleteStoredAffiliatedEntities,
+  } = useIndexedDBContext();
+  const { affiliateRelation, setAffiliateRelation } = useAffiliateContext();
   const [organizations, setOrganizations] = useState<Organization[]>([]);
 
   // Handle live updates to affiliation status
@@ -45,9 +52,36 @@ export default function OrganizationCards() {
         const newIndividual = { ...response.data, animate: true };
 
         setOrganizations((prev) => [newIndividual, ...prev]);
+
+        const storedOrganizations = organizations.map((organization) => ({
+          ...organization,
+          animate: false,
+        }));
+
+        await deleteStoredAffiliatedEntities(AFFILIATED_ORGANIZATIONS_TABLE);
+        await storeAffiliatedEntities(AFFILIATED_ORGANIZATIONS_TABLE, [
+          { ...response.data },
+          ...storedOrganizations,
+        ]);
       } catch (error) {
         console.error("Error fetching organization data:", error);
       }
+    };
+
+    const deleteOldRelationData = async () => {
+      const newOrganizations = organizations.filter(
+        (organization) =>
+          organization.organization_id !==
+          affiliateRelation.affiliate_id_target,
+      );
+
+      setOrganizations(newOrganizations);
+
+      await deleteStoredAffiliatedEntities(AFFILIATED_ORGANIZATIONS_TABLE);
+      await storeAffiliatedEntities(
+        AFFILIATED_ORGANIZATIONS_TABLE,
+        newOrganizations,
+      );
     };
 
     if (
@@ -59,13 +93,15 @@ export default function OrganizationCards() {
       affiliateRelation?.entity_type === 3 &&
       affiliateRelation?.action === "deletedRelation"
     ) {
-      const newOrganizations = organizations.filter(
-        (organization) =>
-          organization.organization_id !==
-          affiliateRelation.affiliate_id_target,
-      );
-
-      setOrganizations(newOrganizations);
+      deleteOldRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_id_root: "",
+        affiliate_id_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     }
   }, [affiliateRelation]);
 
@@ -86,26 +122,40 @@ export default function OrganizationCards() {
 
   useEffect(() => {
     const fetchOrganizationData = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedAffiliates = await getStoredAffiliatedEntities(
+        AFFILIATED_ORGANIZATIONS_TABLE,
+      );
 
-        if (!token) {
-          console.error("Token not found in local storage");
-          return;
-        }
+      if (storedAffiliates.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await Axios.get(
-          `${serverUrl}/affiliateRelations/get_affiliated_organizations`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/affiliateRelations/get_affiliated_organizations`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          },
-        );
+          );
 
-        setOrganizations(sortData(response.data));
-      } catch (error) {
-        console.error("Error fetching organization data:", error);
+          const sortedData = sortData(response.data);
+
+          setOrganizations(sortedData);
+          await storeAffiliatedEntities(
+            AFFILIATED_ORGANIZATIONS_TABLE,
+            sortedData,
+          );
+        } catch (error) {
+          console.error("Error fetching organization data:", error);
+        }
+      } else {
+        setOrganizations(storedAffiliates as Organization[]);
       }
     };
 
@@ -117,7 +167,11 @@ export default function OrganizationCards() {
       <OrganizationCard
         key={orgInfo.organization_id}
         id={orgInfo.organization_id}
-        name={orgInfo.organization_name}
+        name={
+          orgInfo.organization_name
+            ? orgInfo.organization_name
+            : orgInfo.organization_handle
+        }
         currentIssue={orgInfo.organization_currentIssue}
         stances={orgInfo.organization_stances}
         animate={orgInfo.animate}

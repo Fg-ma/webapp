@@ -82,6 +82,10 @@ export default function ProfilePicture({
               profilePictureUrl: url,
             });
           }
+        } else {
+          setProfilePictureData({
+            profilePictureUrl: "",
+          });
         }
       } catch (error) {
         console.error("Error fetching profile picture data:", error);

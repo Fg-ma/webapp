@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, Variants, Transition } from "framer-motion";
 import { AffiliatedEntitiesScrollProps } from "@FgTypes/middleTypes";
 
@@ -26,13 +26,40 @@ const transition: Transition = {
 export default function AffiliatedEntitiesScroll({
   affiliatesProfilePictures,
   affiliateProfilePicturesRef,
+  affiliatedEntitiesScrollRef,
   topHeaderRef,
 }: AffiliatedEntitiesScrollProps) {
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
+  const fullAffiliateProfilePicturesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (
+      fullAffiliateProfilePicturesRef.current &&
+      affiliatedEntitiesScrollRef.current &&
+      fullAffiliateProfilePicturesRef.current.clientWidth &&
+      affiliatedEntitiesScrollRef.current.clientWidth &&
+      fullAffiliateProfilePicturesRef.current.clientWidth <
+        affiliatedEntitiesScrollRef.current.clientWidth
+    ) {
+      setShowRightScroll(false);
+    } else {
+      setShowRightScroll(true);
+    }
+  }, [
+    affiliatesProfilePictures,
+    affiliateProfilePicturesRef.current,
+    affiliatedEntitiesScrollRef.current,
+  ]);
 
   const handleScroll = () => {
     if (affiliateProfilePicturesRef.current) {
+      console.log(
+        affiliateProfilePicturesRef,
+        affiliateProfilePicturesRef.current.scrollWidth,
+        affiliateProfilePicturesRef.current.clientWidth,
+      );
+
       if (affiliateProfilePicturesRef.current.scrollLeft > 0) {
         setShowLeftScroll(true);
       } else {
@@ -84,7 +111,8 @@ export default function AffiliatedEntitiesScroll({
     <>
       {affiliatesProfilePictures?.length !== 0 && (
         <div
-          className="flex flex-row h-8"
+          className="flex flex-row h-8 w-max"
+          ref={fullAffiliateProfilePicturesRef}
           style={{
             maxWidth: topHeaderRef.current
               ? `${topHeaderRef.current.clientWidth - 125}px`

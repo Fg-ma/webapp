@@ -7,20 +7,23 @@ import { AffiliateContextProvider } from "./src/context/AffiliateContext.tsx";
 import { PinnedProvider } from "./src/context/PinnedContext.tsx";
 import { LastMessageContextProvider } from "./src/context/LastMessageContext.tsx";
 import { LiveUpdatesSocketProvider } from "./src/context/LiveUpdatesContext.tsx";
+import { IndexedDBProvider } from "./src/context/IDBContext.tsx";
 
 const container = document.getElementById("root");
 const root = createRoot(container as HTMLElement);
 
 root.render(
-  <LiveUpdatesSocketProvider>
-    <LastMessageContextProvider>
-      <PinnedProvider>
-        <AffiliateContextProvider>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </AffiliateContextProvider>
-      </PinnedProvider>
-    </LastMessageContextProvider>
-  </LiveUpdatesSocketProvider>,
+  <IndexedDBProvider>
+    <LiveUpdatesSocketProvider>
+      <LastMessageContextProvider>
+        <PinnedProvider>
+          <AffiliateContextProvider>
+            <Provider store={store}>
+              <App />
+            </Provider>
+          </AffiliateContextProvider>
+        </PinnedProvider>
+      </LastMessageContextProvider>
+    </LiveUpdatesSocketProvider>
+  </IndexedDBProvider>,
 );

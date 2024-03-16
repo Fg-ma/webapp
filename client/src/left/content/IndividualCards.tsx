@@ -4,6 +4,8 @@ import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
 import { Individual } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
+import { useIndexedDBContext } from "@context/IDBContext";
+import { AFFILIATED_INDIVIDUALS_TABLE } from "@IDB/IDBService";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,7 +21,12 @@ export default function IndividualCards() {
       N/A
   */
 
-  const { affiliateRelation } = useAffiliateContext();
+  const {
+    storeAffiliatedEntities,
+    getStoredAffiliatedEntities,
+    deleteStoredAffiliatedEntities,
+  } = useIndexedDBContext();
+  const { affiliateRelation, setAffiliateRelation } = useAffiliateContext();
   const [individuals, setIndividuals] = useState<Individual[]>([]);
 
   useEffect(() => {
@@ -44,9 +51,35 @@ export default function IndividualCards() {
         const newIndividual = { ...response.data, animate: true };
 
         setIndividuals((prev) => [newIndividual, ...prev]);
+
+        const storedIndividuals = individuals.map((individual) => ({
+          ...individual,
+          animate: false,
+        }));
+
+        await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+        await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
+          { ...response.data },
+          ...storedIndividuals,
+        ]);
       } catch (error) {
         console.error("Error fetching individual data:", error);
       }
+    };
+
+    const deleteOldRelationData = async () => {
+      const newIndividuals = individuals.filter(
+        (individual) =>
+          individual.individual_id !== affiliateRelation.affiliate_id_target,
+      );
+
+      setIndividuals(newIndividuals);
+
+      await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+      await storeAffiliatedEntities(
+        AFFILIATED_INDIVIDUALS_TABLE,
+        newIndividuals,
+      );
     };
 
     if (
@@ -54,16 +87,27 @@ export default function IndividualCards() {
       affiliateRelation?.action === "newRelation"
     ) {
       fetchNewRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_id_root: "",
+        affiliate_id_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     } else if (
       affiliateRelation?.entity_type === 1 &&
       affiliateRelation?.action === "deletedRelation"
     ) {
-      const newIndividuals = individuals.filter(
-        (individual) =>
-          individual.individual_id !== affiliateRelation.affiliate_id_target,
-      );
-
-      setIndividuals(newIndividuals);
+      deleteOldRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_id_root: "",
+        affiliate_id_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     }
   }, [affiliateRelation]);
 
@@ -84,26 +128,40 @@ export default function IndividualCards() {
 
   useEffect(() => {
     const fetchIndividualData = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedAffiliates = await getStoredAffiliatedEntities(
+        AFFILIATED_INDIVIDUALS_TABLE,
+      );
 
-        if (!token) {
-          console.error("Token not found in local storage");
-          return;
-        }
+      if (storedAffiliates.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await Axios.get(
-          `${serverUrl}/affiliateRelations/get_affiliated_individuals`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/affiliateRelations/get_affiliated_individuals`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          },
-        );
+          );
 
-        setIndividuals(sortData(response.data));
-      } catch (error) {
-        console.error("Error fetching individual data:", error);
+          const sortedData = sortData(response.data);
+
+          setIndividuals(sortedData);
+          await storeAffiliatedEntities(
+            AFFILIATED_INDIVIDUALS_TABLE,
+            sortedData,
+          );
+        } catch (error) {
+          console.error("Error fetching individual data:", error);
+        }
+      } else {
+        setIndividuals(storedAffiliates as Individual[]);
       }
     };
 
@@ -115,7 +173,11 @@ export default function IndividualCards() {
       <IndividualCard
         key={indInfo.individual_id}
         id={indInfo.individual_id}
-        name={indInfo.individual_name}
+        name={
+          indInfo.individual_name
+            ? indInfo.individual_name
+            : indInfo.individual_username
+        }
         currentIssue={indInfo.individual_currentIssue}
         animate={indInfo.animate ? true : false}
       />
