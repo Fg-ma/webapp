@@ -5,6 +5,8 @@ import { Transition, Variants, motion } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { ProfilePictureProps, Entity } from "@FgTypes/componentTypes";
+import { useIndexedDBContext } from "@context/IDBContext";
+import { PROFILE_PICTURES } from "@IDB/IDBService";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -37,58 +39,75 @@ export default function ProfilePicture({
 }: ProfilePictureProps) {
   const dispatch = useDispatch();
 
+  const { getStoredProfilePicture, storeProfilePicture } =
+    useIndexedDBContext();
   const [profilePictureData, setProfilePictureData] = useState({
     profilePictureUrl: "",
   });
+  const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+  const mousePosition = useRef<{ x: string; y: string } | null>(null);
 
   useEffect(() => {
     const fetchProfilePictureData = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedProfilePicture = await getStoredProfilePicture(
+        PROFILE_PICTURES,
+        entity_id,
+      );
 
-        if (!token) {
-          return;
-        }
+      console.log(storedProfilePicture, entity_id);
+      if (!storedProfilePicture) {
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await Axios.get(
-          `${serverUrl}/images/get_user_profile_picture`,
-          {
-            params: {
-              entity_id: entity_id,
+          if (!token) {
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/images/get_user_profile_picture`,
+            {
+              params: {
+                entity_id: entity_id,
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        if (response.data !== "default") {
-          const blobData = new Uint8Array(
-            response.data.profile_picture_data.data,
           );
 
-          const extension = response.data.profile_picture_filename
-            .slice(-3)
-            .toLowerCase();
-
-          const mimeType = getMimeType(extension);
-
-          if (mimeType) {
-            const url = URL.createObjectURL(
-              new Blob([blobData], { type: mimeType }),
+          if (response.data !== "default") {
+            const blobData = new Uint8Array(
+              response.data.profile_picture_data.data,
             );
 
+            const extension = response.data.profile_picture_filename
+              .slice(-3)
+              .toLowerCase();
+
+            const mimeType = getMimeType(extension);
+
+            if (mimeType) {
+              const url = URL.createObjectURL(
+                new Blob([blobData], { type: mimeType }),
+              );
+
+              setProfilePictureData({
+                profilePictureUrl: url,
+              });
+
+              await storeProfilePicture(PROFILE_PICTURES, entity_id, url);
+            }
+          } else {
             setProfilePictureData({
-              profilePictureUrl: url,
+              profilePictureUrl: "",
             });
           }
-        } else {
-          setProfilePictureData({
-            profilePictureUrl: "",
-          });
+        } catch (error) {
+          console.error("Error fetching profile picture data:", error);
         }
-      } catch (error) {
-        console.error("Error fetching profile picture data:", error);
+      } else {
+        setProfilePictureData({ profilePictureUrl: storedProfilePicture });
       }
     };
 
@@ -108,10 +127,6 @@ export default function ProfilePicture({
         return null;
     }
   };
-
-  const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
-  const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
-  const mousePosition = useRef<{ x: string; y: string } | null>(null);
 
   const showPopup = (entity: Entity) => {
     setPopupContent(

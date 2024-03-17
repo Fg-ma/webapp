@@ -11,6 +11,12 @@ import "./app.css";
 import "./scrollbar.css";
 import "./filterSwitches.css";
 
+import { AffiliateContextProvider } from "@context/AffiliateContext";
+import { PinnedProvider } from "@context/PinnedContext";
+import { LastMessageContextProvider } from "@context/LastMessageContext";
+import { LiveUpdatesSocketProvider } from "@context/LiveUpdatesContext";
+import { IndexedDBProvider } from "@context/IDBContext";
+
 interface LoginState {
   page: {
     login: {
@@ -63,20 +69,35 @@ export default function App() {
   }
 
   return (
-    <div id="base" className="h-screen w-screen">
-      <div id="pageSpace" className="flex justify-between mx-12 mt-16 h-full">
-        <LeftSpace />
+    <IndexedDBProvider>
+      <LiveUpdatesSocketProvider>
+        <LastMessageContextProvider>
+          <PinnedProvider>
+            <AffiliateContextProvider>
+              <div id="base" className="h-screen w-screen">
+                <div
+                  id="pageSpace"
+                  className="flex justify-between mx-12 mt-16 h-full"
+                >
+                  <LeftSpace />
 
-        <div
-          ref={middleSpaceContainerRef}
-          style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-        >
-          <MiddleSpace middleSpaceContainerRef={middleSpaceContainerRef} />
-          <PageNav />
-        </div>
+                  <div
+                    ref={middleSpaceContainerRef}
+                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                  >
+                    <MiddleSpace
+                      middleSpaceContainerRef={middleSpaceContainerRef}
+                    />
+                    <PageNav />
+                  </div>
 
-        <RightSpace />
-      </div>
-    </div>
+                  <RightSpace />
+                </div>
+              </div>
+            </AffiliateContextProvider>
+          </PinnedProvider>
+        </LastMessageContextProvider>
+      </LiveUpdatesSocketProvider>
+    </IndexedDBProvider>
   );
 }

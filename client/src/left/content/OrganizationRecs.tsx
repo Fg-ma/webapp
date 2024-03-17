@@ -38,11 +38,8 @@ export default function OrganizationRecs() {
       <OrganizationCard
         key={orgInfo.organization_id}
         id={orgInfo.organization_id}
-        name={
-          orgInfo.organization_name
-            ? orgInfo.organization_name
-            : orgInfo.organization_handle
-        }
+        name={orgInfo.organization_name}
+        handle={orgInfo.organization_handle}
         currentIssue={orgInfo.organization_currentIssue}
         stances={orgInfo.organization_stances}
       />

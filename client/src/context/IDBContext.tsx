@@ -1,8 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { useIndexedDB } from "@IDB/IDBService";
 import { IndexedDBProviderProps, IDBService } from "@FgTypes/contextTypes";
-import { Group, Individual, Organization } from "@FgTypes/leftTypes";
-import { table } from "console";
+import { Group, Individual, Organization } from "@FgTypes/contextTypes";
 
 const IndexedDBContext = createContext<IDBService | undefined>(undefined);
 
@@ -75,14 +74,49 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     }
   };
 
+  const storeProfilePicture = async (
+    table: string,
+    index: string,
+    profilePicture: string,
+  ): Promise<void> => {
+    if (indexedDBService.db) {
+      try {
+        await indexedDBService.addItem(table, index, profilePicture);
+      } catch (error) {
+        console.error("Error storing profile picture in IndexedDB:", error);
+      }
+    }
+  };
+
+  const getStoredProfilePicture = async (
+    table: string,
+    index: string,
+  ): Promise<string | null> => {
+    if (indexedDBService.db) {
+      try {
+        const returnedProfilePicture =
+          await indexedDBService.getItemByIndexFromTable(table, index);
+        return returnedProfilePicture as string | null;
+      } catch (error) {
+        console.error("Error storing profile picture in IndexedDB:", error);
+        return null;
+      }
+    } else {
+      return null;
+    }
+  };
+
   const value: IDBService = {
     db: indexedDBService.db,
     addItem: indexedDBService.addItem,
     getAllItemsFromTable: indexedDBService.getAllItemsFromTable,
+    getItemByIndexFromTable: indexedDBService.getItemByIndexFromTable,
     storeAffiliatedEntity: storeAffiliatedEntity,
     getStoredAffiliatedEntities: getStoredAffiliatedEntities,
     storeAffiliatedEntities: storeAffiliatedEntities,
     deleteStoredAffiliatedEntities: deleteStoredAffiliatedEntities,
+    storeProfilePicture: storeProfilePicture,
+    getStoredProfilePicture: getStoredProfilePicture,
   };
 
   return (

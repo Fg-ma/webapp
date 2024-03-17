@@ -5,6 +5,7 @@ export const IDB_VERSION = 1;
 export const AFFILIATED_INDIVIDUALS_TABLE = "affiliatedIndividuals";
 export const AFFILIATED_GROUPS_TABLE = "affiliatedGroups";
 export const AFFILIATED_ORGANIZATIONS_TABLE = "affiliatedOrganizations";
+export const PROFILE_PICTURES = "profilePictures";
 
 export function useIndexedDB() {
   const [db, setDb] = useState<IDBDatabase | null>(null);
@@ -49,6 +50,9 @@ export function useIndexedDB() {
           ) {
             indexedDBInstance.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
           }
+          if (!indexedDBInstance.objectStoreNames.contains(PROFILE_PICTURES)) {
+            indexedDBInstance.createObjectStore(PROFILE_PICTURES);
+          }
         };
       });
     }
@@ -64,7 +68,7 @@ export function useIndexedDB() {
 
   async function addItem<T>(
     table: string,
-    index: number,
+    index: number | string,
     item: T,
   ): Promise<number> {
     if (!db) {
@@ -87,7 +91,7 @@ export function useIndexedDB() {
       };
 
       addRequest.onerror = (event: Event) => {
-        reject("Error adding item to database");
+        resolve(0);
       };
     });
   }
@@ -110,6 +114,32 @@ export function useIndexedDB() {
 
       getAllRequest.onerror = (event: Event) => {
         reject("Error getting items from database");
+      };
+    });
+  }
+
+  async function getItemByIndexFromTable<T>(
+    table: string,
+    index: string | number,
+  ): Promise<T | null> {
+    if (!db) {
+      throw new Error("Database is not initialized");
+    }
+
+    const transaction = db.transaction([table], "readonly");
+    const store = transaction.objectStore(table);
+
+    const indexStore = store.index(String(index));
+    const getRequest = indexStore.get(IDBKeyRange.lowerBound(0)); // fix
+
+    return new Promise<T | null>((resolve, rejesct) => {
+      getRequest.onsuccess = (event: Event) => {
+        const getResult = event.target as IDBRequest<T>;
+        resolve(getResult.result);
+      };
+
+      getRequest.onerror = (event: Event) => {
+        resolve(null);
       };
     });
   }
@@ -139,6 +169,7 @@ export function useIndexedDB() {
     db,
     addItem,
     getAllItemsFromTable,
+    getItemByIndexFromTable,
     deleteAllItemsFromTable,
   };
 }

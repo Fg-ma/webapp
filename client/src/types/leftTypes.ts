@@ -11,7 +11,7 @@ export interface LeftState {
 
 export interface Group {
   group_id: string;
-  group_name: string;
+  group_name: string | null;
   group_handle: string;
   group_currentIssue: string;
   group_description: string;
@@ -22,7 +22,7 @@ export interface Group {
 
 export interface Individual {
   individual_id: string;
-  individual_name: string;
+  individual_name: string | null;
   individual_username: string;
   individual_currentIssue: string;
   individual_description: string;
@@ -33,7 +33,7 @@ export interface Individual {
 
 export interface Organization {
   organization_id: string;
-  organization_name: string;
+  organization_name: string | null;
   organization_handle: string;
   organization_currentIssue: string;
   organization_description: string;
@@ -82,14 +82,16 @@ export interface LeftVerticalSplitPaneProps {
 
 export interface IndividualCardProps {
   id: string;
-  name: string;
+  name: string | null;
+  username: string;
   currentIssue: string | null;
   animate?: boolean;
 }
 
 export interface GroupCardProps {
   id: string;
-  name: string;
+  name: string | null;
+  handle: string;
   currentIssue: string | null;
   affInCommon: string | null;
   animate?: boolean;
@@ -97,7 +99,8 @@ export interface GroupCardProps {
 
 export interface OrganizationCardProps {
   id: string;
-  name: string;
+  name: string | null;
+  handle: string;
   currentIssue: string | null;
   stances: string | null;
   animate?: boolean;

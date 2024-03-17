@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function IndividualCard({
   id,
   name,
+  username,
   currentIssue = null,
   animate,
 }: IndividualCardProps) {
@@ -52,7 +53,9 @@ export function IndividualCard({
           />
         </div>
         <div className="m-2 truncate">
-          <p className="font-Josefin text-xl truncate">{name}</p>
+          <p className="font-Josefin text-xl truncate">
+            {name ? name : username}
+          </p>
           <p className="font-K2D text-sm text-fg-black-30 truncate">
             {currentIssue}
           </p>
@@ -65,6 +68,7 @@ export function IndividualCard({
 export function GroupCard({
   id,
   name,
+  handle,
   currentIssue = null,
   affInCommon = null,
   animate,
@@ -98,7 +102,9 @@ export function GroupCard({
           />
         </div>
         <div className="m-2 truncate">
-          <p className="font-Josefin text-xl truncate">{name}</p>
+          <p className="font-Josefin text-xl truncate">
+            {name ? name : handle}
+          </p>
           <p className="font-K2D text-base text-fg-black-30 truncate">
             {currentIssue}
           </p>
@@ -114,6 +120,7 @@ export function GroupCard({
 export function OrganizationCard({
   id,
   name,
+  handle,
   currentIssue = null,
   stances = null,
   animate,
@@ -147,7 +154,9 @@ export function OrganizationCard({
           />
         </div>
         <div className="m-2 h-full truncate">
-          <p className="font-Josefin text-xl truncate">{name}</p>
+          <p className="font-Josefin text-xl truncate">
+            {name ? name : handle}
+          </p>
           <p className="font-K2D text-base text-fg-black-30 truncate">
             {currentIssue}
           </p>

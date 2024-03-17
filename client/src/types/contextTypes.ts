@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Group, Individual, Organization } from "./leftTypes";
 
 // Global
 
@@ -7,14 +6,55 @@ import { Group, Individual, Organization } from "./leftTypes";
   IDBContext.tsx
 */
 
+export interface Group {
+  group_id: string;
+  group_name: string | null;
+  group_handle: string;
+  group_currentIssue: string;
+  group_description: string;
+  group_stances: string;
+  affiliate_relation_date: string;
+  animate?: boolean;
+}
+
+export interface Individual {
+  individual_id: string;
+  individual_name: string | null;
+  individual_username: string;
+  individual_currentIssue: string;
+  individual_description: string;
+  individual_roles: string;
+  affiliate_relation_date: string;
+  animate?: boolean;
+}
+
+export interface Organization {
+  organization_id: string;
+  organization_name: string | null;
+  organization_handle: string;
+  organization_currentIssue: string;
+  organization_description: string;
+  organization_stances: string;
+  affiliate_relation_date: string;
+  animate?: boolean;
+}
+
 export interface IndexedDBProviderProps {
   children: ReactNode;
 }
 
 export interface IDBService {
   db: IDBDatabase | null;
-  addItem: (table: string, index: number, item: any) => Promise<number>;
+  addItem: (
+    table: string,
+    index: number | string,
+    item: any,
+  ) => Promise<number>;
   getAllItemsFromTable: (table: string) => Promise<unknown[]>;
+  getItemByIndexFromTable: <T>(
+    table: string,
+    index: string | number,
+  ) => Promise<T | null>;
   storeAffiliatedEntity: (
     table: string,
     index: number,
@@ -26,6 +66,15 @@ export interface IDBService {
     sortedData: Individual[] | Group[] | Organization[],
   ) => Promise<void>;
   deleteStoredAffiliatedEntities: (table: string) => Promise<void>;
+  storeProfilePicture: (
+    table: string,
+    index: string,
+    profilePicture: string,
+  ) => Promise<void>;
+  getStoredProfilePicture: (
+    table: string,
+    index: string,
+  ) => Promise<string | null>;
 }
 
 /*

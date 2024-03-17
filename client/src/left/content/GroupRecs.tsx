@@ -38,7 +38,8 @@ export default function GroupRecs() {
       <GroupCard
         key={grpInfo.group_id}
         id={grpInfo.group_id}
-        name={grpInfo.group_name ? grpInfo.group_name : grpInfo.group_handle}
+        name={grpInfo.group_name}
+        handle={grpInfo.group_handle}
         currentIssue={grpInfo.group_currentIssue}
         affInCommon="placeholder"
       />
