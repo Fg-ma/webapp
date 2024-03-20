@@ -16,6 +16,7 @@ import { PinnedProvider } from "@context/PinnedContext";
 import { LastMessageContextProvider } from "@context/LastMessageContext";
 import { LiveUpdatesSocketProvider } from "@context/LiveUpdatesContext";
 import { IndexedDBProvider } from "@context/IDBContext";
+import { useIndexedDBContext } from "@context/IDBContext";
 
 interface LoginState {
   page: {
@@ -37,6 +38,7 @@ export default function App() {
       so it can reference its width and set its own width to be 80% of that.
   */
 
+  const { clearAllIndexedDBData } = useIndexedDBContext();
   const { liveUpdatesSocket } = useSocketContext();
   const isLoggedIn = useSelector(
     (state: LoginState) => state.page.login.pagePayload.isLoggedIn,
@@ -46,6 +48,10 @@ export default function App() {
   );
   const middleSpaceContainerRef = useRef<HTMLDivElement>(null);
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    clearAllIndexedDBData();
+  }, [token]);
 
   useEffect(() => {
     if (!token) {
@@ -69,35 +75,33 @@ export default function App() {
   }
 
   return (
-    <IndexedDBProvider>
-      <LiveUpdatesSocketProvider>
-        <LastMessageContextProvider>
-          <PinnedProvider>
-            <AffiliateContextProvider>
-              <div id="base" className="h-screen w-screen">
+    <LiveUpdatesSocketProvider>
+      <LastMessageContextProvider>
+        <PinnedProvider>
+          <AffiliateContextProvider>
+            <div id="base" className="h-screen w-screen">
+              <div
+                id="pageSpace"
+                className="flex justify-between mx-12 mt-16 h-full"
+              >
+                <LeftSpace />
+
                 <div
-                  id="pageSpace"
-                  className="flex justify-between mx-12 mt-16 h-full"
+                  ref={middleSpaceContainerRef}
+                  style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
                 >
-                  <LeftSpace />
-
-                  <div
-                    ref={middleSpaceContainerRef}
-                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-                  >
-                    <MiddleSpace
-                      middleSpaceContainerRef={middleSpaceContainerRef}
-                    />
-                    <PageNav />
-                  </div>
-
-                  <RightSpace />
+                  <MiddleSpace
+                    middleSpaceContainerRef={middleSpaceContainerRef}
+                  />
+                  <PageNav />
                 </div>
+
+                <RightSpace />
               </div>
-            </AffiliateContextProvider>
-          </PinnedProvider>
-        </LastMessageContextProvider>
-      </LiveUpdatesSocketProvider>
-    </IndexedDBProvider>
+            </div>
+          </AffiliateContextProvider>
+        </PinnedProvider>
+      </LastMessageContextProvider>
+    </LiveUpdatesSocketProvider>
   );
 }

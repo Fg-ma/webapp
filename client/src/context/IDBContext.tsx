@@ -77,11 +77,11 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   const storeProfilePicture = async (
     table: string,
     index: string,
-    profilePicture: string,
+    blob: Blob,
   ): Promise<void> => {
     if (indexedDBService.db) {
       try {
-        await indexedDBService.addItem(table, index, profilePicture);
+        await indexedDBService.addItem(table, index, blob);
       } catch (error) {
         console.error("Error storing profile picture in IndexedDB:", error);
       }
@@ -91,12 +91,12 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   const getStoredProfilePicture = async (
     table: string,
     index: string,
-  ): Promise<string | null> => {
+  ): Promise<Blob | null> => {
     if (indexedDBService.db) {
       try {
         const returnedProfilePicture =
           await indexedDBService.getItemByIndexFromTable(table, index);
-        return returnedProfilePicture as string | null;
+        return returnedProfilePicture as Blob | null;
       } catch (error) {
         console.error("Error storing profile picture in IndexedDB:", error);
         return null;
@@ -111,6 +111,8 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     addItem: indexedDBService.addItem,
     getAllItemsFromTable: indexedDBService.getAllItemsFromTable,
     getItemByIndexFromTable: indexedDBService.getItemByIndexFromTable,
+    deleteAllItemsFromTable: indexedDBService.deleteAllItemsFromTable,
+    clearAllIndexedDBData: indexedDBService.clearAllIndexedDBData,
     storeAffiliatedEntity: storeAffiliatedEntity,
     getStoredAffiliatedEntities: getStoredAffiliatedEntities,
     storeAffiliatedEntities: storeAffiliatedEntities,

@@ -55,59 +55,62 @@ export default function ProfilePicture({
         entity_id,
       );
 
-      console.log(storedProfilePicture, entity_id);
-      if (!storedProfilePicture) {
-        try {
-          const token = localStorage.getItem("token");
+      if (storedProfilePicture) {
+        const url = URL.createObjectURL(storedProfilePicture);
 
-          if (!token) {
-            return;
-          }
+        setProfilePictureData({
+          profilePictureUrl: url,
+        });
+        return;
+      }
 
-          const response = await Axios.get(
-            `${serverUrl}/images/get_user_profile_picture`,
-            {
-              params: {
-                entity_id: entity_id,
-              },
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/images/get_user_profile_picture`,
+          {
+            params: {
+              entity_id: entity_id,
             },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (response.data !== "default") {
+          const blobData = new Uint8Array(
+            response.data.profile_picture_data.data,
           );
 
-          if (response.data !== "default") {
-            const blobData = new Uint8Array(
-              response.data.profile_picture_data.data,
-            );
+          const extension = response.data.profile_picture_filename
+            .slice(-3)
+            .toLowerCase();
 
-            const extension = response.data.profile_picture_filename
-              .slice(-3)
-              .toLowerCase();
+          const mimeType = getMimeType(extension);
 
-            const mimeType = getMimeType(extension);
+          if (mimeType) {
+            const blob = new Blob([blobData], { type: mimeType });
+            const url = URL.createObjectURL(blob);
 
-            if (mimeType) {
-              const url = URL.createObjectURL(
-                new Blob([blobData], { type: mimeType }),
-              );
-
-              setProfilePictureData({
-                profilePictureUrl: url,
-              });
-
-              await storeProfilePicture(PROFILE_PICTURES, entity_id, url);
-            }
-          } else {
             setProfilePictureData({
-              profilePictureUrl: "",
+              profilePictureUrl: url,
             });
+
+            await storeProfilePicture(PROFILE_PICTURES, entity_id, blob);
           }
-        } catch (error) {
-          console.error("Error fetching profile picture data:", error);
+        } else {
+          setProfilePictureData({
+            profilePictureUrl: "",
+          });
         }
-      } else {
-        setProfilePictureData({ profilePictureUrl: storedProfilePicture });
+      } catch (error) {
+        console.error("Error fetching profile picture data:", error);
       }
     };
 

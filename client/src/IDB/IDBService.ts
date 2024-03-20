@@ -1,3 +1,4 @@
+import { error } from "console";
 import { useState, useEffect } from "react";
 
 export const IDB_NAME = "FgIDB";
@@ -11,10 +12,10 @@ export function useIndexedDB() {
   const [db, setDb] = useState<IDBDatabase | null>(null);
 
   useEffect(() => {
-    let indexedDBInstance: IDBDatabase;
+    let indexedDBInstance: IDBDatabase | null = null;
 
-    function initDB() {
-      return new Promise<IDBDatabase>((resolve, reject) => {
+    const initDB = async () => {
+      return new Promise<void>((resolve, reject) => {
         const request = window.indexedDB.open(IDB_NAME, IDB_VERSION);
 
         request.onerror = (event: Event) => {
@@ -24,7 +25,7 @@ export function useIndexedDB() {
         request.onsuccess = (event: Event) => {
           indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
           setDb(indexedDBInstance);
-          resolve(indexedDBInstance);
+          resolve();
         };
 
         request.onupgradeneeded = (event: Event) => {
@@ -55,22 +56,30 @@ export function useIndexedDB() {
           }
         };
       });
-    }
+    };
 
-    initDB();
+    const init = async () => {
+      try {
+        await initDB();
+      } catch (error) {
+        console.error("Error initializing IndexedDB:", error);
+      }
+    };
+
+    init();
 
     return () => {
-      if (db) {
-        db.close();
+      if (indexedDBInstance) {
+        indexedDBInstance.close();
       }
     };
   }, []);
 
-  async function addItem<T>(
+  const addItem = <T>(
     table: string,
     index: number | string,
     item: T,
-  ): Promise<number> {
+  ): Promise<number> => {
     if (!db) {
       throw new Error("Database is not initialized");
     }
@@ -94,9 +103,9 @@ export function useIndexedDB() {
         resolve(0);
       };
     });
-  }
+  };
 
-  async function getAllItemsFromTable<T>(table: string): Promise<T[]> {
+  const getAllItemsFromTable = <T>(table: string): Promise<T[]> => {
     if (!db) {
       throw new Error("Database is not initialized");
     }
@@ -116,12 +125,12 @@ export function useIndexedDB() {
         reject("Error getting items from database");
       };
     });
-  }
+  };
 
-  async function getItemByIndexFromTable<T>(
+  const getItemByIndexFromTable = async <T>(
     table: string,
     index: string | number,
-  ): Promise<T | null> {
+  ): Promise<T | null> => {
     if (!db) {
       throw new Error("Database is not initialized");
     }
@@ -129,8 +138,7 @@ export function useIndexedDB() {
     const transaction = db.transaction([table], "readonly");
     const store = transaction.objectStore(table);
 
-    const indexStore = store.index(String(index));
-    const getRequest = indexStore.get(IDBKeyRange.lowerBound(0)); // fix
+    const getRequest = store.get(index); // fix
 
     return new Promise<T | null>((resolve, rejesct) => {
       getRequest.onsuccess = (event: Event) => {
@@ -142,9 +150,9 @@ export function useIndexedDB() {
         resolve(null);
       };
     });
-  }
+  };
 
-  async function deleteAllItemsFromTable(table: string): Promise<void> {
+  const deleteAllItemsFromTable = async (table: string): Promise<void> => {
     if (!db) {
       throw new Error("Database is not initialized");
     }
@@ -163,7 +171,57 @@ export function useIndexedDB() {
         reject("Error clearing items from table");
       };
     });
-  }
+  };
+
+  const clearAllIndexedDBData = async () => {
+    try {
+      console.log("w");
+
+      if (!db) {
+        // fix
+        await new Promise<void>((resolve) => {
+          const checkDBInitialized = setInterval(() => {
+            if (db) {
+              clearInterval(checkDBInitialized);
+              resolve();
+            }
+          }, 100);
+        });
+      }
+
+      console.log("w2");
+
+      if (!db) {
+        throw new Error("adsad");
+      }
+
+      const transaction = db.transaction(db.objectStoreNames, "readwrite");
+
+      for (const storeName of Array.from(db.objectStoreNames)) {
+        const store = transaction.objectStore(storeName);
+
+        const range = IDBKeyRange.lowerBound(0);
+        const cursorRequest = store.openCursor(range);
+
+        cursorRequest.onsuccess = async (event: Event) => {
+          const cursor = (event.target as IDBRequest<IDBCursorWithValue>)
+            ?.result;
+
+          if (cursor) {
+            cursor.delete();
+            cursor.continue();
+          }
+        };
+      }
+
+      await new Promise<void>((resolve, reject) => {
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error);
+      });
+    } catch (error) {
+      console.error("Error clearing IndexedDB data:", error);
+    }
+  };
 
   return {
     db,
@@ -171,5 +229,6 @@ export function useIndexedDB() {
     getAllItemsFromTable,
     getItemByIndexFromTable,
     deleteAllItemsFromTable,
+    clearAllIndexedDBData,
   };
 }

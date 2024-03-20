@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import RecHeader from "./content/RecHeader";
 import IndividualCards from "./content/IndividualCards";
@@ -31,6 +31,7 @@ export default function LeftVerticalSplitPane({
   const [initialPaneHeight, setInitialPaneHeight] = useState(0);
   const [paneHeight, setPaneHeight] = useState("60%");
   const [headerLightness, setHeaderLightness] = useState(80);
+  const leftBottomPaneRef = useRef<HTMLDivElement>(null);
 
   // Handles softly lowering and raising the pane height when togglePaneHeight is called
   const animateTogglePaneHeight = (targetHeight: number, duration = 500) => {
@@ -204,19 +205,23 @@ export default function LeftVerticalSplitPane({
         />
       </div>
       <div
+        ref={leftBottomPaneRef}
         className="bg-fg-white-95 overflow-auto box-border"
         style={{ height: `calc(100% - ${paneHeight} - 2.25rem)` }}
       >
         {renderRecs()}
       </div>
-      <div
-        className="h-3 absolute bottom-0 left-0 right-0 mx-8 z-40"
-        style={{
-          background: `linear-gradient(to top, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0.35) 50%, rgba(243, 243, 243, 0) 100%)`,
-          filter: "blur(4px)",
-          width: `calc(100% - 4rem)`,
-        }}
-      ></div>
+      {leftBottomPaneRef.current &&
+        leftBottomPaneRef.current.clientHeight >= 15 && (
+          <div
+            className="h-3 absolute bottom-0 left-0 right-0 mx-8 z-40"
+            style={{
+              background: `linear-gradient(to top, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0.35) 50%, rgba(243, 243, 243, 0) 100%)`,
+              filter: "blur(4px)",
+              width: `calc(100% - 4rem)`,
+            }}
+          ></div>
+        )}
     </div>
   );
 }

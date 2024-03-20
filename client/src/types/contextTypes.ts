@@ -55,6 +55,8 @@ export interface IDBService {
     table: string,
     index: string | number,
   ) => Promise<T | null>;
+  deleteAllItemsFromTable: (table: string) => Promise<void>;
+  clearAllIndexedDBData: () => Promise<void>;
   storeAffiliatedEntity: (
     table: string,
     index: number,
@@ -69,12 +71,12 @@ export interface IDBService {
   storeProfilePicture: (
     table: string,
     index: string,
-    profilePicture: string,
+    blob: Blob,
   ) => Promise<void>;
   getStoredProfilePicture: (
     table: string,
     index: string,
-  ) => Promise<string | null>;
+  ) => Promise<Blob | null>;
 }
 
 /*
