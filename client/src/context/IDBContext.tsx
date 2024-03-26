@@ -33,16 +33,11 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   const getStoredAffiliatedEntities = async (
     table: string,
   ): Promise<unknown[]> => {
-    if (indexedDBService.db) {
-      try {
-        const storedEntities =
-          await indexedDBService.getAllItemsFromTable(table);
-        return storedEntities;
-      } catch (error) {
-        console.error("Error getting stored entities from IndexedDB:", error);
-        return [];
-      }
-    } else {
+    try {
+      const storedEntities = await indexedDBService.getAllItemsFromTable(table);
+      return storedEntities;
+    } catch (error) {
+      console.error("Error getting stored entities from IndexedDB:", error);
       return [];
     }
   };
@@ -51,26 +46,22 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     table: string,
     sortedData: Individual[] | Group[] | Organization[],
   ) => {
-    if (indexedDBService.db) {
-      try {
-        for (let i = 0; i < sortedData.length; i++) {
-          await storeAffiliatedEntity(table, i, sortedData[i]);
-        }
-      } catch (error) {
-        console.error("Error storing sorted individuals in IndexedDB:", error);
+    try {
+      for (let i = 0; i < sortedData.length; i++) {
+        await storeAffiliatedEntity(table, i, sortedData[i]);
       }
+    } catch (error) {
+      console.error("Error storing sorted individuals in IndexedDB:", error);
     }
   };
 
   const deleteStoredAffiliatedEntities = async (
     table: string,
   ): Promise<void> => {
-    if (indexedDBService.db) {
-      try {
-        await indexedDBService.deleteAllItemsFromTable(table);
-      } catch (error) {
-        console.error("Error deleting stored entities from IndexedDB:", error);
-      }
+    try {
+      await indexedDBService.deleteAllItemsFromTable(table);
+    } catch (error) {
+      console.error("Error deleting stored entities from IndexedDB:", error);
     }
   };
 
@@ -79,12 +70,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     index: string,
     blob: Blob,
   ): Promise<void> => {
-    if (indexedDBService.db) {
-      try {
-        await indexedDBService.addItem(table, index, blob);
-      } catch (error) {
-        console.error("Error storing profile picture in IndexedDB:", error);
-      }
+    try {
+      await indexedDBService.addItem(table, index, blob);
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
     }
   };
 
@@ -92,16 +81,12 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     table: string,
     index: string,
   ): Promise<Blob | null> => {
-    if (indexedDBService.db) {
-      try {
-        const returnedProfilePicture =
-          await indexedDBService.getItemByIndexFromTable(table, index);
-        return returnedProfilePicture as Blob | null;
-      } catch (error) {
-        console.error("Error storing profile picture in IndexedDB:", error);
-        return null;
-      }
-    } else {
+    try {
+      const returnedProfilePicture =
+        await indexedDBService.getItemByIndexFromTable(table, index);
+      return returnedProfilePicture as Blob | null;
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
       return null;
     }
   };

@@ -1,5 +1,4 @@
-import { error } from "console";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const IDB_NAME = "FgIDB";
 export const IDB_VERSION = 1;
@@ -9,65 +8,60 @@ export const AFFILIATED_ORGANIZATIONS_TABLE = "affiliatedOrganizations";
 export const PROFILE_PICTURES = "profilePictures";
 
 export function useIndexedDB() {
-  const [db, setDb] = useState<IDBDatabase | null>(null);
+  const db = useRef<IDBDatabase | null>(null);
 
-  useEffect(() => {
-    let indexedDBInstance: IDBDatabase | null = null;
+  let indexedDBInstance: IDBDatabase | null = null;
 
-    const initDB = async () => {
-      return new Promise<void>((resolve, reject) => {
-        const request = window.indexedDB.open(IDB_NAME, IDB_VERSION);
+  const init = async () => {
+    try {
+      const request = window.indexedDB.open(IDB_NAME, IDB_VERSION);
 
-        request.onerror = (event: Event) => {
-          reject("Error opening database");
-        };
+      request.onerror = (event: Event) => {
+        console.error("Error opening database");
+      };
 
+      const dbPromise = new Promise<void>((resolve, reject) => {
         request.onsuccess = (event: Event) => {
           indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
-          setDb(indexedDBInstance);
+          db.current = indexedDBInstance;
           resolve();
         };
-
-        request.onupgradeneeded = (event: Event) => {
-          indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
-          if (
-            !indexedDBInstance.objectStoreNames.contains(
-              AFFILIATED_INDIVIDUALS_TABLE,
-            )
-          ) {
-            indexedDBInstance.createObjectStore(AFFILIATED_INDIVIDUALS_TABLE);
-          }
-          if (
-            !indexedDBInstance.objectStoreNames.contains(
-              AFFILIATED_GROUPS_TABLE,
-            )
-          ) {
-            indexedDBInstance.createObjectStore(AFFILIATED_GROUPS_TABLE);
-          }
-          if (
-            !indexedDBInstance.objectStoreNames.contains(
-              AFFILIATED_ORGANIZATIONS_TABLE,
-            )
-          ) {
-            indexedDBInstance.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
-          }
-          if (!indexedDBInstance.objectStoreNames.contains(PROFILE_PICTURES)) {
-            indexedDBInstance.createObjectStore(PROFILE_PICTURES);
-          }
-        };
       });
-    };
 
-    const init = async () => {
-      try {
-        await initDB();
-      } catch (error) {
-        console.error("Error initializing IndexedDB:", error);
-      }
-    };
+      await dbPromise;
 
-    init();
+      request.onupgradeneeded = (event: Event) => {
+        indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
+        if (
+          !indexedDBInstance.objectStoreNames.contains(
+            AFFILIATED_INDIVIDUALS_TABLE,
+          )
+        ) {
+          indexedDBInstance.createObjectStore(AFFILIATED_INDIVIDUALS_TABLE);
+        }
+        if (
+          !indexedDBInstance.objectStoreNames.contains(AFFILIATED_GROUPS_TABLE)
+        ) {
+          indexedDBInstance.createObjectStore(AFFILIATED_GROUPS_TABLE);
+        }
+        if (
+          !indexedDBInstance.objectStoreNames.contains(
+            AFFILIATED_ORGANIZATIONS_TABLE,
+          )
+        ) {
+          indexedDBInstance.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
+        }
+        if (!indexedDBInstance.objectStoreNames.contains(PROFILE_PICTURES)) {
+          indexedDBInstance.createObjectStore(PROFILE_PICTURES);
+        }
+      };
+    } catch (error) {
+      console.error("Error initializing IndexedDB:", error);
+    }
+  };
 
+  // Close indexedDBInstance
+  useEffect(() => {
     return () => {
       if (indexedDBInstance) {
         indexedDBInstance.close();
@@ -75,16 +69,20 @@ export function useIndexedDB() {
     };
   }, []);
 
-  const addItem = <T>(
+  const addItem = async <T>(
     table: string,
     index: number | string,
     item: T,
   ): Promise<number> => {
-    if (!db) {
-      throw new Error("Database is not initialized");
+    if (!db.current) {
+      await init();
     }
 
-    const transaction = db.transaction([table], "readwrite");
+    if (!db.current) {
+      throw new Error("No db");
+    }
+
+    const transaction = db.current.transaction([table], "readwrite");
     const store = transaction.objectStore(table);
 
     if (!store) {
@@ -105,12 +103,16 @@ export function useIndexedDB() {
     });
   };
 
-  const getAllItemsFromTable = <T>(table: string): Promise<T[]> => {
-    if (!db) {
-      throw new Error("Database is not initialized");
+  const getAllItemsFromTable = async <T>(table: string): Promise<T[]> => {
+    if (!db.current) {
+      await init();
     }
 
-    const transaction = db.transaction([table], "readonly");
+    if (!db.current) {
+      throw new Error("No db");
+    }
+
+    const transaction = db.current.transaction([table], "readonly");
     const store = transaction.objectStore(table);
 
     const getAllRequest = store.getAll();
@@ -131,11 +133,15 @@ export function useIndexedDB() {
     table: string,
     index: string | number,
   ): Promise<T | null> => {
-    if (!db) {
-      throw new Error("Database is not initialized");
+    if (!db.current) {
+      await init();
     }
 
-    const transaction = db.transaction([table], "readonly");
+    if (!db.current) {
+      throw new Error("No db");
+    }
+
+    const transaction = db.current.transaction([table], "readonly");
     const store = transaction.objectStore(table);
 
     const getRequest = store.get(index); // fix
@@ -153,11 +159,15 @@ export function useIndexedDB() {
   };
 
   const deleteAllItemsFromTable = async (table: string): Promise<void> => {
-    if (!db) {
-      throw new Error("Database is not initialized");
+    if (!db.current) {
+      await init();
     }
 
-    const transaction = db.transaction([table], "readwrite");
+    if (!db.current) {
+      throw new Error("No db");
+    }
+
+    const transaction = db.current.transaction([table], "readwrite");
     const store = transaction.objectStore(table);
 
     const clearRequest = store.clear();
@@ -175,29 +185,22 @@ export function useIndexedDB() {
 
   const clearAllIndexedDBData = async () => {
     try {
-      console.log("w");
-
-      if (!db) {
-        // fix
-        await new Promise<void>((resolve) => {
-          const checkDBInitialized = setInterval(() => {
-            if (db) {
-              clearInterval(checkDBInitialized);
-              resolve();
-            }
-          }, 100);
-        });
+      if (!db.current) {
+        await init();
+        console.log("wqorsl", db.current);
       }
 
-      console.log("w2");
-
-      if (!db) {
-        throw new Error("adsad");
+      if (!db.current) {
+        console.log("eonslf");
+        throw new Error("No db");
       }
 
-      const transaction = db.transaction(db.objectStoreNames, "readwrite");
+      const transaction = db.current.transaction(
+        db.current.objectStoreNames,
+        "readwrite",
+      );
 
-      for (const storeName of Array.from(db.objectStoreNames)) {
+      for (const storeName of Array.from(db.current.objectStoreNames)) {
         const store = transaction.objectStore(storeName);
 
         const range = IDBKeyRange.lowerBound(0);
@@ -224,7 +227,7 @@ export function useIndexedDB() {
   };
 
   return {
-    db,
+    db: db.current,
     addItem,
     getAllItemsFromTable,
     getItemByIndexFromTable,
