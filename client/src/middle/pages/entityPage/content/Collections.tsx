@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { CollectionsProps, CollectionItem } from "@FgTypes/middleTypes";
-import { Sheet, Video, Image } from "./Cards";
+import SheetCard from "./SheetCard";
+import VideoCard from "./VideoCard";
+import ImageCard from "./ImageCard";
 import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -98,7 +100,7 @@ export default function Collections({
       item.collections_content_id
     ) {
       return (
-        <Sheet
+        <SheetCard
           key={`collectionSheet_${item.content_data.sheet_id}`}
           type={"collection"}
           sheet_id={item.content_data.sheet_id}
@@ -114,7 +116,7 @@ export default function Collections({
       item.collections_content_id
     ) {
       return (
-        <Image
+        <ImageCard
           key={`collectionImage_${item.content_data.image_id}`}
           type={"collection"}
           image_id={item.content_data.image_id}
@@ -129,7 +131,7 @@ export default function Collections({
       item.collections_content_id
     ) {
       return (
-        <Video
+        <VideoCard
           key={`collectionVideo_${item.content_data.video_id}`}
           type={"collection"}
           video_id={item.content_data.video_id}

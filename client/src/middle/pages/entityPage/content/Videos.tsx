@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { VideosProps, VideoData } from "@FgTypes/middleTypes";
-import { Video } from "./Cards";
+import { VideosProps, VideosData } from "@FgTypes/middleTypes";
+import VideoCard from "./VideoCard";
 import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -20,10 +20,10 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
   */
 
   const { pinnedState } = usePinned();
-  const [videosData, setVideosData] = useState<VideoData[]>([]);
+  const [videosData, setVideosData] = useState<VideosData[]>([]);
 
   // Sorts the video data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
-  const sortData = (data: VideoData[]) => {
+  const sortData = (data: VideosData[]) => {
     const pinnedRows = data.filter((item) => item.pinned === true);
     const notPinnedRows = data.filter((item) => item.pinned === false);
 
@@ -60,7 +60,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
 
   // Handle when a video is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredVideoData: VideoData[]) => {
+    const fetchNewPinnedData = async (filteredVideoData: VideosData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_video_by_entities_content_id/${pinnedState.relation_id}`,
@@ -87,7 +87,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
 
   const videos = videosData.map((video) => {
     return (
-      <Video
+      <VideoCard
         key={`video_${video.video_id}`}
         type={"entity"}
         video_id={video.video_id}

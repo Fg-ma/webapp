@@ -223,6 +223,11 @@ export interface ImageData {
   image_description: string;
 }
 
+export interface ImageThumbnailData {
+  image_url: string;
+  image_description: string;
+}
+
 /*
   Collections.tsx
 */
@@ -286,21 +291,14 @@ export interface ImagesProps {
   isEditablePage: MutableRefObject<boolean>;
 }
 
-export interface ImageData {
+export interface ImagesData {
   image_id: string;
   entity_id: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
-  images: {
-    image_id: string;
-    image_data_id: string;
-    image_creator_id: string;
-    image_title: string;
-    image_description: string;
-    image_filename: string;
-  };
+  images: ImageData[];
 }
 
 /*
@@ -312,21 +310,14 @@ export interface SheetsProps {
   isEditablePage: MutableRefObject<boolean>;
 }
 
-export interface SheetData {
+export interface SheetsData {
   sheet_id: string;
   entity_id: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
-  sheets: {
-    sheet_id: string;
-    sheet_data_id: string;
-    sheet_author_id: string;
-    sheet_filename: string;
-    sheet_title: string;
-    sheet_subject: string;
-  };
+  sheets: SheetData[];
 }
 
 /*
@@ -338,21 +329,14 @@ export interface VideosProps {
   isEditablePage: MutableRefObject<boolean>;
 }
 
-export interface VideoData {
+export interface VideosData {
   video_id: string;
   entity_id: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
   date_pinned: string | null;
-  videos: {
-    video_id: string;
-    video_data_id: string;
-    video_creator_id: string;
-    video_filename: string;
-    video_title: string;
-    video_description: string;
-  };
+  videos: VideoData[];
 }
 
 /*

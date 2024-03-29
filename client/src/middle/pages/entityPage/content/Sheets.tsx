@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { SheetsProps, SheetData } from "@FgTypes/middleTypes";
-import { Sheet } from "./Cards";
+import { SheetsProps, SheetsData } from "@FgTypes/middleTypes";
+import SheetCard from "./SheetCard";
 import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -20,10 +20,10 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
   */
 
   const { pinnedState } = usePinned();
-  const [sheetsData, setSheetsData] = useState<SheetData[]>([]);
+  const [sheetsData, setSheetsData] = useState<SheetsData[]>([]);
 
   // Sorts the sheet data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
-  const sortData = (data: SheetData[]) => {
+  const sortData = (data: SheetsData[]) => {
     const pinnedRows = data.filter((item) => item.pinned === true);
     const notPinnedRows = data.filter((item) => item.pinned === false);
 
@@ -61,7 +61,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
 
   // Handle when a sheet is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredSheetData: SheetData[]) => {
+    const fetchNewPinnedData = async (filteredSheetData: SheetsData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_sheet_by_entities_content_id/${pinnedState.relation_id}`,
@@ -88,7 +88,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
 
   const sheets = sheetsData.map((sheet) => {
     return (
-      <Sheet
+      <SheetCard
         key={`sheet_${sheet.sheet_id}`}
         type={"entity"}
         sheet_id={sheet.sheet_id}

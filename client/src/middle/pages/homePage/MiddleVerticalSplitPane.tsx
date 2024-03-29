@@ -158,7 +158,7 @@ export default function MiddleVerticalSplitPane({
   return (
     <div className="flex flex-col w-full h-full relative">
       <div
-        className="h-5 absolute top-0 left-0 right-0 mx-8 z-40"
+        className="h-5 absolute -top-1 left-0 right-0 mx-8 z-40"
         style={{
           background: `linear-gradient(to bottom, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0) 100%)`,
           filter: "blur(4px)",
@@ -203,7 +203,7 @@ export default function MiddleVerticalSplitPane({
       {middleBottomPaneRef.current &&
         middleBottomPaneRef.current.clientHeight >= 15 && (
           <div
-            className="h-3 absolute bottom-0 left-0 right-0 mx-8 z-40"
+            className="h-3 absolute -bottom-1 left-0 right-0 mx-8 z-40"
             style={{
               background: `linear-gradient(to top, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0.35) 50%, rgba(243, 243, 243, 0) 100%)`,
               filter: "blur(4px)",

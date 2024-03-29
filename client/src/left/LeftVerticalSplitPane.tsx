@@ -214,7 +214,7 @@ export default function LeftVerticalSplitPane({
       {leftBottomPaneRef.current &&
         leftBottomPaneRef.current.clientHeight >= 15 && (
           <div
-            className="h-3 absolute bottom-0 left-0 right-0 mx-8 z-40"
+            className="h-3 absolute -bottom-1 left-0 right-0 mx-8 z-40"
             style={{
               background: `linear-gradient(to top, rgba(243, 243, 243, 1) 0%, rgba(243, 243, 243, 0.35) 50%, rgba(243, 243, 243, 0) 100%)`,
               filter: "blur(4px)",

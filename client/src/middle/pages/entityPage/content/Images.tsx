@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { ImagesProps, ImageData } from "@FgTypes/middleTypes";
-import { Image } from "./Cards";
+import { ImagesProps, ImagesData } from "@FgTypes/middleTypes";
+import ImageCard from "./ImageCard";
 import { usePinned } from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -20,10 +20,10 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
   */
 
   const { pinnedState } = usePinned();
-  const [imagesData, setImagesData] = useState<ImageData[]>([]);
+  const [imagesData, setImagesData] = useState<ImagesData[]>([]);
 
   // Sorts the image data first by whether it is pinned or not then sorts by either the date_pinned or the date_added
-  const sortData = (data: ImageData[]) => {
+  const sortData = (data: ImagesData[]) => {
     const pinnedRows = data.filter((item) => item.pinned === true);
     const notPinnedRows = data.filter((item) => item.pinned === false);
 
@@ -60,7 +60,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
 
   // Handle when a image is pinned
   useEffect(() => {
-    const fetchNewPinnedData = async (filteredSheetData: ImageData[]) => {
+    const fetchNewPinnedData = async (filteredSheetData: ImagesData[]) => {
       try {
         const response = await Axios.get(
           `${serverUrl}/entities/entity_image_by_entities_content_id/${pinnedState.relation_id}`,
@@ -87,7 +87,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
 
   const images = imagesData.map((image) => {
     return (
-      <Image
+      <ImageCard
         key={`image_${image.image_id}`}
         type={"entity"}
         image_id={image.image_id}
