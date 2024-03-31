@@ -294,10 +294,11 @@ model sheets_data {
 }
 
 model sheets_thumbnails {
-  sheet_thumbnail_id       String   @id @unique(map: "sheet_thumbnail_id_UNIQUE") @db.Char(36)
-  sheet_thumbnail_data     Bytes
-  sheet_thumbnail_filename String   @db.VarChar(265)
-  sheets                   sheets[]
+  sheet_thumbnail_id          String   @id @unique(map: "sheet_thumbnail_id_UNIQUE") @db.Char(36)
+  sheet_thumbnail_data        Bytes
+  sheet_thumbnail_filename    String   @db.VarChar(256)
+  sheet_thumbnail_description String?  @db.VarChar(512)
+  sheets                      sheets[]
 }
 
 model user_credentials {
@@ -339,8 +340,9 @@ model videos_data {
 }
 
 model videos_thumbnails {
-  video_thumbnail_id       String   @id @unique(map: "videos_thumbnails_id_UNIQUE") @db.Char(36)
-  video_thumbnail_data     Bytes
-  video_thumbnail_filename String   @db.VarChar(256)
-  videos                   videos[]
+  video_thumbnail_id          String   @id @unique(map: "videos_thumbnails_id_UNIQUE") @db.Char(36)
+  video_thumbnail_data        Bytes
+  video_thumbnail_filename    String   @db.VarChar(256)
+  video_thumbnail_description String?  @db.VarChar(512)
+  videos                      videos[]
 }

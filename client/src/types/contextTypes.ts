@@ -39,6 +39,11 @@ export interface Organization {
   animate?: boolean;
 }
 
+export interface Thumbnail {
+  blob: Blob;
+  description: string;
+}
+
 export interface IndexedDBProviderProps {
   children: ReactNode;
 }
@@ -68,15 +73,10 @@ export interface IDBService {
     sortedData: Individual[] | Group[] | Organization[],
   ) => Promise<void>;
   deleteStoredAffiliatedEntities: (table: string) => Promise<void>;
-  storeProfilePicture: (
-    table: string,
-    index: string,
-    blob: Blob,
-  ) => Promise<void>;
-  getStoredProfilePicture: (
-    table: string,
-    index: string,
-  ) => Promise<Blob | null>;
+  storeProfilePicture: (index: string, blob: Blob) => Promise<void>;
+  getStoredProfilePicture: (index: string) => Promise<Blob | null>;
+  storeThumbnail: (index: string, thumbnail: Thumbnail) => Promise<void>;
+  getStoredThumbnail: (index: string) => Promise<Thumbnail | null>;
 }
 
 /*

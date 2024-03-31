@@ -223,6 +223,16 @@ export interface ImageData {
   image_description: string;
 }
 
+export interface SheetThumbnailData {
+  image_url: string;
+  image_description: string;
+}
+
+export interface VideoThumbnailData {
+  image_url: string;
+  image_description: string;
+}
+
 export interface ImageThumbnailData {
   image_url: string;
   image_description: string;

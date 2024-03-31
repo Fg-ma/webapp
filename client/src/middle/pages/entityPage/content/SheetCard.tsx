@@ -4,7 +4,12 @@ import Axios from "axios";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { usePinned } from "@context/PinnedContext";
-import { SheetProps, SheetData } from "@FgTypes/middleTypes";
+import {
+  SheetProps,
+  SheetData,
+  SheetThumbnailData,
+} from "@FgTypes/middleTypes";
+import { useIndexedDBContext } from "@context/IDBContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -21,8 +26,14 @@ export default function SheetCard({
 }: SheetProps) {
   const dispatch = useDispatch();
 
+  const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
   const { setPinnedState } = usePinned();
   const [sheetData, setSheetData] = useState<SheetData>();
+  const [sheetThumbnailData, setSheetThumbnailData] =
+    useState<SheetThumbnailData>({
+      image_url: "",
+      image_description: "",
+    });
   const [hover, setHover] = useState(false);
   const isAuthor = useRef<boolean | null>(null);
 
@@ -103,19 +114,97 @@ export default function SheetCard({
     dispatch(setIds("main", "sheet_id", sheet_id));
   };
 
+  useEffect(() => {
+    const fetchSheetData = async () => {
+      try {
+        const storedThumbnail = await getStoredThumbnail(sheet_id);
+
+        if (storedThumbnail) {
+          const url = URL.createObjectURL(storedThumbnail.blob);
+
+          setSheetThumbnailData({
+            image_url: url,
+            image_description: storedThumbnail.description,
+          });
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/sheets/get_sheet_thumbnail`,
+          {
+            params: {
+              sheet_id: sheet_id,
+            },
+          },
+        );
+
+        if (response.data) {
+          const blobData = new Uint8Array(
+            response.data.sheet_thumbnail_data.data,
+          );
+
+          const extension = response.data.sheet_thumbnail_filename
+            .slice(-3)
+            .toLowerCase();
+
+          const mimeType = getMimeType(extension);
+
+          if (mimeType) {
+            const blob = new Blob([blobData], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const description = response.data.sheet_thumbnail_description;
+
+            setSheetThumbnailData({
+              image_url: url,
+              image_description: description,
+            });
+
+            await storeThumbnail(sheet_id, {
+              blob: blob,
+              description: description,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching sheet data:", error);
+      }
+    };
+
+    if (sheet_id) {
+      fetchSheetData();
+    }
+  }, [sheet_id]);
+
+  const getMimeType = (extension: string) => {
+    switch (extension) {
+      case "jpg":
+      case "jpeg":
+        return "image/jpeg";
+      case "png":
+        return "image/png";
+      case "gif":
+        return "image/gif";
+      default:
+        return null;
+    }
+  };
+
   return (
     <div
       className="shadow-md rounded flex flex-col justify-center"
       onClick={handleClick}
     >
       <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
+        <img
+          className="object-cover object-center w-full h-full rounded-md"
+          src={sheetThumbnailData.image_url}
+          alt={sheetThumbnailData.image_description}
+        />
         {isEditablePage.current ? (
           <button
-            className="w-8 aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none"
-            style={{
-              backgroundImage:
-                pinned || hover ? 'url("/assets/icons/pin.svg")' : "none",
-            }}
+            className={`w-5 ${
+              pinned || hover ? "bg-fg-primary" : "none"
+            } rounded-full aspect-square absolute -top-1.5 -right-1.5 bg-cover bg-no-repeat focus:outline-none`}
             onClick={(e) => {
               e.stopPropagation();
               togglePinned();
@@ -129,12 +218,9 @@ export default function SheetCard({
           ></button>
         ) : (
           <div
-            className={`aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none ${
-              pinned ? "w-8" : "w-0"
-            }`}
-            style={{
-              backgroundImage: pinned ? 'url("/assets/icons/pin.svg")' : "none",
-            }}
+            className={`w-5 ${
+              pinned ? "bg-fg-primary" : "none"
+            } rounded-full aspect-square absolute -top-1.5 -right-1.5 bg-cover bg-no-repeat focus:outline-none`}
           ></div>
         )}
       </div>

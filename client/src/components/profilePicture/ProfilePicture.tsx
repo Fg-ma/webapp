@@ -6,7 +6,6 @@ import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { ProfilePictureProps, Entity } from "@FgTypes/componentTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
-import { PROFILE_PICTURES } from "@IDB/IDBService";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -50,10 +49,7 @@ export default function ProfilePicture({
 
   useEffect(() => {
     const fetchProfilePictureData = async () => {
-      const storedProfilePicture = await getStoredProfilePicture(
-        PROFILE_PICTURES,
-        entity_id,
-      );
+      const storedProfilePicture = await getStoredProfilePicture(entity_id);
 
       if (storedProfilePicture) {
         const url = URL.createObjectURL(storedProfilePicture);
@@ -102,7 +98,7 @@ export default function ProfilePicture({
               profilePictureUrl: url,
             });
 
-            await storeProfilePicture(PROFILE_PICTURES, entity_id, blob);
+            await storeProfilePicture(entity_id, blob);
           }
         } else {
           setProfilePictureData({

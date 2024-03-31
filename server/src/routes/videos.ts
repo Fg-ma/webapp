@@ -2,6 +2,28 @@ import express from "express";
 const router = express.Router();
 import type { FullVideo } from "@FgTypes/types";
 
+// Route to get a video thumbnail by video_id
+router.get("/get_video_thumbnail", async (req, res) => {
+  const video_id = req.query.video_id;
+
+  try {
+    const video = await req.db.videos.findUnique({
+      where: { video_id: video_id },
+    });
+
+    const videoThumbnail = await req.db.videos_thumbnails.findUnique({
+      where: {
+        video_thumbnail_id: video.video_thumbnail_id,
+      },
+    });
+
+    res.send(videoThumbnail);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // Route to get a video by ID
 router.get("/:video_id", async (req, res) => {
   const video_id = req.params.video_id;

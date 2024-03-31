@@ -1,7 +1,12 @@
 import React, { createContext, useContext } from "react";
-import { useIndexedDB } from "@IDB/IDBService";
+import { PROFILE_PICTURES, THUMBNAILS, useIndexedDB } from "@IDB/IDBService";
 import { IndexedDBProviderProps, IDBService } from "@FgTypes/contextTypes";
-import { Group, Individual, Organization } from "@FgTypes/contextTypes";
+import {
+  Group,
+  Individual,
+  Organization,
+  Thumbnail,
+} from "@FgTypes/contextTypes";
 
 const IndexedDBContext = createContext<IDBService | undefined>(undefined);
 
@@ -66,25 +71,49 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   };
 
   const storeProfilePicture = async (
-    table: string,
     index: string,
     blob: Blob,
   ): Promise<void> => {
     try {
-      await indexedDBService.addItem(table, index, blob);
+      await indexedDBService.addItem(PROFILE_PICTURES, index, blob);
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
     }
   };
 
   const getStoredProfilePicture = async (
-    table: string,
     index: string,
   ): Promise<Blob | null> => {
     try {
       const returnedProfilePicture =
-        await indexedDBService.getItemByIndexFromTable(table, index);
+        await indexedDBService.getItemByIndexFromTable(PROFILE_PICTURES, index);
       return returnedProfilePicture as Blob | null;
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+      return null;
+    }
+  };
+
+  const storeThumbnail = async (
+    index: string,
+    thumbnail: Thumbnail,
+  ): Promise<void> => {
+    try {
+      await indexedDBService.addItem(THUMBNAILS, index, thumbnail);
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+    }
+  };
+
+  const getStoredThumbnail = async (
+    index: string,
+  ): Promise<Thumbnail | null> => {
+    try {
+      const returnedImage = await indexedDBService.getItemByIndexFromTable(
+        THUMBNAILS,
+        index,
+      );
+      return returnedImage as Thumbnail | null;
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
       return null;
@@ -104,6 +133,8 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     deleteStoredAffiliatedEntities: deleteStoredAffiliatedEntities,
     storeProfilePicture: storeProfilePicture,
     getStoredProfilePicture: getStoredProfilePicture,
+    storeThumbnail: storeThumbnail,
+    getStoredThumbnail: getStoredThumbnail,
   };
 
   return (

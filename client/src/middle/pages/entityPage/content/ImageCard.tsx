@@ -10,6 +10,7 @@ import {
   ImageData,
   ImageThumbnailData,
 } from "@FgTypes/middleTypes";
+import { useIndexedDBContext } from "@context/IDBContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -52,6 +53,7 @@ export default function ImageCard({
 }: ImageProps) {
   const dispatch = useDispatch();
 
+  const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
   const { setPinnedState } = usePinned();
   const [imageData, setImageData] = useState<ImageData>();
   const [imageThumbnailData, setImageThumbnailData] =
@@ -206,6 +208,18 @@ export default function ImageCard({
   useEffect(() => {
     const fetchImageData = async () => {
       try {
+        const storedThumbnail = await getStoredThumbnail(image_id);
+
+        if (storedThumbnail) {
+          const url = URL.createObjectURL(storedThumbnail.blob);
+
+          setImageThumbnailData({
+            image_url: url,
+            image_description: storedThumbnail.description,
+          });
+          return;
+        }
+
         const response = await Axios.get(
           `${serverUrl}/images/get_full_image/${image_id}`,
         );
@@ -222,13 +236,18 @@ export default function ImageCard({
           const mimeType = getMimeType(extension);
 
           if (mimeType) {
-            const url = URL.createObjectURL(
-              new Blob([blobData], { type: mimeType }),
-            );
+            const blob = new Blob([blobData], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const description = response.data.fullImage.image_description;
 
             setImageThumbnailData({
               image_url: url,
-              image_description: response.data.fullImage.image_description,
+              image_description: description,
+            });
+
+            await storeThumbnail(image_id, {
+              blob: blob,
+              description: description,
             });
           }
         }
@@ -269,15 +288,15 @@ export default function ImageCard({
         }}
       >
         <img
-          className="object-cover object-center w-full h-full"
+          className="object-cover object-center w-full h-full rounded"
           src={imageThumbnailData.image_url}
           alt={imageThumbnailData.image_description}
         />
         {isEditablePage.current ? (
           <button
-            className={`w-6 ${
+            className={`w-5 ${
               pinned || pinHover ? "bg-fg-primary" : "none"
-            } rounded-full aspect-square absolute -top-3 -right-3 bg-cover bg-no-repeat focus:outline-none`}
+            } rounded-full aspect-square absolute -top-1.5 -right-1.5 bg-cover bg-no-repeat focus:outline-none`}
             onClick={(e) => {
               e.stopPropagation();
               togglePinned();
@@ -291,12 +310,9 @@ export default function ImageCard({
           ></button>
         ) : (
           <div
-            className={`aspect-square absolute -top-2.5 -right-2.5 bg-cover bg-no-repeat rotate-45 focus:outline-none ${
-              pinned ? "w-8" : "w-0"
-            }`}
-            style={{
-              backgroundImage: pinned ? 'url("/assets/icons/pin.svg")' : "none",
-            }}
+            className={`w-5 ${
+              pinned ? "bg-fg-primary" : "none"
+            } rounded-full aspect-square absolute -top-1.5 -right-1.5 bg-cover bg-no-repeat focus:outline-none`}
           ></div>
         )}
         {showCreator && (

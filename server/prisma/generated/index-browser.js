@@ -288,7 +288,8 @@ exports.Prisma.Sheets_dataScalarFieldEnum = {
 exports.Prisma.Sheets_thumbnailsScalarFieldEnum = {
   sheet_thumbnail_id: 'sheet_thumbnail_id',
   sheet_thumbnail_data: 'sheet_thumbnail_data',
-  sheet_thumbnail_filename: 'sheet_thumbnail_filename'
+  sheet_thumbnail_filename: 'sheet_thumbnail_filename',
+  sheet_thumbnail_description: 'sheet_thumbnail_description'
 };
 
 exports.Prisma.User_credentialsScalarFieldEnum = {
@@ -323,7 +324,8 @@ exports.Prisma.Videos_dataScalarFieldEnum = {
 exports.Prisma.Videos_thumbnailsScalarFieldEnum = {
   video_thumbnail_id: 'video_thumbnail_id',
   video_thumbnail_data: 'video_thumbnail_data',
-  video_thumbnail_filename: 'video_thumbnail_filename'
+  video_thumbnail_filename: 'video_thumbnail_filename',
+  video_thumbnail_description: 'video_thumbnail_description'
 };
 
 exports.Prisma.SortOrder = {

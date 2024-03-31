@@ -25688,18 +25688,21 @@ export namespace Prisma {
     sheet_thumbnail_id: string | null
     sheet_thumbnail_data: Buffer | null
     sheet_thumbnail_filename: string | null
+    sheet_thumbnail_description: string | null
   }
 
   export type Sheets_thumbnailsMaxAggregateOutputType = {
     sheet_thumbnail_id: string | null
     sheet_thumbnail_data: Buffer | null
     sheet_thumbnail_filename: string | null
+    sheet_thumbnail_description: string | null
   }
 
   export type Sheets_thumbnailsCountAggregateOutputType = {
     sheet_thumbnail_id: number
     sheet_thumbnail_data: number
     sheet_thumbnail_filename: number
+    sheet_thumbnail_description: number
     _all: number
   }
 
@@ -25708,18 +25711,21 @@ export namespace Prisma {
     sheet_thumbnail_id?: true
     sheet_thumbnail_data?: true
     sheet_thumbnail_filename?: true
+    sheet_thumbnail_description?: true
   }
 
   export type Sheets_thumbnailsMaxAggregateInputType = {
     sheet_thumbnail_id?: true
     sheet_thumbnail_data?: true
     sheet_thumbnail_filename?: true
+    sheet_thumbnail_description?: true
   }
 
   export type Sheets_thumbnailsCountAggregateInputType = {
     sheet_thumbnail_id?: true
     sheet_thumbnail_data?: true
     sheet_thumbnail_filename?: true
+    sheet_thumbnail_description?: true
     _all?: true
   }
 
@@ -25799,6 +25805,7 @@ export namespace Prisma {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description: string | null
     _count: Sheets_thumbnailsCountAggregateOutputType | null
     _min: Sheets_thumbnailsMinAggregateOutputType | null
     _max: Sheets_thumbnailsMaxAggregateOutputType | null
@@ -25822,6 +25829,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: boolean
     sheet_thumbnail_data?: boolean
     sheet_thumbnail_filename?: boolean
+    sheet_thumbnail_description?: boolean
     sheets?: boolean | sheets_thumbnails$sheetsArgs<ExtArgs>
     _count?: boolean | Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sheets_thumbnails"]>
@@ -25830,6 +25838,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: boolean
     sheet_thumbnail_data?: boolean
     sheet_thumbnail_filename?: boolean
+    sheet_thumbnail_description?: boolean
   }
 
   export type sheets_thumbnailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -25847,6 +25856,7 @@ export namespace Prisma {
       sheet_thumbnail_id: string
       sheet_thumbnail_data: Buffer
       sheet_thumbnail_filename: string
+      sheet_thumbnail_description: string | null
     }, ExtArgs["result"]["sheets_thumbnails"]>
     composites: {}
   }
@@ -26245,6 +26255,7 @@ export namespace Prisma {
     readonly sheet_thumbnail_id: FieldRef<"sheets_thumbnails", 'String'>
     readonly sheet_thumbnail_data: FieldRef<"sheets_thumbnails", 'Bytes'>
     readonly sheet_thumbnail_filename: FieldRef<"sheets_thumbnails", 'String'>
+    readonly sheet_thumbnail_description: FieldRef<"sheets_thumbnails", 'String'>
   }
     
 
@@ -29523,18 +29534,21 @@ export namespace Prisma {
     video_thumbnail_id: string | null
     video_thumbnail_data: Buffer | null
     video_thumbnail_filename: string | null
+    video_thumbnail_description: string | null
   }
 
   export type Videos_thumbnailsMaxAggregateOutputType = {
     video_thumbnail_id: string | null
     video_thumbnail_data: Buffer | null
     video_thumbnail_filename: string | null
+    video_thumbnail_description: string | null
   }
 
   export type Videos_thumbnailsCountAggregateOutputType = {
     video_thumbnail_id: number
     video_thumbnail_data: number
     video_thumbnail_filename: number
+    video_thumbnail_description: number
     _all: number
   }
 
@@ -29543,18 +29557,21 @@ export namespace Prisma {
     video_thumbnail_id?: true
     video_thumbnail_data?: true
     video_thumbnail_filename?: true
+    video_thumbnail_description?: true
   }
 
   export type Videos_thumbnailsMaxAggregateInputType = {
     video_thumbnail_id?: true
     video_thumbnail_data?: true
     video_thumbnail_filename?: true
+    video_thumbnail_description?: true
   }
 
   export type Videos_thumbnailsCountAggregateInputType = {
     video_thumbnail_id?: true
     video_thumbnail_data?: true
     video_thumbnail_filename?: true
+    video_thumbnail_description?: true
     _all?: true
   }
 
@@ -29634,6 +29651,7 @@ export namespace Prisma {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description: string | null
     _count: Videos_thumbnailsCountAggregateOutputType | null
     _min: Videos_thumbnailsMinAggregateOutputType | null
     _max: Videos_thumbnailsMaxAggregateOutputType | null
@@ -29657,6 +29675,7 @@ export namespace Prisma {
     video_thumbnail_id?: boolean
     video_thumbnail_data?: boolean
     video_thumbnail_filename?: boolean
+    video_thumbnail_description?: boolean
     videos?: boolean | videos_thumbnails$videosArgs<ExtArgs>
     _count?: boolean | Videos_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videos_thumbnails"]>
@@ -29665,6 +29684,7 @@ export namespace Prisma {
     video_thumbnail_id?: boolean
     video_thumbnail_data?: boolean
     video_thumbnail_filename?: boolean
+    video_thumbnail_description?: boolean
   }
 
   export type videos_thumbnailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29682,6 +29702,7 @@ export namespace Prisma {
       video_thumbnail_id: string
       video_thumbnail_data: Buffer
       video_thumbnail_filename: string
+      video_thumbnail_description: string | null
     }, ExtArgs["result"]["videos_thumbnails"]>
     composites: {}
   }
@@ -30080,6 +30101,7 @@ export namespace Prisma {
     readonly video_thumbnail_id: FieldRef<"videos_thumbnails", 'String'>
     readonly video_thumbnail_data: FieldRef<"videos_thumbnails", 'Bytes'>
     readonly video_thumbnail_filename: FieldRef<"videos_thumbnails", 'String'>
+    readonly video_thumbnail_description: FieldRef<"videos_thumbnails", 'String'>
   }
     
 
@@ -30692,7 +30714,8 @@ export namespace Prisma {
   export const Sheets_thumbnailsScalarFieldEnum: {
     sheet_thumbnail_id: 'sheet_thumbnail_id',
     sheet_thumbnail_data: 'sheet_thumbnail_data',
-    sheet_thumbnail_filename: 'sheet_thumbnail_filename'
+    sheet_thumbnail_filename: 'sheet_thumbnail_filename',
+    sheet_thumbnail_description: 'sheet_thumbnail_description'
   };
 
   export type Sheets_thumbnailsScalarFieldEnum = (typeof Sheets_thumbnailsScalarFieldEnum)[keyof typeof Sheets_thumbnailsScalarFieldEnum]
@@ -30739,7 +30762,8 @@ export namespace Prisma {
   export const Videos_thumbnailsScalarFieldEnum: {
     video_thumbnail_id: 'video_thumbnail_id',
     video_thumbnail_data: 'video_thumbnail_data',
-    video_thumbnail_filename: 'video_thumbnail_filename'
+    video_thumbnail_filename: 'video_thumbnail_filename',
+    video_thumbnail_description: 'video_thumbnail_description'
   };
 
   export type Videos_thumbnailsScalarFieldEnum = (typeof Videos_thumbnailsScalarFieldEnum)[keyof typeof Videos_thumbnailsScalarFieldEnum]
@@ -32170,6 +32194,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: StringFilter<"sheets_thumbnails"> | string
     sheet_thumbnail_data?: BytesFilter<"sheets_thumbnails"> | Buffer
     sheet_thumbnail_filename?: StringFilter<"sheets_thumbnails"> | string
+    sheet_thumbnail_description?: StringNullableFilter<"sheets_thumbnails"> | string | null
     sheets?: SheetsListRelationFilter
   }
 
@@ -32177,6 +32202,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: SortOrder
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
+    sheet_thumbnail_description?: SortOrderInput | SortOrder
     sheets?: sheetsOrderByRelationAggregateInput
   }
 
@@ -32187,6 +32213,7 @@ export namespace Prisma {
     NOT?: sheets_thumbnailsWhereInput | sheets_thumbnailsWhereInput[]
     sheet_thumbnail_data?: BytesFilter<"sheets_thumbnails"> | Buffer
     sheet_thumbnail_filename?: StringFilter<"sheets_thumbnails"> | string
+    sheet_thumbnail_description?: StringNullableFilter<"sheets_thumbnails"> | string | null
     sheets?: SheetsListRelationFilter
   }, "sheet_thumbnail_id" | "sheet_thumbnail_id">
 
@@ -32194,6 +32221,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: SortOrder
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
+    sheet_thumbnail_description?: SortOrderInput | SortOrder
     _count?: sheets_thumbnailsCountOrderByAggregateInput
     _max?: sheets_thumbnailsMaxOrderByAggregateInput
     _min?: sheets_thumbnailsMinOrderByAggregateInput
@@ -32206,6 +32234,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: StringWithAggregatesFilter<"sheets_thumbnails"> | string
     sheet_thumbnail_data?: BytesWithAggregatesFilter<"sheets_thumbnails"> | Buffer
     sheet_thumbnail_filename?: StringWithAggregatesFilter<"sheets_thumbnails"> | string
+    sheet_thumbnail_description?: StringNullableWithAggregatesFilter<"sheets_thumbnails"> | string | null
   }
 
   export type user_credentialsWhereInput = {
@@ -32413,6 +32442,7 @@ export namespace Prisma {
     video_thumbnail_id?: StringFilter<"videos_thumbnails"> | string
     video_thumbnail_data?: BytesFilter<"videos_thumbnails"> | Buffer
     video_thumbnail_filename?: StringFilter<"videos_thumbnails"> | string
+    video_thumbnail_description?: StringNullableFilter<"videos_thumbnails"> | string | null
     videos?: VideosListRelationFilter
   }
 
@@ -32420,6 +32450,7 @@ export namespace Prisma {
     video_thumbnail_id?: SortOrder
     video_thumbnail_data?: SortOrder
     video_thumbnail_filename?: SortOrder
+    video_thumbnail_description?: SortOrderInput | SortOrder
     videos?: videosOrderByRelationAggregateInput
   }
 
@@ -32430,6 +32461,7 @@ export namespace Prisma {
     NOT?: videos_thumbnailsWhereInput | videos_thumbnailsWhereInput[]
     video_thumbnail_data?: BytesFilter<"videos_thumbnails"> | Buffer
     video_thumbnail_filename?: StringFilter<"videos_thumbnails"> | string
+    video_thumbnail_description?: StringNullableFilter<"videos_thumbnails"> | string | null
     videos?: VideosListRelationFilter
   }, "video_thumbnail_id" | "video_thumbnail_id">
 
@@ -32437,6 +32469,7 @@ export namespace Prisma {
     video_thumbnail_id?: SortOrder
     video_thumbnail_data?: SortOrder
     video_thumbnail_filename?: SortOrder
+    video_thumbnail_description?: SortOrderInput | SortOrder
     _count?: videos_thumbnailsCountOrderByAggregateInput
     _max?: videos_thumbnailsMaxOrderByAggregateInput
     _min?: videos_thumbnailsMinOrderByAggregateInput
@@ -32449,6 +32482,7 @@ export namespace Prisma {
     video_thumbnail_id?: StringWithAggregatesFilter<"videos_thumbnails"> | string
     video_thumbnail_data?: BytesWithAggregatesFilter<"videos_thumbnails"> | Buffer
     video_thumbnail_filename?: StringWithAggregatesFilter<"videos_thumbnails"> | string
+    video_thumbnail_description?: StringNullableWithAggregatesFilter<"videos_thumbnails"> | string | null
   }
 
   export type affiliates_relationsCreateInput = {
@@ -33784,6 +33818,7 @@ export namespace Prisma {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description?: string | null
     sheets?: sheetsCreateNestedManyWithoutSheets_thumbnailsInput
   }
 
@@ -33791,6 +33826,7 @@ export namespace Prisma {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description?: string | null
     sheets?: sheetsUncheckedCreateNestedManyWithoutSheets_thumbnailsInput
   }
 
@@ -33798,6 +33834,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
     sheets?: sheetsUpdateManyWithoutSheets_thumbnailsNestedInput
   }
 
@@ -33805,6 +33842,7 @@ export namespace Prisma {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
     sheets?: sheetsUncheckedUpdateManyWithoutSheets_thumbnailsNestedInput
   }
 
@@ -33812,18 +33850,21 @@ export namespace Prisma {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description?: string | null
   }
 
   export type sheets_thumbnailsUpdateManyMutationInput = {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type sheets_thumbnailsUncheckedUpdateManyInput = {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type user_credentialsCreateInput = {
@@ -34038,6 +34079,7 @@ export namespace Prisma {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description?: string | null
     videos?: videosCreateNestedManyWithoutVideos_thumbnailsInput
   }
 
@@ -34045,6 +34087,7 @@ export namespace Prisma {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description?: string | null
     videos?: videosUncheckedCreateNestedManyWithoutVideos_thumbnailsInput
   }
 
@@ -34052,6 +34095,7 @@ export namespace Prisma {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: videosUpdateManyWithoutVideos_thumbnailsNestedInput
   }
 
@@ -34059,6 +34103,7 @@ export namespace Prisma {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: videosUncheckedUpdateManyWithoutVideos_thumbnailsNestedInput
   }
 
@@ -34066,18 +34111,21 @@ export namespace Prisma {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description?: string | null
   }
 
   export type videos_thumbnailsUpdateManyMutationInput = {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videos_thumbnailsUncheckedUpdateManyInput = {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -35119,18 +35167,21 @@ export namespace Prisma {
     sheet_thumbnail_id?: SortOrder
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
+    sheet_thumbnail_description?: SortOrder
   }
 
   export type sheets_thumbnailsMaxOrderByAggregateInput = {
     sheet_thumbnail_id?: SortOrder
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
+    sheet_thumbnail_description?: SortOrder
   }
 
   export type sheets_thumbnailsMinOrderByAggregateInput = {
     sheet_thumbnail_id?: SortOrder
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
+    sheet_thumbnail_description?: SortOrder
   }
 
   export type IndividualsNullableRelationFilter = {
@@ -35251,18 +35302,21 @@ export namespace Prisma {
     video_thumbnail_id?: SortOrder
     video_thumbnail_data?: SortOrder
     video_thumbnail_filename?: SortOrder
+    video_thumbnail_description?: SortOrder
   }
 
   export type videos_thumbnailsMaxOrderByAggregateInput = {
     video_thumbnail_id?: SortOrder
     video_thumbnail_data?: SortOrder
     video_thumbnail_filename?: SortOrder
+    video_thumbnail_description?: SortOrder
   }
 
   export type videos_thumbnailsMinOrderByAggregateInput = {
     video_thumbnail_id?: SortOrder
     video_thumbnail_data?: SortOrder
     video_thumbnail_filename?: SortOrder
+    video_thumbnail_description?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -40431,12 +40485,14 @@ export namespace Prisma {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description?: string | null
   }
 
   export type sheets_thumbnailsUncheckedCreateWithoutSheetsInput = {
     sheet_thumbnail_id: string
     sheet_thumbnail_data: Buffer
     sheet_thumbnail_filename: string
+    sheet_thumbnail_description?: string | null
   }
 
   export type sheets_thumbnailsCreateOrConnectWithoutSheetsInput = {
@@ -40527,12 +40583,14 @@ export namespace Prisma {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type sheets_thumbnailsUncheckedUpdateWithoutSheetsInput = {
     sheet_thumbnail_id?: StringFieldUpdateOperationsInput | string
     sheet_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     sheet_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type sheetsCreateWithoutSheets_dataInput = {
@@ -40751,12 +40809,14 @@ export namespace Prisma {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description?: string | null
   }
 
   export type videos_thumbnailsUncheckedCreateWithoutVideosInput = {
     video_thumbnail_id: string
     video_thumbnail_data: Buffer
     video_thumbnail_filename: string
+    video_thumbnail_description?: string | null
   }
 
   export type videos_thumbnailsCreateOrConnectWithoutVideosInput = {
@@ -40847,12 +40907,14 @@ export namespace Prisma {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videos_thumbnailsUncheckedUpdateWithoutVideosInput = {
     video_thumbnail_id?: StringFieldUpdateOperationsInput | string
     video_thumbnail_data?: BytesFieldUpdateOperationsInput | Buffer
     video_thumbnail_filename?: StringFieldUpdateOperationsInput | string
+    video_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videosCreateWithoutVideos_dataInput = {

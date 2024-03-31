@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const IDB_NAME = "FgIDB";
 export const IDB_VERSION = 1;
@@ -6,14 +6,17 @@ export const AFFILIATED_INDIVIDUALS_TABLE = "affiliatedIndividuals";
 export const AFFILIATED_GROUPS_TABLE = "affiliatedGroups";
 export const AFFILIATED_ORGANIZATIONS_TABLE = "affiliatedOrganizations";
 export const PROFILE_PICTURES = "profilePictures";
+export const THUMBNAILS = "thumbnails";
 
 export function useIndexedDB() {
   const db = useRef<IDBDatabase | null>(null);
 
-  let indexedDBInstance: IDBDatabase | null = null;
-
   const init = async () => {
     try {
+      if (db.current) {
+        db.current.close();
+      }
+
       const request = window.indexedDB.open(IDB_NAME, IDB_VERSION);
 
       request.onerror = (event: Event) => {
@@ -22,39 +25,37 @@ export function useIndexedDB() {
 
       const dbPromise = new Promise<void>((resolve, reject) => {
         request.onsuccess = (event: Event) => {
-          indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
-          db.current = indexedDBInstance;
+          db.current = (event.target as IDBRequest<IDBDatabase>).result;
           resolve();
+        };
+
+        request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+          db.current = (event.target as IDBRequest<IDBDatabase>).result;
+          if (
+            !db.current.objectStoreNames.contains(AFFILIATED_INDIVIDUALS_TABLE)
+          ) {
+            db.current.createObjectStore(AFFILIATED_INDIVIDUALS_TABLE);
+          }
+          if (!db.current.objectStoreNames.contains(AFFILIATED_GROUPS_TABLE)) {
+            db.current.createObjectStore(AFFILIATED_GROUPS_TABLE);
+          }
+          if (
+            !db.current.objectStoreNames.contains(
+              AFFILIATED_ORGANIZATIONS_TABLE,
+            )
+          ) {
+            db.current.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
+          }
+          if (!db.current.objectStoreNames.contains(PROFILE_PICTURES)) {
+            db.current.createObjectStore(PROFILE_PICTURES);
+          }
+          if (!db.current.objectStoreNames.contains(THUMBNAILS)) {
+            db.current.createObjectStore(THUMBNAILS);
+          }
         };
       });
 
       await dbPromise;
-
-      request.onupgradeneeded = (event: Event) => {
-        indexedDBInstance = (event.target as IDBRequest<IDBDatabase>).result;
-        if (
-          !indexedDBInstance.objectStoreNames.contains(
-            AFFILIATED_INDIVIDUALS_TABLE,
-          )
-        ) {
-          indexedDBInstance.createObjectStore(AFFILIATED_INDIVIDUALS_TABLE);
-        }
-        if (
-          !indexedDBInstance.objectStoreNames.contains(AFFILIATED_GROUPS_TABLE)
-        ) {
-          indexedDBInstance.createObjectStore(AFFILIATED_GROUPS_TABLE);
-        }
-        if (
-          !indexedDBInstance.objectStoreNames.contains(
-            AFFILIATED_ORGANIZATIONS_TABLE,
-          )
-        ) {
-          indexedDBInstance.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
-        }
-        if (!indexedDBInstance.objectStoreNames.contains(PROFILE_PICTURES)) {
-          indexedDBInstance.createObjectStore(PROFILE_PICTURES);
-        }
-      };
     } catch (error) {
       console.error("Error initializing IndexedDB:", error);
     }
@@ -63,8 +64,8 @@ export function useIndexedDB() {
   // Close indexedDBInstance
   useEffect(() => {
     return () => {
-      if (indexedDBInstance) {
-        indexedDBInstance.close();
+      if (db.current) {
+        db.current.close();
       }
     };
   }, []);
@@ -144,7 +145,7 @@ export function useIndexedDB() {
     const transaction = db.current.transaction([table], "readonly");
     const store = transaction.objectStore(table);
 
-    const getRequest = store.get(index); // fix
+    const getRequest = store.get(index);
 
     return new Promise<T | null>((resolve, rejesct) => {
       getRequest.onsuccess = (event: Event) => {
@@ -187,11 +188,9 @@ export function useIndexedDB() {
     try {
       if (!db.current) {
         await init();
-        console.log("wqorsl", db.current);
       }
 
       if (!db.current) {
-        console.log("eonslf");
         throw new Error("No db");
       }
 
