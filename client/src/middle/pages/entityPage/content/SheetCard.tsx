@@ -10,6 +10,7 @@ import {
   SheetThumbnailData,
 } from "@FgTypes/middleTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
+import LoadingAnimation from "./LoadingAnimation";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -34,6 +35,7 @@ export default function SheetCard({
       image_url: "",
       image_description: "",
     });
+  const [loadingThumbnail, setLoadingThumbnail] = useState(true);
   const [hover, setHover] = useState(false);
   const isAuthor = useRef<boolean | null>(null);
 
@@ -126,6 +128,7 @@ export default function SheetCard({
             image_url: url,
             image_description: storedThumbnail.description,
           });
+          setLoadingThumbnail(false);
           return;
         }
 
@@ -163,6 +166,8 @@ export default function SheetCard({
               blob: blob,
               description: description,
             });
+
+            setLoadingThumbnail(false);
           }
         }
       } catch (error) {
@@ -195,11 +200,16 @@ export default function SheetCard({
       onClick={handleClick}
     >
       <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
-        <img
-          className="object-cover object-center w-full h-full rounded-md"
-          src={sheetThumbnailData.image_url}
-          alt={sheetThumbnailData.image_description}
-        />
+        <LoadingAnimation />
+        {loadingThumbnail ? (
+          <LoadingAnimation />
+        ) : (
+          <img
+            className="object-cover object-center w-full h-full rounded-md"
+            src={sheetThumbnailData.image_url}
+            alt={sheetThumbnailData.image_description}
+          />
+        )}
         {isEditablePage.current ? (
           <button
             className={`w-5 ${
