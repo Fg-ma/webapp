@@ -10,7 +10,7 @@ import {
   SheetThumbnailData,
 } from "@FgTypes/middleTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "../../../../components/loadingAnimation/LoadingAnimation";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -38,6 +38,7 @@ export default function SheetCard({
   const [loadingThumbnail, setLoadingThumbnail] = useState(true);
   const [hover, setHover] = useState(false);
   const isAuthor = useRef<boolean | null>(null);
+  const thumbnailRef = useRef<HTMLDivElement>(null);
 
   // Gets sheet data from a given sheet_id
   useEffect(() => {
@@ -199,10 +200,13 @@ export default function SheetCard({
       className="shadow-md rounded flex flex-col justify-center"
       onClick={handleClick}
     >
-      <div className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative">
-        <LoadingAnimation />
+      <div
+        ref={thumbnailRef}
+        className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative"
+      >
+        <LoadingAnimation containerRef={thumbnailRef} />
         {loadingThumbnail ? (
-          <LoadingAnimation />
+          <LoadingAnimation containerRef={thumbnailRef} />
         ) : (
           <img
             className="object-cover object-center w-full h-full rounded-md"
