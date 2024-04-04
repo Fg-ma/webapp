@@ -30,7 +30,7 @@ const transition: Transition = {
 
 export default function ProfilePicture({
   size,
-  entity_id,
+  entity_username,
   entity_type,
   styles,
   entity,
@@ -49,7 +49,8 @@ export default function ProfilePicture({
 
   useEffect(() => {
     const fetchProfilePictureData = async () => {
-      const storedProfilePicture = await getStoredProfilePicture(entity_id);
+      const storedProfilePicture =
+        await getStoredProfilePicture(entity_username);
 
       if (storedProfilePicture) {
         const url = URL.createObjectURL(storedProfilePicture);
@@ -71,7 +72,8 @@ export default function ProfilePicture({
           `${serverUrl}/images/get_user_profile_picture`,
           {
             params: {
-              entity_id: entity_id,
+              entity_username: entity_username,
+              entity_type: entity_type,
             },
             headers: {
               Authorization: `Bearer ${token}`,
@@ -98,7 +100,7 @@ export default function ProfilePicture({
               profilePictureUrl: url,
             });
 
-            await storeProfilePicture(entity_id, blob);
+            await storeProfilePicture(entity_username, blob);
           }
         } else {
           setProfilePictureData({
@@ -111,7 +113,7 @@ export default function ProfilePicture({
     };
 
     fetchProfilePictureData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   const getMimeType = (extension: string) => {
     switch (extension) {
@@ -195,17 +197,17 @@ export default function ProfilePicture({
       if (entity_type === 1) {
         dispatch(setPageState("main", "individuals"));
         dispatch(setPageState("individuals", "sheets"));
-        dispatch(setIds("main", "individual_id", entity_id));
+        dispatch(setIds("main", "individual_id", entity_username));
         dispatch(setIds("individuals", "collection_id", null));
       } else if (entity_type === 2) {
         dispatch(setPageState("main", "groups"));
         dispatch(setPageState("groups", "sheets"));
-        dispatch(setIds("main", "group_id", entity_id));
+        dispatch(setIds("main", "group_id", entity_username));
         dispatch(setIds("groups", "collection_id", null));
       } else if (entity_type === 3) {
         dispatch(setPageState("main", "organizations"));
         dispatch(setPageState("organizations", "sheets"));
-        dispatch(setIds("main", "organization_id", entity_id));
+        dispatch(setIds("main", "organization_id", entity_username));
         dispatch(setIds("organizations", "collection_id", null));
       }
     }

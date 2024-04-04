@@ -23,7 +23,17 @@ export default function EntityPageFooter({
         onClick={() => swapPageState("home")}
       ></button>
       <p className="text-3xl mt-2">
-        {entity?.[`${entityType.slice(0, -1)}_name`]}
+        {
+          entity?.[
+            `${
+              entityType === 1
+                ? "individual"
+                : entityType === 2
+                  ? "group"
+                  : "organization"
+            }_name`
+          ]
+        }
       </p>
       <button
         className="h-8 aspect-square bg-cover bg-no-repeat mr-4"

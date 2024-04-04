@@ -36,8 +36,7 @@ export default function GroupRecs() {
   const grpRecs = groups.map((grpInfo) => {
     return (
       <GroupCard
-        key={grpInfo.group_id}
-        id={grpInfo.group_id}
+        key={grpInfo.group_handle}
         name={grpInfo.group_name}
         handle={grpInfo.group_handle}
         currentIssue={grpInfo.group_currentIssue}

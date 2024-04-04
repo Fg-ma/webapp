@@ -6,19 +6,7 @@ import { ReactNode } from "react";
   IDBContext.tsx
 */
 
-export interface Group {
-  group_id: string;
-  group_name: string | null;
-  group_handle: string;
-  group_currentIssue: string;
-  group_description: string;
-  group_stances: string;
-  affiliate_relation_date: string;
-  animate?: boolean;
-}
-
 export interface Individual {
-  individual_id: string;
   individual_name: string | null;
   individual_username: string;
   individual_currentIssue: string;
@@ -28,8 +16,17 @@ export interface Individual {
   animate?: boolean;
 }
 
+export interface Group {
+  group_name: string | null;
+  group_handle: string;
+  group_currentIssue: string;
+  group_description: string;
+  group_stances: string;
+  affiliate_relation_date: string;
+  animate?: boolean;
+}
+
 export interface Organization {
-  organization_id: string;
   organization_name: string | null;
   organization_handle: string;
   organization_currentIssue: string;

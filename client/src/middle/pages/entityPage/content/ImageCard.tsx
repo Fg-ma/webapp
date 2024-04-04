@@ -11,6 +11,7 @@ import {
   ImageThumbnailData,
 } from "@FgTypes/middleTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
+import LoadingAnimation from "@components/loadingAnimation/LoadingAnimation";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -55,18 +56,20 @@ export default function ImageCard({
 
   const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
   const { setPinnedState } = usePinned();
+  const [pinHover, setPinHover] = useState(false);
   const [imageData, setImageData] = useState<ImageData>();
   const [imageThumbnailData, setImageThumbnailData] =
     useState<ImageThumbnailData>({
       image_url: "",
       image_description: "",
     });
+  const [loadingThumbnail, setLoadingThumbnail] = useState(true);
   const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
   const [showCreator, setShowCreator] = useState(false);
   const primaryHoverTimeout = useRef<NodeJS.Timeout | null>(null);
   const secondaryHoverTimeout = useRef<NodeJS.Timeout | null>(null);
   const mousePosition = useRef<{ x: string; y: string } | null>(null);
-  const [pinHover, setPinHover] = useState(false);
+  const thumbnailRef = useRef<HTMLDivElement>(null);
 
   // Gets image data from a given image_id
   useEffect(() => {
@@ -217,6 +220,7 @@ export default function ImageCard({
             image_url: url,
             image_description: storedThumbnail.description,
           });
+          setLoadingThumbnail(false);
           return;
         }
 
@@ -249,6 +253,8 @@ export default function ImageCard({
               blob: blob,
               description: description,
             });
+
+            setLoadingThumbnail(false);
           }
         }
       } catch (error) {
@@ -278,6 +284,7 @@ export default function ImageCard({
   return (
     <div className="flex flex-col justify-center" onClick={handleClick}>
       <div
+        ref={thumbnailRef}
         className="bg-fg-white-85 w-full aspect-square rounded mb-3 relative"
         style={{ width: "calc(100% - 1rem)" }}
         onMouseEnter={(e) => startHoverTimer(e)}
@@ -287,11 +294,15 @@ export default function ImageCard({
           updatePopupPosition(e);
         }}
       >
-        <img
-          className="object-cover object-center w-full h-full rounded"
-          src={imageThumbnailData.image_url}
-          alt={imageThumbnailData.image_description}
-        />
+        {loadingThumbnail ? (
+          <LoadingAnimation containerRef={thumbnailRef} />
+        ) : (
+          <img
+            className="object-cover object-center w-full h-full rounded"
+            src={imageThumbnailData.image_url}
+            alt={imageThumbnailData.image_description}
+          />
+        )}
         {isEditablePage.current ? (
           <button
             className={`w-5 ${

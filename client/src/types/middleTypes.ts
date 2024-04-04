@@ -14,19 +14,16 @@ export interface MainState {
 
 export interface EntityData {
   [key: string]: any;
-  individual_id?: string;
   individual_name?: string;
   individual_userName?: string;
   individual_roles?: string;
   individual_currentIssue?: string;
   individual_description?: string;
-  group_id?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
   group_currentIssue?: string;
   group_description?: string;
-  organization_id?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
@@ -354,7 +351,7 @@ export interface VideosData {
 */
 
 export interface CollectionButtonProps {
-  entityType: string;
+  entityType: number;
   collection_id: string;
   collection_name: string;
 }
@@ -376,8 +373,8 @@ export interface CollectionPageState {
 */
 
 export interface CollectionButtonsProps {
-  entityType: string;
-  entity_id: string;
+  entityType: number;
+  entity_username?: string;
   isEditablePage: MutableRefObject<boolean>;
 }
 
@@ -395,7 +392,8 @@ export interface CollectionNames {
 */
 
 export interface EntityContentNavProps {
-  entityType: string;
+  entity_username?: string;
+  entityType: number;
   entity: EntityData | null;
   isEditablePage: MutableRefObject<boolean>;
 }
@@ -417,7 +415,7 @@ export interface PageState {
 */
 
 export interface EntityPageProps {
-  entityType: string;
+  entityType: number;
 }
 
 export interface EntityPageState {
@@ -460,7 +458,7 @@ export interface CollectionsContentMap {
 */
 
 export interface EntityPageFooterProps {
-  entityType: string;
+  entityType: number;
   entity: EntityData | null;
 }
 
@@ -471,8 +469,8 @@ export interface EntityPageFooterProps {
 */
 
 export interface EntityPageHeaderProps {
-  entity_id: string;
-  entityType: string;
+  entity_username: string;
+  entityType: number;
   entity: EntityData | null;
   entityReferences: EntityReferences[];
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;

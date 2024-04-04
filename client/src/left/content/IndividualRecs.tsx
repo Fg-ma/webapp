@@ -36,8 +36,7 @@ export default function IndividualRecs() {
   const indRecs = individuals.map((indInfo) => {
     return (
       <IndividualCard
-        key={indInfo.individual_id}
-        id={indInfo.individual_id}
+        key={indInfo.individual_username}
         name={indInfo.individual_name}
         username={indInfo.individual_username}
         currentIssue={indInfo.individual_currentIssue}

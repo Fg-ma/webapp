@@ -42,8 +42,27 @@ export default function CollectionButton({
   const [isHovered, setIsHovered] = useState(false);
 
   function swapPageState(newState: string) {
-    dispatch(setPageState(entityType, newState));
-    dispatch(setIds(entityType, "collection_id", collection_id));
+    dispatch(
+      setPageState(
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations",
+        newState,
+      ),
+    );
+    dispatch(
+      setIds(
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations",
+        "collection_id",
+        collection_id,
+      ),
+    );
   }
 
   return (

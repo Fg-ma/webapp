@@ -18,7 +18,6 @@ import { motion, AnimatePresence } from "framer-motion";
 */
 
 export function IndividualCard({
-  id,
   name,
   username,
   currentIssue = null,
@@ -29,7 +28,7 @@ export function IndividualCard({
   const handleClick = () => {
     dispatch(setPageState("main", "individuals"));
     dispatch(setPageState("individuals", "sheets"));
-    dispatch(setIds("main", "individual_id", id));
+    dispatch(setIds("main", "individual_id", username));
     dispatch(setIds("individuals", "collection_id", null));
   };
 
@@ -46,7 +45,7 @@ export function IndividualCard({
         <div className="w-14 aspect-square ml-4 mr-5">
           <ProfilePicture
             size={{ h: 3.5, w: 3.5 }}
-            entity_id={id}
+            entity_username={username}
             entity_type={1}
             styles="rounded-full"
             clickable={false}
@@ -66,7 +65,6 @@ export function IndividualCard({
 }
 
 export function GroupCard({
-  id,
   name,
   handle,
   currentIssue = null,
@@ -78,7 +76,7 @@ export function GroupCard({
   const handleClick = () => {
     dispatch(setPageState("main", "groups"));
     dispatch(setPageState("groups", "sheets"));
-    dispatch(setIds("main", "group_id", id));
+    dispatch(setIds("main", "group_id", handle));
     dispatch(setIds("groups", "collection_id", null));
   };
 
@@ -95,7 +93,7 @@ export function GroupCard({
         <div className="w-16 aspect-square ml-4 mr-5">
           <ProfilePicture
             size={{ h: 4, w: 4 }}
-            entity_id={id}
+            entity_username={handle}
             entity_type={2}
             styles="rounded-md"
             clickable={false}
@@ -118,7 +116,6 @@ export function GroupCard({
 }
 
 export function OrganizationCard({
-  id,
   name,
   handle,
   currentIssue = null,
@@ -130,7 +127,7 @@ export function OrganizationCard({
   const handleClick = () => {
     dispatch(setPageState("main", "organizations"));
     dispatch(setPageState("organizations", "sheets"));
-    dispatch(setIds("main", "organization_id", id));
+    dispatch(setIds("main", "organization_id", handle));
     dispatch(setIds("organizations", "collection_id", null));
   };
 
@@ -147,7 +144,7 @@ export function OrganizationCard({
         <div className="w-16 aspect-square ml-4 mr-5">
           <ProfilePicture
             size={{ h: 4, w: 4 }}
-            entity_id={id}
+            entity_username={handle}
             entity_type={3}
             styles="rounded-md"
             clickable={false}

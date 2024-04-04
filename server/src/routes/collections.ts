@@ -3,14 +3,18 @@ const router = express.Router();
 
 // Get collection names and ids from entity id
 router.get("/collections_names", async (req, res) => {
-  const id = req.query.id;
+  const entity_username = req.query.entity_username;
 
   try {
-    let collections;
-
-    collections = await req.db.collections.findMany({
+    const entity = await req.db.entities.findUnique({
       where: {
-        entity_id: id,
+        entity_username: entity_username,
+      },
+    });
+
+    const collections = await req.db.collections.findMany({
+      where: {
+        entity_id: entity.entity_id,
       },
       distinct: ["collection_id"],
     });

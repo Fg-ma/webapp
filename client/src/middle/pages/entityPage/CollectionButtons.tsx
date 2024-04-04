@@ -33,7 +33,7 @@ const serverUrl = isDevelopment
 
 export default function CollectionButtons({
   entityType,
-  entity_id,
+  entity_username,
   isEditablePage,
 }: CollectionButtonsProps) {
   /* 
@@ -57,8 +57,7 @@ export default function CollectionButtons({
           `${serverUrl}/collections/collections_names`,
           {
             params: {
-              id: entity_id,
-              type: entityType,
+              entity_username: entity_username,
             },
           },
         );
@@ -69,7 +68,7 @@ export default function CollectionButtons({
     };
 
     fetchCollectionNamesData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   const collections = collectionNames.map((collection) => {
     return (

@@ -130,7 +130,7 @@ export interface ProfilePictureProps {
     w: number;
     h: number;
   };
-  entity_id: string;
+  entity_username: string;
   entity_type: number;
   styles: string;
   entity?: {
@@ -143,19 +143,16 @@ export interface ProfilePictureProps {
 
 export interface Entity {
   [key: string]: any;
-  individual_id?: string;
   individual_name?: string;
   individual_userName?: string;
   individual_roles?: string;
   individual_currentIssue?: string;
   individual_description?: string;
-  group_id?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
   group_currentIssue?: string;
   group_description?: string;
-  organization_id?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
@@ -169,9 +166,9 @@ export interface Entity {
 
 export interface Reference {
   reference_id: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
+  individual_username: string | null;
+  group_handle: string | null;
+  organization_handle: string | null;
   title: string;
   author: string;
   url: string;

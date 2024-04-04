@@ -11,18 +11,28 @@ import type {
   MergedImageData,
 } from "@FgTypes/types";
 
-// Get entity data from entity type and entity id
+// Get entity data from entity type and entity username
 router.get("/entity", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
   try {
-    const entities = await req.db.entities.findMany({
-      where: {
-        entity_id: entity_id === "user" ? req.user?.user_id : entity_id,
-      },
-    });
+    let entity;
 
-    res.send(entities);
+    if (entity_username === "user") {
+      entity = await req.db.entities.findUnique({
+        where: {
+          entity_id: req.user.user_id,
+        },
+      });
+    } else {
+      entity = await req.db.entities.findUnique({
+        where: {
+          entity_username: entity_username,
+        },
+      });
+    }
+
+    res.send(entity);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -34,9 +44,9 @@ router.get("/entity", verifyToken, async (req, res) => {
   PURPOSES AND ITS RESPONSE SHOULDN'T BE USED TO ALLOW USERS TO EDIT PAGES)
 */
 router.get("/auth", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
-  if (entity_id === "user") {
+  if (entity_username === "user") {
     res.send(true);
   } else {
     res.send(false);

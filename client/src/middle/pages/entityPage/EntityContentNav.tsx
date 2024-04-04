@@ -31,6 +31,7 @@ const transition: Transition = {
 };
 
 export default function EntityContentNav({
+  entity_username,
   entityType,
   entity,
   isEditablePage,
@@ -45,7 +46,14 @@ export default function EntityContentNav({
 
   const dispatch = useDispatch();
   const pageState = useSelector(
-    (state: PageState) => state.page[entityType].pagePayload.pageState,
+    (state: PageState) =>
+      state.page[
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations"
+      ].pagePayload.pageState,
   );
 
   const deactiveStyles: React.CSSProperties = {};
@@ -62,8 +70,27 @@ export default function EntityContentNav({
   const navItems = ["sheets", "videos", "images"];
 
   function swapPageState(newState: string) {
-    dispatch(setPageState(entityType, newState));
-    dispatch(setIds(entityType, "collection_id", null));
+    dispatch(
+      setPageState(
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations",
+        newState,
+      ),
+    );
+    dispatch(
+      setIds(
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations",
+        "collection_id",
+        null,
+      ),
+    );
   }
 
   return (
@@ -97,7 +124,7 @@ export default function EntityContentNav({
       {entity && (
         <CollectionButtons
           entityType={entityType}
-          entity_id={entity[`${entityType.slice(0, -1)}_id`]}
+          entity_username={entity_username}
           isEditablePage={isEditablePage}
         />
       )}

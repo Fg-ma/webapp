@@ -204,7 +204,6 @@ export default function SheetCard({
         ref={thumbnailRef}
         className="bg-fg-white-85 w-3/4 aspect-square rounded-md mx-auto mt-5 mb-3 relative"
       >
-        <LoadingAnimation containerRef={thumbnailRef} />
         {loadingThumbnail ? (
           <LoadingAnimation containerRef={thumbnailRef} />
         ) : (

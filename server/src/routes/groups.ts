@@ -13,14 +13,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route to get a group by ID
-router.get("/:group_id", verifyToken, async (req, res) => {
-  const group_id = req.params.group_id;
+// Route to get a group by username
+router.get("/:group_username", verifyToken, async (req, res) => {
+  const group_username = req.params.group_username;
 
   try {
     const group = await req.db.groups.findUnique({
       where: {
-        group_id: group_id === "user" ? req.user?.user_id : group_id,
+        group_username:
+          group_username === "user" ? req.user?.user_id : group_username,
       },
     });
 

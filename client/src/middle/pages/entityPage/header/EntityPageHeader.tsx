@@ -15,7 +15,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function EntityPageHeader({
-  entity_id,
+  entity_username,
   entityType,
   entity,
   entityReferences,

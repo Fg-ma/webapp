@@ -34,11 +34,11 @@ export default function MiddleSpace({
         />,
       );
     } else if (mainPageState === "individuals" || mainPageState === "profile") {
-      setMiddleSpaceContent(<EntityPage entityType="individuals" />);
+      setMiddleSpaceContent(<EntityPage entityType={1} />);
     } else if (mainPageState === "groups") {
-      setMiddleSpaceContent(<EntityPage entityType="groups" />);
+      setMiddleSpaceContent(<EntityPage entityType={2} />);
     } else if (mainPageState === "organizations") {
-      setMiddleSpaceContent(<EntityPage entityType="organizations" />);
+      setMiddleSpaceContent(<EntityPage entityType={3} />);
     } else if (mainPageState === "sheets") {
       setMiddleSpaceContent(<ContentPage contentType="sheets" />);
     } else if (mainPageState === "videos") {

@@ -35,25 +35,32 @@ export default function EntityPage({ entityType }: EntityPageProps) {
     */
 
   const pageState = useSelector(
-    (state: EntityPageState) => state.page[entityType].pagePayload.pageState,
+    (state: EntityPageState) =>
+      state.page[
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations"
+      ].pagePayload.pageState,
   );
   const entity_collection_id = useSelector(
     (state: EntityPageState) =>
-      state.page[entityType].pagePayload.ids.collection_id,
+      state.page[
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations"
+      ].pagePayload.ids.collection_id,
   );
-  const entity_id = useSelector((state: EntityPageState) => {
-    if (
-      entityType === "individuals" &&
-      state.page["main"].pagePayload.ids.individual_id
-    )
+  const entity_username = useSelector((state: EntityPageState) => {
+    if (entityType === 1 && state.page["main"].pagePayload.ids.individual_id)
       return state.page["main"].pagePayload.ids.individual_id;
-    else if (
-      entityType === "groups" &&
-      state.page["main"].pagePayload.ids.group_id
-    )
+    else if (entityType === 2 && state.page["main"].pagePayload.ids.group_id)
       return state.page["main"].pagePayload.ids.group_id;
     else if (
-      entityType === "organizations" &&
+      entityType === 3 &&
       state.page["main"].pagePayload.ids.organization_id
     )
       return state.page["main"].pagePayload.ids.organization_id;
@@ -88,7 +95,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
         const response = await Axios.get(`${serverUrl}/entities/auth`, {
           params: {
-            entity_id: entity_id,
+            entity_username: entity_username,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,7 +117,13 @@ export default function EntityPage({ entityType }: EntityPageProps) {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/${entityType}/${entity_id}`,
+          `${serverUrl}/${
+            entityType === 1
+              ? "individuals"
+              : entityType === 2
+                ? "groups"
+                : "organizations"
+          }/${entity_username}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -134,7 +147,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
         const response = await Axios.get(`${serverUrl}/entities/entity`, {
           params: {
-            entity_id: entity_id,
+            entity_username: entity_username,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -157,7 +170,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
         const response = await Axios.get(`${serverUrl}/references`, {
           params: {
-            entity_id: entity_id,
+            entity_username: entity_username,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -170,7 +183,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
       }
     };
 
-    if (entity_id) {
+    if (entity_username) {
       fetchEditablePage();
 
       fetchEntityData();
@@ -179,7 +192,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
 
       fetchEntityReferences();
     }
-  }, [entity_id]);
+  }, [entity_username]);
 
   const renderContent = () => {
     if (!entityData) return null;
@@ -244,9 +257,9 @@ export default function EntityPage({ entityType }: EntityPageProps) {
         style={{ height: `calc(100% - 2.5rem)`, scrollbarGutter: "stable" }}
       >
         <div className="px-6 my-8 py-8 bg-white rounded-lg">
-          {entity_id && (
+          {entity_username && (
             <EntityPageHeader
-              entity_id={entity_id}
+              entity_username={entity_username}
               entityType={entityType}
               entity={entityData}
               entityReferences={entityReferences}
@@ -254,6 +267,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
             />
           )}
           <EntityContentNav
+            entity_username={entity_username}
             entityType={entityType}
             entity={entityData}
             isEditablePage={isEditablePage}

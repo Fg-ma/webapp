@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
 import config from "@config";
@@ -10,6 +10,7 @@ import {
   VideoThumbnailData,
 } from "@FgTypes/middleTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
+import LoadingAnimation from "@components/loadingAnimation/LoadingAnimation";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -33,7 +34,9 @@ export default function VideoCard({
       image_url: "",
       image_description: "",
     });
+  const [loadingThumbnail, setLoadingThumbnail] = useState(true);
   const [hover, setHover] = useState(false);
+  const thumbnailRef = useRef<HTMLDivElement>(null);
 
   // Gets video data from a given video_id
   useEffect(() => {
@@ -119,6 +122,7 @@ export default function VideoCard({
             image_url: url,
             image_description: storedThumbnail.description,
           });
+          setLoadingThumbnail(false);
           return;
         }
 
@@ -156,6 +160,8 @@ export default function VideoCard({
               blob: blob,
               description: description,
             });
+
+            setLoadingThumbnail(false);
           }
         }
       } catch (error) {
@@ -184,12 +190,19 @@ export default function VideoCard({
 
   return (
     <div className="flex flex-col justify-center" onClick={handleClick}>
-      <div className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative">
-        <img
-          className="object-cover object-center w-full h-full rounded"
-          src={videoThumbnailData.image_url}
-          alt={videoThumbnailData.image_description}
-        />
+      <div
+        ref={thumbnailRef}
+        className="bg-fg-white-85 w-full aspect-video rounded mx-auto mb-3 relative"
+      >
+        {loadingThumbnail ? (
+          <LoadingAnimation containerRef={thumbnailRef} />
+        ) : (
+          <img
+            className="object-cover object-center w-full h-full rounded"
+            src={videoThumbnailData.image_url}
+            alt={videoThumbnailData.image_description}
+          />
+        )}
         {isEditablePage.current ? (
           <button
             className={`w-5 ${

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
@@ -71,7 +71,7 @@ export default function OrganizationCards() {
     const deleteOldRelationData = async () => {
       const newOrganizations = organizations.filter(
         (organization) =>
-          organization.organization_id !==
+          organization.organization_handle !==
           affiliateRelation.affiliate_id_target,
       );
 
@@ -165,8 +165,7 @@ export default function OrganizationCards() {
   const orgCards = organizations.map((orgInfo) => {
     return (
       <OrganizationCard
-        key={orgInfo.organization_id}
-        id={orgInfo.organization_id}
+        key={orgInfo.organization_handle}
         name={orgInfo.organization_name}
         handle={orgInfo.organization_handle}
         currentIssue={orgInfo.organization_currentIssue}

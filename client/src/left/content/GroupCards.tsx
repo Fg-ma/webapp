@@ -69,7 +69,7 @@ export default function GroupCards() {
 
     const deleteOldRelationData = async () => {
       const newGroups = groups.filter(
-        (group) => group.group_id !== affiliateRelation.affiliate_id_target,
+        (group) => group.group_handle !== affiliateRelation.affiliate_id_target,
       );
 
       setGroups(newGroups);
@@ -164,8 +164,7 @@ export default function GroupCards() {
   const grpCards = groups.map((grpInfo) => {
     return (
       <GroupCard
-        key={grpInfo.group_id}
-        id={grpInfo.group_id}
+        key={grpInfo.group_handle}
         name={grpInfo.group_name}
         handle={grpInfo.group_handle}
         currentIssue={grpInfo.group_currentIssue}

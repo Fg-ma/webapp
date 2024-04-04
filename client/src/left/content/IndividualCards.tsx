@@ -70,7 +70,8 @@ export default function IndividualCards() {
     const deleteOldRelationData = async () => {
       const newIndividuals = individuals.filter(
         (individual) =>
-          individual.individual_id !== affiliateRelation.affiliate_id_target,
+          individual.individual_username !==
+          affiliateRelation.affiliate_id_target,
       );
 
       setIndividuals(newIndividuals);
@@ -171,8 +172,7 @@ export default function IndividualCards() {
   const indCards = individuals.map((indInfo) => {
     return (
       <IndividualCard
-        key={indInfo.individual_id}
-        id={indInfo.individual_id}
+        key={indInfo.individual_username}
         name={indInfo.individual_name}
         username={indInfo.individual_username}
         currentIssue={indInfo.individual_currentIssue}
