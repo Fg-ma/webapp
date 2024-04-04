@@ -63,7 +63,7 @@ export default function EntityPageHeader({
           `${serverUrl}/affiliateRelations/get_affiliated_entities`,
           {
             params: {
-              entity_id: entity_id,
+              entity_username: entity_username,
             },
             headers: {
               Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ export default function EntityPageHeader({
     };
 
     fetchIndividualData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   useEffect(() => {
     const unsortedArray = [];
@@ -115,8 +115,12 @@ export default function EntityPageHeader({
         <ProfilePicture
           key={String(affiliate[`${affiliate.type}_id` as keyof Afiliate])}
           size={{ w: 2, h: 2 }}
-          entity_id={String(
-            affiliate[`${affiliate.type}_id` as keyof Afiliate],
+          entity_username={String(
+            affiliate.type === "individual"
+              ? affiliate.individual_username
+              : affiliate.type === "group"
+                ? affiliate.group_handle
+                : affiliate.organization_handle,
           )}
           entity_type={
             affiliate.type === "individual"
@@ -163,14 +167,12 @@ export default function EntityPageHeader({
         <div className="h-24 w-24">
           <ProfilePicture
             size={{ h: 6, w: 6 }}
-            entity_id={entity_id}
-            entity_type={
-              entityType === "individuals" ? 1 : entityType === "groups" ? 2 : 3
-            }
+            entity_username={entity_username}
+            entity_type={entityType}
             styles={
-              entityType === "individuals"
+              entityType === 1
                 ? "rounded-full"
-                : entityType === "groups"
+                : entityType === 2
                   ? "rounded-xl"
                   : "rounded-md"
             }
@@ -183,11 +185,17 @@ export default function EntityPageHeader({
               affiliatesProfilePictures?.length === 0 ? "mt-2" : "mb-1"
             }`}
           >
-            {entity?.[`${entityType.slice(0, -1)}_name`]
-              ? entity?.[`${entityType.slice(0, -1)}_name`]
-              : entity?.[`${entityType.slice(0, -1)}_username`]
-                ? entity?.[`${entityType.slice(0, -1)}_username`]
-                : entity?.[`${entityType.slice(0, -1)}_handle`]}
+            {entityType === 1
+              ? entity?.individual_name
+                ? entity.individual_name
+                : entity?.individual_username
+              : entityType === 2
+                ? entity?.group_name
+                  ? entity.group_name
+                  : entity?.group_handle
+                : entity?.organization_name
+                  ? entity.organization_name
+                  : entity?.organization_handle}
           </p>
           <div ref={affiliatedEntitiesScrollRef} className="w-full">
             <AffiliatedEntitiesScroll
@@ -200,44 +208,75 @@ export default function EntityPageHeader({
         </div>
       </div>
       <div className="text-xl mt-4">
-        {entity?.[`${entityType.slice(0, -1)}_username`] && (
-          <div className="flex items-center justify-start">
-            <p className="pb-1">@</p>
-            <p>{entity[`${entityType.slice(0, -1)}_username`]}</p>
-          </div>
-        )}
-        {entity?.[`${entityType.slice(0, -1)}_handle`] && (
-          <div className="flex items-center justify-start">
-            <p className="pb-1">@</p>
-            <p>{entity[`${entityType.slice(0, -1)}_handle`]}</p>
-          </div>
-        )}
+        {entityType === 1
+          ? entity?.individual_username && (
+              <div className="flex items-center justify-start">
+                <p className="pb-1">@</p>
+                <p>{entity.individual_username}</p>
+              </div>
+            )
+          : entityType === 2
+            ? entity?.group_handle && (
+                <div className="flex items-center justify-start">
+                  <p className="pb-1">@</p>
+                  <p>{entity.group_handle}</p>
+                </div>
+              )
+            : entity?.organization_handle && (
+                <div className="flex items-center justify-start">
+                  <p className="pb-1">@</p>
+                  <p>{entity.organization_handle}</p>
+                </div>
+              )}
       </div>
       <p className="text-2xl font-bold mt-2">
-        {entity?.[`${entityType.slice(0, -1)}_currentIssue`]}
+        {entityType === 1
+          ? entity?.individual_currentIssue
+          : entityType === 2
+            ? entity?.group_currentIssue
+            : entity?.organization_currentIssue}
       </p>
-      {entity?.[`${entityType.slice(0, -1)}_roles`] && (
-        <p className="text-xl font-K2D line-clamp-2 mt-1">
-          {entity[`${entityType.slice(0, -1)}_roles`]}
-        </p>
-      )}
-      {entity?.[`${entityType.slice(0, -1)}_stances`] && (
-        <p className="text-xl font-K2D line-clamp-2 mt-1">
-          {entity[`${entityType.slice(0, -1)}_stances`]}
-        </p>
-      )}
-      {entity?.[`${entityType.slice(0, -1)}_description`] && (
-        <p className="text-base font-K2D mt-4">
-          {entity[`${entityType.slice(0, -1)}_description`]}
-        </p>
-      )}
+      {entityType === 1
+        ? entity?.individual_roles && (
+            <p className="text-xl font-K2D line-clamp-2 mt-1">
+              {entity.individual_roles}
+            </p>
+          )
+        : entityType === 2
+          ? entity?.group_stances && (
+              <p className="text-xl font-K2D line-clamp-2 mt-1">
+                {entity.group_stances}
+              </p>
+            )
+          : entity?.organization_stances && (
+              <p className="text-xl font-K2D line-clamp-2 mt-1">
+                {entity.organization_stances}
+              </p>
+            )}
+      {entityType === 1
+        ? entity?.individual_description && (
+            <p className="text-base font-K2D mt-4">
+              {entity.individual_description}
+            </p>
+          )
+        : entityType === 2
+          ? entity?.group_description && (
+              <p className="text-base font-K2D mt-4">
+                {entity.group_description}
+              </p>
+            )
+          : entity?.organization_description && (
+              <p className="text-base font-K2D mt-4">
+                {entity.organization_description}
+              </p>
+            )}
       {entityReferences && <ReferenceLinks references={entityReferences} />}
       <div className="space-x-6 font-K2D mt-6 flex items-center justify-left">
-        <AffiliateButton entity_id={entity_id} />
-        <MessageButton entity_id={entity_id} />
+        <AffiliateButton entity_username={entity_username} />
+        <MessageButton entity_username={entity_username} />
         <button className="w-1/4 h-9 rounded-md bg-fg-white-95">Email</button>
         <ContactDropdown
-          entity_id={entity_id}
+          entity_username={entity_username}
           scrollingEntityContainer={scrollingEntityContainer}
         />
       </div>

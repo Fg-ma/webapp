@@ -15,7 +15,7 @@ export interface MainState {
 export interface EntityData {
   [key: string]: any;
   individual_name?: string;
-  individual_userName?: string;
+  individual_username?: string;
   individual_roles?: string;
   individual_currentIssue?: string;
   individual_description?: string;
@@ -33,9 +33,9 @@ export interface EntityData {
 
 export interface EntityReferences {
   reference_id: string;
-  individual_id: string | null;
-  group_id: string | null;
-  organization_id: string | null;
+  individual_username: string | null;
+  group_handle: string | null;
+  organization_handle: string | null;
   title: string;
   author: string;
   url: string;
@@ -587,7 +587,7 @@ export interface AffiliatedEntitiesScrollProps {
 */
 
 export interface AffiliateWithButtonProps {
-  entity_id: string;
+  entity_username: string;
 }
 
 /*

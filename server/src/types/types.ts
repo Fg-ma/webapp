@@ -2,6 +2,7 @@
 
 export interface Entity {
   entity_id: string;
+  entity_username: string;
   entity_type: number;
 }
 

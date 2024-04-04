@@ -44,14 +44,20 @@ router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
 
 // Delete an existing affiliate relation
 router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
   try {
+    const entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
     const existingRelation = await req.db.affiliates_relations.findUnique({
       where: {
         affiliate_id_root_affiliate_id_target: {
           affiliate_id_root: req.user.user_id,
-          affiliate_id_target: entity_id,
+          affiliate_id_target: entity.entity_id,
         },
       },
     });
@@ -63,12 +69,6 @@ router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
     await req.db.affiliates_relations.delete({
       where: {
         affiliate_relation_id: existingRelation.affiliate_relation_id,
-      },
-    });
-
-    const entity = await req.db.entities.findUnique({
-      where: {
-        entity_id: entity_id,
       },
     });
 
@@ -88,15 +88,21 @@ router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
 
 // Route to get an entity's affiliation status with the current user
 router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
   try {
-    if (entity_id !== "user") {
+    if (entity_username !== "user") {
+      const entity: Entity = await req.db.entities.findUnique({
+        where: {
+          entity_username: entity_username,
+        },
+      });
+
       const relation = await req.db.affiliates_relations.findUnique({
         where: {
           affiliate_id_root_affiliate_id_target: {
             affiliate_id_root: req.user.user_id,
-            affiliate_id_target: entity_id,
+            affiliate_id_target: entity.entity_id,
           },
         },
       });
@@ -115,17 +121,22 @@ router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
   }
 });
 
-// Route to get all the affiliated entities with a certian entity id
+// Route to get all the affiliated entities with a certian entity_username
 router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
   try {
     let user_id;
 
-    if (entity_id === "user") {
+    if (entity_username === "user") {
       user_id = req.user.user_id;
     } else {
-      user_id = entity_id;
+      const entity: Entity = await req.db.entities.findUnique({
+        where: {
+          entity_username: entity_username,
+        },
+      });
+      user_id = entity.entity_id;
     }
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({

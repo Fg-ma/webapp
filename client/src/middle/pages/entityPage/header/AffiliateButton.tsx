@@ -10,7 +10,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function AffiliateButton({
-  entity_id,
+  entity_username,
 }: AffiliateWithButtonProps) {
   const { setAffiliateRelation } = useAffiliateContext();
   const [isAffiliated, setIsAffiliated] = useState(false);
@@ -28,7 +28,7 @@ export default function AffiliateButton({
           `${serverUrl}/affiliateRelations/search_affiliate_relation`,
           {
             params: {
-              entity_id: entity_id,
+              entity_username: entity_username,
             },
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export default function AffiliateButton({
     };
 
     fetchIsAffiliated();
-  }, [entity_id]);
+  }, [entity_username]);
 
   const handleAffiliate = async () => {
     try {
