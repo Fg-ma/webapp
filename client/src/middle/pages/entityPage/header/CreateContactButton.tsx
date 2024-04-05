@@ -16,7 +16,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function CreateContactButton({
-  entity_id,
+  entity_username,
 }: CreateContactButtonProps) {
   const dispatch = useDispatch();
 
@@ -28,9 +28,9 @@ export default function CreateContactButton({
     }
 
     const response = await Axios.put(
-      `${serverUrl}/contacts/set_contact_by_entity_id`,
+      `${serverUrl}/contacts/set_contact_by_entity_username`,
       {
-        entity_id: entity_id,
+        entity_username: entity_username,
       },
       {
         headers: {

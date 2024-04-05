@@ -168,6 +168,7 @@ exports.Prisma.Conversations_messages_logsScalarFieldEnum = {
 
 exports.Prisma.EntitiesScalarFieldEnum = {
   entity_id: 'entity_id',
+  entity_username: 'entity_username',
   entity_type: 'entity_type'
 };
 

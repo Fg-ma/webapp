@@ -428,9 +428,15 @@ router.get("/isUser", verifyToken, async (req, res) => {
 
 // Starts a new conversation if necessary then gets the neccssary information for a conversation
 router.get("/message_button", verifyToken, async (req, res) => {
-  const { entity_id } = req.query;
+  const { entity_username } = req.query;
 
   try {
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
     const userConversations = await req.db.conversations_members.findMany({
       where: {
         member_id: req.user.user_id,
@@ -439,7 +445,7 @@ router.get("/message_button", verifyToken, async (req, res) => {
 
     const entityConversations = await req.db.conversations_members.findMany({
       where: {
-        member_id: entity_id,
+        member_id: entity.entity_id,
       },
     });
 
@@ -479,7 +485,7 @@ router.get("/message_button", verifyToken, async (req, res) => {
           conversationArray[index].member_id === req.user.user_id &&
           conversationArray.find(
             (conv: ConversationMember) =>
-              conv.member_id === entity_id &&
+              conv.member_id === entity.entity_id &&
               conv.conversation_id === conversation.conversation_id
           )
         );
@@ -513,7 +519,7 @@ router.get("/message_button", verifyToken, async (req, res) => {
         data: {
           conversations_members_id: uuid(),
           conversation_id: conversation_id,
-          member_id: entity_id,
+          member_id: entity.entity_id,
         },
       });
 
@@ -526,16 +532,10 @@ router.get("/message_button", verifyToken, async (req, res) => {
       });
     }
 
-    const entity = await req.db.entities.findUnique({
-      where: {
-        entity_id: entity_id,
-      },
-    });
-
     if (entity.entity_type === 1) {
       const entityData = await req.db.individuals.findUnique({
         where: {
-          individual_id: entity_id,
+          individual_id: entity.entity_id,
         },
       });
 
@@ -563,7 +563,7 @@ router.get("/message_button", verifyToken, async (req, res) => {
     } else if (entity.entity_type === 2) {
       const entityData = await req.db.groups.findUnique({
         where: {
-          group_id: entity_id,
+          group_id: entity.entity_id,
         },
       });
 
@@ -591,7 +591,7 @@ router.get("/message_button", verifyToken, async (req, res) => {
     } else if (entity.entity_type === 3) {
       const entityData = await req.db.organizations.findUnique({
         where: {
-          organization_id: entity_id,
+          organization_id: entity.entity_id,
         },
       });
 

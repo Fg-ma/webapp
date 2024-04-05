@@ -44,7 +44,7 @@ const dropdownTransition: Transition = {
 };
 
 export default function ContactDropdown({
-  entity_id,
+  entity_username,
   scrollingEntityContainer,
 }: ContactDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +109,7 @@ export default function ContactDropdown({
           {isOpen && (
             <ContactDropdownPortal
               setIsOpen={setIsOpen}
-              entity_id={entity_id}
+              entity_username={entity_username}
               contactDropdownPortalContainerRef={
                 contactDropdownPortalContainerRef
               }
@@ -125,7 +125,7 @@ export default function ContactDropdown({
 
 function ContactDropdownPortal({
   setIsOpen,
-  entity_id,
+  entity_username,
   contactDropdownPortalContainerRef,
   scrollingEntityContainer,
   contactDropdownRef,
@@ -216,7 +216,7 @@ function ContactDropdownPortal({
         className="pl-7 overflow-y-auto grow smallScrollbar flex flex-col space-y-3 py-3"
         style={{ scrollbarGutter: "stable" }}
       >
-        <CreateContactButton entity_id={entity_id} />
+        <CreateContactButton entity_username={entity_username} />
       </div>
       <div
         className="h-1 bg-white mx-7 mt-1 w-full"

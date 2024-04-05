@@ -669,7 +669,7 @@ export interface ConversationMeta {
 */
 
 export interface MessageButtonProps {
-  entity_id: string;
+  entity_username: string;
 }
 
 /*
@@ -677,13 +677,13 @@ export interface MessageButtonProps {
 */
 
 export interface ContactDropdownProps {
-  entity_id: string;
+  entity_username: string;
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;
 }
 
 export interface ContactDropdownPortalProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  entity_id: string;
+  entity_username: string;
   contactDropdownPortalContainerRef: React.RefObject<HTMLDivElement>;
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;
   contactDropdownRef: React.RefObject<HTMLDivElement>;
@@ -694,5 +694,5 @@ export interface ContactDropdownPortalProps {
 */
 
 export interface CreateContactButtonProps {
-  entity_id: string;
+  entity_username: string;
 }

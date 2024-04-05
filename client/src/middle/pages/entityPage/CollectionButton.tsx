@@ -37,7 +37,13 @@ export default function CollectionButton({
   const dispatch = useDispatch();
   const collectionID = useSelector(
     (state: CollectionPageState) =>
-      state.page[entityType].pagePayload.ids.collection_id,
+      state.page[
+        entityType === 1
+          ? "individuals"
+          : entityType === 2
+            ? "groups"
+            : "organizations"
+      ].pagePayload.ids.collection_id,
   );
   const [isHovered, setIsHovered] = useState(false);
 

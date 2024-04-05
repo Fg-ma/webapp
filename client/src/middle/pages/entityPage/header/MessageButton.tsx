@@ -15,7 +15,7 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function MessageButton({ entity_id }: MessageButtonProps) {
+export default function MessageButton({ entity_username }: MessageButtonProps) {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
@@ -29,7 +29,7 @@ export default function MessageButton({ entity_id }: MessageButtonProps) {
       `${serverUrl}/conversations/message_button`,
       {
         params: {
-          entity_id: entity_id,
+          entity_username: entity_username,
         },
         headers: {
           Authorization: `Bearer ${token}`,

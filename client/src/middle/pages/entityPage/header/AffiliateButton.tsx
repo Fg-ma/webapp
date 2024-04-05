@@ -58,7 +58,7 @@ export default function AffiliateButton({
         null,
         {
           params: {
-            entity_id: entity_id,
+            entity_username: entity_username,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function AffiliateButton({
         `${serverUrl}/affiliateRelations/delete_affiliate_relation`,
         {
           params: {
-            entity_id: entity_id,
+            entity_username: entity_username,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,7 +106,7 @@ export default function AffiliateButton({
 
   return (
     <>
-      {entity_id !== "user" && isAffiliated && (
+      {entity_username !== "user" && isAffiliated && (
         <button
           className="w-1/4 h-9 rounded-md text-white bg-fg-black-25"
           onClick={handleUnaffiliate}
@@ -114,7 +114,7 @@ export default function AffiliateButton({
           Unaffiliate
         </button>
       )}
-      {entity_id !== "user" && !isAffiliated && (
+      {entity_username !== "user" && !isAffiliated && (
         <button
           className="w-1/4 h-9 rounded-md text-white bg-fg-primary"
           onClick={handleAffiliate}

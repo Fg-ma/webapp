@@ -173,12 +173,18 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
 
 // Creates a new contact and conversation if a conversation doesn't already exist
 router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
-  const { entity_id } = req.body;
+  const { entity_username } = req.body;
 
   try {
-    if (!entity_id) {
+    if (!entity_username) {
       return;
     }
+
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
 
     const userConversations = await req.db.conversations_members.findMany({
       where: {
@@ -193,7 +199,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
     const sharedConversations = await req.db.conversations_members.findMany({
       where: {
         conversation_id: { in: conversationIds },
-        member_id: entity_id,
+        member_id: entity.entity_id,
       },
     });
 
@@ -227,7 +233,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
           contact_id: contact_id,
           conversation_id: conversation_id,
           contact_id_root: req.user.user_id,
-          contact_id_target: entity_id,
+          contact_id_target: entity.entity_id,
           contact_creation_date: currentTime,
         },
       });
@@ -251,11 +257,11 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
         data: {
           conversations_members_id: uuid(),
           conversation_id: conversation_id,
-          member_id: entity_id,
+          member_id: entity.entity_id,
         },
       });
 
-      const fullEntity = await getEntityData(entity_id);
+      const fullEntity = await getEntityData(entity.entity_id);
 
       if (
         fullEntity?.entity.entity_type === 1 &&
@@ -332,7 +338,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
             contact_id: uuid(),
             conversation_id: fullSharedConversations[0].conversation_id,
             contact_id_root: req.user.user_id,
-            contact_id_target: entity_id,
+            contact_id_target: entity.entity_id,
             contact_creation_date: currentTime,
             last_message: conversationData.last_message,
           },

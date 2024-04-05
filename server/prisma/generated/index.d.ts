@@ -11172,16 +11172,19 @@ export namespace Prisma {
 
   export type EntitiesMinAggregateOutputType = {
     entity_id: string | null
+    entity_username: string | null
     entity_type: number | null
   }
 
   export type EntitiesMaxAggregateOutputType = {
     entity_id: string | null
+    entity_username: string | null
     entity_type: number | null
   }
 
   export type EntitiesCountAggregateOutputType = {
     entity_id: number
+    entity_username: number
     entity_type: number
     _all: number
   }
@@ -11197,16 +11200,19 @@ export namespace Prisma {
 
   export type EntitiesMinAggregateInputType = {
     entity_id?: true
+    entity_username?: true
     entity_type?: true
   }
 
   export type EntitiesMaxAggregateInputType = {
     entity_id?: true
+    entity_username?: true
     entity_type?: true
   }
 
   export type EntitiesCountAggregateInputType = {
     entity_id?: true
+    entity_username?: true
     entity_type?: true
     _all?: true
   }
@@ -11299,6 +11305,7 @@ export namespace Prisma {
 
   export type EntitiesGroupByOutputType = {
     entity_id: string
+    entity_username: string
     entity_type: number
     _count: EntitiesCountAggregateOutputType | null
     _avg: EntitiesAvgAggregateOutputType | null
@@ -11323,6 +11330,7 @@ export namespace Prisma {
 
   export type entitiesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     entity_id?: boolean
+    entity_username?: boolean
     entity_type?: boolean
     collections?: boolean | entities$collectionsArgs<ExtArgs>
     contacts_contacts_contact_id_rootToentities?: boolean | entities$contacts_contacts_contact_id_rootToentitiesArgs<ExtArgs>
@@ -11343,6 +11351,7 @@ export namespace Prisma {
 
   export type entitiesSelectScalar = {
     entity_id?: boolean
+    entity_username?: boolean
     entity_type?: boolean
   }
 
@@ -11385,6 +11394,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       entity_id: string
+      entity_username: string
       entity_type: number
     }, ExtArgs["result"]["entities"]>
     composites: {}
@@ -11808,6 +11818,7 @@ export namespace Prisma {
    */ 
   interface entitiesFieldRefs {
     readonly entity_id: FieldRef<"entities", 'String'>
+    readonly entity_username: FieldRef<"entities", 'String'>
     readonly entity_type: FieldRef<"entities", 'Int'>
   }
     
@@ -30549,6 +30560,7 @@ export namespace Prisma {
 
   export const EntitiesScalarFieldEnum: {
     entity_id: 'entity_id',
+    entity_username: 'entity_username',
     entity_type: 'entity_type'
   };
 
@@ -31285,6 +31297,7 @@ export namespace Prisma {
     OR?: entitiesWhereInput[]
     NOT?: entitiesWhereInput | entitiesWhereInput[]
     entity_id?: StringFilter<"entities"> | string
+    entity_username?: StringFilter<"entities"> | string
     entity_type?: IntFilter<"entities"> | number
     collections?: CollectionsListRelationFilter
     contacts_contacts_contact_id_rootToentities?: ContactsListRelationFilter
@@ -31304,6 +31317,7 @@ export namespace Prisma {
 
   export type entitiesOrderByWithRelationInput = {
     entity_id?: SortOrder
+    entity_username?: SortOrder
     entity_type?: SortOrder
     collections?: collectionsOrderByRelationAggregateInput
     contacts_contacts_contact_id_rootToentities?: contactsOrderByRelationAggregateInput
@@ -31323,6 +31337,7 @@ export namespace Prisma {
 
   export type entitiesWhereUniqueInput = Prisma.AtLeast<{
     entity_id?: string
+    entity_username?: string
     AND?: entitiesWhereInput | entitiesWhereInput[]
     OR?: entitiesWhereInput[]
     NOT?: entitiesWhereInput | entitiesWhereInput[]
@@ -31341,10 +31356,11 @@ export namespace Prisma {
     organizations_members?: Organizations_membersListRelationFilter
     sheets?: SheetsListRelationFilter
     videos?: VideosListRelationFilter
-  }, "entity_id" | "entity_id">
+  }, "entity_id" | "entity_id" | "entity_username">
 
   export type entitiesOrderByWithAggregationInput = {
     entity_id?: SortOrder
+    entity_username?: SortOrder
     entity_type?: SortOrder
     _count?: entitiesCountOrderByAggregateInput
     _avg?: entitiesAvgOrderByAggregateInput
@@ -31358,6 +31374,7 @@ export namespace Prisma {
     OR?: entitiesScalarWhereWithAggregatesInput[]
     NOT?: entitiesScalarWhereWithAggregatesInput | entitiesScalarWhereWithAggregatesInput[]
     entity_id?: StringWithAggregatesFilter<"entities"> | string
+    entity_username?: StringWithAggregatesFilter<"entities"> | string
     entity_type?: IntWithAggregatesFilter<"entities"> | number
   }
 
@@ -32919,6 +32936,7 @@ export namespace Prisma {
 
   export type entitiesCreateInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -32938,6 +32956,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -32957,6 +32976,7 @@ export namespace Prisma {
 
   export type entitiesUpdateInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -32976,6 +32996,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -32995,16 +33016,19 @@ export namespace Prisma {
 
   export type entitiesCreateManyInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
   }
 
   export type entitiesUpdateManyMutationInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type entitiesUncheckedUpdateManyInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
   }
 
@@ -34663,6 +34687,7 @@ export namespace Prisma {
 
   export type entitiesCountOrderByAggregateInput = {
     entity_id?: SortOrder
+    entity_username?: SortOrder
     entity_type?: SortOrder
   }
 
@@ -34672,11 +34697,13 @@ export namespace Prisma {
 
   export type entitiesMaxOrderByAggregateInput = {
     entity_id?: SortOrder
+    entity_username?: SortOrder
     entity_type?: SortOrder
   }
 
   export type entitiesMinOrderByAggregateInput = {
     entity_id?: SortOrder
+    entity_username?: SortOrder
     entity_type?: SortOrder
   }
 
@@ -37371,6 +37398,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutCollectionsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
     contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
@@ -37389,6 +37417,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutCollectionsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
     contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
@@ -37449,6 +37478,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutCollectionsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
     contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
@@ -37467,6 +37497,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutCollectionsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
     contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
@@ -37601,6 +37632,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
@@ -37619,6 +37651,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
@@ -37642,6 +37675,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -37660,6 +37694,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -37694,6 +37729,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
@@ -37712,6 +37748,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
@@ -37741,6 +37778,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -37759,6 +37797,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -38082,6 +38121,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutConversations_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -38100,6 +38140,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutConversations_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -38163,6 +38204,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutConversations_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -38181,6 +38223,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutConversations_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -38222,6 +38265,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutConversations_messages_logsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -38240,6 +38284,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutConversations_messages_logsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -38303,6 +38348,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutConversations_messages_logsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -38321,6 +38367,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutConversations_messages_logsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39043,6 +39090,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutEntities_contentInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39061,6 +39109,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutEntities_contentInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39122,6 +39171,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutEntities_contentInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39140,6 +39190,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutEntities_contentInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39179,6 +39230,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutEntities_dislikesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39197,6 +39249,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutEntities_dislikesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39258,6 +39311,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutEntities_dislikesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39276,6 +39330,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutEntities_dislikesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39315,6 +39370,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutEntities_likesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39333,6 +39389,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutEntities_likesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39394,6 +39451,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutEntities_likesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39412,6 +39470,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutEntities_likesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39430,6 +39489,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutEntities_referencesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39448,6 +39508,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutEntities_referencesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39482,6 +39543,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutEntities_referencesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39500,6 +39562,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutEntities_referencesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39602,6 +39665,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutGroups_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39620,6 +39684,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutGroups_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39679,6 +39744,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutGroups_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39697,6 +39763,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutGroups_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39746,6 +39813,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutImagesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39764,6 +39832,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutImagesInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -39813,6 +39882,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutImagesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -39831,6 +39901,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutImagesInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40108,6 +40179,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutOrganizations_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40126,6 +40198,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutOrganizations_membersInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40185,6 +40258,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutOrganizations_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40203,6 +40277,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutOrganizations_membersInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40427,6 +40502,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutSheetsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40445,6 +40521,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutSheetsInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40513,6 +40590,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutSheetsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40531,6 +40609,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutSheetsInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40751,6 +40830,7 @@ export namespace Prisma {
 
   export type entitiesCreateWithoutVideosInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40769,6 +40849,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedCreateWithoutVideosInput = {
     entity_id: string
+    entity_username: string
     entity_type?: number
     collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
@@ -40837,6 +40918,7 @@ export namespace Prisma {
 
   export type entitiesUpdateWithoutVideosInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
@@ -40855,6 +40937,7 @@ export namespace Prisma {
 
   export type entitiesUncheckedUpdateWithoutVideosInput = {
     entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
     entity_type?: IntFieldUpdateOperationsInput | number
     collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
     contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput

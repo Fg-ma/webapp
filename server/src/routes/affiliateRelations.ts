@@ -6,24 +6,24 @@ import type { Entity, Group, Organization, Relation } from "@FgTypes/types";
 
 // Set a new affiliate relation
 router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
-  const entity_id = req.query.entity_id;
+  const entity_username = req.query.entity_username;
 
   try {
-    if (entity_id !== req.user.user_id) {
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
+    if (entity.entity_id !== req.user.user_id) {
       const currentDate = new Date().toISOString();
 
       const newAffiliateRelation = await req.db.affiliates_relations.create({
         data: {
           affiliate_relation_id: uuid(),
           affiliate_id_root: req.user.user_id,
-          affiliate_id_target: entity_id,
+          affiliate_id_target: entity.entity_id,
           affiliate_relation_date: currentDate,
-        },
-      });
-
-      const entity = await req.db.entities.findUnique({
-        where: {
-          entity_id: entity_id,
         },
       });
 
@@ -47,7 +47,7 @@ router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
-    const entity = await req.db.entities.findUnique({
+    const entity: Entity = await req.db.entities.findUnique({
       where: {
         entity_username: entity_username,
       },

@@ -103,6 +103,7 @@ model conversations_messages_logs {
 
 model entities {
   entity_id                                     String                        @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
+  entity_username                               String                        @unique(map: "entity_username_UNIQUE") @db.VarChar(256)
   entity_type                                   Int                           @default(0)
   collections                                   collections[]
   contacts_contacts_contact_id_rootToentities   contacts[]                    @relation("contacts_contact_id_rootToentities")
