@@ -50,7 +50,7 @@ export default function EntityPageHeader({
       affiliateProfilePicturesRef.current.scrollLeft = 0;
     }
 
-    const fetchIndividualData = async () => {
+    const fetchAffiliateData = async () => {
       try {
         const token = localStorage.getItem("token");
 
@@ -77,7 +77,7 @@ export default function EntityPageHeader({
       }
     };
 
-    fetchIndividualData();
+    fetchAffiliateData();
   }, [entity_username]);
 
   useEffect(() => {

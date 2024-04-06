@@ -10,7 +10,10 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function Videos({ entity_id, isEditablePage }: VideosProps) {
+export default function Videos({
+  entity_username,
+  isEditablePage,
+}: VideosProps) {
   /* 
     Description:   
       Queries the database to get the videos that the passed in entity is related 
@@ -47,7 +50,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
     const fetchVideosData = async () => {
       try {
         const response = await Axios.get(
-          `${serverUrl}/entities/entity_videos/${entity_id}`,
+          `${serverUrl}/entities/entity_videos/${entity_username}`,
         );
         setVideosData(sortData(response.data));
       } catch (error) {
@@ -56,7 +59,7 @@ export default function Videos({ entity_id, isEditablePage }: VideosProps) {
     };
 
     fetchVideosData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   // Handle when a video is pinned
   useEffect(() => {

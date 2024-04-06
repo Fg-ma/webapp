@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import verifyToken from "./verifyJWT";
+import { Group } from "@FgTypes/types";
 
 // Route to get all groups
 router.get("/", async (req, res) => {
@@ -13,15 +14,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route to get a group by username
-router.get("/:group_username", verifyToken, async (req, res) => {
-  const group_username = req.params.group_username;
+// Route to get a group by handle
+router.get("/:group_handle", verifyToken, async (req, res) => {
+  const group_handle = req.params.group_handle;
 
   try {
-    const group = await req.db.groups.findUnique({
+    const group: Group = await req.db.groups.findUnique({
       where: {
-        group_username:
-          group_username === "user" ? req.user?.user_id : group_username,
+        group_handle: group_handle,
       },
     });
 
@@ -30,7 +30,9 @@ router.get("/:group_username", verifyToken, async (req, res) => {
       return;
     }
 
-    res.send(group);
+    const { group_id, ...safeGroup } = group;
+
+    res.send(safeGroup);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

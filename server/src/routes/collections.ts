@@ -1,11 +1,19 @@
+import {
+  Entity,
+  ImageContent,
+  SheetContent,
+  VideoContent,
+} from "@FgTypes/types";
 import express from "express";
 const router = express.Router();
 
-// Get collection names and ids from entity id
+// Get collection names and ids from entity username
 router.get("/collections_names", async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
+    if (!entity_username) return;
+
     const entity = await req.db.entities.findUnique({
       where: {
         entity_username: entity_username,
@@ -44,37 +52,70 @@ router.get("/:collection_id", async (req, res) => {
 
     for (const collection of collections) {
       if (collection.content.content_type === 1) {
-        const content_data = await req.db.sheets.findUnique({
+        const contentData: SheetContent = await req.db.sheets.findUnique({
           where: {
             sheet_id: collection.content_id,
           },
         });
 
+        const author: Entity = await req.db.entities.findUnique({
+          where: {
+            entity_id: contentData.sheet_author_id,
+          },
+        });
+
+        const { sheet_author_id, ...safeContentData } = contentData;
+
         collectionsData.push({
           ...collection,
-          content_data: { ...content_data },
+          content_data: {
+            ...safeContentData,
+            sheet_author_username: author.entity_username,
+          },
         });
       } else if (collection.content.content_type === 2) {
-        const content_data = await req.db.images.findUnique({
+        const contentData: ImageContent = await req.db.images.findUnique({
           where: {
             image_id: collection.content_id,
           },
         });
 
+        const author: Entity = await req.db.entities.findUnique({
+          where: {
+            entity_id: contentData.image_creator_id,
+          },
+        });
+
+        const { image_creator_id, ...safeContentData } = contentData;
+
         collectionsData.push({
           ...collection,
-          content_data: { ...content_data },
+          content_data: {
+            ...safeContentData,
+            image_creator_username: author.entity_username,
+          },
         });
       } else if (collection.content.content_type === 3) {
-        const content_data = await req.db.videos.findUnique({
+        const contentData: VideoContent = await req.db.videos.findUnique({
           where: {
             video_id: collection.content_id,
           },
         });
 
+        const author: Entity = await req.db.entities.findUnique({
+          where: {
+            entity_id: contentData.video_creator_id,
+          },
+        });
+
+        const { video_creator_id, ...safeContentData } = contentData;
+
         collectionsData.push({
           ...collection,
-          content_data: { ...content_data },
+          content_data: {
+            ...safeContentData,
+            video_creator_username: author.entity_username,
+          },
         });
       }
     }
@@ -108,50 +149,6 @@ router.put("/collections_content_pinned", async (req, res) => {
   }
 });
 
-// Set a collection's video as pinned or not pinned
-router.put("/collections_videos_pinned", async (req, res) => {
-  const { relation_id, pinned, date_pinned } = req.body;
-
-  try {
-    const result = await req.db.collections_videos.update({
-      where: {
-        collections_videos_id: relation_id,
-      },
-      data: {
-        pinned: pinned,
-        date_pinned: date_pinned,
-      },
-    });
-
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-// Set a collection's image as pinned or not pinned
-router.put("/collections_images_pinned", async (req, res) => {
-  const { relation_id, pinned, date_pinned } = req.body;
-
-  try {
-    const result = await req.db.collections_images.update({
-      where: {
-        collections_images_id: relation_id,
-      },
-      data: {
-        pinned: pinned,
-        date_pinned: date_pinned,
-      },
-    });
-
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
 // Get a sheet by collections_content_id
 router.get(
   "/collection_sheet_by_collections_content_id/:collections_content_id",
@@ -168,15 +165,26 @@ router.get(
         },
       });
 
-      const sheetContent = await req.db.sheets.findUnique({
+      const sheetContent: SheetContent = await req.db.sheets.findUnique({
         where: {
           sheet_id: collectionContent.content_id,
         },
       });
 
+      const author: Entity = await req.db.entities.findUnique({
+        where: {
+          entity_id: sheetContent.sheet_author_id,
+        },
+      });
+
+      const { sheet_author_id, ...safeSheetContent } = sheetContent;
+
       const collectionSheetData = {
         ...collectionContent,
-        content_data: { ...sheetContent },
+        content_data: {
+          ...safeSheetContent,
+          sheet_author_username: author.entity_username,
+        },
       };
 
       res.send(collectionSheetData);
@@ -203,15 +211,26 @@ router.get(
         },
       });
 
-      const videoContent = await req.db.videos.findUnique({
+      const videoContent: VideoContent = await req.db.videos.findUnique({
         where: {
           video_id: collectionContent.content_id,
         },
       });
 
+      const author: Entity = await req.db.entities.findUnique({
+        where: {
+          entity_id: videoContent.video_creator_id,
+        },
+      });
+
+      const { video_creator_id, ...safeVideoContent } = videoContent;
+
       const collectionVideoData = {
         ...collectionContent,
-        content_data: { ...videoContent },
+        content_data: {
+          ...safeVideoContent,
+          video_creator_username: author.entity_username,
+        },
       };
 
       res.send(collectionVideoData);
@@ -238,15 +257,26 @@ router.get(
         },
       });
 
-      const imageContent = await req.db.images.findUnique({
+      const imageContent: ImageContent = await req.db.images.findUnique({
         where: {
           image_id: collectionContent.content_id,
         },
       });
 
+      const author: Entity = await req.db.entities.findUnique({
+        where: {
+          entity_id: imageContent.image_creator_id,
+        },
+      });
+
+      const { image_creator_id, ...safeImageContent } = imageContent;
+
       const collectionImageData = {
         ...collectionContent,
-        content_data: { ...imageContent },
+        content_data: {
+          ...safeImageContent,
+          image_creator_username: author.entity_username,
+        },
       };
 
       res.send(collectionImageData);

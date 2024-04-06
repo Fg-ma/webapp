@@ -5,12 +5,12 @@ import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { usePinned } from "@context/PinnedContext";
 import {
-  SheetProps,
+  SheetCardProps,
   SheetData,
   SheetThumbnailData,
 } from "@FgTypes/middleTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
-import LoadingAnimation from "../../../../components/loadingAnimation/LoadingAnimation";
+import LoadingAnimation from "@components/loadingAnimation/LoadingAnimation";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -20,11 +20,11 @@ const serverUrl = isDevelopment
 export default function SheetCard({
   type,
   sheet_id,
-  author_id,
+  author_username,
   pinned = false,
   relation_id,
   isEditablePage,
-}: SheetProps) {
+}: SheetCardProps) {
   const dispatch = useDispatch();
 
   const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
@@ -55,7 +55,7 @@ export default function SheetCard({
   }, [sheet_id]);
 
   // Checks if the entity is the author of the sheet
-  if (sheetData && sheetData.sheet_author_id === author_id) {
+  if (sheetData && sheetData.sheet_author_username === author_username) {
     isAuthor.current = true;
   }
 

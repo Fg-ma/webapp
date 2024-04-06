@@ -168,10 +168,10 @@ export interface ContentIDState {
   Cards.tsx
 */
 
-export interface SheetProps {
+export interface SheetCardProps {
   type: string;
   sheet_id: string;
-  author_id: string;
+  author_username: string;
   pinned: boolean;
   relation_id: string;
   isEditablePage: MutableRefObject<boolean>;
@@ -180,7 +180,7 @@ export interface SheetProps {
 export interface SheetData {
   sheet_id: string;
   sheet_data_id: string;
-  sheet_author_id: string;
+  sheet_author_username: string;
   sheet_filename: string;
   sheet_title: string;
   sheet_subject: string;
@@ -240,7 +240,7 @@ export interface ImageThumbnailData {
 */
 
 export interface CollectionsProps {
-  entity_id: string;
+  entity_username: string;
   collection_id: string;
   isEditablePage: MutableRefObject<boolean>;
 }
@@ -253,7 +253,7 @@ export interface CollectionItem {
     content_type: number;
   };
   content_data: {
-    sheet_author_id?: string;
+    sheet_author_username?: string;
     sheet_data_id?: string;
     sheet_date_posted?: string;
     sheet_dislikes?: number;
@@ -263,7 +263,7 @@ export interface CollectionItem {
     sheet_subject?: string;
     sheet_title?: string;
     sheet_views?: number;
-    image_creator_id?: string;
+    image_creator_username?: string;
     image_data_id?: string;
     image_date_posted?: string;
     image_description?: string;
@@ -273,7 +273,7 @@ export interface CollectionItem {
     image_likes?: number;
     image_title?: string;
     image_views?: number;
-    video_creator_id?: string;
+    video_creator_username?: string;
     video_data_id?: string;
     video_date_posted?: string;
     video_description?: string;
@@ -294,13 +294,13 @@ export interface CollectionItem {
 */
 
 export interface ImagesProps {
-  entity_id: string;
+  entity_username: string;
   isEditablePage: MutableRefObject<boolean>;
 }
 
 export interface ImagesData {
   image_id: string;
-  entity_id: string;
+  entity_username: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
@@ -313,13 +313,13 @@ export interface ImagesData {
 */
 
 export interface SheetsProps {
-  entity_id: string;
+  entity_username: string;
   isEditablePage: MutableRefObject<boolean>;
 }
 
 export interface SheetsData {
   sheet_id: string;
-  entity_id: string;
+  entity_username: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
@@ -332,13 +332,13 @@ export interface SheetsData {
 */
 
 export interface VideosProps {
-  entity_id: string;
+  entity_username: string;
   isEditablePage: MutableRefObject<boolean>;
 }
 
 export interface VideosData {
   video_id: string;
-  entity_id: string;
+  entity_username: string;
   entities_content_id: string;
   date_added: string;
   pinned: boolean;
@@ -435,7 +435,7 @@ export interface EntityPageState {
 }
 
 export interface Entity {
-  entity_id: string;
+  entity_username: string;
   entity_type: number;
 }
 

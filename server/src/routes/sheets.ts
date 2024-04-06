@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { FullSheet } from "@FgTypes/types";
+import type { Entity, FullSheet, SheetContent } from "@FgTypes/types";
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
@@ -42,13 +42,24 @@ router.get("/:sheet_id", async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
   try {
-    const sheet = await req.db.sheets.findUnique({
+    const sheet: SheetContent = await req.db.sheets.findUnique({
       where: {
         sheet_id: sheet_id,
       },
     });
 
-    res.send(sheet);
+    const sheetAuthor: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: sheet.sheet_author_id,
+      },
+    });
+
+    const { sheet_author_id, ...newSheet } = sheet;
+
+    res.send({
+      ...newSheet,
+      sheet_author_username: sheetAuthor.entity_username,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

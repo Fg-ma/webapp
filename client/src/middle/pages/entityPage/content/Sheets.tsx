@@ -10,7 +10,10 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
+export default function Sheets({
+  entity_username,
+  isEditablePage,
+}: SheetsProps) {
   /* 
     Description:   
       Queries the database to get the sheets that the passed in entity is related 
@@ -47,7 +50,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
     const fetchSheetsData = async () => {
       try {
         const response = await Axios.get(
-          `${serverUrl}/entities/entity_sheets/${entity_id}`,
+          `${serverUrl}/entities/entity_sheets/${entity_username}`,
         );
 
         setSheetsData(sortData(response.data));
@@ -57,7 +60,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
     };
 
     fetchSheetsData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   // Handle when a sheet is pinned
   useEffect(() => {
@@ -92,7 +95,7 @@ export default function Sheets({ entity_id, isEditablePage }: SheetsProps) {
         key={`sheet_${sheet.sheet_id}`}
         type={"entity"}
         sheet_id={sheet.sheet_id}
-        author_id={entity_id}
+        author_username={entity_username}
         pinned={sheet.pinned}
         relation_id={sheet.entities_content_id}
         isEditablePage={isEditablePage}

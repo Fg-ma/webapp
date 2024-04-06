@@ -154,7 +154,7 @@ export default function EntityPage({ entityType }: EntityPageProps) {
           },
         });
 
-        setEntity(response.data[0]);
+        setEntity(response.data);
       } catch (error) {
         console.error("Error fetching entity:", error);
       }
@@ -195,50 +195,41 @@ export default function EntityPage({ entityType }: EntityPageProps) {
   }, [entity_username]);
 
   const renderContent = () => {
-    if (!entityData) return null;
+    if (!entityData || !entity) return null;
 
     const contentMap: ContentMap = {
-      sheets: entity ? (
-        <Sheets entity_id={entity.entity_id} isEditablePage={isEditablePage} />
-      ) : null,
-      videos: entity ? (
-        <Videos entity_id={entity.entity_id} isEditablePage={isEditablePage} />
-      ) : null,
-      images: entity ? (
-        <Images entity_id={entity.entity_id} isEditablePage={isEditablePage} />
-      ) : null,
+      sheets: (
+        <Sheets
+          entity_username={entity.entity_username}
+          isEditablePage={isEditablePage}
+        />
+      ),
+      videos: (
+        <Videos
+          entity_username={entity.entity_username}
+          isEditablePage={isEditablePage}
+        />
+      ),
+      images: (
+        <Images
+          entity_username={entity.entity_username}
+          isEditablePage={isEditablePage}
+        />
+      ),
     };
 
-    const collectionsContentMap: CollectionsContentMap = {
-      individuals:
-        entityData.individual_id && entity_collection_id ? (
-          <Collections
-            entity_id={entityData.individual_id}
-            collection_id={entity_collection_id}
-            isEditablePage={isEditablePage}
-          />
-        ) : null,
-      groups:
-        entityData.group_id && entity_collection_id ? (
-          <Collections
-            entity_id={entityData.group_id}
-            collection_id={entity_collection_id}
-            isEditablePage={isEditablePage}
-          />
-        ) : null,
-      organizations:
-        entityData.organization_id && entity_collection_id ? (
-          <Collections
-            entity_id={entityData.organization_id}
-            collection_id={entity_collection_id}
-            isEditablePage={isEditablePage}
-          />
-        ) : null,
-    };
+    const collectionsComponent =
+      entity_collection_id && entity_username ? (
+        <Collections
+          entity_username={entity_username}
+          collection_id={entity_collection_id}
+          isEditablePage={isEditablePage}
+        />
+      ) : null;
 
     return pageState !== "collections"
       ? contentMap[pageState]
-      : collectionsContentMap[entityType] || null;
+      : collectionsComponent || null;
   };
 
   return (

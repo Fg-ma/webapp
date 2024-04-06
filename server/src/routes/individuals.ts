@@ -29,7 +29,7 @@ router.get(
     const individual_username = req.params.individual_username;
 
     try {
-      const individual = await req.db.individuals.findUnique({
+      const individual: Individual = await req.db.individuals.findUnique({
         where: {
           individual_username:
             individual_username === "user"
@@ -43,7 +43,9 @@ router.get(
         return;
       }
 
-      res.send(individual);
+      const { individual_id, ...safeIndividual } = individual;
+
+      res.send(safeIndividual);
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");

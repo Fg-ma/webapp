@@ -10,7 +10,10 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function Images({ entity_id, isEditablePage }: ImagesProps) {
+export default function Images({
+  entity_username,
+  isEditablePage,
+}: ImagesProps) {
   /* 
     Description:   
       Queries the database to get the images that the passed in entity is related 
@@ -47,7 +50,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
     const fetchImagesData = async () => {
       try {
         const response = await Axios.get(
-          `${serverUrl}/entities/entity_images/${entity_id}`,
+          `${serverUrl}/entities/entity_images/${entity_username}`,
         );
         setImagesData(sortData(response.data));
       } catch (error) {
@@ -56,7 +59,7 @@ export default function Images({ entity_id, isEditablePage }: ImagesProps) {
     };
 
     fetchImagesData();
-  }, [entity_id]);
+  }, [entity_username]);
 
   // Handle when a image is pinned
   useEffect(() => {

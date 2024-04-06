@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import verifyToken from "./verifyJWT";
+import { Organization } from "@FgTypes/types";
 
 // Route to get all organizations
 router.get("/", async (req, res) => {
@@ -13,15 +14,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route to get an organization by ID
-router.get("/:organization_id", verifyToken, async (req, res) => {
-  const organization_id = req.params.organization_id;
+// Route to get an organization by handle
+router.get("/:organization_handle", verifyToken, async (req, res) => {
+  const organization_handle = req.params.organization_handle;
 
   try {
-    const organization = await req.db.organizations.findUnique({
+    const organization: Organization = await req.db.organizations.findUnique({
       where: {
-        organization_id:
-          organization_id === "user" ? req.user?.user_id : organization_id,
+        organization_handle: organization_handle,
       },
     });
 
@@ -30,7 +30,9 @@ router.get("/:organization_id", verifyToken, async (req, res) => {
       return;
     }
 
-    res.send(organization);
+    const { organization_id, ...safeOrganization } = organization;
+
+    res.send(safeOrganization);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

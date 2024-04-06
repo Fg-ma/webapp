@@ -13,7 +13,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Collections({
-  entity_id,
+  entity_username,
   collection_id,
   isEditablePage,
 }: CollectionsProps) {
@@ -97,6 +97,7 @@ export default function Collections({
     if (
       item.content.content_type === 1 &&
       item.content_data.sheet_id &&
+      item.content_data.sheet_author_username &&
       item.collections_content_id
     ) {
       return (
@@ -104,7 +105,7 @@ export default function Collections({
           key={`collectionSheet_${item.content_data.sheet_id}`}
           type={"collection"}
           sheet_id={item.content_data.sheet_id}
-          author_id={entity_id}
+          author_username={entity_username}
           pinned={item.pinned}
           relation_id={item.collections_content_id}
           isEditablePage={isEditablePage}

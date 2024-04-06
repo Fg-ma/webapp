@@ -9,6 +9,7 @@ import type {
   MergedVideoData,
   ImageContent,
   MergedImageData,
+  Entity,
 } from "@FgTypes/types";
 
 // Get entity data from entity type and entity username
@@ -32,6 +33,8 @@ router.get("/entity", verifyToken, async (req, res) => {
       });
     }
 
+    delete entity["entity_id"];
+
     res.send(entity);
   } catch (error) {
     console.error(error);
@@ -54,13 +57,19 @@ router.get("/auth", verifyToken, async (req, res) => {
 });
 
 // Get all the sheets belonging to an entity
-router.get("/entity_sheets/:entity_id", async (req, res) => {
-  const entity_id = req.params.entity_id;
+router.get("/entity_sheets/:entity_username", async (req, res) => {
+  const entity_username = req.params.entity_username;
 
   try {
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
     const allEntityContent = await req.db.entities_content.findMany({
       where: {
-        entity_id: entity_id,
+        entity_id: entity.entity_id,
       },
     });
 
@@ -133,13 +142,19 @@ router.get(
 );
 
 // Get all the videos belonging to an entity
-router.get("/entity_videos/:entity_id", async (req, res) => {
-  const entity_id = req.params.entity_id;
+router.get("/entity_videos/:entity_username", async (req, res) => {
+  const entity_username = req.params.entity_username;
 
   try {
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
     const allEntityContent = await req.db.entities_content.findMany({
       where: {
-        entity_id: entity_id,
+        entity_id: entity.entity_id,
       },
     });
 
@@ -212,13 +227,19 @@ router.get(
 );
 
 // Get all the images belonging to an entity
-router.get("/entity_images/:entity_id", async (req, res) => {
-  const entity_id = req.params.entity_id;
+router.get("/entity_images/:entity_username", async (req, res) => {
+  const entity_username = req.params.entity_username;
 
   try {
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
+
     const allEntityContent = await req.db.entities_content.findMany({
       where: {
-        entity_id: entity_id,
+        entity_id: entity.entity_id,
       },
     });
 
