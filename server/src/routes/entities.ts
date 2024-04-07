@@ -17,21 +17,11 @@ router.get("/entity", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
-    let entity;
-
-    if (entity_username === "user") {
-      entity = await req.db.entities.findUnique({
-        where: {
-          entity_id: req.user.user_id,
-        },
-      });
-    } else {
-      entity = await req.db.entities.findUnique({
-        where: {
-          entity_username: entity_username,
-        },
-      });
-    }
+    const entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
 
     delete entity["entity_id"];
 
@@ -49,7 +39,7 @@ router.get("/entity", verifyToken, async (req, res) => {
 router.get("/auth", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
-  if (entity_username === "user") {
+  if (entity_username === req.user.username) {
     res.send(true);
   } else {
     res.send(false);

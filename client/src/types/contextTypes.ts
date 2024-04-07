@@ -9,7 +9,7 @@ import { ReactNode } from "react";
 export interface Individual {
   individual_name: string | null;
   individual_username: string;
-  individual_currentIssue: string;
+  individual_current_issue: string;
   individual_description: string;
   individual_roles: string;
   affiliate_relation_date: string;
@@ -19,7 +19,7 @@ export interface Individual {
 export interface Group {
   group_name: string | null;
   group_handle: string;
-  group_currentIssue: string;
+  group_current_issue: string;
   group_description: string;
   group_stances: string;
   affiliate_relation_date: string;
@@ -29,7 +29,7 @@ export interface Group {
 export interface Organization {
   organization_name: string | null;
   organization_handle: string;
-  organization_currentIssue: string;
+  organization_current_issue: string;
   organization_description: string;
   organization_stances: string;
   affiliate_relation_date: string;
@@ -87,8 +87,8 @@ export interface AffiliateContextProviderProps {
 export interface AffiliateContextType {
   affiliateRelation: {
     action: string;
-    affiliate_id_root: string;
-    affiliate_id_target: string;
+    affiliate_username_root: string;
+    affiliate_username_target: string;
     affiliate_relation_date: string;
     affiliate_relation_id: string;
     entity_type: number;
@@ -96,8 +96,8 @@ export interface AffiliateContextType {
   setAffiliateRelation: React.Dispatch<
     React.SetStateAction<{
       action: string;
-      affiliate_id_root: string;
-      affiliate_id_target: string;
+      affiliate_username_root: string;
+      affiliate_username_target: string;
       affiliate_relation_date: string;
       affiliate_relation_id: string;
       entity_type: number;

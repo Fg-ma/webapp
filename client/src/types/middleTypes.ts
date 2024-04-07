@@ -17,17 +17,17 @@ export interface EntityData {
   individual_name?: string;
   individual_username?: string;
   individual_roles?: string;
-  individual_currentIssue?: string;
+  individual_current_issue?: string;
   individual_description?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
-  group_currentIssue?: string;
+  group_current_issue?: string;
   group_description?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
-  organization_currentIssue?: string;
+  organization_current_issue?: string;
   organization_description?: string;
 }
 
@@ -110,6 +110,18 @@ export interface MainSecondaryState {
     main: {
       pagePayload: {
         secondaryPageState: string | null;
+      };
+    };
+  };
+}
+
+export interface LoginState {
+  page: {
+    login: {
+      pagePayload: {
+        username: string;
+        pageState: string;
+        isLoggedIn: string;
       };
     };
   };
@@ -479,19 +491,19 @@ export interface EntityPageHeaderProps {
 export interface Afiliate {
   type?: string;
   date: [{ affiliate_relation_date: string }];
-  individual_currentIssue?: string;
+  individual_current_issue?: string;
   individual_description?: string;
   individual_username?: string;
   individual_id?: string;
   individual_name?: string;
   individual_roles?: string;
-  group_currentIssue?: string;
+  group_current_issue?: string;
   group_description?: string;
   group_handle?: string;
   group_id?: string;
   group_name?: string;
   group_stances?: string;
-  organization_currentIssue?: string;
+  organization_current_issue?: string;
   organization_description?: string;
   organization_handle?: string;
   organization_id?: string;

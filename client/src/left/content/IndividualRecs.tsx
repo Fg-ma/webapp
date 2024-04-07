@@ -12,7 +12,7 @@ const serverUrl = isDevelopment
 export default function IndividualRecs() {
   /* 
     Description:   
-      Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
+      Gets individual data from a database then extracts the id, name, and current_issue to be mapped
       into cards.
     Unique Properties:
       N/A
@@ -39,7 +39,7 @@ export default function IndividualRecs() {
         key={indInfo.individual_username}
         name={indInfo.individual_name}
         username={indInfo.individual_username}
-        currentIssue={indInfo.individual_currentIssue}
+        current_issue={indInfo.individual_current_issue}
       />
     );
   });

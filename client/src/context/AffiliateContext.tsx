@@ -23,15 +23,15 @@ export function AffiliateContextProvider({
 }: AffiliateContextProviderProps) {
   const [affiliateRelation, setAffiliateRelation] = useState<{
     action: string;
-    affiliate_id_root: string;
-    affiliate_id_target: string;
+    affiliate_username_root: string;
+    affiliate_username_target: string;
     affiliate_relation_date: string;
     affiliate_relation_id: string;
     entity_type: number;
   }>({
     action: "",
-    affiliate_id_root: "",
-    affiliate_id_target: "",
+    affiliate_username_root: "",
+    affiliate_username_target: "",
     affiliate_relation_date: "",
     affiliate_relation_id: "",
     entity_type: 0,

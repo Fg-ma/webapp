@@ -32,7 +32,7 @@ export default function ExploreCards() {
           <IndividualCard
             key={exploreInfo.id}
             name={exploreInfo.name}
-            currentIssue={exploreInfo.currentIssue}
+            current_issue={exploreInfo.currentIssue}
           />
         );
       case "group":
@@ -40,7 +40,7 @@ export default function ExploreCards() {
           <GroupCard
             key={exploreInfo.id}
             name={exploreInfo.name}
-            currentIssue={exploreInfo.currentIssue}
+            current_issue={exploreInfo.currentIssue}
             affInCommon={exploreInfo.affInCommon}
           />
         );
@@ -49,7 +49,7 @@ export default function ExploreCards() {
           <OrganizationCard
             key={exploreInfo.id}
             name={exploreInfo.name}
-            subject={exploreInfo.currentIssue}
+            current_issue={exploreInfo.currentIssue}
             stances={exploreInfo.stances}
           />
         );

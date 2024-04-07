@@ -10,7 +10,7 @@ export interface Individual {
   individual_id: string;
   individual_username: string;
   individual_name: string | null;
-  individual_currentIssue: string | null;
+  individual_current_issue: string | null;
   individual_roles: string | null;
   individual_description: string | null;
   profile_picture_id: string | null;
@@ -20,7 +20,7 @@ export interface Group {
   group_id: string;
   group_handle: string;
   group_name: string | null;
-  group_currentIssue: string | null;
+  group_current_issue: string | null;
   group_stances: string | null;
   group_description: string | null;
   profile_picture_id: string | null;
@@ -30,7 +30,7 @@ export interface Organization {
   organization_id: string;
   organization_handle: string;
   organization_name: string | null;
-  organization_currentIssue: string | null;
+  organization_current_issue: string | null;
   organization_stances: string | null;
   organization_description: string | null;
   profile_picture_id: string | null;

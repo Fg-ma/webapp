@@ -8,6 +8,7 @@ import {
 } from "@redux/pageState/pageStateActions";
 import {
   ConverationId,
+  LoginState,
   MainSecondaryState,
   MainState,
 } from "@FgTypes/middleTypes";
@@ -56,6 +57,9 @@ export default function PageNav() {
     (state: MainSecondaryState) =>
       state.page.main.pagePayload.secondaryPageState,
   );
+  const username = useSelector(
+    (state: LoginState) => state.page.login.pagePayload.username,
+  );
   const conversation_id = useSelector(
     (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
   );
@@ -91,7 +95,7 @@ export default function PageNav() {
   const profileNavFunction = () => {
     dispatch(setPageState("individuals", "sheets"));
     dispatch(setSecondaryPageState("main", null));
-    dispatch(setIds("main", "individual_id", "user"));
+    dispatch(setIds("main", "individual_id", username));
     dispatch(setIds("individuals", "collection_id", null));
   };
 
@@ -125,7 +129,7 @@ export default function PageNav() {
         >
           <ProfilePicture
             size={{ w: 2.5, h: 2.5 }}
-            entity_id="user"
+            entity_username={username}
             entity_type={1}
             styles="rounded-full"
             clickable={false}

@@ -14,6 +14,7 @@ export default function AffiliateButton({
 }: AffiliateWithButtonProps) {
   const { setAffiliateRelation } = useAffiliateContext();
   const [isAffiliated, setIsAffiliated] = useState(false);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
     const fetchIsAffiliated = async () => {
@@ -36,7 +37,8 @@ export default function AffiliateButton({
           },
         );
 
-        setIsAffiliated(response.data);
+        setIsAffiliated(response.data.isAffiliated);
+        setIsUser(response.data.isUser);
       } catch (error) {
         console.error("Error fetching affiliate relation:", error);
       }
@@ -106,7 +108,7 @@ export default function AffiliateButton({
 
   return (
     <>
-      {entity_username !== "user" && isAffiliated && (
+      {!isUser && isAffiliated && (
         <button
           className="w-1/4 h-9 rounded-md text-white bg-fg-black-25"
           onClick={handleUnaffiliate}
@@ -114,7 +116,7 @@ export default function AffiliateButton({
           Unaffiliate
         </button>
       )}
-      {entity_username !== "user" && !isAffiliated && (
+      {!isUser && !isAffiliated && (
         <button
           className="w-1/4 h-9 rounded-md text-white bg-fg-primary"
           onClick={handleAffiliate}

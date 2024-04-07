@@ -31,10 +31,7 @@ router.get(
     try {
       const individual: Individual = await req.db.individuals.findUnique({
         where: {
-          individual_username:
-            individual_username === "user"
-              ? req.user?.user_id
-              : individual_username,
+          individual_username: individual_username,
         },
       });
 

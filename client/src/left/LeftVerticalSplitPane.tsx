@@ -31,6 +31,7 @@ export default function LeftVerticalSplitPane({
   const [initialPaneHeight, setInitialPaneHeight] = useState(0);
   const [paneHeight, setPaneHeight] = useState("60%");
   const [headerLightness, setHeaderLightness] = useState(80);
+  const leftTopPaneRef = useRef(null);
   const leftBottomPaneRef = useRef<HTMLDivElement>(null);
 
   // Handles softly lowering and raising the pane height when togglePaneHeight is called
@@ -157,13 +158,13 @@ export default function LeftVerticalSplitPane({
   const renderContent = () => {
     switch (leftPage) {
       case "individuals":
-        return <IndividualCards />;
+        return <IndividualCards leftTopPaneRef={leftTopPaneRef} />;
       case "groups":
-        return <GroupCards />;
+        return <GroupCards leftTopPaneRef={leftTopPaneRef} />;
       case "organizations":
-        return <OrganizationCards />;
+        return <OrganizationCards leftTopPaneRef={leftTopPaneRef} />;
       default:
-        return <IndividualCards />;
+        return null;
     }
   };
 
@@ -176,13 +177,14 @@ export default function LeftVerticalSplitPane({
       case "organizations":
         return <OrganizationRecs />;
       default:
-        return <IndividualRecs />;
+        return null;
     }
   };
 
   return (
     <div className="flex flex-col relative w-full h-full">
       <div
+        ref={leftTopPaneRef}
         className="overflow-auto box-border"
         style={{ height: paneHeight, scrollbarGutter: "stable" }}
       >

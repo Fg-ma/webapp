@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function IndividualCard({
   name,
   username,
-  currentIssue = null,
+  current_issue = null,
   animate,
 }: IndividualCardProps) {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ export function IndividualCard({
             {name ? name : username}
           </p>
           <p className="font-K2D text-sm text-fg-black-30 truncate">
-            {currentIssue}
+            {current_issue}
           </p>
         </div>
       </motion.div>
@@ -67,7 +67,7 @@ export function IndividualCard({
 export function GroupCard({
   name,
   handle,
-  currentIssue = null,
+  current_issue = null,
   affInCommon = null,
   animate,
 }: GroupCardProps) {
@@ -104,7 +104,7 @@ export function GroupCard({
             {name ? name : handle}
           </p>
           <p className="font-K2D text-base text-fg-black-30 truncate">
-            {currentIssue}
+            {current_issue}
           </p>
           <p className="font-K2D text-sm text-fg-black-30 truncate">
             Affiliates in this group: {affInCommon}
@@ -118,7 +118,7 @@ export function GroupCard({
 export function OrganizationCard({
   name,
   handle,
-  currentIssue = null,
+  current_issue = null,
   stances = null,
   animate,
 }: OrganizationCardProps) {
@@ -155,7 +155,7 @@ export function OrganizationCard({
             {name ? name : handle}
           </p>
           <p className="font-K2D text-base text-fg-black-30 truncate">
-            {currentIssue}
+            {current_issue}
           </p>
           <p className="font-K2D text-sm text-fg-black-30 truncate">
             Stances: {stances}

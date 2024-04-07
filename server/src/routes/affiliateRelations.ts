@@ -2,7 +2,13 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { Entity, Group, Organization, Relation } from "@FgTypes/types";
+import type {
+  Entity,
+  Group,
+  Individual,
+  Organization,
+  Relation,
+} from "@FgTypes/types";
 
 // Set a new affiliate relation
 router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
@@ -18,18 +24,22 @@ router.post("/set_affiliate_relation", verifyToken, async (req, res) => {
     if (entity.entity_id !== req.user.user_id) {
       const currentDate = new Date().toISOString();
 
-      const newAffiliateRelation = await req.db.affiliates_relations.create({
-        data: {
-          affiliate_relation_id: uuid(),
-          affiliate_id_root: req.user.user_id,
-          affiliate_id_target: entity.entity_id,
-          affiliate_relation_date: currentDate,
-        },
-      });
+      const newAffiliateRelation: Relation =
+        await req.db.affiliates_relations.create({
+          data: {
+            affiliate_relation_id: uuid(),
+            affiliate_id_root: req.user.user_id,
+            affiliate_id_target: entity.entity_id,
+            affiliate_relation_date: currentDate,
+          },
+        });
 
       res.send({
         newAffiliateRelation: {
-          ...newAffiliateRelation,
+          affiliate_relation_id: newAffiliateRelation.affiliate_relation_id,
+          affiliate_username_root: req.user.username,
+          affiliate_username_target: entity_username,
+          affiliate_relation_date: newAffiliateRelation.affiliate_relation_date,
           entity_type: entity.entity_type,
           action: "newRelation",
         },
@@ -53,14 +63,15 @@ router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
       },
     });
 
-    const existingRelation = await req.db.affiliates_relations.findUnique({
-      where: {
-        affiliate_id_root_affiliate_id_target: {
-          affiliate_id_root: req.user.user_id,
-          affiliate_id_target: entity.entity_id,
+    const existingRelation: Relation =
+      await req.db.affiliates_relations.findUnique({
+        where: {
+          affiliate_id_root_affiliate_id_target: {
+            affiliate_id_root: req.user.user_id,
+            affiliate_id_target: entity.entity_id,
+          },
         },
-      },
-    });
+      });
 
     if (!existingRelation) {
       return res.status(404).send("Relation not found");
@@ -74,7 +85,10 @@ router.delete("/delete_affiliate_relation", verifyToken, async (req, res) => {
 
     res.send({
       deletedAffiliateRelation: {
-        ...existingRelation,
+        affiliate_relation_id: existingRelation.affiliate_relation_id,
+        affiliate_username_root: req.user.username,
+        affiliate_username_target: entity_username,
+        affiliate_relation_date: existingRelation.affiliate_relation_date,
         entity_type: entity.entity_type,
         action: "deletedRelation",
       },
@@ -91,7 +105,7 @@ router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
-    if (entity_username !== "user") {
+    if (entity_username !== req.user.username) {
       const entity: Entity = await req.db.entities.findUnique({
         where: {
           entity_username: entity_username,
@@ -108,12 +122,12 @@ router.get("/search_affiliate_relation", verifyToken, async (req, res) => {
       });
 
       if (relation) {
-        res.send(true);
+        res.send({ isAffiliated: true, isUser: false });
       } else {
-        res.send(false);
+        res.send({ isAffiliated: false, isUser: false });
       }
     } else {
-      res.send(false);
+      res.send({ isAffiliated: false, isUser: true });
     }
   } catch (error) {
     console.error("Error fetching individual data:", error);
@@ -126,18 +140,13 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
-    let user_id;
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_username: entity_username,
+      },
+    });
 
-    if (entity_username === "user") {
-      user_id = req.user.user_id;
-    } else {
-      const entity: Entity = await req.db.entities.findUnique({
-        where: {
-          entity_username: entity_username,
-        },
-      });
-      user_id = entity.entity_id;
-    }
+    const user_id = entity.entity_id;
 
     const affiliates_relations = await req.db.affiliates_relations.findMany({
       where: {
@@ -165,7 +174,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     const individuals = [];
 
     for (const ind_id of individualIdsList) {
-      const individual = await req.db.individuals.findUnique({
+      const individual: Individual = await req.db.individuals.findUnique({
         where: { individual_id: ind_id },
       });
 
@@ -179,8 +188,17 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
         },
       });
 
+      const newIndividual = {
+        individual_username: individual.individual_username,
+        individual_name: individual.individual_name,
+        individual_current_issue: individual.individual_current_issue,
+        individual_roles: individual.individual_roles,
+        individual_description: individual.individual_description,
+        profile_picture_id: individual.profile_picture_id,
+      };
+
       individuals.push({
-        ...individual,
+        ...newIndividual,
         date: individualAffiliation,
       });
     }
@@ -197,7 +215,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     const groups = [];
 
     for (const grp_id of groupIdsList) {
-      const group = await req.db.groups.findUnique({
+      const group: Group = await req.db.groups.findUnique({
         where: { group_id: grp_id },
       });
 
@@ -211,8 +229,17 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
         },
       });
 
+      const newGroup = {
+        group_handle: group.group_handle,
+        group_name: group.group_name,
+        group_current_issue: group.group_current_issue,
+        group_stances: group.group_stances,
+        group_description: group.group_description,
+        profile_picture_id: group.profile_picture_id,
+      };
+
       groups.push({
-        ...group,
+        ...newGroup,
         date: groupAffiliation,
       });
     }
@@ -231,7 +258,7 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
     const organizations = [];
 
     for (const org_id of organizationIdsList) {
-      const organization = await req.db.organizations.findUnique({
+      const organization: Organization = await req.db.organizations.findUnique({
         where: { organization_id: org_id },
       });
 
@@ -246,8 +273,17 @@ router.get("/get_affiliated_entities", verifyToken, async (req, res) => {
           },
         });
 
+      const newOrganization = {
+        organization_handle: organization.organization_handle,
+        organization_name: organization.organization_name,
+        organization_current_issue: organization.organization_current_issue,
+        organization_stances: organization.organization_stances,
+        organization_description: organization.organization_description,
+        profile_picture_id: organization.profile_picture_id,
+      };
+
       organizations.push({
-        ...organization,
+        ...newOrganization,
         date: organizationAffiliation,
       });
     }
@@ -268,11 +304,12 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
   try {
     const user_id = req.user.user_id;
 
-    const affiliates_relations = await req.db.affiliates_relations.findMany({
-      where: {
-        affiliate_id_root: user_id,
-      },
-    });
+    const affiliates_relations: Relation[] =
+      await req.db.affiliates_relations.findMany({
+        where: {
+          affiliate_id_root: user_id,
+        },
+      });
 
     const entity_ids = [];
 
@@ -291,24 +328,36 @@ router.get("/get_affiliated_individuals", verifyToken, async (req, res) => {
       (entry: Entity) => entry.entity_id
     );
 
-    const individuals = await req.db.individuals.findMany({
+    const individuals: Individual[] = await req.db.individuals.findMany({
       where: { individual_id: { in: individualIdsList } },
     });
 
-    const individualsWithAffiliateDate = individuals.map((individual: any) => {
-      const relation = affiliates_relations.find(
-        (rel: Relation) => rel.affiliate_id_target === individual.individual_id
-      );
+    const individualsWithAffiliateDate = individuals.map(
+      (individual: Individual) => {
+        const relation = affiliates_relations.find(
+          (rel: Relation) =>
+            rel.affiliate_id_target === individual.individual_id
+        );
 
-      if (relation) {
-        return {
-          ...individual,
-          affiliate_relation_date: relation.affiliate_relation_date,
+        const returningIndividual = {
+          individual_username: individual.individual_username,
+          individual_name: individual.individual_name,
+          individual_current_issue: individual.individual_current_issue,
+          individual_roles: individual.individual_roles,
+          individual_description: individual.individual_description,
+          profile_picture_id: individual.profile_picture_id,
         };
-      }
 
-      return individual;
-    });
+        if (relation) {
+          return {
+            ...returningIndividual,
+            affiliate_relation_date: relation.affiliate_relation_date,
+          };
+        }
+
+        return returningIndividual;
+      }
+    );
 
     res.send(individualsWithAffiliateDate);
   } catch (error) {
@@ -350,14 +399,23 @@ router.get("/get_affiliated_groups", verifyToken, async (req, res) => {
         (rel: Relation) => rel.affiliate_id_target === group.group_id
       );
 
+      const returningGroup = {
+        group_handle: group.group_handle,
+        group_name: group.group_name,
+        group_current_issue: group.group_current_issue,
+        group_stances: group.group_stances,
+        group_description: group.group_description,
+        profile_picture_id: group.profile_picture_id,
+      };
+
       if (relation) {
         return {
-          ...group,
+          ...returningGroup,
           affiliate_relation_date: relation.affiliate_relation_date,
         };
       }
 
-      return group;
+      return returningGroup;
     });
 
     res.send(groupsWithAffiliateDate);
@@ -404,14 +462,23 @@ router.get("/get_affiliated_organizations", verifyToken, async (req, res) => {
             rel.affiliate_id_target === organization.organization_id
         );
 
+        const returningOrganization = {
+          organization_handle: organization.organization_handle,
+          organization_name: organization.organization_name,
+          organization_current_issue: organization.organization_current_issue,
+          organization_stances: organization.organization_stances,
+          organization_description: organization.organization_description,
+          profile_picture_id: organization.profile_picture_id,
+        };
+
         if (relation) {
           return {
-            ...organization,
+            ...returningOrganization,
             affiliate_relation_date: relation.affiliate_relation_date,
           };
         }
 
-        return organization;
+        return returningOrganization;
       }
     );
 

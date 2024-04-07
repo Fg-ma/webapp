@@ -146,17 +146,17 @@ export interface Entity {
   individual_name?: string;
   individual_userName?: string;
   individual_roles?: string;
-  individual_currentIssue?: string;
+  individual_current_issue?: string;
   individual_description?: string;
   group_name?: string;
   group_handle?: string;
   group_stances?: string;
-  group_currentIssue?: string;
+  group_current_issue?: string;
   group_description?: string;
   organization_name?: string;
   organization_handle?: string;
   organization_stances?: string;
-  organization_currentIssue?: string;
+  organization_current_issue?: string;
   organization_description?: string;
 }
 

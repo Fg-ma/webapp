@@ -12,7 +12,7 @@ const serverUrl = isDevelopment
 export default function OrganizationRecs() {
   /* 
     Description:   
-      Gets organization data from a database then extracts the id, name, currentIssue, and stances to 
+      Gets organization data from a database then extracts the id, name, current_issue, and stances to 
       be mapped into cards.
     Unique Properties:
       N/A
@@ -39,7 +39,7 @@ export default function OrganizationRecs() {
         key={orgInfo.organization_handle}
         name={orgInfo.organization_name}
         handle={orgInfo.organization_handle}
-        currentIssue={orgInfo.organization_currentIssue}
+        current_issue={orgInfo.organization_current_issue}
         stances={orgInfo.organization_stances}
       />
     );

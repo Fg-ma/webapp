@@ -12,7 +12,7 @@ export interface LeftState {
 export interface Group {
   group_name: string | null;
   group_handle: string;
-  group_currentIssue: string;
+  group_current_issue: string;
   group_description: string;
   group_stances: string;
   affiliate_relation_date: string;
@@ -22,7 +22,7 @@ export interface Group {
 export interface Individual {
   individual_name: string | null;
   individual_username: string;
-  individual_currentIssue: string;
+  individual_current_issue: string;
   individual_description: string;
   individual_roles: string;
   affiliate_relation_date: string;
@@ -32,7 +32,7 @@ export interface Individual {
 export interface Organization {
   organization_name: string | null;
   organization_handle: string;
-  organization_currentIssue: string;
+  organization_current_issue: string;
   organization_description: string;
   organization_stances: string;
   affiliate_relation_date: string;
@@ -58,6 +58,10 @@ export interface LeftVerticalSplitPaneProps {
   Global Group
 */
 
+export interface GroupCardsProps {
+  leftTopPaneRef: React.RefObject<HTMLDivElement>;
+}
+
 /* 
   GroupRecs.tsx
   Global Group
@@ -67,6 +71,10 @@ export interface LeftVerticalSplitPaneProps {
   IndividualCards.tsx
   Global Individual
 */
+
+export interface IndividualCardsProps {
+  leftTopPaneRef: React.RefObject<HTMLDivElement>;
+}
 
 /* 
   IndividualRecs.tsx
@@ -80,14 +88,14 @@ export interface LeftVerticalSplitPaneProps {
 export interface IndividualCardProps {
   name: string | null;
   username: string;
-  currentIssue: string | null;
+  current_issue: string | null;
   animate?: boolean;
 }
 
 export interface GroupCardProps {
   name: string | null;
   handle: string;
-  currentIssue: string | null;
+  current_issue: string | null;
   affInCommon: string | null;
   animate?: boolean;
 }
@@ -95,7 +103,7 @@ export interface GroupCardProps {
 export interface OrganizationCardProps {
   name: string | null;
   handle: string;
-  currentIssue: string | null;
+  current_issue: string | null;
   stances: string | null;
   animate?: boolean;
 }
@@ -104,6 +112,10 @@ export interface OrganizationCardProps {
   OrganizationCards.tsx
   Global Organization
 */
+
+export interface OrganizationCardsProps {
+  leftTopPaneRef: React.RefObject<HTMLDivElement>;
+}
 
 /* 
   OrganizationRecs.tsx

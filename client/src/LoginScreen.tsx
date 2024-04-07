@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
-import { setLoggedIn, setPageState } from "@redux/pageState/pageStateActions";
+import {
+  setLoggedIn,
+  setPageState,
+  setUsernameState,
+} from "@redux/pageState/pageStateActions";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -61,7 +65,9 @@ export default function LoginScreen() {
 
         Axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
 
+        setPassword("");
         dispatch(setLoggedIn(true));
+        dispatch(setUsernameState(username));
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -89,7 +95,9 @@ export default function LoginScreen() {
           },
         },
       )
-        .then(() => {
+        .then((response) => {
+          setPassword("");
+          dispatch(setUsernameState(response.data.username));
           dispatch(setLoggedIn(true));
         })
         .catch(() => {

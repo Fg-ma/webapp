@@ -1,9 +1,11 @@
+import { SET_FILTER_OPTION } from "@redux/filters/filterTypes";
 import {
   SET_PAGE_STATE,
   SET_IDS,
   SET_LOGGED_IN,
   SET_CONVERSATION,
   SET_SECONDARY_PAGE_STATE,
+  SET_USERNAME,
 } from "./pageStateTypes";
 
 export const setPageState = (page: string, newState: string) => ({
@@ -27,6 +29,11 @@ export const setIds = (page: string, id: string, value: string | null) => ({
 export const setLoggedIn = (isLoggedIn: boolean) => ({
   type: SET_LOGGED_IN,
   payload: { isLoggedIn },
+});
+
+export const setUsernameState = (username: string) => ({
+  type: SET_USERNAME,
+  payload: { username },
 });
 
 export const setConversation = (

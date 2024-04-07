@@ -4,59 +4,31 @@ import verifyToken from "./verifyJWT";
 import type { FullImage } from "@FgTypes/types";
 
 // Route to get profile picture of an entity
-router.get("/get_user_profile_picture", verifyToken, async (req, res) => {
+router.get("/get_user_profile_picture", async (req, res) => {
   const entity_username = req.query.entity_username;
   const entity_type = parseInt(req.query.entity_type as string, 10);
 
   try {
     let profilePictureId;
 
-    if (entity_username === "user") {
-      const entity = await req.db.entities.findUnique({
+    if (entity_type === 1) {
+      profilePictureId = await req.db.individuals.findUnique({
         where: {
-          entity_id: req.user?.user_id,
+          individual_username: entity_username,
         },
       });
-
-      if (entity.entity_type === 1) {
-        profilePictureId = await req.db.individuals.findUnique({
-          where: {
-            individual_id: entity.entity_id,
-          },
-        });
-      } else if (entity.entity_type === 2) {
-        profilePictureId = await req.db.groups.findUnique({
-          where: {
-            group_id: entity.entity_id,
-          },
-        });
-      } else if (entity.entity_type === 3) {
-        profilePictureId = await req.db.organizations.findUnique({
-          where: {
-            organization_id: entity.entity_id,
-          },
-        });
-      }
-    } else {
-      if (entity_type === 1) {
-        profilePictureId = await req.db.individuals.findUnique({
-          where: {
-            individual_username: entity_username,
-          },
-        });
-      } else if (entity_type === 2) {
-        profilePictureId = await req.db.groups.findUnique({
-          where: {
-            group_handle: entity_username,
-          },
-        });
-      } else if (entity_type === 3) {
-        profilePictureId = await req.db.organizations.findUnique({
-          where: {
-            organization_handle: entity_username,
-          },
-        });
-      }
+    } else if (entity_type === 2) {
+      profilePictureId = await req.db.groups.findUnique({
+        where: {
+          group_handle: entity_username,
+        },
+      });
+    } else if (entity_type === 3) {
+      profilePictureId = await req.db.organizations.findUnique({
+        where: {
+          organization_handle: entity_username,
+        },
+      });
     }
 
     const profilePicture = await req.db.profile_pictures.findUnique({

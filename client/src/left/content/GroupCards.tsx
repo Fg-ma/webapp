@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { GroupCard } from "./LeftSpaceCards";
-import { Group } from "@FgTypes/leftTypes";
+import { Group, GroupCardsProps } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 import { AFFILIATED_GROUPS_TABLE } from "@IDB/IDBService";
@@ -12,10 +12,10 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function GroupCards() {
+export default function GroupCards({ leftTopPaneRef }: GroupCardsProps) {
   /* 
     Description:   
-      Gets group data from a database then extracts the id, name, and currentIssue to be mapped
+      Gets group data from a database then extracts the id, name, and current_issue to be mapped
       into cards.
     Unique Properties:
       It queries for any affiliates that the user may have in common with the group.
@@ -40,7 +40,7 @@ export default function GroupCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/groups/${affiliateRelation.affiliate_id_target}`,
+          `${serverUrl}/groups/${affiliateRelation.affiliate_username_target}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -69,7 +69,8 @@ export default function GroupCards() {
 
     const deleteOldRelationData = async () => {
       const newGroups = groups.filter(
-        (group) => group.group_handle !== affiliateRelation.affiliate_id_target,
+        (group) =>
+          group.group_handle !== affiliateRelation.affiliate_username_target,
       );
 
       setGroups(newGroups);
@@ -85,12 +86,20 @@ export default function GroupCards() {
       fetchNewRelationData();
       setAffiliateRelation({
         action: "",
-        affiliate_id_root: "",
-        affiliate_id_target: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
         affiliate_relation_date: "",
         affiliate_relation_id: "",
         entity_type: 0,
       });
+      if (leftTopPaneRef.current) {
+        const scrollOptions: ScrollToOptions = {
+          top: 0,
+          behavior: "smooth",
+        };
+
+        leftTopPaneRef.current.scrollTo(scrollOptions);
+      }
     } else if (
       affiliateRelation?.entity_type === 2 &&
       affiliateRelation?.action === "deletedRelation"
@@ -98,8 +107,8 @@ export default function GroupCards() {
       deleteOldRelationData();
       setAffiliateRelation({
         action: "",
-        affiliate_id_root: "",
-        affiliate_id_target: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
         affiliate_relation_date: "",
         affiliate_relation_id: "",
         entity_type: 0,
@@ -167,7 +176,7 @@ export default function GroupCards() {
         key={grpInfo.group_handle}
         name={grpInfo.group_name}
         handle={grpInfo.group_handle}
-        currentIssue={grpInfo.group_currentIssue}
+        current_issue={grpInfo.group_current_issue}
         affInCommon="placeholder"
         animate={grpInfo.animate}
       />

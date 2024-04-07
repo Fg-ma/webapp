@@ -205,7 +205,7 @@ exports.Prisma.GroupsScalarFieldEnum = {
   group_id: 'group_id',
   group_handle: 'group_handle',
   group_name: 'group_name',
-  group_currentIssue: 'group_currentIssue',
+  group_current_issue: 'group_current_issue',
   group_stances: 'group_stances',
   group_description: 'group_description',
   profile_picture_id: 'profile_picture_id'
@@ -239,7 +239,7 @@ exports.Prisma.IndividualsScalarFieldEnum = {
   individual_id: 'individual_id',
   individual_username: 'individual_username',
   individual_name: 'individual_name',
-  individual_currentIssue: 'individual_currentIssue',
+  individual_current_issue: 'individual_current_issue',
   individual_roles: 'individual_roles',
   individual_description: 'individual_description',
   profile_picture_id: 'profile_picture_id'
@@ -249,7 +249,7 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
   organization_id: 'organization_id',
   organization_handle: 'organization_handle',
   organization_name: 'organization_name',
-  organization_currentIssue: 'organization_currentIssue',
+  organization_current_issue: 'organization_current_issue',
   organization_stances: 'organization_stances',
   organization_description: 'organization_description',
   profile_picture_id: 'profile_picture_id'

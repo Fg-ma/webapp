@@ -4,12 +4,14 @@ import {
   SET_LOGGED_IN,
   SET_CONVERSATION,
   SET_SECONDARY_PAGE_STATE,
+  SET_USERNAME,
 } from "./pageStateTypes";
 import { PageState, PageStateAction } from "@FgTypes/reduxTypes";
 
 const initialState: PageState = {
   login: {
     pagePayload: {
+      username: "",
       pageState: "login",
       isLoggedIn: false,
     },
@@ -153,6 +155,21 @@ export default function pageStateReducer(
           pagePayload: {
             ...state.login.pagePayload,
             isLoggedIn: isLoggedIn,
+          },
+        },
+      };
+    }
+
+    case SET_USERNAME: {
+      const { username } = action.payload;
+
+      return {
+        ...state,
+        login: {
+          ...state.login,
+          pagePayload: {
+            ...state.login.pagePayload,
+            username: username,
           },
         },
       };

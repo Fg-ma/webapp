@@ -62,21 +62,12 @@ export default function ProfilePicture({
       }
 
       try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          return;
-        }
-
         const response = await Axios.get(
           `${serverUrl}/images/get_user_profile_picture`,
           {
             params: {
               entity_username: entity_username,
               entity_type: entity_type,
-            },
-            headers: {
-              Authorization: `Bearer ${token}`,
             },
           },
         );

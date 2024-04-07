@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { OrganizationCard } from "./LeftSpaceCards";
-import { Organization } from "@FgTypes/leftTypes";
+import { Organization, OrganizationCardsProps } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
 import { AFFILIATED_ORGANIZATIONS_TABLE } from "@IDB/IDBService";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -12,10 +12,12 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function OrganizationCards() {
+export default function OrganizationCards({
+  leftTopPaneRef,
+}: OrganizationCardsProps) {
   /* 
     Description:   
-      Gets organization data from a database then extracts the id, name, currentIssue, and stances to 
+      Gets organization data from a database then extracts the id, name, current_issue, and stances to 
       be mapped into cards.
     Unique Properties:
       N/A
@@ -41,7 +43,7 @@ export default function OrganizationCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/organizations/${affiliateRelation.affiliate_id_target}`,
+          `${serverUrl}/organizations/${affiliateRelation.affiliate_username_target}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +74,7 @@ export default function OrganizationCards() {
       const newOrganizations = organizations.filter(
         (organization) =>
           organization.organization_handle !==
-          affiliateRelation.affiliate_id_target,
+          affiliateRelation.affiliate_username_target,
       );
 
       setOrganizations(newOrganizations);
@@ -89,6 +91,22 @@ export default function OrganizationCards() {
       affiliateRelation?.action === "newRelation"
     ) {
       fetchNewRelationData();
+      setAffiliateRelation({
+        action: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
+      if (leftTopPaneRef.current) {
+        const scrollOptions: ScrollToOptions = {
+          top: 0,
+          behavior: "smooth",
+        };
+
+        leftTopPaneRef.current.scrollTo(scrollOptions);
+      }
     } else if (
       affiliateRelation?.entity_type === 3 &&
       affiliateRelation?.action === "deletedRelation"
@@ -96,8 +114,8 @@ export default function OrganizationCards() {
       deleteOldRelationData();
       setAffiliateRelation({
         action: "",
-        affiliate_id_root: "",
-        affiliate_id_target: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
         affiliate_relation_date: "",
         affiliate_relation_id: "",
         entity_type: 0,
@@ -168,7 +186,7 @@ export default function OrganizationCards() {
         key={orgInfo.organization_handle}
         name={orgInfo.organization_name}
         handle={orgInfo.organization_handle}
-        currentIssue={orgInfo.organization_currentIssue}
+        current_issue={orgInfo.organization_current_issue}
         stances={orgInfo.organization_stances}
         animate={orgInfo.animate}
       />

@@ -17,6 +17,7 @@ import {
   SET_LOGGED_IN,
   SET_CONVERSATION,
   SET_SECONDARY_PAGE_STATE,
+  SET_USERNAME,
 } from "@redux/pageState/pageStateTypes";
 
 // Global
@@ -112,6 +113,7 @@ export interface PageState {
     pagePayload: {
       pageState: string;
       secondaryPageState?: string | null;
+      username?: string;
       isLoggedIn?: boolean;
       ids?: {
         individual_id?: string | null;
@@ -140,6 +142,7 @@ export type PageStateAction =
       payload: { page: string; id: string; value: string | null };
     }
   | { type: typeof SET_LOGGED_IN; payload: { isLoggedIn: boolean } }
+  | { type: typeof SET_USERNAME; payload: { username: string } }
   | {
       type: typeof SET_CONVERSATION;
       payload: {

@@ -16109,7 +16109,7 @@ export namespace Prisma {
     group_id: string | null
     group_handle: string | null
     group_name: string | null
-    group_currentIssue: string | null
+    group_current_issue: string | null
     group_stances: string | null
     group_description: string | null
     profile_picture_id: string | null
@@ -16119,7 +16119,7 @@ export namespace Prisma {
     group_id: string | null
     group_handle: string | null
     group_name: string | null
-    group_currentIssue: string | null
+    group_current_issue: string | null
     group_stances: string | null
     group_description: string | null
     profile_picture_id: string | null
@@ -16129,7 +16129,7 @@ export namespace Prisma {
     group_id: number
     group_handle: number
     group_name: number
-    group_currentIssue: number
+    group_current_issue: number
     group_stances: number
     group_description: number
     profile_picture_id: number
@@ -16141,7 +16141,7 @@ export namespace Prisma {
     group_id?: true
     group_handle?: true
     group_name?: true
-    group_currentIssue?: true
+    group_current_issue?: true
     group_stances?: true
     group_description?: true
     profile_picture_id?: true
@@ -16151,7 +16151,7 @@ export namespace Prisma {
     group_id?: true
     group_handle?: true
     group_name?: true
-    group_currentIssue?: true
+    group_current_issue?: true
     group_stances?: true
     group_description?: true
     profile_picture_id?: true
@@ -16161,7 +16161,7 @@ export namespace Prisma {
     group_id?: true
     group_handle?: true
     group_name?: true
-    group_currentIssue?: true
+    group_current_issue?: true
     group_stances?: true
     group_description?: true
     profile_picture_id?: true
@@ -16244,7 +16244,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name: string | null
-    group_currentIssue: string | null
+    group_current_issue: string | null
     group_stances: string | null
     group_description: string | null
     profile_picture_id: string | null
@@ -16271,7 +16271,7 @@ export namespace Prisma {
     group_id?: boolean
     group_handle?: boolean
     group_name?: boolean
-    group_currentIssue?: boolean
+    group_current_issue?: boolean
     group_stances?: boolean
     group_description?: boolean
     profile_picture_id?: boolean
@@ -16284,7 +16284,7 @@ export namespace Prisma {
     group_id?: boolean
     group_handle?: boolean
     group_name?: boolean
-    group_currentIssue?: boolean
+    group_current_issue?: boolean
     group_stances?: boolean
     group_description?: boolean
     profile_picture_id?: boolean
@@ -16307,7 +16307,7 @@ export namespace Prisma {
       group_id: string
       group_handle: string
       group_name: string | null
-      group_currentIssue: string | null
+      group_current_issue: string | null
       group_stances: string | null
       group_description: string | null
       profile_picture_id: string | null
@@ -16711,7 +16711,7 @@ export namespace Prisma {
     readonly group_id: FieldRef<"groups", 'String'>
     readonly group_handle: FieldRef<"groups", 'String'>
     readonly group_name: FieldRef<"groups", 'String'>
-    readonly group_currentIssue: FieldRef<"groups", 'String'>
+    readonly group_current_issue: FieldRef<"groups", 'String'>
     readonly group_stances: FieldRef<"groups", 'String'>
     readonly group_description: FieldRef<"groups", 'String'>
     readonly profile_picture_id: FieldRef<"groups", 'String'>
@@ -19922,7 +19922,7 @@ export namespace Prisma {
     individual_id: string | null
     individual_username: string | null
     individual_name: string | null
-    individual_currentIssue: string | null
+    individual_current_issue: string | null
     individual_roles: string | null
     individual_description: string | null
     profile_picture_id: string | null
@@ -19932,7 +19932,7 @@ export namespace Prisma {
     individual_id: string | null
     individual_username: string | null
     individual_name: string | null
-    individual_currentIssue: string | null
+    individual_current_issue: string | null
     individual_roles: string | null
     individual_description: string | null
     profile_picture_id: string | null
@@ -19942,7 +19942,7 @@ export namespace Prisma {
     individual_id: number
     individual_username: number
     individual_name: number
-    individual_currentIssue: number
+    individual_current_issue: number
     individual_roles: number
     individual_description: number
     profile_picture_id: number
@@ -19954,7 +19954,7 @@ export namespace Prisma {
     individual_id?: true
     individual_username?: true
     individual_name?: true
-    individual_currentIssue?: true
+    individual_current_issue?: true
     individual_roles?: true
     individual_description?: true
     profile_picture_id?: true
@@ -19964,7 +19964,7 @@ export namespace Prisma {
     individual_id?: true
     individual_username?: true
     individual_name?: true
-    individual_currentIssue?: true
+    individual_current_issue?: true
     individual_roles?: true
     individual_description?: true
     profile_picture_id?: true
@@ -19974,7 +19974,7 @@ export namespace Prisma {
     individual_id?: true
     individual_username?: true
     individual_name?: true
-    individual_currentIssue?: true
+    individual_current_issue?: true
     individual_roles?: true
     individual_description?: true
     profile_picture_id?: true
@@ -20057,7 +20057,7 @@ export namespace Prisma {
     individual_id: string
     individual_username: string
     individual_name: string | null
-    individual_currentIssue: string | null
+    individual_current_issue: string | null
     individual_roles: string | null
     individual_description: string | null
     profile_picture_id: string | null
@@ -20084,7 +20084,7 @@ export namespace Prisma {
     individual_id?: boolean
     individual_username?: boolean
     individual_name?: boolean
-    individual_currentIssue?: boolean
+    individual_current_issue?: boolean
     individual_roles?: boolean
     individual_description?: boolean
     profile_picture_id?: boolean
@@ -20096,7 +20096,7 @@ export namespace Prisma {
     individual_id?: boolean
     individual_username?: boolean
     individual_name?: boolean
-    individual_currentIssue?: boolean
+    individual_current_issue?: boolean
     individual_roles?: boolean
     individual_description?: boolean
     profile_picture_id?: boolean
@@ -20118,7 +20118,7 @@ export namespace Prisma {
       individual_id: string
       individual_username: string
       individual_name: string | null
-      individual_currentIssue: string | null
+      individual_current_issue: string | null
       individual_roles: string | null
       individual_description: string | null
       profile_picture_id: string | null
@@ -20522,7 +20522,7 @@ export namespace Prisma {
     readonly individual_id: FieldRef<"individuals", 'String'>
     readonly individual_username: FieldRef<"individuals", 'String'>
     readonly individual_name: FieldRef<"individuals", 'String'>
-    readonly individual_currentIssue: FieldRef<"individuals", 'String'>
+    readonly individual_current_issue: FieldRef<"individuals", 'String'>
     readonly individual_roles: FieldRef<"individuals", 'String'>
     readonly individual_description: FieldRef<"individuals", 'String'>
     readonly profile_picture_id: FieldRef<"individuals", 'String'>
@@ -20883,7 +20883,7 @@ export namespace Prisma {
     organization_id: string | null
     organization_handle: string | null
     organization_name: string | null
-    organization_currentIssue: string | null
+    organization_current_issue: string | null
     organization_stances: string | null
     organization_description: string | null
     profile_picture_id: string | null
@@ -20893,7 +20893,7 @@ export namespace Prisma {
     organization_id: string | null
     organization_handle: string | null
     organization_name: string | null
-    organization_currentIssue: string | null
+    organization_current_issue: string | null
     organization_stances: string | null
     organization_description: string | null
     profile_picture_id: string | null
@@ -20903,7 +20903,7 @@ export namespace Prisma {
     organization_id: number
     organization_handle: number
     organization_name: number
-    organization_currentIssue: number
+    organization_current_issue: number
     organization_stances: number
     organization_description: number
     profile_picture_id: number
@@ -20915,7 +20915,7 @@ export namespace Prisma {
     organization_id?: true
     organization_handle?: true
     organization_name?: true
-    organization_currentIssue?: true
+    organization_current_issue?: true
     organization_stances?: true
     organization_description?: true
     profile_picture_id?: true
@@ -20925,7 +20925,7 @@ export namespace Prisma {
     organization_id?: true
     organization_handle?: true
     organization_name?: true
-    organization_currentIssue?: true
+    organization_current_issue?: true
     organization_stances?: true
     organization_description?: true
     profile_picture_id?: true
@@ -20935,7 +20935,7 @@ export namespace Prisma {
     organization_id?: true
     organization_handle?: true
     organization_name?: true
-    organization_currentIssue?: true
+    organization_current_issue?: true
     organization_stances?: true
     organization_description?: true
     profile_picture_id?: true
@@ -21018,7 +21018,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name: string | null
-    organization_currentIssue: string | null
+    organization_current_issue: string | null
     organization_stances: string | null
     organization_description: string | null
     profile_picture_id: string | null
@@ -21045,7 +21045,7 @@ export namespace Prisma {
     organization_id?: boolean
     organization_handle?: boolean
     organization_name?: boolean
-    organization_currentIssue?: boolean
+    organization_current_issue?: boolean
     organization_stances?: boolean
     organization_description?: boolean
     profile_picture_id?: boolean
@@ -21058,7 +21058,7 @@ export namespace Prisma {
     organization_id?: boolean
     organization_handle?: boolean
     organization_name?: boolean
-    organization_currentIssue?: boolean
+    organization_current_issue?: boolean
     organization_stances?: boolean
     organization_description?: boolean
     profile_picture_id?: boolean
@@ -21081,7 +21081,7 @@ export namespace Prisma {
       organization_id: string
       organization_handle: string
       organization_name: string | null
-      organization_currentIssue: string | null
+      organization_current_issue: string | null
       organization_stances: string | null
       organization_description: string | null
       profile_picture_id: string | null
@@ -21485,7 +21485,7 @@ export namespace Prisma {
     readonly organization_id: FieldRef<"organizations", 'String'>
     readonly organization_handle: FieldRef<"organizations", 'String'>
     readonly organization_name: FieldRef<"organizations", 'String'>
-    readonly organization_currentIssue: FieldRef<"organizations", 'String'>
+    readonly organization_current_issue: FieldRef<"organizations", 'String'>
     readonly organization_stances: FieldRef<"organizations", 'String'>
     readonly organization_description: FieldRef<"organizations", 'String'>
     readonly profile_picture_id: FieldRef<"organizations", 'String'>
@@ -30612,7 +30612,7 @@ export namespace Prisma {
     group_id: 'group_id',
     group_handle: 'group_handle',
     group_name: 'group_name',
-    group_currentIssue: 'group_currentIssue',
+    group_current_issue: 'group_current_issue',
     group_stances: 'group_stances',
     group_description: 'group_description',
     profile_picture_id: 'profile_picture_id'
@@ -30658,7 +30658,7 @@ export namespace Prisma {
     individual_id: 'individual_id',
     individual_username: 'individual_username',
     individual_name: 'individual_name',
-    individual_currentIssue: 'individual_currentIssue',
+    individual_current_issue: 'individual_current_issue',
     individual_roles: 'individual_roles',
     individual_description: 'individual_description',
     profile_picture_id: 'profile_picture_id'
@@ -30671,7 +30671,7 @@ export namespace Prisma {
     organization_id: 'organization_id',
     organization_handle: 'organization_handle',
     organization_name: 'organization_name',
-    organization_currentIssue: 'organization_currentIssue',
+    organization_current_issue: 'organization_current_issue',
     organization_stances: 'organization_stances',
     organization_description: 'organization_description',
     profile_picture_id: 'profile_picture_id'
@@ -31601,7 +31601,7 @@ export namespace Prisma {
     group_id?: StringFilter<"groups"> | string
     group_handle?: StringFilter<"groups"> | string
     group_name?: StringNullableFilter<"groups"> | string | null
-    group_currentIssue?: StringNullableFilter<"groups"> | string | null
+    group_current_issue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
     profile_picture_id?: StringNullableFilter<"groups"> | string | null
@@ -31613,7 +31613,7 @@ export namespace Prisma {
     group_id?: SortOrder
     group_handle?: SortOrder
     group_name?: SortOrderInput | SortOrder
-    group_currentIssue?: SortOrderInput | SortOrder
+    group_current_issue?: SortOrderInput | SortOrder
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31628,7 +31628,7 @@ export namespace Prisma {
     OR?: groupsWhereInput[]
     NOT?: groupsWhereInput | groupsWhereInput[]
     group_name?: StringNullableFilter<"groups"> | string | null
-    group_currentIssue?: StringNullableFilter<"groups"> | string | null
+    group_current_issue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
     profile_picture_id?: StringNullableFilter<"groups"> | string | null
@@ -31640,7 +31640,7 @@ export namespace Prisma {
     group_id?: SortOrder
     group_handle?: SortOrder
     group_name?: SortOrderInput | SortOrder
-    group_currentIssue?: SortOrderInput | SortOrder
+    group_current_issue?: SortOrderInput | SortOrder
     group_stances?: SortOrderInput | SortOrder
     group_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31656,7 +31656,7 @@ export namespace Prisma {
     group_id?: StringWithAggregatesFilter<"groups"> | string
     group_handle?: StringWithAggregatesFilter<"groups"> | string
     group_name?: StringNullableWithAggregatesFilter<"groups"> | string | null
-    group_currentIssue?: StringNullableWithAggregatesFilter<"groups"> | string | null
+    group_current_issue?: StringNullableWithAggregatesFilter<"groups"> | string | null
     group_stances?: StringNullableWithAggregatesFilter<"groups"> | string | null
     group_description?: StringNullableWithAggregatesFilter<"groups"> | string | null
     profile_picture_id?: StringNullableWithAggregatesFilter<"groups"> | string | null
@@ -31843,7 +31843,7 @@ export namespace Prisma {
     individual_id?: StringFilter<"individuals"> | string
     individual_username?: StringFilter<"individuals"> | string
     individual_name?: StringNullableFilter<"individuals"> | string | null
-    individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
+    individual_current_issue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
     profile_picture_id?: StringNullableFilter<"individuals"> | string | null
@@ -31855,7 +31855,7 @@ export namespace Prisma {
     individual_id?: SortOrder
     individual_username?: SortOrder
     individual_name?: SortOrderInput | SortOrder
-    individual_currentIssue?: SortOrderInput | SortOrder
+    individual_current_issue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31870,7 +31870,7 @@ export namespace Prisma {
     OR?: individualsWhereInput[]
     NOT?: individualsWhereInput | individualsWhereInput[]
     individual_name?: StringNullableFilter<"individuals"> | string | null
-    individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
+    individual_current_issue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
     profile_picture_id?: StringNullableFilter<"individuals"> | string | null
@@ -31882,7 +31882,7 @@ export namespace Prisma {
     individual_id?: SortOrder
     individual_username?: SortOrder
     individual_name?: SortOrderInput | SortOrder
-    individual_currentIssue?: SortOrderInput | SortOrder
+    individual_current_issue?: SortOrderInput | SortOrder
     individual_roles?: SortOrderInput | SortOrder
     individual_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31898,7 +31898,7 @@ export namespace Prisma {
     individual_id?: StringWithAggregatesFilter<"individuals"> | string
     individual_username?: StringWithAggregatesFilter<"individuals"> | string
     individual_name?: StringNullableWithAggregatesFilter<"individuals"> | string | null
-    individual_currentIssue?: StringNullableWithAggregatesFilter<"individuals"> | string | null
+    individual_current_issue?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_roles?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     individual_description?: StringNullableWithAggregatesFilter<"individuals"> | string | null
     profile_picture_id?: StringNullableWithAggregatesFilter<"individuals"> | string | null
@@ -31911,7 +31911,7 @@ export namespace Prisma {
     organization_id?: StringFilter<"organizations"> | string
     organization_handle?: StringFilter<"organizations"> | string
     organization_name?: StringNullableFilter<"organizations"> | string | null
-    organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
+    organization_current_issue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
     profile_picture_id?: StringNullableFilter<"organizations"> | string | null
@@ -31923,7 +31923,7 @@ export namespace Prisma {
     organization_id?: SortOrder
     organization_handle?: SortOrder
     organization_name?: SortOrderInput | SortOrder
-    organization_currentIssue?: SortOrderInput | SortOrder
+    organization_current_issue?: SortOrderInput | SortOrder
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31938,7 +31938,7 @@ export namespace Prisma {
     OR?: organizationsWhereInput[]
     NOT?: organizationsWhereInput | organizationsWhereInput[]
     organization_name?: StringNullableFilter<"organizations"> | string | null
-    organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
+    organization_current_issue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
     profile_picture_id?: StringNullableFilter<"organizations"> | string | null
@@ -31950,7 +31950,7 @@ export namespace Prisma {
     organization_id?: SortOrder
     organization_handle?: SortOrder
     organization_name?: SortOrderInput | SortOrder
-    organization_currentIssue?: SortOrderInput | SortOrder
+    organization_current_issue?: SortOrderInput | SortOrder
     organization_stances?: SortOrderInput | SortOrder
     organization_description?: SortOrderInput | SortOrder
     profile_picture_id?: SortOrderInput | SortOrder
@@ -31966,7 +31966,7 @@ export namespace Prisma {
     organization_id?: StringWithAggregatesFilter<"organizations"> | string
     organization_handle?: StringWithAggregatesFilter<"organizations"> | string
     organization_name?: StringNullableWithAggregatesFilter<"organizations"> | string | null
-    organization_currentIssue?: StringNullableWithAggregatesFilter<"organizations"> | string | null
+    organization_current_issue?: StringNullableWithAggregatesFilter<"organizations"> | string | null
     organization_stances?: StringNullableWithAggregatesFilter<"organizations"> | string | null
     organization_description?: StringNullableWithAggregatesFilter<"organizations"> | string | null
     profile_picture_id?: StringNullableWithAggregatesFilter<"organizations"> | string | null
@@ -33232,7 +33232,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     profile_pictures?: profile_picturesCreateNestedOneWithoutGroupsInput
@@ -33243,7 +33243,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     profile_picture_id?: string | null
@@ -33254,7 +33254,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pictures?: profile_picturesUpdateOneWithoutGroupsNestedInput
@@ -33265,7 +33265,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33276,7 +33276,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     profile_picture_id?: string | null
@@ -33286,7 +33286,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -33295,7 +33295,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33472,7 +33472,7 @@ export namespace Prisma {
   export type individualsCreateInput = {
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     user_credentials: user_credentialsCreateNestedOneWithoutIndividualsInput
@@ -33483,7 +33483,7 @@ export namespace Prisma {
     individual_id: string
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     profile_picture_id?: string | null
@@ -33492,7 +33492,7 @@ export namespace Prisma {
   export type individualsUpdateInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
@@ -33503,7 +33503,7 @@ export namespace Prisma {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33513,7 +33513,7 @@ export namespace Prisma {
     individual_id: string
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     profile_picture_id?: string | null
@@ -33522,7 +33522,7 @@ export namespace Prisma {
   export type individualsUpdateManyMutationInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -33531,7 +33531,7 @@ export namespace Prisma {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33541,7 +33541,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     profile_pictures?: profile_picturesCreateNestedOneWithoutOrganizationsInput
@@ -33552,7 +33552,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     profile_picture_id?: string | null
@@ -33563,7 +33563,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pictures?: profile_picturesUpdateOneWithoutOrganizationsNestedInput
@@ -33574,7 +33574,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33585,7 +33585,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     profile_picture_id?: string | null
@@ -33595,7 +33595,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -33604,7 +33604,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34833,7 +34833,7 @@ export namespace Prisma {
     group_id?: SortOrder
     group_handle?: SortOrder
     group_name?: SortOrder
-    group_currentIssue?: SortOrder
+    group_current_issue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -34843,7 +34843,7 @@ export namespace Prisma {
     group_id?: SortOrder
     group_handle?: SortOrder
     group_name?: SortOrder
-    group_currentIssue?: SortOrder
+    group_current_issue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -34853,7 +34853,7 @@ export namespace Prisma {
     group_id?: SortOrder
     group_handle?: SortOrder
     group_name?: SortOrder
-    group_currentIssue?: SortOrder
+    group_current_issue?: SortOrder
     group_stances?: SortOrder
     group_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -34984,7 +34984,7 @@ export namespace Prisma {
     individual_id?: SortOrder
     individual_username?: SortOrder
     individual_name?: SortOrder
-    individual_currentIssue?: SortOrder
+    individual_current_issue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -34994,7 +34994,7 @@ export namespace Prisma {
     individual_id?: SortOrder
     individual_username?: SortOrder
     individual_name?: SortOrder
-    individual_currentIssue?: SortOrder
+    individual_current_issue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -35004,7 +35004,7 @@ export namespace Prisma {
     individual_id?: SortOrder
     individual_username?: SortOrder
     individual_name?: SortOrder
-    individual_currentIssue?: SortOrder
+    individual_current_issue?: SortOrder
     individual_roles?: SortOrder
     individual_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -35014,7 +35014,7 @@ export namespace Prisma {
     organization_id?: SortOrder
     organization_handle?: SortOrder
     organization_name?: SortOrder
-    organization_currentIssue?: SortOrder
+    organization_current_issue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -35024,7 +35024,7 @@ export namespace Prisma {
     organization_id?: SortOrder
     organization_handle?: SortOrder
     organization_name?: SortOrder
-    organization_currentIssue?: SortOrder
+    organization_current_issue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -35034,7 +35034,7 @@ export namespace Prisma {
     organization_id?: SortOrder
     organization_handle?: SortOrder
     organization_name?: SortOrder
-    organization_currentIssue?: SortOrder
+    organization_current_issue?: SortOrder
     organization_stances?: SortOrder
     organization_description?: SortOrder
     profile_picture_id?: SortOrder
@@ -39710,7 +39710,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     profile_pictures?: profile_picturesCreateNestedOneWithoutGroupsInput
@@ -39720,7 +39720,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     profile_picture_id?: string | null
@@ -39795,7 +39795,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pictures?: profile_picturesUpdateOneWithoutGroupsNestedInput
@@ -39805,7 +39805,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40224,7 +40224,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     profile_pictures?: profile_picturesCreateNestedOneWithoutOrganizationsInput
@@ -40234,7 +40234,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     profile_picture_id?: string | null
@@ -40309,7 +40309,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pictures?: profile_picturesUpdateOneWithoutOrganizationsNestedInput
@@ -40319,7 +40319,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40329,7 +40329,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     groups_members?: groups_membersCreateNestedManyWithoutGroupsInput
@@ -40339,7 +40339,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutGroupsInput
@@ -40358,7 +40358,7 @@ export namespace Prisma {
   export type individualsCreateWithoutProfile_picturesInput = {
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     user_credentials: user_credentialsCreateNestedOneWithoutIndividualsInput
@@ -40368,7 +40368,7 @@ export namespace Prisma {
     individual_id: string
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
   }
@@ -40387,7 +40387,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     organizations_members?: organizations_membersCreateNestedManyWithoutOrganizationsInput
@@ -40397,7 +40397,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutOrganizationsInput
@@ -40436,7 +40436,7 @@ export namespace Prisma {
     group_id?: StringFilter<"groups"> | string
     group_handle?: StringFilter<"groups"> | string
     group_name?: StringNullableFilter<"groups"> | string | null
-    group_currentIssue?: StringNullableFilter<"groups"> | string | null
+    group_current_issue?: StringNullableFilter<"groups"> | string | null
     group_stances?: StringNullableFilter<"groups"> | string | null
     group_description?: StringNullableFilter<"groups"> | string | null
     profile_picture_id?: StringNullableFilter<"groups"> | string | null
@@ -40465,7 +40465,7 @@ export namespace Prisma {
     individual_id?: StringFilter<"individuals"> | string
     individual_username?: StringFilter<"individuals"> | string
     individual_name?: StringNullableFilter<"individuals"> | string | null
-    individual_currentIssue?: StringNullableFilter<"individuals"> | string | null
+    individual_current_issue?: StringNullableFilter<"individuals"> | string | null
     individual_roles?: StringNullableFilter<"individuals"> | string | null
     individual_description?: StringNullableFilter<"individuals"> | string | null
     profile_picture_id?: StringNullableFilter<"individuals"> | string | null
@@ -40494,7 +40494,7 @@ export namespace Prisma {
     organization_id?: StringFilter<"organizations"> | string
     organization_handle?: StringFilter<"organizations"> | string
     organization_name?: StringNullableFilter<"organizations"> | string | null
-    organization_currentIssue?: StringNullableFilter<"organizations"> | string | null
+    organization_current_issue?: StringNullableFilter<"organizations"> | string | null
     organization_stances?: StringNullableFilter<"organizations"> | string | null
     organization_description?: StringNullableFilter<"organizations"> | string | null
     profile_picture_id?: StringNullableFilter<"organizations"> | string | null
@@ -40779,7 +40779,7 @@ export namespace Prisma {
   export type individualsCreateWithoutUser_credentialsInput = {
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     profile_pictures?: profile_picturesCreateNestedOneWithoutIndividualsInput
@@ -40788,7 +40788,7 @@ export namespace Prisma {
   export type individualsUncheckedCreateWithoutUser_credentialsInput = {
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
     profile_picture_id?: string | null
@@ -40813,7 +40813,7 @@ export namespace Prisma {
   export type individualsUpdateWithoutUser_credentialsInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pictures?: profile_picturesUpdateOneWithoutIndividualsNestedInput
@@ -40822,7 +40822,7 @@ export namespace Prisma {
   export type individualsUncheckedUpdateWithoutUser_credentialsInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     profile_picture_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41814,7 +41814,7 @@ export namespace Prisma {
     group_id: string
     group_handle: string
     group_name?: string | null
-    group_currentIssue?: string | null
+    group_current_issue?: string | null
     group_stances?: string | null
     group_description?: string | null
   }
@@ -41823,7 +41823,7 @@ export namespace Prisma {
     individual_id: string
     individual_username: string
     individual_name?: string | null
-    individual_currentIssue?: string | null
+    individual_current_issue?: string | null
     individual_roles?: string | null
     individual_description?: string | null
   }
@@ -41832,7 +41832,7 @@ export namespace Prisma {
     organization_id: string
     organization_handle: string
     organization_name?: string | null
-    organization_currentIssue?: string | null
+    organization_current_issue?: string | null
     organization_stances?: string | null
     organization_description?: string | null
   }
@@ -41841,7 +41841,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     groups_members?: groups_membersUpdateManyWithoutGroupsNestedInput
@@ -41851,7 +41851,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
     groups_members?: groups_membersUncheckedUpdateManyWithoutGroupsNestedInput
@@ -41861,7 +41861,7 @@ export namespace Prisma {
     group_id?: StringFieldUpdateOperationsInput | string
     group_handle?: StringFieldUpdateOperationsInput | string
     group_name?: NullableStringFieldUpdateOperationsInput | string | null
-    group_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    group_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     group_stances?: NullableStringFieldUpdateOperationsInput | string | null
     group_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -41869,7 +41869,7 @@ export namespace Prisma {
   export type individualsUpdateWithoutProfile_picturesInput = {
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
     user_credentials?: user_credentialsUpdateOneRequiredWithoutIndividualsNestedInput
@@ -41879,7 +41879,7 @@ export namespace Prisma {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -41888,7 +41888,7 @@ export namespace Prisma {
     individual_id?: StringFieldUpdateOperationsInput | string
     individual_username?: StringFieldUpdateOperationsInput | string
     individual_name?: NullableStringFieldUpdateOperationsInput | string | null
-    individual_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    individual_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     individual_roles?: NullableStringFieldUpdateOperationsInput | string | null
     individual_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -41897,7 +41897,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     organizations_members?: organizations_membersUpdateManyWithoutOrganizationsNestedInput
@@ -41907,7 +41907,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutOrganizationsNestedInput
@@ -41917,7 +41917,7 @@ export namespace Prisma {
     organization_id?: StringFieldUpdateOperationsInput | string
     organization_handle?: StringFieldUpdateOperationsInput | string
     organization_name?: NullableStringFieldUpdateOperationsInput | string | null
-    organization_currentIssue?: NullableStringFieldUpdateOperationsInput | string | null
+    organization_current_issue?: NullableStringFieldUpdateOperationsInput | string | null
     organization_stances?: NullableStringFieldUpdateOperationsInput | string | null
     organization_description?: NullableStringFieldUpdateOperationsInput | string | null
   }

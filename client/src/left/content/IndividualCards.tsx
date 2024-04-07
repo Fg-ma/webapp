@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { IndividualCard } from "./LeftSpaceCards";
-import { Individual } from "@FgTypes/leftTypes";
+import { Individual, IndividualCardsProps } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 import { AFFILIATED_INDIVIDUALS_TABLE } from "@IDB/IDBService";
@@ -12,10 +12,12 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function IndividualCards() {
+export default function IndividualCards({
+  leftTopPaneRef,
+}: IndividualCardsProps) {
   /* 
     Description:   
-      Gets individual data from a database then extracts the id, name, and currentIssue to be mapped
+      Gets individual data from a database then extracts the id, name, and current_issue to be mapped
       into cards.
     Unique Properties:
       N/A
@@ -40,7 +42,7 @@ export default function IndividualCards() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/individuals/${affiliateRelation.affiliate_id_target}`,
+          `${serverUrl}/individuals/${affiliateRelation.affiliate_username_target}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,7 +73,7 @@ export default function IndividualCards() {
       const newIndividuals = individuals.filter(
         (individual) =>
           individual.individual_username !==
-          affiliateRelation.affiliate_id_target,
+          affiliateRelation.affiliate_username_target,
       );
 
       setIndividuals(newIndividuals);
@@ -90,12 +92,20 @@ export default function IndividualCards() {
       fetchNewRelationData();
       setAffiliateRelation({
         action: "",
-        affiliate_id_root: "",
-        affiliate_id_target: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
         affiliate_relation_date: "",
         affiliate_relation_id: "",
         entity_type: 0,
       });
+      if (leftTopPaneRef.current) {
+        const scrollOptions: ScrollToOptions = {
+          top: 0,
+          behavior: "smooth",
+        };
+
+        leftTopPaneRef.current.scrollTo(scrollOptions);
+      }
     } else if (
       affiliateRelation?.entity_type === 1 &&
       affiliateRelation?.action === "deletedRelation"
@@ -103,8 +113,8 @@ export default function IndividualCards() {
       deleteOldRelationData();
       setAffiliateRelation({
         action: "",
-        affiliate_id_root: "",
-        affiliate_id_target: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
         affiliate_relation_date: "",
         affiliate_relation_id: "",
         entity_type: 0,
@@ -175,7 +185,7 @@ export default function IndividualCards() {
         key={indInfo.individual_username}
         name={indInfo.individual_name}
         username={indInfo.individual_username}
-        currentIssue={indInfo.individual_currentIssue}
+        current_issue={indInfo.individual_current_issue}
         animate={indInfo.animate ? true : false}
       />
     );

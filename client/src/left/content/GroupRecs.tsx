@@ -12,7 +12,7 @@ const serverUrl = isDevelopment
 export default function GroupRecs() {
   /* 
     Description:   
-      Gets group data from a database then extracts the id, name, and currentIssue to be mapped
+      Gets group data from a database then extracts the id, name, and current_issue to be mapped
       into cards.
     Unique Properties:
       It queries for any affiliates that the user may have in common with the group.
@@ -39,7 +39,7 @@ export default function GroupRecs() {
         key={grpInfo.group_handle}
         name={grpInfo.group_name}
         handle={grpInfo.group_handle}
-        currentIssue={grpInfo.group_currentIssue}
+        current_issue={grpInfo.group_current_issue}
         affInCommon="placeholder"
       />
     );
