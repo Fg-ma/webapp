@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { Entity, FullSheet, SheetContent } from "@FgTypes/types";
+import type { Entity, FullSheet, Sheet } from "@FgTypes/types";
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
@@ -42,7 +42,7 @@ router.get("/:sheet_id", async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
   try {
-    const sheet: SheetContent = await req.db.sheets.findUnique({
+    const sheet: Sheet = await req.db.sheets.findUnique({
       where: {
         sheet_id: sheet_id,
       },

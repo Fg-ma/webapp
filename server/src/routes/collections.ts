@@ -2,9 +2,9 @@ import {
   Collection,
   CollectionsContent,
   Entity,
-  ImageContent,
-  SheetContent,
-  VideoContent,
+  Image,
+  Sheet,
+  Video,
 } from "@FgTypes/types";
 import express from "express";
 const router = express.Router();
@@ -60,7 +60,7 @@ router.get("/:collection_id", async (req, res) => {
 
     for (const collection of collections) {
       if (collection.content?.content_type === 1) {
-        const contentData: SheetContent = await req.db.sheets.findUnique({
+        const contentData: Sheet = await req.db.sheets.findUnique({
           where: {
             sheet_id: collection.content_id,
           },
@@ -82,7 +82,7 @@ router.get("/:collection_id", async (req, res) => {
           },
         });
       } else if (collection.content?.content_type === 2) {
-        const contentData: ImageContent = await req.db.images.findUnique({
+        const contentData: Image = await req.db.images.findUnique({
           where: {
             image_id: collection.content_id,
           },
@@ -104,7 +104,7 @@ router.get("/:collection_id", async (req, res) => {
           },
         });
       } else if (collection.content?.content_type === 3) {
-        const contentData: VideoContent = await req.db.videos.findUnique({
+        const contentData: Video = await req.db.videos.findUnique({
           where: {
             video_id: collection.content_id,
           },
@@ -174,7 +174,7 @@ router.get(
           },
         });
 
-      const sheetContent: SheetContent = await req.db.sheets.findUnique({
+      const sheetContent: Sheet = await req.db.sheets.findUnique({
         where: {
           sheet_id: collectionContent.content_id,
         },
@@ -231,7 +231,7 @@ router.get(
           },
         });
 
-      const videoContent: VideoContent = await req.db.videos.findUnique({
+      const videoContent: Video = await req.db.videos.findUnique({
         where: {
           video_id: collectionContent.content_id,
         },
@@ -288,7 +288,7 @@ router.get(
           },
         });
 
-      const imageContent: ImageContent = await req.db.images.findUnique({
+      const imageContent: Image = await req.db.images.findUnique({
         where: {
           image_id: collectionContent.content_id,
         },

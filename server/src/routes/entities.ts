@@ -3,13 +3,14 @@ const router = express.Router();
 import verifyToken from "./verifyJWT";
 import type {
   EntityContent,
-  SheetContent,
+  Sheet,
   MergedSheetData,
-  VideoContent,
+  Video,
   MergedVideoData,
-  ImageContent,
+  Image,
   MergedImageData,
   Entity,
+  Content,
 } from "@FgTypes/types";
 
 // Get entity data from entity type and entity username
@@ -17,15 +18,18 @@ router.get("/entity", verifyToken, async (req, res) => {
   const entity_username = req.query.entity_username;
 
   try {
-    const entity = await req.db.entities.findUnique({
+    const entity: Entity = await req.db.entities.findUnique({
       where: {
         entity_username: entity_username,
       },
     });
 
-    delete entity["entity_id"];
+    const returningEntity = {
+      entity_username: entity.entity_username,
+      entity_type: entity.entity_type,
+    };
 
-    res.send(entity);
+    res.send(returningEntity);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -33,7 +37,7 @@ router.get("/entity", verifyToken, async (req, res) => {
 });
 
 /* 
-  Get if a user can edit a certain entities page(NOTE THIS CAN ONLY FOR DISPLAY 
+  Get if a user can edit a certain entities page(NOTE THIS IS ONLY FOR DISPLAY 
   PURPOSES AND ITS RESPONSE SHOULDN'T BE USED TO ALLOW USERS TO EDIT PAGES)
 */
 router.get("/auth", verifyToken, async (req, res) => {
@@ -57,34 +61,47 @@ router.get("/entity_sheets/:entity_username", async (req, res) => {
       },
     });
 
-    const allEntityContent = await req.db.entities_content.findMany({
-      where: {
-        entity_id: entity.entity_id,
-      },
-    });
+    const allEntityContent: EntityContent[] =
+      await req.db.entities_content.findMany({
+        where: {
+          entity_id: entity.entity_id,
+        },
+      });
 
-    const sheetEntityContent = await req.db.content.findMany({
+    const allEntityContentIds: string[] = allEntityContent.map(
+      (content) => content.content_id
+    );
+
+    const entitySheetContent: Content[] = await req.db.content.findMany({
       where: {
-        content_id: allEntityContent.content_id,
+        content_id: {
+          in: allEntityContentIds,
+        },
         content_type: 1,
       },
     });
 
-    const sheetContent = await req.db.sheets.findMany({
+    const entitySheetIds: string[] = entitySheetContent.map(
+      (content) => content.content_id
+    );
+
+    const sheetContent: Sheet[] = await req.db.sheets.findMany({
       where: {
-        sheet_id: sheetEntityContent.content_id,
+        sheet_id: {
+          in: entitySheetIds,
+        },
       },
     });
 
     function mergeData(
       allEntityContent: EntityContent[],
-      sheetContent: SheetContent[]
+      sheetContent: Sheet[]
     ) {
       const mergedData: MergedSheetData[] = [];
 
       allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingSheetContent = sheetContent.find(
-          (sheet: SheetContent) => sheet.sheet_id === entityContent.content_id
+          (sheet) => sheet.sheet_id === entityContent.content_id
         );
         if (matchingSheetContent) {
           const mergedObject = { ...entityContent, ...matchingSheetContent };
@@ -142,34 +159,45 @@ router.get("/entity_videos/:entity_username", async (req, res) => {
       },
     });
 
-    const allEntityContent = await req.db.entities_content.findMany({
-      where: {
-        entity_id: entity.entity_id,
-      },
-    });
+    const allEntityContent: EntityContent[] =
+      await req.db.entities_content.findMany({
+        where: {
+          entity_id: entity.entity_id,
+        },
+      });
 
-    const videoEntityContent = await req.db.content.findMany({
+    const allEntityContentIds: string[] = allEntityContent.map(
+      (content) => content.content_id
+    );
+
+    const entityVideoContent: Content[] = await req.db.content.findMany({
       where: {
-        content_id: allEntityContent.content_id,
+        content_id: {
+          in: allEntityContentIds,
+        },
         content_type: 3,
       },
     });
 
-    const videoContent = await req.db.videos.findMany({
+    const entityVideoIds: string[] = entityVideoContent.map(
+      (content) => content.content_id
+    );
+
+    const videoContent: Video[] = await req.db.videos.findMany({
       where: {
-        video_id: videoEntityContent.content_id,
+        video_id: { in: entityVideoIds },
       },
     });
 
     function mergeData(
       allEntityContent: EntityContent[],
-      videoContent: VideoContent[]
+      videoContent: Video[]
     ) {
       const mergedData: MergedVideoData[] = [];
 
       allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingVideoContent = videoContent.find(
-          (video: VideoContent) => video.video_id === entityContent.content_id
+          (video) => video.video_id === entityContent.content_id
         );
         if (matchingVideoContent) {
           const mergedObject = { ...entityContent, ...matchingVideoContent };
@@ -227,34 +255,43 @@ router.get("/entity_images/:entity_username", async (req, res) => {
       },
     });
 
-    const allEntityContent = await req.db.entities_content.findMany({
-      where: {
-        entity_id: entity.entity_id,
-      },
-    });
+    const allEntityContent: EntityContent[] =
+      await req.db.entities_content.findMany({
+        where: {
+          entity_id: entity.entity_id,
+        },
+      });
 
-    const imageEntityContent = await req.db.content.findMany({
+    const allEntityContentIds: string[] = allEntityContent.map(
+      (content) => content.content_id
+    );
+
+    const entityImageContent: Content[] = await req.db.content.findMany({
       where: {
-        content_id: allEntityContent.content_id,
+        content_id: { in: allEntityContentIds },
         content_type: 1,
       },
     });
 
-    const imageContent = await req.db.images.findMany({
+    const entityImageIds: string[] = entityImageContent.map(
+      (content) => content.content_id
+    );
+
+    const imageContent: Image[] = await req.db.images.findMany({
       where: {
-        image_id: imageEntityContent.content_id,
+        image_id: { in: entityImageIds },
       },
     });
 
     function mergeData(
       allEntityContent: EntityContent[],
-      imageContent: ImageContent[]
+      imageContent: Image[]
     ) {
       const mergedData: MergedImageData[] = [];
 
       allEntityContent.forEach((entityContent: EntityContent) => {
         const matchingImageContent = imageContent.find(
-          (image: ImageContent) => image.image_id === entityContent.content_id
+          (image: Image) => image.image_id === entityContent.content_id
         );
         if (matchingImageContent) {
           const mergedObject = { ...entityContent, ...matchingImageContent };

@@ -44,7 +44,7 @@ export interface Conversation {
   members?: ConversationMember[];
 }
 
-export interface SheetContent {
+export interface Sheet {
   sheet_id: string;
   sheet_author_id: string;
   sheet_title: string;
@@ -57,7 +57,7 @@ export interface SheetContent {
   sheet_date_posted: string;
 }
 
-export interface VideoContent {
+export interface Video {
   video_id: string;
   video_creator_id: string;
   video_title: string;
@@ -70,7 +70,7 @@ export interface VideoContent {
   video_date_posted: string;
 }
 
-export interface ImageContent {
+export interface Image {
   image_id: string;
   image_creator_id: string;
   image_title: string;
@@ -105,6 +105,11 @@ export interface Relation {
   Global VideoContent
 */
 
+export interface Content {
+  content_id: string;
+  content_type: number;
+}
+
 export interface EntityContent {
   entities_content_id: string;
   entity_id: string;
@@ -114,11 +119,11 @@ export interface EntityContent {
   date_pinned: string | null;
 }
 
-export interface MergedSheetData extends EntityContent, SheetContent {}
+export interface MergedSheetData extends EntityContent, Sheet {}
 
-export interface MergedVideoData extends EntityContent, VideoContent {}
+export interface MergedVideoData extends EntityContent, Video {}
 
-export interface MergedImageData extends EntityContent, ImageContent {}
+export interface MergedImageData extends EntityContent, Image {}
 
 /*
   images.ts
