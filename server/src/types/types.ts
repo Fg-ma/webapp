@@ -44,6 +44,45 @@ export interface Conversation {
   members?: ConversationMember[];
 }
 
+export interface SheetContent {
+  sheet_id: string;
+  sheet_author_id: string;
+  sheet_title: string;
+  sheet_subject: string;
+  sheet_filename: string;
+  sheet_data_id: string;
+  sheet_likes: number;
+  sheet_dislikes: number;
+  sheet_views: number;
+  sheet_date_posted: string;
+}
+
+export interface VideoContent {
+  video_id: string;
+  video_creator_id: string;
+  video_title: string;
+  video_description: string;
+  video_filename: string;
+  video_data_id: string;
+  video_likes: number;
+  video_dislikes: number;
+  video_views: number;
+  video_date_posted: string;
+}
+
+export interface ImageContent {
+  image_id: string;
+  image_creator_id: string;
+  image_title: string;
+  image_description: string;
+  image_filename: string;
+  image_data_id: string;
+  image_likes: number;
+  image_dislikes: number;
+  image_views: number;
+  image_date_posted: string;
+}
+
 /*
   affiliateRelations.ts
   Global Entity
@@ -61,6 +100,9 @@ export interface Relation {
 
 /*
   entities.ts
+  Global SheetContent
+  Global ImageContent
+  Global VideoContent
 */
 
 export interface EntityContent {
@@ -72,48 +114,9 @@ export interface EntityContent {
   date_pinned: string | null;
 }
 
-export interface SheetContent {
-  sheet_id: string;
-  sheet_author_id: string;
-  sheet_title: string;
-  sheet_subject: string;
-  sheet_filename: string;
-  sheet_data_id: string;
-  sheet_likes: number;
-  sheet_dislikes: number;
-  sheet_views: number;
-  sheet_date_posted: string;
-}
-
 export interface MergedSheetData extends EntityContent, SheetContent {}
 
-export interface VideoContent {
-  video_id: string;
-  video_creator_id: string;
-  video_title: string;
-  video_description: string;
-  video_filename: string;
-  video_data_id: string;
-  video_likes: number;
-  video_dislikes: number;
-  video_views: number;
-  video_date_posted: string;
-}
-
 export interface MergedVideoData extends EntityContent, VideoContent {}
-
-export interface ImageContent {
-  image_id: string;
-  image_creator_id: string;
-  image_title: string;
-  image_description: string;
-  image_filename: string;
-  image_data_id: string;
-  image_likes: number;
-  image_dislikes: number;
-  image_views: number;
-  image_date_posted: string;
-}
 
 export interface MergedImageData extends EntityContent, ImageContent {}
 
@@ -243,4 +246,45 @@ export interface Contact {
   contact_creation_date: string;
   last_message: string | null;
   last_message_date: string | null;
+}
+
+/* 
+  auth.ts
+*/
+
+export interface UserCredentials {
+  user_id: string;
+  username: string;
+  user_password: string;
+  user_first_name: string;
+  user_last_name: string;
+  user_email: string;
+  user_phone_number: string;
+}
+
+/* 
+  collections.ts
+  Global Entity
+  Global SheetContent
+  Global ImageContent
+  Global VideoContent
+*/
+
+export interface Collection {
+  collection_id: string;
+  collection_name: string;
+  entity_id: string;
+}
+
+export interface CollectionsContent {
+  collections_content_id: string;
+  collection_id: string;
+  content_id: string;
+  date_added: string;
+  pinned: number;
+  date_pinned: string;
+  content?: {
+    content_id: string;
+    content_type: number;
+  };
 }

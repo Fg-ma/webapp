@@ -1,6 +1,5 @@
 import express from "express";
 const router = express.Router();
-import verifyToken from "./verifyJWT";
 import type { FullImage } from "@FgTypes/types";
 
 // Route to get profile picture of an entity

@@ -30,9 +30,9 @@ router.get("/:organization_handle", verifyToken, async (req, res) => {
       return;
     }
 
-    const { organization_id, ...safeOrganization } = organization;
+    const { organization_id, ...returningOrganization } = organization;
 
-    res.send(safeOrganization);
+    res.send(returningOrganization);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

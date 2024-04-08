@@ -64,11 +64,6 @@ export default function EntityPage({ entityType }: EntityPageProps) {
       state.page["main"].pagePayload.ids.organization_id
     )
       return state.page["main"].pagePayload.ids.organization_id;
-    else if (
-      state.page["main"].pagePayload.ids.individual_id &&
-      state.page["main"].pagePayload.ids.individual_id === "user"
-    )
-      return "user";
   });
 
   const [entityData, setEntityData] = useState<EntityData | null>(null);

@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
 import jwt, { Secret } from "jsonwebtoken";
 import verifyToken from "./verifyJWT";
+import { UserCredentials } from "@FgTypes/types";
 
 router.post("/register", async (req, res) => {
   const { newUserUsername, newUserPassword } = req.body;
@@ -13,7 +14,7 @@ router.post("/register", async (req, res) => {
 
     const user_id = uuid();
 
-    const newUser = await req.db.user_credentials.create({
+    const newUser: UserCredentials = await req.db.user_credentials.create({
       data: {
         user_id: user_id,
         username: newUserUsername,
@@ -37,7 +38,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await req.db.user_credentials.findUnique({
+    const user: UserCredentials = await req.db.user_credentials.findUnique({
       where: {
         username: username,
       },
@@ -57,7 +58,6 @@ router.post("/login", async (req, res) => {
         res.json({ success: false });
       }
     } else {
-      // User not found
       res.json({ success: false });
     }
   } catch (error) {

@@ -43,7 +43,6 @@ export default function EntityPageHeader({
   >(null);
   const topHeaderRef = useRef<HTMLDivElement>(null);
   const affiliateProfilePicturesRef = useRef<HTMLDivElement>(null);
-  const affiliatedEntitiesScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (affiliateProfilePicturesRef.current) {
@@ -105,15 +104,21 @@ export default function EntityPageHeader({
     }
 
     const sortedAffiliatesArray = unsortedArray.slice().sort((a, b) => {
-      const dateA = new Date(a.date[0].affiliate_relation_date).getTime();
-      const dateB = new Date(b.date[0].affiliate_relation_date).getTime();
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
       return dateA - dateB;
     });
 
     setAffiliatesProfilePictures(
       sortedAffiliatesArray.map((affiliate: Afiliate) => (
         <ProfilePicture
-          key={String(affiliate[`${affiliate.type}_id` as keyof Afiliate])}
+          key={String(
+            affiliate.type === "individual"
+              ? affiliate.individual_username
+              : affiliate.type === "group"
+                ? affiliate.group_handle
+                : affiliate.organization_handle,
+          )}
           size={{ w: 2, h: 2 }}
           entity_username={String(
             affiliate.type === "individual"
@@ -141,18 +146,18 @@ export default function EntityPageHeader({
               ? {
                   entity_name: affiliate.individual_name,
                   entity_username: affiliate.individual_username,
-                  entity_current_Issue: affiliate.individual_currentIssue,
+                  entity_current_Issue: affiliate.individual_current_issue,
                 }
               : affiliate.type === "group"
                 ? {
                     entity_name: affiliate.group_name,
                     entity_username: affiliate.group_handle,
-                    entity_current_Issue: affiliate.group_currentIssue,
+                    entity_current_Issue: affiliate.group_current_issue,
                   }
                 : {
                     entity_name: affiliate.organization_name,
                     entity_username: affiliate.organization_handle,
-                    entity_current_Issue: affiliate.organization_currentIssue,
+                    entity_current_Issue: affiliate.organization_current_issue,
                   }
           }
           clickable={true}
@@ -197,14 +202,11 @@ export default function EntityPageHeader({
                   ? entity.organization_name
                   : entity?.organization_handle}
           </p>
-          <div ref={affiliatedEntitiesScrollRef} className="w-full">
-            <AffiliatedEntitiesScroll
-              affiliatesProfilePictures={affiliatesProfilePictures}
-              affiliateProfilePicturesRef={affiliateProfilePicturesRef}
-              affiliatedEntitiesScrollRef={affiliatedEntitiesScrollRef}
-              topHeaderRef={topHeaderRef}
-            />
-          </div>
+          <AffiliatedEntitiesScroll
+            affiliatesProfilePictures={affiliatesProfilePictures}
+            affiliateProfilePicturesRef={affiliateProfilePicturesRef}
+            topHeaderRef={topHeaderRef}
+          />
         </div>
       </div>
       <div className="text-xl mt-4">

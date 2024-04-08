@@ -490,7 +490,7 @@ export interface EntityPageHeaderProps {
 
 export interface Afiliate {
   type?: string;
-  date: [{ affiliate_relation_date: string }];
+  date: string;
   individual_current_issue?: string;
   individual_description?: string;
   individual_username?: string;
@@ -590,7 +590,6 @@ export interface MiddleSearchFilterProps {
 export interface AffiliatedEntitiesScrollProps {
   affiliatesProfilePictures: React.JSX.Element[] | null;
   affiliateProfilePicturesRef: React.RefObject<HTMLDivElement>;
-  affiliatedEntitiesScrollRef: React.RefObject<HTMLDivElement>;
   topHeaderRef: React.RefObject<HTMLDivElement>;
 }
 

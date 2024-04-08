@@ -40,9 +40,9 @@ router.get(
         return;
       }
 
-      const { individual_id, ...safeIndividual } = individual;
+      const { individual_id, ...returningIndividual } = individual;
 
-      res.send(safeIndividual);
+      res.send(returningIndividual);
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");

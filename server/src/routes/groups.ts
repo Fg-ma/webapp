@@ -30,9 +30,9 @@ router.get("/:group_handle", verifyToken, async (req, res) => {
       return;
     }
 
-    const { group_id, ...safeGroup } = group;
+    const { group_id, ...returningGroup } = group;
 
-    res.send(safeGroup);
+    res.send(returningGroup);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

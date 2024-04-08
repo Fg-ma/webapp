@@ -13,7 +13,7 @@ const scrollButtonsVar: Variants = {
     opacity: 1,
     x: 0,
   },
-  hover: { backgroundColor: "rgb(64 64 64)", fill: "white" },
+  hover: { backgroundColor: "rgb(64 64 64)", fill: "rgb(255 255 255)" },
 };
 
 const transition: Transition = {
@@ -26,11 +26,11 @@ const transition: Transition = {
 export default function AffiliatedEntitiesScroll({
   affiliatesProfilePictures,
   affiliateProfilePicturesRef,
-  affiliatedEntitiesScrollRef,
   topHeaderRef,
 }: AffiliatedEntitiesScrollProps) {
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
+  const affiliatedEntitiesScrollRef = useRef<HTMLDivElement>(null);
   const fullAffiliateProfilePicturesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,12 +54,6 @@ export default function AffiliatedEntitiesScroll({
 
   const handleScroll = () => {
     if (affiliateProfilePicturesRef.current) {
-      console.log(
-        affiliateProfilePicturesRef,
-        affiliateProfilePicturesRef.current.scrollWidth,
-        affiliateProfilePicturesRef.current.clientWidth,
-      );
-
       if (affiliateProfilePicturesRef.current.scrollLeft > 0) {
         setShowLeftScroll(true);
       } else {
@@ -108,7 +102,7 @@ export default function AffiliatedEntitiesScroll({
   };
 
   return (
-    <>
+    <div ref={affiliatedEntitiesScrollRef} className="w-full">
       {affiliatesProfilePictures?.length !== 0 && (
         <div
           className="flex flex-row h-8 w-max"
@@ -185,6 +179,6 @@ export default function AffiliatedEntitiesScroll({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

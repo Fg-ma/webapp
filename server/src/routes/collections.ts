@@ -1,4 +1,6 @@
 import {
+  Collection,
+  CollectionsContent,
   Entity,
   ImageContent,
   SheetContent,
@@ -14,20 +16,25 @@ router.get("/collections_names", async (req, res) => {
   try {
     if (!entity_username) return;
 
-    const entity = await req.db.entities.findUnique({
+    const entity: Entity = await req.db.entities.findUnique({
       where: {
         entity_username: entity_username,
       },
     });
 
-    const collections = await req.db.collections.findMany({
+    const collections: Collection[] = await req.db.collections.findMany({
       where: {
         entity_id: entity.entity_id,
       },
       distinct: ["collection_id"],
     });
 
-    res.send(collections);
+    const returningCollection = collections.map((collection) => ({
+      collection_id: collection.collection_id,
+      collection_name: collection.collection_name,
+    }));
+
+    res.send(returningCollection);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -39,19 +46,20 @@ router.get("/:collection_id", async (req, res) => {
   const collection_id = req.params.collection_id;
 
   try {
-    const collections = await req.db.collections_content.findMany({
-      where: {
-        collection_id: collection_id,
-      },
-      include: {
-        content: true,
-      },
-    });
+    const collections: CollectionsContent[] =
+      await req.db.collections_content.findMany({
+        where: {
+          collection_id: collection_id,
+        },
+        include: {
+          content: true,
+        },
+      });
 
     const collectionsData = [];
 
     for (const collection of collections) {
-      if (collection.content.content_type === 1) {
+      if (collection.content?.content_type === 1) {
         const contentData: SheetContent = await req.db.sheets.findUnique({
           where: {
             sheet_id: collection.content_id,
@@ -64,16 +72,16 @@ router.get("/:collection_id", async (req, res) => {
           },
         });
 
-        const { sheet_author_id, ...safeContentData } = contentData;
+        const { sheet_author_id, ...returningContentData } = contentData;
 
         collectionsData.push({
           ...collection,
           content_data: {
-            ...safeContentData,
+            ...returningContentData,
             sheet_author_username: author.entity_username,
           },
         });
-      } else if (collection.content.content_type === 2) {
+      } else if (collection.content?.content_type === 2) {
         const contentData: ImageContent = await req.db.images.findUnique({
           where: {
             image_id: collection.content_id,
@@ -86,16 +94,16 @@ router.get("/:collection_id", async (req, res) => {
           },
         });
 
-        const { image_creator_id, ...safeContentData } = contentData;
+        const { image_creator_id, ...returningContentData } = contentData;
 
         collectionsData.push({
           ...collection,
           content_data: {
-            ...safeContentData,
+            ...returningContentData,
             image_creator_username: author.entity_username,
           },
         });
-      } else if (collection.content.content_type === 3) {
+      } else if (collection.content?.content_type === 3) {
         const contentData: VideoContent = await req.db.videos.findUnique({
           where: {
             video_id: collection.content_id,
@@ -108,12 +116,12 @@ router.get("/:collection_id", async (req, res) => {
           },
         });
 
-        const { video_creator_id, ...safeContentData } = contentData;
+        const { video_creator_id, ...returningContentData } = contentData;
 
         collectionsData.push({
           ...collection,
           content_data: {
-            ...safeContentData,
+            ...returningContentData,
             video_creator_username: author.entity_username,
           },
         });
@@ -132,7 +140,7 @@ router.put("/collections_content_pinned", async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
-    const result = await req.db.collections_content.update({
+    const result: CollectionsContent = await req.db.collections_content.update({
       where: {
         collections_content_id: relation_id,
       },
@@ -156,14 +164,15 @@ router.get(
     const collections_content_id = req.params.collections_content_id;
 
     try {
-      const collectionContent = await req.db.collections_content.findUnique({
-        where: {
-          collections_content_id: collections_content_id,
-        },
-        include: {
-          content: true,
-        },
-      });
+      const collectionContent: CollectionsContent =
+        await req.db.collections_content.findUnique({
+          where: {
+            collections_content_id: collections_content_id,
+          },
+          include: {
+            content: true,
+          },
+        });
 
       const sheetContent: SheetContent = await req.db.sheets.findUnique({
         where: {
@@ -177,12 +186,22 @@ router.get(
         },
       });
 
-      const { sheet_author_id, ...safeSheetContent } = sheetContent;
+      const returningSheetContent = {
+        sheet_id: sheetContent.sheet_id,
+        sheet_title: sheetContent.sheet_title,
+        sheet_subject: sheetContent.sheet_subject,
+        sheet_filename: sheetContent.sheet_filename,
+        sheet_data_id: sheetContent.sheet_data_id,
+        sheet_likes: sheetContent.sheet_likes,
+        sheet_dislikes: sheetContent.sheet_dislikes,
+        sheet_views: sheetContent.sheet_views,
+        sheet_date_posted: sheetContent.sheet_date_posted,
+      };
 
       const collectionSheetData = {
         ...collectionContent,
         content_data: {
-          ...safeSheetContent,
+          ...returningSheetContent,
           sheet_author_username: author.entity_username,
         },
       };
@@ -202,14 +221,15 @@ router.get(
     const collections_content_id = req.params.collections_content_id;
 
     try {
-      const collectionContent = await req.db.collections_content.findUnique({
-        where: {
-          collections_content_id: collections_content_id,
-        },
-        include: {
-          content: true,
-        },
-      });
+      const collectionContent: CollectionsContent =
+        await req.db.collections_content.findUnique({
+          where: {
+            collections_content_id: collections_content_id,
+          },
+          include: {
+            content: true,
+          },
+        });
 
       const videoContent: VideoContent = await req.db.videos.findUnique({
         where: {
@@ -223,12 +243,22 @@ router.get(
         },
       });
 
-      const { video_creator_id, ...safeVideoContent } = videoContent;
+      const returningVideoContent = {
+        video_id: videoContent.video_id,
+        video_title: videoContent.video_title,
+        video_description: videoContent.video_description,
+        video_filename: videoContent.video_filename,
+        video_data_id: videoContent.video_data_id,
+        video_likes: videoContent.video_likes,
+        video_dislikes: videoContent.video_dislikes,
+        video_views: videoContent.video_views,
+        video_date_posted: videoContent.video_date_posted,
+      };
 
       const collectionVideoData = {
         ...collectionContent,
         content_data: {
-          ...safeVideoContent,
+          ...returningVideoContent,
           video_creator_username: author.entity_username,
         },
       };
@@ -248,14 +278,15 @@ router.get(
     const collections_content_id = req.params.collections_content_id;
 
     try {
-      const collectionContent = await req.db.collections_content.findUnique({
-        where: {
-          collections_content_id: collections_content_id,
-        },
-        include: {
-          content: true,
-        },
-      });
+      const collectionContent: CollectionsContent =
+        await req.db.collections_content.findUnique({
+          where: {
+            collections_content_id: collections_content_id,
+          },
+          include: {
+            content: true,
+          },
+        });
 
       const imageContent: ImageContent = await req.db.images.findUnique({
         where: {
@@ -269,12 +300,22 @@ router.get(
         },
       });
 
-      const { image_creator_id, ...safeImageContent } = imageContent;
+      const returningImageContent = {
+        image_id: imageContent.image_id,
+        image_title: imageContent.image_title,
+        image_description: imageContent.image_description,
+        image_filename: imageContent.image_filename,
+        image_data_id: imageContent.image_data_id,
+        image_likes: imageContent.image_likes,
+        image_dislikes: imageContent.image_dislikes,
+        image_views: imageContent.image_views,
+        image_date_posted: imageContent.image_date_posted,
+      };
 
       const collectionImageData = {
         ...collectionContent,
         content_data: {
-          ...safeImageContent,
+          ...returningImageContent,
           image_creator_username: author.entity_username,
         },
       };
