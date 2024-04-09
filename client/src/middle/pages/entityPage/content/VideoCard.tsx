@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 import {
   VideoProps,
   VideoData,
@@ -27,7 +27,7 @@ export default function VideoCard({
   const dispatch = useDispatch();
 
   const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
-  const { setPinnedState } = usePinned();
+  const { setPinnedState } = usePinnedContext();
   const [videoData, setVideoData] = useState<VideoData>();
   const [videoThumbnailData, setVideoThumbnailData] =
     useState<VideoThumbnailData>({

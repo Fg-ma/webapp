@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { VideosProps, VideosData } from "@FgTypes/middleTypes";
 import VideoCard from "./VideoCard";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -22,7 +22,7 @@ export default function Videos({
       N/A
   */
 
-  const { pinnedState } = usePinned();
+  const { pinnedState } = usePinnedContext();
   const [videosData, setVideosData] = useState<VideosData[]>([]);
 
   // Sorts the video data first by whether it is pinned or not then sorts by either the date_pinned or the date_added

@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { SheetsProps, SheetsData } from "@FgTypes/middleTypes";
 import SheetCard from "./SheetCard";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -22,7 +22,7 @@ export default function Sheets({
       N/A
   */
 
-  const { pinnedState } = usePinned();
+  const { pinnedState } = usePinnedContext();
   const [sheetsData, setSheetsData] = useState<SheetsData[]>([]);
 
   // Sorts the sheet data first by whether it is pinned or not then sorts by either the date_pinned or the date_added

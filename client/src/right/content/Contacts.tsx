@@ -5,6 +5,7 @@ import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Contact } from "@FgTypes/rightTypes";
 import { ContactCard } from "./RightSpaceCards";
 import { useLastMessageContext } from "@context/LastMessageContext";
+import { useContactContext } from "@context/ContactContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -15,6 +16,7 @@ export default function Contacts() {
   const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const { fluxContact, setFluxContact } = useContactContext();
 
   const sortData = (data: Contact[]) => {
     const parseDate = (dateString: string | null) =>
@@ -45,6 +47,76 @@ export default function Contacts() {
 
     return [...sortedData];
   };
+
+  useEffect(() => {
+    const fetchNewRelationData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/individuals/${affiliateRelation.affiliate_username_target}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const newIndividual = { ...response.data, animate: true };
+
+        setIndividuals((prev) => [newIndividual, ...prev]);
+
+        const storedIndividuals = individuals.map((individual) => ({
+          ...individual,
+          animate: false,
+        }));
+
+        await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+        await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
+          { ...response.data },
+          ...storedIndividuals,
+        ]);
+      } catch (error) {
+        console.error("Error fetching individual data:", error);
+      }
+    };
+
+    const deleteOldRelationData = async () => {
+      const newIndividuals = individuals.filter(
+        (individual) =>
+          individual.individual_username !==
+          affiliateRelation.affiliate_username_target,
+      );
+
+      setIndividuals(newIndividuals);
+
+      await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+      await storeAffiliatedEntities(
+        AFFILIATED_INDIVIDUALS_TABLE,
+        newIndividuals,
+      );
+    };
+
+    if (fluxContact?.action === "newContact") {
+      fetchNewRelationData();
+    } else if (fluxContact?.action === "deletedRelation") {
+      deleteOldRelationData();
+    }
+
+    setFluxContact({
+      action: "",
+      contact_id: "",
+      conversation_name: null,
+      contact_name: "",
+      last_message: "",
+      contact_creation_date: "",
+    });
+  }, [fluxContact]);
 
   useEffect(() => {
     const fetchContacts = async () => {

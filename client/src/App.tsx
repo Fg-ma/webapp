@@ -12,10 +12,10 @@ import "./scrollbar.css";
 import "./filterSwitches.css";
 
 import { AffiliateContextProvider } from "@context/AffiliateContext";
-import { PinnedProvider } from "@context/PinnedContext";
+import { PinnedContextProvider } from "@context/PinnedContext";
 import { LastMessageContextProvider } from "@context/LastMessageContext";
 import { LiveUpdatesSocketProvider } from "@context/LiveUpdatesContext";
-import { IndexedDBProvider } from "@context/IDBContext";
+import { ContactContextProvider } from "@context/ContactContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 
 interface LoginState {
@@ -77,30 +77,32 @@ export default function App() {
   return (
     <LiveUpdatesSocketProvider>
       <LastMessageContextProvider>
-        <PinnedProvider>
+        <PinnedContextProvider>
           <AffiliateContextProvider>
-            <div id="base" className="h-screen w-screen">
-              <div
-                id="pageSpace"
-                className="flex justify-between mx-12 mt-16 h-full"
-              >
-                <LeftSpace />
-
+            <ContactContextProvider>
+              <div id="base" className="h-screen w-screen">
                 <div
-                  ref={middleSpaceContainerRef}
-                  style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                  id="pageSpace"
+                  className="flex justify-between mx-12 mt-16 h-full"
                 >
-                  <MiddleSpace
-                    middleSpaceContainerRef={middleSpaceContainerRef}
-                  />
-                  <PageNav />
-                </div>
+                  <LeftSpace />
 
-                <RightSpace />
+                  <div
+                    ref={middleSpaceContainerRef}
+                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                  >
+                    <MiddleSpace
+                      middleSpaceContainerRef={middleSpaceContainerRef}
+                    />
+                    <PageNav />
+                  </div>
+
+                  <RightSpace />
+                </div>
               </div>
-            </div>
+            </ContactContextProvider>
           </AffiliateContextProvider>
-        </PinnedProvider>
+        </PinnedContextProvider>
       </LastMessageContextProvider>
     </LiveUpdatesSocketProvider>
   );

@@ -9,6 +9,7 @@ import {
   setSecondaryPageState,
 } from "@redux/pageState/pageStateActions";
 import { CreateContactButtonProps } from "@FgTypes/middleTypes";
+import { useContactContext } from "@context/ContactContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -19,6 +20,8 @@ export default function CreateContactButton({
   entity_username,
 }: CreateContactButtonProps) {
   const dispatch = useDispatch();
+
+  const { setFluxContact } = useContactContext();
 
   const createContact = async () => {
     const token = localStorage.getItem("token");
@@ -38,6 +41,15 @@ export default function CreateContactButton({
         },
       },
     );
+    console.log(response.data);
+    setFluxContact({
+      action: "newContact",
+      contact_id: response.data.contact_id,
+      conversation_name: response.data.conversation_name,
+      contact_name: response.data.members[0],
+      last_message: "",
+      contact_creation_date: response.data.conversation_name,
+    });
 
     dispatch(setPageState("main", "messages"));
     dispatch(setPageState("messages", "contacts"));

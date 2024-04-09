@@ -3,7 +3,7 @@ import { PinnedProviderProps, PinnedContextType } from "@FgTypes/contextTypes";
 
 const PinnedContext = createContext<PinnedContextType | undefined>(undefined);
 
-export function usePinned() {
+export function usePinnedContext() {
   const context = useContext(PinnedContext);
   if (!context) {
     throw new Error("usePinned must be used within a PinnedProvider");
@@ -11,7 +11,7 @@ export function usePinned() {
   return context;
 }
 
-export function PinnedProvider({ children }: PinnedProviderProps) {
+export function PinnedContextProvider({ children }: PinnedProviderProps) {
   const [pinnedState, setPinnedState] = useState<{
     relation_id: string;
     type: string;
@@ -23,3 +23,5 @@ export function PinnedProvider({ children }: PinnedProviderProps) {
     </PinnedContext.Provider>
   );
 }
+
+export default usePinnedContext;

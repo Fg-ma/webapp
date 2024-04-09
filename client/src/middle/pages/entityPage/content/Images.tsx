@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { ImagesProps, ImagesData } from "@FgTypes/middleTypes";
 import ImageCard from "./ImageCard";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -22,7 +22,7 @@ export default function Images({
       N/A
   */
 
-  const { pinnedState } = usePinned();
+  const { pinnedState } = usePinnedContext();
   const [imagesData, setImagesData] = useState<ImagesData[]>([]);
 
   // Sorts the image data first by whether it is pinned or not then sorts by either the date_pinned or the date_added

@@ -151,3 +151,32 @@ export interface PinnedContextType {
     }>
   >;
 }
+
+/*
+ ContactContext.tsx
+*/
+
+export interface ContactContextProviderProps {
+  children: ReactNode;
+}
+
+export interface ContactContextType {
+  fluxContact: {
+    action: string;
+    contact_id: string;
+    conversation_name: string | null;
+    contact_name: string;
+    last_message: string;
+    contact_creation_date: string;
+  };
+  setFluxContact: React.Dispatch<
+    React.SetStateAction<{
+      action: string;
+      contact_id: string;
+      conversation_name: string | null;
+      contact_name: string;
+      last_message: string;
+      contact_creation_date: string;
+    }>
+  >;
+}

@@ -5,7 +5,7 @@ import { CollectionsProps, CollectionItem } from "@FgTypes/middleTypes";
 import SheetCard from "./SheetCard";
 import VideoCard from "./VideoCard";
 import ImageCard from "./ImageCard";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -25,7 +25,7 @@ export default function Collections({
       N/A
   */
 
-  const { pinnedState } = usePinned();
+  const { pinnedState } = usePinnedContext();
   const [collectionData, setCollectionData] = useState<CollectionItem[]>([]);
 
   // Sorts the collection data first by whether it is pinned or not then sorts by either the date_pinned or the date_added

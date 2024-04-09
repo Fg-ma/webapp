@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 import {
   SheetCardProps,
   SheetData,
@@ -28,7 +28,7 @@ export default function SheetCard({
   const dispatch = useDispatch();
 
   const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
-  const { setPinnedState } = usePinned();
+  const { setPinnedState } = usePinnedContext();
   const [sheetData, setSheetData] = useState<SheetData>();
   const [sheetThumbnailData, setSheetThumbnailData] =
     useState<SheetThumbnailData>({

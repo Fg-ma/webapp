@@ -268,8 +268,8 @@ export interface Contact {
   conversation_name: string | null;
   conversation_id: string;
   contact_name: string | null;
-  contact_id_root: string;
-  contact_id_target: string;
+  contact_username_root: string;
+  contact_username_target: string;
   contact_creation_date: string;
   last_message: string | null;
   last_contact_date: string | null;

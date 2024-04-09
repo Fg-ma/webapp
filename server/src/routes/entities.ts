@@ -112,7 +112,27 @@ router.get("/entity_sheets/:entity_username", async (req, res) => {
       return mergedData;
     }
 
-    res.send(mergeData(allEntityContent, sheetContent));
+    const mergedData = mergeData(allEntityContent, sheetContent);
+
+    const returningMergedData = mergedData.map((item) => ({
+      entities_content_id: item.entities_content_id,
+      content_id: item.content_id,
+      date_added: item.date_added,
+      pinned: item.pinned,
+      date_pinned: item.date_pinned,
+      sheet_id: item.sheet_id,
+      sheet_title: item.sheet_title,
+      sheet_subject: item.sheet_subject,
+      sheet_filename: item.sheet_filename,
+      sheet_data_id: item.sheet_data_id,
+      sheet_thumbnail_id: item.sheet_thumbnail_id,
+      sheet_likes: item.sheet_likes,
+      sheet_dislikes: item.sheet_dislikes,
+      sheet_views: item.sheet_views,
+      sheet_date_posted: item.sheet_date_posted,
+    }));
+
+    res.send(returningMergedData);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -209,7 +229,27 @@ router.get("/entity_videos/:entity_username", async (req, res) => {
       return mergedData;
     }
 
-    res.send(mergeData(allEntityContent, videoContent));
+    const mergedData = mergeData(allEntityContent, videoContent);
+
+    const returningMergedData = mergedData.map((item) => ({
+      entities_content_id: item.entities_content_id,
+      content_id: item.content_id,
+      date_added: item.date_added,
+      pinned: item.pinned,
+      date_pinned: item.date_pinned,
+      video_id: item.video_id,
+      video_title: item.video_title,
+      video_description: item.video_description,
+      video_filename: item.video_filename,
+      video_data_id: item.video_data_id,
+      video_thumbnail_id: item.video_thumbnail_id,
+      video_likes: item.video_likes,
+      video_dislikes: item.video_dislikes,
+      video_views: item.video_views,
+      video_date_posted: item.video_date_posted,
+    }));
+
+    res.send(returningMergedData);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -303,8 +343,27 @@ router.get("/entity_images/:entity_username", async (req, res) => {
 
       return mergedData;
     }
-    // bad merged data
-    res.send(mergeData(allEntityContent, imageContent));
+
+    const mergedData = mergeData(allEntityContent, imageContent);
+
+    const returningMergedData = mergedData.map((item) => ({
+      entities_content_id: item.entities_content_id,
+      content_id: item.content_id,
+      date_added: item.date_added,
+      pinned: item.pinned,
+      date_pinned: item.date_pinned,
+      image_id: item.image_id,
+      image_title: item.image_title,
+      image_description: item.image_description,
+      image_filename: item.image_filename,
+      image_data_id: item.image_data_id,
+      image_likes: item.image_likes,
+      image_dislikes: item.image_dislikes,
+      image_views: item.image_views,
+      image_date_posted: item.image_date_posted,
+    }));
+
+    res.send(returningMergedData);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

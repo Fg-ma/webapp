@@ -4,7 +4,7 @@ import Axios from "axios";
 import { motion, Variants, Transition } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import { usePinned } from "@context/PinnedContext";
+import usePinnedContext from "@context/PinnedContext";
 import {
   ImageProps,
   ImageData,
@@ -55,7 +55,7 @@ export default function ImageCard({
   const dispatch = useDispatch();
 
   const { getStoredThumbnail, storeThumbnail } = useIndexedDBContext();
-  const { setPinnedState } = usePinned();
+  const { setPinnedState } = usePinnedContext();
   const [pinHover, setPinHover] = useState(false);
   const [imageData, setImageData] = useState<ImageData>();
   const [imageThumbnailData, setImageThumbnailData] =

@@ -172,7 +172,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
 });
 
 // Creates a new contact and conversation if a conversation doesn't already exist
-router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
+router.put("/set_contact_by_entity_username", verifyToken, async (req, res) => {
   const { entity_username } = req.body;
 
   try {
@@ -270,6 +270,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
       ) {
         if (fullEntity.entityData.individual_name) {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity.entityData.individual_name],
@@ -277,6 +278,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
           });
         } else {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity.entityData.individual_username],
@@ -290,6 +292,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
       ) {
         if (fullEntity?.entityData.group_name) {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity.entityData.group_name],
@@ -297,6 +300,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
           });
         } else {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity.entityData.group_handle],
@@ -310,6 +314,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
       ) {
         if (fullEntity.entityData.organization_name) {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity?.entityData.organization_name],
@@ -317,6 +322,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
           });
         } else {
           res.send({
+            contact_id: contact_id,
             conversation_id: conversation_id,
             conversation_name: null,
             members: [fullEntity.entityData.organization_handle],
@@ -331,11 +337,13 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
         },
       });
 
+      const currentTime = new Date().toISOString();
+      const contact_id = uuid();
+
       try {
-        const currentTime = new Date().toISOString();
         await req.db.contacts.create({
           data: {
-            contact_id: uuid(),
+            contact_id: contact_id,
             conversation_id: fullSharedConversations[0].conversation_id,
             contact_id_root: req.user.user_id,
             contact_id_target: entity.entity_id,
@@ -401,6 +409,7 @@ router.put("/set_contact_by_entity_id", verifyToken, async (req, res) => {
       }
 
       res.send({
+        contact_id: contact_id,
         conversation_id: fullSharedConversations[0].conversation_id,
         conversation_name: conversationData.conversation_name,
         members: members,

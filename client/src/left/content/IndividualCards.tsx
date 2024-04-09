@@ -90,14 +90,7 @@ export default function IndividualCards({
       affiliateRelation?.action === "newRelation"
     ) {
       fetchNewRelationData();
-      setAffiliateRelation({
-        action: "",
-        affiliate_username_root: "",
-        affiliate_username_target: "",
-        affiliate_relation_date: "",
-        affiliate_relation_id: "",
-        entity_type: 0,
-      });
+
       if (leftTopPaneRef.current) {
         const scrollOptions: ScrollToOptions = {
           top: 0,
@@ -111,15 +104,15 @@ export default function IndividualCards({
       affiliateRelation?.action === "deletedRelation"
     ) {
       deleteOldRelationData();
-      setAffiliateRelation({
-        action: "",
-        affiliate_username_root: "",
-        affiliate_username_target: "",
-        affiliate_relation_date: "",
-        affiliate_relation_id: "",
-        entity_type: 0,
-      });
     }
+    setAffiliateRelation({
+      action: "",
+      affiliate_username_root: "",
+      affiliate_username_target: "",
+      affiliate_relation_date: "",
+      affiliate_relation_id: "",
+      entity_type: 0,
+    });
   }, [affiliateRelation]);
 
   const sortData = (data: Individual[]) => {
