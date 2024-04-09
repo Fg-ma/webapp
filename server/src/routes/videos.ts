@@ -52,7 +52,7 @@ router.get("/get_full_video/:video_id", async (req, res) => {
   const video_id = req.params.video_id;
 
   try {
-    const fullVideo = await req.db.videos.findUnique({
+    const fullVideo: FullVideo = await req.db.videos.findUnique({
       where: {
         video_id: video_id,
       },
@@ -62,39 +62,33 @@ router.get("/get_full_video/:video_id", async (req, res) => {
       },
     });
 
-    const getVideoCreator = async (fullVideo: FullVideo) => {
-      if (fullVideo.entities.entity_type === 1) {
-        return await req.db.individuals.findUnique({
-          where: {
-            individual_id: fullVideo.entities.entity_id,
-          },
-        });
-      } else if (fullVideo.entities.entity_type === 2) {
-        return await req.db.groups.findUnique({
-          where: {
-            group_id: fullVideo.entities.entity_id,
-          },
-        });
-      } else if (fullVideo.entities.entity_type === 3) {
-        return await req.db.organizations.findUnique({
-          where: {
-            organization_id: fullVideo.entities.entity_id,
-          },
-        });
-      }
-    };
-
-    const videoCreator = await getVideoCreator(fullVideo);
-
-    if (!fullVideo || fullVideo.length === 0) {
+    if (!fullVideo) {
       res.status(404).send("Video not found");
-      return;
-    } else if (!videoCreator) {
-      res.status(404).send("Creator not found");
       return;
     }
 
-    res.send({ fullVideo, videoCreator });
+    const returningFullVideo = {
+      video_id: fullVideo.video_id,
+      video_title: fullVideo.video_title,
+      video_description: fullVideo.video_description,
+      video_filename: fullVideo.video_filename,
+      video_data_id: fullVideo.video_data_id,
+      video_thumbnail_id: fullVideo.video_thumbnail_id,
+      video_likes: fullVideo.video_likes,
+      video_dislikes: fullVideo.video_dislikes,
+      video_views: fullVideo.video_views,
+      video_date_posted: fullVideo.video_date_posted,
+      videos_data: {
+        video_data_id: fullVideo.videos_data.video_data_id,
+        video_data: fullVideo.videos_data.video_data,
+      },
+      entities: {
+        entity_username: fullVideo.entities.entity_username,
+        entity_type: fullVideo.entities.entity_type,
+      },
+    };
+
+    res.send(returningFullVideo);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

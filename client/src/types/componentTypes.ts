@@ -191,7 +191,7 @@ export interface ImageData {
   image_title: string;
   image_description: string;
   entity_type: number;
-  image_creator: any;
+  image_creator_username: string;
 }
 
 /*
@@ -238,7 +238,7 @@ export interface SheetHeaderProps {
     sheet_title: string;
     sheet_subject: string;
     entity_type: number;
-    sheet_author: any;
+    sheet_author: string;
     sheet_url: string;
     sheet_likes: number;
     sheet_dislikes: number;
@@ -258,7 +258,7 @@ export interface SheetData {
   sheet_title: string;
   sheet_subject: string;
   entity_type: number;
-  sheet_author: any;
+  sheet_author: string;
   sheet_likes: number;
   sheet_dislikes: number;
 }
@@ -276,7 +276,7 @@ export interface VideoData {
   video_title: string;
   video_description: string;
   entity_type: number;
-  video_creator: any;
+  video_creator_username: string;
 }
 
 /* 

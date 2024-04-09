@@ -14,7 +14,7 @@ export default function ImageViewer({ image_id }: ImageViewerProps) {
     image_title: "",
     image_description: "",
     entity_type: 0,
-    image_creator: null,
+    image_creator_username: "",
   });
 
   useEffect(() => {
@@ -26,10 +26,10 @@ export default function ImageViewer({ image_id }: ImageViewerProps) {
 
         if (response.data) {
           const blobData = new Uint8Array(
-            response.data.fullImage.images_data.image_data.data,
+            response.data.images_data.image_data.data,
           );
 
-          const extension = response.data.fullImage.image_filename
+          const extension = response.data.image_filename
             .slice(-3)
             .toLowerCase();
 
@@ -42,10 +42,10 @@ export default function ImageViewer({ image_id }: ImageViewerProps) {
 
             setImageData({
               image_url: url,
-              image_title: response.data.fullImage.image_title,
-              image_description: response.data.fullImage.image_description,
-              entity_type: response.data.fullImage.entities.entity_type,
-              image_creator: response.data.imageCreator,
+              image_title: response.data.image_title,
+              image_description: response.data.image_description,
+              entity_type: response.data.entities.entity_type,
+              image_creator_username: response.data.entities.entity_username,
             });
           }
         }
@@ -73,23 +73,6 @@ export default function ImageViewer({ image_id }: ImageViewerProps) {
     }
   };
 
-  let creatorElement = null;
-  if (imageData.image_creator) {
-    if (imageData.entity_type === 1) {
-      creatorElement = (
-        <p className="text-lg">{imageData.image_creator.individual_name}</p>
-      );
-    } else if (imageData.entity_type === 2) {
-      creatorElement = (
-        <p className="text-lg">{imageData.image_creator.group_name}</p>
-      );
-    } else if (imageData.entity_type === 3) {
-      creatorElement = (
-        <p className="text-lg">{imageData.image_creator.organization_name}</p>
-      );
-    }
-  }
-
   return (
     <div className="w-full">
       {imageData.image_url && (
@@ -102,20 +85,18 @@ export default function ImageViewer({ image_id }: ImageViewerProps) {
           />
         </div>
       )}
-      {imageData.image_title &&
-        imageData.image_creator &&
-        imageData.image_description && (
-          <div className="flex flex-col mt-4 items-start justify-center">
-            <p className="text-xl mb-2">{imageData.image_title}</p>
-            <div className="flex items-center justify-start mb-2">
-              <div className="bg-fg-white-85 rounded-full h-10 aspect-square"></div>
-              <div className="flex flex-col items-start justify-center ml-4">
-                {creatorElement}
-              </div>
+      {imageData.image_title && imageData.image_description && (
+        <div className="flex flex-col mt-4 items-start justify-center">
+          <p className="text-xl mb-2">{imageData.image_title}</p>
+          <div className="flex items-center justify-start mb-2">
+            <div className="bg-fg-white-85 rounded-full h-10 aspect-square"></div>
+            <div className="flex flex-col items-start justify-center ml-4">
+              {<p className="text-lg">{imageData.image_creator_username}</p>}
             </div>
-            <p className="font-K2D text-base">{imageData.image_description}</p>
           </div>
-        )}
+          <p className="font-K2D text-base">{imageData.image_description}</p>
+        </div>
+      )}
     </div>
   );
 }

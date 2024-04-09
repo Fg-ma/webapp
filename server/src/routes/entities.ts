@@ -126,13 +126,14 @@ router.get(
     const entities_content_id = req.params.entities_content_id;
 
     try {
-      const entityContent = await req.db.entities_content.findUnique({
-        where: {
-          entities_content_id: entities_content_id,
-        },
-      });
+      const entityContent: EntityContent =
+        await req.db.entities_content.findUnique({
+          where: {
+            entities_content_id: entities_content_id,
+          },
+        });
 
-      const sheetContent = await req.db.sheets.findUnique({
+      const sheetContent: Sheet = await req.db.sheets.findUnique({
         where: {
           sheet_id: entityContent.content_id,
         },
@@ -222,13 +223,14 @@ router.get(
     const entities_content_id = req.params.entities_content_id;
 
     try {
-      const entityContent = await req.db.entities_content.findUnique({
-        where: {
-          entities_content_id: entities_content_id,
-        },
-      });
+      const entityContent: EntityContent =
+        await req.db.entities_content.findUnique({
+          where: {
+            entities_content_id: entities_content_id,
+          },
+        });
 
-      const videoContent = await req.db.videos.findUnique({
+      const videoContent: Video = await req.db.videos.findUnique({
         where: {
           video_id: entityContent.content_id,
         },
@@ -269,7 +271,7 @@ router.get("/entity_images/:entity_username", async (req, res) => {
     const entityImageContent: Content[] = await req.db.content.findMany({
       where: {
         content_id: { in: allEntityContentIds },
-        content_type: 1,
+        content_type: 2,
       },
     });
 
@@ -301,7 +303,7 @@ router.get("/entity_images/:entity_username", async (req, res) => {
 
       return mergedData;
     }
-
+    // bad merged data
     res.send(mergeData(allEntityContent, imageContent));
   } catch (error) {
     console.error(error);
@@ -316,13 +318,14 @@ router.get(
     const entities_content_id = req.params.entities_content_id;
 
     try {
-      const entityContent = await req.db.entities_content.findUnique({
-        where: {
-          entities_content_id: entities_content_id,
-        },
-      });
+      const entityContent: EntityContent =
+        await req.db.entities_content.findUnique({
+          where: {
+            entities_content_id: entities_content_id,
+          },
+        });
 
-      const imageContent = await req.db.images.findUnique({
+      const imageContent: Image = await req.db.images.findUnique({
         where: {
           image_id: entityContent.content_id,
         },
@@ -343,21 +346,18 @@ router.put("/entity_content_pinned", verifyToken, async (req, res) => {
   const { relation_id, pinned, date_pinned } = req.body;
 
   try {
-    const searchResult = await req.db.entities_content.findUnique({
-      where: {
-        entities_content_id: relation_id,
-      },
-    });
+    const searchResult: EntityContent =
+      await req.db.entities_content.findUnique({
+        where: {
+          entities_content_id: relation_id,
+        },
+      });
 
-    if (!searchResult) {
+    if (!searchResult || searchResult.entity_id !== req.user?.user_id) {
       return;
     }
 
-    if (searchResult.entity_id !== req.user?.user_id) {
-      return;
-    }
-
-    const updateResult = await req.db.entities_content.update({
+    const updateResult: EntityContent = await req.db.entities_content.update({
       where: {
         entities_content_id: relation_id,
       },

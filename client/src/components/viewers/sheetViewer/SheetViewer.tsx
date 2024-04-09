@@ -23,7 +23,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
     sheet_title: "",
     sheet_subject: "",
     entity_type: 0,
-    sheet_author: null,
+    sheet_author: "",
     sheet_likes: 0,
     sheet_dislikes: 0,
   });
@@ -42,7 +42,7 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
 
         if (response.data) {
           const blobData = new Uint8Array(
-            response.data.fullSheet.sheets_data.sheet_data.data,
+            response.data.sheets_data.sheet_data.data,
           );
           const url = URL.createObjectURL(
             new Blob([blobData], { type: "application/pdf" }),
@@ -50,12 +50,12 @@ export default function SheetViewer({ sheet_id }: SheetViewerProps) {
 
           setSheetData({
             sheet_url: url,
-            sheet_title: response.data.fullSheet.sheet_title,
-            sheet_subject: response.data.fullSheet.sheet_subject,
-            entity_type: response.data.fullSheet.entities.entity_type,
-            sheet_author: response.data.sheetAuthor,
-            sheet_likes: response.data.fullSheet.sheet_likes,
-            sheet_dislikes: response.data.fullSheet.sheet_dislikes,
+            sheet_title: response.data.sheet_title,
+            sheet_subject: response.data.sheet_subject,
+            entity_type: response.data.entities.entity_type,
+            sheet_author: response.data.entities.entity_username,
+            sheet_likes: response.data.sheet_likes,
+            sheet_dislikes: response.data.sheet_dislikes,
           });
         }
       } catch (error) {

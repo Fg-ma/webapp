@@ -230,10 +230,10 @@ export default function ImageCard({
 
         if (response.data) {
           const blobData = new Uint8Array(
-            response.data.fullImage.images_data.image_data.data,
+            response.data.images_data.image_data.data,
           );
 
-          const extension = response.data.fullImage.image_filename
+          const extension = response.data.image_filename
             .slice(-3)
             .toLowerCase();
 
@@ -242,7 +242,7 @@ export default function ImageCard({
           if (mimeType) {
             const blob = new Blob([blobData], { type: mimeType });
             const url = URL.createObjectURL(blob);
-            const description = response.data.fullImage.image_description;
+            const description = response.data.image_description;
 
             setImageThumbnailData({
               image_url: url,

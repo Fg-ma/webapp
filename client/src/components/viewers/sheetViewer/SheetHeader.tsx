@@ -3,28 +3,6 @@ import { SheetHeaderProps } from "@FgTypes/componentTypes";
 import SheetActionSection from "./SheetActionSection";
 
 export default function SheetHeader({ sheet_id, sheetData }: SheetHeaderProps) {
-  let authorElement = null;
-
-  if (sheetData.sheet_author) {
-    if (sheetData.entity_type === 1) {
-      authorElement = (
-        <p className="text-2xl mb-2">
-          {sheetData.sheet_author.individual_name}
-        </p>
-      );
-    } else if (sheetData.entity_type === 2) {
-      authorElement = (
-        <p className="text-2xl mb-2">{sheetData.sheet_author.group_name}</p>
-      );
-    } else if (sheetData.entity_type === 3) {
-      authorElement = (
-        <p className="text-2xl mb-2">
-          {sheetData.sheet_author.organization_name}
-        </p>
-      );
-    }
-  }
-
   return (
     <div className="bg-fg-white-90 mb-24 rounded-md shadow relative">
       <div className="w-full h-full px-4 pt-4 pb-6 flex flex-col items-center justify-center">
@@ -41,7 +19,7 @@ export default function SheetHeader({ sheet_id, sheetData }: SheetHeaderProps) {
             {sheetData.sheet_subject}
           </p>
         )}
-        {sheetData.sheet_author && authorElement}
+        {<p className="text-2xl mb-2">{sheetData.sheet_author}</p>}
         <div className="h-0.5 w-11/12 rounded-full bg-fg-white-75 mb-8"></div>
         <div className="bg-fg-white-85 h-14 w-full rounded space-x-6 flex items-center justify-start pl-6 mb-8">
           <button className="relative max-w-48 h-8 bg-fg-white-75 font-bold rounded-full px-4 pt-1">

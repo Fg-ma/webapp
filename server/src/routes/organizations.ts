@@ -6,8 +6,18 @@ import { Organization } from "@FgTypes/types";
 // Route to get all organizations
 router.get("/", async (req, res) => {
   try {
-    const organizations = await req.db.organizations.findMany();
-    res.send(organizations);
+    const organizations: Organization[] = await req.db.organizations.findMany();
+
+    const returningOrganizations = organizations.map((organization) => ({
+      organization_handle: organization.organization_handle,
+      organization_name: organization.organization_name,
+      organization_current_issue: organization.organization_current_issue,
+      organization_stances: organization.organization_stances,
+      organization_description: organization.organization_description,
+      profile_picture_id: organization.profile_picture_id,
+    }));
+
+    res.send(returningOrganizations);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -30,7 +40,14 @@ router.get("/:organization_handle", verifyToken, async (req, res) => {
       return;
     }
 
-    const { organization_id, ...returningOrganization } = organization;
+    const returningOrganization = {
+      organization_handle: organization.organization_handle,
+      organization_name: organization.organization_name,
+      organization_current_issue: organization.organization_current_issue,
+      organization_stances: organization.organization_stances,
+      organization_description: organization.organization_description,
+      profile_picture_id: organization.profile_picture_id,
+    };
 
     res.send(returningOrganization);
   } catch (error) {

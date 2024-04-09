@@ -6,8 +6,18 @@ import { Group } from "@FgTypes/types";
 // Route to get all groups
 router.get("/", async (req, res) => {
   try {
-    const groups = await req.db.groups.findMany();
-    res.send(groups);
+    const groups: Group[] = await req.db.groups.findMany();
+
+    const returningGroups = groups.map((group) => ({
+      group_handle: group.group_handle,
+      group_name: group.group_name,
+      group_current_issue: group.group_current_issue,
+      group_stances: group.group_stances,
+      group_description: group.group_description,
+      profile_picture_id: group.profile_picture_id,
+    }));
+
+    res.send(returningGroups);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -30,7 +40,14 @@ router.get("/:group_handle", verifyToken, async (req, res) => {
       return;
     }
 
-    const { group_id, ...returningGroup } = group;
+    const returningGroup = {
+      group_handle: group.group_handle,
+      group_name: group.group_name,
+      group_current_issue: group.group_current_issue,
+      group_stances: group.group_stances,
+      group_description: group.group_description,
+      profile_picture_id: group.profile_picture_id,
+    };
 
     res.send(returningGroup);
   } catch (error) {

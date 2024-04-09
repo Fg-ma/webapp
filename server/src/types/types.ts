@@ -51,6 +51,7 @@ export interface Sheet {
   sheet_subject: string;
   sheet_filename: string;
   sheet_data_id: string;
+  sheet_thumbnail_id: string;
   sheet_likes: number;
   sheet_dislikes: number;
   sheet_views: number;
@@ -63,6 +64,7 @@ export interface Video {
   video_title: string;
   video_description: string;
   video_filename: string;
+  video_thumbnail_id: string;
   video_data_id: string;
   video_likes: number;
   video_dislikes: number;
@@ -144,7 +146,13 @@ export interface FullImage {
     image_data_id: string;
     image_data: Buffer;
   };
-  entities: { entity_id: string; entity_type: number };
+  entities: { entity_id: string; entity_username: string; entity_type: number };
+}
+
+export interface ProfilePicture {
+  profile_picture_id: string;
+  profile_picture_data: Blob;
+  profile_picture_filename: string;
 }
 
 /*
@@ -158,6 +166,7 @@ export interface FullSheet {
   sheet_subject: string;
   sheet_filename: string;
   sheet_data_id: string;
+  sheet_thumbnail_id: string;
   sheet_likes: number;
   sheet_dislikes: number;
   sheet_views: number;
@@ -168,8 +177,16 @@ export interface FullSheet {
   };
   entities: {
     entity_id: string;
+    entity_username: string;
     entity_type: number;
   };
+}
+
+export interface SheetThumbnail {
+  sheet_thumbnail_id: string;
+  sheet_thumbnail_data: Blob;
+  sheet_thumbnail_filename: string;
+  sheet_thumbnail_description: string;
 }
 
 /*
@@ -183,16 +200,18 @@ export interface FullVideo {
   video_description: string;
   video_filename: string;
   video_data_id: string;
+  video_thumbnail_id: string;
   video_likes: number;
   video_dislikes: number;
   video_views: number;
   video_date_posted: string;
   videos_data: {
     video_data_id: string;
-    video_data: Buffer;
+    video_data: Blob;
   };
   entities: {
     entity_id: string;
+    entity_username: string;
     entity_type: number;
   };
 }
@@ -292,4 +311,16 @@ export interface CollectionsContent {
     content_id: string;
     content_type: number;
   };
+}
+
+/*
+  references.ts
+*/
+
+export interface EntityReferences {
+  reference_id: string;
+  entity_id: string;
+  title: string;
+  author: string;
+  url: string;
 }

@@ -53,15 +53,17 @@ export default function CollectionButtons({
   useEffect(() => {
     const fetchCollectionNamesData = async () => {
       try {
-        const response = await Axios.get(
-          `${serverUrl}/collections/collections_names`,
-          {
-            params: {
-              entity_username: entity_username,
+        if (entity_username) {
+          const response = await Axios.get(
+            `${serverUrl}/collections/collections_names`,
+            {
+              params: {
+                entity_username: entity_username,
+              },
             },
-          },
-        );
-        setCollectionNames(response.data);
+          );
+          setCollectionNames(response.data);
+        }
       } catch (error) {
         console.error("Error fetching collection names:", error);
       }

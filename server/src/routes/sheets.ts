@@ -2,13 +2,35 @@ import express from "express";
 const router = express.Router();
 import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
-import type { Entity, FullSheet, Sheet } from "@FgTypes/types";
+import type {
+  Entity,
+  FullSheet,
+  Group,
+  Individual,
+  Organization,
+  Sheet,
+  SheetThumbnail,
+} from "@FgTypes/types";
 
 // Route to get all sheets
 router.get("/", async (req, res) => {
   try {
-    const sheets = await req.db.sheets.findMany();
-    res.send(sheets);
+    const sheets: Sheet[] = await req.db.sheets.findMany();
+
+    const returningSheets = sheets.map((sheet) => ({
+      sheet_id: sheet.sheet_id,
+      sheet_title: sheet.sheet_title,
+      sheet_subject: sheet.sheet_subject,
+      sheet_filename: sheet.sheet_filename,
+      sheet_data_id: sheet.sheet_data_id,
+      sheet_thumbnail_id: sheet.sheet_thumbnail_id,
+      sheet_likes: sheet.sheet_likes,
+      sheet_dislikes: sheet.sheet_dislikes,
+      sheet_views: sheet.sheet_views,
+      sheet_date_posted: sheet.sheet_date_posted,
+    }));
+
+    res.send(returningSheets);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -20,15 +42,16 @@ router.get("/get_sheet_thumbnail", async (req, res) => {
   const sheet_id = req.query.sheet_id;
 
   try {
-    const sheet = await req.db.sheets.findUnique({
+    const sheet: Sheet = await req.db.sheets.findUnique({
       where: { sheet_id: sheet_id },
     });
 
-    const sheetThumbnail = await req.db.sheets_thumbnails.findUnique({
-      where: {
-        sheet_thumbnail_id: sheet.sheet_thumbnail_id,
-      },
-    });
+    const sheetThumbnail: SheetThumbnail =
+      await req.db.sheets_thumbnails.findUnique({
+        where: {
+          sheet_thumbnail_id: sheet.sheet_thumbnail_id,
+        },
+      });
 
     res.send(sheetThumbnail);
   } catch (error) {
@@ -71,7 +94,7 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
   const sheet_id = req.params.sheet_id;
 
   try {
-    const fullSheet = await req.db.sheets.findUnique({
+    const fullSheet: FullSheet = await req.db.sheets.findUnique({
       where: {
         sheet_id: sheet_id,
       },
@@ -81,39 +104,33 @@ router.get("/get_full_sheet/:sheet_id", async (req, res) => {
       },
     });
 
-    const getSheetAuthor = async (fullSheet: FullSheet) => {
-      if (fullSheet.entities.entity_type === 1) {
-        return await req.db.individuals.findUnique({
-          where: {
-            individual_id: fullSheet.entities.entity_id,
-          },
-        });
-      } else if (fullSheet.entities.entity_type === 2) {
-        return await req.db.groups.findUnique({
-          where: {
-            group_id: fullSheet.entities.entity_id,
-          },
-        });
-      } else if (fullSheet.entities.entity_type === 3) {
-        return await req.db.organizations.findUnique({
-          where: {
-            organization_id: fullSheet.entities.entity_id,
-          },
-        });
-      }
-    };
-
-    const sheetAuthor = await getSheetAuthor(fullSheet);
-
     if (!fullSheet) {
       res.status(404).send("Sheet not found");
       return;
-    } else if (!sheetAuthor) {
-      res.status(404).send("Author not found");
-      return;
     }
 
-    res.send({ fullSheet, sheetAuthor });
+    const returningFullSheet = {
+      sheet_id: fullSheet.sheet_id,
+      sheet_title: fullSheet.sheet_title,
+      sheet_subject: fullSheet.sheet_subject,
+      sheet_filename: fullSheet.sheet_filename,
+      sheet_data_id: fullSheet.sheet_data_id,
+      sheet_thumbnail_id: fullSheet.sheet_thumbnail_id,
+      sheet_likes: fullSheet.sheet_likes,
+      sheet_dislikes: fullSheet.sheet_dislikes,
+      sheet_views: fullSheet.sheet_views,
+      sheet_date_posted: fullSheet.sheet_date_posted,
+      sheets_data: {
+        sheet_data_id: fullSheet.sheets_data.sheet_data_id,
+        sheet_data: fullSheet.sheets_data.sheet_data,
+      },
+      entities: {
+        entity_username: fullSheet.entities.entity_username,
+        entity_type: fullSheet.entities.entity_type,
+      },
+    };
+
+    res.send(returningFullSheet);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

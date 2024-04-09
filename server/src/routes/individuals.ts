@@ -7,14 +7,17 @@ import { Individual } from "@FgTypes/types";
 router.get("/", async (req: Request, res: Response) => {
   try {
     const individuals: Individual[] = await req.db.individuals.findMany();
-    const filteredIndividuals: Omit<
-      Individual,
-      "individual_id" | "profile_picture_id"
-    >[] = individuals.map(
-      ({ individual_id, profile_picture_id, ...filteredIndividual }) =>
-        filteredIndividual
-    );
-    res.send(filteredIndividuals);
+
+    const returningIndividuals = individuals.map((individual) => ({
+      individual_username: individual.individual_username,
+      individual_name: individual.individual_name,
+      individual_current_issue: individual.individual_current_issue,
+      individual_roles: individual.individual_roles,
+      individual_description: individual.individual_description,
+      profile_picture_id: individual.profile_picture_id,
+    }));
+
+    res.send(returningIndividuals);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
