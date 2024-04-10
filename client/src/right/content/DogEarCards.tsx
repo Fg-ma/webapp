@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { CoverSheet } from "@FgTypes/rightTypes";
-import { DogEarCard } from "./RightSpaceCards";
+import { DogEarCard } from "./DogEarCard";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

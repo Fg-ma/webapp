@@ -82,7 +82,7 @@ export interface IndividualCardsProps {
 */
 
 /* 
-  LeftSpaceCards.tsx
+  IndividualCard.tsx
 */
 
 export interface IndividualCardProps {
@@ -92,6 +92,10 @@ export interface IndividualCardProps {
   animate?: boolean;
 }
 
+/* 
+  GroupCard.tsx
+*/
+
 export interface GroupCardProps {
   name: string | null;
   handle: string;
@@ -99,6 +103,10 @@ export interface GroupCardProps {
   affInCommon: string | null;
   animate?: boolean;
 }
+
+/* 
+  OrganizationCard.tsx
+*/
 
 export interface OrganizationCardProps {
   name: string | null;

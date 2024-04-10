@@ -122,7 +122,7 @@ export interface CoverSheet {
 */
 
 /* 
-  RightSpaceCards.tsx
+  PapersCard.tsx
 */
 
 export interface PapersCardProps {
@@ -131,6 +131,10 @@ export interface PapersCardProps {
   subject: string;
 }
 
+/* 
+  NewsCard.tsx
+*/
+
 export interface NewsCardProps {
   sheet_id: string;
   title: string;
@@ -138,12 +142,20 @@ export interface NewsCardProps {
   affResponses?: string | null;
 }
 
+/* 
+  DogEarCard.tsx
+*/
+
 export interface DogEarCardProps {
   sheet_id: string;
   title: string;
   subject: string;
   affResponses?: string | null;
 }
+
+/* 
+  ConversationCard.tsx
+*/
 
 export interface ConversationCardProps {
   conversation_id: string;
@@ -153,7 +165,12 @@ export interface ConversationCardProps {
   conversation_creation_date: string;
 }
 
+/* 
+  ContactCard.tsx
+*/
+
 export interface ContactCardProps {
+  animate?: boolean;
   conversation_id: string;
   conversation_name: string | null;
   contact_name: string | null;
@@ -264,6 +281,7 @@ export interface Conversation {
 */
 
 export interface Contact {
+  animate?: boolean;
   contact_id: string;
   conversation_name: string | null;
   conversation_id: string;

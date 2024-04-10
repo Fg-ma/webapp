@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Conversation } from "@FgTypes/rightTypes";
-import { ConversationCard } from "./RightSpaceCards";
+import { ConversationCard } from "./ConversationCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";

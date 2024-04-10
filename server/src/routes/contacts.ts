@@ -422,4 +422,142 @@ router.put("/set_contact_by_entity_username", verifyToken, async (req, res) => {
   }
 });
 
+// Get a contact by contact_id
+router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
+  const { contact_id } = req.query;
+
+  try {
+    const user: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: req.user.user_id,
+      },
+    });
+
+    const contact: Contact = await req.db.contacts.findUnique({
+      where: {
+        contact_id: contact_id,
+        contact_id_root: req.user.user_id,
+      },
+    });
+
+    if (!contact) {
+      res.status(500).send("Internal Server Error");
+    }
+
+    const conversation: Conversation = await req.db.conversations.findUnique({
+      where: {
+        conversation_id: contact.conversation_id,
+      },
+    });
+
+    const entity: Entity = await req.db.entities.findUnique({
+      where: {
+        entity_id: contact.contact_id_target,
+      },
+    });
+
+    let entityData;
+    if (entity.entity_type === 1) {
+      entityData = await req.db.individuals.findUnique({
+        where: {
+          individual_id: contact.contact_id_target,
+        },
+      });
+
+      if (entityData.individual_name) {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.individual_name,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.individual_username,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      } else {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.organization_handle,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.organization_handle,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      }
+    } else if (entity.entity_type === 2) {
+      entityData = await req.db.groups.findUnique({
+        where: {
+          group_id: contact.contact_id_target,
+        },
+      });
+
+      if (entityData.group_name) {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.group_name,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.group_handle,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      } else {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.organization_handle,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.organization_handle,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      }
+    } else if (entity.entity_type === 3) {
+      entityData = await req.db.organizations.findUnique({
+        where: {
+          organization_id: contact.contact_id_target,
+        },
+      });
+
+      if (entityData.organization_name) {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.organization_name,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.organization_handle,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      } else {
+        res.send({
+          contact_id: contact.contact_id,
+          conversation_name: conversation.conversation_name,
+          conversation_id: conversation.conversation_id,
+          contact_name: entityData.organization_handle,
+          contact_username_root: user.entity_username,
+          contact_username_target: entityData.organization_handle,
+          contact_creation_date: contact.contact_creation_date,
+          last_message: contact.last_message,
+          last_contact_date: contact.last_contact_date,
+        });
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 export default router;

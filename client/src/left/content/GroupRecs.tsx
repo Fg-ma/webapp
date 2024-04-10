@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { GroupCard } from "./LeftSpaceCards";
+import { GroupCard } from "./GroupCard";
 import { Group } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";

@@ -1,11 +1,9 @@
 import React from "react";
 import { explore } from "../../data";
-import {
-  IndividualCard,
-  GroupCard,
-  OrganizationCard,
-} from "../../left/content/LeftSpaceCards";
-import { NewsCard } from "./RightSpaceCards";
+import { IndividualCard } from "../../left/content/IndividualCard";
+import { GroupCard } from "../../left/content/GroupCard";
+import { OrganizationCard } from "../../left/content/OrganizationCard";
+import { NewsCard } from "./NewsCard";
 
 export default function ExploreCards() {
   /* 

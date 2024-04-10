@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { OrganizationCard } from "./LeftSpaceCards";
+import { OrganizationCard } from "./OrganizationCard";
 import { Organization, OrganizationCardsProps } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
 import { AFFILIATED_ORGANIZATIONS_TABLE } from "@IDB/IDBService";
@@ -55,7 +55,7 @@ export default function OrganizationCards({
 
         setOrganizations((prev) => [newIndividual, ...prev]);
 
-        const storedOrganizations = organizations.map((organization) => ({
+        const storeOrganizations = organizations.map((organization) => ({
           ...organization,
           animate: false,
         }));
@@ -63,7 +63,7 @@ export default function OrganizationCards({
         await deleteStoredAffiliatedEntities(AFFILIATED_ORGANIZATIONS_TABLE);
         await storeAffiliatedEntities(AFFILIATED_ORGANIZATIONS_TABLE, [
           { ...response.data },
-          ...storedOrganizations,
+          ...storeOrganizations,
         ]);
       } catch (error) {
         console.error("Error fetching organization data:", error);
@@ -100,20 +100,30 @@ export default function OrganizationCards({
 
         leftTopPaneRef.current.scrollTo(scrollOptions);
       }
+
+      setAffiliateRelation({
+        action: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     } else if (
       affiliateRelation?.entity_type === 3 &&
       affiliateRelation?.action === "deletedRelation"
     ) {
       deleteOldRelationData();
+
+      setAffiliateRelation({
+        action: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     }
-    setAffiliateRelation({
-      action: "",
-      affiliate_username_root: "",
-      affiliate_username_target: "",
-      affiliate_relation_date: "",
-      affiliate_relation_id: "",
-      entity_type: 0,
-    });
   }, [affiliateRelation]);
 
   const sortData = (data: Organization[]) => {

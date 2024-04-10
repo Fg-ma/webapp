@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { IndividualCard } from "./LeftSpaceCards";
+import { IndividualCard } from "./IndividualCard";
 import { Individual, IndividualCardsProps } from "@FgTypes/leftTypes";
 import { useAffiliateContext } from "@context/AffiliateContext";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -54,7 +54,7 @@ export default function IndividualCards({
 
         setIndividuals((prev) => [newIndividual, ...prev]);
 
-        const storedIndividuals = individuals.map((individual) => ({
+        const storeIndividuals = individuals.map((individual) => ({
           ...individual,
           animate: false,
         }));
@@ -62,7 +62,7 @@ export default function IndividualCards({
         await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
         await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
           { ...response.data },
-          ...storedIndividuals,
+          ...storeIndividuals,
         ]);
       } catch (error) {
         console.error("Error fetching individual data:", error);
@@ -99,20 +99,30 @@ export default function IndividualCards({
 
         leftTopPaneRef.current.scrollTo(scrollOptions);
       }
+
+      setAffiliateRelation({
+        action: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     } else if (
       affiliateRelation?.entity_type === 1 &&
       affiliateRelation?.action === "deletedRelation"
     ) {
       deleteOldRelationData();
+
+      setAffiliateRelation({
+        action: "",
+        affiliate_username_root: "",
+        affiliate_username_target: "",
+        affiliate_relation_date: "",
+        affiliate_relation_id: "",
+        entity_type: 0,
+      });
     }
-    setAffiliateRelation({
-      action: "",
-      affiliate_username_root: "",
-      affiliate_username_target: "",
-      affiliate_relation_date: "",
-      affiliate_relation_id: "",
-      entity_type: 0,
-    });
   }, [affiliateRelation]);
 
   const sortData = (data: Individual[]) => {

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { OrganizationCard } from "./LeftSpaceCards";
+import { OrganizationCard } from "./OrganizationCard";
 import { Organization } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";

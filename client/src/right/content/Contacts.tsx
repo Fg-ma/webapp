@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Contact } from "@FgTypes/rightTypes";
-import { ContactCard } from "./RightSpaceCards";
+import { ContactCard } from "./ContactCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useContactContext } from "@context/ContactContext";
 
@@ -16,6 +16,7 @@ export default function Contacts() {
   const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [newContact, setNewContact] = useState<Contact>();
   const { fluxContact, setFluxContact } = useContactContext();
 
   const sortData = (data: Contact[]) => {
@@ -49,7 +50,7 @@ export default function Contacts() {
   };
 
   useEffect(() => {
-    const fetchNewRelationData = async () => {
+    const fetchNewContact = async () => {
       try {
         const token = localStorage.getItem("token");
 
@@ -59,63 +60,63 @@ export default function Contacts() {
         }
 
         const response = await Axios.get(
-          `${serverUrl}/individuals/${affiliateRelation.affiliate_username_target}`,
+          `${serverUrl}/contacts/get_contact_by_contact_id`,
           {
+            params: {
+              contact_id: fluxContact.contact_id,
+            },
             headers: {
               Authorization: `Bearer ${token}`,
             },
           },
         );
 
-        const newIndividual = { ...response.data, animate: true };
+        const newContact = { ...response.data, animate: true };
 
-        setIndividuals((prev) => [newIndividual, ...prev]);
+        setNewContact(newContact);
 
-        const storedIndividuals = individuals.map((individual) => ({
-          ...individual,
-          animate: false,
-        }));
+        //const storeContacts = contacts.map((contact) => ({
+        //  ...contact,
+        //  animate: false,
+        //}));
 
-        await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
-        await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
-          { ...response.data },
-          ...storedIndividuals,
-        ]);
+        //await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+        //await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
+        //  { ...response.data },
+        //  ...storeContacts,
+        //]);
       } catch (error) {
-        console.error("Error fetching individual data:", error);
+        console.error("Error fetching Contact data:", error);
       }
     };
 
-    const deleteOldRelationData = async () => {
-      const newIndividuals = individuals.filter(
-        (individual) =>
-          individual.individual_username !==
-          affiliateRelation.affiliate_username_target,
+    const deleteOldContact = async () => {
+      const newContacts = contacts.filter(
+        (contact) => contact.contact_id !== fluxContact.contact_id,
       );
 
-      setIndividuals(newIndividuals);
+      setContacts(newContacts);
 
-      await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
-      await storeAffiliatedEntities(
-        AFFILIATED_INDIVIDUALS_TABLE,
-        newIndividuals,
-      );
+      //await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
+      //await storeAffiliatedEntities(
+      //  AFFILIATED_INDIVIDUALS_TABLE,
+      //  newIndividuals,
+      //);
     };
 
     if (fluxContact?.action === "newContact") {
-      fetchNewRelationData();
+      fetchNewContact();
+      setFluxContact({
+        action: "",
+        contact_id: "",
+      });
     } else if (fluxContact?.action === "deletedRelation") {
-      deleteOldRelationData();
+      deleteOldContact();
+      setFluxContact({
+        action: "",
+        contact_id: "",
+      });
     }
-
-    setFluxContact({
-      action: "",
-      contact_id: "",
-      conversation_name: null,
-      contact_name: "",
-      last_message: "",
-      contact_creation_date: "",
-    });
   }, [fluxContact]);
 
   useEffect(() => {
@@ -137,6 +138,7 @@ export default function Contacts() {
         );
 
         setContacts(sortData(response.data));
+        setNewContact(undefined);
       } catch (error) {
         console.error("Error fetching entity data:", error);
       }
@@ -146,6 +148,10 @@ export default function Contacts() {
   }, []);
 
   useEffect(() => {
+    if (lastMessage.conversation_id === "") {
+      return;
+    }
+
     const updatedContacts = contacts.map((contact) => {
       if (contact.conversation_id === lastMessage.conversation_id) {
         return {
@@ -204,6 +210,26 @@ export default function Contacts() {
     };
   }, []);
 
+  let newContactCard;
+  if (newContact) {
+    const foundContact = contacts.find(
+      (contact) => contact.contact_id === newContact.contact_id,
+    );
+    if (!foundContact) {
+      newContactCard = (
+        <ContactCard
+          key={newContact.contact_id}
+          animate={newContact.animate}
+          conversation_id={newContact.conversation_id}
+          conversation_name={newContact.conversation_name}
+          contact_name={newContact.contact_name}
+          last_message={newContact.last_message}
+          contact_creation_date={newContact.contact_creation_date}
+        />
+      );
+    }
+  }
+
   const contactCards = contacts.map((contact) => {
     return (
       <ContactCard
@@ -217,5 +243,10 @@ export default function Contacts() {
     );
   });
 
-  return <div>{contactCards}</div>;
+  return (
+    <div>
+      {newContactCard}
+      {contactCards}
+    </div>
+  );
 }

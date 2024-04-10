@@ -22,17 +22,9 @@ export function ContactContextProvider({
   const [fluxContact, setFluxContact] = useState<{
     action: string;
     contact_id: string;
-    conversation_name: string | null;
-    contact_name: string;
-    last_message: string;
-    contact_creation_date: string;
   }>({
     action: "",
     contact_id: "",
-    conversation_name: null,
-    contact_name: "",
-    last_message: "",
-    contact_creation_date: "",
   });
 
   return (

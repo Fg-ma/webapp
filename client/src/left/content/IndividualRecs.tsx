@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
-import { IndividualCard } from "./LeftSpaceCards";
+import { IndividualCard } from "./IndividualCard";
 import { Individual } from "@FgTypes/leftTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";

@@ -41,14 +41,10 @@ export default function CreateContactButton({
         },
       },
     );
-    console.log(response.data);
+
     setFluxContact({
       action: "newContact",
       contact_id: response.data.contact_id,
-      conversation_name: response.data.conversation_name,
-      contact_name: response.data.members[0],
-      last_message: "",
-      contact_creation_date: response.data.conversation_name,
     });
 
     dispatch(setPageState("main", "messages"));

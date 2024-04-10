@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import config from "@config";
 import { Sheet } from "@FgTypes/rightTypes";
-import { NewsCard } from "./RightSpaceCards";
+import { NewsCard } from "./NewsCard";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
