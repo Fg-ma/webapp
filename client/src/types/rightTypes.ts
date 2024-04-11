@@ -170,6 +170,7 @@ export interface ConversationCardProps {
 */
 
 export interface ContactCardProps {
+  entity_username: string;
   animate?: boolean;
   conversation_id: string;
   conversation_name: string | null;

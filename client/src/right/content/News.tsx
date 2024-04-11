@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function NewsCards() {
+export default function News() {
   /* 
     Description:   
       Gets issues data from a database then extracts the id, title, and issueQuestions to be mapped

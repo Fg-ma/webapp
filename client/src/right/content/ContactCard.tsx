@@ -7,8 +7,10 @@ import {
   setPageState,
 } from "@redux/pageState/pageStateActions";
 import { ContactCardProps } from "@FgTypes/rightTypes";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 export function ContactCard({
+  entity_username,
   animate,
   conversation_id,
   conversation_name,
@@ -33,7 +35,7 @@ export function ContactCard({
       dispatch(setConversation(conversation_name, [], contact_creation_date));
     }
   };
-
+  console.log(entity_username);
   return (
     <AnimatePresence>
       <motion.div
@@ -44,10 +46,16 @@ export function ContactCard({
         className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
         onClick={handleClick}
       >
-        <div
-          className="mx-5 my-2 space-y-1"
-          style={{ width: "calc(100% - 2.5rem)" }}
-        >
+        <div className="w-14 aspect-square mx-4">
+          <ProfilePicture
+            size={{ h: 3.5, w: 3.5 }}
+            entity_username={entity_username}
+            entity_type={1}
+            styles="rounded-full"
+            clickable={false}
+          />
+        </div>
+        <div className="my-2 mr-4 truncate">
           <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
             {contact_name}
           </p>

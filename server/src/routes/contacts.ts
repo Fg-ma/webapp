@@ -50,76 +50,77 @@ async function getEntityData(entity_id: string) {
 // Get a user's full conversations
 router.get("/user_contacts", verifyToken, async (req, res) => {
   try {
-    const contacts = await req.db.contacts.findMany({
+    const contacts: Contact[] = await req.db.contacts.findMany({
       where: {
         contact_id_root: req.user.user_id,
       },
     });
 
-    const conversationIds = contacts.map(
+    const conversationIds: string[] = contacts.map(
       (contact: Contact) => contact.conversation_id
     );
 
-    const conversations = await req.db.conversations.findMany({
+    const conversations: Conversation[] = await req.db.conversations.findMany({
       where: {
         conversation_id: { in: conversationIds },
       },
     });
 
-    const contactIds = contacts.map(
+    const contactIds: string[] = contacts.map(
       (contact: Contact) => contact.contact_id_target
     );
 
-    const individuals = await req.db.entities.findMany({
+    const individuals: Entity[] = await req.db.entities.findMany({
       where: {
         entity_id: { in: contactIds },
         entity_type: 1,
       },
     });
 
-    const individualsIds = individuals.map(
+    const individualsIds: string[] = individuals.map(
       (individual: Entity) => individual.entity_id
     );
 
-    const individualsData = await req.db.individuals.findMany({
+    const individualsData: Individual[] = await req.db.individuals.findMany({
       where: {
         individual_id: { in: individualsIds },
       },
     });
 
-    const groups = await req.db.entities.findMany({
+    const groups: Entity[] = await req.db.entities.findMany({
       where: {
         entity_id: { in: contactIds },
         entity_type: 2,
       },
     });
 
-    const groupsIds = groups.map((group: Entity) => group.entity_id);
+    const groupsIds: string[] = groups.map((group: Entity) => group.entity_id);
 
-    const groupsData = await req.db.groups.findMany({
+    const groupsData: Group[] = await req.db.groups.findMany({
       where: {
         group_id: { in: groupsIds },
       },
     });
 
-    const organizations = await req.db.entities.findMany({
+    const organizations: Entity[] = await req.db.entities.findMany({
       where: {
         entity_id: { in: contactIds },
         entity_type: 3,
       },
     });
 
-    const organizationsIds = organizations.map(
+    const organizationsIds: string[] = organizations.map(
       (organization: Entity) => organization.entity_id
     );
 
-    const organizationsData = await req.db.organizations.findMany({
-      where: {
-        organization_id: { in: organizationsIds },
-      },
-    });
+    const organizationsData: Organization[] =
+      await req.db.organizations.findMany({
+        where: {
+          organization_id: { in: organizationsIds },
+        },
+      });
 
-    contacts.forEach((contact: Contact) => {
+    const returningContacts = contacts.map((contact: Contact) => {
       const individualMatch = individualsData.find(
         (individual: Individual) =>
           individual.individual_id === contact.contact_id_target
@@ -136,35 +137,54 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
           conversation.conversation_id === contact.conversation_id
       );
 
+      let contact_name: string | null;
+      let contact_username: string | null;
+      let conversation_name: string | null;
       if (individualMatch) {
         if (individualMatch.individual_name) {
-          contact.contact_name = individualMatch.individual_name;
+          contact_name = individualMatch.individual_name;
         } else {
-          contact.contact_name = individualMatch.individual_username;
+          contact_name = individualMatch.individual_username;
         }
+        contact_username = individualMatch.individual_username;
       } else if (groupMatch) {
         if (groupMatch.group_name) {
-          contact.contact_name = groupMatch.group_name;
+          contact_name = groupMatch.group_name;
         } else {
-          contact.contact_name = groupMatch.group_handle;
+          contact_name = groupMatch.group_handle;
         }
+        contact_username = groupMatch.group_handle;
       } else if (organizationMatch) {
         if (organizationMatch.organization_name) {
-          contact.contact_name = organizationMatch.organization_name;
+          contact_name = organizationMatch.organization_name;
         } else {
-          contact.contact_name = organizationMatch.organization_handle;
+          contact_name = organizationMatch.organization_handle;
         }
+        contact_username = organizationMatch.organization_handle;
       } else {
-        contact.contact_name = null;
+        contact_name = null;
+        contact_username = null;
       }
       if (conversationMatch) {
-        contact.conversation_name = conversationMatch.conversation_name;
+        conversation_name = conversationMatch.conversation_name;
       } else {
-        contact.conversation_name = null;
+        conversation_name = null;
       }
+
+      return {
+        contact_id: contact.contact_id,
+        contact_name: contact_name,
+        conversation_id: contact,
+        conversation_name: conversation_name,
+        contact_username_root: req.user.username,
+        contact_username_target: contact_username,
+        contact_creation_date: contact.contact_creation_date,
+        last_message: contact.last_message,
+        last_contact_date: contact.last_contact_date,
+      };
     });
 
-    res.send(contacts);
+    res.send(returningContacts);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -440,7 +460,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
       },
     });
 
-    if (!contact) {
+    if (!contact || !contact.conversation_id) {
       res.status(500).send("Internal Server Error");
     }
 

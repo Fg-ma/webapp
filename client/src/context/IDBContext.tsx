@@ -1,7 +1,14 @@
 import React, { createContext, useContext } from "react";
-import { PROFILE_PICTURES, THUMBNAILS, useIndexedDB } from "@IDB/IDBService";
-import { IndexedDBProviderProps, IDBService } from "@FgTypes/contextTypes";
 import {
+  CONTACTS_TABLE,
+  PROFILE_PICTURES_TABLE,
+  THUMBNAILS_TABLE,
+  useIndexedDB,
+} from "@IDB/IDBService";
+import {
+  IndexedDBProviderProps,
+  IDBService,
+  Contact,
   Group,
   Individual,
   Organization,
@@ -75,7 +82,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     blob: Blob,
   ): Promise<void> => {
     try {
-      await indexedDBService.addItem(PROFILE_PICTURES, index, blob);
+      await indexedDBService.addItem(PROFILE_PICTURES_TABLE, index, blob);
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
     }
@@ -86,7 +93,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   ): Promise<Blob | null> => {
     try {
       const returnedProfilePicture =
-        await indexedDBService.getItemByIndexFromTable(PROFILE_PICTURES, index);
+        await indexedDBService.getItemByIndexFromTable(
+          PROFILE_PICTURES_TABLE,
+          index,
+        );
       return returnedProfilePicture as Blob | null;
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
@@ -99,7 +109,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     thumbnail: Thumbnail,
   ): Promise<void> => {
     try {
-      await indexedDBService.addItem(THUMBNAILS, index, thumbnail);
+      await indexedDBService.addItem(THUMBNAILS_TABLE, index, thumbnail);
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
     }
@@ -110,13 +120,46 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
   ): Promise<Thumbnail | null> => {
     try {
       const returnedImage = await indexedDBService.getItemByIndexFromTable(
-        THUMBNAILS,
+        THUMBNAILS_TABLE,
         index,
       );
       return returnedImage as Thumbnail | null;
     } catch (error) {
       console.error("Error storing profile picture in IndexedDB:", error);
       return null;
+    }
+  };
+
+  const getStoredContacts = async (): Promise<Contact[]> => {
+    try {
+      const contacts =
+        await indexedDBService.getAllItemsFromTable(CONTACTS_TABLE);
+      return contacts as Contact[];
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+      return [];
+    }
+  };
+
+  const storeContacts = async (contacts: Contact[]): Promise<void> => {
+    try {
+      for (let i = 0; i < contacts.length; i++) {
+        await indexedDBService.addItem(
+          CONTACTS_TABLE,
+          contacts[i].contact_id,
+          contacts[i],
+        );
+      }
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+    }
+  };
+
+  const deleteStoredContacts = async (): Promise<void> => {
+    try {
+      await indexedDBService.deleteAllItemsFromTable(CONTACTS_TABLE);
+    } catch (error) {
+      console.error("Error deleting stored entities from IndexedDB:", error);
     }
   };
 
@@ -135,6 +178,9 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     getStoredProfilePicture: getStoredProfilePicture,
     storeThumbnail: storeThumbnail,
     getStoredThumbnail: getStoredThumbnail,
+    getStoredContacts: getStoredContacts,
+    storeContacts: storeContacts,
+    deleteStoredContacts: deleteStoredContacts,
   };
 
   return (

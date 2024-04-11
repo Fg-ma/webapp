@@ -31,16 +31,16 @@ export function OrganizationCard({
         className="bg-white w-fill my-4 ml-9 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
         onClick={handleClick}
       >
-        <div className="w-16 aspect-square ml-4 mr-5">
+        <div className="w-16 aspect-square mx-4">
           <ProfilePicture
             size={{ h: 4, w: 4 }}
             entity_username={handle}
             entity_type={3}
-            styles="rounded-md"
+            styles="rounded"
             clickable={false}
           />
         </div>
-        <div className="m-2 h-full truncate">
+        <div className="my-2 mr-4 h-full truncate">
           <p className="font-Josefin text-xl truncate">
             {name ? name : handle}
           </p>

@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import "./rightSpace.css";
 import RightSearchBar from "./search/RightSearchBar";
 import RightNav from "./RightNav";
-import NewsCards from "./content/NewsCards";
+import News from "./content/News";
 import ExploreCards from "./content/ExploreCards";
-import DogEarCards from "./content/DogEarCards";
-import PapersCards from "./content/PapersCards";
+import DogEars from "./content/DogEars";
+import Papers from "./content/Papers";
 import {
   RightState,
   MainState,
@@ -43,15 +43,15 @@ export default function RightSpace() {
     if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
       switch (rightPage) {
         case "papers":
-          return <PapersCards />;
+          return <Papers />;
         case "news":
-          return <NewsCards />;
+          return <News />;
         case "explore":
           return <ExploreCards />;
         case "dogEars":
-          return <DogEarCards />;
+          return <DogEars />;
         default:
-          return <NewsCards />;
+          return <News />;
       }
     } else if (
       mainPageState === "messages" ||

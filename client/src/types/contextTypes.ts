@@ -6,6 +6,19 @@ import { ReactNode } from "react";
   IDBContext.tsx
 */
 
+export interface Contact {
+  animate?: boolean;
+  contact_id: string;
+  conversation_name: string | null;
+  conversation_id: string;
+  contact_name: string | null;
+  contact_username_root: string;
+  contact_username_target: string;
+  contact_creation_date: string;
+  last_message: string | null;
+  last_contact_date: string | null;
+}
+
 export interface Individual {
   individual_name: string | null;
   individual_username: string;
@@ -74,6 +87,9 @@ export interface IDBService {
   getStoredProfilePicture: (index: string) => Promise<Blob | null>;
   storeThumbnail: (index: string, thumbnail: Thumbnail) => Promise<void>;
   getStoredThumbnail: (index: string) => Promise<Thumbnail | null>;
+  getStoredContacts: () => Promise<Contact[]>;
+  storeContacts: (contact: Contact[]) => Promise<void>;
+  deleteStoredContacts: () => Promise<void>;
 }
 
 /*

@@ -6,6 +6,7 @@ import { Contact } from "@FgTypes/rightTypes";
 import { ContactCard } from "./ContactCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useContactContext } from "@context/ContactContext";
+import { useIndexedDBContext } from "@context/IDBContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -15,9 +16,11 @@ const serverUrl = isDevelopment
 export default function Contacts() {
   const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
+  const { fluxContact, setFluxContact } = useContactContext();
+  const { storeContacts, getStoredContacts, deleteStoredContacts } =
+    useIndexedDBContext();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [newContact, setNewContact] = useState<Contact>();
-  const { fluxContact, setFluxContact } = useContactContext();
 
   const sortData = (data: Contact[]) => {
     const parseDate = (dateString: string | null) =>
@@ -50,6 +53,43 @@ export default function Contacts() {
   };
 
   useEffect(() => {
+    const fetchContacts = async () => {
+      const storedContacts = await getStoredContacts();
+
+      if (storedContacts.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/contacts/user_contacts`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const sortedData = sortData(response.data);
+
+          setContacts(sortedData);
+          setNewContact(undefined);
+          await storeContacts(sortedData);
+        } catch (error) {
+          console.error("Error fetching entity data:", error);
+        }
+      } else {
+        setContacts(storedContacts);
+      }
+    };
+
+    fetchContacts();
+  }, []);
+
+  useEffect(() => {
     const fetchNewContact = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -75,16 +115,16 @@ export default function Contacts() {
 
         setNewContact(newContact);
 
-        //const storeContacts = contacts.map((contact) => ({
-        //  ...contact,
-        //  animate: false,
-        //}));
+        const storingContacts: Contact[] = contacts.map((contact) => ({
+          ...contact,
+          animate: false,
+        }));
 
-        //await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
-        //await storeAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE, [
-        //  { ...response.data },
-        //  ...storeContacts,
-        //]);
+        await deleteStoredContacts();
+        await storeContacts([
+          { ...response.data, animate: true },
+          ...storingContacts,
+        ]);
       } catch (error) {
         console.error("Error fetching Contact data:", error);
       }
@@ -97,11 +137,8 @@ export default function Contacts() {
 
       setContacts(newContacts);
 
-      //await deleteStoredAffiliatedEntities(AFFILIATED_INDIVIDUALS_TABLE);
-      //await storeAffiliatedEntities(
-      //  AFFILIATED_INDIVIDUALS_TABLE,
-      //  newIndividuals,
-      //);
+      await deleteStoredContacts();
+      await storeContacts(newContacts);
     };
 
     if (fluxContact?.action === "newContact") {
@@ -118,34 +155,6 @@ export default function Contacts() {
       });
     }
   }, [fluxContact]);
-
-  useEffect(() => {
-    const fetchContacts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          return;
-        }
-
-        const response = await Axios.get(
-          `${serverUrl}/contacts/user_contacts`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        setContacts(sortData(response.data));
-        setNewContact(undefined);
-      } catch (error) {
-        console.error("Error fetching entity data:", error);
-      }
-    };
-
-    fetchContacts();
-  }, []);
 
   useEffect(() => {
     if (lastMessage.conversation_id === "") {
@@ -219,6 +228,7 @@ export default function Contacts() {
       newContactCard = (
         <ContactCard
           key={newContact.contact_id}
+          entity_username={newContact.contact_username_target}
           animate={newContact.animate}
           conversation_id={newContact.conversation_id}
           conversation_name={newContact.conversation_name}
@@ -234,6 +244,7 @@ export default function Contacts() {
     return (
       <ContactCard
         key={contact.contact_id}
+        entity_username={contact.contact_username_target}
         conversation_id={contact.conversation_id}
         conversation_name={contact.conversation_name}
         contact_name={contact.contact_name}

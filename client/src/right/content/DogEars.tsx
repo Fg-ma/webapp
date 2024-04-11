@@ -9,7 +9,7 @@ const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function DogEarCards() {
+export default function DogEars() {
   /* 
     Description:   
       Gets dogEars data from a database then extracts the id, title, and issueQuestions to be mapped

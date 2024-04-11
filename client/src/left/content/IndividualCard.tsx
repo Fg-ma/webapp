@@ -30,7 +30,7 @@ export function IndividualCard({
         className="bg-white w-fill my-4 ml-9 h-20 py-2.5 flex items-center rounded-md cursor-pointer"
         onClick={handleClick}
       >
-        <div className="w-14 aspect-square ml-4 mr-5">
+        <div className="w-14 aspect-square mx-4">
           <ProfilePicture
             size={{ h: 3.5, w: 3.5 }}
             entity_username={username}
@@ -39,7 +39,7 @@ export function IndividualCard({
             clickable={false}
           />
         </div>
-        <div className="m-2 truncate">
+        <div className="my-2 mr-4 truncate">
           <p className="font-Josefin text-xl truncate">
             {name ? name : username}
           </p>

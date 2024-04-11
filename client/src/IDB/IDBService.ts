@@ -5,8 +5,9 @@ export const IDB_VERSION = 1;
 export const AFFILIATED_INDIVIDUALS_TABLE = "affiliatedIndividuals";
 export const AFFILIATED_GROUPS_TABLE = "affiliatedGroups";
 export const AFFILIATED_ORGANIZATIONS_TABLE = "affiliatedOrganizations";
-export const PROFILE_PICTURES = "profilePictures";
-export const THUMBNAILS = "thumbnails";
+export const PROFILE_PICTURES_TABLE = "profilePictures";
+export const THUMBNAILS_TABLE = "thumbnails";
+export const CONTACTS_TABLE = "contacts";
 
 export function useIndexedDB() {
   const db = useRef<IDBDatabase | null>(null);
@@ -46,11 +47,14 @@ export function useIndexedDB() {
           ) {
             db.current.createObjectStore(AFFILIATED_ORGANIZATIONS_TABLE);
           }
-          if (!db.current.objectStoreNames.contains(PROFILE_PICTURES)) {
-            db.current.createObjectStore(PROFILE_PICTURES);
+          if (!db.current.objectStoreNames.contains(PROFILE_PICTURES_TABLE)) {
+            db.current.createObjectStore(PROFILE_PICTURES_TABLE);
           }
-          if (!db.current.objectStoreNames.contains(THUMBNAILS)) {
-            db.current.createObjectStore(THUMBNAILS);
+          if (!db.current.objectStoreNames.contains(THUMBNAILS_TABLE)) {
+            db.current.createObjectStore(THUMBNAILS_TABLE);
+          }
+          if (!db.current.objectStoreNames.contains(CONTACTS_TABLE)) {
+            db.current.createObjectStore(CONTACTS_TABLE);
           }
         };
       });
