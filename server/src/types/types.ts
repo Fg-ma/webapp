@@ -41,6 +41,7 @@ export interface Conversation {
   conversation_name: string;
   conversation_creation_date: string;
   last_message: string;
+  last_message_date: string;
   members?: ConversationMember[];
 }
 
@@ -217,7 +218,9 @@ export interface FullVideo {
 }
 
 export interface ConversationMember {
+  isNewConversation?: boolean;
   conversation_id: string;
+  conversations_members_id: string;
   member_id: string;
   individual_data?: {
     individual_username: string;

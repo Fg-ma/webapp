@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   setConversation,
   setIds,
@@ -8,6 +9,7 @@ import {
 import { ConversationCardProps } from "@FgTypes/rightTypes";
 
 export function ConversationCard({
+  animate,
   conversation_id,
   conversation_name,
   last_message,
@@ -25,23 +27,29 @@ export function ConversationCard({
   };
 
   return (
-    <div
-      className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
-      onClick={handleClick}
-    >
-      <div
-        className="mx-5 my-2 space-y-1"
-        style={{ width: "calc(100% - 2.5rem)" }}
+    <AnimatePresence>
+      <motion.div
+        initial={animate && { opacity: 0, scale: 0.95 }}
+        animate={animate && { opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
+        onClick={handleClick}
       >
-        <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
-          {conversation_name
-            ? conversation_name
-            : members && members.join(", ")}
-        </p>
-        <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
-          {last_message}
-        </p>
-      </div>
-    </div>
+        <div
+          className="mx-5 my-2 space-y-1"
+          style={{ width: "calc(100% - 2.5rem)" }}
+        >
+          <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
+            {conversation_name
+              ? conversation_name
+              : members && members.join(", ")}
+          </p>
+          <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
+            {last_message}
+          </p>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }

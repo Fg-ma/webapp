@@ -8,6 +8,7 @@ export const AFFILIATED_ORGANIZATIONS_TABLE = "affiliatedOrganizations";
 export const PROFILE_PICTURES_TABLE = "profilePictures";
 export const THUMBNAILS_TABLE = "thumbnails";
 export const CONTACTS_TABLE = "contacts";
+export const CONVERSATIONS_TABLE = "conversations";
 
 export function useIndexedDB() {
   const db = useRef<IDBDatabase | null>(null);
@@ -55,6 +56,9 @@ export function useIndexedDB() {
           }
           if (!db.current.objectStoreNames.contains(CONTACTS_TABLE)) {
             db.current.createObjectStore(CONTACTS_TABLE);
+          }
+          if (!db.current.objectStoreNames.contains(CONVERSATIONS_TABLE)) {
+            db.current.createObjectStore(CONVERSATIONS_TABLE);
           }
         };
       });

@@ -6,6 +6,32 @@ import { ReactNode } from "react";
   IDBContext.tsx
 */
 
+interface Members {
+  conversation_id: string;
+  member_id: string;
+  individual_data?: {
+    individual_name: string | null;
+    individual_username: string;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
+
+export interface Conversation {
+  conversation_id: string;
+  conversation_name: string | null;
+  conversation_creation_date: string;
+  last_message: string | null;
+  last_message_date: string | null;
+  members: Members[];
+}
+
 export interface Contact {
   animate?: boolean;
   contact_id: string;
@@ -89,7 +115,12 @@ export interface IDBService {
   getStoredThumbnail: (index: string) => Promise<Thumbnail | null>;
   getStoredContacts: () => Promise<Contact[]>;
   storeContacts: (contact: Contact[]) => Promise<void>;
+  storeContact: (contact: Contact) => Promise<void>;
   deleteStoredContacts: () => Promise<void>;
+  getStoredConversations: () => Promise<Conversation[]>;
+  storeConversations: (conversations: Conversation[]) => Promise<void>;
+  storeConversation: (conversation: Conversation) => Promise<void>;
+  deleteStoredConversations: () => Promise<void>;
 }
 
 /*
@@ -185,6 +216,27 @@ export interface ContactContextType {
     React.SetStateAction<{
       action: string;
       contact_id: string;
+    }>
+  >;
+}
+
+/*
+ ConversationContext.tsx
+*/
+
+export interface ConversationContextProviderProps {
+  children: ReactNode;
+}
+
+export interface ConversationContextType {
+  fluxConversation: {
+    action: string;
+    conversation_id: string;
+  };
+  setFluxConversation: React.Dispatch<
+    React.SetStateAction<{
+      action: string;
+      conversation_id: string;
     }>
   >;
 }

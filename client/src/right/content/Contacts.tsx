@@ -17,8 +17,12 @@ export default function Contacts() {
   const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
   const { fluxContact, setFluxContact } = useContactContext();
-  const { storeContacts, getStoredContacts, deleteStoredContacts } =
-    useIndexedDBContext();
+  const {
+    storeContact,
+    storeContacts,
+    getStoredContacts,
+    deleteStoredContacts,
+  } = useIndexedDBContext();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [newContact, setNewContact] = useState<Contact>();
 
@@ -76,13 +80,12 @@ export default function Contacts() {
           const sortedData = sortData(response.data);
 
           setContacts(sortedData);
-          setNewContact(undefined);
           await storeContacts(sortedData);
         } catch (error) {
           console.error("Error fetching entity data:", error);
         }
       } else {
-        setContacts(storedContacts);
+        setContacts(sortData(storedContacts));
       }
     };
 
@@ -91,42 +94,37 @@ export default function Contacts() {
 
   useEffect(() => {
     const fetchNewContact = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedContacts = await getStoredContacts();
 
-        if (!token) {
-          console.error("Token not found in local storage");
-          return;
+      if (storedContacts.length !== 0) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/contacts/get_contact_by_contact_id`,
+            {
+              params: {
+                contact_id: fluxContact.contact_id,
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const newContact = { ...response.data, animate: true };
+
+          setNewContact(newContact);
+
+          await storeContact({ ...response.data, animate: false });
+        } catch (error) {
+          console.error("Error fetching Contact data:", error);
         }
-
-        const response = await Axios.get(
-          `${serverUrl}/contacts/get_contact_by_contact_id`,
-          {
-            params: {
-              contact_id: fluxContact.contact_id,
-            },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        const newContact = { ...response.data, animate: true };
-
-        setNewContact(newContact);
-
-        const storingContacts: Contact[] = contacts.map((contact) => ({
-          ...contact,
-          animate: false,
-        }));
-
-        await deleteStoredContacts();
-        await storeContacts([
-          { ...response.data, animate: true },
-          ...storingContacts,
-        ]);
-      } catch (error) {
-        console.error("Error fetching Contact data:", error);
       }
     };
 
@@ -147,7 +145,7 @@ export default function Contacts() {
         action: "",
         contact_id: "",
       });
-    } else if (fluxContact?.action === "deletedRelation") {
+    } else if (fluxContact?.action === "deletedContact") {
       deleteOldContact();
       setFluxContact({
         action: "",

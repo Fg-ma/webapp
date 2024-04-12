@@ -158,6 +158,7 @@ export interface DogEarCardProps {
 */
 
 export interface ConversationCardProps {
+  animate?: boolean;
   conversation_id: string;
   conversation_name: string | null;
   last_message: string | null;
@@ -269,6 +270,7 @@ interface Members {
 }
 
 export interface Conversation {
+  animate?: boolean;
   conversation_id: string;
   conversation_name: string | null;
   conversation_creation_date: string;

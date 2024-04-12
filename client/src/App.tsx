@@ -16,6 +16,7 @@ import { PinnedContextProvider } from "@context/PinnedContext";
 import { LastMessageContextProvider } from "@context/LastMessageContext";
 import { LiveUpdatesSocketProvider } from "@context/LiveUpdatesContext";
 import { ContactContextProvider } from "@context/ContactContext";
+import { ConversationContextProvider } from "@context/ConversationContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 
 interface LoginState {
@@ -80,26 +81,28 @@ export default function App() {
         <PinnedContextProvider>
           <AffiliateContextProvider>
             <ContactContextProvider>
-              <div id="base" className="h-screen w-screen">
-                <div
-                  id="pageSpace"
-                  className="flex justify-between mx-12 mt-16 h-full"
-                >
-                  <LeftSpace />
-
+              <ConversationContextProvider>
+                <div id="base" className="h-screen w-screen">
                   <div
-                    ref={middleSpaceContainerRef}
-                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                    id="pageSpace"
+                    className="flex justify-between mx-12 mt-16 h-full"
                   >
-                    <MiddleSpace
-                      middleSpaceContainerRef={middleSpaceContainerRef}
-                    />
-                    <PageNav />
-                  </div>
+                    <LeftSpace />
 
-                  <RightSpace />
+                    <div
+                      ref={middleSpaceContainerRef}
+                      style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                    >
+                      <MiddleSpace
+                        middleSpaceContainerRef={middleSpaceContainerRef}
+                      />
+                      <PageNav />
+                    </div>
+
+                    <RightSpace />
+                  </div>
                 </div>
-              </div>
+              </ConversationContextProvider>
             </ContactContextProvider>
           </AffiliateContextProvider>
         </PinnedContextProvider>

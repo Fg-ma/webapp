@@ -9,6 +9,7 @@ import {
   setSecondaryPageState,
 } from "@redux/pageState/pageStateActions";
 import { MessageButtonProps } from "@FgTypes/middleTypes";
+import { useConversationContext } from "@context/ConversationContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -17,6 +18,8 @@ const serverUrl = isDevelopment
 
 export default function MessageButton({ entity_username }: MessageButtonProps) {
   const dispatch = useDispatch();
+
+  const { setFluxConversation } = useConversationContext();
 
   const handleClick = async () => {
     const token = localStorage.getItem("token");
@@ -36,6 +39,13 @@ export default function MessageButton({ entity_username }: MessageButtonProps) {
         },
       },
     );
+
+    if (response.data.isNewConversation) {
+      setFluxConversation({
+        action: "newConversation",
+        conversation_id: response.data.conversation_id,
+      });
+    }
 
     dispatch(setPageState("main", "messages"));
     dispatch(setSecondaryPageState("main", "messages"));

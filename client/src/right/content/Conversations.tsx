@@ -5,6 +5,8 @@ import { useSocketContext } from "@context/LiveUpdatesContext";
 import { Conversation } from "@FgTypes/rightTypes";
 import { ConversationCard } from "./ConversationCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
+import { useIndexedDBContext } from "@context/IDBContext";
+import { useConversationContext } from "@context/ConversationContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -14,7 +16,15 @@ const serverUrl = isDevelopment
 export default function Conversations() {
   const { liveUpdatesSocket } = useSocketContext();
   const { lastMessage } = useLastMessageContext();
+  const { fluxConversation, setFluxConversation } = useConversationContext();
+  const {
+    storeConversation,
+    storeConversations,
+    getStoredConversations,
+    deleteStoredConversations,
+  } = useIndexedDBContext();
   const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [newConversation, setNewConversation] = useState<Conversation>();
 
   const sortData = (data: Conversation[]) => {
     const parseDate = (dateString: string | null) =>
@@ -50,30 +60,102 @@ export default function Conversations() {
 
   useEffect(() => {
     const fetchConversations = async () => {
-      try {
-        const token = localStorage.getItem("token");
+      const storedConversations = await getStoredConversations();
 
-        if (!token) {
-          return;
-        }
+      if (storedConversations.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await Axios.get(
-          `${serverUrl}/conversations/user_conversations`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          if (!token) {
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/conversations/user_conversations`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          },
-        );
+          );
 
-        setConversations(sortData(response.data));
-      } catch (error) {
-        console.error("Error fetching entity data:", error);
+          const sortedData = sortData(response.data);
+
+          setConversations(sortedData);
+          await storeConversations(sortedData);
+        } catch (error) {
+          console.error("Error fetching entity data:", error);
+        }
+      } else {
+        setConversations(sortData(storedConversations));
       }
     };
 
     fetchConversations();
   }, []);
+
+  useEffect(() => {
+    const fetchNewConversation = async () => {
+      const storedConversations = await getStoredConversations();
+
+      if (storedConversations.length !== 0) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/conversations/get_conversation_by_conversation_id`,
+            {
+              params: {
+                conversation_id: fluxConversation.conversation_id,
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const newConversation = { ...response.data, animate: true };
+
+          setNewConversation(newConversation);
+
+          await storeConversation({ ...response.data, animate: false });
+        } catch (error) {
+          console.error("Error fetching Conversation data:", error);
+        }
+      }
+    };
+
+    const deleteOldConversation = async () => {
+      const newConversations = conversations.filter(
+        (conversation) =>
+          conversation.conversation_id !== fluxConversation.conversation_id,
+      );
+
+      setConversations(newConversations);
+
+      await deleteStoredConversations();
+      await storeConversations(newConversations);
+    };
+
+    if (fluxConversation?.action === "newConversation") {
+      fetchNewConversation();
+      setFluxConversation({
+        action: "",
+        conversation_id: "",
+      });
+    } else if (fluxConversation?.action === "deletedConversation") {
+      deleteOldConversation();
+      setFluxConversation({
+        action: "",
+        conversation_id: "",
+      });
+    }
+  }, [fluxConversation]);
 
   // Update last message and message position
   useEffect(() => {
@@ -144,8 +226,9 @@ export default function Conversations() {
     };
   }, []);
 
-  const conversationCards = conversations.map((conversation) => {
+  const getConversationMembersNames = (conversation: Conversation) => {
     let conversationMembersNames: string[] = [];
+
     for (const member of conversation.members) {
       if (member.individual_data) {
         if (member.individual_data.individual_name) {
@@ -174,17 +257,49 @@ export default function Conversations() {
       }
     }
 
+    return conversationMembersNames;
+  };
+
+  let newConversationCard;
+  if (newConversation) {
+    const foundConversation = conversations.find(
+      (conversation) =>
+        conversation.conversation_id === newConversation.conversation_id,
+    );
+    if (!foundConversation) {
+      newConversationCard = (
+        <ConversationCard
+          key={newConversation.conversation_id}
+          animate={newConversation.animate}
+          conversation_id={newConversation.conversation_id}
+          conversation_name={newConversation.conversation_name}
+          last_message={newConversation.last_message}
+          members={getConversationMembersNames(newConversation)}
+          conversation_creation_date={
+            newConversation.conversation_creation_date
+          }
+        />
+      );
+    }
+  }
+
+  const conversationCards = conversations.map((conversation) => {
     return (
       <ConversationCard
         key={conversation.conversation_id}
         conversation_id={conversation.conversation_id}
         conversation_name={conversation.conversation_name}
         last_message={conversation.last_message}
-        members={conversationMembersNames}
+        members={getConversationMembersNames(conversation)}
         conversation_creation_date={conversation.conversation_creation_date}
       />
     );
   });
 
-  return <div>{conversationCards}</div>;
+  return (
+    <div>
+      {newConversationCard}
+      {conversationCards}
+    </div>
+  );
 }

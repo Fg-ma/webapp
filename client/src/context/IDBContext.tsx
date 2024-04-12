@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import {
   CONTACTS_TABLE,
+  CONVERSATIONS_TABLE,
   PROFILE_PICTURES_TABLE,
   THUMBNAILS_TABLE,
   useIndexedDB,
@@ -13,6 +14,7 @@ import {
   Individual,
   Organization,
   Thumbnail,
+  Conversation,
 } from "@FgTypes/contextTypes";
 
 const IndexedDBContext = createContext<IDBService | undefined>(undefined);
@@ -155,9 +157,70 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     }
   };
 
+  const storeContact = async (contact: Contact): Promise<void> => {
+    try {
+      await indexedDBService.addItem(
+        CONTACTS_TABLE,
+        contact.contact_id,
+        contact,
+      );
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+    }
+  };
+
   const deleteStoredContacts = async (): Promise<void> => {
     try {
       await indexedDBService.deleteAllItemsFromTable(CONTACTS_TABLE);
+    } catch (error) {
+      console.error("Error deleting stored entities from IndexedDB:", error);
+    }
+  };
+
+  const getStoredConversations = async (): Promise<Conversation[]> => {
+    try {
+      const conversations =
+        await indexedDBService.getAllItemsFromTable(CONVERSATIONS_TABLE);
+      return conversations as Conversation[];
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+      return [];
+    }
+  };
+
+  const storeConversations = async (
+    conversations: Conversation[],
+  ): Promise<void> => {
+    try {
+      for (let i = 0; i < conversations.length; i++) {
+        await indexedDBService.addItem(
+          CONVERSATIONS_TABLE,
+          conversations[i].conversation_id,
+          conversations[i],
+        );
+      }
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+    }
+  };
+
+  const storeConversation = async (
+    conversation: Conversation,
+  ): Promise<void> => {
+    try {
+      await indexedDBService.addItem(
+        CONVERSATIONS_TABLE,
+        conversation.conversation_id,
+        conversation,
+      );
+    } catch (error) {
+      console.error("Error storing profile picture in IndexedDB:", error);
+    }
+  };
+
+  const deleteStoredConversations = async (): Promise<void> => {
+    try {
+      await indexedDBService.deleteAllItemsFromTable(CONVERSATIONS_TABLE);
     } catch (error) {
       console.error("Error deleting stored entities from IndexedDB:", error);
     }
@@ -180,7 +243,12 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     getStoredThumbnail: getStoredThumbnail,
     getStoredContacts: getStoredContacts,
     storeContacts: storeContacts,
+    storeContact: storeContact,
     deleteStoredContacts: deleteStoredContacts,
+    getStoredConversations: getStoredConversations,
+    storeConversations: storeConversations,
+    storeConversation: storeConversation,
+    deleteStoredConversations: deleteStoredConversations,
   };
 
   return (
