@@ -174,7 +174,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
       return {
         contact_id: contact.contact_id,
         contact_name: contact_name,
-        conversation_id: contact,
+        conversation_id: contact.conversation_id,
         conversation_name: conversation_name,
         contact_username_root: req.user.username,
         contact_username_target: contact_username,

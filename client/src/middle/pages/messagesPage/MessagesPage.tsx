@@ -3,7 +3,12 @@ import { useSelector } from "react-redux";
 import Axios from "axios";
 import io from "socket.io-client";
 import config from "@config";
-import { Message, ConverationId, MessagePageProps } from "@FgTypes/middleTypes";
+import {
+  Message,
+  ConverationId,
+  MessagePageProps,
+  Typing,
+} from "@FgTypes/middleTypes";
 import MessagesTextField from "./MessagesTextField";
 import MessagesConversationBody from "./MessagesConversationBody";
 
@@ -22,12 +27,35 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
   const [previousConversationId, setPreviousConversationId] = useState<
     string | null
   >(null);
-  const conversationSize = useRef(3);
+  const conversationSize = useRef(2);
   const messagesPageRef = useRef<HTMLDivElement>(null);
   const conversation_id = useSelector(
     (state: ConverationId) => state.page.main.pagePayload.ids.conversation_id,
   );
+  const [typing, setTyping] = useState<Typing[]>([]);
   const token = localStorage.getItem("token");
+
+  const sortData = (data: Message[]) => {
+    const parseDate = (dateString: string | null) =>
+      dateString
+        ? new Date(dateString).getTime()
+        : new Date("2000-01-01T01:01:01.000Z").getTime();
+
+    data.sort((a, b) => parseDate(a.message_date) - parseDate(b.message_date));
+
+    return [...data];
+  };
+
+  // Establish socket connection
+  useEffect(() => {
+    messageSocket.on("connection", () => {
+      return;
+    });
+
+    return () => {
+      messageSocket.disconnect();
+    };
+  }, []);
 
   const joinConversation = (conversation_id: string) => {
     if (!token) {
@@ -75,18 +103,10 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       setConversation((prevConversation) => [...prevConversation, message]);
     });
 
-    const sortData = (data: Message[]) => {
-      const parseDate = (dateString: string | null) =>
-        dateString
-          ? new Date(dateString).getTime()
-          : new Date("2000-01-01T01:01:01.000Z").getTime();
-
-      data.sort(
-        (a, b) => parseDate(a.message_date) - parseDate(b.message_date),
-      );
-
-      return [...data];
-    };
+    // Handle typing changes
+    messageSocket.on("typingStatusChange", async (typingStatus: Typing) => {
+      setTyping((prev) => [...prev, typingStatus]);
+    });
 
     const fetchConversationData = async () => {
       try {
@@ -106,7 +126,8 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
           },
         );
 
-        setConversation(sortData(response.data));
+        conversationSize.current = response.data.conversationSize;
+        setConversation(sortData(response.data.conversation));
       } catch (error) {
         console.error("Error fetching entity data:", error);
       }
@@ -125,17 +146,6 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       messageSocket.off("newMessage");
     };
   }, [conversation_id]);
-
-  // Establish socket connection
-  useEffect(() => {
-    messageSocket.on("connection", () => {
-      return;
-    });
-
-    return () => {
-      messageSocket.disconnect();
-    };
-  }, []);
 
   // Set intial scroll to bottom
   useEffect(() => {
@@ -185,6 +195,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       <MessagesConversationBody
         conversation={conversation}
         conversationSize={conversationSize.current}
+        typing={typing}
       />
       <MessagesTextField
         inputValue={inputValue}

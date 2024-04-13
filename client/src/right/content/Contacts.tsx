@@ -183,6 +183,11 @@ export default function Contacts() {
 
   // Establish incomingMessage live update socket connection
   useEffect(() => {
+    const asyncStoreContacts = async (contacts: Contact[]) => {
+      await deleteStoredContacts();
+      await storeContacts(contacts);
+    };
+
     liveUpdatesSocket?.on(
       "incomingMessage",
       (incomingMessage: { content: string; conversation_id: string }) => {
@@ -207,6 +212,7 @@ export default function Contacts() {
             updatedContacts.unshift(updatedContact);
           }
 
+          asyncStoreContacts(updatedContacts);
           return updatedContacts;
         });
       },

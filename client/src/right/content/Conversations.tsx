@@ -187,6 +187,11 @@ export default function Conversations() {
 
   // Establish incomingMessage live update socket connection
   useEffect(() => {
+    const asyncStoreConversations = async (conversations: Conversation[]) => {
+      await deleteStoredConversations();
+      await storeConversations(conversations);
+    };
+
     liveUpdatesSocket?.on(
       "incomingMessage",
       (incomingMessage: { content: string; conversation_id: string }) => {
@@ -216,6 +221,7 @@ export default function Conversations() {
             updatedConversations.unshift(updatedConversation);
           }
 
+          asyncStoreConversations(updatedConversations);
           return updatedConversations;
         });
       },

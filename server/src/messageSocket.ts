@@ -56,6 +56,23 @@ export default function messageSocket(server: HttpServer) {
       }
     );
 
+    socket.on(
+      "typing",
+      async (token: string, conversation_id: string, typing: boolean) => {
+        const isInConversation = await verifyUser(token, conversation_id);
+        const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+
+        if (isInConversation && typeof user !== "string") {
+          io.to(conversation_id).emit("typingStatusChange", {
+            content: typing,
+            typer: user.username,
+          });
+        } else {
+          console.log("Authorization denied");
+        }
+      }
+    );
+
     socket.on("joinConversation", async (token, conversation_id) => {
       const isInConversation = await verifyUser(token, conversation_id);
 

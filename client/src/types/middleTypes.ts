@@ -617,6 +617,11 @@ export interface Message {
   message_date: string;
 }
 
+export interface Typing {
+  typing: boolean;
+  typer: string;
+}
+
 /*
   MessagesConversationBody.tsx
 */
@@ -624,6 +629,7 @@ export interface Message {
 export interface MessagesConversationBodyProps {
   conversation: Message[];
   conversationSize: number;
+  typing: Typing[];
 }
 
 /*

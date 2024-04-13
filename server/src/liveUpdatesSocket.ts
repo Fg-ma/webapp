@@ -2,7 +2,7 @@ import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
-import { ConversationMember } from "@FgTypes/types";
+import { ConversationMember, Entity } from "@FgTypes/types";
 
 const verifyUser = async (token: string, conversation_id: string) => {
   try {
@@ -44,23 +44,34 @@ export default function liveUpdatesSocket(server: HttpServer) {
         const isInConversation = await verifyUser(token, conversation_id);
         const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
-        const recipients = await prisma.conversations_members.findMany({
-          where: {
-            conversation_id: conversation_id,
-          },
-        });
-
         if (isInConversation && typeof user !== "string") {
+          const recipients: ConversationMember[] =
+            await prisma.conversations_members.findMany({
+              where: {
+                conversation_id: conversation_id,
+              },
+            });
+
           const validRecipients = recipients.filter(
             (recipient) => recipient.member_id !== user.user_id
           );
 
           const validRecipientIds = validRecipients.map(
-            (recipient: ConversationMember) => recipient.member_id
+            (recipient) => recipient.member_id
           );
 
-          for (const index in validRecipientIds) {
-            io.to(validRecipientIds[index]).emit("incomingMessage", {
+          const entities: Entity[] = await prisma.entities.findMany({
+            where: {
+              entity_id: { in: validRecipientIds },
+            },
+          });
+
+          const entityUsernames = entities.map(
+            (entity) => entity.entity_username
+          );
+
+          for (const username in entityUsernames) {
+            io.to(entityUsernames[username]).emit("incomingMessage", {
               content: message,
               conversation_id: conversation_id,
             });
@@ -75,7 +86,7 @@ export default function liveUpdatesSocket(server: HttpServer) {
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
       if (user && typeof user !== "string") {
-        socket.join(user.user_id);
+        socket.join(user.username);
       } else {
         console.log("Authorization denied");
       }
@@ -84,7 +95,7 @@ export default function liveUpdatesSocket(server: HttpServer) {
     socket.on("leaveSession", (token) => {
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
       if (user && typeof user !== "string") {
-        socket.leave(user.user_id);
+        socket.leave(user.user_username);
       } else {
         console.log("Authorization denied");
       }

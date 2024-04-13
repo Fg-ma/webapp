@@ -14,7 +14,6 @@ import "./filterSwitches.css";
 import { AffiliateContextProvider } from "@context/AffiliateContext";
 import { PinnedContextProvider } from "@context/PinnedContext";
 import { LastMessageContextProvider } from "@context/LastMessageContext";
-import { LiveUpdatesSocketProvider } from "@context/LiveUpdatesContext";
 import { ContactContextProvider } from "@context/ContactContext";
 import { ConversationContextProvider } from "@context/ConversationContext";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -55,16 +54,16 @@ export default function App() {
   }, [token]);
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !liveUpdatesSocket) {
       return;
     }
 
-    liveUpdatesSocket?.emit("joinSession", token);
+    liveUpdatesSocket.emit("joinSession", token);
 
     return () => {
-      liveUpdatesSocket?.emit("leaveSession", token);
+      liveUpdatesSocket.emit("leaveSession", token);
     };
-  }, [isLoggedIn]);
+  }, [isLoggedIn, liveUpdatesSocket]);
 
   if (!isLoggedIn) {
     switch (loginPageState) {
@@ -76,37 +75,35 @@ export default function App() {
   }
 
   return (
-    <LiveUpdatesSocketProvider>
-      <LastMessageContextProvider>
-        <PinnedContextProvider>
-          <AffiliateContextProvider>
-            <ContactContextProvider>
-              <ConversationContextProvider>
-                <div id="base" className="h-screen w-screen">
+    <LastMessageContextProvider>
+      <PinnedContextProvider>
+        <AffiliateContextProvider>
+          <ContactContextProvider>
+            <ConversationContextProvider>
+              <div id="base" className="h-screen w-screen">
+                <div
+                  id="pageSpace"
+                  className="flex justify-between mx-12 mt-16 h-full"
+                >
+                  <LeftSpace />
+
                   <div
-                    id="pageSpace"
-                    className="flex justify-between mx-12 mt-16 h-full"
+                    ref={middleSpaceContainerRef}
+                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
                   >
-                    <LeftSpace />
-
-                    <div
-                      ref={middleSpaceContainerRef}
-                      style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-                    >
-                      <MiddleSpace
-                        middleSpaceContainerRef={middleSpaceContainerRef}
-                      />
-                      <PageNav />
-                    </div>
-
-                    <RightSpace />
+                    <MiddleSpace
+                      middleSpaceContainerRef={middleSpaceContainerRef}
+                    />
+                    <PageNav />
                   </div>
+
+                  <RightSpace />
                 </div>
-              </ConversationContextProvider>
-            </ContactContextProvider>
-          </AffiliateContextProvider>
-        </PinnedContextProvider>
-      </LastMessageContextProvider>
-    </LiveUpdatesSocketProvider>
+              </div>
+            </ConversationContextProvider>
+          </ContactContextProvider>
+        </AffiliateContextProvider>
+      </PinnedContextProvider>
+    </LastMessageContextProvider>
   );
 }

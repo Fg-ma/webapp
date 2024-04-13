@@ -7,6 +7,7 @@ import RecipientsBubbles from "./RecipientsBubbles";
 export default function MessagesConversationBody({
   conversation,
   conversationSize,
+  typing,
 }: MessagesConversationBodyProps) {
   const renderContent = () => {
     return conversation.map((message, index) => {

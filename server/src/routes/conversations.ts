@@ -5,10 +5,10 @@ import verifyToken from "./verifyJWT";
 import {
   Conversation,
   ConversationMember,
+  ConversationsMessagesLogs,
   Entity,
   Group,
   Individual,
-  Message,
   Organization,
 } from "@FgTypes/types";
 
@@ -398,30 +398,28 @@ router.get(
     const { conversation_id } = req.query;
 
     try {
-      const conversationMembers = await req.db.conversations_members.findMany({
-        where: {
-          conversation_id: conversation_id,
-        },
-      });
-
-      const isInConversation = conversationMembers.some(
-        (member: ConversationMember) => member.member_id === req.user.user_id
-      );
-
-      let conversation = [];
-
-      if (isInConversation) {
-        conversation = await req.db.conversations_messages_logs.findMany({
+      const conversationMembers: ConversationMember[] =
+        await req.db.conversations_members.findMany({
           where: {
             conversation_id: conversation_id,
           },
         });
 
-        const entityIds = conversation.map(
-          (message: Message) => message.entity_id
-        );
+      const isInConversation = conversationMembers.some(
+        (member) => member.member_id === req.user.user_id
+      );
 
-        const individuals = await req.db.entities.findMany({
+      if (isInConversation) {
+        const conversation: ConversationsMessagesLogs[] =
+          await req.db.conversations_messages_logs.findMany({
+            where: {
+              conversation_id: conversation_id,
+            },
+          });
+
+        const entityIds = conversation.map((message) => message.entity_id);
+
+        const individuals: Entity[] = await req.db.entities.findMany({
           where: {
             entity_id: { in: entityIds },
             entity_type: 1,
@@ -429,31 +427,33 @@ router.get(
         });
 
         const individualsIds = individuals.map(
-          (individual: Entity) => individual.entity_id
+          (individual) => individual.entity_id
         );
 
-        const individualsData = await req.db.individuals.findMany({
-          where: {
-            individual_id: { in: individualsIds },
-          },
-        });
+        const individualsData: Individual[] = await req.db.individuals.findMany(
+          {
+            where: {
+              individual_id: { in: individualsIds },
+            },
+          }
+        );
 
-        const groups = await req.db.entities.findMany({
+        const groups: Entity[] = await req.db.entities.findMany({
           where: {
             entity_id: { in: entityIds },
             entity_type: 2,
           },
         });
 
-        const groupsIds = groups.map((group: Entity) => group.entity_id);
+        const groupsIds = groups.map((group) => group.entity_id);
 
-        const groupsData = await req.db.groups.findMany({
+        const groupsData: Group[] = await req.db.groups.findMany({
           where: {
             group_id: { in: groupsIds },
           },
         });
 
-        const organizations = await req.db.entities.findMany({
+        const organizations: Entity[] = await req.db.entities.findMany({
           where: {
             entity_id: { in: entityIds },
             entity_type: 3,
@@ -461,16 +461,17 @@ router.get(
         });
 
         const organizationsIds = organizations.map(
-          (organization: Entity) => organization.entity_id
+          (organization) => organization.entity_id
         );
 
-        const organizationsData = await req.db.organizations.findMany({
-          where: {
-            organization_id: { in: organizationsIds },
-          },
-        });
+        const organizationsData: Organization[] =
+          await req.db.organizations.findMany({
+            where: {
+              organization_id: { in: organizationsIds },
+            },
+          });
 
-        conversation = conversation.map((message: Message) => {
+        const returningConversation = conversation.map((message) => {
           let sender = "";
           const currentEntityId = message.entity_id;
 
@@ -489,7 +490,7 @@ router.get(
           );
 
           if (individualMatch) {
-            sender = individualMatch.individual_name;
+            sender = individualMatch.individual_username;
           } else if (groupMatch) {
             sender = groupMatch.group_handle;
           } else if (organizationMatch) {
@@ -503,9 +504,12 @@ router.get(
             message_date: message.message_date,
           };
         });
-      }
 
-      res.send(conversation);
+        res.send({
+          conversation: returningConversation,
+          conversationSize: conversationMembers.length,
+        });
+      }
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");

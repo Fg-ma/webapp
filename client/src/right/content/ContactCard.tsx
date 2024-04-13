@@ -35,7 +35,7 @@ export function ContactCard({
       dispatch(setConversation(conversation_name, [], contact_creation_date));
     }
   };
-  console.log(entity_username);
+
   return (
     <AnimatePresence>
       <motion.div

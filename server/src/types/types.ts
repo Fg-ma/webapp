@@ -245,7 +245,7 @@ export interface ConversationMember {
   Global ConversationMember
 */
 
-export interface Message {
+export interface ConversationsMessagesLogs {
   conversations_messages_logs_id: string;
   conversation_id: string;
   entity_id: string;
