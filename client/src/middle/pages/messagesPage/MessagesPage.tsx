@@ -21,7 +21,6 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
   const messageSocket = io(serverUrl, {
     path: "/message-socket",
   });
-  const [inputValue, setInputValue] = useState("");
   const [conversation, setConversation] = useState<Message[]>([]);
   const [textFieldSnap, setTextFieldSnap] = useState(true);
   const [previousConversationId, setPreviousConversationId] = useState<
@@ -105,7 +104,42 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
 
     // Handle typing changes
     messageSocket.on("typingStatusChange", async (typingStatus: Typing) => {
-      setTyping((prev) => [...prev, typingStatus]);
+      if (typingStatus.typing) {
+        setTyping((prev) => {
+          let matchedSender = false;
+          for (const i in prev) {
+            if (prev[i].sender === typingStatus.sender) {
+              matchedSender = true;
+            }
+          }
+
+          if (matchedSender) {
+            return prev;
+          } else {
+            return [...prev, typingStatus];
+          }
+        });
+      } else if (!typingStatus.typing) {
+        setTyping((prev) => {
+          let matchedSender = false;
+          let matchedIndex;
+          for (const i in prev) {
+            if (prev[i].sender === typingStatus.sender) {
+              matchedSender = true;
+              matchedIndex = parseInt(i);
+            }
+          }
+
+          if (matchedSender && matchedIndex !== undefined) {
+            let returningTyping = prev
+              .slice(0, matchedIndex)
+              .concat(prev.slice(matchedIndex + 1));
+
+            return returningTyping;
+          }
+          return prev;
+        });
+      }
     });
 
     const fetchConversationData = async () => {
@@ -144,6 +178,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
         leaveConversation(conversation_id);
       }
       messageSocket.off("newMessage");
+      messageSocket.off("typingStatusChange");
     };
   }, [conversation_id]);
 
@@ -198,9 +233,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
         typing={typing}
       />
       <MessagesTextField
-        inputValue={inputValue}
         conversation_id={conversation_id}
-        setInputValue={setInputValue}
         messageSocket={messageSocket}
         messagesPageRef={messagesPageRef}
         textFieldSnap={textFieldSnap}

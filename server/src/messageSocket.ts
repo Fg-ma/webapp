@@ -64,8 +64,8 @@ export default function messageSocket(server: HttpServer) {
 
         if (isInConversation && typeof user !== "string") {
           io.to(conversation_id).emit("typingStatusChange", {
-            content: typing,
-            typer: user.username,
+            typing: typing,
+            sender: user.username,
           });
         } else {
           console.log("Authorization denied");

@@ -26,10 +26,24 @@ export default function MessagesConversationBody({
     });
   };
 
+  const renderTyping = () => {
+    return typing.map((type) => {
+      return (
+        <RecipientsBubbles
+          key={type.sender}
+          message={"typing"}
+          conversationSize={conversationSize}
+          sender={type.sender}
+        />
+      );
+    });
+  };
+
   return (
     <div className="w-full grow flex flex-col items-center justify-start pt-10">
       <MessagesConversationHeader />
       {renderContent()}
+      {renderTyping()}
     </div>
   );
 }

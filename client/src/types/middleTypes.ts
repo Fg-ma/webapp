@@ -619,7 +619,7 @@ export interface Message {
 
 export interface Typing {
   typing: boolean;
-  typer: string;
+  sender: string;
 }
 
 /*
@@ -637,9 +637,7 @@ export interface MessagesConversationBodyProps {
 */
 
 export interface MessagesTextFieldProps {
-  inputValue: string;
   conversation_id: string | null;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messageSocket: Socket;
   messagesPageRef: React.RefObject<HTMLDivElement>;
   textFieldSnap: boolean;

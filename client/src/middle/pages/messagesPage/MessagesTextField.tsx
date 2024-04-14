@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Axios from "axios";
 import config from "@config";
 import { MessagesTextFieldProps } from "@FgTypes/middleTypes";
@@ -11,9 +11,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function MessagesTextField({
-  inputValue,
   conversation_id,
-  setInputValue,
   messageSocket,
   messagesPageRef,
   textFieldSnap,
@@ -21,12 +19,24 @@ export default function MessagesTextField({
   const placeholder = "Search...";
   const { liveUpdatesSocket } = useSocketContext();
   const { setLastMessage } = useLastMessageContext();
+  const [inputValue, setInputValue] = useState("");
   const contentEditableRef = useRef<HTMLDivElement>(null);
+  const token = localStorage.getItem("token");
 
   const handleInputChange = () => {
     let text = contentEditableRef.current?.innerText || "";
 
     setInputValue(text);
+
+    if (!token) {
+      return;
+    }
+
+    if (text) {
+      messageSocket.emit("typing", token, conversation_id, true);
+    } else if (!text) {
+      messageSocket.emit("typing", token, conversation_id, false);
+    }
   };
 
   useEffect(() => {
@@ -82,8 +92,6 @@ export default function MessagesTextField({
     e.preventDefault();
 
     if (!inputValue || !contentEditableRef.current || !conversation_id) return;
-
-    const token = localStorage.getItem("token");
 
     if (!token) {
       return;
