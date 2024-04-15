@@ -1,4 +1,5 @@
 import {
+  SET_FILTER_VALUE,
   TOGGLE_DROP,
   CLOSE_DROP,
   SET_FILTER_OPTION,
@@ -11,6 +12,11 @@ import {
   CLEAR_ADVANCED_AFFILIATED_FILTER,
   SET_DATE_RANGE,
 } from "./filterTypes";
+
+export const setFilterValue = (filter: string, value: string) => ({
+  type: SET_FILTER_VALUE,
+  payload: { filter, value },
+});
 
 export const toggleDrop = (filter: string, dropType: string) => ({
   type: TOGGLE_DROP,

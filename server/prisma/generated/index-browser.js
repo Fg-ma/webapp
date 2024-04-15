@@ -149,7 +149,8 @@ exports.Prisma.ConversationsScalarFieldEnum = {
   conversation_name: 'conversation_name',
   conversation_creation_date: 'conversation_creation_date',
   last_message: 'last_message',
-  last_message_date: 'last_message_date'
+  last_message_date: 'last_message_date',
+  conversations_pictures_id: 'conversations_pictures_id'
 };
 
 exports.Prisma.Conversations_membersScalarFieldEnum = {
@@ -164,6 +165,12 @@ exports.Prisma.Conversations_messages_logsScalarFieldEnum = {
   entity_id: 'entity_id',
   message: 'message',
   message_date: 'message_date'
+};
+
+exports.Prisma.Conversations_picturesScalarFieldEnum = {
+  conversations_pictures_id: 'conversations_pictures_id',
+  conversation_picture_data: 'conversation_picture_data',
+  conversation_picture_filename: 'conversation_picture_filename'
 };
 
 exports.Prisma.EntitiesScalarFieldEnum = {
@@ -349,6 +356,7 @@ exports.Prisma.ModelName = {
   conversations: 'conversations',
   conversations_members: 'conversations_members',
   conversations_messages_logs: 'conversations_messages_logs',
+  conversations_pictures: 'conversations_pictures',
   entities: 'entities',
   entities_content: 'entities_content',
   entities_dislikes: 'entities_dislikes',

@@ -1,8 +1,18 @@
-import React, { useState, useEffect, useRef, ChangeEvent } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ChangeEvent,
+  FormEvent,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import RightSearchFilter from "./RightSearchFilter";
-import { toggleDrop, cancelFilterChanges } from "@redux/filters/filterActions";
+import {
+  toggleDrop,
+  cancelFilterChanges,
+  setFilterValue,
+} from "@redux/filters/filterActions";
 import { RightSearchBarProps, RightPageState } from "@FgTypes/rightTypes";
 
 export default function RightSearchBar({
@@ -62,6 +72,7 @@ export default function RightSearchBar({
 
   // Reset the searchbar when page changes
   useEffect(() => {
+    dispatch(setFilterValue(page, ""));
     setInputValue("");
   }, [page]);
 
@@ -152,13 +163,21 @@ export default function RightSearchBar({
     }
   };
 
+  const handleRightSearchBarSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setFilterValue(page, inputValue));
+  };
+
   return (
     <div
       ref={refs.rightSpaceSearchBar}
       className="h-16 w-full bg-fg-white-90 flex justify-center items-center"
     >
-      <form className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center border border-fg-white-85">
-        <input
+      <form
+        className="w-4/5 h-10 bg-white rounded-md overflow-clip flex items-center border border-fg-white-85"
+        onSubmit={handleRightSearchBarSubmit}
+      >
+        <button
           key="searchArrow"
           type="submit"
           value=""

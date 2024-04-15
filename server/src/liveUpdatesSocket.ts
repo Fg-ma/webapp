@@ -71,7 +71,7 @@ export default function liveUpdatesSocket(server: HttpServer) {
           );
 
           for (const username in entityUsernames) {
-            io.to(entityUsernames[username]).emit("incomingMessage", {
+            io.to(`live_${entityUsernames[username]}`).emit("incomingMessage", {
               content: message,
               conversation_id: conversation_id,
             });
@@ -86,7 +86,7 @@ export default function liveUpdatesSocket(server: HttpServer) {
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
       if (user && typeof user !== "string") {
-        socket.join(user.username);
+        socket.join(`live_${user.username}`);
       } else {
         console.log("Authorization denied");
       }
@@ -95,7 +95,7 @@ export default function liveUpdatesSocket(server: HttpServer) {
     socket.on("leaveSession", (token) => {
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
       if (user && typeof user !== "string") {
-        socket.leave(user.user_username);
+        socket.leave(`live_${user.username}`);
       } else {
         console.log("Authorization denied");
       }

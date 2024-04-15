@@ -29,6 +29,7 @@ export interface Conversation {
   conversation_creation_date: string;
   last_message: string | null;
   last_message_date: string | null;
+  conversations_pictures_id: string | null;
   members: Members[];
 }
 
@@ -43,6 +44,7 @@ export interface Contact {
   contact_creation_date: string;
   last_message: string | null;
   last_contact_date: string | null;
+  entity_type: number;
 }
 
 export interface Individual {

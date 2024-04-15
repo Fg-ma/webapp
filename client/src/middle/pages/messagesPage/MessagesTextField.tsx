@@ -16,7 +16,7 @@ export default function MessagesTextField({
   messagesPageRef,
   textFieldSnap,
 }: MessagesTextFieldProps) {
-  const placeholder = "Search...";
+  const placeholder = "Send message...";
   const { liveUpdatesSocket } = useSocketContext();
   const { setLastMessage } = useLastMessageContext();
   const [inputValue, setInputValue] = useState("");
@@ -32,7 +32,7 @@ export default function MessagesTextField({
       return;
     }
 
-    if (text) {
+    if (text && text.length < 2) {
       messageSocket.emit("typing", token, conversation_id, true);
     } else if (!text) {
       messageSocket.emit("typing", token, conversation_id, false);
@@ -97,6 +97,7 @@ export default function MessagesTextField({
       return;
     }
 
+    messageSocket.emit("typing", token, conversation_id, false);
     messageSocket.emit("sendMessage", token, conversation_id, inputValue);
 
     liveUpdatesSocket?.emit(

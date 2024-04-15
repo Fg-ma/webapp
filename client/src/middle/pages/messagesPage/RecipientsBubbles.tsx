@@ -1,5 +1,52 @@
 import React from "react";
+import { Transition, Variants, motion } from "framer-motion";
 import { RecipientsBubblesProps } from "@FgTypes/middleTypes";
+
+const animateVar1: Variants = {
+  animate: {
+    backgroundColor: [
+      "rgb(153 153 153)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+    ],
+  },
+};
+const animateVar2: Variants = {
+  animate: {
+    backgroundColor: [
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(153 153 153)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+    ],
+  },
+};
+const animateVar3: Variants = {
+  animate: {
+    backgroundColor: [
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(230 230 230)",
+      "rgb(153 153 153)",
+      "rgb(230 230 230)",
+    ],
+  },
+};
+
+const animateTransition: Transition = {
+  backgroundColor: {
+    duration: 4.75,
+    ease: "easeInOut",
+    times: [1 / 6, 1 / 3, 0.5, 2 / 3, 5 / 6, 1],
+    repeat: Infinity,
+  },
+};
 
 export default function RecipientsBubbles({
   message,
@@ -44,9 +91,24 @@ export default function RecipientsBubbles({
           </span>
         ) : (
           <span className="w-full max-w-full flex-wrap z-20 relative py-2 flex flex-row space-x-2">
-            <div className="w-3 aspect-square bg-fg-white-75 rounded-full"></div>
-            <div className="w-3 aspect-square bg-fg-white-75 rounded-full"></div>
-            <div className="w-3 aspect-square bg-fg-white-75 rounded-full"></div>
+            <motion.div
+              className="w-3 aspect-square bg-fg-white-85 rounded-full"
+              variants={animateVar1}
+              animate="animate"
+              transition={animateTransition}
+            ></motion.div>
+            <motion.div
+              className="w-3 aspect-square bg-fg-white-80 rounded-full"
+              variants={animateVar2}
+              animate="animate"
+              transition={animateTransition}
+            ></motion.div>
+            <motion.div
+              className="w-3 aspect-square bg-fg-white-60 rounded-full"
+              variants={animateVar3}
+              animate="animate"
+              transition={animateTransition}
+            ></motion.div>
           </span>
         )}
         <svg

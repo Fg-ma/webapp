@@ -6,6 +6,7 @@ import {
   Conversation,
   ConversationMember,
   ConversationsMessagesLogs,
+  ConversationPicture,
   Entity,
   Group,
   Individual,
@@ -162,6 +163,7 @@ router.get("/user_conversations", verifyToken, async (req, res) => {
       conversation_creation_date: conversation.conversation_creation_date,
       last_message: conversation.last_message,
       last_message_date: conversation.last_message_date,
+      conversations_pictures_id: conversation.conversations_pictures_id,
       members: conversation.members?.map(
         ({ conversation_id, conversations_members_id, member_id, ...rest }) =>
           rest
@@ -312,6 +314,7 @@ router.get(
         conversation_creation_date: conversation.conversation_creation_date,
         last_message: conversation.last_message,
         last_message_date: conversation.last_message_date,
+        conversations_pictures_id: conversation.conversations_pictures_id,
         members: conversation.members?.map(
           ({ conversation_id, conversations_members_id, member_id, ...rest }) =>
             rest
@@ -798,6 +801,30 @@ router.get("/message_button", verifyToken, async (req, res) => {
         });
       }
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Gets the data needed for a conversation picture
+router.get("/get_conversation_picture", async (req, res) => {
+  const { conversations_pictures_id } = req.query;
+
+  try {
+    const conversationPicture: ConversationPicture =
+      await req.db.conversations_pictures.findUnique({
+        where: {
+          conversations_pictures_id: conversations_pictures_id,
+        },
+      });
+
+    if (!conversationPicture) {
+      res.send("Default");
+      return;
+    }
+
+    res.send(conversationPicture);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

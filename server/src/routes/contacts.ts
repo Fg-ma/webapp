@@ -140,6 +140,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
       let contact_name: string | null;
       let contact_username: string | null;
       let conversation_name: string | null;
+      let entity_type: number;
       if (individualMatch) {
         if (individualMatch.individual_name) {
           contact_name = individualMatch.individual_name;
@@ -147,6 +148,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
           contact_name = individualMatch.individual_username;
         }
         contact_username = individualMatch.individual_username;
+        entity_type = 1;
       } else if (groupMatch) {
         if (groupMatch.group_name) {
           contact_name = groupMatch.group_name;
@@ -154,6 +156,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
           contact_name = groupMatch.group_handle;
         }
         contact_username = groupMatch.group_handle;
+        entity_type = 2;
       } else if (organizationMatch) {
         if (organizationMatch.organization_name) {
           contact_name = organizationMatch.organization_name;
@@ -161,10 +164,13 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
           contact_name = organizationMatch.organization_handle;
         }
         contact_username = organizationMatch.organization_handle;
+        entity_type = 3;
       } else {
         contact_name = null;
         contact_username = null;
+        entity_type = 0;
       }
+
       if (conversationMatch) {
         conversation_name = conversationMatch.conversation_name;
       } else {
@@ -181,6 +187,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
         contact_creation_date: contact.contact_creation_date,
         last_message: contact.last_message,
         last_contact_date: contact.last_contact_date,
+        entity_type: entity_type,
       };
     });
 
@@ -492,6 +499,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         } else {
@@ -505,6 +513,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         }
@@ -526,6 +535,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         } else {
@@ -539,6 +549,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         }
@@ -560,6 +571,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         } else {
@@ -573,6 +585,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            entity_type: entity.entity_type,
           });
           return;
         }

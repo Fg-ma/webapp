@@ -139,6 +139,7 @@ export interface ProfilePictureProps {
     entity_current_Issue?: string;
   };
   clickable: boolean;
+  conversations_pictures_id?: string;
 }
 
 export interface Entity {
@@ -264,7 +265,7 @@ export interface SheetData {
 }
 
 /*
-  VideoViewr.tsx
+  VideoViewer.tsx
 */
 
 export interface VideoViewerProps {

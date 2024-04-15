@@ -73,8 +73,12 @@ model conversations {
   conversation_creation_date  DateTime                      @db.Timestamp(0)
   last_message                String?                       @db.Text
   last_message_date           DateTime?                     @db.Timestamp(0)
+  conversations_pictures_id   String?                       @db.Char(36)
+  conversations_pictures      conversations_pictures?       @relation(fields: [conversations_pictures_id], references: [conversations_pictures_id], onDelete: NoAction, onUpdate: NoAction, map: "conversations_conversations_pictures_id_fk")
   conversations_members       conversations_members[]
   conversations_messages_logs conversations_messages_logs[]
+
+  @@index([conversations_pictures_id], map: "conversations_conversation_picture_id_fk_idx")
 }
 
 model conversations_members {
@@ -99,6 +103,13 @@ model conversations_messages_logs {
 
   @@index([conversation_id], map: "conversations_messages_logs_conversation_id_fk_idx")
   @@index([entity_id], map: "conversations_messages_logs_entity_id_fk_idx")
+}
+
+model conversations_pictures {
+  conversations_pictures_id     String          @id @unique(map: "conversations_pictures_id_UNIQUE") @db.Char(36)
+  conversation_picture_data     Bytes
+  conversation_picture_filename String          @db.VarChar(256)
+  conversations                 conversations[]
 }
 
 model entities {
@@ -261,7 +272,7 @@ model organizations_members {
 model profile_pictures {
   profile_picture_id       String          @id @unique(map: "profile_picture_id_UNIQUE") @db.Char(36)
   profile_picture_data     Bytes
-  profile_picture_filename String?         @db.VarChar(256)
+  profile_picture_filename String          @db.VarChar(256)
   groups                   groups[]
   individuals              individuals[]
   organizations            organizations[]

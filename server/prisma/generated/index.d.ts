@@ -54,6 +54,11 @@ export type conversations_members = $Result.DefaultSelection<Prisma.$conversatio
  */
 export type conversations_messages_logs = $Result.DefaultSelection<Prisma.$conversations_messages_logsPayload>
 /**
+ * Model conversations_pictures
+ * 
+ */
+export type conversations_pictures = $Result.DefaultSelection<Prisma.$conversations_picturesPayload>
+/**
  * Model entities
  * 
  */
@@ -355,6 +360,16 @@ export class PrismaClient<
     * ```
     */
   get conversations_messages_logs(): Prisma.conversations_messages_logsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.conversations_pictures`: Exposes CRUD operations for the **conversations_pictures** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Conversations_pictures
+    * const conversations_pictures = await prisma.conversations_pictures.findMany()
+    * ```
+    */
+  get conversations_pictures(): Prisma.conversations_picturesDelegate<ExtArgs>;
 
   /**
    * `prisma.entities`: Exposes CRUD operations for the **entities** model.
@@ -1033,6 +1048,7 @@ export namespace Prisma {
     conversations: 'conversations',
     conversations_members: 'conversations_members',
     conversations_messages_logs: 'conversations_messages_logs',
+    conversations_pictures: 'conversations_pictures',
     entities: 'entities',
     entities_content: 'entities_content',
     entities_dislikes: 'entities_dislikes',
@@ -1069,7 +1085,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1598,6 +1614,72 @@ export namespace Prisma {
           count: {
             args: Prisma.conversations_messages_logsCountArgs<ExtArgs>,
             result: $Utils.Optional<Conversations_messages_logsCountAggregateOutputType> | number
+          }
+        }
+      }
+      conversations_pictures: {
+        payload: Prisma.$conversations_picturesPayload<ExtArgs>
+        fields: Prisma.conversations_picturesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.conversations_picturesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.conversations_picturesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          findFirst: {
+            args: Prisma.conversations_picturesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.conversations_picturesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          findMany: {
+            args: Prisma.conversations_picturesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>[]
+          }
+          create: {
+            args: Prisma.conversations_picturesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          createMany: {
+            args: Prisma.conversations_picturesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.conversations_picturesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          update: {
+            args: Prisma.conversations_picturesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          deleteMany: {
+            args: Prisma.conversations_picturesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.conversations_picturesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.conversations_picturesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$conversations_picturesPayload>
+          }
+          aggregate: {
+            args: Prisma.Conversations_picturesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateConversations_pictures>
+          }
+          groupBy: {
+            args: Prisma.conversations_picturesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Conversations_picturesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.conversations_picturesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Conversations_picturesCountAggregateOutputType> | number
           }
         }
       }
@@ -3213,6 +3295,40 @@ export namespace Prisma {
    */
   export type ConversationsCountOutputTypeCountConversations_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: conversations_messages_logsWhereInput
+  }
+
+
+
+  /**
+   * Count Type Conversations_picturesCountOutputType
+   */
+
+  export type Conversations_picturesCountOutputType = {
+    conversations: number
+  }
+
+  export type Conversations_picturesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | Conversations_picturesCountOutputTypeCountConversationsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Conversations_picturesCountOutputType without action
+   */
+  export type Conversations_picturesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversations_picturesCountOutputType
+     */
+    select?: Conversations_picturesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Conversations_picturesCountOutputType without action
+   */
+  export type Conversations_picturesCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: conversationsWhereInput
   }
 
 
@@ -8375,6 +8491,7 @@ export namespace Prisma {
     conversation_creation_date: Date | null
     last_message: string | null
     last_message_date: Date | null
+    conversations_pictures_id: string | null
   }
 
   export type ConversationsMaxAggregateOutputType = {
@@ -8383,6 +8500,7 @@ export namespace Prisma {
     conversation_creation_date: Date | null
     last_message: string | null
     last_message_date: Date | null
+    conversations_pictures_id: string | null
   }
 
   export type ConversationsCountAggregateOutputType = {
@@ -8391,6 +8509,7 @@ export namespace Prisma {
     conversation_creation_date: number
     last_message: number
     last_message_date: number
+    conversations_pictures_id: number
     _all: number
   }
 
@@ -8401,6 +8520,7 @@ export namespace Prisma {
     conversation_creation_date?: true
     last_message?: true
     last_message_date?: true
+    conversations_pictures_id?: true
   }
 
   export type ConversationsMaxAggregateInputType = {
@@ -8409,6 +8529,7 @@ export namespace Prisma {
     conversation_creation_date?: true
     last_message?: true
     last_message_date?: true
+    conversations_pictures_id?: true
   }
 
   export type ConversationsCountAggregateInputType = {
@@ -8417,6 +8538,7 @@ export namespace Prisma {
     conversation_creation_date?: true
     last_message?: true
     last_message_date?: true
+    conversations_pictures_id?: true
     _all?: true
   }
 
@@ -8498,6 +8620,7 @@ export namespace Prisma {
     conversation_creation_date: Date
     last_message: string | null
     last_message_date: Date | null
+    conversations_pictures_id: string | null
     _count: ConversationsCountAggregateOutputType | null
     _min: ConversationsMinAggregateOutputType | null
     _max: ConversationsMaxAggregateOutputType | null
@@ -8523,6 +8646,8 @@ export namespace Prisma {
     conversation_creation_date?: boolean
     last_message?: boolean
     last_message_date?: boolean
+    conversations_pictures_id?: boolean
+    conversations_pictures?: boolean | conversations$conversations_picturesArgs<ExtArgs>
     conversations_members?: boolean | conversations$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | conversations$conversations_messages_logsArgs<ExtArgs>
     _count?: boolean | ConversationsCountOutputTypeDefaultArgs<ExtArgs>
@@ -8534,9 +8659,11 @@ export namespace Prisma {
     conversation_creation_date?: boolean
     last_message?: boolean
     last_message_date?: boolean
+    conversations_pictures_id?: boolean
   }
 
   export type conversationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations_pictures?: boolean | conversations$conversations_picturesArgs<ExtArgs>
     conversations_members?: boolean | conversations$conversations_membersArgs<ExtArgs>
     conversations_messages_logs?: boolean | conversations$conversations_messages_logsArgs<ExtArgs>
     _count?: boolean | ConversationsCountOutputTypeDefaultArgs<ExtArgs>
@@ -8546,6 +8673,7 @@ export namespace Prisma {
   export type $conversationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "conversations"
     objects: {
+      conversations_pictures: Prisma.$conversations_picturesPayload<ExtArgs> | null
       conversations_members: Prisma.$conversations_membersPayload<ExtArgs>[]
       conversations_messages_logs: Prisma.$conversations_messages_logsPayload<ExtArgs>[]
     }
@@ -8555,6 +8683,7 @@ export namespace Prisma {
       conversation_creation_date: Date
       last_message: string | null
       last_message_date: Date | null
+      conversations_pictures_id: string | null
     }, ExtArgs["result"]["conversations"]>
     composites: {}
   }
@@ -8920,6 +9049,8 @@ export namespace Prisma {
   export interface Prisma__conversationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    conversations_pictures<T extends conversations$conversations_picturesArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_picturesArgs<ExtArgs>>): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     conversations_members<T extends conversations$conversations_membersArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     conversations_messages_logs<T extends conversations$conversations_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, conversations$conversations_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
@@ -8957,6 +9088,7 @@ export namespace Prisma {
     readonly conversation_creation_date: FieldRef<"conversations", 'DateTime'>
     readonly last_message: FieldRef<"conversations", 'String'>
     readonly last_message_date: FieldRef<"conversations", 'DateTime'>
+    readonly conversations_pictures_id: FieldRef<"conversations", 'String'>
   }
     
 
@@ -9265,6 +9397,22 @@ export namespace Prisma {
      * Filter which conversations to delete
      */
     where?: conversationsWhereInput
+  }
+
+
+  /**
+   * conversations.conversations_pictures
+   */
+  export type conversations$conversations_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    where?: conversations_picturesWhereInput
   }
 
 
@@ -11146,6 +11294,925 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: conversations_messages_logsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model conversations_pictures
+   */
+
+  export type AggregateConversations_pictures = {
+    _count: Conversations_picturesCountAggregateOutputType | null
+    _min: Conversations_picturesMinAggregateOutputType | null
+    _max: Conversations_picturesMaxAggregateOutputType | null
+  }
+
+  export type Conversations_picturesMinAggregateOutputType = {
+    conversations_pictures_id: string | null
+    conversation_picture_data: Buffer | null
+    conversation_picture_filename: string | null
+  }
+
+  export type Conversations_picturesMaxAggregateOutputType = {
+    conversations_pictures_id: string | null
+    conversation_picture_data: Buffer | null
+    conversation_picture_filename: string | null
+  }
+
+  export type Conversations_picturesCountAggregateOutputType = {
+    conversations_pictures_id: number
+    conversation_picture_data: number
+    conversation_picture_filename: number
+    _all: number
+  }
+
+
+  export type Conversations_picturesMinAggregateInputType = {
+    conversations_pictures_id?: true
+    conversation_picture_data?: true
+    conversation_picture_filename?: true
+  }
+
+  export type Conversations_picturesMaxAggregateInputType = {
+    conversations_pictures_id?: true
+    conversation_picture_data?: true
+    conversation_picture_filename?: true
+  }
+
+  export type Conversations_picturesCountAggregateInputType = {
+    conversations_pictures_id?: true
+    conversation_picture_data?: true
+    conversation_picture_filename?: true
+    _all?: true
+  }
+
+  export type Conversations_picturesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which conversations_pictures to aggregate.
+     */
+    where?: conversations_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of conversations_pictures to fetch.
+     */
+    orderBy?: conversations_picturesOrderByWithRelationInput | conversations_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: conversations_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` conversations_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` conversations_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned conversations_pictures
+    **/
+    _count?: true | Conversations_picturesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Conversations_picturesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Conversations_picturesMaxAggregateInputType
+  }
+
+  export type GetConversations_picturesAggregateType<T extends Conversations_picturesAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversations_pictures]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversations_pictures[P]>
+      : GetScalarType<T[P], AggregateConversations_pictures[P]>
+  }
+
+
+
+
+  export type conversations_picturesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: conversations_picturesWhereInput
+    orderBy?: conversations_picturesOrderByWithAggregationInput | conversations_picturesOrderByWithAggregationInput[]
+    by: Conversations_picturesScalarFieldEnum[] | Conversations_picturesScalarFieldEnum
+    having?: conversations_picturesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Conversations_picturesCountAggregateInputType | true
+    _min?: Conversations_picturesMinAggregateInputType
+    _max?: Conversations_picturesMaxAggregateInputType
+  }
+
+  export type Conversations_picturesGroupByOutputType = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+    _count: Conversations_picturesCountAggregateOutputType | null
+    _min: Conversations_picturesMinAggregateOutputType | null
+    _max: Conversations_picturesMaxAggregateOutputType | null
+  }
+
+  type GetConversations_picturesGroupByPayload<T extends conversations_picturesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Conversations_picturesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Conversations_picturesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Conversations_picturesGroupByOutputType[P]>
+            : GetScalarType<T[P], Conversations_picturesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type conversations_picturesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    conversations_pictures_id?: boolean
+    conversation_picture_data?: boolean
+    conversation_picture_filename?: boolean
+    conversations?: boolean | conversations_pictures$conversationsArgs<ExtArgs>
+    _count?: boolean | Conversations_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversations_pictures"]>
+
+  export type conversations_picturesSelectScalar = {
+    conversations_pictures_id?: boolean
+    conversation_picture_data?: boolean
+    conversation_picture_filename?: boolean
+  }
+
+  export type conversations_picturesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | conversations_pictures$conversationsArgs<ExtArgs>
+    _count?: boolean | Conversations_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $conversations_picturesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "conversations_pictures"
+    objects: {
+      conversations: Prisma.$conversationsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      conversations_pictures_id: string
+      conversation_picture_data: Buffer
+      conversation_picture_filename: string
+    }, ExtArgs["result"]["conversations_pictures"]>
+    composites: {}
+  }
+
+
+  type conversations_picturesGetPayload<S extends boolean | null | undefined | conversations_picturesDefaultArgs> = $Result.GetResult<Prisma.$conversations_picturesPayload, S>
+
+  type conversations_picturesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<conversations_picturesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Conversations_picturesCountAggregateInputType | true
+    }
+
+  export interface conversations_picturesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['conversations_pictures'], meta: { name: 'conversations_pictures' } }
+    /**
+     * Find zero or one Conversations_pictures that matches the filter.
+     * @param {conversations_picturesFindUniqueArgs} args - Arguments to find a Conversations_pictures
+     * @example
+     * // Get one Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends conversations_picturesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesFindUniqueArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Conversations_pictures that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {conversations_picturesFindUniqueOrThrowArgs} args - Arguments to find a Conversations_pictures
+     * @example
+     * // Get one Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends conversations_picturesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Conversations_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesFindFirstArgs} args - Arguments to find a Conversations_pictures
+     * @example
+     * // Get one Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends conversations_picturesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesFindFirstArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Conversations_pictures that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesFindFirstOrThrowArgs} args - Arguments to find a Conversations_pictures
+     * @example
+     * // Get one Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends conversations_picturesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Conversations_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findMany()
+     * 
+     * // Get first 10 Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.findMany({ take: 10 })
+     * 
+     * // Only select the `conversations_pictures_id`
+     * const conversations_picturesWithConversations_pictures_idOnly = await prisma.conversations_pictures.findMany({ select: { conversations_pictures_id: true } })
+     * 
+    **/
+    findMany<T extends conversations_picturesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Conversations_pictures.
+     * @param {conversations_picturesCreateArgs} args - Arguments to create a Conversations_pictures.
+     * @example
+     * // Create one Conversations_pictures
+     * const Conversations_pictures = await prisma.conversations_pictures.create({
+     *   data: {
+     *     // ... data to create a Conversations_pictures
+     *   }
+     * })
+     * 
+    **/
+    create<T extends conversations_picturesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesCreateArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Conversations_pictures.
+     *     @param {conversations_picturesCreateManyArgs} args - Arguments to create many Conversations_pictures.
+     *     @example
+     *     // Create many Conversations_pictures
+     *     const conversations_pictures = await prisma.conversations_pictures.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends conversations_picturesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Conversations_pictures.
+     * @param {conversations_picturesDeleteArgs} args - Arguments to delete one Conversations_pictures.
+     * @example
+     * // Delete one Conversations_pictures
+     * const Conversations_pictures = await prisma.conversations_pictures.delete({
+     *   where: {
+     *     // ... filter to delete one Conversations_pictures
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends conversations_picturesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesDeleteArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Conversations_pictures.
+     * @param {conversations_picturesUpdateArgs} args - Arguments to update one Conversations_pictures.
+     * @example
+     * // Update one Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends conversations_picturesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesUpdateArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Conversations_pictures.
+     * @param {conversations_picturesDeleteManyArgs} args - Arguments to filter Conversations_pictures to delete.
+     * @example
+     * // Delete a few Conversations_pictures
+     * const { count } = await prisma.conversations_pictures.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends conversations_picturesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, conversations_picturesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Conversations_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends conversations_picturesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Conversations_pictures.
+     * @param {conversations_picturesUpsertArgs} args - Arguments to update or create a Conversations_pictures.
+     * @example
+     * // Update or create a Conversations_pictures
+     * const conversations_pictures = await prisma.conversations_pictures.upsert({
+     *   create: {
+     *     // ... data to create a Conversations_pictures
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Conversations_pictures we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends conversations_picturesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, conversations_picturesUpsertArgs<ExtArgs>>
+    ): Prisma__conversations_picturesClient<$Result.GetResult<Prisma.$conversations_picturesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Conversations_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesCountArgs} args - Arguments to filter Conversations_pictures to count.
+     * @example
+     * // Count the number of Conversations_pictures
+     * const count = await prisma.conversations_pictures.count({
+     *   where: {
+     *     // ... the filter for the Conversations_pictures we want to count
+     *   }
+     * })
+    **/
+    count<T extends conversations_picturesCountArgs>(
+      args?: Subset<T, conversations_picturesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Conversations_picturesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Conversations_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Conversations_picturesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Conversations_picturesAggregateArgs>(args: Subset<T, Conversations_picturesAggregateArgs>): Prisma.PrismaPromise<GetConversations_picturesAggregateType<T>>
+
+    /**
+     * Group by Conversations_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {conversations_picturesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends conversations_picturesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: conversations_picturesGroupByArgs['orderBy'] }
+        : { orderBy?: conversations_picturesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, conversations_picturesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversations_picturesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the conversations_pictures model
+   */
+  readonly fields: conversations_picturesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for conversations_pictures.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__conversations_picturesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    conversations<T extends conversations_pictures$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, conversations_pictures$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$conversationsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the conversations_pictures model
+   */ 
+  interface conversations_picturesFieldRefs {
+    readonly conversations_pictures_id: FieldRef<"conversations_pictures", 'String'>
+    readonly conversation_picture_data: FieldRef<"conversations_pictures", 'Bytes'>
+    readonly conversation_picture_filename: FieldRef<"conversations_pictures", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * conversations_pictures findUnique
+   */
+  export type conversations_picturesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which conversations_pictures to fetch.
+     */
+    where: conversations_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * conversations_pictures findUniqueOrThrow
+   */
+  export type conversations_picturesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which conversations_pictures to fetch.
+     */
+    where: conversations_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * conversations_pictures findFirst
+   */
+  export type conversations_picturesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which conversations_pictures to fetch.
+     */
+    where?: conversations_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of conversations_pictures to fetch.
+     */
+    orderBy?: conversations_picturesOrderByWithRelationInput | conversations_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for conversations_pictures.
+     */
+    cursor?: conversations_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` conversations_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` conversations_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of conversations_pictures.
+     */
+    distinct?: Conversations_picturesScalarFieldEnum | Conversations_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * conversations_pictures findFirstOrThrow
+   */
+  export type conversations_picturesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which conversations_pictures to fetch.
+     */
+    where?: conversations_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of conversations_pictures to fetch.
+     */
+    orderBy?: conversations_picturesOrderByWithRelationInput | conversations_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for conversations_pictures.
+     */
+    cursor?: conversations_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` conversations_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` conversations_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of conversations_pictures.
+     */
+    distinct?: Conversations_picturesScalarFieldEnum | Conversations_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * conversations_pictures findMany
+   */
+  export type conversations_picturesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which conversations_pictures to fetch.
+     */
+    where?: conversations_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of conversations_pictures to fetch.
+     */
+    orderBy?: conversations_picturesOrderByWithRelationInput | conversations_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing conversations_pictures.
+     */
+    cursor?: conversations_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` conversations_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` conversations_pictures.
+     */
+    skip?: number
+    distinct?: Conversations_picturesScalarFieldEnum | Conversations_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * conversations_pictures create
+   */
+  export type conversations_picturesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a conversations_pictures.
+     */
+    data: XOR<conversations_picturesCreateInput, conversations_picturesUncheckedCreateInput>
+  }
+
+
+  /**
+   * conversations_pictures createMany
+   */
+  export type conversations_picturesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many conversations_pictures.
+     */
+    data: conversations_picturesCreateManyInput | conversations_picturesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * conversations_pictures update
+   */
+  export type conversations_picturesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a conversations_pictures.
+     */
+    data: XOR<conversations_picturesUpdateInput, conversations_picturesUncheckedUpdateInput>
+    /**
+     * Choose, which conversations_pictures to update.
+     */
+    where: conversations_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * conversations_pictures updateMany
+   */
+  export type conversations_picturesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update conversations_pictures.
+     */
+    data: XOR<conversations_picturesUpdateManyMutationInput, conversations_picturesUncheckedUpdateManyInput>
+    /**
+     * Filter which conversations_pictures to update
+     */
+    where?: conversations_picturesWhereInput
+  }
+
+
+  /**
+   * conversations_pictures upsert
+   */
+  export type conversations_picturesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the conversations_pictures to update in case it exists.
+     */
+    where: conversations_picturesWhereUniqueInput
+    /**
+     * In case the conversations_pictures found by the `where` argument doesn't exist, create a new conversations_pictures with this data.
+     */
+    create: XOR<conversations_picturesCreateInput, conversations_picturesUncheckedCreateInput>
+    /**
+     * In case the conversations_pictures was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<conversations_picturesUpdateInput, conversations_picturesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * conversations_pictures delete
+   */
+  export type conversations_picturesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
+    /**
+     * Filter which conversations_pictures to delete.
+     */
+    where: conversations_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * conversations_pictures deleteMany
+   */
+  export type conversations_picturesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which conversations_pictures to delete
+     */
+    where?: conversations_picturesWhereInput
+  }
+
+
+  /**
+   * conversations_pictures.conversations
+   */
+  export type conversations_pictures$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations
+     */
+    select?: conversationsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversationsInclude<ExtArgs> | null
+    where?: conversationsWhereInput
+    orderBy?: conversationsOrderByWithRelationInput | conversationsOrderByWithRelationInput[]
+    cursor?: conversationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationsScalarFieldEnum | ConversationsScalarFieldEnum[]
+  }
+
+
+  /**
+   * conversations_pictures without action
+   */
+  export type conversations_picturesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the conversations_pictures
+     */
+    select?: conversations_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: conversations_picturesInclude<ExtArgs> | null
   }
 
 
@@ -22878,7 +23945,7 @@ export namespace Prisma {
   export type Profile_picturesGroupByOutputType = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename: string | null
+    profile_picture_filename: string
     _count: Profile_picturesCountAggregateOutputType | null
     _min: Profile_picturesMinAggregateOutputType | null
     _max: Profile_picturesMaxAggregateOutputType | null
@@ -22932,7 +23999,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       profile_picture_id: string
       profile_picture_data: Buffer
-      profile_picture_filename: string | null
+      profile_picture_filename: string
     }, ExtArgs["result"]["profile_pictures"]>
     composites: {}
   }
@@ -30532,7 +31599,8 @@ export namespace Prisma {
     conversation_name: 'conversation_name',
     conversation_creation_date: 'conversation_creation_date',
     last_message: 'last_message',
-    last_message_date: 'last_message_date'
+    last_message_date: 'last_message_date',
+    conversations_pictures_id: 'conversations_pictures_id'
   };
 
   export type ConversationsScalarFieldEnum = (typeof ConversationsScalarFieldEnum)[keyof typeof ConversationsScalarFieldEnum]
@@ -30556,6 +31624,15 @@ export namespace Prisma {
   };
 
   export type Conversations_messages_logsScalarFieldEnum = (typeof Conversations_messages_logsScalarFieldEnum)[keyof typeof Conversations_messages_logsScalarFieldEnum]
+
+
+  export const Conversations_picturesScalarFieldEnum: {
+    conversations_pictures_id: 'conversations_pictures_id',
+    conversation_picture_data: 'conversation_picture_data',
+    conversation_picture_filename: 'conversation_picture_filename'
+  };
+
+  export type Conversations_picturesScalarFieldEnum = (typeof Conversations_picturesScalarFieldEnum)[keyof typeof Conversations_picturesScalarFieldEnum]
 
 
   export const EntitiesScalarFieldEnum: {
@@ -31136,6 +32213,8 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
     last_message?: StringNullableFilter<"conversations"> | string | null
     last_message_date?: DateTimeNullableFilter<"conversations"> | Date | string | null
+    conversations_pictures_id?: StringNullableFilter<"conversations"> | string | null
+    conversations_pictures?: XOR<Conversations_picturesNullableRelationFilter, conversations_picturesWhereInput> | null
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }
@@ -31146,6 +32225,8 @@ export namespace Prisma {
     conversation_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
     last_message_date?: SortOrderInput | SortOrder
+    conversations_pictures_id?: SortOrderInput | SortOrder
+    conversations_pictures?: conversations_picturesOrderByWithRelationInput
     conversations_members?: conversations_membersOrderByRelationAggregateInput
     conversations_messages_logs?: conversations_messages_logsOrderByRelationAggregateInput
   }
@@ -31159,6 +32240,8 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
     last_message?: StringNullableFilter<"conversations"> | string | null
     last_message_date?: DateTimeNullableFilter<"conversations"> | Date | string | null
+    conversations_pictures_id?: StringNullableFilter<"conversations"> | string | null
+    conversations_pictures?: XOR<Conversations_picturesNullableRelationFilter, conversations_picturesWhereInput> | null
     conversations_members?: Conversations_membersListRelationFilter
     conversations_messages_logs?: Conversations_messages_logsListRelationFilter
   }, "conversation_id" | "conversation_id">
@@ -31169,6 +32252,7 @@ export namespace Prisma {
     conversation_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
     last_message_date?: SortOrderInput | SortOrder
+    conversations_pictures_id?: SortOrderInput | SortOrder
     _count?: conversationsCountOrderByAggregateInput
     _max?: conversationsMaxOrderByAggregateInput
     _min?: conversationsMinOrderByAggregateInput
@@ -31183,6 +32267,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeWithAggregatesFilter<"conversations"> | Date | string
     last_message?: StringNullableWithAggregatesFilter<"conversations"> | string | null
     last_message_date?: DateTimeNullableWithAggregatesFilter<"conversations"> | Date | string | null
+    conversations_pictures_id?: StringNullableWithAggregatesFilter<"conversations"> | string | null
   }
 
   export type conversations_membersWhereInput = {
@@ -31290,6 +32375,51 @@ export namespace Prisma {
     entity_id?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
     message?: StringWithAggregatesFilter<"conversations_messages_logs"> | string
     message_date?: DateTimeWithAggregatesFilter<"conversations_messages_logs"> | Date | string
+  }
+
+  export type conversations_picturesWhereInput = {
+    AND?: conversations_picturesWhereInput | conversations_picturesWhereInput[]
+    OR?: conversations_picturesWhereInput[]
+    NOT?: conversations_picturesWhereInput | conversations_picturesWhereInput[]
+    conversations_pictures_id?: StringFilter<"conversations_pictures"> | string
+    conversation_picture_data?: BytesFilter<"conversations_pictures"> | Buffer
+    conversation_picture_filename?: StringFilter<"conversations_pictures"> | string
+    conversations?: ConversationsListRelationFilter
+  }
+
+  export type conversations_picturesOrderByWithRelationInput = {
+    conversations_pictures_id?: SortOrder
+    conversation_picture_data?: SortOrder
+    conversation_picture_filename?: SortOrder
+    conversations?: conversationsOrderByRelationAggregateInput
+  }
+
+  export type conversations_picturesWhereUniqueInput = Prisma.AtLeast<{
+    conversations_pictures_id?: string
+    AND?: conversations_picturesWhereInput | conversations_picturesWhereInput[]
+    OR?: conversations_picturesWhereInput[]
+    NOT?: conversations_picturesWhereInput | conversations_picturesWhereInput[]
+    conversation_picture_data?: BytesFilter<"conversations_pictures"> | Buffer
+    conversation_picture_filename?: StringFilter<"conversations_pictures"> | string
+    conversations?: ConversationsListRelationFilter
+  }, "conversations_pictures_id" | "conversations_pictures_id">
+
+  export type conversations_picturesOrderByWithAggregationInput = {
+    conversations_pictures_id?: SortOrder
+    conversation_picture_data?: SortOrder
+    conversation_picture_filename?: SortOrder
+    _count?: conversations_picturesCountOrderByAggregateInput
+    _max?: conversations_picturesMaxOrderByAggregateInput
+    _min?: conversations_picturesMinOrderByAggregateInput
+  }
+
+  export type conversations_picturesScalarWhereWithAggregatesInput = {
+    AND?: conversations_picturesScalarWhereWithAggregatesInput | conversations_picturesScalarWhereWithAggregatesInput[]
+    OR?: conversations_picturesScalarWhereWithAggregatesInput[]
+    NOT?: conversations_picturesScalarWhereWithAggregatesInput | conversations_picturesScalarWhereWithAggregatesInput[]
+    conversations_pictures_id?: StringWithAggregatesFilter<"conversations_pictures"> | string
+    conversation_picture_data?: BytesWithAggregatesFilter<"conversations_pictures"> | Buffer
+    conversation_picture_filename?: StringWithAggregatesFilter<"conversations_pictures"> | string
   }
 
   export type entitiesWhereInput = {
@@ -32026,7 +33156,7 @@ export namespace Prisma {
     NOT?: profile_picturesWhereInput | profile_picturesWhereInput[]
     profile_picture_id?: StringFilter<"profile_pictures"> | string
     profile_picture_data?: BytesFilter<"profile_pictures"> | Buffer
-    profile_picture_filename?: StringNullableFilter<"profile_pictures"> | string | null
+    profile_picture_filename?: StringFilter<"profile_pictures"> | string
     groups?: GroupsListRelationFilter
     individuals?: IndividualsListRelationFilter
     organizations?: OrganizationsListRelationFilter
@@ -32035,7 +33165,7 @@ export namespace Prisma {
   export type profile_picturesOrderByWithRelationInput = {
     profile_picture_id?: SortOrder
     profile_picture_data?: SortOrder
-    profile_picture_filename?: SortOrderInput | SortOrder
+    profile_picture_filename?: SortOrder
     groups?: groupsOrderByRelationAggregateInput
     individuals?: individualsOrderByRelationAggregateInput
     organizations?: organizationsOrderByRelationAggregateInput
@@ -32047,7 +33177,7 @@ export namespace Prisma {
     OR?: profile_picturesWhereInput[]
     NOT?: profile_picturesWhereInput | profile_picturesWhereInput[]
     profile_picture_data?: BytesFilter<"profile_pictures"> | Buffer
-    profile_picture_filename?: StringNullableFilter<"profile_pictures"> | string | null
+    profile_picture_filename?: StringFilter<"profile_pictures"> | string
     groups?: GroupsListRelationFilter
     individuals?: IndividualsListRelationFilter
     organizations?: OrganizationsListRelationFilter
@@ -32056,7 +33186,7 @@ export namespace Prisma {
   export type profile_picturesOrderByWithAggregationInput = {
     profile_picture_id?: SortOrder
     profile_picture_data?: SortOrder
-    profile_picture_filename?: SortOrderInput | SortOrder
+    profile_picture_filename?: SortOrder
     _count?: profile_picturesCountOrderByAggregateInput
     _max?: profile_picturesMaxOrderByAggregateInput
     _min?: profile_picturesMinOrderByAggregateInput
@@ -32068,7 +33198,7 @@ export namespace Prisma {
     NOT?: profile_picturesScalarWhereWithAggregatesInput | profile_picturesScalarWhereWithAggregatesInput[]
     profile_picture_id?: StringWithAggregatesFilter<"profile_pictures"> | string
     profile_picture_data?: BytesWithAggregatesFilter<"profile_pictures"> | Buffer
-    profile_picture_filename?: StringNullableWithAggregatesFilter<"profile_pictures"> | string | null
+    profile_picture_filename?: StringWithAggregatesFilter<"profile_pictures"> | string
   }
 
   export type sheetsWhereInput = {
@@ -32782,6 +33912,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures?: conversations_picturesCreateNestedOneWithoutConversationsInput
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
@@ -32792,6 +33923,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures_id?: string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
@@ -32802,6 +33934,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures?: conversations_picturesUpdateOneWithoutConversationsNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
@@ -32812,6 +33945,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
@@ -32822,6 +33956,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures_id?: string | null
   }
 
   export type conversationsUpdateManyMutationInput = {
@@ -32838,6 +33973,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type conversations_membersCreateInput = {
@@ -32932,6 +34068,52 @@ export namespace Prisma {
     entity_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type conversations_picturesCreateInput = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+    conversations?: conversationsCreateNestedManyWithoutConversations_picturesInput
+  }
+
+  export type conversations_picturesUncheckedCreateInput = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+    conversations?: conversationsUncheckedCreateNestedManyWithoutConversations_picturesInput
+  }
+
+  export type conversations_picturesUpdateInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
+    conversations?: conversationsUpdateManyWithoutConversations_picturesNestedInput
+  }
+
+  export type conversations_picturesUncheckedUpdateInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
+    conversations?: conversationsUncheckedUpdateManyWithoutConversations_picturesNestedInput
+  }
+
+  export type conversations_picturesCreateManyInput = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+  }
+
+  export type conversations_picturesUpdateManyMutationInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type conversations_picturesUncheckedUpdateManyInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type entitiesCreateInput = {
@@ -33653,7 +34835,7 @@ export namespace Prisma {
   export type profile_picturesCreateInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsCreateNestedManyWithoutProfile_picturesInput
     individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
@@ -33662,7 +34844,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedCreateInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
     individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
@@ -33671,7 +34853,7 @@ export namespace Prisma {
   export type profile_picturesUpdateInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
     individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
@@ -33680,7 +34862,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedUpdateInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
     individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
@@ -33689,19 +34871,19 @@ export namespace Prisma {
   export type profile_picturesCreateManyInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
   }
 
   export type profile_picturesUpdateManyMutationInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type profile_picturesUncheckedUpdateManyInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type sheetsCreateInput = {
@@ -34498,6 +35680,11 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type Conversations_picturesNullableRelationFilter = {
+    is?: conversations_picturesWhereInput | null
+    isNot?: conversations_picturesWhereInput | null
+  }
+
   export type Conversations_membersListRelationFilter = {
     every?: conversations_membersWhereInput
     some?: conversations_membersWhereInput
@@ -34524,6 +35711,7 @@ export namespace Prisma {
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
     last_message_date?: SortOrder
+    conversations_pictures_id?: SortOrder
   }
 
   export type conversationsMaxOrderByAggregateInput = {
@@ -34532,6 +35720,7 @@ export namespace Prisma {
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
     last_message_date?: SortOrder
+    conversations_pictures_id?: SortOrder
   }
 
   export type conversationsMinOrderByAggregateInput = {
@@ -34540,6 +35729,7 @@ export namespace Prisma {
     conversation_creation_date?: SortOrder
     last_message?: SortOrder
     last_message_date?: SortOrder
+    conversations_pictures_id?: SortOrder
   }
 
   export type ConversationsRelationFilter = {
@@ -34592,6 +35782,51 @@ export namespace Prisma {
     entity_id?: SortOrder
     message?: SortOrder
     message_date?: SortOrder
+  }
+
+  export type BytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
+  export type ConversationsListRelationFilter = {
+    every?: conversationsWhereInput
+    some?: conversationsWhereInput
+    none?: conversationsWhereInput
+  }
+
+  export type conversationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type conversations_picturesCountOrderByAggregateInput = {
+    conversations_pictures_id?: SortOrder
+    conversation_picture_data?: SortOrder
+    conversation_picture_filename?: SortOrder
+  }
+
+  export type conversations_picturesMaxOrderByAggregateInput = {
+    conversations_pictures_id?: SortOrder
+    conversation_picture_data?: SortOrder
+    conversation_picture_filename?: SortOrder
+  }
+
+  export type conversations_picturesMinOrderByAggregateInput = {
+    conversations_pictures_id?: SortOrder
+    conversation_picture_data?: SortOrder
+    conversation_picture_filename?: SortOrder
+  }
+
+  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -34943,13 +36178,6 @@ export namespace Prisma {
     image_views?: SortOrder
   }
 
-  export type BytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
-  }
-
   export type images_dataCountOrderByAggregateInput = {
     image_data_id?: SortOrder
     image_data?: SortOrder
@@ -34963,16 +36191,6 @@ export namespace Prisma {
   export type images_dataMinOrderByAggregateInput = {
     image_data_id?: SortOrder
     image_data?: SortOrder
-  }
-
-  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type User_credentialsRelationFilter = {
@@ -35654,6 +36872,12 @@ export namespace Prisma {
     deleteMany?: entities_likesScalarWhereInput | entities_likesScalarWhereInput[]
   }
 
+  export type conversations_picturesCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<conversations_picturesCreateWithoutConversationsInput, conversations_picturesUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: conversations_picturesCreateOrConnectWithoutConversationsInput
+    connect?: conversations_picturesWhereUniqueInput
+  }
+
   export type conversations_membersCreateNestedManyWithoutConversationsInput = {
     create?: XOR<conversations_membersCreateWithoutConversationsInput, conversations_membersUncheckedCreateWithoutConversationsInput> | conversations_membersCreateWithoutConversationsInput[] | conversations_membersUncheckedCreateWithoutConversationsInput[]
     connectOrCreate?: conversations_membersCreateOrConnectWithoutConversationsInput | conversations_membersCreateOrConnectWithoutConversationsInput[]
@@ -35680,6 +36904,16 @@ export namespace Prisma {
     connectOrCreate?: conversations_messages_logsCreateOrConnectWithoutConversationsInput | conversations_messages_logsCreateOrConnectWithoutConversationsInput[]
     createMany?: conversations_messages_logsCreateManyConversationsInputEnvelope
     connect?: conversations_messages_logsWhereUniqueInput | conversations_messages_logsWhereUniqueInput[]
+  }
+
+  export type conversations_picturesUpdateOneWithoutConversationsNestedInput = {
+    create?: XOR<conversations_picturesCreateWithoutConversationsInput, conversations_picturesUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: conversations_picturesCreateOrConnectWithoutConversationsInput
+    upsert?: conversations_picturesUpsertWithoutConversationsInput
+    disconnect?: conversations_picturesWhereInput | boolean
+    delete?: conversations_picturesWhereInput | boolean
+    connect?: conversations_picturesWhereUniqueInput
+    update?: XOR<XOR<conversations_picturesUpdateToOneWithWhereWithoutConversationsInput, conversations_picturesUpdateWithoutConversationsInput>, conversations_picturesUncheckedUpdateWithoutConversationsInput>
   }
 
   export type conversations_membersUpdateManyWithoutConversationsNestedInput = {
@@ -35792,6 +37026,52 @@ export namespace Prisma {
     upsert?: entitiesUpsertWithoutConversations_messages_logsInput
     connect?: entitiesWhereUniqueInput
     update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutConversations_messages_logsInput, entitiesUpdateWithoutConversations_messages_logsInput>, entitiesUncheckedUpdateWithoutConversations_messages_logsInput>
+  }
+
+  export type conversationsCreateNestedManyWithoutConversations_picturesInput = {
+    create?: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput> | conversationsCreateWithoutConversations_picturesInput[] | conversationsUncheckedCreateWithoutConversations_picturesInput[]
+    connectOrCreate?: conversationsCreateOrConnectWithoutConversations_picturesInput | conversationsCreateOrConnectWithoutConversations_picturesInput[]
+    createMany?: conversationsCreateManyConversations_picturesInputEnvelope
+    connect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+  }
+
+  export type conversationsUncheckedCreateNestedManyWithoutConversations_picturesInput = {
+    create?: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput> | conversationsCreateWithoutConversations_picturesInput[] | conversationsUncheckedCreateWithoutConversations_picturesInput[]
+    connectOrCreate?: conversationsCreateOrConnectWithoutConversations_picturesInput | conversationsCreateOrConnectWithoutConversations_picturesInput[]
+    createMany?: conversationsCreateManyConversations_picturesInputEnvelope
+    connect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+  }
+
+  export type BytesFieldUpdateOperationsInput = {
+    set?: Buffer
+  }
+
+  export type conversationsUpdateManyWithoutConversations_picturesNestedInput = {
+    create?: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput> | conversationsCreateWithoutConversations_picturesInput[] | conversationsUncheckedCreateWithoutConversations_picturesInput[]
+    connectOrCreate?: conversationsCreateOrConnectWithoutConversations_picturesInput | conversationsCreateOrConnectWithoutConversations_picturesInput[]
+    upsert?: conversationsUpsertWithWhereUniqueWithoutConversations_picturesInput | conversationsUpsertWithWhereUniqueWithoutConversations_picturesInput[]
+    createMany?: conversationsCreateManyConversations_picturesInputEnvelope
+    set?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    disconnect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    delete?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    connect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    update?: conversationsUpdateWithWhereUniqueWithoutConversations_picturesInput | conversationsUpdateWithWhereUniqueWithoutConversations_picturesInput[]
+    updateMany?: conversationsUpdateManyWithWhereWithoutConversations_picturesInput | conversationsUpdateManyWithWhereWithoutConversations_picturesInput[]
+    deleteMany?: conversationsScalarWhereInput | conversationsScalarWhereInput[]
+  }
+
+  export type conversationsUncheckedUpdateManyWithoutConversations_picturesNestedInput = {
+    create?: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput> | conversationsCreateWithoutConversations_picturesInput[] | conversationsUncheckedCreateWithoutConversations_picturesInput[]
+    connectOrCreate?: conversationsCreateOrConnectWithoutConversations_picturesInput | conversationsCreateOrConnectWithoutConversations_picturesInput[]
+    upsert?: conversationsUpsertWithWhereUniqueWithoutConversations_picturesInput | conversationsUpsertWithWhereUniqueWithoutConversations_picturesInput[]
+    createMany?: conversationsCreateManyConversations_picturesInputEnvelope
+    set?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    disconnect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    delete?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    connect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
+    update?: conversationsUpdateWithWhereUniqueWithoutConversations_picturesInput | conversationsUpdateWithWhereUniqueWithoutConversations_picturesInput[]
+    updateMany?: conversationsUpdateManyWithWhereWithoutConversations_picturesInput | conversationsUpdateManyWithWhereWithoutConversations_picturesInput[]
+    deleteMany?: conversationsScalarWhereInput | conversationsScalarWhereInput[]
   }
 
   export type collectionsCreateNestedManyWithoutEntitiesInput = {
@@ -36616,10 +37896,6 @@ export namespace Prisma {
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
   }
 
-  export type BytesFieldUpdateOperationsInput = {
-    set?: Buffer
-  }
-
   export type imagesUpdateManyWithoutImages_dataNestedInput = {
     create?: XOR<imagesCreateWithoutImages_dataInput, imagesUncheckedCreateWithoutImages_dataInput> | imagesCreateWithoutImages_dataInput[] | imagesUncheckedCreateWithoutImages_dataInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutImages_dataInput | imagesCreateOrConnectWithoutImages_dataInput[]
@@ -37352,6 +38628,23 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
+  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -37377,23 +38670,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedBytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
-  }
-
-  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type entitiesCreateWithoutCollectionsInput = {
@@ -38000,6 +39276,23 @@ export namespace Prisma {
     content_id?: StringFilter<"entities_likes"> | string
   }
 
+  export type conversations_picturesCreateWithoutConversationsInput = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+  }
+
+  export type conversations_picturesUncheckedCreateWithoutConversationsInput = {
+    conversations_pictures_id: string
+    conversation_picture_data: Buffer
+    conversation_picture_filename: string
+  }
+
+  export type conversations_picturesCreateOrConnectWithoutConversationsInput = {
+    where: conversations_picturesWhereUniqueInput
+    create: XOR<conversations_picturesCreateWithoutConversationsInput, conversations_picturesUncheckedCreateWithoutConversationsInput>
+  }
+
   export type conversations_membersCreateWithoutConversationsInput = {
     conversations_members_id: string
     entities: entitiesCreateNestedOneWithoutConversations_membersInput
@@ -38042,6 +39335,29 @@ export namespace Prisma {
   export type conversations_messages_logsCreateManyConversationsInputEnvelope = {
     data: conversations_messages_logsCreateManyConversationsInput | conversations_messages_logsCreateManyConversationsInput[]
     skipDuplicates?: boolean
+  }
+
+  export type conversations_picturesUpsertWithoutConversationsInput = {
+    update: XOR<conversations_picturesUpdateWithoutConversationsInput, conversations_picturesUncheckedUpdateWithoutConversationsInput>
+    create: XOR<conversations_picturesCreateWithoutConversationsInput, conversations_picturesUncheckedCreateWithoutConversationsInput>
+    where?: conversations_picturesWhereInput
+  }
+
+  export type conversations_picturesUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: conversations_picturesWhereInput
+    data: XOR<conversations_picturesUpdateWithoutConversationsInput, conversations_picturesUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type conversations_picturesUpdateWithoutConversationsInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type conversations_picturesUncheckedUpdateWithoutConversationsInput = {
+    conversations_pictures_id?: StringFieldUpdateOperationsInput | string
+    conversation_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    conversation_picture_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type conversations_membersUpsertWithWhereUniqueWithoutConversationsInput = {
@@ -38102,6 +39418,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures?: conversations_picturesCreateNestedOneWithoutConversationsInput
     conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
   }
 
@@ -38111,6 +39428,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures_id?: string | null
     conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
   }
 
@@ -38179,6 +39497,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures?: conversations_picturesUpdateOneWithoutConversationsNestedInput
     conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
   }
 
@@ -38188,6 +39507,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
@@ -38246,6 +39566,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures?: conversations_picturesCreateNestedOneWithoutConversationsInput
     conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
   }
 
@@ -38255,6 +39576,7 @@ export namespace Prisma {
     conversation_creation_date: Date | string
     last_message?: string | null
     last_message_date?: Date | string | null
+    conversations_pictures_id?: string | null
     conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
   }
 
@@ -38323,6 +39645,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures?: conversations_picturesUpdateOneWithoutConversationsNestedInput
     conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
   }
 
@@ -38332,6 +39655,7 @@ export namespace Prisma {
     conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
   }
 
@@ -38382,6 +39706,64 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type conversationsCreateWithoutConversations_picturesInput = {
+    conversation_id: string
+    conversation_name?: string | null
+    conversation_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    conversations_members?: conversations_membersCreateNestedManyWithoutConversationsInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutConversationsInput
+  }
+
+  export type conversationsUncheckedCreateWithoutConversations_picturesInput = {
+    conversation_id: string
+    conversation_name?: string | null
+    conversation_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutConversationsInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutConversationsInput
+  }
+
+  export type conversationsCreateOrConnectWithoutConversations_picturesInput = {
+    where: conversationsWhereUniqueInput
+    create: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput>
+  }
+
+  export type conversationsCreateManyConversations_picturesInputEnvelope = {
+    data: conversationsCreateManyConversations_picturesInput | conversationsCreateManyConversations_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type conversationsUpsertWithWhereUniqueWithoutConversations_picturesInput = {
+    where: conversationsWhereUniqueInput
+    update: XOR<conversationsUpdateWithoutConversations_picturesInput, conversationsUncheckedUpdateWithoutConversations_picturesInput>
+    create: XOR<conversationsCreateWithoutConversations_picturesInput, conversationsUncheckedCreateWithoutConversations_picturesInput>
+  }
+
+  export type conversationsUpdateWithWhereUniqueWithoutConversations_picturesInput = {
+    where: conversationsWhereUniqueInput
+    data: XOR<conversationsUpdateWithoutConversations_picturesInput, conversationsUncheckedUpdateWithoutConversations_picturesInput>
+  }
+
+  export type conversationsUpdateManyWithWhereWithoutConversations_picturesInput = {
+    where: conversationsScalarWhereInput
+    data: XOR<conversationsUpdateManyMutationInput, conversationsUncheckedUpdateManyWithoutConversations_picturesInput>
+  }
+
+  export type conversationsScalarWhereInput = {
+    AND?: conversationsScalarWhereInput | conversationsScalarWhereInput[]
+    OR?: conversationsScalarWhereInput[]
+    NOT?: conversationsScalarWhereInput | conversationsScalarWhereInput[]
+    conversation_id?: StringFilter<"conversations"> | string
+    conversation_name?: StringNullableFilter<"conversations"> | string | null
+    conversation_creation_date?: DateTimeFilter<"conversations"> | Date | string
+    last_message?: StringNullableFilter<"conversations"> | string | null
+    last_message_date?: DateTimeNullableFilter<"conversations"> | Date | string | null
+    conversations_pictures_id?: StringNullableFilter<"conversations"> | string | null
   }
 
   export type collectionsCreateWithoutEntitiesInput = {
@@ -39582,7 +40964,7 @@ export namespace Prisma {
   export type profile_picturesCreateWithoutGroupsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
   }
@@ -39590,7 +40972,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedCreateWithoutGroupsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
   }
@@ -39634,7 +41016,7 @@ export namespace Prisma {
   export type profile_picturesUpdateWithoutGroupsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -39642,7 +41024,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedUpdateWithoutGroupsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -40017,7 +41399,7 @@ export namespace Prisma {
   export type profile_picturesCreateWithoutIndividualsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsCreateNestedManyWithoutProfile_picturesInput
   }
@@ -40025,7 +41407,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedCreateWithoutIndividualsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
     organizations?: organizationsUncheckedCreateNestedManyWithoutProfile_picturesInput
   }
@@ -40080,7 +41462,7 @@ export namespace Prisma {
   export type profile_picturesUpdateWithoutIndividualsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -40088,7 +41470,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedUpdateWithoutIndividualsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
     organizations?: organizationsUncheckedUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -40096,7 +41478,7 @@ export namespace Prisma {
   export type profile_picturesCreateWithoutOrganizationsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsCreateNestedManyWithoutProfile_picturesInput
     individuals?: individualsCreateNestedManyWithoutProfile_picturesInput
   }
@@ -40104,7 +41486,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedCreateWithoutOrganizationsInput = {
     profile_picture_id: string
     profile_picture_data: Buffer
-    profile_picture_filename?: string | null
+    profile_picture_filename: string
     groups?: groupsUncheckedCreateNestedManyWithoutProfile_picturesInput
     individuals?: individualsUncheckedCreateNestedManyWithoutProfile_picturesInput
   }
@@ -40148,7 +41530,7 @@ export namespace Prisma {
   export type profile_picturesUpdateWithoutOrganizationsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUpdateManyWithoutProfile_picturesNestedInput
     individuals?: individualsUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -40156,7 +41538,7 @@ export namespace Prisma {
   export type profile_picturesUncheckedUpdateWithoutOrganizationsInput = {
     profile_picture_id?: StringFieldUpdateOperationsInput | string
     profile_picture_data?: BytesFieldUpdateOperationsInput | Buffer
-    profile_picture_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_picture_filename?: StringFieldUpdateOperationsInput | string
     groups?: groupsUncheckedUpdateManyWithoutProfile_picturesNestedInput
     individuals?: individualsUncheckedUpdateManyWithoutProfile_picturesNestedInput
   }
@@ -41288,6 +42670,42 @@ export namespace Prisma {
     message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type conversationsCreateManyConversations_picturesInput = {
+    conversation_id: string
+    conversation_name?: string | null
+    conversation_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+  }
+
+  export type conversationsUpdateWithoutConversations_picturesInput = {
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
+    conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_members?: conversations_membersUpdateManyWithoutConversationsNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutConversationsNestedInput
+  }
+
+  export type conversationsUncheckedUpdateWithoutConversations_picturesInput = {
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
+    conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutConversationsNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutConversationsNestedInput
+  }
+
+  export type conversationsUncheckedUpdateManyWithoutConversations_picturesInput = {
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    conversation_name?: NullableStringFieldUpdateOperationsInput | string | null
+    conversation_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type collectionsCreateManyEntitiesInput = {
     collection_id: string
     collection_name: string
@@ -42148,6 +43566,10 @@ export namespace Prisma {
      */
     export type ConversationsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ConversationsCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Conversations_picturesCountOutputTypeDefaultArgs instead
+     */
+    export type Conversations_picturesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Conversations_picturesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use EntitiesCountOutputTypeDefaultArgs instead
      */
     export type EntitiesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EntitiesCountOutputTypeDefaultArgs<ExtArgs>
@@ -42215,6 +43637,10 @@ export namespace Prisma {
      * @deprecated Use conversations_messages_logsDefaultArgs instead
      */
     export type conversations_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = conversations_messages_logsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use conversations_picturesDefaultArgs instead
+     */
+    export type conversations_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = conversations_picturesDefaultArgs<ExtArgs>
     /**
      * @deprecated Use entitiesDefaultArgs instead
      */

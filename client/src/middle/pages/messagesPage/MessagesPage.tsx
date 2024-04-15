@@ -65,7 +65,11 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
   };
 
   const leaveConversation = (conversation_id: string) => {
-    messageSocket.emit("leaveConversation", conversation_id);
+    if (!token) {
+      return;
+    }
+
+    messageSocket.emit("leaveConversation", token, conversation_id);
   };
 
   useEffect(() => {
@@ -82,7 +86,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       if (!token) {
         return;
       }
-
+      console.log(newMessage);
       const response = await Axios.get(`${serverUrl}/conversations/isUser`, {
         params: {
           sender: newMessage.sender,
@@ -179,6 +183,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       }
       messageSocket.off("newMessage");
       messageSocket.off("typingStatusChange");
+      setTyping([]);
     };
   }, [conversation_id]);
 

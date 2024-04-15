@@ -85,8 +85,16 @@ export default function RightSpace() {
         {renderContent()}
       </div>
       <RightSearchBar
-        page={rightPage}
-        isFilter={mainPageState !== "messages" ? true : false}
+        page={
+          mainPageState !== "messages" && mainSecondaryPageState !== "messages"
+            ? rightPage
+            : messagesPage
+        }
+        isFilter={
+          mainPageState !== "messages" && mainSecondaryPageState !== "messages"
+            ? true
+            : false
+        }
       />
     </div>
   );

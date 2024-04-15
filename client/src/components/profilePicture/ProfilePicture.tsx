@@ -35,6 +35,7 @@ export default function ProfilePicture({
   styles,
   entity,
   clickable,
+  conversations_pictures_id,
 }: ProfilePictureProps) {
   const dispatch = useDispatch();
 
@@ -49,8 +50,9 @@ export default function ProfilePicture({
 
   useEffect(() => {
     const fetchProfilePictureData = async () => {
-      const storedProfilePicture =
-        await getStoredProfilePicture(entity_username);
+      const storedProfilePicture = await getStoredProfilePicture(
+        conversations_pictures_id ? conversations_pictures_id : entity_username,
+      );
 
       if (storedProfilePicture) {
         const url = URL.createObjectURL(storedProfilePicture);
@@ -62,41 +64,79 @@ export default function ProfilePicture({
       }
 
       try {
-        const response = await Axios.get(
-          `${serverUrl}/images/get_user_profile_picture`,
-          {
-            params: {
-              entity_username: entity_username,
-              entity_type: entity_type,
+        if (conversations_pictures_id) {
+          const response = await Axios.get(
+            `${serverUrl}/conversations/get_conversation_picture`,
+            {
+              params: {
+                conversations_pictures_id: conversations_pictures_id,
+              },
             },
-          },
-        );
-
-        if (response.data !== "default") {
-          const blobData = new Uint8Array(
-            response.data.profile_picture_data.data,
           );
 
-          const extension = response.data.profile_picture_filename
-            .slice(-3)
-            .toLowerCase();
+          if (response.data !== "default") {
+            const blobData = new Uint8Array(
+              response.data.conversation_picture_data.data,
+            );
 
-          const mimeType = getMimeType(extension);
+            const extension = response.data.conversation_picture_filename
+              .slice(-3)
+              .toLowerCase();
 
-          if (mimeType) {
-            const blob = new Blob([blobData], { type: mimeType });
-            const url = URL.createObjectURL(blob);
+            const mimeType = getMimeType(extension);
 
+            if (mimeType) {
+              const blob = new Blob([blobData], { type: mimeType });
+              const url = URL.createObjectURL(blob);
+
+              setProfilePictureData({
+                profilePictureUrl: url,
+              });
+
+              await storeProfilePicture(conversations_pictures_id, blob);
+            }
+          } else {
             setProfilePictureData({
-              profilePictureUrl: url,
+              profilePictureUrl: "",
             });
-
-            await storeProfilePicture(entity_username, blob);
           }
         } else {
-          setProfilePictureData({
-            profilePictureUrl: "",
-          });
+          const response = await Axios.get(
+            `${serverUrl}/images/get_user_profile_picture`,
+            {
+              params: {
+                entity_username: entity_username,
+                entity_type: entity_type,
+              },
+            },
+          );
+
+          if (response.data !== "default") {
+            const blobData = new Uint8Array(
+              response.data.profile_picture_data.data,
+            );
+
+            const extension = response.data.profile_picture_filename
+              .slice(-3)
+              .toLowerCase();
+
+            const mimeType = getMimeType(extension);
+
+            if (mimeType) {
+              const blob = new Blob([blobData], { type: mimeType });
+              const url = URL.createObjectURL(blob);
+
+              setProfilePictureData({
+                profilePictureUrl: url,
+              });
+
+              await storeProfilePicture(entity_username, blob);
+            }
+          } else {
+            setProfilePictureData({
+              profilePictureUrl: "",
+            });
+          }
         }
       } catch (error) {
         console.error("Error fetching profile picture data:", error);

@@ -2,6 +2,7 @@ import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
+import { ConversationMember, Entity } from "@FgTypes/types";
 
 const verifyUser = async (token: string, conversation_id: string) => {
   try {
@@ -45,11 +46,41 @@ export default function messageSocket(server: HttpServer) {
         const message_date = new Date().toISOString();
 
         if (isInConversation && typeof user !== "string") {
-          io.to(conversation_id).emit("newMessage", {
-            content: message,
-            sender: user.username,
-            message_date: message_date,
+          const recipients: ConversationMember[] =
+            await prisma.conversations_members.findMany({
+              where: {
+                conversation_id: conversation_id,
+              },
+            });
+
+          const validRecipients = recipients.filter(
+            (recipient) => recipient.member_id !== user.user_id
+          );
+
+          const validRecipientIds = validRecipients.map(
+            (recipient) => recipient.member_id
+          );
+
+          const entities: Entity[] = await prisma.entities.findMany({
+            where: {
+              entity_id: { in: validRecipientIds },
+            },
           });
+
+          const entityUsernames = entities.map(
+            (entity) => entity.entity_username
+          );
+
+          for (const username in entityUsernames) {
+            io.to(`${conversation_id}_${entityUsernames[username]}`).emit(
+              "newMessage",
+              {
+                content: message,
+                sender: user.username,
+                message_date: message_date,
+              }
+            );
+          }
         } else {
           console.log("Authorization denied");
         }
@@ -63,10 +94,36 @@ export default function messageSocket(server: HttpServer) {
         const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
         if (isInConversation && typeof user !== "string") {
-          io.to(conversation_id).emit("typingStatusChange", {
-            typing: typing,
-            sender: user.username,
+          const recipients: ConversationMember[] =
+            await prisma.conversations_members.findMany({
+              where: {
+                conversation_id: conversation_id,
+              },
+            });
+
+          const recipientIds = recipients.map(
+            (recipient) => recipient.member_id
+          );
+
+          const entities: Entity[] = await prisma.entities.findMany({
+            where: {
+              entity_id: { in: recipientIds },
+            },
           });
+
+          const entityUsernames = entities.map(
+            (entity) => entity.entity_username
+          );
+
+          for (const username in entityUsernames) {
+            io.to(`${conversation_id}_${entityUsernames[username]}`).emit(
+              "typingStatusChange",
+              {
+                typing: typing,
+                sender: user.username,
+              }
+            );
+          }
         } else {
           console.log("Authorization denied");
         }
@@ -75,16 +132,19 @@ export default function messageSocket(server: HttpServer) {
 
     socket.on("joinConversation", async (token, conversation_id) => {
       const isInConversation = await verifyUser(token, conversation_id);
+      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
 
-      if (isInConversation) {
-        socket.join(conversation_id);
-      } else {
-        console.log("Authorization denied");
+      if (isInConversation && typeof user !== "string") {
+        socket.join(`${conversation_id}_${user.username}`);
       }
     });
 
-    socket.on("leaveConversation", (conversation_id) => {
-      socket.leave(conversation_id);
+    socket.on("leaveConversation", (token, conversation_id) => {
+      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+
+      if (typeof user !== "string") {
+        socket.leave(`${conversation_id}_${user.username}`);
+      }
     });
 
     socket.on("disconnect", () => {

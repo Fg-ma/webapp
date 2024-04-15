@@ -9,14 +9,35 @@ import {
 import { ContactCardProps } from "@FgTypes/rightTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
+function highlightText(text: string | null, filter: string | undefined) {
+  if (!filter || !text) {
+    return text;
+  }
+
+  const regex = new RegExp(`(${filter})`, "ig");
+  const parts = text.split(regex);
+
+  return parts.map((part, index) =>
+    part.toLowerCase() === filter.toLowerCase() ? (
+      <em key={index}>
+        <strong>{part}</strong>
+      </em>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function ContactCard({
   entity_username,
+  entity_type,
   animate,
   conversation_id,
   conversation_name,
   contact_name,
   last_message,
   contact_creation_date,
+  filter,
 }: ContactCardProps) {
   const dispatch = useDispatch();
 
@@ -36,6 +57,13 @@ export function ContactCard({
     }
   };
 
+  const lastMessage = last_message?.includes("\n")
+    ? last_message?.split("\n")[0]
+    : last_message;
+
+  const filteredContactName = highlightText(contact_name, filter);
+  const filteredLastMessage = highlightText(lastMessage, filter);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -50,17 +78,25 @@ export function ContactCard({
           <ProfilePicture
             size={{ h: 3.5, w: 3.5 }}
             entity_username={entity_username}
-            entity_type={1}
-            styles="rounded-full"
+            entity_type={entity_type}
+            styles={
+              entity_type === 1
+                ? "rounded-full"
+                : entity_type === 2
+                  ? "rounded-lg"
+                  : entity_type === 3
+                    ? "rounded"
+                    : ""
+            }
             clickable={false}
           />
         </div>
         <div className="my-2 mr-4 truncate">
           <p className="w-full font-Josefin text-xl font-bold line-clamp-1 leading-5 pt-2">
-            {contact_name}
+            {filteredContactName}
           </p>
           <p className="w-full font-Josefin text-md text-fg-black-30 truncate">
-            {last_message}
+            {filteredLastMessage}
           </p>
         </div>
       </motion.div>

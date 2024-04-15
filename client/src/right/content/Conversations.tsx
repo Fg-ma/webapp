@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
-import { Conversation } from "@FgTypes/rightTypes";
+import { Conversation, RightFilterState } from "@FgTypes/rightTypes";
 import { ConversationCard } from "./ConversationCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -23,7 +24,15 @@ export default function Conversations() {
     getStoredConversations,
     deleteStoredConversations,
   } = useIndexedDBContext();
+  const filter = useSelector(
+    (state: RightFilterState) =>
+      state.filters.conversations.filterPayload.value,
+  );
   const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [filterConversations, setFilterConversations] = useState<
+    Conversation[]
+  >([]);
+  const [noFilteredMatchesFound, setNoFilteredMatchesFound] = useState(false);
   const [newConversation, setNewConversation] = useState<Conversation>();
 
   const sortData = (data: Conversation[]) => {
@@ -94,6 +103,109 @@ export default function Conversations() {
     fetchConversations();
   }, []);
 
+  // Handles filtering conversations
+  useEffect(() => {
+    if (!filter) {
+      setNoFilteredMatchesFound(false);
+      setFilterConversations([]);
+      return;
+    }
+
+    const lowerCaseFilter = filter.toLowerCase();
+
+    let allConversations = conversations;
+    if (newConversation) {
+      allConversations = [newConversation, ...conversations];
+    }
+
+    const filteredConversations = allConversations.filter((conversation) => {
+      let last_message = conversation.last_message?.toLowerCase();
+      if (conversation.last_message?.toLowerCase().includes("\n")) {
+        last_message = conversation.last_message?.toLowerCase().split("\n")[0];
+      }
+
+      if (last_message?.includes(lowerCaseFilter)) {
+        return true;
+      }
+
+      if (
+        conversation.conversation_name?.toLowerCase().includes(lowerCaseFilter)
+      ) {
+        return true;
+      }
+
+      for (const memberIndex in conversation.members) {
+        const individualData =
+          conversation.members[memberIndex].individual_data;
+        if (individualData) {
+          if (individualData.individual_name) {
+            if (
+              individualData.individual_name
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          } else {
+            if (
+              individualData.individual_username
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+
+        const groupData = conversation.members[memberIndex].group_data;
+        if (groupData) {
+          if (groupData.group_name) {
+            if (groupData.group_name.toLowerCase().includes(lowerCaseFilter)) {
+              return true;
+            }
+          } else {
+            if (
+              groupData.group_handle.toLowerCase().includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+
+        const organizationData =
+          conversation.members[memberIndex].organization_data;
+        if (organizationData) {
+          if (organizationData.organization_name) {
+            if (
+              organizationData.organization_name
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          } else {
+            if (
+              organizationData.organization_handle
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    });
+
+    if (filterConversations.length === 0) {
+      setNoFilteredMatchesFound(true);
+    }
+
+    setFilterConversations(filteredConversations);
+  }, [filter]);
+
+  // Handles adding and removing new conversations
   useEffect(() => {
     const fetchNewConversation = async () => {
       const storedConversations = await getStoredConversations();
@@ -195,6 +307,22 @@ export default function Conversations() {
     liveUpdatesSocket?.on(
       "incomingMessage",
       (incomingMessage: { content: string; conversation_id: string }) => {
+        if (newConversation) {
+          setNewConversation((prevConversation) => {
+            if (
+              prevConversation?.conversation_id ===
+              incomingMessage.conversation_id
+            ) {
+              const updatedConversation = {
+                ...prevConversation,
+                last_message: incomingMessage.content,
+              };
+              asyncStoreConversations([updatedConversation, ...conversations]);
+              return updatedConversation;
+            }
+          });
+        }
+
         setConversations((prevConversations) => {
           const updatedConversations = prevConversations.map((conversation) => {
             if (
@@ -232,40 +360,6 @@ export default function Conversations() {
     };
   }, []);
 
-  const getConversationMembersNames = (conversation: Conversation) => {
-    let conversationMembersNames: string[] = [];
-
-    for (const member of conversation.members) {
-      if (member.individual_data) {
-        if (member.individual_data.individual_name) {
-          conversationMembersNames.push(member.individual_data.individual_name);
-        } else {
-          conversationMembersNames.push(
-            member.individual_data.individual_username,
-          );
-        }
-      } else if (member.group_data) {
-        if (member.group_data.group_name) {
-          conversationMembersNames.push(member.group_data.group_name);
-        } else {
-          conversationMembersNames.push(member.group_data.group_handle);
-        }
-      } else if (member.organization_data) {
-        if (member.organization_data.organization_name) {
-          conversationMembersNames.push(
-            member.organization_data.organization_name,
-          );
-        } else {
-          conversationMembersNames.push(
-            member.organization_data.organization_handle,
-          );
-        }
-      }
-    }
-
-    return conversationMembersNames;
-  };
-
   let newConversationCard;
   if (newConversation) {
     const foundConversation = conversations.find(
@@ -280,32 +374,54 @@ export default function Conversations() {
           conversation_id={newConversation.conversation_id}
           conversation_name={newConversation.conversation_name}
           last_message={newConversation.last_message}
-          members={getConversationMembersNames(newConversation)}
+          members={newConversation.members}
           conversation_creation_date={
             newConversation.conversation_creation_date
           }
+          conversations_pictures_id={newConversation.conversations_pictures_id}
         />
       );
     }
   }
 
-  const conversationCards = conversations.map((conversation) => {
+  const filteredConversationsCards = filterConversations.map((conversation) => {
     return (
       <ConversationCard
         key={conversation.conversation_id}
         conversation_id={conversation.conversation_id}
         conversation_name={conversation.conversation_name}
         last_message={conversation.last_message}
-        members={getConversationMembersNames(conversation)}
+        members={conversation.members}
         conversation_creation_date={conversation.conversation_creation_date}
+        conversations_pictures_id={conversation.conversations_pictures_id}
+        filter={filter}
+      />
+    );
+  });
+
+  const conversationsCards = conversations.map((conversation) => {
+    return (
+      <ConversationCard
+        key={conversation.conversation_id}
+        conversation_id={conversation.conversation_id}
+        conversation_name={conversation.conversation_name}
+        last_message={conversation.last_message}
+        members={conversation.members}
+        conversation_creation_date={conversation.conversation_creation_date}
+        conversations_pictures_id={conversation.conversations_pictures_id}
       />
     );
   });
 
   return (
     <div>
-      {newConversationCard}
-      {conversationCards}
+      {filteredConversationsCards}
+      {!noFilteredMatchesFound &&
+        filteredConversationsCards.length === 0 &&
+        newConversationCard}
+      {!noFilteredMatchesFound &&
+        filteredConversationsCards.length === 0 &&
+        conversationsCards}
     </div>
   );
 }

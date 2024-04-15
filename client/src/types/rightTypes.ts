@@ -24,6 +24,7 @@ export interface RightFilterState {
   filters: {
     [filter: string]: {
       filterPayload: {
+        value: string;
         isWhatsCurrent: boolean;
         isAffiliateActivity: boolean;
         isAllTimeGreats: boolean;
@@ -162,8 +163,10 @@ export interface ConversationCardProps {
   conversation_id: string;
   conversation_name: string | null;
   last_message: string | null;
-  members: string[];
+  members: Members[];
   conversation_creation_date: string;
+  conversations_pictures_id: string | null;
+  filter?: string;
 }
 
 /* 
@@ -172,12 +175,14 @@ export interface ConversationCardProps {
 
 export interface ContactCardProps {
   entity_username: string;
+  entity_type: number;
   animate?: boolean;
   conversation_id: string;
   conversation_name: string | null;
   contact_name: string | null;
   last_message: string | null;
   contact_creation_date: string;
+  filter?: string;
 }
 
 /* 
@@ -252,7 +257,7 @@ export interface RightSearchFilterProps {
 /* 
   Conversations.tsx
 */
-interface Members {
+export interface Members {
   conversation_id: string;
   member_id: string;
   individual_data?: {
@@ -276,6 +281,7 @@ export interface Conversation {
   conversation_creation_date: string;
   last_message: string | null;
   last_message_date: string | null;
+  conversations_pictures_id: string | null;
   members: Members[];
 }
 
@@ -294,4 +300,5 @@ export interface Contact {
   contact_creation_date: string;
   last_message: string | null;
   last_contact_date: string | null;
+  entity_type: number;
 }

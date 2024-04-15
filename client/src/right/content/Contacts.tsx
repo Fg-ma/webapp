@@ -1,8 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
-import { Contact } from "@FgTypes/rightTypes";
+import { Contact, RightFilterState } from "@FgTypes/rightTypes";
 import { ContactCard } from "./ContactCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useContactContext } from "@context/ContactContext";
@@ -23,7 +24,12 @@ export default function Contacts() {
     getStoredContacts,
     deleteStoredContacts,
   } = useIndexedDBContext();
+  const filter = useSelector(
+    (state: RightFilterState) => state.filters.contacts.filterPayload.value,
+  );
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [filterContacts, setFilterContacts] = useState<Contact[]>([]);
+  const [noFilteredMatchesFound, setNoFilteredMatchesFound] = useState(false);
   const [newContact, setNewContact] = useState<Contact>();
 
   const sortData = (data: Contact[]) => {
@@ -92,6 +98,46 @@ export default function Contacts() {
     fetchContacts();
   }, []);
 
+  // Handles filtering contacts
+  useEffect(() => {
+    if (!filter) {
+      setNoFilteredMatchesFound(false);
+      setFilterContacts([]);
+      return;
+    }
+
+    const lowerCaseFilter = filter.toLowerCase();
+
+    let allContacts = contacts;
+    if (newContact) {
+      allContacts = [newContact, ...contacts];
+    }
+
+    const filteredContacts = allContacts.filter((contact) => {
+      let last_message = contact.last_message?.toLowerCase();
+      if (contact.last_message?.toLowerCase().includes("\n")) {
+        last_message = contact.last_message?.toLowerCase().split("\n")[0];
+      }
+
+      if (last_message?.includes(lowerCaseFilter)) {
+        return true;
+      }
+
+      if (contact.contact_name?.toLowerCase().includes(lowerCaseFilter)) {
+        return true;
+      }
+
+      return false;
+    });
+
+    if (filteredContacts.length === 0) {
+      setNoFilteredMatchesFound(true);
+    }
+
+    setFilterContacts(filteredContacts);
+  }, [filter]);
+
+  // Handles adding and removing new contacts
   useEffect(() => {
     const fetchNewContact = async () => {
       const storedContacts = await getStoredContacts();
@@ -154,6 +200,7 @@ export default function Contacts() {
     }
   }, [fluxContact]);
 
+  // Update last message and message position
   useEffect(() => {
     if (lastMessage.conversation_id === "") {
       return;
@@ -174,8 +221,8 @@ export default function Contacts() {
     );
 
     if (indexToUpdate !== -1) {
-      const updatedConversation = updatedContacts.splice(indexToUpdate, 1)[0];
-      updatedContacts.unshift(updatedConversation);
+      const updatedContact = updatedContacts.splice(indexToUpdate, 1)[0];
+      updatedContacts.unshift(updatedContact);
     }
 
     setContacts(updatedContacts);
@@ -191,6 +238,21 @@ export default function Contacts() {
     liveUpdatesSocket?.on(
       "incomingMessage",
       (incomingMessage: { content: string; conversation_id: string }) => {
+        if (newContact) {
+          setNewContact((prevContact) => {
+            if (
+              prevContact?.conversation_id === incomingMessage.conversation_id
+            ) {
+              const updatedContact = {
+                ...prevContact,
+                last_message: incomingMessage.content,
+              };
+              asyncStoreContacts([updatedContact, ...contacts]);
+              return updatedContact;
+            }
+          });
+        }
+
         setContacts((prevContacts) => {
           const updatedContacts = prevContacts.map((contact) => {
             if (contact.conversation_id === incomingMessage.conversation_id) {
@@ -233,6 +295,7 @@ export default function Contacts() {
         <ContactCard
           key={newContact.contact_id}
           entity_username={newContact.contact_username_target}
+          entity_type={newContact.entity_type}
           animate={newContact.animate}
           conversation_id={newContact.conversation_id}
           conversation_name={newContact.conversation_name}
@@ -244,11 +307,28 @@ export default function Contacts() {
     }
   }
 
-  const contactCards = contacts.map((contact) => {
+  const filteredContactsCards = filterContacts.map((contact) => {
     return (
       <ContactCard
         key={contact.contact_id}
         entity_username={contact.contact_username_target}
+        entity_type={contact.entity_type}
+        conversation_id={contact.conversation_id}
+        conversation_name={contact.conversation_name}
+        contact_name={contact.contact_name}
+        last_message={contact.last_message}
+        contact_creation_date={contact.contact_creation_date}
+        filter={filter}
+      />
+    );
+  });
+
+  const contactsCards = contacts.map((contact) => {
+    return (
+      <ContactCard
+        key={contact.contact_id}
+        entity_username={contact.contact_username_target}
+        entity_type={contact.entity_type}
         conversation_id={contact.conversation_id}
         conversation_name={contact.conversation_name}
         contact_name={contact.contact_name}
@@ -260,8 +340,13 @@ export default function Contacts() {
 
   return (
     <div>
-      {newContactCard}
-      {contactCards}
+      {filteredContactsCards}
+      {!noFilteredMatchesFound &&
+        filteredContactsCards.length === 0 &&
+        newContactCard}
+      {!noFilteredMatchesFound &&
+        filteredContactsCards.length === 0 &&
+        contactsCards}
     </div>
   );
 }

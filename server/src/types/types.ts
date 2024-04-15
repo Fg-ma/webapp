@@ -38,10 +38,11 @@ export interface Organization {
 
 export interface Conversation {
   conversation_id: string;
-  conversation_name: string;
+  conversation_name: string | null;
   conversation_creation_date: string;
-  last_message: string;
-  last_message_date: string;
+  last_message: string | null;
+  last_message_date: string | null;
+  conversations_pictures_id: string | null;
   members?: ConversationMember[];
 }
 
@@ -251,6 +252,12 @@ export interface ConversationsMessagesLogs {
   entity_id: string;
   message: string;
   message_date: string;
+}
+
+export interface ConversationPicture {
+  conversations_pictures_id: string;
+  conversation_picture_data: Blob;
+  conversation_picture_filename: string;
 }
 
 /*

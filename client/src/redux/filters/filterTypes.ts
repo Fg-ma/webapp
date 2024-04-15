@@ -1,3 +1,4 @@
+export const SET_FILTER_VALUE = "SET_FILTER_VALUE";
 export const TOGGLE_DROP = "TOGGLE_DROP";
 export const CLOSE_DROP = "CLOSE_DROP";
 export const SET_FILTER_OPTION = "SET_FILTER_OPTION";

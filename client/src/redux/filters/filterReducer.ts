@@ -1,4 +1,5 @@
 import {
+  SET_FILTER_VALUE,
   TOGGLE_DROP,
   CLOSE_DROP,
   SET_FILTER_OPTION,
@@ -18,6 +19,7 @@ const initialState: FilterState = {
     isDrop: false,
     isDropFilter: false,
     filterPayload: {
+      value: "",
       isWhatsCurrent: false,
       isAffiliateActivity: false,
       isAllTimeGreats: false,
@@ -42,6 +44,7 @@ const initialState: FilterState = {
   news: {
     isDropFilter: false,
     filterPayload: {
+      value: "",
       isWhatsCurrent: false,
       isAffiliateActivity: false,
       isAllTimeGreats: false,
@@ -66,6 +69,7 @@ const initialState: FilterState = {
   papers: {
     isDropFilter: false,
     filterPayload: {
+      value: "",
       isWhatsCurrent: false,
       isAffiliateActivity: false,
       isAllTimeGreats: false,
@@ -90,6 +94,7 @@ const initialState: FilterState = {
   explore: {
     isDropFilter: false,
     filterPayload: {
+      value: "",
       isWhatsCurrent: false,
       isAffiliateActivity: false,
       isAllTimeGreats: false,
@@ -111,26 +116,20 @@ const initialState: FilterState = {
     },
     appliedFilterOptions: null,
   },
-  messages: {
-    isDropFilter: false,
+  conversations: {
     filterPayload: {
-      isIndividuals: false,
-      isGroups: false,
-      isOrganizations: false,
-      isNewestMessages: false,
-      isOldestMessages: false,
-      isNewestAffiliate: false,
-      isOldestAffiliate: false,
-      dateRange: {
-        from: "",
-        to: "",
-      },
+      value: "",
     },
-    appliedFilterOptions: null,
+  },
+  contacts: {
+    filterPayload: {
+      value: "",
+    },
   },
   dogEars: {
     isDropFilter: false,
     filterPayload: {
+      value: "",
       isAffiliateActivity: false,
       isDatePosted: false,
       isDatePostedSwitched: false,
@@ -157,6 +156,19 @@ export default function filterReducer(
   action: FilterAction,
 ) {
   switch (action.type) {
+    case SET_FILTER_VALUE: {
+      const { filter, value } = action.payload;
+      return {
+        ...state,
+        [filter]: {
+          ...state[filter],
+          filterPayload: {
+            ...state[filter].filterPayload,
+            value: value,
+          },
+        },
+      };
+    }
     case TOGGLE_DROP: {
       const { filter, dropType } = action.payload;
       return {

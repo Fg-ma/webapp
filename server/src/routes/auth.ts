@@ -6,6 +6,20 @@ import jwt, { Secret } from "jsonwebtoken";
 import verifyToken from "./verifyJWT";
 import { UserCredentials } from "@FgTypes/types";
 
+// Gets if the user is the inputted target *NOTE USED ONLY FOR COMSEMITIC PURPOSES
+router.get("/isUser", verifyToken, async (req, res) => {
+  const { target } = req.query;
+
+  try {
+    const isUser = target === req.user.username;
+
+    res.send(isUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 router.post("/register", async (req, res) => {
   const { newUserUsername, newUserPassword } = req.body;
 

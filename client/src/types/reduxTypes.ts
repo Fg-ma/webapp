@@ -10,7 +10,8 @@ import {
   REMOVE_ADVANCED_AFFILIATED_FILTER,
   CLEAR_ADVANCED_AFFILIATED_FILTER,
   SET_DATE_RANGE,
-} from "../redux/filters/filterTypes";
+  SET_FILTER_VALUE,
+} from "@redux/filters/filterTypes";
 import {
   SET_PAGE_STATE,
   SET_IDS,
@@ -27,6 +28,7 @@ import {
 */
 
 export interface FilterPayload {
+  value: string;
   isWhatsCurrent?: boolean;
   isAffiliateActivity?: boolean;
   isAllTimeGreats?: boolean;
@@ -49,7 +51,7 @@ export interface FilterPayload {
     org: string[];
   };
   author?: string;
-  dateRange: {
+  dateRange?: {
     from: string;
     to: string;
   };
@@ -59,13 +61,17 @@ export interface FilterState {
   [key: string]: {
     [key: string]: boolean | FilterPayload | any;
     isDrop?: boolean;
-    isDropFilter: boolean;
+    isDropFilter?: boolean;
     filterPayload: FilterPayload;
-    appliedFilterOptions: any;
+    appliedFilterOptions?: any;
   };
 }
 
 export type FilterAction =
+  | {
+      type: typeof SET_FILTER_VALUE;
+      payload: { filter: string; value: string };
+    }
   | { type: typeof TOGGLE_DROP; payload: { filter: string; dropType: string } }
   | { type: typeof CLOSE_DROP; payload: { filter: string; dropType: string } }
   | {
