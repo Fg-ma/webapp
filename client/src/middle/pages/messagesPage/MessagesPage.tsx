@@ -86,7 +86,6 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       if (!token) {
         return;
       }
-      console.log(newMessage);
       const response = await Axios.get(`${serverUrl}/conversations/isUser`, {
         params: {
           sender: newMessage.sender,
@@ -183,7 +182,6 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
       }
       messageSocket.off("newMessage");
       messageSocket.off("typingStatusChange");
-      setTyping([]);
     };
   }, [conversation_id]);
 

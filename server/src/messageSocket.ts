@@ -53,17 +53,13 @@ export default function messageSocket(server: HttpServer) {
               },
             });
 
-          const validRecipients = recipients.filter(
-            (recipient) => recipient.member_id !== user.user_id
-          );
-
-          const validRecipientIds = validRecipients.map(
+          const recipientIds = recipients.map(
             (recipient) => recipient.member_id
           );
 
           const entities: Entity[] = await prisma.entities.findMany({
             where: {
-              entity_id: { in: validRecipientIds },
+              entity_id: { in: recipientIds },
             },
           });
 
@@ -81,8 +77,6 @@ export default function messageSocket(server: HttpServer) {
               }
             );
           }
-        } else {
-          console.log("Authorization denied");
         }
       }
     );
@@ -124,8 +118,6 @@ export default function messageSocket(server: HttpServer) {
               }
             );
           }
-        } else {
-          console.log("Authorization denied");
         }
       }
     );
@@ -133,7 +125,6 @@ export default function messageSocket(server: HttpServer) {
     socket.on("joinConversation", async (token, conversation_id) => {
       const isInConversation = await verifyUser(token, conversation_id);
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
-
       if (isInConversation && typeof user !== "string") {
         socket.join(`${conversation_id}_${user.username}`);
       }

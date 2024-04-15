@@ -76,8 +76,6 @@ export default function liveUpdatesSocket(server: HttpServer) {
               conversation_id: conversation_id,
             });
           }
-        } else {
-          console.log("Authorization denied");
         }
       }
     );
@@ -87,8 +85,6 @@ export default function liveUpdatesSocket(server: HttpServer) {
 
       if (user && typeof user !== "string") {
         socket.join(`live_${user.username}`);
-      } else {
-        console.log("Authorization denied");
       }
     });
 
@@ -96,8 +92,6 @@ export default function liveUpdatesSocket(server: HttpServer) {
       const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
       if (user && typeof user !== "string") {
         socket.leave(`live_${user.username}`);
-      } else {
-        console.log("Authorization denied");
       }
     });
 

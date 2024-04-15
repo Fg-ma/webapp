@@ -32,7 +32,7 @@ export default function MessagesTextField({
       return;
     }
 
-    if (text && text.length < 2) {
+    if (text) {
       messageSocket.emit("typing", token, conversation_id, true);
     } else if (!text) {
       messageSocket.emit("typing", token, conversation_id, false);
@@ -49,7 +49,7 @@ export default function MessagesTextField({
         handleInputChange,
       );
     };
-  }, []);
+  }, [conversation_id]);
 
   // Reset on conversation change
   useEffect(() => {
@@ -57,6 +57,9 @@ export default function MessagesTextField({
 
     setInputValue("");
     contentEditableRef.current.innerText = placeholder;
+    return () => {
+      messageSocket.emit("typing", token, conversation_id, false);
+    };
   }, [conversation_id]);
 
   // Set placeholder if div is empty
