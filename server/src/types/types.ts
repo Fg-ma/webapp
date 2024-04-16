@@ -281,6 +281,13 @@ export interface Contact {
   last_message: string | null;
   last_message_date: string | null;
   last_contact_date: string | null;
+  contacts_pictures_id: string | null;
+}
+
+export interface ContactPicture {
+  contacts_pictures_id: string;
+  contact_picture_data: Blob;
+  contact_picture_filename: string;
 }
 
 /* 

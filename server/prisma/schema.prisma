@@ -42,20 +42,30 @@ model collections_content {
 }
 
 model contacts {
-  contact_id                                    String    @id @unique(map: "contact_id_UNIQUE") @db.Char(36)
-  conversation_id                               String    @unique(map: "conversation_id_UNIQUE") @db.Char(36)
-  contact_id_root                               String    @db.Char(36)
-  contact_id_target                             String    @db.Char(36)
-  contact_creation_date                         DateTime  @db.Timestamp(0)
-  last_message                                  String?   @db.Text
-  last_contact_date                             DateTime? @db.Timestamp(0)
-  entities_contacts_contact_id_rootToentities   entities  @relation("contacts_contact_id_rootToentities", fields: [contact_id_root], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_root_fk")
-  entities_contacts_contact_id_targetToentities entities  @relation("contacts_contact_id_targetToentities", fields: [contact_id_target], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_target_fk")
+  contact_id                                    String             @id @unique(map: "contact_id_UNIQUE") @db.Char(36)
+  conversation_id                               String             @unique(map: "conversation_id_UNIQUE") @db.Char(36)
+  contact_id_root                               String             @db.Char(36)
+  contact_id_target                             String             @db.Char(36)
+  contact_creation_date                         DateTime           @db.Timestamp(0)
+  last_message                                  String?            @db.Text
+  last_contact_date                             DateTime?          @db.Timestamp(0)
+  contacts_pictures_id                          String?            @db.Char(36)
+  entities_contacts_contact_id_rootToentities   entities           @relation("contacts_contact_id_rootToentities", fields: [contact_id_root], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_root_fk")
+  entities_contacts_contact_id_targetToentities entities           @relation("contacts_contact_id_targetToentities", fields: [contact_id_target], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contact_id_target_fk")
+  contacts_pictures                             contacts_pictures? @relation(fields: [contacts_pictures_id], references: [contacts_pictures_id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_contacts_pictures_id_fk")
 
   @@unique([contact_id, conversation_id], map: "unique_contact_ids")
   @@unique([contact_id_root, contact_id_target], map: "unique_contact_members")
   @@index([contact_id_root], map: "contacts_contact_id_root_fk_idx")
   @@index([contact_id_target])
+  @@index([contacts_pictures_id], map: "contacts_contacts_pictures_id_fk_idx")
+}
+
+model contacts_pictures {
+  contacts_pictures_id     String     @id @unique(map: "contacts_pictures_id_UNIQUE") @db.Char(36)
+  contact_picture_data     Bytes
+  contact_picture_filename String     @db.VarChar(256)
+  contacts                 contacts[]
 }
 
 model content {

@@ -302,6 +302,7 @@ export default function Contacts() {
           contact_name={newContact.contact_name}
           last_message={newContact.last_message}
           contact_creation_date={newContact.contact_creation_date}
+          contacts_pictures_id={newContact.contacts_pictures_id}
         />
       );
     }
@@ -318,6 +319,7 @@ export default function Contacts() {
         contact_name={contact.contact_name}
         last_message={contact.last_message}
         contact_creation_date={contact.contact_creation_date}
+        contacts_pictures_id={contact.contacts_pictures_id}
         filter={filter}
       />
     );
@@ -334,6 +336,7 @@ export default function Contacts() {
         contact_name={contact.contact_name}
         last_message={contact.last_message}
         contact_creation_date={contact.contact_creation_date}
+        contacts_pictures_id={contact.contacts_pictures_id}
       />
     );
   });

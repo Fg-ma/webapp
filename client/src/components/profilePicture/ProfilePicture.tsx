@@ -36,6 +36,7 @@ export default function ProfilePicture({
   entity,
   clickable,
   conversations_pictures_id,
+  contacts_pictures_id,
 }: ProfilePictureProps) {
   const dispatch = useDispatch();
 
@@ -51,7 +52,11 @@ export default function ProfilePicture({
   useEffect(() => {
     const fetchProfilePictureData = async () => {
       const storedProfilePicture = await getStoredProfilePicture(
-        conversations_pictures_id ? conversations_pictures_id : entity_username,
+        conversations_pictures_id
+          ? conversations_pictures_id
+          : contacts_pictures_id
+            ? contacts_pictures_id
+            : entity_username,
       );
 
       if (storedProfilePicture) {
@@ -94,6 +99,42 @@ export default function ProfilePicture({
               });
 
               await storeProfilePicture(conversations_pictures_id, blob);
+            }
+          } else {
+            setProfilePictureData({
+              profilePictureUrl: "",
+            });
+          }
+        } else if (contacts_pictures_id) {
+          const response = await Axios.get(
+            `${serverUrl}/contacts/get_contact_picture`,
+            {
+              params: {
+                contacts_pictures_id: contacts_pictures_id,
+              },
+            },
+          );
+
+          if (response.data !== "default") {
+            const blobData = new Uint8Array(
+              response.data.contact_picture_data.data,
+            );
+
+            const extension = response.data.contact_picture_filename
+              .slice(-3)
+              .toLowerCase();
+
+            const mimeType = getMimeType(extension);
+
+            if (mimeType) {
+              const blob = new Blob([blobData], { type: mimeType });
+              const url = URL.createObjectURL(blob);
+
+              setProfilePictureData({
+                profilePictureUrl: url,
+              });
+
+              await storeProfilePicture(contacts_pictures_id, blob);
             }
           } else {
             setProfilePictureData({

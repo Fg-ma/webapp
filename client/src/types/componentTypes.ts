@@ -140,6 +140,7 @@ export interface ProfilePictureProps {
   };
   clickable: boolean;
   conversations_pictures_id?: string;
+  contacts_pictures_id?: string;
 }
 
 export interface Entity {

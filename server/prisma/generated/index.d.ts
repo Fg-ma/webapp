@@ -34,6 +34,11 @@ export type collections_content = $Result.DefaultSelection<Prisma.$collections_c
  */
 export type contacts = $Result.DefaultSelection<Prisma.$contactsPayload>
 /**
+ * Model contacts_pictures
+ * 
+ */
+export type contacts_pictures = $Result.DefaultSelection<Prisma.$contacts_picturesPayload>
+/**
  * Model content
  * 
  */
@@ -320,6 +325,16 @@ export class PrismaClient<
     * ```
     */
   get contacts(): Prisma.contactsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.contacts_pictures`: Exposes CRUD operations for the **contacts_pictures** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contacts_pictures
+    * const contacts_pictures = await prisma.contacts_pictures.findMany()
+    * ```
+    */
+  get contacts_pictures(): Prisma.contacts_picturesDelegate<ExtArgs>;
 
   /**
    * `prisma.content`: Exposes CRUD operations for the **content** model.
@@ -1044,6 +1059,7 @@ export namespace Prisma {
     collections: 'collections',
     collections_content: 'collections_content',
     contacts: 'contacts',
+    contacts_pictures: 'contacts_pictures',
     content: 'content',
     conversations: 'conversations',
     conversations_members: 'conversations_members',
@@ -1085,7 +1101,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'contacts_pictures' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1350,6 +1366,72 @@ export namespace Prisma {
           count: {
             args: Prisma.contactsCountArgs<ExtArgs>,
             result: $Utils.Optional<ContactsCountAggregateOutputType> | number
+          }
+        }
+      }
+      contacts_pictures: {
+        payload: Prisma.$contacts_picturesPayload<ExtArgs>
+        fields: Prisma.contacts_picturesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.contacts_picturesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.contacts_picturesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          findFirst: {
+            args: Prisma.contacts_picturesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.contacts_picturesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          findMany: {
+            args: Prisma.contacts_picturesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>[]
+          }
+          create: {
+            args: Prisma.contacts_picturesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          createMany: {
+            args: Prisma.contacts_picturesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.contacts_picturesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          update: {
+            args: Prisma.contacts_picturesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          deleteMany: {
+            args: Prisma.contacts_picturesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.contacts_picturesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.contacts_picturesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$contacts_picturesPayload>
+          }
+          aggregate: {
+            args: Prisma.Contacts_picturesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateContacts_pictures>
+          }
+          groupBy: {
+            args: Prisma.contacts_picturesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Contacts_picturesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.contacts_picturesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Contacts_picturesCountAggregateOutputType> | number
           }
         }
       }
@@ -3187,6 +3269,40 @@ export namespace Prisma {
    */
   export type CollectionsCountOutputTypeCountCollections_contentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: collections_contentWhereInput
+  }
+
+
+
+  /**
+   * Count Type Contacts_picturesCountOutputType
+   */
+
+  export type Contacts_picturesCountOutputType = {
+    contacts: number
+  }
+
+  export type Contacts_picturesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contacts?: boolean | Contacts_picturesCountOutputTypeCountContactsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Contacts_picturesCountOutputType without action
+   */
+  export type Contacts_picturesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contacts_picturesCountOutputType
+     */
+    select?: Contacts_picturesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Contacts_picturesCountOutputType without action
+   */
+  export type Contacts_picturesCountOutputTypeCountContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contactsWhereInput
   }
 
 
@@ -6528,6 +6644,7 @@ export namespace Prisma {
     contact_creation_date: Date | null
     last_message: string | null
     last_contact_date: Date | null
+    contacts_pictures_id: string | null
   }
 
   export type ContactsMaxAggregateOutputType = {
@@ -6538,6 +6655,7 @@ export namespace Prisma {
     contact_creation_date: Date | null
     last_message: string | null
     last_contact_date: Date | null
+    contacts_pictures_id: string | null
   }
 
   export type ContactsCountAggregateOutputType = {
@@ -6548,6 +6666,7 @@ export namespace Prisma {
     contact_creation_date: number
     last_message: number
     last_contact_date: number
+    contacts_pictures_id: number
     _all: number
   }
 
@@ -6560,6 +6679,7 @@ export namespace Prisma {
     contact_creation_date?: true
     last_message?: true
     last_contact_date?: true
+    contacts_pictures_id?: true
   }
 
   export type ContactsMaxAggregateInputType = {
@@ -6570,6 +6690,7 @@ export namespace Prisma {
     contact_creation_date?: true
     last_message?: true
     last_contact_date?: true
+    contacts_pictures_id?: true
   }
 
   export type ContactsCountAggregateInputType = {
@@ -6580,6 +6701,7 @@ export namespace Prisma {
     contact_creation_date?: true
     last_message?: true
     last_contact_date?: true
+    contacts_pictures_id?: true
     _all?: true
   }
 
@@ -6663,6 +6785,7 @@ export namespace Prisma {
     contact_creation_date: Date
     last_message: string | null
     last_contact_date: Date | null
+    contacts_pictures_id: string | null
     _count: ContactsCountAggregateOutputType | null
     _min: ContactsMinAggregateOutputType | null
     _max: ContactsMaxAggregateOutputType | null
@@ -6690,8 +6813,10 @@ export namespace Prisma {
     contact_creation_date?: boolean
     last_message?: boolean
     last_contact_date?: boolean
+    contacts_pictures_id?: boolean
     entities_contacts_contact_id_rootToentities?: boolean | entitiesDefaultArgs<ExtArgs>
     entities_contacts_contact_id_targetToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+    contacts_pictures?: boolean | contacts$contacts_picturesArgs<ExtArgs>
   }, ExtArgs["result"]["contacts"]>
 
   export type contactsSelectScalar = {
@@ -6702,11 +6827,13 @@ export namespace Prisma {
     contact_creation_date?: boolean
     last_message?: boolean
     last_contact_date?: boolean
+    contacts_pictures_id?: boolean
   }
 
   export type contactsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entities_contacts_contact_id_rootToentities?: boolean | entitiesDefaultArgs<ExtArgs>
     entities_contacts_contact_id_targetToentities?: boolean | entitiesDefaultArgs<ExtArgs>
+    contacts_pictures?: boolean | contacts$contacts_picturesArgs<ExtArgs>
   }
 
 
@@ -6715,6 +6842,7 @@ export namespace Prisma {
     objects: {
       entities_contacts_contact_id_rootToentities: Prisma.$entitiesPayload<ExtArgs>
       entities_contacts_contact_id_targetToentities: Prisma.$entitiesPayload<ExtArgs>
+      contacts_pictures: Prisma.$contacts_picturesPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       contact_id: string
@@ -6724,6 +6852,7 @@ export namespace Prisma {
       contact_creation_date: Date
       last_message: string | null
       last_contact_date: Date | null
+      contacts_pictures_id: string | null
     }, ExtArgs["result"]["contacts"]>
     composites: {}
   }
@@ -7093,6 +7222,8 @@ export namespace Prisma {
 
     entities_contacts_contact_id_targetToentities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    contacts_pictures<T extends contacts$contacts_picturesArgs<ExtArgs> = {}>(args?: Subset<T, contacts$contacts_picturesArgs<ExtArgs>>): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7128,6 +7259,7 @@ export namespace Prisma {
     readonly contact_creation_date: FieldRef<"contacts", 'DateTime'>
     readonly last_message: FieldRef<"contacts", 'String'>
     readonly last_contact_date: FieldRef<"contacts", 'DateTime'>
+    readonly contacts_pictures_id: FieldRef<"contacts", 'String'>
   }
     
 
@@ -7440,6 +7572,22 @@ export namespace Prisma {
 
 
   /**
+   * contacts.contacts_pictures
+   */
+  export type contacts$contacts_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    where?: contacts_picturesWhereInput
+  }
+
+
+  /**
    * contacts without action
    */
   export type contactsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7451,6 +7599,925 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: contactsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model contacts_pictures
+   */
+
+  export type AggregateContacts_pictures = {
+    _count: Contacts_picturesCountAggregateOutputType | null
+    _min: Contacts_picturesMinAggregateOutputType | null
+    _max: Contacts_picturesMaxAggregateOutputType | null
+  }
+
+  export type Contacts_picturesMinAggregateOutputType = {
+    contacts_pictures_id: string | null
+    contact_picture_data: Buffer | null
+    contact_picture_filename: string | null
+  }
+
+  export type Contacts_picturesMaxAggregateOutputType = {
+    contacts_pictures_id: string | null
+    contact_picture_data: Buffer | null
+    contact_picture_filename: string | null
+  }
+
+  export type Contacts_picturesCountAggregateOutputType = {
+    contacts_pictures_id: number
+    contact_picture_data: number
+    contact_picture_filename: number
+    _all: number
+  }
+
+
+  export type Contacts_picturesMinAggregateInputType = {
+    contacts_pictures_id?: true
+    contact_picture_data?: true
+    contact_picture_filename?: true
+  }
+
+  export type Contacts_picturesMaxAggregateInputType = {
+    contacts_pictures_id?: true
+    contact_picture_data?: true
+    contact_picture_filename?: true
+  }
+
+  export type Contacts_picturesCountAggregateInputType = {
+    contacts_pictures_id?: true
+    contact_picture_data?: true
+    contact_picture_filename?: true
+    _all?: true
+  }
+
+  export type Contacts_picturesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contacts_pictures to aggregate.
+     */
+    where?: contacts_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts_pictures to fetch.
+     */
+    orderBy?: contacts_picturesOrderByWithRelationInput | contacts_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: contacts_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned contacts_pictures
+    **/
+    _count?: true | Contacts_picturesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Contacts_picturesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Contacts_picturesMaxAggregateInputType
+  }
+
+  export type GetContacts_picturesAggregateType<T extends Contacts_picturesAggregateArgs> = {
+        [P in keyof T & keyof AggregateContacts_pictures]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContacts_pictures[P]>
+      : GetScalarType<T[P], AggregateContacts_pictures[P]>
+  }
+
+
+
+
+  export type contacts_picturesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contacts_picturesWhereInput
+    orderBy?: contacts_picturesOrderByWithAggregationInput | contacts_picturesOrderByWithAggregationInput[]
+    by: Contacts_picturesScalarFieldEnum[] | Contacts_picturesScalarFieldEnum
+    having?: contacts_picturesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Contacts_picturesCountAggregateInputType | true
+    _min?: Contacts_picturesMinAggregateInputType
+    _max?: Contacts_picturesMaxAggregateInputType
+  }
+
+  export type Contacts_picturesGroupByOutputType = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+    _count: Contacts_picturesCountAggregateOutputType | null
+    _min: Contacts_picturesMinAggregateOutputType | null
+    _max: Contacts_picturesMaxAggregateOutputType | null
+  }
+
+  type GetContacts_picturesGroupByPayload<T extends contacts_picturesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Contacts_picturesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Contacts_picturesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Contacts_picturesGroupByOutputType[P]>
+            : GetScalarType<T[P], Contacts_picturesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type contacts_picturesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    contacts_pictures_id?: boolean
+    contact_picture_data?: boolean
+    contact_picture_filename?: boolean
+    contacts?: boolean | contacts_pictures$contactsArgs<ExtArgs>
+    _count?: boolean | Contacts_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contacts_pictures"]>
+
+  export type contacts_picturesSelectScalar = {
+    contacts_pictures_id?: boolean
+    contact_picture_data?: boolean
+    contact_picture_filename?: boolean
+  }
+
+  export type contacts_picturesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contacts?: boolean | contacts_pictures$contactsArgs<ExtArgs>
+    _count?: boolean | Contacts_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $contacts_picturesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "contacts_pictures"
+    objects: {
+      contacts: Prisma.$contactsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      contacts_pictures_id: string
+      contact_picture_data: Buffer
+      contact_picture_filename: string
+    }, ExtArgs["result"]["contacts_pictures"]>
+    composites: {}
+  }
+
+
+  type contacts_picturesGetPayload<S extends boolean | null | undefined | contacts_picturesDefaultArgs> = $Result.GetResult<Prisma.$contacts_picturesPayload, S>
+
+  type contacts_picturesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<contacts_picturesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Contacts_picturesCountAggregateInputType | true
+    }
+
+  export interface contacts_picturesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['contacts_pictures'], meta: { name: 'contacts_pictures' } }
+    /**
+     * Find zero or one Contacts_pictures that matches the filter.
+     * @param {contacts_picturesFindUniqueArgs} args - Arguments to find a Contacts_pictures
+     * @example
+     * // Get one Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends contacts_picturesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesFindUniqueArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Contacts_pictures that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {contacts_picturesFindUniqueOrThrowArgs} args - Arguments to find a Contacts_pictures
+     * @example
+     * // Get one Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends contacts_picturesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Contacts_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesFindFirstArgs} args - Arguments to find a Contacts_pictures
+     * @example
+     * // Get one Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends contacts_picturesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesFindFirstArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Contacts_pictures that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesFindFirstOrThrowArgs} args - Arguments to find a Contacts_pictures
+     * @example
+     * // Get one Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends contacts_picturesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Contacts_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findMany()
+     * 
+     * // Get first 10 Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.findMany({ take: 10 })
+     * 
+     * // Only select the `contacts_pictures_id`
+     * const contacts_picturesWithContacts_pictures_idOnly = await prisma.contacts_pictures.findMany({ select: { contacts_pictures_id: true } })
+     * 
+    **/
+    findMany<T extends contacts_picturesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Contacts_pictures.
+     * @param {contacts_picturesCreateArgs} args - Arguments to create a Contacts_pictures.
+     * @example
+     * // Create one Contacts_pictures
+     * const Contacts_pictures = await prisma.contacts_pictures.create({
+     *   data: {
+     *     // ... data to create a Contacts_pictures
+     *   }
+     * })
+     * 
+    **/
+    create<T extends contacts_picturesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesCreateArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Contacts_pictures.
+     *     @param {contacts_picturesCreateManyArgs} args - Arguments to create many Contacts_pictures.
+     *     @example
+     *     // Create many Contacts_pictures
+     *     const contacts_pictures = await prisma.contacts_pictures.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends contacts_picturesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Contacts_pictures.
+     * @param {contacts_picturesDeleteArgs} args - Arguments to delete one Contacts_pictures.
+     * @example
+     * // Delete one Contacts_pictures
+     * const Contacts_pictures = await prisma.contacts_pictures.delete({
+     *   where: {
+     *     // ... filter to delete one Contacts_pictures
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends contacts_picturesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesDeleteArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Contacts_pictures.
+     * @param {contacts_picturesUpdateArgs} args - Arguments to update one Contacts_pictures.
+     * @example
+     * // Update one Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends contacts_picturesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesUpdateArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Contacts_pictures.
+     * @param {contacts_picturesDeleteManyArgs} args - Arguments to filter Contacts_pictures to delete.
+     * @example
+     * // Delete a few Contacts_pictures
+     * const { count } = await prisma.contacts_pictures.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends contacts_picturesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, contacts_picturesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contacts_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends contacts_picturesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Contacts_pictures.
+     * @param {contacts_picturesUpsertArgs} args - Arguments to update or create a Contacts_pictures.
+     * @example
+     * // Update or create a Contacts_pictures
+     * const contacts_pictures = await prisma.contacts_pictures.upsert({
+     *   create: {
+     *     // ... data to create a Contacts_pictures
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contacts_pictures we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends contacts_picturesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, contacts_picturesUpsertArgs<ExtArgs>>
+    ): Prisma__contacts_picturesClient<$Result.GetResult<Prisma.$contacts_picturesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Contacts_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesCountArgs} args - Arguments to filter Contacts_pictures to count.
+     * @example
+     * // Count the number of Contacts_pictures
+     * const count = await prisma.contacts_pictures.count({
+     *   where: {
+     *     // ... the filter for the Contacts_pictures we want to count
+     *   }
+     * })
+    **/
+    count<T extends contacts_picturesCountArgs>(
+      args?: Subset<T, contacts_picturesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Contacts_picturesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contacts_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Contacts_picturesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Contacts_picturesAggregateArgs>(args: Subset<T, Contacts_picturesAggregateArgs>): Prisma.PrismaPromise<GetContacts_picturesAggregateType<T>>
+
+    /**
+     * Group by Contacts_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contacts_picturesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends contacts_picturesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: contacts_picturesGroupByArgs['orderBy'] }
+        : { orderBy?: contacts_picturesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, contacts_picturesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContacts_picturesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the contacts_pictures model
+   */
+  readonly fields: contacts_picturesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for contacts_pictures.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__contacts_picturesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    contacts<T extends contacts_pictures$contactsArgs<ExtArgs> = {}>(args?: Subset<T, contacts_pictures$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the contacts_pictures model
+   */ 
+  interface contacts_picturesFieldRefs {
+    readonly contacts_pictures_id: FieldRef<"contacts_pictures", 'String'>
+    readonly contact_picture_data: FieldRef<"contacts_pictures", 'Bytes'>
+    readonly contact_picture_filename: FieldRef<"contacts_pictures", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * contacts_pictures findUnique
+   */
+  export type contacts_picturesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts_pictures to fetch.
+     */
+    where: contacts_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * contacts_pictures findUniqueOrThrow
+   */
+  export type contacts_picturesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts_pictures to fetch.
+     */
+    where: contacts_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * contacts_pictures findFirst
+   */
+  export type contacts_picturesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts_pictures to fetch.
+     */
+    where?: contacts_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts_pictures to fetch.
+     */
+    orderBy?: contacts_picturesOrderByWithRelationInput | contacts_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contacts_pictures.
+     */
+    cursor?: contacts_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contacts_pictures.
+     */
+    distinct?: Contacts_picturesScalarFieldEnum | Contacts_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts_pictures findFirstOrThrow
+   */
+  export type contacts_picturesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts_pictures to fetch.
+     */
+    where?: contacts_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts_pictures to fetch.
+     */
+    orderBy?: contacts_picturesOrderByWithRelationInput | contacts_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contacts_pictures.
+     */
+    cursor?: contacts_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contacts_pictures.
+     */
+    distinct?: Contacts_picturesScalarFieldEnum | Contacts_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts_pictures findMany
+   */
+  export type contacts_picturesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which contacts_pictures to fetch.
+     */
+    where?: contacts_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contacts_pictures to fetch.
+     */
+    orderBy?: contacts_picturesOrderByWithRelationInput | contacts_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing contacts_pictures.
+     */
+    cursor?: contacts_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contacts_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contacts_pictures.
+     */
+    skip?: number
+    distinct?: Contacts_picturesScalarFieldEnum | Contacts_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts_pictures create
+   */
+  export type contacts_picturesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a contacts_pictures.
+     */
+    data: XOR<contacts_picturesCreateInput, contacts_picturesUncheckedCreateInput>
+  }
+
+
+  /**
+   * contacts_pictures createMany
+   */
+  export type contacts_picturesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many contacts_pictures.
+     */
+    data: contacts_picturesCreateManyInput | contacts_picturesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * contacts_pictures update
+   */
+  export type contacts_picturesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a contacts_pictures.
+     */
+    data: XOR<contacts_picturesUpdateInput, contacts_picturesUncheckedUpdateInput>
+    /**
+     * Choose, which contacts_pictures to update.
+     */
+    where: contacts_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * contacts_pictures updateMany
+   */
+  export type contacts_picturesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update contacts_pictures.
+     */
+    data: XOR<contacts_picturesUpdateManyMutationInput, contacts_picturesUncheckedUpdateManyInput>
+    /**
+     * Filter which contacts_pictures to update
+     */
+    where?: contacts_picturesWhereInput
+  }
+
+
+  /**
+   * contacts_pictures upsert
+   */
+  export type contacts_picturesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the contacts_pictures to update in case it exists.
+     */
+    where: contacts_picturesWhereUniqueInput
+    /**
+     * In case the contacts_pictures found by the `where` argument doesn't exist, create a new contacts_pictures with this data.
+     */
+    create: XOR<contacts_picturesCreateInput, contacts_picturesUncheckedCreateInput>
+    /**
+     * In case the contacts_pictures was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<contacts_picturesUpdateInput, contacts_picturesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * contacts_pictures delete
+   */
+  export type contacts_picturesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
+    /**
+     * Filter which contacts_pictures to delete.
+     */
+    where: contacts_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * contacts_pictures deleteMany
+   */
+  export type contacts_picturesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contacts_pictures to delete
+     */
+    where?: contacts_picturesWhereInput
+  }
+
+
+  /**
+   * contacts_pictures.contacts
+   */
+  export type contacts_pictures$contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts
+     */
+    select?: contactsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contactsInclude<ExtArgs> | null
+    where?: contactsWhereInput
+    orderBy?: contactsOrderByWithRelationInput | contactsOrderByWithRelationInput[]
+    cursor?: contactsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactsScalarFieldEnum | ContactsScalarFieldEnum[]
+  }
+
+
+  /**
+   * contacts_pictures without action
+   */
+  export type contacts_picturesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contacts_pictures
+     */
+    select?: contacts_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: contacts_picturesInclude<ExtArgs> | null
   }
 
 
@@ -31580,10 +32647,20 @@ export namespace Prisma {
     contact_id_target: 'contact_id_target',
     contact_creation_date: 'contact_creation_date',
     last_message: 'last_message',
-    last_contact_date: 'last_contact_date'
+    last_contact_date: 'last_contact_date',
+    contacts_pictures_id: 'contacts_pictures_id'
   };
 
   export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typeof ContactsScalarFieldEnum]
+
+
+  export const Contacts_picturesScalarFieldEnum: {
+    contacts_pictures_id: 'contacts_pictures_id',
+    contact_picture_data: 'contact_picture_data',
+    contact_picture_filename: 'contact_picture_filename'
+  };
+
+  export type Contacts_picturesScalarFieldEnum = (typeof Contacts_picturesScalarFieldEnum)[keyof typeof Contacts_picturesScalarFieldEnum]
 
 
   export const ContentScalarFieldEnum: {
@@ -31901,16 +32978,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Bytes'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
   /**
-   * Reference to a field of type 'Bytes'
+   * Reference to a field of type 'Int'
    */
-  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -32094,8 +33171,10 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
     last_message?: StringNullableFilter<"contacts"> | string | null
     last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+    contacts_pictures_id?: StringNullableFilter<"contacts"> | string | null
     entities_contacts_contact_id_rootToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     entities_contacts_contact_id_targetToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    contacts_pictures?: XOR<Contacts_picturesNullableRelationFilter, contacts_picturesWhereInput> | null
   }
 
   export type contactsOrderByWithRelationInput = {
@@ -32106,8 +33185,10 @@ export namespace Prisma {
     contact_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
     last_contact_date?: SortOrderInput | SortOrder
+    contacts_pictures_id?: SortOrderInput | SortOrder
     entities_contacts_contact_id_rootToentities?: entitiesOrderByWithRelationInput
     entities_contacts_contact_id_targetToentities?: entitiesOrderByWithRelationInput
+    contacts_pictures?: contacts_picturesOrderByWithRelationInput
   }
 
   export type contactsWhereUniqueInput = Prisma.AtLeast<{
@@ -32123,8 +33204,10 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
     last_message?: StringNullableFilter<"contacts"> | string | null
     last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+    contacts_pictures_id?: StringNullableFilter<"contacts"> | string | null
     entities_contacts_contact_id_rootToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     entities_contacts_contact_id_targetToentities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    contacts_pictures?: XOR<Contacts_picturesNullableRelationFilter, contacts_picturesWhereInput> | null
   }, "contact_id" | "contact_id" | "conversation_id" | "contact_id_conversation_id" | "contact_id_root_contact_id_target">
 
   export type contactsOrderByWithAggregationInput = {
@@ -32135,6 +33218,7 @@ export namespace Prisma {
     contact_creation_date?: SortOrder
     last_message?: SortOrderInput | SortOrder
     last_contact_date?: SortOrderInput | SortOrder
+    contacts_pictures_id?: SortOrderInput | SortOrder
     _count?: contactsCountOrderByAggregateInput
     _max?: contactsMaxOrderByAggregateInput
     _min?: contactsMinOrderByAggregateInput
@@ -32151,6 +33235,52 @@ export namespace Prisma {
     contact_creation_date?: DateTimeWithAggregatesFilter<"contacts"> | Date | string
     last_message?: StringNullableWithAggregatesFilter<"contacts"> | string | null
     last_contact_date?: DateTimeNullableWithAggregatesFilter<"contacts"> | Date | string | null
+    contacts_pictures_id?: StringNullableWithAggregatesFilter<"contacts"> | string | null
+  }
+
+  export type contacts_picturesWhereInput = {
+    AND?: contacts_picturesWhereInput | contacts_picturesWhereInput[]
+    OR?: contacts_picturesWhereInput[]
+    NOT?: contacts_picturesWhereInput | contacts_picturesWhereInput[]
+    contacts_pictures_id?: StringFilter<"contacts_pictures"> | string
+    contact_picture_data?: BytesFilter<"contacts_pictures"> | Buffer
+    contact_picture_filename?: StringFilter<"contacts_pictures"> | string
+    contacts?: ContactsListRelationFilter
+  }
+
+  export type contacts_picturesOrderByWithRelationInput = {
+    contacts_pictures_id?: SortOrder
+    contact_picture_data?: SortOrder
+    contact_picture_filename?: SortOrder
+    contacts?: contactsOrderByRelationAggregateInput
+  }
+
+  export type contacts_picturesWhereUniqueInput = Prisma.AtLeast<{
+    contacts_pictures_id?: string
+    AND?: contacts_picturesWhereInput | contacts_picturesWhereInput[]
+    OR?: contacts_picturesWhereInput[]
+    NOT?: contacts_picturesWhereInput | contacts_picturesWhereInput[]
+    contact_picture_data?: BytesFilter<"contacts_pictures"> | Buffer
+    contact_picture_filename?: StringFilter<"contacts_pictures"> | string
+    contacts?: ContactsListRelationFilter
+  }, "contacts_pictures_id" | "contacts_pictures_id">
+
+  export type contacts_picturesOrderByWithAggregationInput = {
+    contacts_pictures_id?: SortOrder
+    contact_picture_data?: SortOrder
+    contact_picture_filename?: SortOrder
+    _count?: contacts_picturesCountOrderByAggregateInput
+    _max?: contacts_picturesMaxOrderByAggregateInput
+    _min?: contacts_picturesMinOrderByAggregateInput
+  }
+
+  export type contacts_picturesScalarWhereWithAggregatesInput = {
+    AND?: contacts_picturesScalarWhereWithAggregatesInput | contacts_picturesScalarWhereWithAggregatesInput[]
+    OR?: contacts_picturesScalarWhereWithAggregatesInput[]
+    NOT?: contacts_picturesScalarWhereWithAggregatesInput | contacts_picturesScalarWhereWithAggregatesInput[]
+    contacts_pictures_id?: StringWithAggregatesFilter<"contacts_pictures"> | string
+    contact_picture_data?: BytesWithAggregatesFilter<"contacts_pictures"> | Buffer
+    contact_picture_filename?: StringWithAggregatesFilter<"contacts_pictures"> | string
   }
 
   export type contentWhereInput = {
@@ -33795,6 +34925,7 @@ export namespace Prisma {
     last_contact_date?: Date | string | null
     entities_contacts_contact_id_rootToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput
     entities_contacts_contact_id_targetToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput
+    contacts_pictures?: contacts_picturesCreateNestedOneWithoutContactsInput
   }
 
   export type contactsUncheckedCreateInput = {
@@ -33805,6 +34936,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type contactsUpdateInput = {
@@ -33815,6 +34947,7 @@ export namespace Prisma {
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities_contacts_contact_id_rootToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput
     entities_contacts_contact_id_targetToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput
+    contacts_pictures?: contacts_picturesUpdateOneWithoutContactsNestedInput
   }
 
   export type contactsUncheckedUpdateInput = {
@@ -33825,6 +34958,7 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type contactsCreateManyInput = {
@@ -33835,6 +34969,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type contactsUpdateManyMutationInput = {
@@ -33853,6 +34988,53 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type contacts_picturesCreateInput = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+    contacts?: contactsCreateNestedManyWithoutContacts_picturesInput
+  }
+
+  export type contacts_picturesUncheckedCreateInput = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+    contacts?: contactsUncheckedCreateNestedManyWithoutContacts_picturesInput
+  }
+
+  export type contacts_picturesUpdateInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
+    contacts?: contactsUpdateManyWithoutContacts_picturesNestedInput
+  }
+
+  export type contacts_picturesUncheckedUpdateInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
+    contacts?: contactsUncheckedUpdateManyWithoutContacts_picturesNestedInput
+  }
+
+  export type contacts_picturesCreateManyInput = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+  }
+
+  export type contacts_picturesUpdateManyMutationInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type contacts_picturesUncheckedUpdateManyInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
   }
 
   export type contentCreateInput = {
@@ -35543,6 +36725,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type Contacts_picturesNullableRelationFilter = {
+    is?: contacts_picturesWhereInput | null
+    isNot?: contacts_picturesWhereInput | null
+  }
+
   export type contactsContact_idConversation_idCompoundUniqueInput = {
     contact_id: string
     conversation_id: string
@@ -35561,6 +36748,7 @@ export namespace Prisma {
     contact_creation_date?: SortOrder
     last_message?: SortOrder
     last_contact_date?: SortOrder
+    contacts_pictures_id?: SortOrder
   }
 
   export type contactsMaxOrderByAggregateInput = {
@@ -35571,6 +36759,7 @@ export namespace Prisma {
     contact_creation_date?: SortOrder
     last_message?: SortOrder
     last_contact_date?: SortOrder
+    contacts_pictures_id?: SortOrder
   }
 
   export type contactsMinOrderByAggregateInput = {
@@ -35581,6 +36770,7 @@ export namespace Prisma {
     contact_creation_date?: SortOrder
     last_message?: SortOrder
     last_contact_date?: SortOrder
+    contacts_pictures_id?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -35598,6 +36788,51 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
+  export type ContactsListRelationFilter = {
+    every?: contactsWhereInput
+    some?: contactsWhereInput
+    none?: contactsWhereInput
+  }
+
+  export type contactsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type contacts_picturesCountOrderByAggregateInput = {
+    contacts_pictures_id?: SortOrder
+    contact_picture_data?: SortOrder
+    contact_picture_filename?: SortOrder
+  }
+
+  export type contacts_picturesMaxOrderByAggregateInput = {
+    contacts_pictures_id?: SortOrder
+    contact_picture_data?: SortOrder
+    contact_picture_filename?: SortOrder
+  }
+
+  export type contacts_picturesMinOrderByAggregateInput = {
+    contacts_pictures_id?: SortOrder
+    contact_picture_data?: SortOrder
+    contact_picture_filename?: SortOrder
+  }
+
+  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -35784,13 +37019,6 @@ export namespace Prisma {
     message_date?: SortOrder
   }
 
-  export type BytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
-  }
-
   export type ConversationsListRelationFilter = {
     every?: conversationsWhereInput
     some?: conversationsWhereInput
@@ -35819,16 +37047,6 @@ export namespace Prisma {
     conversation_picture_filename?: SortOrder
   }
 
-  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -35844,12 +37062,6 @@ export namespace Prisma {
     every?: collectionsWhereInput
     some?: collectionsWhereInput
     none?: collectionsWhereInput
-  }
-
-  export type ContactsListRelationFilter = {
-    every?: contactsWhereInput
-    some?: contactsWhereInput
-    none?: contactsWhereInput
   }
 
   export type Entities_referencesListRelationFilter = {
@@ -35889,10 +37101,6 @@ export namespace Prisma {
   }
 
   export type collectionsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type contactsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -36676,6 +37884,12 @@ export namespace Prisma {
     connect?: entitiesWhereUniqueInput
   }
 
+  export type contacts_picturesCreateNestedOneWithoutContactsInput = {
+    create?: XOR<contacts_picturesCreateWithoutContactsInput, contacts_picturesUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: contacts_picturesCreateOrConnectWithoutContactsInput
+    connect?: contacts_picturesWhereUniqueInput
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -36694,6 +37908,62 @@ export namespace Prisma {
     upsert?: entitiesUpsertWithoutContacts_contacts_contact_id_targetToentitiesInput
     connect?: entitiesWhereUniqueInput
     update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_targetToentitiesInput>
+  }
+
+  export type contacts_picturesUpdateOneWithoutContactsNestedInput = {
+    create?: XOR<contacts_picturesCreateWithoutContactsInput, contacts_picturesUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: contacts_picturesCreateOrConnectWithoutContactsInput
+    upsert?: contacts_picturesUpsertWithoutContactsInput
+    disconnect?: contacts_picturesWhereInput | boolean
+    delete?: contacts_picturesWhereInput | boolean
+    connect?: contacts_picturesWhereUniqueInput
+    update?: XOR<XOR<contacts_picturesUpdateToOneWithWhereWithoutContactsInput, contacts_picturesUpdateWithoutContactsInput>, contacts_picturesUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type contactsCreateNestedManyWithoutContacts_picturesInput = {
+    create?: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput> | contactsCreateWithoutContacts_picturesInput[] | contactsUncheckedCreateWithoutContacts_picturesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutContacts_picturesInput | contactsCreateOrConnectWithoutContacts_picturesInput[]
+    createMany?: contactsCreateManyContacts_picturesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+  }
+
+  export type contactsUncheckedCreateNestedManyWithoutContacts_picturesInput = {
+    create?: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput> | contactsCreateWithoutContacts_picturesInput[] | contactsUncheckedCreateWithoutContacts_picturesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutContacts_picturesInput | contactsCreateOrConnectWithoutContacts_picturesInput[]
+    createMany?: contactsCreateManyContacts_picturesInputEnvelope
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+  }
+
+  export type BytesFieldUpdateOperationsInput = {
+    set?: Buffer
+  }
+
+  export type contactsUpdateManyWithoutContacts_picturesNestedInput = {
+    create?: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput> | contactsCreateWithoutContacts_picturesInput[] | contactsUncheckedCreateWithoutContacts_picturesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutContacts_picturesInput | contactsCreateOrConnectWithoutContacts_picturesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutContacts_picturesInput | contactsUpsertWithWhereUniqueWithoutContacts_picturesInput[]
+    createMany?: contactsCreateManyContacts_picturesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutContacts_picturesInput | contactsUpdateWithWhereUniqueWithoutContacts_picturesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutContacts_picturesInput | contactsUpdateManyWithWhereWithoutContacts_picturesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
+  }
+
+  export type contactsUncheckedUpdateManyWithoutContacts_picturesNestedInput = {
+    create?: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput> | contactsCreateWithoutContacts_picturesInput[] | contactsUncheckedCreateWithoutContacts_picturesInput[]
+    connectOrCreate?: contactsCreateOrConnectWithoutContacts_picturesInput | contactsCreateOrConnectWithoutContacts_picturesInput[]
+    upsert?: contactsUpsertWithWhereUniqueWithoutContacts_picturesInput | contactsUpsertWithWhereUniqueWithoutContacts_picturesInput[]
+    createMany?: contactsCreateManyContacts_picturesInputEnvelope
+    set?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    disconnect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    delete?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    connect?: contactsWhereUniqueInput | contactsWhereUniqueInput[]
+    update?: contactsUpdateWithWhereUniqueWithoutContacts_picturesInput | contactsUpdateWithWhereUniqueWithoutContacts_picturesInput[]
+    updateMany?: contactsUpdateManyWithWhereWithoutContacts_picturesInput | contactsUpdateManyWithWhereWithoutContacts_picturesInput[]
+    deleteMany?: contactsScalarWhereInput | contactsScalarWhereInput[]
   }
 
   export type collections_contentCreateNestedManyWithoutContentInput = {
@@ -37040,10 +38310,6 @@ export namespace Prisma {
     connectOrCreate?: conversationsCreateOrConnectWithoutConversations_picturesInput | conversationsCreateOrConnectWithoutConversations_picturesInput[]
     createMany?: conversationsCreateManyConversations_picturesInputEnvelope
     connect?: conversationsWhereUniqueInput | conversationsWhereUniqueInput[]
-  }
-
-  export type BytesFieldUpdateOperationsInput = {
-    set?: Buffer
   }
 
   export type conversationsUpdateManyWithoutConversations_picturesNestedInput = {
@@ -38601,6 +39867,23 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedBytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
+  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -38626,23 +39909,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
-  }
-
-  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -38992,6 +40258,23 @@ export namespace Prisma {
     create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_targetToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_targetToentitiesInput>
   }
 
+  export type contacts_picturesCreateWithoutContactsInput = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+  }
+
+  export type contacts_picturesUncheckedCreateWithoutContactsInput = {
+    contacts_pictures_id: string
+    contact_picture_data: Buffer
+    contact_picture_filename: string
+  }
+
+  export type contacts_picturesCreateOrConnectWithoutContactsInput = {
+    where: contacts_picturesWhereUniqueInput
+    create: XOR<contacts_picturesCreateWithoutContactsInput, contacts_picturesUncheckedCreateWithoutContactsInput>
+  }
+
   export type entitiesUpsertWithoutContacts_contacts_contact_id_rootToentitiesInput = {
     update: XOR<entitiesUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedUpdateWithoutContacts_contacts_contact_id_rootToentitiesInput>
     create: XOR<entitiesCreateWithoutContacts_contacts_contact_id_rootToentitiesInput, entitiesUncheckedCreateWithoutContacts_contacts_contact_id_rootToentitiesInput>
@@ -39088,6 +40371,89 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type contacts_picturesUpsertWithoutContactsInput = {
+    update: XOR<contacts_picturesUpdateWithoutContactsInput, contacts_picturesUncheckedUpdateWithoutContactsInput>
+    create: XOR<contacts_picturesCreateWithoutContactsInput, contacts_picturesUncheckedCreateWithoutContactsInput>
+    where?: contacts_picturesWhereInput
+  }
+
+  export type contacts_picturesUpdateToOneWithWhereWithoutContactsInput = {
+    where?: contacts_picturesWhereInput
+    data: XOR<contacts_picturesUpdateWithoutContactsInput, contacts_picturesUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type contacts_picturesUpdateWithoutContactsInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type contacts_picturesUncheckedUpdateWithoutContactsInput = {
+    contacts_pictures_id?: StringFieldUpdateOperationsInput | string
+    contact_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    contact_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type contactsCreateWithoutContacts_picturesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+    entities_contacts_contact_id_rootToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput
+    entities_contacts_contact_id_targetToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput
+  }
+
+  export type contactsUncheckedCreateWithoutContacts_picturesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsCreateOrConnectWithoutContacts_picturesInput = {
+    where: contactsWhereUniqueInput
+    create: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput>
+  }
+
+  export type contactsCreateManyContacts_picturesInputEnvelope = {
+    data: contactsCreateManyContacts_picturesInput | contactsCreateManyContacts_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type contactsUpsertWithWhereUniqueWithoutContacts_picturesInput = {
+    where: contactsWhereUniqueInput
+    update: XOR<contactsUpdateWithoutContacts_picturesInput, contactsUncheckedUpdateWithoutContacts_picturesInput>
+    create: XOR<contactsCreateWithoutContacts_picturesInput, contactsUncheckedCreateWithoutContacts_picturesInput>
+  }
+
+  export type contactsUpdateWithWhereUniqueWithoutContacts_picturesInput = {
+    where: contactsWhereUniqueInput
+    data: XOR<contactsUpdateWithoutContacts_picturesInput, contactsUncheckedUpdateWithoutContacts_picturesInput>
+  }
+
+  export type contactsUpdateManyWithWhereWithoutContacts_picturesInput = {
+    where: contactsScalarWhereInput
+    data: XOR<contactsUpdateManyMutationInput, contactsUncheckedUpdateManyWithoutContacts_picturesInput>
+  }
+
+  export type contactsScalarWhereInput = {
+    AND?: contactsScalarWhereInput | contactsScalarWhereInput[]
+    OR?: contactsScalarWhereInput[]
+    NOT?: contactsScalarWhereInput | contactsScalarWhereInput[]
+    contact_id?: StringFilter<"contacts"> | string
+    conversation_id?: StringFilter<"contacts"> | string
+    contact_id_root?: StringFilter<"contacts"> | string
+    contact_id_target?: StringFilter<"contacts"> | string
+    contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
+    last_message?: StringNullableFilter<"contacts"> | string | null
+    last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
+    contacts_pictures_id?: StringNullableFilter<"contacts"> | string | null
   }
 
   export type collections_contentCreateWithoutContentInput = {
@@ -39795,6 +41161,7 @@ export namespace Prisma {
     last_message?: string | null
     last_contact_date?: Date | string | null
     entities_contacts_contact_id_targetToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_targetToentitiesInput
+    contacts_pictures?: contacts_picturesCreateNestedOneWithoutContactsInput
   }
 
   export type contactsUncheckedCreateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
@@ -39804,6 +41171,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type contactsCreateOrConnectWithoutEntities_contacts_contact_id_rootToentitiesInput = {
@@ -39823,6 +41191,7 @@ export namespace Prisma {
     last_message?: string | null
     last_contact_date?: Date | string | null
     entities_contacts_contact_id_rootToentities: entitiesCreateNestedOneWithoutContacts_contacts_contact_id_rootToentitiesInput
+    contacts_pictures?: contacts_picturesCreateNestedOneWithoutContactsInput
   }
 
   export type contactsUncheckedCreateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -39832,6 +41201,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type contactsCreateOrConnectWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -40163,19 +41533,6 @@ export namespace Prisma {
   export type contactsUpdateManyWithWhereWithoutEntities_contacts_contact_id_rootToentitiesInput = {
     where: contactsScalarWhereInput
     data: XOR<contactsUpdateManyMutationInput, contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesInput>
-  }
-
-  export type contactsScalarWhereInput = {
-    AND?: contactsScalarWhereInput | contactsScalarWhereInput[]
-    OR?: contactsScalarWhereInput[]
-    NOT?: contactsScalarWhereInput | contactsScalarWhereInput[]
-    contact_id?: StringFilter<"contacts"> | string
-    conversation_id?: StringFilter<"contacts"> | string
-    contact_id_root?: StringFilter<"contacts"> | string
-    contact_id_target?: StringFilter<"contacts"> | string
-    contact_creation_date?: DateTimeFilter<"contacts"> | Date | string
-    last_message?: StringNullableFilter<"contacts"> | string | null
-    last_contact_date?: DateTimeNullableFilter<"contacts"> | Date | string | null
   }
 
   export type contactsUpsertWithWhereUniqueWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -42518,6 +43875,46 @@ export namespace Prisma {
     date_pinned?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type contactsCreateManyContacts_picturesInput = {
+    contact_id: string
+    conversation_id: string
+    contact_id_root: string
+    contact_id_target: string
+    contact_creation_date: Date | string
+    last_message?: string | null
+    last_contact_date?: Date | string | null
+  }
+
+  export type contactsUpdateWithoutContacts_picturesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    entities_contacts_contact_id_rootToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput
+    entities_contacts_contact_id_targetToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput
+  }
+
+  export type contactsUncheckedUpdateWithoutContacts_picturesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type contactsUncheckedUpdateManyWithoutContacts_picturesInput = {
+    contact_id?: StringFieldUpdateOperationsInput | string
+    conversation_id?: StringFieldUpdateOperationsInput | string
+    contact_id_root?: StringFieldUpdateOperationsInput | string
+    contact_id_target?: StringFieldUpdateOperationsInput | string
+    contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type collections_contentCreateManyContentInput = {
     collections_content_id: string
     collection_id: string
@@ -42718,6 +44115,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type contactsCreateManyEntities_contacts_contact_id_targetToentitiesInput = {
@@ -42727,6 +44125,7 @@ export namespace Prisma {
     contact_creation_date: Date | string
     last_message?: string | null
     last_contact_date?: Date | string | null
+    contacts_pictures_id?: string | null
   }
 
   export type conversations_membersCreateManyEntitiesInput = {
@@ -42838,6 +44237,7 @@ export namespace Prisma {
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities_contacts_contact_id_targetToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_targetToentitiesNestedInput
+    contacts_pictures?: contacts_picturesUpdateOneWithoutContactsNestedInput
   }
 
   export type contactsUncheckedUpdateWithoutEntities_contacts_contact_id_rootToentitiesInput = {
@@ -42847,6 +44247,7 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesInput = {
@@ -42856,6 +44257,7 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type contactsUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -42865,6 +44267,7 @@ export namespace Prisma {
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     entities_contacts_contact_id_rootToentities?: entitiesUpdateOneRequiredWithoutContacts_contacts_contact_id_rootToentitiesNestedInput
+    contacts_pictures?: contacts_picturesUpdateOneWithoutContactsNestedInput
   }
 
   export type contactsUncheckedUpdateWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -42874,6 +44277,7 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesInput = {
@@ -42883,6 +44287,7 @@ export namespace Prisma {
     contact_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_contact_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contacts_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type conversations_membersUpdateWithoutEntitiesInput = {
@@ -43558,6 +44963,10 @@ export namespace Prisma {
      */
     export type CollectionsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CollectionsCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Contacts_picturesCountOutputTypeDefaultArgs instead
+     */
+    export type Contacts_picturesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Contacts_picturesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use ContentCountOutputTypeDefaultArgs instead
      */
     export type ContentCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContentCountOutputTypeDefaultArgs<ExtArgs>
@@ -43621,6 +45030,10 @@ export namespace Prisma {
      * @deprecated Use contactsDefaultArgs instead
      */
     export type contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = contactsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use contacts_picturesDefaultArgs instead
+     */
+    export type contacts_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = contacts_picturesDefaultArgs<ExtArgs>
     /**
      * @deprecated Use contentDefaultArgs instead
      */

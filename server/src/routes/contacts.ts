@@ -11,6 +11,7 @@ import {
   Individual,
   Conversation,
   ConversationMember,
+  ContactPicture,
 } from "@FgTypes/types";
 
 async function getEntityData(entity_id: string) {
@@ -187,6 +188,7 @@ router.get("/user_contacts", verifyToken, async (req, res) => {
         contact_creation_date: contact.contact_creation_date,
         last_message: contact.last_message,
         last_contact_date: contact.last_contact_date,
+        contacts_pictures_id: contact.contacts_pictures_id,
         entity_type: entity_type,
       };
     });
@@ -499,6 +501,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
@@ -513,6 +516,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
@@ -535,6 +539,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
@@ -549,6 +554,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
@@ -571,6 +577,7 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
@@ -585,12 +592,37 @@ router.get("/get_contact_by_contact_id", verifyToken, async (req, res) => {
             contact_creation_date: contact.contact_creation_date,
             last_message: contact.last_message,
             last_contact_date: contact.last_contact_date,
+            contacts_pictures_id: contact.contacts_pictures_id,
             entity_type: entity.entity_type,
           });
           return;
         }
       }
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Gets the data needed for a contact picture
+router.get("/get_contact_picture", async (req, res) => {
+  const { contacts_pictures_id } = req.query;
+
+  try {
+    const contactPicture: ContactPicture =
+      await req.db.contacts_pictures.findUnique({
+        where: {
+          contacts_pictures_id: contacts_pictures_id,
+        },
+      });
+
+    if (!contactPicture) {
+      res.send("Default");
+      return;
+    }
+
+    res.send(contactPicture);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

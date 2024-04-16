@@ -182,6 +182,7 @@ export interface ContactCardProps {
   contact_name: string | null;
   last_message: string | null;
   contact_creation_date: string;
+  contacts_pictures_id: string | null;
   filter?: string;
 }
 
@@ -300,5 +301,6 @@ export interface Contact {
   contact_creation_date: string;
   last_message: string | null;
   last_contact_date: string | null;
+  contacts_pictures_id: string | null;
   entity_type: number;
 }

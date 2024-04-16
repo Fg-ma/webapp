@@ -136,7 +136,14 @@ exports.Prisma.ContactsScalarFieldEnum = {
   contact_id_target: 'contact_id_target',
   contact_creation_date: 'contact_creation_date',
   last_message: 'last_message',
-  last_contact_date: 'last_contact_date'
+  last_contact_date: 'last_contact_date',
+  contacts_pictures_id: 'contacts_pictures_id'
+};
+
+exports.Prisma.Contacts_picturesScalarFieldEnum = {
+  contacts_pictures_id: 'contacts_pictures_id',
+  contact_picture_data: 'contact_picture_data',
+  contact_picture_filename: 'contact_picture_filename'
 };
 
 exports.Prisma.ContentScalarFieldEnum = {
@@ -352,6 +359,7 @@ exports.Prisma.ModelName = {
   collections: 'collections',
   collections_content: 'collections_content',
   contacts: 'contacts',
+  contacts_pictures: 'contacts_pictures',
   content: 'content',
   conversations: 'conversations',
   conversations_members: 'conversations_members',

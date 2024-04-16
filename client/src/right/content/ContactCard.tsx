@@ -37,6 +37,7 @@ export function ContactCard({
   contact_name,
   last_message,
   contact_creation_date,
+  contacts_pictures_id,
   filter,
 }: ContactCardProps) {
   const dispatch = useDispatch();
@@ -89,6 +90,9 @@ export function ContactCard({
                     : ""
             }
             clickable={false}
+            contacts_pictures_id={
+              contacts_pictures_id ? contacts_pictures_id : undefined
+            }
           />
         </div>
         <div className="my-2 mr-4 truncate">
