@@ -70,9 +70,6 @@ export default function RightSpace() {
     <div
       className="bg-fg-white-95 rounded-xl overflow-hidden h-4/5"
       style={{
-        width: "24.5%",
-        minWidth: "24.5%",
-        maxWidth: "24.5%",
         boxShadow:
           "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
       }}

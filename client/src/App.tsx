@@ -29,6 +29,16 @@ interface LoginState {
   };
 }
 
+interface MainState {
+  page: {
+    main: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
+
 export default function App() {
   /* 
     Description:   
@@ -48,6 +58,10 @@ export default function App() {
   );
   const middleSpaceContainerRef = useRef<HTMLDivElement>(null);
   const token = localStorage.getItem("token");
+
+  const mainPageState = useSelector(
+    (state: MainState) => state.page.main.pagePayload.pageState,
+  );
 
   useEffect(() => {
     clearAllIndexedDBData();
@@ -85,19 +99,31 @@ export default function App() {
                   id="pageSpace"
                   className="flex justify-between mx-12 mt-16 h-full"
                 >
-                  <LeftSpace />
-
+                  {mainPageState !== "tables" && <LeftSpace />}
                   <div
                     ref={middleSpaceContainerRef}
                     style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
                   >
-                    <MiddleSpace
-                      middleSpaceContainerRef={middleSpaceContainerRef}
-                    />
-                    <PageNav />
+                    {mainPageState !== "tables" && (
+                      <>
+                        <MiddleSpace
+                          middleSpaceContainerRef={middleSpaceContainerRef}
+                        />
+                        <PageNav />
+                      </>
+                    )}
                   </div>
 
-                  <RightSpace />
+                  <div
+                    style={{
+                      width: "24.5%",
+                      minWidth: "24.5%",
+                      maxWidth: "24.5%",
+                    }}
+                  >
+                    <RightSpace />
+                    {mainPageState === "tables" && <PageNav />}
+                  </div>
                 </div>
               </div>
             </ConversationContextProvider>

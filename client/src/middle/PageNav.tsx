@@ -77,6 +77,7 @@ export default function PageNav() {
     home: deactiveStyles,
     messages: deactiveStyles,
     dogEars: deactiveStyles,
+    tables: deactiveStyles,
     notifications: deactiveStyles,
     settings: deactiveStyles,
   };
@@ -162,6 +163,24 @@ export default function PageNav() {
           initial="init"
           whileHover="hover"
           transition={transition}
+          onClick={() => swapPageState("tables")}
+        >
+          <button
+            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+            style={{
+              backgroundImage: 'url("/assets/icons/table.svg")',
+            }}
+          ></button>
+          <button style={mainPageStyles["tables"]} className="ml-2 pt-1">
+            Tables
+          </button>
+        </motion.div>
+        <motion.div
+          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+          variants={navButtonsVar}
+          initial="init"
+          whileHover="hover"
+          transition={transition}
           onClick={() => messagesNavFunction("messages")}
         >
           <button
@@ -172,24 +191,6 @@ export default function PageNav() {
           ></button>
           <button style={mainPageStyles["messages"]} className="ml-1 pt-1">
             Messages
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => swapPageState("dogEars")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/dogEars.svg")',
-            }}
-          ></button>
-          <button style={mainPageStyles["dogEars"]} className="ml-1 pt-1">
-            Dog-Ears
           </button>
         </motion.div>
         <motion.div
