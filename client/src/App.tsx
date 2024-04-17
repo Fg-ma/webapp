@@ -5,6 +5,7 @@ import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
 import PageNav from "./middle/PageNav";
+import Tables from "./tables/Tables";
 import LoginScreen from "./LoginScreen";
 import CreateAccountScreen from "./CreateAccountScreen";
 import "./app.css";
@@ -50,6 +51,9 @@ export default function App() {
 
   const { clearAllIndexedDBData } = useIndexedDBContext();
   const { liveUpdatesSocket } = useSocketContext();
+  const mainPageState = useSelector(
+    (state: MainState) => state.page.main.pagePayload.pageState,
+  );
   const isLoggedIn = useSelector(
     (state: LoginState) => state.page.login.pagePayload.isLoggedIn,
   );
@@ -58,10 +62,6 @@ export default function App() {
   );
   const middleSpaceContainerRef = useRef<HTMLDivElement>(null);
   const token = localStorage.getItem("token");
-
-  const mainPageState = useSelector(
-    (state: MainState) => state.page.main.pagePayload.pageState,
-  );
 
   useEffect(() => {
     clearAllIndexedDBData();
@@ -99,20 +99,23 @@ export default function App() {
                   id="pageSpace"
                   className="flex justify-between mx-12 mt-16 h-full"
                 >
+                  {mainPageState === "tables" && <Tables />}
+
                   {mainPageState !== "tables" && <LeftSpace />}
-                  <div
-                    ref={middleSpaceContainerRef}
-                    style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
-                  >
-                    {mainPageState !== "tables" && (
+
+                  {mainPageState !== "tables" && (
+                    <div
+                      ref={middleSpaceContainerRef}
+                      style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                    >
                       <>
                         <MiddleSpace
                           middleSpaceContainerRef={middleSpaceContainerRef}
                         />
                         <PageNav />
                       </>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   <div
                     style={{

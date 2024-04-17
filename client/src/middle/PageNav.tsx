@@ -136,7 +136,7 @@ export default function PageNav() {
             clickable={false}
           />
           <button style={mainPageStyles["profile"]} className="ml-2">
-            Profile
+            {mainPageState !== "tables" && "Profile"}
           </button>
         </motion.div>
         <motion.div
@@ -154,7 +154,7 @@ export default function PageNav() {
             }}
           ></button>
           <button style={mainPageStyles["home"]} className="ml-1 pt-1">
-            Home
+            {mainPageState !== "tables" && "Home"}
           </button>
         </motion.div>
         <motion.div
@@ -172,7 +172,7 @@ export default function PageNav() {
             }}
           ></button>
           <button style={mainPageStyles["tables"]} className="ml-2 pt-1">
-            Tables
+            {mainPageState !== "tables" && "Tables"}
           </button>
         </motion.div>
         <motion.div
@@ -190,7 +190,7 @@ export default function PageNav() {
             }}
           ></button>
           <button style={mainPageStyles["messages"]} className="ml-1 pt-1">
-            Messages
+            {mainPageState !== "tables" && "Messages"}
           </button>
         </motion.div>
         <motion.div
@@ -208,7 +208,7 @@ export default function PageNav() {
             }}
           ></button>
           <button style={mainPageStyles["notifications"]} className="ml-1 pt-1">
-            Notifications
+            {mainPageState !== "tables" && "Notifications"}
           </button>
         </motion.div>
         <motion.div
@@ -226,7 +226,7 @@ export default function PageNav() {
             }}
           ></button>
           <button style={mainPageStyles["settings"]} className="ml-1 pt-1">
-            Settings
+            {mainPageState !== "tables" && "Settings"}
           </button>
         </motion.div>
       </div>

@@ -73,11 +73,20 @@ export default function RightNav({ mainPageState }: RightNavProps) {
     dogEars: deactiveStyles,
     conversations: deactiveStyles,
     contacts: deactiveStyles,
+    tables: deactiveStyles,
+    conversation: deactiveStyles,
+    members: deactiveStyles,
   };
 
   let navItems: string[] = [];
 
-  if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
+  if (mainPageState === "tables") {
+    navItems = ["tables", "conversation", "members"];
+  } else if (
+    mainPageState !== "messages" &&
+    mainPageState !== "tables" &&
+    mainSecondaryPageState !== "messages"
+  ) {
     styles[rightPage] = { ...activeStyles };
     navItems = ["papers", "news", "explore", "dogEars"];
   } else if (
