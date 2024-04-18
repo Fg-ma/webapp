@@ -94,11 +94,8 @@ export default function App() {
         <AffiliateContextProvider>
           <ContactContextProvider>
             <ConversationContextProvider>
-              <div id="base" className="h-screen w-screen">
-                <div
-                  id="pageSpace"
-                  className="flex justify-between mx-12 mt-16 h-full"
-                >
+              <div className="h-screen w-screen overflow-clip">
+                <div className="flex justify-between px-12 pt-16 h-full">
                   {mainPageState === "tables" && <Tables />}
 
                   {mainPageState !== "tables" && <LeftSpace />}
@@ -106,6 +103,7 @@ export default function App() {
                   {mainPageState !== "tables" && (
                     <div
                       ref={middleSpaceContainerRef}
+                      className="h-full flex flex-col"
                       style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
                     >
                       <>
@@ -118,6 +116,7 @@ export default function App() {
                   )}
 
                   <div
+                    className="h-full flex flex-col"
                     style={{
                       width: "24.5%",
                       minWidth: "24.5%",

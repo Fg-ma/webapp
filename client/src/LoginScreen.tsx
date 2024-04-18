@@ -101,7 +101,7 @@ export default function LoginScreen() {
           dispatch(setLoggedIn(true));
         })
         .catch(() => {
-          return;
+          localStorage.removeItem("token");
         });
     } catch (error) {
       return;

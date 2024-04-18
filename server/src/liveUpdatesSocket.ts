@@ -42,9 +42,17 @@ export default function liveUpdatesSocket(server: HttpServer) {
       "outgoingMessage",
       async (token: string, conversation_id: string, message: string) => {
         const isInConversation = await verifyUser(token, conversation_id);
-        const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
 
-        if (isInConversation && typeof user !== "string") {
+        if (isInConversation) {
           const recipients: ConversationMember[] =
             await prisma.conversations_members.findMany({
               where: {
@@ -81,15 +89,32 @@ export default function liveUpdatesSocket(server: HttpServer) {
     );
 
     socket.on("joinSession", async (token) => {
-      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
 
-      if (user && typeof user !== "string") {
+      if (user) {
         socket.join(`live_${user.username}`);
       }
     });
 
     socket.on("leaveSession", (token) => {
-      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
       if (user && typeof user !== "string") {
         socket.leave(`live_${user.username}`);
       }

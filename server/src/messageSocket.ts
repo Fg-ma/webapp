@@ -6,7 +6,15 @@ import { ConversationMember, Entity } from "@FgTypes/types";
 
 const verifyUser = async (token: string, conversation_id: string) => {
   try {
-    const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+    let user: jwt.JwtPayload;
+    try {
+      user = jwt.verify(
+        token,
+        process.env.TOKEN_KEY as Secret
+      ) as jwt.JwtPayload;
+    } catch {
+      return false;
+    }
 
     const conversationMembers = await prisma.conversations_members.findMany({
       where: {
@@ -16,11 +24,9 @@ const verifyUser = async (token: string, conversation_id: string) => {
 
     let isInConversation = false;
 
-    if (typeof user !== "string") {
-      isInConversation = conversationMembers.some(
-        (member) => member.member_id === user.user_id
-      );
-    }
+    isInConversation = conversationMembers.some(
+      (member) => member.member_id === user.user_id
+    );
 
     return isInConversation;
   } catch (error) {
@@ -42,10 +48,18 @@ export default function messageSocket(server: HttpServer) {
       "sendMessage",
       async (token: string, conversation_id: string, message: string) => {
         const isInConversation = await verifyUser(token, conversation_id);
-        const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
         const message_date = new Date().toISOString();
 
-        if (isInConversation && typeof user !== "string") {
+        if (isInConversation) {
           const recipients: ConversationMember[] =
             await prisma.conversations_members.findMany({
               where: {
@@ -85,9 +99,17 @@ export default function messageSocket(server: HttpServer) {
       "typing",
       async (token: string, conversation_id: string, typing: boolean) => {
         const isInConversation = await verifyUser(token, conversation_id);
-        const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
 
-        if (isInConversation && typeof user !== "string") {
+        if (isInConversation) {
           const recipients: ConversationMember[] =
             await prisma.conversations_members.findMany({
               where: {
@@ -124,16 +146,34 @@ export default function messageSocket(server: HttpServer) {
 
     socket.on("joinConversation", async (token, conversation_id) => {
       const isInConversation = await verifyUser(token, conversation_id);
-      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
-      if (isInConversation && typeof user !== "string") {
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
+      if (isInConversation) {
         socket.join(`${conversation_id}_${user.username}`);
       }
     });
 
-    socket.on("leaveConversation", (token, conversation_id) => {
-      const user = jwt.verify(token, process.env.TOKEN_KEY as Secret);
+    socket.on("leaveConversation", async (token, conversation_id) => {
+      const isInConversation = await verifyUser(token, conversation_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
 
-      if (typeof user !== "string") {
+      if (isInConversation) {
         socket.leave(`${conversation_id}_${user.username}`);
       }
     });

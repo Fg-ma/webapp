@@ -108,128 +108,144 @@ export default function PageNav() {
   };
 
   return (
-    <nav
-      id="pageNav"
-      className="bg-fg-white-95 h-16  w-full rounded-xl mt-8"
-      style={{
-        boxShadow:
-          "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
-      }}
-    >
-      <div className="flex divide-x-2 divide-fg-white-70 h-full">
-        <motion.div
-          className="h-11 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => {
-            swapPageState("profile");
-            profileNavFunction();
-          }}
-        >
-          <ProfilePicture
-            size={{ w: 2.5, h: 2.5 }}
-            entity_username={username}
-            entity_type={1}
-            styles="rounded-full"
-            clickable={false}
-          />
-          <button style={mainPageStyles["profile"]} className="ml-2">
-            {mainPageState !== "tables" && "Profile"}
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => swapPageState("home")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/home.svg")',
+    <div className="grow w-full flex items-center justify-center">
+      <nav
+        className="bg-fg-white-95 h-16 w-full rounded-xl"
+        style={{
+          boxShadow:
+            "0px 8px 8px -4px rgba(0, 0, 0, 0.1), 0 6px 6px -4px rgba(0, 0, 0, 0.06)",
+        }}
+      >
+        <div className="flex divide-x-2 divide-fg-white-70 h-full">
+          <motion.div
+            className="h-11 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => {
+              swapPageState("profile");
+              profileNavFunction();
             }}
-          ></button>
-          <button style={mainPageStyles["home"]} className="ml-1 pt-1">
-            {mainPageState !== "tables" && "Home"}
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => swapPageState("tables")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/table.svg")',
-            }}
-          ></button>
-          <button style={mainPageStyles["tables"]} className="ml-2 pt-1">
-            {mainPageState !== "tables" && "Tables"}
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => messagesNavFunction("messages")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/messages.svg")',
-            }}
-          ></button>
-          <button style={mainPageStyles["messages"]} className="ml-1 pt-1">
-            {mainPageState !== "tables" && "Messages"}
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => swapPageState("notifications")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/notifications.svg")',
-            }}
-          ></button>
-          <button style={mainPageStyles["notifications"]} className="ml-1 pt-1">
-            {mainPageState !== "tables" && "Notifications"}
-          </button>
-        </motion.div>
-        <motion.div
-          className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
-          variants={navButtonsVar}
-          initial="init"
-          whileHover="hover"
-          transition={transition}
-          onClick={() => swapPageState("settings")}
-        >
-          <button
-            className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
-            style={{
-              backgroundImage: 'url("/assets/icons/settings.svg")',
-            }}
-          ></button>
-          <button style={mainPageStyles["settings"]} className="ml-1 pt-1">
-            {mainPageState !== "tables" && "Settings"}
-          </button>
-        </motion.div>
-      </div>
-    </nav>
+          >
+            <ProfilePicture
+              size={{ w: 2.5, h: 2.5 }}
+              entity_username={username}
+              entity_type={1}
+              styles="rounded-full"
+              clickable={false}
+            />
+            {mainPageState !== "tables" && (
+              <button style={mainPageStyles["profile"]} className="ml-2">
+                Profile
+              </button>
+            )}
+          </motion.div>
+          <motion.div
+            className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => swapPageState("home")}
+          >
+            <button
+              className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: 'url("/assets/icons/home.svg")',
+              }}
+            ></button>
+            {mainPageState !== "tables" && (
+              <button style={mainPageStyles["home"]} className="ml-1 pt-1">
+                Home
+              </button>
+            )}
+          </motion.div>
+          <motion.div
+            className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => swapPageState("tables")}
+          >
+            <button
+              className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: 'url("/assets/icons/table.svg")',
+              }}
+            ></button>
+            {mainPageState !== "tables" && (
+              <button style={mainPageStyles["tables"]} className="ml-2 pt-1">
+                Tables
+              </button>
+            )}
+          </motion.div>
+          <motion.div
+            className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => messagesNavFunction("messages")}
+          >
+            <button
+              className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: 'url("/assets/icons/messages.svg")',
+              }}
+            ></button>
+            {mainPageState !== "tables" && (
+              <button style={mainPageStyles["messages"]} className="ml-1 pt-1">
+                Messages
+              </button>
+            )}
+          </motion.div>
+          <motion.div
+            className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => swapPageState("notifications")}
+          >
+            <button
+              className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: 'url("/assets/icons/notifications.svg")',
+              }}
+            ></button>
+            {mainPageState !== "tables" && (
+              <button
+                style={mainPageStyles["notifications"]}
+                className="ml-1 pt-1"
+              >
+                Notifications
+              </button>
+            )}
+          </motion.div>
+          <motion.div
+            className="h-8 w-1/6 my-auto flex justify-center items-center cursor-pointer"
+            variants={navButtonsVar}
+            initial="init"
+            whileHover="hover"
+            transition={transition}
+            onClick={() => swapPageState("settings")}
+          >
+            <button
+              className="w-7 aspect-square bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: 'url("/assets/icons/settings.svg")',
+              }}
+            ></button>
+            {mainPageState !== "tables" && (
+              <button style={mainPageStyles["settings"]} className="ml-1 pt-1">
+                Settings
+              </button>
+            )}
+          </motion.div>
+        </div>
+      </nav>
+    </div>
   );
 }

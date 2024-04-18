@@ -12,6 +12,7 @@
   background-clip: content-box;
   border: 9px solid transparent;
   border-radius: 14px;
+  cursor: default;
 }
 
 .smallScrollbar::-webkit-scrollbar-thumb {
@@ -20,6 +21,7 @@
   border: 9px solid transparent;
   min-height: 50px;
   border-radius: 14px;
+  cursor: default;
 }
 
 .smallScrollbar::-webkit-scrollbar-thumb:hover {
@@ -40,6 +42,7 @@
   background-clip: content-box;
   border: 13px solid transparent;
   border-radius: 18px;
+  cursor: default;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -48,6 +51,7 @@
   border: 13px solid transparent;
   min-height: 50px;
   border-radius: 18px;
+  cursor: default;
 }
 
 ::-webkit-scrollbar-thumb:hover {
