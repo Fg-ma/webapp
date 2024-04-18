@@ -304,3 +304,9 @@ export interface Contact {
   contacts_pictures_id: string | null;
   entity_type: number;
 }
+
+/* 
+  Tables.tsx
+*/
+
+export interface Table {}

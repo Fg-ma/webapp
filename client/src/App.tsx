@@ -5,7 +5,7 @@ import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
 import PageNav from "./middle/PageNav";
-import Tables from "./tables/Tables";
+import Tables from "./tables/TablesPage";
 import LoginScreen from "./LoginScreen";
 import CreateAccountScreen from "./CreateAccountScreen";
 import "./app.css";
