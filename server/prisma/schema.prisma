@@ -139,6 +139,8 @@ model entities {
   images                                        images[]
   organizations_members                         organizations_members[]
   sheets                                        sheets[]
+  tables_members                                tables_members[]
+  tables_messages_logs                          tables_messages_logs[]
   videos                                        videos[]
 }
 
@@ -321,6 +323,61 @@ model sheets_thumbnails {
   sheet_thumbnail_filename    String   @db.VarChar(256)
   sheet_thumbnail_description String?  @db.VarChar(512)
   sheets                      sheets[]
+}
+
+model tables {
+  table_id             String                 @id @unique(map: "table_id_UNIQUE") @db.Char(36)
+  table_name           String?                @db.VarChar(256)
+  table_creation_date  DateTime               @db.Timestamp(0)
+  last_message         String?                @db.Text
+  last_message_date    DateTime?              @db.Timestamp(0)
+  tables_pictures_id   String?                @db.Char(36)
+  tables_pictures      tables_pictures?       @relation(fields: [tables_pictures_id], references: [tables_pictures_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_tables_pictures_id_fk")
+  tables_members       tables_members[]
+  tables_messages_logs tables_messages_logs[]
+
+  @@index([tables_pictures_id], map: "tables_tables_pictures_id_fk_idx")
+}
+
+model tables_members {
+  tables_members_id String   @id @unique(map: "tables_members_id_UNIQUE") @db.Char(36)
+  table_id          String   @db.Char(36)
+  member_id         String   @db.Char(36)
+  entities          entities @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_member_id_fk")
+  tables            tables   @relation(fields: [table_id], references: [table_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_table_id_fk")
+
+  @@index([member_id], map: "tables_members_member_id_fk_idx")
+  @@index([table_id], map: "tables_members_table_id_fk_idx")
+}
+
+model tables_messages_logs {
+  tables_messages_logs_id String   @id @unique(map: "tables_messages_logs_id_UNIQUE") @db.Char(36)
+  table_id                String   @db.Char(36)
+  entity_id               String   @db.Char(36)
+  message                 String   @db.Text
+  message_date            DateTime @db.Timestamp(0)
+  entities                entities @relation(fields: [entity_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_messages_logs_entity_id_fk")
+  tables                  tables   @relation(fields: [table_id], references: [table_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_messages_logs_table_id_fk")
+
+  @@index([entity_id])
+  @@index([table_id], map: "tables_messages_logs_table_id_fk_idx")
+}
+
+model tables_pictures {
+  tables_pictures_id     String   @id @unique(map: "tables_pictures_id_UNIQUE") @db.Char(36)
+  table_picture_data     Bytes
+  table_picture_filename String   @db.VarChar(256)
+  tables                 tables[]
+}
+
+model tables_tabletops {
+  tables_tabletops_id String   @id @unique(map: "tables_tabletops_id_UNIQUE") @db.Char(36)
+  content_data        Bytes
+  content_filename    String   @db.VarChar(256)
+  content_date_posted DateTime @db.Timestamp(0)
+  content_x_position  Int
+  content_y_position  Int
+  content_rotation    Int
 }
 
 model user_credentials {

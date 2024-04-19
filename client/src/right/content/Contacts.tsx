@@ -88,7 +88,7 @@ export default function Contacts() {
           setContacts(sortedData);
           await storeContacts(sortedData);
         } catch (error) {
-          console.error("Error fetching entity data:", error);
+          console.error("Error fetching contacts data:", error);
         }
       } else {
         setContacts(sortData(storedContacts));

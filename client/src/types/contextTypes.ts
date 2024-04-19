@@ -6,9 +6,8 @@ import { ReactNode } from "react";
   IDBContext.tsx
 */
 
-interface Members {
+interface ConversationMember {
   conversation_id: string;
-  member_id: string;
   individual_data?: {
     individual_name: string | null;
     individual_username: string;
@@ -30,7 +29,7 @@ export interface Conversation {
   last_message: string | null;
   last_message_date: string | null;
   conversations_pictures_id: string | null;
-  members: Members[];
+  members: ConversationMember[];
 }
 
 export interface Contact {

@@ -342,3 +342,53 @@ export interface EntityReferences {
   author: string;
   url: string;
 }
+
+/*
+  tables.ts
+*/
+
+export interface Table {
+  table_id: string;
+  table_name: string;
+  table_creation_date: string;
+  last_message: string;
+  last_message_date: string;
+  tables_pictures_id: string;
+  members?: TableMember[];
+}
+
+export interface TableMember {
+  tables_members_id: string;
+  table_id: string;
+  member_id: string;
+  individual_data?: {
+    individual_username: string;
+    individual_name: string | null;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
+
+export interface TableMessageLogs {
+  tables_messages_logs_id: string;
+  table_id: string;
+  entity_id: string;
+  message: string;
+  message_date: string;
+}
+
+export interface TableTabletop {
+  tables_tabletops_id: string;
+  content_data: Blob;
+  content_filename: string;
+  content_date_posted: string;
+  content_x_position: number;
+  content_y_position: number;
+  content_rotation: number;
+}

@@ -52,6 +52,11 @@ const initialState: PageState = {
       pageState: "conversations",
     },
   },
+  tables: {
+    pagePayload: {
+      pageState: "tables",
+    },
+  },
   individuals: {
     pagePayload: {
       pageState: "articles",

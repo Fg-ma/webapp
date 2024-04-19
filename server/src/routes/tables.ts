@@ -11,35 +11,35 @@ import {
   Group,
   Individual,
   Organization,
+  TableMember,
+  Table,
 } from "@FgTypes/types";
 
-// Get a user's full conversations
-router.get("/user_conversations", verifyToken, async (req, res) => {
+// Get a user's full tables
+router.get("/user_tables", verifyToken, async (req, res) => {
   try {
-    const conversationsRelations: ConversationMember[] =
-      await req.db.conversations_members.findMany({
+    const tablesRelations: TableMember[] = await req.db.tables_members.findMany(
+      {
         where: {
           member_id: req.user.user_id,
         },
-      });
-
-    const conversationIds = conversationsRelations.map(
-      (relation) => relation.conversation_id
+      }
     );
 
-    const conversations: Conversation[] = await req.db.conversations.findMany({
+    const tableIds = tablesRelations.map((relation) => relation.table_id);
+
+    const tables: Table[] = await req.db.tables.findMany({
       where: {
-        conversation_id: { in: conversationIds },
+        table_id: { in: tableIds },
       },
     });
 
-    for (const conversationId of conversationIds) {
-      const members: ConversationMember[] =
-        await req.db.conversations_members.findMany({
-          where: {
-            conversation_id: conversationId,
-          },
-        });
+    for (const tableId of tableIds) {
+      const members: TableMember[] = await req.db.tables_members.findMany({
+        where: {
+          table_id: tableId,
+        },
+      });
 
       const filteredMembers = members.filter(
         (member) => member.member_id !== req.user.user_id
@@ -97,20 +97,18 @@ router.get("/user_conversations", verifyToken, async (req, res) => {
           },
         });
 
-      const conversation = conversations.find(
-        (conversation) => conversation.conversation_id === conversationId
-      );
+      const table = tables.find((table) => table.table_id === tableId);
 
-      if (conversation) {
-        conversation.members = filteredMembers;
+      if (table) {
+        table.members = filteredMembers;
 
         individualsData.forEach((individual) => {
           if (
-            conversation.members?.some(
+            table.members?.some(
               (member) => member.member_id === individual.individual_id
             )
           ) {
-            conversation.members.forEach((member) => {
+            table.members.forEach((member) => {
               if (member.member_id === individual.individual_id) {
                 member.individual_data = {
                   individual_username: individual.individual_username,
@@ -123,11 +121,9 @@ router.get("/user_conversations", verifyToken, async (req, res) => {
 
         groupsData.forEach((group) => {
           if (
-            conversation.members?.some(
-              (member) => member.member_id === group.group_id
-            )
+            table.members?.some((member) => member.member_id === group.group_id)
           ) {
-            conversation.members.forEach((member) => {
+            table.members.forEach((member) => {
               if (member.member_id === group.group_id) {
                 member.group_data = {
                   group_handle: group.group_handle,
@@ -140,11 +136,11 @@ router.get("/user_conversations", verifyToken, async (req, res) => {
 
         organizationsData.forEach((organization) => {
           if (
-            conversation.members?.some(
+            table.members?.some(
               (member) => member.member_id === organization.organization_id
             )
           ) {
-            conversation.members.forEach((member) => {
+            table.members.forEach((member) => {
               if (member.member_id === organization.organization_id) {
                 member.organization_data = {
                   organization_handle: organization.organization_handle,
@@ -157,20 +153,19 @@ router.get("/user_conversations", verifyToken, async (req, res) => {
       }
     }
 
-    const returningConversations = conversations.map((conversation) => ({
-      conversation_id: conversation.conversation_id,
-      conversation_name: conversation.conversation_name,
-      conversation_creation_date: conversation.conversation_creation_date,
-      last_message: conversation.last_message,
-      last_message_date: conversation.last_message_date,
-      conversations_pictures_id: conversation.conversations_pictures_id,
-      members: conversation.members?.map(
-        ({ conversation_id, conversations_members_id, member_id, ...rest }) =>
-          rest
+    const returningTables = tables.map((table) => ({
+      table_id: table.table_id,
+      table_name: table.table_name,
+      table_creation_date: table.table_creation_date,
+      last_message: table.last_message,
+      last_message_date: table.last_message_date,
+      tables_pictures_id: table.tables_pictures_id,
+      members: table.members?.map(
+        ({ table_id, tables_members_id, member_id, ...rest }) => rest
       ),
     }));
 
-    res.send(returningConversations);
+    res.send(returningTables);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

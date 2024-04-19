@@ -93,7 +93,7 @@ export default function Conversations() {
           setConversations(sortedData);
           await storeConversations(sortedData);
         } catch (error) {
-          console.error("Error fetching entity data:", error);
+          console.error("Error fetching conversations data:", error);
         }
       } else {
         setConversations(sortData(storedConversations));

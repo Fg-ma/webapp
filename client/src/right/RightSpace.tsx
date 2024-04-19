@@ -12,9 +12,11 @@ import {
   MainState,
   MessagesState,
   MainSecondaryState,
+  TablesState,
 } from "@FgTypes/rightTypes";
 import Conversations from "./content/Conversations";
 import Contacts from "./content/Contacts";
+import Tables from "./content/Tables";
 
 export default function RightSpace() {
   /* 
@@ -31,6 +33,9 @@ export default function RightSpace() {
   const messagesPage = useSelector(
     (state: MessagesState) => state.page.messages.pagePayload.pageState,
   );
+  const tablesPage = useSelector(
+    (state: TablesState) => state.page.tables.pagePayload.pageState,
+  );
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
@@ -40,7 +45,12 @@ export default function RightSpace() {
   );
 
   const renderContent = () => {
-    if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
+    if (
+      mainPageState !== "messages" &&
+      mainSecondaryPageState !== "messages" &&
+      mainPageState !== "tables" &&
+      mainSecondaryPageState !== "tables"
+    ) {
       switch (rightPage) {
         case "papers":
           return <Papers />;
@@ -62,6 +72,14 @@ export default function RightSpace() {
           return <Conversations />;
         case "contacts":
           return <Contacts />;
+      }
+    } else if (
+      mainPageState === "tables" ||
+      mainSecondaryPageState === "tables"
+    ) {
+      switch (tablesPage) {
+        case "tables":
+          return <Tables />;
       }
     }
   };

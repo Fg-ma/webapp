@@ -144,6 +144,31 @@ export type sheets_data = $Result.DefaultSelection<Prisma.$sheets_dataPayload>
  */
 export type sheets_thumbnails = $Result.DefaultSelection<Prisma.$sheets_thumbnailsPayload>
 /**
+ * Model tables
+ * 
+ */
+export type tables = $Result.DefaultSelection<Prisma.$tablesPayload>
+/**
+ * Model tables_members
+ * 
+ */
+export type tables_members = $Result.DefaultSelection<Prisma.$tables_membersPayload>
+/**
+ * Model tables_messages_logs
+ * 
+ */
+export type tables_messages_logs = $Result.DefaultSelection<Prisma.$tables_messages_logsPayload>
+/**
+ * Model tables_pictures
+ * 
+ */
+export type tables_pictures = $Result.DefaultSelection<Prisma.$tables_picturesPayload>
+/**
+ * Model tables_tabletops
+ * 
+ */
+export type tables_tabletops = $Result.DefaultSelection<Prisma.$tables_tabletopsPayload>
+/**
  * Model user_credentials
  * 
  */
@@ -545,6 +570,56 @@ export class PrismaClient<
     * ```
     */
   get sheets_thumbnails(): Prisma.sheets_thumbnailsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables`: Exposes CRUD operations for the **tables** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables
+    * const tables = await prisma.tables.findMany()
+    * ```
+    */
+  get tables(): Prisma.tablesDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables_members`: Exposes CRUD operations for the **tables_members** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables_members
+    * const tables_members = await prisma.tables_members.findMany()
+    * ```
+    */
+  get tables_members(): Prisma.tables_membersDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables_messages_logs`: Exposes CRUD operations for the **tables_messages_logs** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables_messages_logs
+    * const tables_messages_logs = await prisma.tables_messages_logs.findMany()
+    * ```
+    */
+  get tables_messages_logs(): Prisma.tables_messages_logsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables_pictures`: Exposes CRUD operations for the **tables_pictures** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables_pictures
+    * const tables_pictures = await prisma.tables_pictures.findMany()
+    * ```
+    */
+  get tables_pictures(): Prisma.tables_picturesDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables_tabletops`: Exposes CRUD operations for the **tables_tabletops** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables_tabletops
+    * const tables_tabletops = await prisma.tables_tabletops.findMany()
+    * ```
+    */
+  get tables_tabletops(): Prisma.tables_tabletopsDelegate<ExtArgs>;
 
   /**
    * `prisma.user_credentials`: Exposes CRUD operations for the **user_credentials** model.
@@ -1081,6 +1156,11 @@ export namespace Prisma {
     sheets: 'sheets',
     sheets_data: 'sheets_data',
     sheets_thumbnails: 'sheets_thumbnails',
+    tables: 'tables',
+    tables_members: 'tables_members',
+    tables_messages_logs: 'tables_messages_logs',
+    tables_pictures: 'tables_pictures',
+    tables_tabletops: 'tables_tabletops',
     user_credentials: 'user_credentials',
     videos: 'videos',
     videos_data: 'videos_data',
@@ -1101,7 +1181,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'contacts_pictures' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'contacts_pictures' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'tables' | 'tables_members' | 'tables_messages_logs' | 'tables_pictures' | 'tables_tabletops' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2821,6 +2901,336 @@ export namespace Prisma {
           }
         }
       }
+      tables: {
+        payload: Prisma.$tablesPayload<ExtArgs>
+        fields: Prisma.tablesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tablesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tablesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          findFirst: {
+            args: Prisma.tablesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tablesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          findMany: {
+            args: Prisma.tablesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>[]
+          }
+          create: {
+            args: Prisma.tablesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          createMany: {
+            args: Prisma.tablesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tablesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          update: {
+            args: Prisma.tablesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          deleteMany: {
+            args: Prisma.tablesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tablesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tablesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tablesPayload>
+          }
+          aggregate: {
+            args: Prisma.TablesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables>
+          }
+          groupBy: {
+            args: Prisma.tablesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<TablesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tablesCountArgs<ExtArgs>,
+            result: $Utils.Optional<TablesCountAggregateOutputType> | number
+          }
+        }
+      }
+      tables_members: {
+        payload: Prisma.$tables_membersPayload<ExtArgs>
+        fields: Prisma.tables_membersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tables_membersFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tables_membersFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          findFirst: {
+            args: Prisma.tables_membersFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tables_membersFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          findMany: {
+            args: Prisma.tables_membersFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>[]
+          }
+          create: {
+            args: Prisma.tables_membersCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          createMany: {
+            args: Prisma.tables_membersCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tables_membersDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          update: {
+            args: Prisma.tables_membersUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          deleteMany: {
+            args: Prisma.tables_membersDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tables_membersUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tables_membersUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_membersPayload>
+          }
+          aggregate: {
+            args: Prisma.Tables_membersAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables_members>
+          }
+          groupBy: {
+            args: Prisma.tables_membersGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_membersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tables_membersCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_membersCountAggregateOutputType> | number
+          }
+        }
+      }
+      tables_messages_logs: {
+        payload: Prisma.$tables_messages_logsPayload<ExtArgs>
+        fields: Prisma.tables_messages_logsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tables_messages_logsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tables_messages_logsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          findFirst: {
+            args: Prisma.tables_messages_logsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tables_messages_logsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          findMany: {
+            args: Prisma.tables_messages_logsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>[]
+          }
+          create: {
+            args: Prisma.tables_messages_logsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          createMany: {
+            args: Prisma.tables_messages_logsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tables_messages_logsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          update: {
+            args: Prisma.tables_messages_logsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          deleteMany: {
+            args: Prisma.tables_messages_logsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tables_messages_logsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tables_messages_logsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_messages_logsPayload>
+          }
+          aggregate: {
+            args: Prisma.Tables_messages_logsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables_messages_logs>
+          }
+          groupBy: {
+            args: Prisma.tables_messages_logsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_messages_logsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tables_messages_logsCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_messages_logsCountAggregateOutputType> | number
+          }
+        }
+      }
+      tables_pictures: {
+        payload: Prisma.$tables_picturesPayload<ExtArgs>
+        fields: Prisma.tables_picturesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tables_picturesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tables_picturesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          findFirst: {
+            args: Prisma.tables_picturesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tables_picturesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          findMany: {
+            args: Prisma.tables_picturesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>[]
+          }
+          create: {
+            args: Prisma.tables_picturesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          createMany: {
+            args: Prisma.tables_picturesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tables_picturesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          update: {
+            args: Prisma.tables_picturesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          deleteMany: {
+            args: Prisma.tables_picturesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tables_picturesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tables_picturesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_picturesPayload>
+          }
+          aggregate: {
+            args: Prisma.Tables_picturesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables_pictures>
+          }
+          groupBy: {
+            args: Prisma.tables_picturesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_picturesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tables_picturesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_picturesCountAggregateOutputType> | number
+          }
+        }
+      }
+      tables_tabletops: {
+        payload: Prisma.$tables_tabletopsPayload<ExtArgs>
+        fields: Prisma.tables_tabletopsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tables_tabletopsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tables_tabletopsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          findFirst: {
+            args: Prisma.tables_tabletopsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tables_tabletopsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          findMany: {
+            args: Prisma.tables_tabletopsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>[]
+          }
+          create: {
+            args: Prisma.tables_tabletopsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          createMany: {
+            args: Prisma.tables_tabletopsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tables_tabletopsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          update: {
+            args: Prisma.tables_tabletopsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          deleteMany: {
+            args: Prisma.tables_tabletopsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tables_tabletopsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tables_tabletopsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletopsPayload>
+          }
+          aggregate: {
+            args: Prisma.Tables_tabletopsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables_tabletops>
+          }
+          groupBy: {
+            args: Prisma.tables_tabletopsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_tabletopsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tables_tabletopsCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_tabletopsCountAggregateOutputType> | number
+          }
+        }
+      }
       user_credentials: {
         payload: Prisma.$user_credentialsPayload<ExtArgs>
         fields: Prisma.user_credentialsFieldRefs
@@ -3467,6 +3877,8 @@ export namespace Prisma {
     images: number
     organizations_members: number
     sheets: number
+    tables_members: number
+    tables_messages_logs: number
     videos: number
   }
 
@@ -3484,6 +3896,8 @@ export namespace Prisma {
     images?: boolean | EntitiesCountOutputTypeCountImagesArgs
     organizations_members?: boolean | EntitiesCountOutputTypeCountOrganizations_membersArgs
     sheets?: boolean | EntitiesCountOutputTypeCountSheetsArgs
+    tables_members?: boolean | EntitiesCountOutputTypeCountTables_membersArgs
+    tables_messages_logs?: boolean | EntitiesCountOutputTypeCountTables_messages_logsArgs
     videos?: boolean | EntitiesCountOutputTypeCountVideosArgs
   }
 
@@ -3601,6 +4015,22 @@ export namespace Prisma {
    */
   export type EntitiesCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: sheetsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountTables_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_membersWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountTables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_messages_logsWhereInput
   }
 
 
@@ -3833,6 +4263,84 @@ export namespace Prisma {
    */
   export type Sheets_thumbnailsCountOutputTypeCountSheetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: sheetsWhereInput
+  }
+
+
+
+  /**
+   * Count Type TablesCountOutputType
+   */
+
+  export type TablesCountOutputType = {
+    tables_members: number
+    tables_messages_logs: number
+  }
+
+  export type TablesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables_members?: boolean | TablesCountOutputTypeCountTables_membersArgs
+    tables_messages_logs?: boolean | TablesCountOutputTypeCountTables_messages_logsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * TablesCountOutputType without action
+   */
+  export type TablesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TablesCountOutputType
+     */
+    select?: TablesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * TablesCountOutputType without action
+   */
+  export type TablesCountOutputTypeCountTables_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_membersWhereInput
+  }
+
+
+  /**
+   * TablesCountOutputType without action
+   */
+  export type TablesCountOutputTypeCountTables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_messages_logsWhereInput
+  }
+
+
+
+  /**
+   * Count Type Tables_picturesCountOutputType
+   */
+
+  export type Tables_picturesCountOutputType = {
+    tables: number
+  }
+
+  export type Tables_picturesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables?: boolean | Tables_picturesCountOutputTypeCountTablesArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Tables_picturesCountOutputType without action
+   */
+  export type Tables_picturesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tables_picturesCountOutputType
+     */
+    select?: Tables_picturesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Tables_picturesCountOutputType without action
+   */
+  export type Tables_picturesCountOutputTypeCountTablesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tablesWhereInput
   }
 
 
@@ -13479,6 +13987,8 @@ export namespace Prisma {
     images?: boolean | entities$imagesArgs<ExtArgs>
     organizations_members?: boolean | entities$organizations_membersArgs<ExtArgs>
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
+    tables_members?: boolean | entities$tables_membersArgs<ExtArgs>
+    tables_messages_logs?: boolean | entities$tables_messages_logsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entities"]>
@@ -13503,6 +14013,8 @@ export namespace Prisma {
     images?: boolean | entities$imagesArgs<ExtArgs>
     organizations_members?: boolean | entities$organizations_membersArgs<ExtArgs>
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
+    tables_members?: boolean | entities$tables_membersArgs<ExtArgs>
+    tables_messages_logs?: boolean | entities$tables_messages_logsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13524,6 +14036,8 @@ export namespace Prisma {
       images: Prisma.$imagesPayload<ExtArgs>[]
       organizations_members: Prisma.$organizations_membersPayload<ExtArgs>[]
       sheets: Prisma.$sheetsPayload<ExtArgs>[]
+      tables_members: Prisma.$tables_membersPayload<ExtArgs>[]
+      tables_messages_logs: Prisma.$tables_messages_logsPayload<ExtArgs>[]
       videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13920,6 +14434,10 @@ export namespace Prisma {
     organizations_members<T extends entities$organizations_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$organizations_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizations_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     sheets<T extends entities$sheetsArgs<ExtArgs> = {}>(args?: Subset<T, entities$sheetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sheetsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tables_members<T extends entities$tables_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$tables_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tables_messages_logs<T extends entities$tables_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, entities$tables_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     videos<T extends entities$videosArgs<ExtArgs> = {}>(args?: Subset<T, entities$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -14535,6 +15053,48 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SheetsScalarFieldEnum | SheetsScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.tables_members
+   */
+  export type entities$tables_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    where?: tables_membersWhereInput
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    cursor?: tables_membersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_membersScalarFieldEnum | Tables_membersScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.tables_messages_logs
+   */
+  export type entities$tables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    where?: tables_messages_logsWhereInput
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    cursor?: tables_messages_logsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
   }
 
 
@@ -28750,6 +29310,4682 @@ export namespace Prisma {
 
 
   /**
+   * Model tables
+   */
+
+  export type AggregateTables = {
+    _count: TablesCountAggregateOutputType | null
+    _min: TablesMinAggregateOutputType | null
+    _max: TablesMaxAggregateOutputType | null
+  }
+
+  export type TablesMinAggregateOutputType = {
+    table_id: string | null
+    table_name: string | null
+    table_creation_date: Date | null
+    last_message: string | null
+    last_message_date: Date | null
+    tables_pictures_id: string | null
+  }
+
+  export type TablesMaxAggregateOutputType = {
+    table_id: string | null
+    table_name: string | null
+    table_creation_date: Date | null
+    last_message: string | null
+    last_message_date: Date | null
+    tables_pictures_id: string | null
+  }
+
+  export type TablesCountAggregateOutputType = {
+    table_id: number
+    table_name: number
+    table_creation_date: number
+    last_message: number
+    last_message_date: number
+    tables_pictures_id: number
+    _all: number
+  }
+
+
+  export type TablesMinAggregateInputType = {
+    table_id?: true
+    table_name?: true
+    table_creation_date?: true
+    last_message?: true
+    last_message_date?: true
+    tables_pictures_id?: true
+  }
+
+  export type TablesMaxAggregateInputType = {
+    table_id?: true
+    table_name?: true
+    table_creation_date?: true
+    last_message?: true
+    last_message_date?: true
+    tables_pictures_id?: true
+  }
+
+  export type TablesCountAggregateInputType = {
+    table_id?: true
+    table_name?: true
+    table_creation_date?: true
+    last_message?: true
+    last_message_date?: true
+    tables_pictures_id?: true
+    _all?: true
+  }
+
+  export type TablesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables to aggregate.
+     */
+    where?: tablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables to fetch.
+     */
+    orderBy?: tablesOrderByWithRelationInput | tablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables
+    **/
+    _count?: true | TablesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TablesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TablesMaxAggregateInputType
+  }
+
+  export type GetTablesAggregateType<T extends TablesAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables[P]>
+      : GetScalarType<T[P], AggregateTables[P]>
+  }
+
+
+
+
+  export type tablesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tablesWhereInput
+    orderBy?: tablesOrderByWithAggregationInput | tablesOrderByWithAggregationInput[]
+    by: TablesScalarFieldEnum[] | TablesScalarFieldEnum
+    having?: tablesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TablesCountAggregateInputType | true
+    _min?: TablesMinAggregateInputType
+    _max?: TablesMaxAggregateInputType
+  }
+
+  export type TablesGroupByOutputType = {
+    table_id: string
+    table_name: string | null
+    table_creation_date: Date
+    last_message: string | null
+    last_message_date: Date | null
+    tables_pictures_id: string | null
+    _count: TablesCountAggregateOutputType | null
+    _min: TablesMinAggregateOutputType | null
+    _max: TablesMaxAggregateOutputType | null
+  }
+
+  type GetTablesGroupByPayload<T extends tablesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TablesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TablesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TablesGroupByOutputType[P]>
+            : GetScalarType<T[P], TablesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tablesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    table_id?: boolean
+    table_name?: boolean
+    table_creation_date?: boolean
+    last_message?: boolean
+    last_message_date?: boolean
+    tables_pictures_id?: boolean
+    tables_pictures?: boolean | tables$tables_picturesArgs<ExtArgs>
+    tables_members?: boolean | tables$tables_membersArgs<ExtArgs>
+    tables_messages_logs?: boolean | tables$tables_messages_logsArgs<ExtArgs>
+    _count?: boolean | TablesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tables"]>
+
+  export type tablesSelectScalar = {
+    table_id?: boolean
+    table_name?: boolean
+    table_creation_date?: boolean
+    last_message?: boolean
+    last_message_date?: boolean
+    tables_pictures_id?: boolean
+  }
+
+  export type tablesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables_pictures?: boolean | tables$tables_picturesArgs<ExtArgs>
+    tables_members?: boolean | tables$tables_membersArgs<ExtArgs>
+    tables_messages_logs?: boolean | tables$tables_messages_logsArgs<ExtArgs>
+    _count?: boolean | TablesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tablesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables"
+    objects: {
+      tables_pictures: Prisma.$tables_picturesPayload<ExtArgs> | null
+      tables_members: Prisma.$tables_membersPayload<ExtArgs>[]
+      tables_messages_logs: Prisma.$tables_messages_logsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      table_id: string
+      table_name: string | null
+      table_creation_date: Date
+      last_message: string | null
+      last_message_date: Date | null
+      tables_pictures_id: string | null
+    }, ExtArgs["result"]["tables"]>
+    composites: {}
+  }
+
+
+  type tablesGetPayload<S extends boolean | null | undefined | tablesDefaultArgs> = $Result.GetResult<Prisma.$tablesPayload, S>
+
+  type tablesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tablesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: TablesCountAggregateInputType | true
+    }
+
+  export interface tablesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables'], meta: { name: 'tables' } }
+    /**
+     * Find zero or one Tables that matches the filter.
+     * @param {tablesFindUniqueArgs} args - Arguments to find a Tables
+     * @example
+     * // Get one Tables
+     * const tables = await prisma.tables.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tablesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesFindUniqueArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tablesFindUniqueOrThrowArgs} args - Arguments to find a Tables
+     * @example
+     * // Get one Tables
+     * const tables = await prisma.tables.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tablesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesFindFirstArgs} args - Arguments to find a Tables
+     * @example
+     * // Get one Tables
+     * const tables = await prisma.tables.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tablesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesFindFirstArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesFindFirstOrThrowArgs} args - Arguments to find a Tables
+     * @example
+     * // Get one Tables
+     * const tables = await prisma.tables.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tablesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables
+     * const tables = await prisma.tables.findMany()
+     * 
+     * // Get first 10 Tables
+     * const tables = await prisma.tables.findMany({ take: 10 })
+     * 
+     * // Only select the `table_id`
+     * const tablesWithTable_idOnly = await prisma.tables.findMany({ select: { table_id: true } })
+     * 
+    **/
+    findMany<T extends tablesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables.
+     * @param {tablesCreateArgs} args - Arguments to create a Tables.
+     * @example
+     * // Create one Tables
+     * const Tables = await prisma.tables.create({
+     *   data: {
+     *     // ... data to create a Tables
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tablesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesCreateArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables.
+     *     @param {tablesCreateManyArgs} args - Arguments to create many Tables.
+     *     @example
+     *     // Create many Tables
+     *     const tables = await prisma.tables.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tablesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables.
+     * @param {tablesDeleteArgs} args - Arguments to delete one Tables.
+     * @example
+     * // Delete one Tables
+     * const Tables = await prisma.tables.delete({
+     *   where: {
+     *     // ... filter to delete one Tables
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tablesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesDeleteArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables.
+     * @param {tablesUpdateArgs} args - Arguments to update one Tables.
+     * @example
+     * // Update one Tables
+     * const tables = await prisma.tables.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tablesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesUpdateArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables.
+     * @param {tablesDeleteManyArgs} args - Arguments to filter Tables to delete.
+     * @example
+     * // Delete a few Tables
+     * const { count } = await prisma.tables.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tablesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tablesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables
+     * const tables = await prisma.tables.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tablesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables.
+     * @param {tablesUpsertArgs} args - Arguments to update or create a Tables.
+     * @example
+     * // Update or create a Tables
+     * const tables = await prisma.tables.upsert({
+     *   create: {
+     *     // ... data to create a Tables
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tablesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tablesUpsertArgs<ExtArgs>>
+    ): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesCountArgs} args - Arguments to filter Tables to count.
+     * @example
+     * // Count the number of Tables
+     * const count = await prisma.tables.count({
+     *   where: {
+     *     // ... the filter for the Tables we want to count
+     *   }
+     * })
+    **/
+    count<T extends tablesCountArgs>(
+      args?: Subset<T, tablesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TablesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TablesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TablesAggregateArgs>(args: Subset<T, TablesAggregateArgs>): Prisma.PrismaPromise<GetTablesAggregateType<T>>
+
+    /**
+     * Group by Tables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tablesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tablesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tablesGroupByArgs['orderBy'] }
+        : { orderBy?: tablesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tablesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTablesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables model
+   */
+  readonly fields: tablesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tablesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    tables_pictures<T extends tables$tables_picturesArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_picturesArgs<ExtArgs>>): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    tables_members<T extends tables$tables_membersArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tables_messages_logs<T extends tables$tables_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables model
+   */ 
+  interface tablesFieldRefs {
+    readonly table_id: FieldRef<"tables", 'String'>
+    readonly table_name: FieldRef<"tables", 'String'>
+    readonly table_creation_date: FieldRef<"tables", 'DateTime'>
+    readonly last_message: FieldRef<"tables", 'String'>
+    readonly last_message_date: FieldRef<"tables", 'DateTime'>
+    readonly tables_pictures_id: FieldRef<"tables", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables findUnique
+   */
+  export type tablesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables to fetch.
+     */
+    where: tablesWhereUniqueInput
+  }
+
+
+  /**
+   * tables findUniqueOrThrow
+   */
+  export type tablesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables to fetch.
+     */
+    where: tablesWhereUniqueInput
+  }
+
+
+  /**
+   * tables findFirst
+   */
+  export type tablesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables to fetch.
+     */
+    where?: tablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables to fetch.
+     */
+    orderBy?: tablesOrderByWithRelationInput | tablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables.
+     */
+    cursor?: tablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables.
+     */
+    distinct?: TablesScalarFieldEnum | TablesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables findFirstOrThrow
+   */
+  export type tablesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables to fetch.
+     */
+    where?: tablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables to fetch.
+     */
+    orderBy?: tablesOrderByWithRelationInput | tablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables.
+     */
+    cursor?: tablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables.
+     */
+    distinct?: TablesScalarFieldEnum | TablesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables findMany
+   */
+  export type tablesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables to fetch.
+     */
+    where?: tablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables to fetch.
+     */
+    orderBy?: tablesOrderByWithRelationInput | tablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables.
+     */
+    cursor?: tablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables.
+     */
+    skip?: number
+    distinct?: TablesScalarFieldEnum | TablesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables create
+   */
+  export type tablesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tables.
+     */
+    data: XOR<tablesCreateInput, tablesUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables createMany
+   */
+  export type tablesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables.
+     */
+    data: tablesCreateManyInput | tablesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables update
+   */
+  export type tablesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tables.
+     */
+    data: XOR<tablesUpdateInput, tablesUncheckedUpdateInput>
+    /**
+     * Choose, which tables to update.
+     */
+    where: tablesWhereUniqueInput
+  }
+
+
+  /**
+   * tables updateMany
+   */
+  export type tablesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables.
+     */
+    data: XOR<tablesUpdateManyMutationInput, tablesUncheckedUpdateManyInput>
+    /**
+     * Filter which tables to update
+     */
+    where?: tablesWhereInput
+  }
+
+
+  /**
+   * tables upsert
+   */
+  export type tablesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tables to update in case it exists.
+     */
+    where: tablesWhereUniqueInput
+    /**
+     * In case the tables found by the `where` argument doesn't exist, create a new tables with this data.
+     */
+    create: XOR<tablesCreateInput, tablesUncheckedCreateInput>
+    /**
+     * In case the tables was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tablesUpdateInput, tablesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables delete
+   */
+  export type tablesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    /**
+     * Filter which tables to delete.
+     */
+    where: tablesWhereUniqueInput
+  }
+
+
+  /**
+   * tables deleteMany
+   */
+  export type tablesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables to delete
+     */
+    where?: tablesWhereInput
+  }
+
+
+  /**
+   * tables.tables_pictures
+   */
+  export type tables$tables_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    where?: tables_picturesWhereInput
+  }
+
+
+  /**
+   * tables.tables_members
+   */
+  export type tables$tables_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    where?: tables_membersWhereInput
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    cursor?: tables_membersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_membersScalarFieldEnum | Tables_membersScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables.tables_messages_logs
+   */
+  export type tables$tables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    where?: tables_messages_logsWhereInput
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    cursor?: tables_messages_logsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables without action
+   */
+  export type tablesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model tables_members
+   */
+
+  export type AggregateTables_members = {
+    _count: Tables_membersCountAggregateOutputType | null
+    _min: Tables_membersMinAggregateOutputType | null
+    _max: Tables_membersMaxAggregateOutputType | null
+  }
+
+  export type Tables_membersMinAggregateOutputType = {
+    tables_members_id: string | null
+    table_id: string | null
+    member_id: string | null
+  }
+
+  export type Tables_membersMaxAggregateOutputType = {
+    tables_members_id: string | null
+    table_id: string | null
+    member_id: string | null
+  }
+
+  export type Tables_membersCountAggregateOutputType = {
+    tables_members_id: number
+    table_id: number
+    member_id: number
+    _all: number
+  }
+
+
+  export type Tables_membersMinAggregateInputType = {
+    tables_members_id?: true
+    table_id?: true
+    member_id?: true
+  }
+
+  export type Tables_membersMaxAggregateInputType = {
+    tables_members_id?: true
+    table_id?: true
+    member_id?: true
+  }
+
+  export type Tables_membersCountAggregateInputType = {
+    tables_members_id?: true
+    table_id?: true
+    member_id?: true
+    _all?: true
+  }
+
+  export type Tables_membersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_members to aggregate.
+     */
+    where?: tables_membersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_members to fetch.
+     */
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tables_membersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables_members
+    **/
+    _count?: true | Tables_membersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tables_membersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tables_membersMaxAggregateInputType
+  }
+
+  export type GetTables_membersAggregateType<T extends Tables_membersAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables_members]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables_members[P]>
+      : GetScalarType<T[P], AggregateTables_members[P]>
+  }
+
+
+
+
+  export type tables_membersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_membersWhereInput
+    orderBy?: tables_membersOrderByWithAggregationInput | tables_membersOrderByWithAggregationInput[]
+    by: Tables_membersScalarFieldEnum[] | Tables_membersScalarFieldEnum
+    having?: tables_membersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tables_membersCountAggregateInputType | true
+    _min?: Tables_membersMinAggregateInputType
+    _max?: Tables_membersMaxAggregateInputType
+  }
+
+  export type Tables_membersGroupByOutputType = {
+    tables_members_id: string
+    table_id: string
+    member_id: string
+    _count: Tables_membersCountAggregateOutputType | null
+    _min: Tables_membersMinAggregateOutputType | null
+    _max: Tables_membersMaxAggregateOutputType | null
+  }
+
+  type GetTables_membersGroupByPayload<T extends tables_membersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tables_membersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tables_membersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tables_membersGroupByOutputType[P]>
+            : GetScalarType<T[P], Tables_membersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tables_membersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tables_members_id?: boolean
+    table_id?: boolean
+    member_id?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tables_members"]>
+
+  export type tables_membersSelectScalar = {
+    tables_members_id?: boolean
+    table_id?: boolean
+    member_id?: boolean
+  }
+
+  export type tables_membersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tables_membersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables_members"
+    objects: {
+      entities: Prisma.$entitiesPayload<ExtArgs>
+      tables: Prisma.$tablesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tables_members_id: string
+      table_id: string
+      member_id: string
+    }, ExtArgs["result"]["tables_members"]>
+    composites: {}
+  }
+
+
+  type tables_membersGetPayload<S extends boolean | null | undefined | tables_membersDefaultArgs> = $Result.GetResult<Prisma.$tables_membersPayload, S>
+
+  type tables_membersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tables_membersFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tables_membersCountAggregateInputType | true
+    }
+
+  export interface tables_membersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables_members'], meta: { name: 'tables_members' } }
+    /**
+     * Find zero or one Tables_members that matches the filter.
+     * @param {tables_membersFindUniqueArgs} args - Arguments to find a Tables_members
+     * @example
+     * // Get one Tables_members
+     * const tables_members = await prisma.tables_members.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tables_membersFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersFindUniqueArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables_members that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tables_membersFindUniqueOrThrowArgs} args - Arguments to find a Tables_members
+     * @example
+     * // Get one Tables_members
+     * const tables_members = await prisma.tables_members.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tables_membersFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables_members that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersFindFirstArgs} args - Arguments to find a Tables_members
+     * @example
+     * // Get one Tables_members
+     * const tables_members = await prisma.tables_members.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tables_membersFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersFindFirstArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables_members that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersFindFirstOrThrowArgs} args - Arguments to find a Tables_members
+     * @example
+     * // Get one Tables_members
+     * const tables_members = await prisma.tables_members.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tables_membersFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables_members that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables_members
+     * const tables_members = await prisma.tables_members.findMany()
+     * 
+     * // Get first 10 Tables_members
+     * const tables_members = await prisma.tables_members.findMany({ take: 10 })
+     * 
+     * // Only select the `tables_members_id`
+     * const tables_membersWithTables_members_idOnly = await prisma.tables_members.findMany({ select: { tables_members_id: true } })
+     * 
+    **/
+    findMany<T extends tables_membersFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables_members.
+     * @param {tables_membersCreateArgs} args - Arguments to create a Tables_members.
+     * @example
+     * // Create one Tables_members
+     * const Tables_members = await prisma.tables_members.create({
+     *   data: {
+     *     // ... data to create a Tables_members
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tables_membersCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersCreateArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables_members.
+     *     @param {tables_membersCreateManyArgs} args - Arguments to create many Tables_members.
+     *     @example
+     *     // Create many Tables_members
+     *     const tables_members = await prisma.tables_members.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tables_membersCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables_members.
+     * @param {tables_membersDeleteArgs} args - Arguments to delete one Tables_members.
+     * @example
+     * // Delete one Tables_members
+     * const Tables_members = await prisma.tables_members.delete({
+     *   where: {
+     *     // ... filter to delete one Tables_members
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tables_membersDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersDeleteArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables_members.
+     * @param {tables_membersUpdateArgs} args - Arguments to update one Tables_members.
+     * @example
+     * // Update one Tables_members
+     * const tables_members = await prisma.tables_members.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tables_membersUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersUpdateArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables_members.
+     * @param {tables_membersDeleteManyArgs} args - Arguments to filter Tables_members to delete.
+     * @example
+     * // Delete a few Tables_members
+     * const { count } = await prisma.tables_members.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tables_membersDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_membersDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables_members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables_members
+     * const tables_members = await prisma.tables_members.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tables_membersUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables_members.
+     * @param {tables_membersUpsertArgs} args - Arguments to update or create a Tables_members.
+     * @example
+     * // Update or create a Tables_members
+     * const tables_members = await prisma.tables_members.upsert({
+     *   create: {
+     *     // ... data to create a Tables_members
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables_members we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tables_membersUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_membersUpsertArgs<ExtArgs>>
+    ): Prisma__tables_membersClient<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables_members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersCountArgs} args - Arguments to filter Tables_members to count.
+     * @example
+     * // Count the number of Tables_members
+     * const count = await prisma.tables_members.count({
+     *   where: {
+     *     // ... the filter for the Tables_members we want to count
+     *   }
+     * })
+    **/
+    count<T extends tables_membersCountArgs>(
+      args?: Subset<T, tables_membersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tables_membersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables_members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tables_membersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tables_membersAggregateArgs>(args: Subset<T, Tables_membersAggregateArgs>): Prisma.PrismaPromise<GetTables_membersAggregateType<T>>
+
+    /**
+     * Group by Tables_members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_membersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tables_membersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tables_membersGroupByArgs['orderBy'] }
+        : { orderBy?: tables_membersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tables_membersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTables_membersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables_members model
+   */
+  readonly fields: tables_membersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables_members.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tables_membersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    tables<T extends tablesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, tablesDefaultArgs<ExtArgs>>): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables_members model
+   */ 
+  interface tables_membersFieldRefs {
+    readonly tables_members_id: FieldRef<"tables_members", 'String'>
+    readonly table_id: FieldRef<"tables_members", 'String'>
+    readonly member_id: FieldRef<"tables_members", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables_members findUnique
+   */
+  export type tables_membersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_members to fetch.
+     */
+    where: tables_membersWhereUniqueInput
+  }
+
+
+  /**
+   * tables_members findUniqueOrThrow
+   */
+  export type tables_membersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_members to fetch.
+     */
+    where: tables_membersWhereUniqueInput
+  }
+
+
+  /**
+   * tables_members findFirst
+   */
+  export type tables_membersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_members to fetch.
+     */
+    where?: tables_membersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_members to fetch.
+     */
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_members.
+     */
+    cursor?: tables_membersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_members.
+     */
+    distinct?: Tables_membersScalarFieldEnum | Tables_membersScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_members findFirstOrThrow
+   */
+  export type tables_membersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_members to fetch.
+     */
+    where?: tables_membersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_members to fetch.
+     */
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_members.
+     */
+    cursor?: tables_membersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_members.
+     */
+    distinct?: Tables_membersScalarFieldEnum | Tables_membersScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_members findMany
+   */
+  export type tables_membersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_members to fetch.
+     */
+    where?: tables_membersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_members to fetch.
+     */
+    orderBy?: tables_membersOrderByWithRelationInput | tables_membersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables_members.
+     */
+    cursor?: tables_membersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_members.
+     */
+    skip?: number
+    distinct?: Tables_membersScalarFieldEnum | Tables_membersScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_members create
+   */
+  export type tables_membersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tables_members.
+     */
+    data: XOR<tables_membersCreateInput, tables_membersUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables_members createMany
+   */
+  export type tables_membersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables_members.
+     */
+    data: tables_membersCreateManyInput | tables_membersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables_members update
+   */
+  export type tables_membersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tables_members.
+     */
+    data: XOR<tables_membersUpdateInput, tables_membersUncheckedUpdateInput>
+    /**
+     * Choose, which tables_members to update.
+     */
+    where: tables_membersWhereUniqueInput
+  }
+
+
+  /**
+   * tables_members updateMany
+   */
+  export type tables_membersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables_members.
+     */
+    data: XOR<tables_membersUpdateManyMutationInput, tables_membersUncheckedUpdateManyInput>
+    /**
+     * Filter which tables_members to update
+     */
+    where?: tables_membersWhereInput
+  }
+
+
+  /**
+   * tables_members upsert
+   */
+  export type tables_membersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tables_members to update in case it exists.
+     */
+    where: tables_membersWhereUniqueInput
+    /**
+     * In case the tables_members found by the `where` argument doesn't exist, create a new tables_members with this data.
+     */
+    create: XOR<tables_membersCreateInput, tables_membersUncheckedCreateInput>
+    /**
+     * In case the tables_members was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tables_membersUpdateInput, tables_membersUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables_members delete
+   */
+  export type tables_membersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+    /**
+     * Filter which tables_members to delete.
+     */
+    where: tables_membersWhereUniqueInput
+  }
+
+
+  /**
+   * tables_members deleteMany
+   */
+  export type tables_membersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_members to delete
+     */
+    where?: tables_membersWhereInput
+  }
+
+
+  /**
+   * tables_members without action
+   */
+  export type tables_membersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_members
+     */
+    select?: tables_membersSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_membersInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model tables_messages_logs
+   */
+
+  export type AggregateTables_messages_logs = {
+    _count: Tables_messages_logsCountAggregateOutputType | null
+    _min: Tables_messages_logsMinAggregateOutputType | null
+    _max: Tables_messages_logsMaxAggregateOutputType | null
+  }
+
+  export type Tables_messages_logsMinAggregateOutputType = {
+    tables_messages_logs_id: string | null
+    table_id: string | null
+    entity_id: string | null
+    message: string | null
+    message_date: Date | null
+  }
+
+  export type Tables_messages_logsMaxAggregateOutputType = {
+    tables_messages_logs_id: string | null
+    table_id: string | null
+    entity_id: string | null
+    message: string | null
+    message_date: Date | null
+  }
+
+  export type Tables_messages_logsCountAggregateOutputType = {
+    tables_messages_logs_id: number
+    table_id: number
+    entity_id: number
+    message: number
+    message_date: number
+    _all: number
+  }
+
+
+  export type Tables_messages_logsMinAggregateInputType = {
+    tables_messages_logs_id?: true
+    table_id?: true
+    entity_id?: true
+    message?: true
+    message_date?: true
+  }
+
+  export type Tables_messages_logsMaxAggregateInputType = {
+    tables_messages_logs_id?: true
+    table_id?: true
+    entity_id?: true
+    message?: true
+    message_date?: true
+  }
+
+  export type Tables_messages_logsCountAggregateInputType = {
+    tables_messages_logs_id?: true
+    table_id?: true
+    entity_id?: true
+    message?: true
+    message_date?: true
+    _all?: true
+  }
+
+  export type Tables_messages_logsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_messages_logs to aggregate.
+     */
+    where?: tables_messages_logsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_messages_logs to fetch.
+     */
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tables_messages_logsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_messages_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_messages_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables_messages_logs
+    **/
+    _count?: true | Tables_messages_logsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tables_messages_logsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tables_messages_logsMaxAggregateInputType
+  }
+
+  export type GetTables_messages_logsAggregateType<T extends Tables_messages_logsAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables_messages_logs]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables_messages_logs[P]>
+      : GetScalarType<T[P], AggregateTables_messages_logs[P]>
+  }
+
+
+
+
+  export type tables_messages_logsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_messages_logsWhereInput
+    orderBy?: tables_messages_logsOrderByWithAggregationInput | tables_messages_logsOrderByWithAggregationInput[]
+    by: Tables_messages_logsScalarFieldEnum[] | Tables_messages_logsScalarFieldEnum
+    having?: tables_messages_logsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tables_messages_logsCountAggregateInputType | true
+    _min?: Tables_messages_logsMinAggregateInputType
+    _max?: Tables_messages_logsMaxAggregateInputType
+  }
+
+  export type Tables_messages_logsGroupByOutputType = {
+    tables_messages_logs_id: string
+    table_id: string
+    entity_id: string
+    message: string
+    message_date: Date
+    _count: Tables_messages_logsCountAggregateOutputType | null
+    _min: Tables_messages_logsMinAggregateOutputType | null
+    _max: Tables_messages_logsMaxAggregateOutputType | null
+  }
+
+  type GetTables_messages_logsGroupByPayload<T extends tables_messages_logsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tables_messages_logsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tables_messages_logsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tables_messages_logsGroupByOutputType[P]>
+            : GetScalarType<T[P], Tables_messages_logsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tables_messages_logsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tables_messages_logs_id?: boolean
+    table_id?: boolean
+    entity_id?: boolean
+    message?: boolean
+    message_date?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tables_messages_logs"]>
+
+  export type tables_messages_logsSelectScalar = {
+    tables_messages_logs_id?: boolean
+    table_id?: boolean
+    entity_id?: boolean
+    message?: boolean
+    message_date?: boolean
+  }
+
+  export type tables_messages_logsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tables_messages_logsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables_messages_logs"
+    objects: {
+      entities: Prisma.$entitiesPayload<ExtArgs>
+      tables: Prisma.$tablesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tables_messages_logs_id: string
+      table_id: string
+      entity_id: string
+      message: string
+      message_date: Date
+    }, ExtArgs["result"]["tables_messages_logs"]>
+    composites: {}
+  }
+
+
+  type tables_messages_logsGetPayload<S extends boolean | null | undefined | tables_messages_logsDefaultArgs> = $Result.GetResult<Prisma.$tables_messages_logsPayload, S>
+
+  type tables_messages_logsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tables_messages_logsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tables_messages_logsCountAggregateInputType | true
+    }
+
+  export interface tables_messages_logsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables_messages_logs'], meta: { name: 'tables_messages_logs' } }
+    /**
+     * Find zero or one Tables_messages_logs that matches the filter.
+     * @param {tables_messages_logsFindUniqueArgs} args - Arguments to find a Tables_messages_logs
+     * @example
+     * // Get one Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tables_messages_logsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsFindUniqueArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables_messages_logs that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tables_messages_logsFindUniqueOrThrowArgs} args - Arguments to find a Tables_messages_logs
+     * @example
+     * // Get one Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tables_messages_logsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables_messages_logs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsFindFirstArgs} args - Arguments to find a Tables_messages_logs
+     * @example
+     * // Get one Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tables_messages_logsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsFindFirstArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables_messages_logs that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsFindFirstOrThrowArgs} args - Arguments to find a Tables_messages_logs
+     * @example
+     * // Get one Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tables_messages_logsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables_messages_logs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findMany()
+     * 
+     * // Get first 10 Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.findMany({ take: 10 })
+     * 
+     * // Only select the `tables_messages_logs_id`
+     * const tables_messages_logsWithTables_messages_logs_idOnly = await prisma.tables_messages_logs.findMany({ select: { tables_messages_logs_id: true } })
+     * 
+    **/
+    findMany<T extends tables_messages_logsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables_messages_logs.
+     * @param {tables_messages_logsCreateArgs} args - Arguments to create a Tables_messages_logs.
+     * @example
+     * // Create one Tables_messages_logs
+     * const Tables_messages_logs = await prisma.tables_messages_logs.create({
+     *   data: {
+     *     // ... data to create a Tables_messages_logs
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tables_messages_logsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsCreateArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables_messages_logs.
+     *     @param {tables_messages_logsCreateManyArgs} args - Arguments to create many Tables_messages_logs.
+     *     @example
+     *     // Create many Tables_messages_logs
+     *     const tables_messages_logs = await prisma.tables_messages_logs.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tables_messages_logsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables_messages_logs.
+     * @param {tables_messages_logsDeleteArgs} args - Arguments to delete one Tables_messages_logs.
+     * @example
+     * // Delete one Tables_messages_logs
+     * const Tables_messages_logs = await prisma.tables_messages_logs.delete({
+     *   where: {
+     *     // ... filter to delete one Tables_messages_logs
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tables_messages_logsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsDeleteArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables_messages_logs.
+     * @param {tables_messages_logsUpdateArgs} args - Arguments to update one Tables_messages_logs.
+     * @example
+     * // Update one Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tables_messages_logsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsUpdateArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables_messages_logs.
+     * @param {tables_messages_logsDeleteManyArgs} args - Arguments to filter Tables_messages_logs to delete.
+     * @example
+     * // Delete a few Tables_messages_logs
+     * const { count } = await prisma.tables_messages_logs.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tables_messages_logsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_messages_logsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables_messages_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tables_messages_logsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables_messages_logs.
+     * @param {tables_messages_logsUpsertArgs} args - Arguments to update or create a Tables_messages_logs.
+     * @example
+     * // Update or create a Tables_messages_logs
+     * const tables_messages_logs = await prisma.tables_messages_logs.upsert({
+     *   create: {
+     *     // ... data to create a Tables_messages_logs
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables_messages_logs we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tables_messages_logsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_messages_logsUpsertArgs<ExtArgs>>
+    ): Prisma__tables_messages_logsClient<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables_messages_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsCountArgs} args - Arguments to filter Tables_messages_logs to count.
+     * @example
+     * // Count the number of Tables_messages_logs
+     * const count = await prisma.tables_messages_logs.count({
+     *   where: {
+     *     // ... the filter for the Tables_messages_logs we want to count
+     *   }
+     * })
+    **/
+    count<T extends tables_messages_logsCountArgs>(
+      args?: Subset<T, tables_messages_logsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tables_messages_logsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables_messages_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tables_messages_logsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tables_messages_logsAggregateArgs>(args: Subset<T, Tables_messages_logsAggregateArgs>): Prisma.PrismaPromise<GetTables_messages_logsAggregateType<T>>
+
+    /**
+     * Group by Tables_messages_logs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_messages_logsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tables_messages_logsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tables_messages_logsGroupByArgs['orderBy'] }
+        : { orderBy?: tables_messages_logsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tables_messages_logsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTables_messages_logsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables_messages_logs model
+   */
+  readonly fields: tables_messages_logsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables_messages_logs.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tables_messages_logsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    tables<T extends tablesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, tablesDefaultArgs<ExtArgs>>): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables_messages_logs model
+   */ 
+  interface tables_messages_logsFieldRefs {
+    readonly tables_messages_logs_id: FieldRef<"tables_messages_logs", 'String'>
+    readonly table_id: FieldRef<"tables_messages_logs", 'String'>
+    readonly entity_id: FieldRef<"tables_messages_logs", 'String'>
+    readonly message: FieldRef<"tables_messages_logs", 'String'>
+    readonly message_date: FieldRef<"tables_messages_logs", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables_messages_logs findUnique
+   */
+  export type tables_messages_logsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_messages_logs to fetch.
+     */
+    where: tables_messages_logsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_messages_logs findUniqueOrThrow
+   */
+  export type tables_messages_logsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_messages_logs to fetch.
+     */
+    where: tables_messages_logsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_messages_logs findFirst
+   */
+  export type tables_messages_logsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_messages_logs to fetch.
+     */
+    where?: tables_messages_logsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_messages_logs to fetch.
+     */
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_messages_logs.
+     */
+    cursor?: tables_messages_logsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_messages_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_messages_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_messages_logs.
+     */
+    distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_messages_logs findFirstOrThrow
+   */
+  export type tables_messages_logsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_messages_logs to fetch.
+     */
+    where?: tables_messages_logsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_messages_logs to fetch.
+     */
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_messages_logs.
+     */
+    cursor?: tables_messages_logsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_messages_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_messages_logs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_messages_logs.
+     */
+    distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_messages_logs findMany
+   */
+  export type tables_messages_logsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_messages_logs to fetch.
+     */
+    where?: tables_messages_logsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_messages_logs to fetch.
+     */
+    orderBy?: tables_messages_logsOrderByWithRelationInput | tables_messages_logsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables_messages_logs.
+     */
+    cursor?: tables_messages_logsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_messages_logs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_messages_logs.
+     */
+    skip?: number
+    distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_messages_logs create
+   */
+  export type tables_messages_logsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tables_messages_logs.
+     */
+    data: XOR<tables_messages_logsCreateInput, tables_messages_logsUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables_messages_logs createMany
+   */
+  export type tables_messages_logsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables_messages_logs.
+     */
+    data: tables_messages_logsCreateManyInput | tables_messages_logsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables_messages_logs update
+   */
+  export type tables_messages_logsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tables_messages_logs.
+     */
+    data: XOR<tables_messages_logsUpdateInput, tables_messages_logsUncheckedUpdateInput>
+    /**
+     * Choose, which tables_messages_logs to update.
+     */
+    where: tables_messages_logsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_messages_logs updateMany
+   */
+  export type tables_messages_logsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables_messages_logs.
+     */
+    data: XOR<tables_messages_logsUpdateManyMutationInput, tables_messages_logsUncheckedUpdateManyInput>
+    /**
+     * Filter which tables_messages_logs to update
+     */
+    where?: tables_messages_logsWhereInput
+  }
+
+
+  /**
+   * tables_messages_logs upsert
+   */
+  export type tables_messages_logsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tables_messages_logs to update in case it exists.
+     */
+    where: tables_messages_logsWhereUniqueInput
+    /**
+     * In case the tables_messages_logs found by the `where` argument doesn't exist, create a new tables_messages_logs with this data.
+     */
+    create: XOR<tables_messages_logsCreateInput, tables_messages_logsUncheckedCreateInput>
+    /**
+     * In case the tables_messages_logs was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tables_messages_logsUpdateInput, tables_messages_logsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables_messages_logs delete
+   */
+  export type tables_messages_logsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+    /**
+     * Filter which tables_messages_logs to delete.
+     */
+    where: tables_messages_logsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_messages_logs deleteMany
+   */
+  export type tables_messages_logsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_messages_logs to delete
+     */
+    where?: tables_messages_logsWhereInput
+  }
+
+
+  /**
+   * tables_messages_logs without action
+   */
+  export type tables_messages_logsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_messages_logs
+     */
+    select?: tables_messages_logsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_messages_logsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model tables_pictures
+   */
+
+  export type AggregateTables_pictures = {
+    _count: Tables_picturesCountAggregateOutputType | null
+    _min: Tables_picturesMinAggregateOutputType | null
+    _max: Tables_picturesMaxAggregateOutputType | null
+  }
+
+  export type Tables_picturesMinAggregateOutputType = {
+    tables_pictures_id: string | null
+    table_picture_data: Buffer | null
+    table_picture_filename: string | null
+  }
+
+  export type Tables_picturesMaxAggregateOutputType = {
+    tables_pictures_id: string | null
+    table_picture_data: Buffer | null
+    table_picture_filename: string | null
+  }
+
+  export type Tables_picturesCountAggregateOutputType = {
+    tables_pictures_id: number
+    table_picture_data: number
+    table_picture_filename: number
+    _all: number
+  }
+
+
+  export type Tables_picturesMinAggregateInputType = {
+    tables_pictures_id?: true
+    table_picture_data?: true
+    table_picture_filename?: true
+  }
+
+  export type Tables_picturesMaxAggregateInputType = {
+    tables_pictures_id?: true
+    table_picture_data?: true
+    table_picture_filename?: true
+  }
+
+  export type Tables_picturesCountAggregateInputType = {
+    tables_pictures_id?: true
+    table_picture_data?: true
+    table_picture_filename?: true
+    _all?: true
+  }
+
+  export type Tables_picturesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_pictures to aggregate.
+     */
+    where?: tables_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_pictures to fetch.
+     */
+    orderBy?: tables_picturesOrderByWithRelationInput | tables_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tables_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables_pictures
+    **/
+    _count?: true | Tables_picturesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tables_picturesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tables_picturesMaxAggregateInputType
+  }
+
+  export type GetTables_picturesAggregateType<T extends Tables_picturesAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables_pictures]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables_pictures[P]>
+      : GetScalarType<T[P], AggregateTables_pictures[P]>
+  }
+
+
+
+
+  export type tables_picturesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_picturesWhereInput
+    orderBy?: tables_picturesOrderByWithAggregationInput | tables_picturesOrderByWithAggregationInput[]
+    by: Tables_picturesScalarFieldEnum[] | Tables_picturesScalarFieldEnum
+    having?: tables_picturesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tables_picturesCountAggregateInputType | true
+    _min?: Tables_picturesMinAggregateInputType
+    _max?: Tables_picturesMaxAggregateInputType
+  }
+
+  export type Tables_picturesGroupByOutputType = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+    _count: Tables_picturesCountAggregateOutputType | null
+    _min: Tables_picturesMinAggregateOutputType | null
+    _max: Tables_picturesMaxAggregateOutputType | null
+  }
+
+  type GetTables_picturesGroupByPayload<T extends tables_picturesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tables_picturesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tables_picturesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tables_picturesGroupByOutputType[P]>
+            : GetScalarType<T[P], Tables_picturesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tables_picturesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tables_pictures_id?: boolean
+    table_picture_data?: boolean
+    table_picture_filename?: boolean
+    tables?: boolean | tables_pictures$tablesArgs<ExtArgs>
+    _count?: boolean | Tables_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tables_pictures"]>
+
+  export type tables_picturesSelectScalar = {
+    tables_pictures_id?: boolean
+    table_picture_data?: boolean
+    table_picture_filename?: boolean
+  }
+
+  export type tables_picturesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables?: boolean | tables_pictures$tablesArgs<ExtArgs>
+    _count?: boolean | Tables_picturesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tables_picturesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables_pictures"
+    objects: {
+      tables: Prisma.$tablesPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tables_pictures_id: string
+      table_picture_data: Buffer
+      table_picture_filename: string
+    }, ExtArgs["result"]["tables_pictures"]>
+    composites: {}
+  }
+
+
+  type tables_picturesGetPayload<S extends boolean | null | undefined | tables_picturesDefaultArgs> = $Result.GetResult<Prisma.$tables_picturesPayload, S>
+
+  type tables_picturesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tables_picturesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tables_picturesCountAggregateInputType | true
+    }
+
+  export interface tables_picturesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables_pictures'], meta: { name: 'tables_pictures' } }
+    /**
+     * Find zero or one Tables_pictures that matches the filter.
+     * @param {tables_picturesFindUniqueArgs} args - Arguments to find a Tables_pictures
+     * @example
+     * // Get one Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tables_picturesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesFindUniqueArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables_pictures that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tables_picturesFindUniqueOrThrowArgs} args - Arguments to find a Tables_pictures
+     * @example
+     * // Get one Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tables_picturesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesFindFirstArgs} args - Arguments to find a Tables_pictures
+     * @example
+     * // Get one Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tables_picturesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesFindFirstArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables_pictures that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesFindFirstOrThrowArgs} args - Arguments to find a Tables_pictures
+     * @example
+     * // Get one Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tables_picturesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables_pictures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findMany()
+     * 
+     * // Get first 10 Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.findMany({ take: 10 })
+     * 
+     * // Only select the `tables_pictures_id`
+     * const tables_picturesWithTables_pictures_idOnly = await prisma.tables_pictures.findMany({ select: { tables_pictures_id: true } })
+     * 
+    **/
+    findMany<T extends tables_picturesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables_pictures.
+     * @param {tables_picturesCreateArgs} args - Arguments to create a Tables_pictures.
+     * @example
+     * // Create one Tables_pictures
+     * const Tables_pictures = await prisma.tables_pictures.create({
+     *   data: {
+     *     // ... data to create a Tables_pictures
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tables_picturesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesCreateArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables_pictures.
+     *     @param {tables_picturesCreateManyArgs} args - Arguments to create many Tables_pictures.
+     *     @example
+     *     // Create many Tables_pictures
+     *     const tables_pictures = await prisma.tables_pictures.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tables_picturesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables_pictures.
+     * @param {tables_picturesDeleteArgs} args - Arguments to delete one Tables_pictures.
+     * @example
+     * // Delete one Tables_pictures
+     * const Tables_pictures = await prisma.tables_pictures.delete({
+     *   where: {
+     *     // ... filter to delete one Tables_pictures
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tables_picturesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesDeleteArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables_pictures.
+     * @param {tables_picturesUpdateArgs} args - Arguments to update one Tables_pictures.
+     * @example
+     * // Update one Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tables_picturesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesUpdateArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables_pictures.
+     * @param {tables_picturesDeleteManyArgs} args - Arguments to filter Tables_pictures to delete.
+     * @example
+     * // Delete a few Tables_pictures
+     * const { count } = await prisma.tables_pictures.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tables_picturesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_picturesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tables_picturesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables_pictures.
+     * @param {tables_picturesUpsertArgs} args - Arguments to update or create a Tables_pictures.
+     * @example
+     * // Update or create a Tables_pictures
+     * const tables_pictures = await prisma.tables_pictures.upsert({
+     *   create: {
+     *     // ... data to create a Tables_pictures
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables_pictures we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tables_picturesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_picturesUpsertArgs<ExtArgs>>
+    ): Prisma__tables_picturesClient<$Result.GetResult<Prisma.$tables_picturesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesCountArgs} args - Arguments to filter Tables_pictures to count.
+     * @example
+     * // Count the number of Tables_pictures
+     * const count = await prisma.tables_pictures.count({
+     *   where: {
+     *     // ... the filter for the Tables_pictures we want to count
+     *   }
+     * })
+    **/
+    count<T extends tables_picturesCountArgs>(
+      args?: Subset<T, tables_picturesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tables_picturesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tables_picturesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tables_picturesAggregateArgs>(args: Subset<T, Tables_picturesAggregateArgs>): Prisma.PrismaPromise<GetTables_picturesAggregateType<T>>
+
+    /**
+     * Group by Tables_pictures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_picturesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tables_picturesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tables_picturesGroupByArgs['orderBy'] }
+        : { orderBy?: tables_picturesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tables_picturesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTables_picturesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables_pictures model
+   */
+  readonly fields: tables_picturesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables_pictures.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tables_picturesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    tables<T extends tables_pictures$tablesArgs<ExtArgs> = {}>(args?: Subset<T, tables_pictures$tablesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables_pictures model
+   */ 
+  interface tables_picturesFieldRefs {
+    readonly tables_pictures_id: FieldRef<"tables_pictures", 'String'>
+    readonly table_picture_data: FieldRef<"tables_pictures", 'Bytes'>
+    readonly table_picture_filename: FieldRef<"tables_pictures", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables_pictures findUnique
+   */
+  export type tables_picturesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_pictures to fetch.
+     */
+    where: tables_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * tables_pictures findUniqueOrThrow
+   */
+  export type tables_picturesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_pictures to fetch.
+     */
+    where: tables_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * tables_pictures findFirst
+   */
+  export type tables_picturesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_pictures to fetch.
+     */
+    where?: tables_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_pictures to fetch.
+     */
+    orderBy?: tables_picturesOrderByWithRelationInput | tables_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_pictures.
+     */
+    cursor?: tables_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_pictures.
+     */
+    distinct?: Tables_picturesScalarFieldEnum | Tables_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_pictures findFirstOrThrow
+   */
+  export type tables_picturesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_pictures to fetch.
+     */
+    where?: tables_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_pictures to fetch.
+     */
+    orderBy?: tables_picturesOrderByWithRelationInput | tables_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_pictures.
+     */
+    cursor?: tables_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_pictures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_pictures.
+     */
+    distinct?: Tables_picturesScalarFieldEnum | Tables_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_pictures findMany
+   */
+  export type tables_picturesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_pictures to fetch.
+     */
+    where?: tables_picturesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_pictures to fetch.
+     */
+    orderBy?: tables_picturesOrderByWithRelationInput | tables_picturesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables_pictures.
+     */
+    cursor?: tables_picturesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_pictures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_pictures.
+     */
+    skip?: number
+    distinct?: Tables_picturesScalarFieldEnum | Tables_picturesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_pictures create
+   */
+  export type tables_picturesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tables_pictures.
+     */
+    data: XOR<tables_picturesCreateInput, tables_picturesUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables_pictures createMany
+   */
+  export type tables_picturesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables_pictures.
+     */
+    data: tables_picturesCreateManyInput | tables_picturesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables_pictures update
+   */
+  export type tables_picturesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tables_pictures.
+     */
+    data: XOR<tables_picturesUpdateInput, tables_picturesUncheckedUpdateInput>
+    /**
+     * Choose, which tables_pictures to update.
+     */
+    where: tables_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * tables_pictures updateMany
+   */
+  export type tables_picturesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables_pictures.
+     */
+    data: XOR<tables_picturesUpdateManyMutationInput, tables_picturesUncheckedUpdateManyInput>
+    /**
+     * Filter which tables_pictures to update
+     */
+    where?: tables_picturesWhereInput
+  }
+
+
+  /**
+   * tables_pictures upsert
+   */
+  export type tables_picturesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tables_pictures to update in case it exists.
+     */
+    where: tables_picturesWhereUniqueInput
+    /**
+     * In case the tables_pictures found by the `where` argument doesn't exist, create a new tables_pictures with this data.
+     */
+    create: XOR<tables_picturesCreateInput, tables_picturesUncheckedCreateInput>
+    /**
+     * In case the tables_pictures was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tables_picturesUpdateInput, tables_picturesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables_pictures delete
+   */
+  export type tables_picturesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+    /**
+     * Filter which tables_pictures to delete.
+     */
+    where: tables_picturesWhereUniqueInput
+  }
+
+
+  /**
+   * tables_pictures deleteMany
+   */
+  export type tables_picturesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_pictures to delete
+     */
+    where?: tables_picturesWhereInput
+  }
+
+
+  /**
+   * tables_pictures.tables
+   */
+  export type tables_pictures$tablesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables
+     */
+    select?: tablesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tablesInclude<ExtArgs> | null
+    where?: tablesWhereInput
+    orderBy?: tablesOrderByWithRelationInput | tablesOrderByWithRelationInput[]
+    cursor?: tablesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TablesScalarFieldEnum | TablesScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_pictures without action
+   */
+  export type tables_picturesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_pictures
+     */
+    select?: tables_picturesSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_picturesInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model tables_tabletops
+   */
+
+  export type AggregateTables_tabletops = {
+    _count: Tables_tabletopsCountAggregateOutputType | null
+    _avg: Tables_tabletopsAvgAggregateOutputType | null
+    _sum: Tables_tabletopsSumAggregateOutputType | null
+    _min: Tables_tabletopsMinAggregateOutputType | null
+    _max: Tables_tabletopsMaxAggregateOutputType | null
+  }
+
+  export type Tables_tabletopsAvgAggregateOutputType = {
+    content_x_position: number | null
+    content_y_position: number | null
+    content_rotation: number | null
+  }
+
+  export type Tables_tabletopsSumAggregateOutputType = {
+    content_x_position: number | null
+    content_y_position: number | null
+    content_rotation: number | null
+  }
+
+  export type Tables_tabletopsMinAggregateOutputType = {
+    tables_tabletops_id: string | null
+    content_data: Buffer | null
+    content_filename: string | null
+    content_date_posted: Date | null
+    content_x_position: number | null
+    content_y_position: number | null
+    content_rotation: number | null
+  }
+
+  export type Tables_tabletopsMaxAggregateOutputType = {
+    tables_tabletops_id: string | null
+    content_data: Buffer | null
+    content_filename: string | null
+    content_date_posted: Date | null
+    content_x_position: number | null
+    content_y_position: number | null
+    content_rotation: number | null
+  }
+
+  export type Tables_tabletopsCountAggregateOutputType = {
+    tables_tabletops_id: number
+    content_data: number
+    content_filename: number
+    content_date_posted: number
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    _all: number
+  }
+
+
+  export type Tables_tabletopsAvgAggregateInputType = {
+    content_x_position?: true
+    content_y_position?: true
+    content_rotation?: true
+  }
+
+  export type Tables_tabletopsSumAggregateInputType = {
+    content_x_position?: true
+    content_y_position?: true
+    content_rotation?: true
+  }
+
+  export type Tables_tabletopsMinAggregateInputType = {
+    tables_tabletops_id?: true
+    content_data?: true
+    content_filename?: true
+    content_date_posted?: true
+    content_x_position?: true
+    content_y_position?: true
+    content_rotation?: true
+  }
+
+  export type Tables_tabletopsMaxAggregateInputType = {
+    tables_tabletops_id?: true
+    content_data?: true
+    content_filename?: true
+    content_date_posted?: true
+    content_x_position?: true
+    content_y_position?: true
+    content_rotation?: true
+  }
+
+  export type Tables_tabletopsCountAggregateInputType = {
+    tables_tabletops_id?: true
+    content_data?: true
+    content_filename?: true
+    content_date_posted?: true
+    content_x_position?: true
+    content_y_position?: true
+    content_rotation?: true
+    _all?: true
+  }
+
+  export type Tables_tabletopsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_tabletops to aggregate.
+     */
+    where?: tables_tabletopsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops to fetch.
+     */
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tables_tabletopsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables_tabletops
+    **/
+    _count?: true | Tables_tabletopsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Tables_tabletopsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Tables_tabletopsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tables_tabletopsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tables_tabletopsMaxAggregateInputType
+  }
+
+  export type GetTables_tabletopsAggregateType<T extends Tables_tabletopsAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables_tabletops]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables_tabletops[P]>
+      : GetScalarType<T[P], AggregateTables_tabletops[P]>
+  }
+
+
+
+
+  export type tables_tabletopsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_tabletopsWhereInput
+    orderBy?: tables_tabletopsOrderByWithAggregationInput | tables_tabletopsOrderByWithAggregationInput[]
+    by: Tables_tabletopsScalarFieldEnum[] | Tables_tabletopsScalarFieldEnum
+    having?: tables_tabletopsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tables_tabletopsCountAggregateInputType | true
+    _avg?: Tables_tabletopsAvgAggregateInputType
+    _sum?: Tables_tabletopsSumAggregateInputType
+    _min?: Tables_tabletopsMinAggregateInputType
+    _max?: Tables_tabletopsMaxAggregateInputType
+  }
+
+  export type Tables_tabletopsGroupByOutputType = {
+    tables_tabletops_id: string
+    content_data: Buffer
+    content_filename: string
+    content_date_posted: Date
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    _count: Tables_tabletopsCountAggregateOutputType | null
+    _avg: Tables_tabletopsAvgAggregateOutputType | null
+    _sum: Tables_tabletopsSumAggregateOutputType | null
+    _min: Tables_tabletopsMinAggregateOutputType | null
+    _max: Tables_tabletopsMaxAggregateOutputType | null
+  }
+
+  type GetTables_tabletopsGroupByPayload<T extends tables_tabletopsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tables_tabletopsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tables_tabletopsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tables_tabletopsGroupByOutputType[P]>
+            : GetScalarType<T[P], Tables_tabletopsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tables_tabletopsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tables_tabletops_id?: boolean
+    content_data?: boolean
+    content_filename?: boolean
+    content_date_posted?: boolean
+    content_x_position?: boolean
+    content_y_position?: boolean
+    content_rotation?: boolean
+  }, ExtArgs["result"]["tables_tabletops"]>
+
+  export type tables_tabletopsSelectScalar = {
+    tables_tabletops_id?: boolean
+    content_data?: boolean
+    content_filename?: boolean
+    content_date_posted?: boolean
+    content_x_position?: boolean
+    content_y_position?: boolean
+    content_rotation?: boolean
+  }
+
+
+  export type $tables_tabletopsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables_tabletops"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      tables_tabletops_id: string
+      content_data: Buffer
+      content_filename: string
+      content_date_posted: Date
+      content_x_position: number
+      content_y_position: number
+      content_rotation: number
+    }, ExtArgs["result"]["tables_tabletops"]>
+    composites: {}
+  }
+
+
+  type tables_tabletopsGetPayload<S extends boolean | null | undefined | tables_tabletopsDefaultArgs> = $Result.GetResult<Prisma.$tables_tabletopsPayload, S>
+
+  type tables_tabletopsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tables_tabletopsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tables_tabletopsCountAggregateInputType | true
+    }
+
+  export interface tables_tabletopsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables_tabletops'], meta: { name: 'tables_tabletops' } }
+    /**
+     * Find zero or one Tables_tabletops that matches the filter.
+     * @param {tables_tabletopsFindUniqueArgs} args - Arguments to find a Tables_tabletops
+     * @example
+     * // Get one Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tables_tabletopsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsFindUniqueArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables_tabletops that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tables_tabletopsFindUniqueOrThrowArgs} args - Arguments to find a Tables_tabletops
+     * @example
+     * // Get one Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tables_tabletopsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables_tabletops that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsFindFirstArgs} args - Arguments to find a Tables_tabletops
+     * @example
+     * // Get one Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tables_tabletopsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsFindFirstArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables_tabletops that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsFindFirstOrThrowArgs} args - Arguments to find a Tables_tabletops
+     * @example
+     * // Get one Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tables_tabletopsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables_tabletops that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findMany()
+     * 
+     * // Get first 10 Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.findMany({ take: 10 })
+     * 
+     * // Only select the `tables_tabletops_id`
+     * const tables_tabletopsWithTables_tabletops_idOnly = await prisma.tables_tabletops.findMany({ select: { tables_tabletops_id: true } })
+     * 
+    **/
+    findMany<T extends tables_tabletopsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables_tabletops.
+     * @param {tables_tabletopsCreateArgs} args - Arguments to create a Tables_tabletops.
+     * @example
+     * // Create one Tables_tabletops
+     * const Tables_tabletops = await prisma.tables_tabletops.create({
+     *   data: {
+     *     // ... data to create a Tables_tabletops
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tables_tabletopsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsCreateArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables_tabletops.
+     *     @param {tables_tabletopsCreateManyArgs} args - Arguments to create many Tables_tabletops.
+     *     @example
+     *     // Create many Tables_tabletops
+     *     const tables_tabletops = await prisma.tables_tabletops.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tables_tabletopsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables_tabletops.
+     * @param {tables_tabletopsDeleteArgs} args - Arguments to delete one Tables_tabletops.
+     * @example
+     * // Delete one Tables_tabletops
+     * const Tables_tabletops = await prisma.tables_tabletops.delete({
+     *   where: {
+     *     // ... filter to delete one Tables_tabletops
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tables_tabletopsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsDeleteArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables_tabletops.
+     * @param {tables_tabletopsUpdateArgs} args - Arguments to update one Tables_tabletops.
+     * @example
+     * // Update one Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tables_tabletopsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsUpdateArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables_tabletops.
+     * @param {tables_tabletopsDeleteManyArgs} args - Arguments to filter Tables_tabletops to delete.
+     * @example
+     * // Delete a few Tables_tabletops
+     * const { count } = await prisma.tables_tabletops.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tables_tabletopsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletopsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables_tabletops.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tables_tabletopsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables_tabletops.
+     * @param {tables_tabletopsUpsertArgs} args - Arguments to update or create a Tables_tabletops.
+     * @example
+     * // Update or create a Tables_tabletops
+     * const tables_tabletops = await prisma.tables_tabletops.upsert({
+     *   create: {
+     *     // ... data to create a Tables_tabletops
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables_tabletops we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tables_tabletopsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletopsUpsertArgs<ExtArgs>>
+    ): Prisma__tables_tabletopsClient<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables_tabletops.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsCountArgs} args - Arguments to filter Tables_tabletops to count.
+     * @example
+     * // Count the number of Tables_tabletops
+     * const count = await prisma.tables_tabletops.count({
+     *   where: {
+     *     // ... the filter for the Tables_tabletops we want to count
+     *   }
+     * })
+    **/
+    count<T extends tables_tabletopsCountArgs>(
+      args?: Subset<T, tables_tabletopsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tables_tabletopsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables_tabletops.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tables_tabletopsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tables_tabletopsAggregateArgs>(args: Subset<T, Tables_tabletopsAggregateArgs>): Prisma.PrismaPromise<GetTables_tabletopsAggregateType<T>>
+
+    /**
+     * Group by Tables_tabletops.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletopsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tables_tabletopsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tables_tabletopsGroupByArgs['orderBy'] }
+        : { orderBy?: tables_tabletopsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tables_tabletopsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTables_tabletopsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables_tabletops model
+   */
+  readonly fields: tables_tabletopsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables_tabletops.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tables_tabletopsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables_tabletops model
+   */ 
+  interface tables_tabletopsFieldRefs {
+    readonly tables_tabletops_id: FieldRef<"tables_tabletops", 'String'>
+    readonly content_data: FieldRef<"tables_tabletops", 'Bytes'>
+    readonly content_filename: FieldRef<"tables_tabletops", 'String'>
+    readonly content_date_posted: FieldRef<"tables_tabletops", 'DateTime'>
+    readonly content_x_position: FieldRef<"tables_tabletops", 'Int'>
+    readonly content_y_position: FieldRef<"tables_tabletops", 'Int'>
+    readonly content_rotation: FieldRef<"tables_tabletops", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables_tabletops findUnique
+   */
+  export type tables_tabletopsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops to fetch.
+     */
+    where: tables_tabletopsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops findUniqueOrThrow
+   */
+  export type tables_tabletopsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops to fetch.
+     */
+    where: tables_tabletopsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops findFirst
+   */
+  export type tables_tabletopsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops to fetch.
+     */
+    where?: tables_tabletopsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops to fetch.
+     */
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_tabletops.
+     */
+    cursor?: tables_tabletopsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_tabletops.
+     */
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops findFirstOrThrow
+   */
+  export type tables_tabletopsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops to fetch.
+     */
+    where?: tables_tabletopsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops to fetch.
+     */
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_tabletops.
+     */
+    cursor?: tables_tabletopsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_tabletops.
+     */
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops findMany
+   */
+  export type tables_tabletopsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops to fetch.
+     */
+    where?: tables_tabletopsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops to fetch.
+     */
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables_tabletops.
+     */
+    cursor?: tables_tabletopsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops.
+     */
+    skip?: number
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops create
+   */
+  export type tables_tabletopsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * The data needed to create a tables_tabletops.
+     */
+    data: XOR<tables_tabletopsCreateInput, tables_tabletopsUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables_tabletops createMany
+   */
+  export type tables_tabletopsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables_tabletops.
+     */
+    data: tables_tabletopsCreateManyInput | tables_tabletopsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables_tabletops update
+   */
+  export type tables_tabletopsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * The data needed to update a tables_tabletops.
+     */
+    data: XOR<tables_tabletopsUpdateInput, tables_tabletopsUncheckedUpdateInput>
+    /**
+     * Choose, which tables_tabletops to update.
+     */
+    where: tables_tabletopsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops updateMany
+   */
+  export type tables_tabletopsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables_tabletops.
+     */
+    data: XOR<tables_tabletopsUpdateManyMutationInput, tables_tabletopsUncheckedUpdateManyInput>
+    /**
+     * Filter which tables_tabletops to update
+     */
+    where?: tables_tabletopsWhereInput
+  }
+
+
+  /**
+   * tables_tabletops upsert
+   */
+  export type tables_tabletopsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * The filter to search for the tables_tabletops to update in case it exists.
+     */
+    where: tables_tabletopsWhereUniqueInput
+    /**
+     * In case the tables_tabletops found by the `where` argument doesn't exist, create a new tables_tabletops with this data.
+     */
+    create: XOR<tables_tabletopsCreateInput, tables_tabletopsUncheckedCreateInput>
+    /**
+     * In case the tables_tabletops was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tables_tabletopsUpdateInput, tables_tabletopsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables_tabletops delete
+   */
+  export type tables_tabletopsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Filter which tables_tabletops to delete.
+     */
+    where: tables_tabletopsWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops deleteMany
+   */
+  export type tables_tabletopsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_tabletops to delete
+     */
+    where?: tables_tabletopsWhereInput
+  }
+
+
+  /**
+   * tables_tabletops without action
+   */
+  export type tables_tabletopsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model user_credentials
    */
 
@@ -32887,6 +38123,60 @@ export namespace Prisma {
   export type Sheets_thumbnailsScalarFieldEnum = (typeof Sheets_thumbnailsScalarFieldEnum)[keyof typeof Sheets_thumbnailsScalarFieldEnum]
 
 
+  export const TablesScalarFieldEnum: {
+    table_id: 'table_id',
+    table_name: 'table_name',
+    table_creation_date: 'table_creation_date',
+    last_message: 'last_message',
+    last_message_date: 'last_message_date',
+    tables_pictures_id: 'tables_pictures_id'
+  };
+
+  export type TablesScalarFieldEnum = (typeof TablesScalarFieldEnum)[keyof typeof TablesScalarFieldEnum]
+
+
+  export const Tables_membersScalarFieldEnum: {
+    tables_members_id: 'tables_members_id',
+    table_id: 'table_id',
+    member_id: 'member_id'
+  };
+
+  export type Tables_membersScalarFieldEnum = (typeof Tables_membersScalarFieldEnum)[keyof typeof Tables_membersScalarFieldEnum]
+
+
+  export const Tables_messages_logsScalarFieldEnum: {
+    tables_messages_logs_id: 'tables_messages_logs_id',
+    table_id: 'table_id',
+    entity_id: 'entity_id',
+    message: 'message',
+    message_date: 'message_date'
+  };
+
+  export type Tables_messages_logsScalarFieldEnum = (typeof Tables_messages_logsScalarFieldEnum)[keyof typeof Tables_messages_logsScalarFieldEnum]
+
+
+  export const Tables_picturesScalarFieldEnum: {
+    tables_pictures_id: 'tables_pictures_id',
+    table_picture_data: 'table_picture_data',
+    table_picture_filename: 'table_picture_filename'
+  };
+
+  export type Tables_picturesScalarFieldEnum = (typeof Tables_picturesScalarFieldEnum)[keyof typeof Tables_picturesScalarFieldEnum]
+
+
+  export const Tables_tabletopsScalarFieldEnum: {
+    tables_tabletops_id: 'tables_tabletops_id',
+    content_data: 'content_data',
+    content_filename: 'content_filename',
+    content_date_posted: 'content_date_posted',
+    content_x_position: 'content_x_position',
+    content_y_position: 'content_y_position',
+    content_rotation: 'content_rotation'
+  };
+
+  export type Tables_tabletopsScalarFieldEnum = (typeof Tables_tabletopsScalarFieldEnum)[keyof typeof Tables_tabletopsScalarFieldEnum]
+
+
   export const User_credentialsScalarFieldEnum: {
     user_id: 'user_id',
     username: 'username',
@@ -33572,6 +38862,8 @@ export namespace Prisma {
     images?: ImagesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
     sheets?: SheetsListRelationFilter
+    tables_members?: Tables_membersListRelationFilter
+    tables_messages_logs?: Tables_messages_logsListRelationFilter
     videos?: VideosListRelationFilter
   }
 
@@ -33592,6 +38884,8 @@ export namespace Prisma {
     images?: imagesOrderByRelationAggregateInput
     organizations_members?: organizations_membersOrderByRelationAggregateInput
     sheets?: sheetsOrderByRelationAggregateInput
+    tables_members?: tables_membersOrderByRelationAggregateInput
+    tables_messages_logs?: tables_messages_logsOrderByRelationAggregateInput
     videos?: videosOrderByRelationAggregateInput
   }
 
@@ -33615,6 +38909,8 @@ export namespace Prisma {
     images?: ImagesListRelationFilter
     organizations_members?: Organizations_membersListRelationFilter
     sheets?: SheetsListRelationFilter
+    tables_members?: Tables_membersListRelationFilter
+    tables_messages_logs?: Tables_messages_logsListRelationFilter
     videos?: VideosListRelationFilter
   }, "entity_id" | "entity_id" | "entity_username">
 
@@ -34514,6 +39810,287 @@ export namespace Prisma {
     sheet_thumbnail_description?: StringNullableWithAggregatesFilter<"sheets_thumbnails"> | string | null
   }
 
+  export type tablesWhereInput = {
+    AND?: tablesWhereInput | tablesWhereInput[]
+    OR?: tablesWhereInput[]
+    NOT?: tablesWhereInput | tablesWhereInput[]
+    table_id?: StringFilter<"tables"> | string
+    table_name?: StringNullableFilter<"tables"> | string | null
+    table_creation_date?: DateTimeFilter<"tables"> | Date | string
+    last_message?: StringNullableFilter<"tables"> | string | null
+    last_message_date?: DateTimeNullableFilter<"tables"> | Date | string | null
+    tables_pictures_id?: StringNullableFilter<"tables"> | string | null
+    tables_pictures?: XOR<Tables_picturesNullableRelationFilter, tables_picturesWhereInput> | null
+    tables_members?: Tables_membersListRelationFilter
+    tables_messages_logs?: Tables_messages_logsListRelationFilter
+  }
+
+  export type tablesOrderByWithRelationInput = {
+    table_id?: SortOrder
+    table_name?: SortOrderInput | SortOrder
+    table_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
+    last_message_date?: SortOrderInput | SortOrder
+    tables_pictures_id?: SortOrderInput | SortOrder
+    tables_pictures?: tables_picturesOrderByWithRelationInput
+    tables_members?: tables_membersOrderByRelationAggregateInput
+    tables_messages_logs?: tables_messages_logsOrderByRelationAggregateInput
+  }
+
+  export type tablesWhereUniqueInput = Prisma.AtLeast<{
+    table_id?: string
+    AND?: tablesWhereInput | tablesWhereInput[]
+    OR?: tablesWhereInput[]
+    NOT?: tablesWhereInput | tablesWhereInput[]
+    table_name?: StringNullableFilter<"tables"> | string | null
+    table_creation_date?: DateTimeFilter<"tables"> | Date | string
+    last_message?: StringNullableFilter<"tables"> | string | null
+    last_message_date?: DateTimeNullableFilter<"tables"> | Date | string | null
+    tables_pictures_id?: StringNullableFilter<"tables"> | string | null
+    tables_pictures?: XOR<Tables_picturesNullableRelationFilter, tables_picturesWhereInput> | null
+    tables_members?: Tables_membersListRelationFilter
+    tables_messages_logs?: Tables_messages_logsListRelationFilter
+  }, "table_id" | "table_id">
+
+  export type tablesOrderByWithAggregationInput = {
+    table_id?: SortOrder
+    table_name?: SortOrderInput | SortOrder
+    table_creation_date?: SortOrder
+    last_message?: SortOrderInput | SortOrder
+    last_message_date?: SortOrderInput | SortOrder
+    tables_pictures_id?: SortOrderInput | SortOrder
+    _count?: tablesCountOrderByAggregateInput
+    _max?: tablesMaxOrderByAggregateInput
+    _min?: tablesMinOrderByAggregateInput
+  }
+
+  export type tablesScalarWhereWithAggregatesInput = {
+    AND?: tablesScalarWhereWithAggregatesInput | tablesScalarWhereWithAggregatesInput[]
+    OR?: tablesScalarWhereWithAggregatesInput[]
+    NOT?: tablesScalarWhereWithAggregatesInput | tablesScalarWhereWithAggregatesInput[]
+    table_id?: StringWithAggregatesFilter<"tables"> | string
+    table_name?: StringNullableWithAggregatesFilter<"tables"> | string | null
+    table_creation_date?: DateTimeWithAggregatesFilter<"tables"> | Date | string
+    last_message?: StringNullableWithAggregatesFilter<"tables"> | string | null
+    last_message_date?: DateTimeNullableWithAggregatesFilter<"tables"> | Date | string | null
+    tables_pictures_id?: StringNullableWithAggregatesFilter<"tables"> | string | null
+  }
+
+  export type tables_membersWhereInput = {
+    AND?: tables_membersWhereInput | tables_membersWhereInput[]
+    OR?: tables_membersWhereInput[]
+    NOT?: tables_membersWhereInput | tables_membersWhereInput[]
+    tables_members_id?: StringFilter<"tables_members"> | string
+    table_id?: StringFilter<"tables_members"> | string
+    member_id?: StringFilter<"tables_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+  }
+
+  export type tables_membersOrderByWithRelationInput = {
+    tables_members_id?: SortOrder
+    table_id?: SortOrder
+    member_id?: SortOrder
+    entities?: entitiesOrderByWithRelationInput
+    tables?: tablesOrderByWithRelationInput
+  }
+
+  export type tables_membersWhereUniqueInput = Prisma.AtLeast<{
+    tables_members_id?: string
+    AND?: tables_membersWhereInput | tables_membersWhereInput[]
+    OR?: tables_membersWhereInput[]
+    NOT?: tables_membersWhereInput | tables_membersWhereInput[]
+    table_id?: StringFilter<"tables_members"> | string
+    member_id?: StringFilter<"tables_members"> | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+  }, "tables_members_id" | "tables_members_id">
+
+  export type tables_membersOrderByWithAggregationInput = {
+    tables_members_id?: SortOrder
+    table_id?: SortOrder
+    member_id?: SortOrder
+    _count?: tables_membersCountOrderByAggregateInput
+    _max?: tables_membersMaxOrderByAggregateInput
+    _min?: tables_membersMinOrderByAggregateInput
+  }
+
+  export type tables_membersScalarWhereWithAggregatesInput = {
+    AND?: tables_membersScalarWhereWithAggregatesInput | tables_membersScalarWhereWithAggregatesInput[]
+    OR?: tables_membersScalarWhereWithAggregatesInput[]
+    NOT?: tables_membersScalarWhereWithAggregatesInput | tables_membersScalarWhereWithAggregatesInput[]
+    tables_members_id?: StringWithAggregatesFilter<"tables_members"> | string
+    table_id?: StringWithAggregatesFilter<"tables_members"> | string
+    member_id?: StringWithAggregatesFilter<"tables_members"> | string
+  }
+
+  export type tables_messages_logsWhereInput = {
+    AND?: tables_messages_logsWhereInput | tables_messages_logsWhereInput[]
+    OR?: tables_messages_logsWhereInput[]
+    NOT?: tables_messages_logsWhereInput | tables_messages_logsWhereInput[]
+    tables_messages_logs_id?: StringFilter<"tables_messages_logs"> | string
+    table_id?: StringFilter<"tables_messages_logs"> | string
+    entity_id?: StringFilter<"tables_messages_logs"> | string
+    message?: StringFilter<"tables_messages_logs"> | string
+    message_date?: DateTimeFilter<"tables_messages_logs"> | Date | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+  }
+
+  export type tables_messages_logsOrderByWithRelationInput = {
+    tables_messages_logs_id?: SortOrder
+    table_id?: SortOrder
+    entity_id?: SortOrder
+    message?: SortOrder
+    message_date?: SortOrder
+    entities?: entitiesOrderByWithRelationInput
+    tables?: tablesOrderByWithRelationInput
+  }
+
+  export type tables_messages_logsWhereUniqueInput = Prisma.AtLeast<{
+    tables_messages_logs_id?: string
+    AND?: tables_messages_logsWhereInput | tables_messages_logsWhereInput[]
+    OR?: tables_messages_logsWhereInput[]
+    NOT?: tables_messages_logsWhereInput | tables_messages_logsWhereInput[]
+    table_id?: StringFilter<"tables_messages_logs"> | string
+    entity_id?: StringFilter<"tables_messages_logs"> | string
+    message?: StringFilter<"tables_messages_logs"> | string
+    message_date?: DateTimeFilter<"tables_messages_logs"> | Date | string
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+  }, "tables_messages_logs_id" | "tables_messages_logs_id">
+
+  export type tables_messages_logsOrderByWithAggregationInput = {
+    tables_messages_logs_id?: SortOrder
+    table_id?: SortOrder
+    entity_id?: SortOrder
+    message?: SortOrder
+    message_date?: SortOrder
+    _count?: tables_messages_logsCountOrderByAggregateInput
+    _max?: tables_messages_logsMaxOrderByAggregateInput
+    _min?: tables_messages_logsMinOrderByAggregateInput
+  }
+
+  export type tables_messages_logsScalarWhereWithAggregatesInput = {
+    AND?: tables_messages_logsScalarWhereWithAggregatesInput | tables_messages_logsScalarWhereWithAggregatesInput[]
+    OR?: tables_messages_logsScalarWhereWithAggregatesInput[]
+    NOT?: tables_messages_logsScalarWhereWithAggregatesInput | tables_messages_logsScalarWhereWithAggregatesInput[]
+    tables_messages_logs_id?: StringWithAggregatesFilter<"tables_messages_logs"> | string
+    table_id?: StringWithAggregatesFilter<"tables_messages_logs"> | string
+    entity_id?: StringWithAggregatesFilter<"tables_messages_logs"> | string
+    message?: StringWithAggregatesFilter<"tables_messages_logs"> | string
+    message_date?: DateTimeWithAggregatesFilter<"tables_messages_logs"> | Date | string
+  }
+
+  export type tables_picturesWhereInput = {
+    AND?: tables_picturesWhereInput | tables_picturesWhereInput[]
+    OR?: tables_picturesWhereInput[]
+    NOT?: tables_picturesWhereInput | tables_picturesWhereInput[]
+    tables_pictures_id?: StringFilter<"tables_pictures"> | string
+    table_picture_data?: BytesFilter<"tables_pictures"> | Buffer
+    table_picture_filename?: StringFilter<"tables_pictures"> | string
+    tables?: TablesListRelationFilter
+  }
+
+  export type tables_picturesOrderByWithRelationInput = {
+    tables_pictures_id?: SortOrder
+    table_picture_data?: SortOrder
+    table_picture_filename?: SortOrder
+    tables?: tablesOrderByRelationAggregateInput
+  }
+
+  export type tables_picturesWhereUniqueInput = Prisma.AtLeast<{
+    tables_pictures_id?: string
+    AND?: tables_picturesWhereInput | tables_picturesWhereInput[]
+    OR?: tables_picturesWhereInput[]
+    NOT?: tables_picturesWhereInput | tables_picturesWhereInput[]
+    table_picture_data?: BytesFilter<"tables_pictures"> | Buffer
+    table_picture_filename?: StringFilter<"tables_pictures"> | string
+    tables?: TablesListRelationFilter
+  }, "tables_pictures_id" | "tables_pictures_id">
+
+  export type tables_picturesOrderByWithAggregationInput = {
+    tables_pictures_id?: SortOrder
+    table_picture_data?: SortOrder
+    table_picture_filename?: SortOrder
+    _count?: tables_picturesCountOrderByAggregateInput
+    _max?: tables_picturesMaxOrderByAggregateInput
+    _min?: tables_picturesMinOrderByAggregateInput
+  }
+
+  export type tables_picturesScalarWhereWithAggregatesInput = {
+    AND?: tables_picturesScalarWhereWithAggregatesInput | tables_picturesScalarWhereWithAggregatesInput[]
+    OR?: tables_picturesScalarWhereWithAggregatesInput[]
+    NOT?: tables_picturesScalarWhereWithAggregatesInput | tables_picturesScalarWhereWithAggregatesInput[]
+    tables_pictures_id?: StringWithAggregatesFilter<"tables_pictures"> | string
+    table_picture_data?: BytesWithAggregatesFilter<"tables_pictures"> | Buffer
+    table_picture_filename?: StringWithAggregatesFilter<"tables_pictures"> | string
+  }
+
+  export type tables_tabletopsWhereInput = {
+    AND?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
+    OR?: tables_tabletopsWhereInput[]
+    NOT?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
+    tables_tabletops_id?: StringFilter<"tables_tabletops"> | string
+    content_data?: BytesFilter<"tables_tabletops"> | Buffer
+    content_filename?: StringFilter<"tables_tabletops"> | string
+    content_date_posted?: DateTimeFilter<"tables_tabletops"> | Date | string
+    content_x_position?: IntFilter<"tables_tabletops"> | number
+    content_y_position?: IntFilter<"tables_tabletops"> | number
+    content_rotation?: IntFilter<"tables_tabletops"> | number
+  }
+
+  export type tables_tabletopsOrderByWithRelationInput = {
+    tables_tabletops_id?: SortOrder
+    content_data?: SortOrder
+    content_filename?: SortOrder
+    content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+  }
+
+  export type tables_tabletopsWhereUniqueInput = Prisma.AtLeast<{
+    tables_tabletops_id?: string
+    AND?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
+    OR?: tables_tabletopsWhereInput[]
+    NOT?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
+    content_data?: BytesFilter<"tables_tabletops"> | Buffer
+    content_filename?: StringFilter<"tables_tabletops"> | string
+    content_date_posted?: DateTimeFilter<"tables_tabletops"> | Date | string
+    content_x_position?: IntFilter<"tables_tabletops"> | number
+    content_y_position?: IntFilter<"tables_tabletops"> | number
+    content_rotation?: IntFilter<"tables_tabletops"> | number
+  }, "tables_tabletops_id" | "tables_tabletops_id">
+
+  export type tables_tabletopsOrderByWithAggregationInput = {
+    tables_tabletops_id?: SortOrder
+    content_data?: SortOrder
+    content_filename?: SortOrder
+    content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+    _count?: tables_tabletopsCountOrderByAggregateInput
+    _avg?: tables_tabletopsAvgOrderByAggregateInput
+    _max?: tables_tabletopsMaxOrderByAggregateInput
+    _min?: tables_tabletopsMinOrderByAggregateInput
+    _sum?: tables_tabletopsSumOrderByAggregateInput
+  }
+
+  export type tables_tabletopsScalarWhereWithAggregatesInput = {
+    AND?: tables_tabletopsScalarWhereWithAggregatesInput | tables_tabletopsScalarWhereWithAggregatesInput[]
+    OR?: tables_tabletopsScalarWhereWithAggregatesInput[]
+    NOT?: tables_tabletopsScalarWhereWithAggregatesInput | tables_tabletopsScalarWhereWithAggregatesInput[]
+    tables_tabletops_id?: StringWithAggregatesFilter<"tables_tabletops"> | string
+    content_data?: BytesWithAggregatesFilter<"tables_tabletops"> | Buffer
+    content_filename?: StringWithAggregatesFilter<"tables_tabletops"> | string
+    content_date_posted?: DateTimeWithAggregatesFilter<"tables_tabletops"> | Date | string
+    content_x_position?: IntWithAggregatesFilter<"tables_tabletops"> | number
+    content_y_position?: IntWithAggregatesFilter<"tables_tabletops"> | number
+    content_rotation?: IntWithAggregatesFilter<"tables_tabletops"> | number
+  }
+
   export type user_credentialsWhereInput = {
     AND?: user_credentialsWhereInput | user_credentialsWhereInput[]
     OR?: user_credentialsWhereInput[]
@@ -35315,6 +40892,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -35335,6 +40914,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -35355,6 +40936,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -35375,6 +40958,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -36255,6 +41840,286 @@ export namespace Prisma {
     sheet_thumbnail_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type tablesCreateInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
+    tables_members?: tables_membersCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUncheckedCreateInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures_id?: string | null
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUpdateInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+    tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesCreateManyInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures_id?: string | null
+  }
+
+  export type tablesUpdateManyMutationInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type tablesUncheckedUpdateManyInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type tables_membersCreateInput = {
+    tables_members_id: string
+    entities: entitiesCreateNestedOneWithoutTables_membersInput
+    tables: tablesCreateNestedOneWithoutTables_membersInput
+  }
+
+  export type tables_membersUncheckedCreateInput = {
+    tables_members_id: string
+    table_id: string
+    member_id: string
+  }
+
+  export type tables_membersUpdateInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutTables_membersNestedInput
+    tables?: tablesUpdateOneRequiredWithoutTables_membersNestedInput
+  }
+
+  export type tables_membersUncheckedUpdateInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    member_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_membersCreateManyInput = {
+    tables_members_id: string
+    table_id: string
+    member_id: string
+  }
+
+  export type tables_membersUpdateManyMutationInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_membersUncheckedUpdateManyInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    member_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_messages_logsCreateInput = {
+    tables_messages_logs_id: string
+    message: string
+    message_date: Date | string
+    entities: entitiesCreateNestedOneWithoutTables_messages_logsInput
+    tables: tablesCreateNestedOneWithoutTables_messages_logsInput
+  }
+
+  export type tables_messages_logsUncheckedCreateInput = {
+    tables_messages_logs_id: string
+    table_id: string
+    entity_id: string
+    message: string
+    message_date: Date | string
+  }
+
+  export type tables_messages_logsUpdateInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    entities?: entitiesUpdateOneRequiredWithoutTables_messages_logsNestedInput
+    tables?: tablesUpdateOneRequiredWithoutTables_messages_logsNestedInput
+  }
+
+  export type tables_messages_logsUncheckedUpdateInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_messages_logsCreateManyInput = {
+    tables_messages_logs_id: string
+    table_id: string
+    entity_id: string
+    message: string
+    message_date: Date | string
+  }
+
+  export type tables_messages_logsUpdateManyMutationInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_messages_logsUncheckedUpdateManyInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_picturesCreateInput = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+    tables?: tablesCreateNestedManyWithoutTables_picturesInput
+  }
+
+  export type tables_picturesUncheckedCreateInput = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+    tables?: tablesUncheckedCreateNestedManyWithoutTables_picturesInput
+  }
+
+  export type tables_picturesUpdateInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+    tables?: tablesUpdateManyWithoutTables_picturesNestedInput
+  }
+
+  export type tables_picturesUncheckedUpdateInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+    tables?: tablesUncheckedUpdateManyWithoutTables_picturesNestedInput
+  }
+
+  export type tables_picturesCreateManyInput = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+  }
+
+  export type tables_picturesUpdateManyMutationInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_picturesUncheckedUpdateManyInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_tabletopsCreateInput = {
+    tables_tabletops_id: string
+    content_data: Buffer
+    content_filename: string
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+  }
+
+  export type tables_tabletopsUncheckedCreateInput = {
+    tables_tabletops_id: string
+    content_data: Buffer
+    content_filename: string
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+  }
+
+  export type tables_tabletopsUpdateInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    content_data?: BytesFieldUpdateOperationsInput | Buffer
+    content_filename?: StringFieldUpdateOperationsInput | string
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type tables_tabletopsUncheckedUpdateInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    content_data?: BytesFieldUpdateOperationsInput | Buffer
+    content_filename?: StringFieldUpdateOperationsInput | string
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type tables_tabletopsCreateManyInput = {
+    tables_tabletops_id: string
+    content_data: Buffer
+    content_filename: string
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+  }
+
+  export type tables_tabletopsUpdateManyMutationInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    content_data?: BytesFieldUpdateOperationsInput | Buffer
+    content_filename?: StringFieldUpdateOperationsInput | string
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    content_data?: BytesFieldUpdateOperationsInput | Buffer
+    content_filename?: StringFieldUpdateOperationsInput | string
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+  }
+
   export type user_credentialsCreateInput = {
     user_id: string
     username: string
@@ -37094,6 +42959,18 @@ export namespace Prisma {
     none?: sheetsWhereInput
   }
 
+  export type Tables_membersListRelationFilter = {
+    every?: tables_membersWhereInput
+    some?: tables_membersWhereInput
+    none?: tables_membersWhereInput
+  }
+
+  export type Tables_messages_logsListRelationFilter = {
+    every?: tables_messages_logsWhereInput
+    some?: tables_messages_logsWhereInput
+    none?: tables_messages_logsWhereInput
+  }
+
   export type VideosListRelationFilter = {
     every?: videosWhereInput
     some?: videosWhereInput
@@ -37121,6 +42998,14 @@ export namespace Prisma {
   }
 
   export type sheetsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tables_membersOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tables_messages_logsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -37635,6 +43520,155 @@ export namespace Prisma {
     sheet_thumbnail_data?: SortOrder
     sheet_thumbnail_filename?: SortOrder
     sheet_thumbnail_description?: SortOrder
+  }
+
+  export type Tables_picturesNullableRelationFilter = {
+    is?: tables_picturesWhereInput | null
+    isNot?: tables_picturesWhereInput | null
+  }
+
+  export type tablesCountOrderByAggregateInput = {
+    table_id?: SortOrder
+    table_name?: SortOrder
+    table_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_message_date?: SortOrder
+    tables_pictures_id?: SortOrder
+  }
+
+  export type tablesMaxOrderByAggregateInput = {
+    table_id?: SortOrder
+    table_name?: SortOrder
+    table_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_message_date?: SortOrder
+    tables_pictures_id?: SortOrder
+  }
+
+  export type tablesMinOrderByAggregateInput = {
+    table_id?: SortOrder
+    table_name?: SortOrder
+    table_creation_date?: SortOrder
+    last_message?: SortOrder
+    last_message_date?: SortOrder
+    tables_pictures_id?: SortOrder
+  }
+
+  export type TablesRelationFilter = {
+    is?: tablesWhereInput
+    isNot?: tablesWhereInput
+  }
+
+  export type tables_membersCountOrderByAggregateInput = {
+    tables_members_id?: SortOrder
+    table_id?: SortOrder
+    member_id?: SortOrder
+  }
+
+  export type tables_membersMaxOrderByAggregateInput = {
+    tables_members_id?: SortOrder
+    table_id?: SortOrder
+    member_id?: SortOrder
+  }
+
+  export type tables_membersMinOrderByAggregateInput = {
+    tables_members_id?: SortOrder
+    table_id?: SortOrder
+    member_id?: SortOrder
+  }
+
+  export type tables_messages_logsCountOrderByAggregateInput = {
+    tables_messages_logs_id?: SortOrder
+    table_id?: SortOrder
+    entity_id?: SortOrder
+    message?: SortOrder
+    message_date?: SortOrder
+  }
+
+  export type tables_messages_logsMaxOrderByAggregateInput = {
+    tables_messages_logs_id?: SortOrder
+    table_id?: SortOrder
+    entity_id?: SortOrder
+    message?: SortOrder
+    message_date?: SortOrder
+  }
+
+  export type tables_messages_logsMinOrderByAggregateInput = {
+    tables_messages_logs_id?: SortOrder
+    table_id?: SortOrder
+    entity_id?: SortOrder
+    message?: SortOrder
+    message_date?: SortOrder
+  }
+
+  export type TablesListRelationFilter = {
+    every?: tablesWhereInput
+    some?: tablesWhereInput
+    none?: tablesWhereInput
+  }
+
+  export type tablesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tables_picturesCountOrderByAggregateInput = {
+    tables_pictures_id?: SortOrder
+    table_picture_data?: SortOrder
+    table_picture_filename?: SortOrder
+  }
+
+  export type tables_picturesMaxOrderByAggregateInput = {
+    tables_pictures_id?: SortOrder
+    table_picture_data?: SortOrder
+    table_picture_filename?: SortOrder
+  }
+
+  export type tables_picturesMinOrderByAggregateInput = {
+    tables_pictures_id?: SortOrder
+    table_picture_data?: SortOrder
+    table_picture_filename?: SortOrder
+  }
+
+  export type tables_tabletopsCountOrderByAggregateInput = {
+    tables_tabletops_id?: SortOrder
+    content_data?: SortOrder
+    content_filename?: SortOrder
+    content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+  }
+
+  export type tables_tabletopsAvgOrderByAggregateInput = {
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+  }
+
+  export type tables_tabletopsMaxOrderByAggregateInput = {
+    tables_tabletops_id?: SortOrder
+    content_data?: SortOrder
+    content_filename?: SortOrder
+    content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+  }
+
+  export type tables_tabletopsMinOrderByAggregateInput = {
+    tables_tabletops_id?: SortOrder
+    content_data?: SortOrder
+    content_filename?: SortOrder
+    content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+  }
+
+  export type tables_tabletopsSumOrderByAggregateInput = {
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
   }
 
   export type IndividualsNullableRelationFilter = {
@@ -38431,6 +44465,20 @@ export namespace Prisma {
     connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
   }
 
+  export type tables_membersCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput> | tables_membersCreateWithoutEntitiesInput[] | tables_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutEntitiesInput | tables_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_membersCreateManyEntitiesInputEnvelope
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+  }
+
+  export type tables_messages_logsCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput> | tables_messages_logsCreateWithoutEntitiesInput[] | tables_messages_logsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutEntitiesInput | tables_messages_logsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_messages_logsCreateManyEntitiesInputEnvelope
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+  }
+
   export type videosCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
@@ -38527,6 +44575,20 @@ export namespace Prisma {
     connectOrCreate?: sheetsCreateOrConnectWithoutEntitiesInput | sheetsCreateOrConnectWithoutEntitiesInput[]
     createMany?: sheetsCreateManyEntitiesInputEnvelope
     connect?: sheetsWhereUniqueInput | sheetsWhereUniqueInput[]
+  }
+
+  export type tables_membersUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput> | tables_membersCreateWithoutEntitiesInput[] | tables_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutEntitiesInput | tables_membersCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_membersCreateManyEntitiesInputEnvelope
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+  }
+
+  export type tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput> | tables_messages_logsCreateWithoutEntitiesInput[] | tables_messages_logsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutEntitiesInput | tables_messages_logsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_messages_logsCreateManyEntitiesInputEnvelope
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
   }
 
   export type videosUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -38726,6 +44788,34 @@ export namespace Prisma {
     deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
   }
 
+  export type tables_membersUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput> | tables_membersCreateWithoutEntitiesInput[] | tables_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutEntitiesInput | tables_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_membersUpsertWithWhereUniqueWithoutEntitiesInput | tables_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_membersCreateManyEntitiesInputEnvelope
+    set?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    disconnect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    delete?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    update?: tables_membersUpdateWithWhereUniqueWithoutEntitiesInput | tables_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_membersUpdateManyWithWhereWithoutEntitiesInput | tables_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+  }
+
+  export type tables_messages_logsUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput> | tables_messages_logsCreateWithoutEntitiesInput[] | tables_messages_logsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutEntitiesInput | tables_messages_logsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput | tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_messages_logsCreateManyEntitiesInputEnvelope
+    set?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    disconnect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    delete?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    update?: tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput | tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput | tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+  }
+
   export type videosUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
@@ -38920,6 +45010,34 @@ export namespace Prisma {
     update?: sheetsUpdateWithWhereUniqueWithoutEntitiesInput | sheetsUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: sheetsUpdateManyWithWhereWithoutEntitiesInput | sheetsUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
+  }
+
+  export type tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput> | tables_membersCreateWithoutEntitiesInput[] | tables_membersUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutEntitiesInput | tables_membersCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_membersUpsertWithWhereUniqueWithoutEntitiesInput | tables_membersUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_membersCreateManyEntitiesInputEnvelope
+    set?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    disconnect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    delete?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    update?: tables_membersUpdateWithWhereUniqueWithoutEntitiesInput | tables_membersUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_membersUpdateManyWithWhereWithoutEntitiesInput | tables_membersUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+  }
+
+  export type tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput> | tables_messages_logsCreateWithoutEntitiesInput[] | tables_messages_logsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutEntitiesInput | tables_messages_logsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput | tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_messages_logsCreateManyEntitiesInputEnvelope
+    set?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    disconnect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    delete?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    update?: tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput | tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput | tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
   }
 
   export type videosUncheckedUpdateManyWithoutEntitiesNestedInput = {
@@ -39560,6 +45678,204 @@ export namespace Prisma {
     deleteMany?: sheetsScalarWhereInput | sheetsScalarWhereInput[]
   }
 
+  export type tables_picturesCreateNestedOneWithoutTablesInput = {
+    create?: XOR<tables_picturesCreateWithoutTablesInput, tables_picturesUncheckedCreateWithoutTablesInput>
+    connectOrCreate?: tables_picturesCreateOrConnectWithoutTablesInput
+    connect?: tables_picturesWhereUniqueInput
+  }
+
+  export type tables_membersCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_membersCreateManyTablesInputEnvelope
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+  }
+
+  export type tables_messages_logsCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput> | tables_messages_logsCreateWithoutTablesInput[] | tables_messages_logsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutTablesInput | tables_messages_logsCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_messages_logsCreateManyTablesInputEnvelope
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+  }
+
+  export type tables_membersUncheckedCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_membersCreateManyTablesInputEnvelope
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+  }
+
+  export type tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput> | tables_messages_logsCreateWithoutTablesInput[] | tables_messages_logsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutTablesInput | tables_messages_logsCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_messages_logsCreateManyTablesInputEnvelope
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+  }
+
+  export type tables_picturesUpdateOneWithoutTablesNestedInput = {
+    create?: XOR<tables_picturesCreateWithoutTablesInput, tables_picturesUncheckedCreateWithoutTablesInput>
+    connectOrCreate?: tables_picturesCreateOrConnectWithoutTablesInput
+    upsert?: tables_picturesUpsertWithoutTablesInput
+    disconnect?: tables_picturesWhereInput | boolean
+    delete?: tables_picturesWhereInput | boolean
+    connect?: tables_picturesWhereUniqueInput
+    update?: XOR<XOR<tables_picturesUpdateToOneWithWhereWithoutTablesInput, tables_picturesUpdateWithoutTablesInput>, tables_picturesUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type tables_membersUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_membersUpsertWithWhereUniqueWithoutTablesInput | tables_membersUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_membersCreateManyTablesInputEnvelope
+    set?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    disconnect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    delete?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    update?: tables_membersUpdateWithWhereUniqueWithoutTablesInput | tables_membersUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_membersUpdateManyWithWhereWithoutTablesInput | tables_membersUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+  }
+
+  export type tables_messages_logsUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput> | tables_messages_logsCreateWithoutTablesInput[] | tables_messages_logsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutTablesInput | tables_messages_logsCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_messages_logsUpsertWithWhereUniqueWithoutTablesInput | tables_messages_logsUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_messages_logsCreateManyTablesInputEnvelope
+    set?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    disconnect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    delete?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    update?: tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput | tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_messages_logsUpdateManyWithWhereWithoutTablesInput | tables_messages_logsUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+  }
+
+  export type tables_membersUncheckedUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_membersUpsertWithWhereUniqueWithoutTablesInput | tables_membersUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_membersCreateManyTablesInputEnvelope
+    set?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    disconnect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    delete?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    connect?: tables_membersWhereUniqueInput | tables_membersWhereUniqueInput[]
+    update?: tables_membersUpdateWithWhereUniqueWithoutTablesInput | tables_membersUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_membersUpdateManyWithWhereWithoutTablesInput | tables_membersUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+  }
+
+  export type tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput> | tables_messages_logsCreateWithoutTablesInput[] | tables_messages_logsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_messages_logsCreateOrConnectWithoutTablesInput | tables_messages_logsCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_messages_logsUpsertWithWhereUniqueWithoutTablesInput | tables_messages_logsUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_messages_logsCreateManyTablesInputEnvelope
+    set?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    disconnect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    delete?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+    update?: tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput | tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_messages_logsUpdateManyWithWhereWithoutTablesInput | tables_messages_logsUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+  }
+
+  export type entitiesCreateNestedOneWithoutTables_membersInput = {
+    create?: XOR<entitiesCreateWithoutTables_membersInput, entitiesUncheckedCreateWithoutTables_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_membersInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type tablesCreateNestedOneWithoutTables_membersInput = {
+    create?: XOR<tablesCreateWithoutTables_membersInput, tablesUncheckedCreateWithoutTables_membersInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_membersInput
+    connect?: tablesWhereUniqueInput
+  }
+
+  export type entitiesUpdateOneRequiredWithoutTables_membersNestedInput = {
+    create?: XOR<entitiesCreateWithoutTables_membersInput, entitiesUncheckedCreateWithoutTables_membersInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_membersInput
+    upsert?: entitiesUpsertWithoutTables_membersInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutTables_membersInput, entitiesUpdateWithoutTables_membersInput>, entitiesUncheckedUpdateWithoutTables_membersInput>
+  }
+
+  export type tablesUpdateOneRequiredWithoutTables_membersNestedInput = {
+    create?: XOR<tablesCreateWithoutTables_membersInput, tablesUncheckedCreateWithoutTables_membersInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_membersInput
+    upsert?: tablesUpsertWithoutTables_membersInput
+    connect?: tablesWhereUniqueInput
+    update?: XOR<XOR<tablesUpdateToOneWithWhereWithoutTables_membersInput, tablesUpdateWithoutTables_membersInput>, tablesUncheckedUpdateWithoutTables_membersInput>
+  }
+
+  export type entitiesCreateNestedOneWithoutTables_messages_logsInput = {
+    create?: XOR<entitiesCreateWithoutTables_messages_logsInput, entitiesUncheckedCreateWithoutTables_messages_logsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_messages_logsInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type tablesCreateNestedOneWithoutTables_messages_logsInput = {
+    create?: XOR<tablesCreateWithoutTables_messages_logsInput, tablesUncheckedCreateWithoutTables_messages_logsInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_messages_logsInput
+    connect?: tablesWhereUniqueInput
+  }
+
+  export type entitiesUpdateOneRequiredWithoutTables_messages_logsNestedInput = {
+    create?: XOR<entitiesCreateWithoutTables_messages_logsInput, entitiesUncheckedCreateWithoutTables_messages_logsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_messages_logsInput
+    upsert?: entitiesUpsertWithoutTables_messages_logsInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutTables_messages_logsInput, entitiesUpdateWithoutTables_messages_logsInput>, entitiesUncheckedUpdateWithoutTables_messages_logsInput>
+  }
+
+  export type tablesUpdateOneRequiredWithoutTables_messages_logsNestedInput = {
+    create?: XOR<tablesCreateWithoutTables_messages_logsInput, tablesUncheckedCreateWithoutTables_messages_logsInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_messages_logsInput
+    upsert?: tablesUpsertWithoutTables_messages_logsInput
+    connect?: tablesWhereUniqueInput
+    update?: XOR<XOR<tablesUpdateToOneWithWhereWithoutTables_messages_logsInput, tablesUpdateWithoutTables_messages_logsInput>, tablesUncheckedUpdateWithoutTables_messages_logsInput>
+  }
+
+  export type tablesCreateNestedManyWithoutTables_picturesInput = {
+    create?: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput> | tablesCreateWithoutTables_picturesInput[] | tablesUncheckedCreateWithoutTables_picturesInput[]
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_picturesInput | tablesCreateOrConnectWithoutTables_picturesInput[]
+    createMany?: tablesCreateManyTables_picturesInputEnvelope
+    connect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+  }
+
+  export type tablesUncheckedCreateNestedManyWithoutTables_picturesInput = {
+    create?: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput> | tablesCreateWithoutTables_picturesInput[] | tablesUncheckedCreateWithoutTables_picturesInput[]
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_picturesInput | tablesCreateOrConnectWithoutTables_picturesInput[]
+    createMany?: tablesCreateManyTables_picturesInputEnvelope
+    connect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+  }
+
+  export type tablesUpdateManyWithoutTables_picturesNestedInput = {
+    create?: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput> | tablesCreateWithoutTables_picturesInput[] | tablesUncheckedCreateWithoutTables_picturesInput[]
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_picturesInput | tablesCreateOrConnectWithoutTables_picturesInput[]
+    upsert?: tablesUpsertWithWhereUniqueWithoutTables_picturesInput | tablesUpsertWithWhereUniqueWithoutTables_picturesInput[]
+    createMany?: tablesCreateManyTables_picturesInputEnvelope
+    set?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    disconnect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    delete?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    connect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    update?: tablesUpdateWithWhereUniqueWithoutTables_picturesInput | tablesUpdateWithWhereUniqueWithoutTables_picturesInput[]
+    updateMany?: tablesUpdateManyWithWhereWithoutTables_picturesInput | tablesUpdateManyWithWhereWithoutTables_picturesInput[]
+    deleteMany?: tablesScalarWhereInput | tablesScalarWhereInput[]
+  }
+
+  export type tablesUncheckedUpdateManyWithoutTables_picturesNestedInput = {
+    create?: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput> | tablesCreateWithoutTables_picturesInput[] | tablesUncheckedCreateWithoutTables_picturesInput[]
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_picturesInput | tablesCreateOrConnectWithoutTables_picturesInput[]
+    upsert?: tablesUpsertWithWhereUniqueWithoutTables_picturesInput | tablesUpsertWithWhereUniqueWithoutTables_picturesInput[]
+    createMany?: tablesCreateManyTables_picturesInputEnvelope
+    set?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    disconnect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    delete?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    connect?: tablesWhereUniqueInput | tablesWhereUniqueInput[]
+    update?: tablesUpdateWithWhereUniqueWithoutTables_picturesInput | tablesUpdateWithWhereUniqueWithoutTables_picturesInput[]
+    updateMany?: tablesUpdateManyWithWhereWithoutTables_picturesInput | tablesUpdateManyWithWhereWithoutTables_picturesInput[]
+    deleteMany?: tablesScalarWhereInput | tablesScalarWhereInput[]
+  }
+
   export type individualsCreateNestedOneWithoutUser_credentialsInput = {
     create?: XOR<individualsCreateWithoutUser_credentialsInput, individualsUncheckedCreateWithoutUser_credentialsInput>
     connectOrCreate?: individualsCreateOrConnectWithoutUser_credentialsInput
@@ -39954,6 +46270,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -39973,6 +46291,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40034,6 +46354,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40053,6 +46375,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40188,6 +46512,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40207,6 +46533,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40231,6 +46559,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40250,6 +46580,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40302,6 +46634,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40321,6 +46655,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40351,6 +46687,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40370,6 +46708,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40819,6 +47159,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40838,6 +47180,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40904,6 +47248,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40923,6 +47269,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -40967,6 +47315,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40986,6 +47336,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -41052,6 +47404,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41071,6 +47425,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41458,6 +47814,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type tables_membersCreateWithoutEntitiesInput = {
+    tables_members_id: string
+    tables: tablesCreateNestedOneWithoutTables_membersInput
+  }
+
+  export type tables_membersUncheckedCreateWithoutEntitiesInput = {
+    tables_members_id: string
+    table_id: string
+  }
+
+  export type tables_membersCreateOrConnectWithoutEntitiesInput = {
+    where: tables_membersWhereUniqueInput
+    create: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_membersCreateManyEntitiesInputEnvelope = {
+    data: tables_membersCreateManyEntitiesInput | tables_membersCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tables_messages_logsCreateWithoutEntitiesInput = {
+    tables_messages_logs_id: string
+    message: string
+    message_date: Date | string
+    tables: tablesCreateNestedOneWithoutTables_messages_logsInput
+  }
+
+  export type tables_messages_logsUncheckedCreateWithoutEntitiesInput = {
+    tables_messages_logs_id: string
+    table_id: string
+    message: string
+    message_date: Date | string
+  }
+
+  export type tables_messages_logsCreateOrConnectWithoutEntitiesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    create: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_messages_logsCreateManyEntitiesInputEnvelope = {
+    data: tables_messages_logsCreateManyEntitiesInput | tables_messages_logsCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type videosCreateWithoutEntitiesInput = {
     video_id: string
     video_title: string
@@ -41773,6 +48173,58 @@ export namespace Prisma {
     sheet_date_posted?: DateTimeFilter<"sheets"> | Date | string
   }
 
+  export type tables_membersUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_membersWhereUniqueInput
+    update: XOR<tables_membersUpdateWithoutEntitiesInput, tables_membersUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<tables_membersCreateWithoutEntitiesInput, tables_membersUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_membersUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_membersWhereUniqueInput
+    data: XOR<tables_membersUpdateWithoutEntitiesInput, tables_membersUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type tables_membersUpdateManyWithWhereWithoutEntitiesInput = {
+    where: tables_membersScalarWhereInput
+    data: XOR<tables_membersUpdateManyMutationInput, tables_membersUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type tables_membersScalarWhereInput = {
+    AND?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+    OR?: tables_membersScalarWhereInput[]
+    NOT?: tables_membersScalarWhereInput | tables_membersScalarWhereInput[]
+    tables_members_id?: StringFilter<"tables_members"> | string
+    table_id?: StringFilter<"tables_members"> | string
+    member_id?: StringFilter<"tables_members"> | string
+  }
+
+  export type tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    update: XOR<tables_messages_logsUpdateWithoutEntitiesInput, tables_messages_logsUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<tables_messages_logsCreateWithoutEntitiesInput, tables_messages_logsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    data: XOR<tables_messages_logsUpdateWithoutEntitiesInput, tables_messages_logsUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput = {
+    where: tables_messages_logsScalarWhereInput
+    data: XOR<tables_messages_logsUpdateManyMutationInput, tables_messages_logsUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type tables_messages_logsScalarWhereInput = {
+    AND?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+    OR?: tables_messages_logsScalarWhereInput[]
+    NOT?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+    tables_messages_logs_id?: StringFilter<"tables_messages_logs"> | string
+    table_id?: StringFilter<"tables_messages_logs"> | string
+    entity_id?: StringFilter<"tables_messages_logs"> | string
+    message?: StringFilter<"tables_messages_logs"> | string
+    message_date?: DateTimeFilter<"tables_messages_logs"> | Date | string
+  }
+
   export type videosUpsertWithWhereUniqueWithoutEntitiesInput = {
     where: videosWhereUniqueInput
     update: XOR<videosUpdateWithoutEntitiesInput, videosUncheckedUpdateWithoutEntitiesInput>
@@ -41843,6 +48295,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -41862,6 +48316,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -41924,6 +48380,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41943,6 +48401,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41983,6 +48443,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42002,6 +48464,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42064,6 +48528,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42083,6 +48549,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42123,6 +48591,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42142,6 +48612,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42204,6 +48676,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42223,6 +48697,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42242,6 +48718,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42261,6 +48739,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42296,6 +48776,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42315,6 +48797,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42418,6 +48902,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42437,6 +48923,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42497,6 +48985,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42516,6 +49006,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42566,6 +49058,8 @@ export namespace Prisma {
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42585,6 +49079,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42635,6 +49131,8 @@ export namespace Prisma {
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42654,6 +49152,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -42932,6 +49432,8 @@ export namespace Prisma {
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -42951,6 +49453,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -43011,6 +49515,8 @@ export namespace Prisma {
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -43030,6 +49536,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -43255,6 +49763,8 @@ export namespace Prisma {
     groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -43274,6 +49784,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -43343,6 +49855,8 @@ export namespace Prisma {
     groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -43362,6 +49876,8 @@ export namespace Prisma {
     groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -43515,6 +50031,492 @@ export namespace Prisma {
     data: XOR<sheetsUpdateManyMutationInput, sheetsUncheckedUpdateManyWithoutSheets_thumbnailsInput>
   }
 
+  export type tables_picturesCreateWithoutTablesInput = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+  }
+
+  export type tables_picturesUncheckedCreateWithoutTablesInput = {
+    tables_pictures_id: string
+    table_picture_data: Buffer
+    table_picture_filename: string
+  }
+
+  export type tables_picturesCreateOrConnectWithoutTablesInput = {
+    where: tables_picturesWhereUniqueInput
+    create: XOR<tables_picturesCreateWithoutTablesInput, tables_picturesUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_membersCreateWithoutTablesInput = {
+    tables_members_id: string
+    entities: entitiesCreateNestedOneWithoutTables_membersInput
+  }
+
+  export type tables_membersUncheckedCreateWithoutTablesInput = {
+    tables_members_id: string
+    member_id: string
+  }
+
+  export type tables_membersCreateOrConnectWithoutTablesInput = {
+    where: tables_membersWhereUniqueInput
+    create: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_membersCreateManyTablesInputEnvelope = {
+    data: tables_membersCreateManyTablesInput | tables_membersCreateManyTablesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tables_messages_logsCreateWithoutTablesInput = {
+    tables_messages_logs_id: string
+    message: string
+    message_date: Date | string
+    entities: entitiesCreateNestedOneWithoutTables_messages_logsInput
+  }
+
+  export type tables_messages_logsUncheckedCreateWithoutTablesInput = {
+    tables_messages_logs_id: string
+    entity_id: string
+    message: string
+    message_date: Date | string
+  }
+
+  export type tables_messages_logsCreateOrConnectWithoutTablesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    create: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_messages_logsCreateManyTablesInputEnvelope = {
+    data: tables_messages_logsCreateManyTablesInput | tables_messages_logsCreateManyTablesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tables_picturesUpsertWithoutTablesInput = {
+    update: XOR<tables_picturesUpdateWithoutTablesInput, tables_picturesUncheckedUpdateWithoutTablesInput>
+    create: XOR<tables_picturesCreateWithoutTablesInput, tables_picturesUncheckedCreateWithoutTablesInput>
+    where?: tables_picturesWhereInput
+  }
+
+  export type tables_picturesUpdateToOneWithWhereWithoutTablesInput = {
+    where?: tables_picturesWhereInput
+    data: XOR<tables_picturesUpdateWithoutTablesInput, tables_picturesUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type tables_picturesUpdateWithoutTablesInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_picturesUncheckedUpdateWithoutTablesInput = {
+    tables_pictures_id?: StringFieldUpdateOperationsInput | string
+    table_picture_data?: BytesFieldUpdateOperationsInput | Buffer
+    table_picture_filename?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_membersUpsertWithWhereUniqueWithoutTablesInput = {
+    where: tables_membersWhereUniqueInput
+    update: XOR<tables_membersUpdateWithoutTablesInput, tables_membersUncheckedUpdateWithoutTablesInput>
+    create: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_membersUpdateWithWhereUniqueWithoutTablesInput = {
+    where: tables_membersWhereUniqueInput
+    data: XOR<tables_membersUpdateWithoutTablesInput, tables_membersUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type tables_membersUpdateManyWithWhereWithoutTablesInput = {
+    where: tables_membersScalarWhereInput
+    data: XOR<tables_membersUpdateManyMutationInput, tables_membersUncheckedUpdateManyWithoutTablesInput>
+  }
+
+  export type tables_messages_logsUpsertWithWhereUniqueWithoutTablesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    update: XOR<tables_messages_logsUpdateWithoutTablesInput, tables_messages_logsUncheckedUpdateWithoutTablesInput>
+    create: XOR<tables_messages_logsCreateWithoutTablesInput, tables_messages_logsUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput = {
+    where: tables_messages_logsWhereUniqueInput
+    data: XOR<tables_messages_logsUpdateWithoutTablesInput, tables_messages_logsUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type tables_messages_logsUpdateManyWithWhereWithoutTablesInput = {
+    where: tables_messages_logsScalarWhereInput
+    data: XOR<tables_messages_logsUpdateManyMutationInput, tables_messages_logsUncheckedUpdateManyWithoutTablesInput>
+  }
+
+  export type entitiesCreateWithoutTables_membersInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutTables_membersInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutTables_membersInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutTables_membersInput, entitiesUncheckedCreateWithoutTables_membersInput>
+  }
+
+  export type tablesCreateWithoutTables_membersInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUncheckedCreateWithoutTables_membersInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures_id?: string | null
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesCreateOrConnectWithoutTables_membersInput = {
+    where: tablesWhereUniqueInput
+    create: XOR<tablesCreateWithoutTables_membersInput, tablesUncheckedCreateWithoutTables_membersInput>
+  }
+
+  export type entitiesUpsertWithoutTables_membersInput = {
+    update: XOR<entitiesUpdateWithoutTables_membersInput, entitiesUncheckedUpdateWithoutTables_membersInput>
+    create: XOR<entitiesCreateWithoutTables_membersInput, entitiesUncheckedCreateWithoutTables_membersInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutTables_membersInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutTables_membersInput, entitiesUncheckedUpdateWithoutTables_membersInput>
+  }
+
+  export type entitiesUpdateWithoutTables_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutTables_membersInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type tablesUpsertWithoutTables_membersInput = {
+    update: XOR<tablesUpdateWithoutTables_membersInput, tablesUncheckedUpdateWithoutTables_membersInput>
+    create: XOR<tablesCreateWithoutTables_membersInput, tablesUncheckedCreateWithoutTables_membersInput>
+    where?: tablesWhereInput
+  }
+
+  export type tablesUpdateToOneWithWhereWithoutTables_membersInput = {
+    where?: tablesWhereInput
+    data: XOR<tablesUpdateWithoutTables_membersInput, tablesUncheckedUpdateWithoutTables_membersInput>
+  }
+
+  export type tablesUpdateWithoutTables_membersInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateWithoutTables_membersInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+  }
+
+  export type entitiesCreateWithoutTables_messages_logsInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutTables_messages_logsInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutTables_messages_logsInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutTables_messages_logsInput, entitiesUncheckedCreateWithoutTables_messages_logsInput>
+  }
+
+  export type tablesCreateWithoutTables_messages_logsInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
+    tables_members?: tables_membersCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUncheckedCreateWithoutTables_messages_logsInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures_id?: string | null
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesCreateOrConnectWithoutTables_messages_logsInput = {
+    where: tablesWhereUniqueInput
+    create: XOR<tablesCreateWithoutTables_messages_logsInput, tablesUncheckedCreateWithoutTables_messages_logsInput>
+  }
+
+  export type entitiesUpsertWithoutTables_messages_logsInput = {
+    update: XOR<entitiesUpdateWithoutTables_messages_logsInput, entitiesUncheckedUpdateWithoutTables_messages_logsInput>
+    create: XOR<entitiesCreateWithoutTables_messages_logsInput, entitiesUncheckedCreateWithoutTables_messages_logsInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutTables_messages_logsInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutTables_messages_logsInput, entitiesUncheckedUpdateWithoutTables_messages_logsInput>
+  }
+
+  export type entitiesUpdateWithoutTables_messages_logsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutTables_messages_logsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type tablesUpsertWithoutTables_messages_logsInput = {
+    update: XOR<tablesUpdateWithoutTables_messages_logsInput, tablesUncheckedUpdateWithoutTables_messages_logsInput>
+    create: XOR<tablesCreateWithoutTables_messages_logsInput, tablesUncheckedCreateWithoutTables_messages_logsInput>
+    where?: tablesWhereInput
+  }
+
+  export type tablesUpdateToOneWithWhereWithoutTables_messages_logsInput = {
+    where?: tablesWhereInput
+    data: XOR<tablesUpdateWithoutTables_messages_logsInput, tablesUncheckedUpdateWithoutTables_messages_logsInput>
+  }
+
+  export type tablesUpdateWithoutTables_messages_logsInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateWithoutTables_messages_logsInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+    tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesCreateWithoutTables_picturesInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_members?: tables_membersCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUncheckedCreateWithoutTables_picturesInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesCreateOrConnectWithoutTables_picturesInput = {
+    where: tablesWhereUniqueInput
+    create: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput>
+  }
+
+  export type tablesCreateManyTables_picturesInputEnvelope = {
+    data: tablesCreateManyTables_picturesInput | tablesCreateManyTables_picturesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tablesUpsertWithWhereUniqueWithoutTables_picturesInput = {
+    where: tablesWhereUniqueInput
+    update: XOR<tablesUpdateWithoutTables_picturesInput, tablesUncheckedUpdateWithoutTables_picturesInput>
+    create: XOR<tablesCreateWithoutTables_picturesInput, tablesUncheckedCreateWithoutTables_picturesInput>
+  }
+
+  export type tablesUpdateWithWhereUniqueWithoutTables_picturesInput = {
+    where: tablesWhereUniqueInput
+    data: XOR<tablesUpdateWithoutTables_picturesInput, tablesUncheckedUpdateWithoutTables_picturesInput>
+  }
+
+  export type tablesUpdateManyWithWhereWithoutTables_picturesInput = {
+    where: tablesScalarWhereInput
+    data: XOR<tablesUpdateManyMutationInput, tablesUncheckedUpdateManyWithoutTables_picturesInput>
+  }
+
+  export type tablesScalarWhereInput = {
+    AND?: tablesScalarWhereInput | tablesScalarWhereInput[]
+    OR?: tablesScalarWhereInput[]
+    NOT?: tablesScalarWhereInput | tablesScalarWhereInput[]
+    table_id?: StringFilter<"tables"> | string
+    table_name?: StringNullableFilter<"tables"> | string | null
+    table_creation_date?: DateTimeFilter<"tables"> | Date | string
+    last_message?: StringNullableFilter<"tables"> | string | null
+    last_message_date?: DateTimeNullableFilter<"tables"> | Date | string | null
+    tables_pictures_id?: StringNullableFilter<"tables"> | string | null
+  }
+
   export type individualsCreateWithoutUser_credentialsInput = {
     individual_username: string
     individual_name?: string | null
@@ -43584,6 +50586,8 @@ export namespace Prisma {
     images?: imagesCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutVideosInput = {
@@ -43603,6 +50607,8 @@ export namespace Prisma {
     images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutVideosInput = {
@@ -43672,6 +50678,8 @@ export namespace Prisma {
     images?: imagesUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutVideosInput = {
@@ -43691,6 +50699,8 @@ export namespace Prisma {
     images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type videos_dataUpsertWithoutVideosInput = {
@@ -44200,6 +51210,18 @@ export namespace Prisma {
     sheet_date_posted?: Date | string
   }
 
+  export type tables_membersCreateManyEntitiesInput = {
+    tables_members_id: string
+    table_id: string
+  }
+
+  export type tables_messages_logsCreateManyEntitiesInput = {
+    tables_messages_logs_id: string
+    table_id: string
+    message: string
+    message_date: Date | string
+  }
+
   export type videosCreateManyEntitiesInput = {
     video_id: string
     video_title: string
@@ -44504,6 +51526,42 @@ export namespace Prisma {
     sheet_dislikes?: IntFieldUpdateOperationsInput | number
     sheet_views?: IntFieldUpdateOperationsInput | number
     sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_membersUpdateWithoutEntitiesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    tables?: tablesUpdateOneRequiredWithoutTables_membersNestedInput
+  }
+
+  export type tables_membersUncheckedUpdateWithoutEntitiesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_membersUncheckedUpdateManyWithoutEntitiesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_messages_logsUpdateWithoutEntitiesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    tables?: tablesUpdateOneRequiredWithoutTables_messages_logsNestedInput
+  }
+
+  export type tables_messages_logsUncheckedUpdateWithoutEntitiesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_messages_logsUncheckedUpdateManyWithoutEntitiesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type videosUpdateWithoutEntitiesInput = {
@@ -44849,6 +51907,90 @@ export namespace Prisma {
     sheet_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type tables_membersCreateManyTablesInput = {
+    tables_members_id: string
+    member_id: string
+  }
+
+  export type tables_messages_logsCreateManyTablesInput = {
+    tables_messages_logs_id: string
+    entity_id: string
+    message: string
+    message_date: Date | string
+  }
+
+  export type tables_membersUpdateWithoutTablesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    entities?: entitiesUpdateOneRequiredWithoutTables_membersNestedInput
+  }
+
+  export type tables_membersUncheckedUpdateWithoutTablesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    member_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_membersUncheckedUpdateManyWithoutTablesInput = {
+    tables_members_id?: StringFieldUpdateOperationsInput | string
+    member_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tables_messages_logsUpdateWithoutTablesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    entities?: entitiesUpdateOneRequiredWithoutTables_messages_logsNestedInput
+  }
+
+  export type tables_messages_logsUncheckedUpdateWithoutTablesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_messages_logsUncheckedUpdateManyWithoutTablesInput = {
+    tables_messages_logs_id?: StringFieldUpdateOperationsInput | string
+    entity_id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tablesCreateManyTables_picturesInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+  }
+
+  export type tablesUpdateWithoutTables_picturesInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateWithoutTables_picturesInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateManyWithoutTables_picturesInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type videosCreateManyVideos_dataInput = {
     video_id: string
     video_creator_id: string
@@ -45007,6 +52149,14 @@ export namespace Prisma {
      */
     export type Sheets_thumbnailsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Sheets_thumbnailsCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use TablesCountOutputTypeDefaultArgs instead
+     */
+    export type TablesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TablesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use Tables_picturesCountOutputTypeDefaultArgs instead
+     */
+    export type Tables_picturesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Tables_picturesCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use Videos_dataCountOutputTypeDefaultArgs instead
      */
     export type Videos_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Videos_dataCountOutputTypeDefaultArgs<ExtArgs>
@@ -45118,6 +52268,26 @@ export namespace Prisma {
      * @deprecated Use sheets_thumbnailsDefaultArgs instead
      */
     export type sheets_thumbnailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sheets_thumbnailsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tablesDefaultArgs instead
+     */
+    export type tablesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tablesDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tables_membersDefaultArgs instead
+     */
+    export type tables_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_membersDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tables_messages_logsDefaultArgs instead
+     */
+    export type tables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_messages_logsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tables_picturesDefaultArgs instead
+     */
+    export type tables_picturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_picturesDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tables_tabletopsDefaultArgs instead
+     */
+    export type tables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_tabletopsDefaultArgs<ExtArgs>
     /**
      * @deprecated Use user_credentialsDefaultArgs instead
      */

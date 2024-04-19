@@ -74,6 +74,16 @@ export interface MessagesState {
   };
 }
 
+export interface TablesState {
+  page: {
+    tables: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
+
 /* 
 RightSpace.tsx
 Global RightState
@@ -163,7 +173,7 @@ export interface ConversationCardProps {
   conversation_id: string;
   conversation_name: string | null;
   last_message: string | null;
-  members: Members[];
+  members: ConversationMember[];
   conversation_creation_date: string;
   conversations_pictures_id: string | null;
   filter?: string;
@@ -258,9 +268,8 @@ export interface RightSearchFilterProps {
 /* 
   Conversations.tsx
 */
-export interface Members {
+export interface ConversationMember {
   conversation_id: string;
-  member_id: string;
   individual_data?: {
     individual_name: string | null;
     individual_username: string;
@@ -283,7 +292,7 @@ export interface Conversation {
   last_message: string | null;
   last_message_date: string | null;
   conversations_pictures_id: string | null;
-  members: Members[];
+  members: ConversationMember[];
 }
 
 /*
@@ -309,4 +318,61 @@ export interface Contact {
   Tables.tsx
 */
 
-export interface Table {}
+export interface Table {
+  table_id: string;
+  table_name: string;
+  table_creation_date: string;
+  last_message: string;
+  last_message_date: string;
+  tables_pictures_id: string;
+  members: TableMember[];
+}
+
+export interface TableMember {
+  table_id: string;
+  individual_data?: {
+    individual_name: string | null;
+    individual_username: string;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
+
+export interface TableMessageLogs {
+  tables_messages_logs_id: string;
+  table_id: string;
+  entity_id: string;
+  message: string;
+  message_date: string;
+}
+
+export interface TableTabletop {
+  tables_tabletops_id: string;
+  content_data: Blob;
+  content_filename: string;
+  content_date_posted: string;
+  content_x_position: number;
+  content_y_position: number;
+  content_rotation: number;
+}
+
+/* 
+  TableCard.tsx
+*/
+
+export interface TableCardProps {
+  animate?: boolean;
+  table_id: string;
+  table_name: string | null;
+  last_message: string | null;
+  members: TableMember[];
+  table_creation_date: string;
+  tables_pictures_id: string | null;
+  filter?: string;
+}

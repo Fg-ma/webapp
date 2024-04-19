@@ -307,6 +307,45 @@ exports.Prisma.Sheets_thumbnailsScalarFieldEnum = {
   sheet_thumbnail_description: 'sheet_thumbnail_description'
 };
 
+exports.Prisma.TablesScalarFieldEnum = {
+  table_id: 'table_id',
+  table_name: 'table_name',
+  table_creation_date: 'table_creation_date',
+  last_message: 'last_message',
+  last_message_date: 'last_message_date',
+  tables_pictures_id: 'tables_pictures_id'
+};
+
+exports.Prisma.Tables_membersScalarFieldEnum = {
+  tables_members_id: 'tables_members_id',
+  table_id: 'table_id',
+  member_id: 'member_id'
+};
+
+exports.Prisma.Tables_messages_logsScalarFieldEnum = {
+  tables_messages_logs_id: 'tables_messages_logs_id',
+  table_id: 'table_id',
+  entity_id: 'entity_id',
+  message: 'message',
+  message_date: 'message_date'
+};
+
+exports.Prisma.Tables_picturesScalarFieldEnum = {
+  tables_pictures_id: 'tables_pictures_id',
+  table_picture_data: 'table_picture_data',
+  table_picture_filename: 'table_picture_filename'
+};
+
+exports.Prisma.Tables_tabletopsScalarFieldEnum = {
+  tables_tabletops_id: 'tables_tabletops_id',
+  content_data: 'content_data',
+  content_filename: 'content_filename',
+  content_date_posted: 'content_date_posted',
+  content_x_position: 'content_x_position',
+  content_y_position: 'content_y_position',
+  content_rotation: 'content_rotation'
+};
+
 exports.Prisma.User_credentialsScalarFieldEnum = {
   user_id: 'user_id',
   username: 'username',
@@ -381,6 +420,11 @@ exports.Prisma.ModelName = {
   sheets: 'sheets',
   sheets_data: 'sheets_data',
   sheets_thumbnails: 'sheets_thumbnails',
+  tables: 'tables',
+  tables_members: 'tables_members',
+  tables_messages_logs: 'tables_messages_logs',
+  tables_pictures: 'tables_pictures',
+  tables_tabletops: 'tables_tabletops',
   user_credentials: 'user_credentials',
   videos: 'videos',
   videos_data: 'videos_data',
