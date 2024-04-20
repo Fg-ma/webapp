@@ -6,13 +6,13 @@ import {
   Conversation,
   ConversationMember,
   ConversationsMessagesLogs,
-  ConversationPicture,
   Entity,
   Group,
   Individual,
   Organization,
   TableMember,
   Table,
+  TablePicture,
 } from "@FgTypes/types";
 
 // Get a user's full tables
@@ -803,23 +803,22 @@ router.get("/message_button", verifyToken, async (req, res) => {
 });
 
 // Gets the data needed for a conversation picture
-router.get("/get_conversation_picture", async (req, res) => {
-  const { conversations_pictures_id } = req.query;
+router.get("/get_table_picture", async (req, res) => {
+  const { tables_pictures_id } = req.query;
 
   try {
-    const conversationPicture: ConversationPicture =
-      await req.db.conversations_pictures.findUnique({
-        where: {
-          conversations_pictures_id: conversations_pictures_id,
-        },
-      });
+    const tablePicture: TablePicture = await req.db.tables_pictures.findUnique({
+      where: {
+        tables_pictures_id: tables_pictures_id,
+      },
+    });
 
-    if (!conversationPicture) {
+    if (!tablePicture) {
       res.send("Default");
       return;
     }
 
-    res.send(conversationPicture);
+    res.send(tablePicture);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

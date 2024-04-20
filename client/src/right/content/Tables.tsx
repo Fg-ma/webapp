@@ -5,9 +5,9 @@ import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useIndexedDBContext } from "@context/IDBContext";
-import { useConversationContext } from "@context/ConversationContext";
+import { useTableContext } from "@context/TableContext";
 import { TableCard } from "./TableCard";
-import { RightFilterState, Table } from "@FgTypes/rightTypes";
+import { IncomingMessage, RightFilterState, Table } from "@FgTypes/rightTypes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -15,15 +15,11 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Tables() {
-  //const { liveUpdatesSocket } = useSocketContext();
-  //const { lastMessage } = useLastMessageContext();
-  //const { fluxConversation, setFluxConversation } = useConversationContext();
-  //const {
-  //  storeConversation,
-  //  storeConversations,
-  //  getStoredConversations,
-  //  deleteStoredConversations,
-  //} = useIndexedDBContext();
+  const { liveUpdatesSocket } = useSocketContext();
+  const { lastMessage } = useLastMessageContext();
+  const { fluxTable, setFluxTable } = useTableContext();
+  const { storeTable, storeTables, getStoredTables, deleteStoredTables } =
+    useIndexedDBContext();
   //const filter = useSelector(
   //  (state: RightFilterState) =>
   //    state.filters.conversations.filterPayload.value,
@@ -33,7 +29,7 @@ export default function Tables() {
   //  Conversation[]
   //>([]);
   //const [noFilteredMatchesFound, setNoFilteredMatchesFound] = useState(false);
-  //const [newConversation, setNewConversation] = useState<Conversation>();
+  const [newTable, setNewTable] = useState<Table>();
 
   const sortData = (data: Table[]) => {
     const parseDate = (dateString: string | null) =>
@@ -66,38 +62,38 @@ export default function Tables() {
 
   useEffect(() => {
     const fetchTables = async () => {
-      //const storedConversations = await getStoredConversations();
-      //
-      //if (storedConversations.length === 0) {
-      try {
-        const token = localStorage.getItem("token");
+      const storedTables = await getStoredTables();
 
-        if (!token) {
-          return;
+      if (storedTables.length === 0) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            return;
+          }
+
+          const response = await Axios.get(`${serverUrl}/tables/user_tables`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const sortedData = sortData(response.data);
+
+          setTables(sortedData);
+          await storeTables(sortedData);
+        } catch (error) {
+          console.error("Error fetching tables data:", error);
         }
-
-        const response = await Axios.get(`${serverUrl}/tables/user_tables`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const sortedData = sortData(response.data);
-
-        setTables(sortedData);
-        //await storeConversations(sortedData);
-      } catch (error) {
-        console.error("Error fetching tables data:", error);
+      } else {
+        setTables(sortData(storedTables));
       }
-      //} else {
-      //  setConversations(sortData(storedConversations));
-      //}
     };
 
     fetchTables();
   }, []);
 
-  // Handles filtering conversations
+  // Handles filtering tables
   //useEffect(() => {
   //  if (!filter) {
   //    setNoFilteredMatchesFound(false);
@@ -199,184 +195,167 @@ export default function Tables() {
   //  setFilterConversations(filteredConversations);
   //}, [filter]);
 
-  // Handles adding and removing new conversations
-  //useEffect(() => {
-  //  const fetchNewConversation = async () => {
-  //    const storedConversations = await getStoredConversations();
-  //
-  //    if (storedConversations.length !== 0) {
-  //      try {
-  //        const token = localStorage.getItem("token");
-  //
-  //        if (!token) {
-  //          console.error("Token not found in local storage");
-  //          return;
-  //        }
-  //
-  //        const response = await Axios.get(
-  //          `${serverUrl}/conversations/get_conversation_by_conversation_id`,
-  //          {
-  //            params: {
-  //              conversation_id: fluxConversation.conversation_id,
-  //            },
-  //            headers: {
-  //              Authorization: `Bearer ${token}`,
-  //            },
-  //          },
-  //        );
-  //
-  //        const newConversation = { ...response.data, animate: true };
-  //
-  //        setNewConversation(newConversation);
-  //
-  //        await storeConversation({ ...response.data, animate: false });
-  //      } catch (error) {
-  //        console.error("Error fetching Conversation data:", error);
-  //      }
-  //    }
-  //  };
-  //
-  //  const deleteOldConversation = async () => {
-  //    const newConversations = conversations.filter(
-  //      (conversation) =>
-  //        conversation.conversation_id !== fluxConversation.conversation_id,
-  //    );
-  //
-  //    setConversations(newConversations);
-  //
-  //    await deleteStoredConversations();
-  //    await storeConversations(newConversations);
-  //  };
-  //
-  //  if (fluxConversation?.action === "newConversation") {
-  //    fetchNewConversation();
-  //    setFluxConversation({
-  //      action: "",
-  //      conversation_id: "",
-  //    });
-  //  } else if (fluxConversation?.action === "deletedConversation") {
-  //    deleteOldConversation();
-  //    setFluxConversation({
-  //      action: "",
-  //      conversation_id: "",
-  //    });
-  //  }
-  //}, [fluxConversation]);
+  // Handles adding and removing new tables
+  useEffect(() => {
+    const fetchNewConversation = async () => {
+      const storedConversations = await getStoredConversations();
+
+      if (storedConversations.length !== 0) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            console.error("Token not found in local storage");
+            return;
+          }
+
+          const response = await Axios.get(
+            `${serverUrl}/conversations/get_conversation_by_conversation_id`,
+            {
+              params: {
+                conversation_id: fluxConversation.conversation_id,
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const newConversation = { ...response.data, animate: true };
+
+          setNewConversation(newConversation);
+
+          await storeConversation({ ...response.data, animate: false });
+        } catch (error) {
+          console.error("Error fetching Conversation data:", error);
+        }
+      }
+    };
+
+    const deleteOldConversation = async () => {
+      const newConversations = conversations.filter(
+        (conversation) =>
+          conversation.conversation_id !== fluxConversation.conversation_id,
+      );
+
+      setConversations(newConversations);
+
+      await deleteStoredConversations();
+      await storeConversations(newConversations);
+    };
+
+    if (fluxConversation?.action === "newConversation") {
+      fetchNewConversation();
+      setFluxConversation({
+        action: "",
+        conversation_id: "",
+      });
+    } else if (fluxConversation?.action === "deletedConversation") {
+      deleteOldConversation();
+      setFluxConversation({
+        action: "",
+        conversation_id: "",
+      });
+    }
+  }, [fluxConversation]);
 
   // Update last message and message position
-  //useEffect(() => {
-  //  const updatedConversations = conversations.map((conversation) => {
-  //    if (conversation.conversation_id === lastMessage.conversation_id) {
-  //      return {
-  //        ...conversation,
-  //        last_message: lastMessage.last_message,
-  //      };
-  //    }
-  //    return conversation;
-  //  });
-  //
-  //  const indexToUpdate = updatedConversations.findIndex(
-  //    (conversation) =>
-  //      conversation.conversation_id === lastMessage.conversation_id,
-  //  );
-  //
-  //  if (indexToUpdate !== -1) {
-  //    const updatedConversation = updatedConversations.splice(
-  //      indexToUpdate,
-  //      1,
-  //    )[0];
-  //    updatedConversations.unshift(updatedConversation);
-  //  }
-  //
-  //  setConversations(updatedConversations);
-  //}, [lastMessage]);
-  //
-  //// Establish incomingMessage live update socket connection
-  //useEffect(() => {
-  //  const asyncStoreConversations = async (conversations: Conversation[]) => {
-  //    await deleteStoredConversations();
-  //    await storeConversations(conversations);
-  //  };
-  //
-  //  liveUpdatesSocket?.on(
-  //    "incomingMessage",
-  //    (incomingMessage: { content: string; conversation_id: string }) => {
-  //      if (newConversation) {
-  //        setNewConversation((prevConversation) => {
-  //          if (
-  //            prevConversation?.conversation_id ===
-  //            incomingMessage.conversation_id
-  //          ) {
-  //            const updatedConversation = {
-  //              ...prevConversation,
-  //              last_message: incomingMessage.content,
-  //            };
-  //            asyncStoreConversations([updatedConversation, ...conversations]);
-  //            return updatedConversation;
-  //          }
-  //        });
-  //      }
-  //
-  //      setConversations((prevConversations) => {
-  //        const updatedConversations = prevConversations.map((conversation) => {
-  //          if (
-  //            conversation.conversation_id === incomingMessage.conversation_id
-  //          ) {
-  //            return {
-  //              ...conversation,
-  //              last_message: incomingMessage.content,
-  //            };
-  //          }
-  //          return conversation;
-  //        });
-  //
-  //        const indexToUpdate = updatedConversations.findIndex(
-  //          (conversation) =>
-  //            conversation.conversation_id === incomingMessage.conversation_id,
-  //        );
-  //
-  //        if (indexToUpdate !== -1) {
-  //          const updatedConversation = updatedConversations.splice(
-  //            indexToUpdate,
-  //            1,
-  //          )[0];
-  //          updatedConversations.unshift(updatedConversation);
-  //        }
-  //
-  //        asyncStoreConversations(updatedConversations);
-  //        return updatedConversations;
-  //      });
-  //    },
-  //  );
-  //
-  //  return () => {
-  //    liveUpdatesSocket?.off("incomingMessage");
-  //  };
-  //}, []);
+  useEffect(() => {
+    const updatedTables = tables.map((table) => {
+      if (table.table_id === lastMessage.table.table_id) {
+        return {
+          ...table,
+          last_message: lastMessage.table.last_message,
+        };
+      }
+      return table;
+    });
 
-  //let newConversationCard;
-  //if (newConversation) {
-  //  const foundConversation = conversations.find(
-  //    (conversation) =>
-  //      conversation.conversation_id === newConversation.conversation_id,
-  //  );
-  //  if (!foundConversation) {
-  //    newConversationCard = (
-  //      <ConversationCard
-  //        key={newConversation.conversation_id}
-  //        animate={newConversation.animate}
-  //        conversation_id={newConversation.conversation_id}
-  //        conversation_name={newConversation.conversation_name}
-  //        last_message={newConversation.last_message}
-  //        members={newConversation.members}
-  //        conversation_creation_date={
-  //          newConversation.conversation_creation_date
-  //        }
-  //        conversations_pictures_id={newConversation.conversations_pictures_id}
-  //      />
-  //    );
-  //  }
-  //}
+    const indexToUpdate = updatedTables.findIndex(
+      (table) => table.table_id === lastMessage.table.table_id,
+    );
+
+    if (indexToUpdate !== -1) {
+      const updatedTable = updatedTables.splice(indexToUpdate, 1)[0];
+      updatedTables.unshift(updatedTable);
+    }
+
+    setTables(updatedTables);
+  }, [lastMessage]);
+
+  // Establish incomingMessage live update socket connection
+  useEffect(() => {
+    const asyncStoreTables = async (tables: Table[]) => {
+      await deleteStoredTables();
+      await storeTables(tables);
+    };
+
+    liveUpdatesSocket?.on(
+      "incomingMessage",
+      (incomingMessage: IncomingMessage) => {
+        if (newTable) {
+          setNewTable((prevTable) => {
+            if (prevTable?.table_id === incomingMessage.table.table_id) {
+              const updatedTable = {
+                ...prevTable,
+                last_message: incomingMessage.table.content,
+              };
+              asyncStoreTables([updatedTable, ...tables]);
+              return updatedTable;
+            }
+          });
+        }
+
+        setTables((prevTables) => {
+          const updatedTables = prevTables.map((table) => {
+            if (table.table_id === incomingMessage.table.table_id) {
+              return {
+                ...table,
+                last_message: incomingMessage.table.content,
+              };
+            }
+            return table;
+          });
+
+          const indexToUpdate = updatedTables.findIndex(
+            (table) => table.table_id === incomingMessage.table.table_id,
+          );
+
+          if (indexToUpdate !== -1) {
+            const updatedTable = updatedTables.splice(indexToUpdate, 1)[0];
+            updatedTables.unshift(updatedTable);
+          }
+
+          asyncStoreTables(updatedTables);
+          return updatedTables;
+        });
+      },
+    );
+
+    return () => {
+      liveUpdatesSocket?.off("incomingMessage");
+    };
+  }, []);
+
+  let newTableCard;
+  if (newTable) {
+    const foundTable = tables.find(
+      (table) => table.table_id === newTable.table_id,
+    );
+    if (!foundTable) {
+      newTableCard = (
+        <TableCard
+          key={newTable.table_id}
+          table_id={newTable.table_id}
+          table_name={newTable.table_name}
+          last_message={newTable.last_message}
+          members={newTable.members}
+          table_creation_date={newTable.table_creation_date}
+          tables_pictures_id={newTable.tables_pictures_id}
+        />
+      );
+    }
+  }
 
   //const filteredConversationsCards = filterConversations.map((conversation) => {
   //  return (

@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  setConversation,
   setIds,
   setPageState,
+  setTable,
 } from "@redux/pageState/pageStateActions";
 import { TableMember, TableCardProps } from "@FgTypes/rightTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
@@ -79,7 +79,7 @@ export function TableCard({
   const handleClick = () => {
     dispatch(setPageState("main", "tables"));
     dispatch(setIds("main", "table_id", table_id));
-    //dispatch(setTable(table_name, membersNames, table_creation_date));
+    dispatch(setTable(table_name, membersNames, table_creation_date));
   };
 
   const lastMessage = last_message?.includes("\n")
@@ -136,7 +136,7 @@ export function TableCard({
                         : ""
               }
               clickable={false}
-              conversations_pictures_id={
+              tables_pictures_id={
                 tables_pictures_id ? tables_pictures_id : undefined
               }
             />

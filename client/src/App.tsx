@@ -18,6 +18,7 @@ import { LastMessageContextProvider } from "@context/LastMessageContext";
 import { ContactContextProvider } from "@context/ContactContext";
 import { ConversationContextProvider } from "@context/ConversationContext";
 import { useIndexedDBContext } from "@context/IDBContext";
+import { TableContextProvider } from "@context/TableContext";
 
 interface LoginState {
   page: {
@@ -94,40 +95,46 @@ export default function App() {
         <AffiliateContextProvider>
           <ContactContextProvider>
             <ConversationContextProvider>
-              <div className="h-screen w-screen overflow-clip">
-                <div className="flex justify-between px-12 pt-16 h-full">
-                  {mainPageState === "tables" && <Tables />}
+              <TableContextProvider>
+                <div className="h-screen w-screen overflow-clip">
+                  <div className="flex justify-between px-12 pt-16 h-full">
+                    {mainPageState === "tables" && <Tables />}
 
-                  {mainPageState !== "tables" && <LeftSpace />}
+                    {mainPageState !== "tables" && <LeftSpace />}
 
-                  {mainPageState !== "tables" && (
+                    {mainPageState !== "tables" && (
+                      <div
+                        ref={middleSpaceContainerRef}
+                        className="h-full flex flex-col"
+                        style={{
+                          width: "45%",
+                          minWidth: "45%",
+                          maxWidth: "45%",
+                        }}
+                      >
+                        <>
+                          <MiddleSpace
+                            middleSpaceContainerRef={middleSpaceContainerRef}
+                          />
+                          <PageNav />
+                        </>
+                      </div>
+                    )}
+
                     <div
-                      ref={middleSpaceContainerRef}
                       className="h-full flex flex-col"
-                      style={{ width: "45%", minWidth: "45%", maxWidth: "45%" }}
+                      style={{
+                        width: "24.5%",
+                        minWidth: "24.5%",
+                        maxWidth: "24.5%",
+                      }}
                     >
-                      <>
-                        <MiddleSpace
-                          middleSpaceContainerRef={middleSpaceContainerRef}
-                        />
-                        <PageNav />
-                      </>
+                      <RightSpace />
+                      {mainPageState === "tables" && <PageNav />}
                     </div>
-                  )}
-
-                  <div
-                    className="h-full flex flex-col"
-                    style={{
-                      width: "24.5%",
-                      minWidth: "24.5%",
-                      maxWidth: "24.5%",
-                    }}
-                  >
-                    <RightSpace />
-                    {mainPageState === "tables" && <PageNav />}
                   </div>
                 </div>
-              </div>
+              </TableContextProvider>
             </ConversationContextProvider>
           </ContactContextProvider>
         </AffiliateContextProvider>

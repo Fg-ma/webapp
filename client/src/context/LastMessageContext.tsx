@@ -22,11 +22,23 @@ export function LastMessageContextProvider({
   children,
 }: LastMessageContextProviderProps) {
   const [lastMessage, setLastMessage] = useState<{
-    conversation_id: string;
-    last_message: string;
+    conversation: {
+      conversation_id: string | null;
+      last_message: string | null;
+    };
+    table: {
+      table_id: string | null;
+      last_message: string | null;
+    };
   }>({
-    conversation_id: "",
-    last_message: "",
+    conversation: {
+      conversation_id: "",
+      last_message: "",
+    },
+    table: {
+      table_id: "",
+      last_message: "",
+    },
   });
 
   return (

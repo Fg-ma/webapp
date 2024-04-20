@@ -3,6 +3,7 @@ import {
   CONTACTS_TABLE,
   CONVERSATIONS_TABLE,
   PROFILE_PICTURES_TABLE,
+  TABLES_TABLE,
   THUMBNAILS_TABLE,
   useIndexedDB,
 } from "@IDB/IDBService";
@@ -15,6 +16,7 @@ import {
   Organization,
   Thumbnail,
   Conversation,
+  Table,
 } from "@FgTypes/contextTypes";
 
 const IndexedDBContext = createContext<IDBService | undefined>(undefined);
@@ -40,7 +42,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     try {
       await indexedDBService.addItem(table, index, affiliatedEntity);
     } catch (error) {
-      console.error("Error storing entity in IndexedDB:", error);
+      console.error("Error storing affiliated entity in IndexedDB:", error);
     }
   };
 
@@ -51,7 +53,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
       const storedEntities = await indexedDBService.getAllItemsFromTable(table);
       return storedEntities;
     } catch (error) {
-      console.error("Error getting stored entities from IndexedDB:", error);
+      console.error(
+        "Error getting stored affiliated entities from IndexedDB:",
+        error,
+      );
       return [];
     }
   };
@@ -65,7 +70,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         await storeAffiliatedEntity(table, i, sortedData[i]);
       }
     } catch (error) {
-      console.error("Error storing sorted individuals in IndexedDB:", error);
+      console.error("Error storing affiliated entities in IndexedDB:", error);
     }
   };
 
@@ -75,7 +80,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     try {
       await indexedDBService.deleteAllItemsFromTable(table);
     } catch (error) {
-      console.error("Error deleting stored entities from IndexedDB:", error);
+      console.error(
+        "Error deleting stored affiliated entities from IndexedDB:",
+        error,
+      );
     }
   };
 
@@ -101,7 +109,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         );
       return returnedProfilePicture as Blob | null;
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error(
+        "Error getting stored profile picture in IndexedDB:",
+        error,
+      );
       return null;
     }
   };
@@ -113,7 +124,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     try {
       await indexedDBService.addItem(THUMBNAILS_TABLE, index, thumbnail);
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error storing thumbnail in IndexedDB:", error);
     }
   };
 
@@ -127,7 +138,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
       );
       return returnedImage as Thumbnail | null;
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error getting stored thumbnail in IndexedDB:", error);
       return null;
     }
   };
@@ -138,7 +149,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         await indexedDBService.getAllItemsFromTable(CONTACTS_TABLE);
       return contacts as Contact[];
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error getting stored contacts in IndexedDB:", error);
       return [];
     }
   };
@@ -153,7 +164,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         );
       }
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error storing contacts in IndexedDB:", error);
     }
   };
 
@@ -165,7 +176,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         contact,
       );
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error storing contact in IndexedDB:", error);
     }
   };
 
@@ -173,7 +184,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     try {
       await indexedDBService.deleteAllItemsFromTable(CONTACTS_TABLE);
     } catch (error) {
-      console.error("Error deleting stored entities from IndexedDB:", error);
+      console.error("Error deleting stored contacts from IndexedDB:", error);
     }
   };
 
@@ -183,7 +194,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         await indexedDBService.getAllItemsFromTable(CONVERSATIONS_TABLE);
       return conversations as Conversation[];
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error getting stored conversations in IndexedDB:", error);
       return [];
     }
   };
@@ -200,7 +211,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         );
       }
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error storing converstaions in IndexedDB:", error);
     }
   };
 
@@ -214,7 +225,7 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
         conversation,
       );
     } catch (error) {
-      console.error("Error storing profile picture in IndexedDB:", error);
+      console.error("Error storing conversation in IndexedDB:", error);
     }
   };
 
@@ -222,7 +233,50 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     try {
       await indexedDBService.deleteAllItemsFromTable(CONVERSATIONS_TABLE);
     } catch (error) {
-      console.error("Error deleting stored entities from IndexedDB:", error);
+      console.error(
+        "Error deleting stored conversations from IndexedDB:",
+        error,
+      );
+    }
+  };
+
+  const getStoredTables = async (): Promise<Table[]> => {
+    try {
+      const tables = await indexedDBService.getAllItemsFromTable(TABLES_TABLE);
+      return tables as Table[];
+    } catch (error) {
+      console.error("Error getting stored tables in IndexedDB:", error);
+      return [];
+    }
+  };
+
+  const storeTables = async (tables: Table[]): Promise<void> => {
+    try {
+      for (let i = 0; i < tables.length; i++) {
+        await indexedDBService.addItem(
+          TABLES_TABLE,
+          tables[i].table_id,
+          tables[i],
+        );
+      }
+    } catch (error) {
+      console.error("Error storing tables in IndexedDB:", error);
+    }
+  };
+
+  const storeTable = async (table: Table): Promise<void> => {
+    try {
+      await indexedDBService.addItem(TABLES_TABLE, table.table_id, table);
+    } catch (error) {
+      console.error("Error storing table in IndexedDB:", error);
+    }
+  };
+
+  const deleteStoredTables = async (): Promise<void> => {
+    try {
+      await indexedDBService.deleteAllItemsFromTable(TABLES_TABLE);
+    } catch (error) {
+      console.error("Error deleting stored tables from IndexedDB:", error);
     }
   };
 
@@ -249,6 +303,10 @@ export const IndexedDBProvider = ({ children }: IndexedDBProviderProps) => {
     storeConversations: storeConversations,
     storeConversation: storeConversation,
     deleteStoredConversations: deleteStoredConversations,
+    getStoredTables: getStoredTables,
+    storeTables: storeTables,
+    storeTable: storeTable,
+    deleteStoredTables: deleteStoredTables,
   };
 
   return (

@@ -82,6 +82,32 @@ export interface Thumbnail {
   description: string;
 }
 
+export interface Table {
+  table_id: string;
+  table_name: string | null;
+  table_creation_date: string;
+  last_message: string | null;
+  last_message_date: string | null;
+  tables_pictures_id: string | null;
+  members: TableMember[];
+}
+
+export interface TableMember {
+  table_id: string;
+  individual_data?: {
+    individual_name: string | null;
+    individual_username: string;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+  };
+}
+
 export interface IndexedDBProviderProps {
   children: ReactNode;
 }
@@ -123,6 +149,10 @@ export interface IDBService {
   storeConversations: (conversations: Conversation[]) => Promise<void>;
   storeConversation: (conversation: Conversation) => Promise<void>;
   deleteStoredConversations: () => Promise<void>;
+  getStoredTables: () => Promise<Table[]>;
+  storeTables: (tables: Table[]) => Promise<void>;
+  storeTable: (table: Table) => Promise<void>;
+  deleteStoredTables: () => Promise<void>;
 }
 
 /*
@@ -164,13 +194,25 @@ export interface LastMessageContextProviderProps {
 
 export interface LastMessageContextType {
   lastMessage: {
-    conversation_id: string;
-    last_message: string;
+    conversation: {
+      conversation_id: string | null;
+      last_message: string | null;
+    };
+    table: {
+      table_id: string | null;
+      last_message: string | null;
+    };
   };
   setLastMessage: React.Dispatch<
     React.SetStateAction<{
-      conversation_id: string;
-      last_message: string;
+      conversation: {
+        conversation_id: string | null;
+        last_message: string | null;
+      };
+      table: {
+        table_id: string | null;
+        last_message: string | null;
+      };
     }>
   >;
 }
@@ -202,7 +244,7 @@ export interface PinnedContextType {
 }
 
 /*
- ContactContext.tsx
+  ContactContext.tsx
 */
 
 export interface ContactContextProviderProps {
@@ -223,7 +265,7 @@ export interface ContactContextType {
 }
 
 /*
- ConversationContext.tsx
+  ConversationContext.tsx
 */
 
 export interface ConversationContextProviderProps {
@@ -239,6 +281,27 @@ export interface ConversationContextType {
     React.SetStateAction<{
       action: string;
       conversation_id: string;
+    }>
+  >;
+}
+
+/*
+  TableContext.tsx
+*/
+
+export interface TableContextProviderProps {
+  children: ReactNode;
+}
+
+export interface TableContextType {
+  fluxTable: {
+    action: string;
+    table_id: string;
+  };
+  setFluxTable: React.Dispatch<
+    React.SetStateAction<{
+      action: string;
+      table_id: string;
     }>
   >;
 }

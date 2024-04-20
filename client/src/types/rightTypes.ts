@@ -1,6 +1,11 @@
 import { ChangeEvent } from "react";
 
 // Global
+
+export interface IncomingMessage {
+  conversation: { content: string | null; conversation_id: string | null };
+  table: { content: string | null; table_id: string | null };
+}
 export interface RightState {
   page: {
     right: {
@@ -320,11 +325,11 @@ export interface Contact {
 
 export interface Table {
   table_id: string;
-  table_name: string;
+  table_name: string | null;
   table_creation_date: string;
-  last_message: string;
-  last_message_date: string;
-  tables_pictures_id: string;
+  last_message: string | null;
+  last_message_date: string | null;
+  tables_pictures_id: string | null;
   members: TableMember[];
 }
 

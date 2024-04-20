@@ -37,6 +37,7 @@ export default function ProfilePicture({
   clickable,
   conversations_pictures_id,
   contacts_pictures_id,
+  tables_pictures_id,
 }: ProfilePictureProps) {
   const dispatch = useDispatch();
 
@@ -135,6 +136,42 @@ export default function ProfilePicture({
               });
 
               await storeProfilePicture(contacts_pictures_id, blob);
+            }
+          } else {
+            setProfilePictureData({
+              profilePictureUrl: "",
+            });
+          }
+        } else if (tables_pictures_id) {
+          const response = await Axios.get(
+            `${serverUrl}/tables/get_table_picture`,
+            {
+              params: {
+                tables_pictures_id: tables_pictures_id,
+              },
+            },
+          );
+
+          if (response.data !== "default") {
+            const blobData = new Uint8Array(
+              response.data.table_picture_data.data,
+            );
+
+            const extension = response.data.table_picture_filename
+              .slice(-3)
+              .toLowerCase();
+
+            const mimeType = getMimeType(extension);
+
+            if (mimeType) {
+              const blob = new Blob([blobData], { type: mimeType });
+              const url = URL.createObjectURL(blob);
+
+              setProfilePictureData({
+                profilePictureUrl: url,
+              });
+
+              await storeProfilePicture(tables_pictures_id, blob);
             }
           } else {
             setProfilePictureData({

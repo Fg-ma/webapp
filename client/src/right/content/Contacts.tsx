@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
-import { Contact, RightFilterState } from "@FgTypes/rightTypes";
+import {
+  Contact,
+  IncomingMessage,
+  RightFilterState,
+} from "@FgTypes/rightTypes";
 import { ContactCard } from "./ContactCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useContactContext } from "@context/ContactContext";
@@ -202,22 +206,25 @@ export default function Contacts() {
 
   // Update last message and message position
   useEffect(() => {
-    if (lastMessage.conversation_id === "") {
+    if (lastMessage.conversation.conversation_id === "") {
       return;
     }
 
     const updatedContacts = contacts.map((contact) => {
-      if (contact.conversation_id === lastMessage.conversation_id) {
+      if (
+        contact.conversation_id === lastMessage.conversation.conversation_id
+      ) {
         return {
           ...contact,
-          last_message: lastMessage.last_message,
+          last_message: lastMessage.conversation.last_message,
         };
       }
       return contact;
     });
 
     const indexToUpdate = updatedContacts.findIndex(
-      (contact) => contact.conversation_id === lastMessage.conversation_id,
+      (contact) =>
+        contact.conversation_id === lastMessage.conversation.conversation_id,
     );
 
     if (indexToUpdate !== -1) {
@@ -237,15 +244,16 @@ export default function Contacts() {
 
     liveUpdatesSocket?.on(
       "incomingMessage",
-      (incomingMessage: { content: string; conversation_id: string }) => {
+      (incomingMessage: IncomingMessage) => {
         if (newContact) {
           setNewContact((prevContact) => {
             if (
-              prevContact?.conversation_id === incomingMessage.conversation_id
+              prevContact?.conversation_id ===
+              incomingMessage.conversation.conversation_id
             ) {
               const updatedContact = {
                 ...prevContact,
-                last_message: incomingMessage.content,
+                last_message: incomingMessage.conversation.content,
               };
               asyncStoreContacts([updatedContact, ...contacts]);
               return updatedContact;
@@ -255,10 +263,13 @@ export default function Contacts() {
 
         setContacts((prevContacts) => {
           const updatedContacts = prevContacts.map((contact) => {
-            if (contact.conversation_id === incomingMessage.conversation_id) {
+            if (
+              contact.conversation_id ===
+              incomingMessage.conversation.conversation_id
+            ) {
               return {
                 ...contact,
-                last_message: incomingMessage.content,
+                last_message: incomingMessage.conversation.content,
               };
             }
             return contact;
@@ -266,7 +277,8 @@ export default function Contacts() {
 
           const indexToUpdate = updatedContacts.findIndex(
             (contact) =>
-              contact.conversation_id === incomingMessage.conversation_id,
+              contact.conversation_id ===
+              incomingMessage.conversation.conversation_id,
           );
 
           if (indexToUpdate !== -1) {

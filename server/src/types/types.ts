@@ -349,11 +349,11 @@ export interface EntityReferences {
 
 export interface Table {
   table_id: string;
-  table_name: string;
+  table_name: string | null;
   table_creation_date: string;
-  last_message: string;
-  last_message_date: string;
-  tables_pictures_id: string;
+  last_message: string | null;
+  last_message_date: string | null;
+  tables_pictures_id: string | null;
   members?: TableMember[];
 }
 
@@ -391,4 +391,10 @@ export interface TableTabletop {
   content_x_position: number;
   content_y_position: number;
   content_rotation: number;
+}
+
+export interface TablePicture {
+  tables_pictures_id: string;
+  table_picture_data: Blob;
+  table_picture_filename: string;
 }

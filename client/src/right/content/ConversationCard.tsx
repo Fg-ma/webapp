@@ -6,7 +6,7 @@ import {
   setIds,
   setPageState,
 } from "@redux/pageState/pageStateActions";
-import { ConversationCardProps, Members } from "@FgTypes/rightTypes";
+import { ConversationCardProps, ConversationMember } from "@FgTypes/rightTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 function highlightText(text: string | null, filter: string | undefined) {
@@ -28,7 +28,7 @@ function highlightText(text: string | null, filter: string | undefined) {
   );
 }
 
-const getMembersNames = (members: Members[]) => {
+const getMembersNames = (members: ConversationMember[]) => {
   let conversationMembersNames: string[] = [];
 
   for (const member of members) {

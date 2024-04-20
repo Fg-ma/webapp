@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
 import { useSocketContext } from "@context/LiveUpdatesContext";
-import { Conversation, RightFilterState } from "@FgTypes/rightTypes";
+import {
+  Conversation,
+  IncomingMessage,
+  RightFilterState,
+} from "@FgTypes/rightTypes";
 import { ConversationCard } from "./ConversationCard";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -272,10 +276,13 @@ export default function Conversations() {
   // Update last message and message position
   useEffect(() => {
     const updatedConversations = conversations.map((conversation) => {
-      if (conversation.conversation_id === lastMessage.conversation_id) {
+      if (
+        conversation.conversation_id ===
+        lastMessage.conversation.conversation_id
+      ) {
         return {
           ...conversation,
-          last_message: lastMessage.last_message,
+          last_message: lastMessage.conversation.last_message,
         };
       }
       return conversation;
@@ -283,7 +290,8 @@ export default function Conversations() {
 
     const indexToUpdate = updatedConversations.findIndex(
       (conversation) =>
-        conversation.conversation_id === lastMessage.conversation_id,
+        conversation.conversation_id ===
+        lastMessage.conversation.conversation_id,
     );
 
     if (indexToUpdate !== -1) {
@@ -306,16 +314,16 @@ export default function Conversations() {
 
     liveUpdatesSocket?.on(
       "incomingMessage",
-      (incomingMessage: { content: string; conversation_id: string }) => {
+      (incomingMessage: IncomingMessage) => {
         if (newConversation) {
           setNewConversation((prevConversation) => {
             if (
               prevConversation?.conversation_id ===
-              incomingMessage.conversation_id
+              incomingMessage.conversation.conversation_id
             ) {
               const updatedConversation = {
                 ...prevConversation,
-                last_message: incomingMessage.content,
+                last_message: incomingMessage.conversation.content,
               };
               asyncStoreConversations([updatedConversation, ...conversations]);
               return updatedConversation;
@@ -326,11 +334,12 @@ export default function Conversations() {
         setConversations((prevConversations) => {
           const updatedConversations = prevConversations.map((conversation) => {
             if (
-              conversation.conversation_id === incomingMessage.conversation_id
+              conversation.conversation_id ===
+              incomingMessage.conversation.conversation_id
             ) {
               return {
                 ...conversation,
-                last_message: incomingMessage.content,
+                last_message: incomingMessage.conversation.content,
               };
             }
             return conversation;
@@ -338,7 +347,8 @@ export default function Conversations() {
 
           const indexToUpdate = updatedConversations.findIndex(
             (conversation) =>
-              conversation.conversation_id === incomingMessage.conversation_id,
+              conversation.conversation_id ===
+              incomingMessage.conversation.conversation_id,
           );
 
           if (indexToUpdate !== -1) {

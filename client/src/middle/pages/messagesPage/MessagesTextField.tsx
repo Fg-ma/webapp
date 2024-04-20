@@ -106,8 +106,8 @@ export default function MessagesTextField({
     liveUpdatesSocket?.emit(
       "outgoingMessage",
       token,
-      conversation_id,
       inputValue,
+      (conversation_id = conversation_id),
     );
 
     await Axios.put(
@@ -123,10 +123,13 @@ export default function MessagesTextField({
       },
     );
 
-    setLastMessage({
-      conversation_id: conversation_id,
-      last_message: inputValue,
-    });
+    setLastMessage((prev) => ({
+      ...prev,
+      conversation: {
+        conversation_id: conversation_id,
+        last_message: inputValue,
+      },
+    }));
 
     if (messagesPageRef.current) {
       messagesPageRef.current.scrollTop = messagesPageRef.current.scrollHeight;
