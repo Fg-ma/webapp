@@ -324,6 +324,7 @@ export interface Contact {
 */
 
 export interface Table {
+  animate?: boolean;
   table_id: string;
   table_name: string | null;
   table_creation_date: string;

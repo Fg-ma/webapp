@@ -20,15 +20,12 @@ export default function Tables() {
   const { fluxTable, setFluxTable } = useTableContext();
   const { storeTable, storeTables, getStoredTables, deleteStoredTables } =
     useIndexedDBContext();
-  //const filter = useSelector(
-  //  (state: RightFilterState) =>
-  //    state.filters.conversations.filterPayload.value,
-  //);
+  const filter = useSelector(
+    (state: RightFilterState) => state.filters.tables.filterPayload.value,
+  );
   const [tables, setTables] = useState<Table[]>([]);
-  //const [filterConversations, setFilterConversations] = useState<
-  //  Conversation[]
-  //>([]);
-  //const [noFilteredMatchesFound, setNoFilteredMatchesFound] = useState(false);
+  const [filterTables, setFilterTables] = useState<Table[]>([]);
+  const [noFilteredMatchesFound, setNoFilteredMatchesFound] = useState(false);
   const [newTable, setNewTable] = useState<Table>();
 
   const sortData = (data: Table[]) => {
@@ -94,113 +91,109 @@ export default function Tables() {
   }, []);
 
   // Handles filtering tables
-  //useEffect(() => {
-  //  if (!filter) {
-  //    setNoFilteredMatchesFound(false);
-  //    setFilterConversations([]);
-  //    return;
-  //  }
-  //
-  //  const lowerCaseFilter = filter.toLowerCase();
-  //
-  //  let allConversations = conversations;
-  //  if (newConversation) {
-  //    allConversations = [newConversation, ...conversations];
-  //  }
-  //
-  //  const filteredConversations = allConversations.filter((conversation) => {
-  //    let last_message = conversation.last_message?.toLowerCase();
-  //    if (conversation.last_message?.toLowerCase().includes("\n")) {
-  //      last_message = conversation.last_message?.toLowerCase().split("\n")[0];
-  //    }
-  //
-  //    if (last_message?.includes(lowerCaseFilter)) {
-  //      return true;
-  //    }
-  //
-  //    if (
-  //      conversation.conversation_name?.toLowerCase().includes(lowerCaseFilter)
-  //    ) {
-  //      return true;
-  //    }
-  //
-  //    for (const memberIndex in conversation.members) {
-  //      const individualData =
-  //        conversation.members[memberIndex].individual_data;
-  //      if (individualData) {
-  //        if (individualData.individual_name) {
-  //          if (
-  //            individualData.individual_name
-  //              .toLowerCase()
-  //              .includes(lowerCaseFilter)
-  //          ) {
-  //            return true;
-  //          }
-  //        } else {
-  //          if (
-  //            individualData.individual_username
-  //              .toLowerCase()
-  //              .includes(lowerCaseFilter)
-  //          ) {
-  //            return true;
-  //          }
-  //        }
-  //      }
-  //
-  //      const groupData = conversation.members[memberIndex].group_data;
-  //      if (groupData) {
-  //        if (groupData.group_name) {
-  //          if (groupData.group_name.toLowerCase().includes(lowerCaseFilter)) {
-  //            return true;
-  //          }
-  //        } else {
-  //          if (
-  //            groupData.group_handle.toLowerCase().includes(lowerCaseFilter)
-  //          ) {
-  //            return true;
-  //          }
-  //        }
-  //      }
-  //
-  //      const organizationData =
-  //        conversation.members[memberIndex].organization_data;
-  //      if (organizationData) {
-  //        if (organizationData.organization_name) {
-  //          if (
-  //            organizationData.organization_name
-  //              .toLowerCase()
-  //              .includes(lowerCaseFilter)
-  //          ) {
-  //            return true;
-  //          }
-  //        } else {
-  //          if (
-  //            organizationData.organization_handle
-  //              .toLowerCase()
-  //              .includes(lowerCaseFilter)
-  //          ) {
-  //            return true;
-  //          }
-  //        }
-  //      }
-  //    }
-  //
-  //    return false;
-  //  });
-  //
-  //  if (filterConversations.length === 0) {
-  //    setNoFilteredMatchesFound(true);
-  //  }
-  //
-  //  setFilterConversations(filteredConversations);
-  //}, [filter]);
+  useEffect(() => {
+    if (!filter) {
+      setNoFilteredMatchesFound(false);
+      setFilterTables([]);
+      return;
+    }
+
+    const lowerCaseFilter = filter.toLowerCase();
+
+    let allTables = tables;
+    if (newTable) {
+      allTables = [newTable, ...tables];
+    }
+
+    const filteredTables = allTables.filter((table) => {
+      let last_message = table.last_message?.toLowerCase();
+      if (table.last_message?.toLowerCase().includes("\n")) {
+        last_message = table.last_message?.toLowerCase().split("\n")[0];
+      }
+
+      if (last_message?.includes(lowerCaseFilter)) {
+        return true;
+      }
+
+      if (table.table_name?.toLowerCase().includes(lowerCaseFilter)) {
+        return true;
+      }
+
+      for (const memberIndex in table.members) {
+        const individualData = table.members[memberIndex].individual_data;
+        if (individualData) {
+          if (individualData.individual_name) {
+            if (
+              individualData.individual_name
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          } else {
+            if (
+              individualData.individual_username
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+
+        const groupData = table.members[memberIndex].group_data;
+        if (groupData) {
+          if (groupData.group_name) {
+            if (groupData.group_name.toLowerCase().includes(lowerCaseFilter)) {
+              return true;
+            }
+          } else {
+            if (
+              groupData.group_handle.toLowerCase().includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+
+        const organizationData = table.members[memberIndex].organization_data;
+        if (organizationData) {
+          if (organizationData.organization_name) {
+            if (
+              organizationData.organization_name
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          } else {
+            if (
+              organizationData.organization_handle
+                .toLowerCase()
+                .includes(lowerCaseFilter)
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    });
+
+    if (filterTables.length === 0) {
+      setNoFilteredMatchesFound(true);
+    }
+
+    setFilterTables(filteredTables);
+  }, [filter]);
 
   // Handles adding and removing new tables
   useEffect(() => {
-    const fetchNewConversation = async () => {
-      const storedConversations = await getStoredConversations();
+    const fetchNewTable = async () => {
+      const storedTables = await getStoredTables();
 
-      if (storedConversations.length !== 0) {
+      if (storedTables.length !== 0) {
         try {
           const token = localStorage.getItem("token");
 
@@ -210,10 +203,10 @@ export default function Tables() {
           }
 
           const response = await Axios.get(
-            `${serverUrl}/conversations/get_conversation_by_conversation_id`,
+            `${serverUrl}/tables/get_table_by_table_id`,
             {
               params: {
-                conversation_id: fluxConversation.conversation_id,
+                table_id: fluxTable.table_id,
               },
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -221,43 +214,42 @@ export default function Tables() {
             },
           );
 
-          const newConversation = { ...response.data, animate: true };
+          const newTable = { ...response.data, animate: true };
 
-          setNewConversation(newConversation);
+          setNewTable(newTable);
 
-          await storeConversation({ ...response.data, animate: false });
+          await storeTable({ ...response.data, animate: false });
         } catch (error) {
-          console.error("Error fetching Conversation data:", error);
+          console.error("Error fetching table data:", error);
         }
       }
     };
 
-    const deleteOldConversation = async () => {
-      const newConversations = conversations.filter(
-        (conversation) =>
-          conversation.conversation_id !== fluxConversation.conversation_id,
+    const deleteOldTable = async () => {
+      const newTables = tables.filter(
+        (table) => table.table_id !== fluxTable.table_id,
       );
 
-      setConversations(newConversations);
+      setTables(newTables);
 
-      await deleteStoredConversations();
-      await storeConversations(newConversations);
+      await deleteStoredTables();
+      await storeTables(newTables);
     };
 
-    if (fluxConversation?.action === "newConversation") {
-      fetchNewConversation();
-      setFluxConversation({
+    if (fluxTable?.action === "newTable") {
+      fetchNewTable();
+      setFluxTable({
         action: "",
-        conversation_id: "",
+        table_id: "",
       });
-    } else if (fluxConversation?.action === "deletedConversation") {
-      deleteOldConversation();
-      setFluxConversation({
+    } else if (fluxTable?.action === "deletedTable") {
+      deleteOldTable();
+      setFluxTable({
         action: "",
-        conversation_id: "",
+        table_id: "",
       });
     }
-  }, [fluxConversation]);
+  }, [fluxTable]);
 
   // Update last message and message position
   useEffect(() => {
@@ -346,6 +338,7 @@ export default function Tables() {
       newTableCard = (
         <TableCard
           key={newTable.table_id}
+          animate={newTable.animate}
           table_id={newTable.table_id}
           table_name={newTable.table_name}
           last_message={newTable.last_message}
@@ -357,20 +350,20 @@ export default function Tables() {
     }
   }
 
-  //const filteredConversationsCards = filterConversations.map((conversation) => {
-  //  return (
-  //    <ConversationCard
-  //      key={conversation.conversation_id}
-  //      conversation_id={conversation.conversation_id}
-  //      conversation_name={conversation.conversation_name}
-  //      last_message={conversation.last_message}
-  //      members={conversation.members}
-  //      conversation_creation_date={conversation.conversation_creation_date}
-  //      conversations_pictures_id={conversation.conversations_pictures_id}
-  //      filter={filter}
-  //    />
-  //  );
-  //});
+  const filteredTablesCards = filterTables.map((table) => {
+    return (
+      <TableCard
+        key={table.table_id}
+        table_id={table.table_id}
+        table_name={table.table_name}
+        last_message={table.last_message}
+        members={table.members}
+        table_creation_date={table.table_creation_date}
+        tables_pictures_id={table.tables_pictures_id}
+        filter={filter}
+      />
+    );
+  });
 
   const tablesCards = tables.map((table) => {
     return (
@@ -386,13 +379,15 @@ export default function Tables() {
     );
   });
 
-  return <div>{tablesCards}</div>;
+  return (
+    <div>
+      {filteredTablesCards}
+      {!noFilteredMatchesFound &&
+        filteredTablesCards.length === 0 &&
+        newTableCard}
+      {!noFilteredMatchesFound &&
+        filteredTablesCards.length === 0 &&
+        tablesCards}
+    </div>
+  );
 }
-
-//{filteredConversationsCards}
-//      {!noFilteredMatchesFound &&
-//        filteredConversationsCards.length === 0 &&
-//        newConversationCard}
-//      {!noFilteredMatchesFound &&
-//        filteredConversationsCards.length === 0 &&
-//        conversationsCards}

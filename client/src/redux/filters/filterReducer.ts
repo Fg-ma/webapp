@@ -126,6 +126,11 @@ const initialState: FilterState = {
       value: "",
     },
   },
+  tables: {
+    filterPayload: {
+      value: "",
+    },
+  },
   dogEars: {
     isDropFilter: false,
     filterPayload: {
