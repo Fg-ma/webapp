@@ -5,7 +5,7 @@ import { setPageState, setIds } from "@redux/pageState/pageStateActions";
 import { EntityContentNavProps, PageState } from "@FgTypes/middleTypes";
 import CollectionButtons from "./CollectionButtons";
 
-const indNavButtonsVar: Variants = {
+const navButtonsVar: Variants = {
   init: {
     fontSize: "1.5rem",
     lineHeight: "2rem",
@@ -95,7 +95,7 @@ export default function EntityContentNav({
 
   return (
     <>
-      <div className="mt-6 mb-1 flex items-center justify-center">
+      <div className="mt-6 mb-2 flex items-center justify-center">
         {navItems.map((navItem) => (
           <div
             key={navItem}
@@ -104,7 +104,7 @@ export default function EntityContentNav({
             <motion.div
               key={navItem}
               className="h-8 flex cursor-pointer"
-              variants={indNavButtonsVar}
+              variants={navButtonsVar}
               initial="init"
               whileHover="hover"
               transition={transition}

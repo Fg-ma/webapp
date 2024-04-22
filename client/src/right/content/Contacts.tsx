@@ -354,7 +354,7 @@ export default function Contacts() {
   });
 
   return (
-    <div>
+    <div className="my-4 ml-9 flex flex-col space-y-4">
       {filteredContactsCards}
       {!noFilteredMatchesFound &&
         filteredContactsCards.length === 0 &&

@@ -299,7 +299,13 @@ export default function MiddleAdvancedSearchFilter({
       ref={refs.middleAdvancedSearchFilter}
       className="h-full w-full bg-fg-white-95 rounded-lg"
     >
-      <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
+      <div className="flex items-center justify-between h-7 bg-fg-primary rounded-t-lg drop-shadow-md">
+        <input
+          type="button"
+          className="text-base cursor-pointer text-white ml-2"
+          value="Advanced Search"
+          onClick={handleAdvancedFilter}
+        />
         <input
           type="button"
           name="isAdvancedSearch"
@@ -307,12 +313,6 @@ export default function MiddleAdvancedSearchFilter({
           style={{
             backgroundImage: `url("assets/icons/whiteClose.svg")`,
           }}
-          onClick={handleAdvancedFilter}
-        />
-        <input
-          type="button"
-          className="text-base cursor-pointer mt-1 text-white"
-          value="Remove Advanced Search"
           onClick={handleAdvancedFilter}
         />
       </div>

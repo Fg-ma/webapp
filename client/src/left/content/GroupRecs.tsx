@@ -46,8 +46,6 @@ export default function GroupRecs() {
   });
 
   return (
-    <div id="groupRecs" className="h-max">
-      {grpRecs}
-    </div>
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{grpRecs}</div>
   );
 }

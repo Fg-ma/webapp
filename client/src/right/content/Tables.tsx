@@ -8,6 +8,7 @@ import { useIndexedDBContext } from "@context/IDBContext";
 import { useTableContext } from "@context/TableContext";
 import { TableCard } from "./TableCard";
 import { IncomingMessage, RightFilterState, Table } from "@FgTypes/rightTypes";
+import MakeTableCard from "./MakeTableContent/MakeTableCard";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -343,7 +344,6 @@ export default function Tables() {
           table_name={newTable.table_name}
           last_message={newTable.last_message}
           members={newTable.members}
-          table_creation_date={newTable.table_creation_date}
           tables_pictures_id={newTable.tables_pictures_id}
         />
       );
@@ -358,7 +358,6 @@ export default function Tables() {
         table_name={table.table_name}
         last_message={table.last_message}
         members={table.members}
-        table_creation_date={table.table_creation_date}
         tables_pictures_id={table.tables_pictures_id}
         filter={filter}
       />
@@ -373,14 +372,14 @@ export default function Tables() {
         table_name={table.table_name}
         last_message={table.last_message}
         members={table.members}
-        table_creation_date={table.table_creation_date}
         tables_pictures_id={table.tables_pictures_id}
       />
     );
   });
 
   return (
-    <div>
+    <div className="h-max flex flex-col space-y-4 my-4 ml-9">
+      <MakeTableCard />
       {filteredTablesCards}
       {!noFilteredMatchesFound &&
         filteredTablesCards.length === 0 &&

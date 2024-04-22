@@ -187,8 +187,6 @@ export default function GroupCards({ leftTopPaneRef }: GroupCardsProps) {
   });
 
   return (
-    <div id="groupCards" className="h-max">
-      {grpCards}
-    </div>
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{grpCards}</div>
   );
 }

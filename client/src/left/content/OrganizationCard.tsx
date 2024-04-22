@@ -28,7 +28,7 @@ export function OrganizationCard({
         animate={animate && { opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.5 }}
-        className="bg-white w-fill my-4 ml-9 h-24 py-2.5 flex items-center rounded-md cursor-pointer"
+        className="bg-white w-fill h-24 py-2.5 flex items-center rounded-md cursor-pointer"
         onClick={handleClick}
       >
         <div className="w-16 aspect-square mx-4">

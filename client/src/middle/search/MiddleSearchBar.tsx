@@ -150,7 +150,7 @@ export default function MiddleSearchBar({
       className="flex flex-col justify-center items-center"
       style={{ width: middleSearchWidth }}
     >
-      <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center shadow-md">
+      <form className="w-full h-10 bg-white rounded-md overflow-clip flex items-center shadow-md border border-fg-white-85">
         <input
           id="middleSearchSubmit"
           type="submit"
@@ -173,7 +173,7 @@ export default function MiddleSearchBar({
           onChange={handleInputChange}
           value={inputValue}
         />
-        <div className="w-16 h-full bg-fg-white-90 flex justify-center items-center">
+        <div className="w-16 h-full bg-fg-white-90 flex justify-center items-center border-l border-fg-white-85">
           <input
             type="button"
             className="w-8 h-8 bg-cover bg-no-repeat cursor-pointer"

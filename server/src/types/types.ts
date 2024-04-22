@@ -1,5 +1,3 @@
-// Global
-
 export interface Entity {
   entity_id: string;
   entity_username: string;
@@ -87,27 +85,12 @@ export interface Image {
   image_date_posted: string;
 }
 
-/*
-  affiliateRelations.ts
-  Global Entity
-  Global Individual
-  Global Group
-  Global Organization
-*/
-
 export interface Relation {
   affiliate_relation_id: string;
   affiliate_id_root: string;
   affiliate_id_target: string;
   affiliate_relation_date: string;
 }
-
-/*
-  entities.ts
-  Global SheetContent
-  Global ImageContent
-  Global VideoContent
-*/
 
 export interface Content {
   content_id: string;
@@ -128,10 +111,6 @@ export interface MergedSheetData extends EntityContent, Sheet {}
 export interface MergedVideoData extends EntityContent, Video {}
 
 export interface MergedImageData extends EntityContent, Image {}
-
-/*
-  images.ts
-*/
 
 export interface FullImage {
   image_id: string;
@@ -156,10 +135,6 @@ export interface ProfilePicture {
   profile_picture_data: Blob;
   profile_picture_filename: string;
 }
-
-/*
-  sheets.ts
-*/
 
 export interface FullSheet {
   sheet_id: string;
@@ -190,10 +165,6 @@ export interface SheetThumbnail {
   sheet_thumbnail_filename: string;
   sheet_thumbnail_description: string;
 }
-
-/*
-  videos.ts
-*/
 
 export interface FullVideo {
   video_id: string;
@@ -237,15 +208,6 @@ export interface ConversationMember {
   };
 }
 
-/*
-  conversations.ts
-  Global Individual
-  Global Group
-  Global Organization
-  Global Conversation
-  Global ConversationMember
-*/
-
 export interface ConversationsMessagesLogs {
   conversations_messages_logs_id: string;
   conversation_id: string;
@@ -259,16 +221,6 @@ export interface ConversationPicture {
   conversation_picture_data: Blob;
   conversation_picture_filename: string;
 }
-
-/*
-  contacts.ts
-  Global Entity
-  Global Organization
-  Global Group
-  Global Individual
-  Global Conversation
-  Global ConversationMember
-*/
 
 export interface Contact {
   contact_id: string;
@@ -290,10 +242,6 @@ export interface ContactPicture {
   contact_picture_filename: string;
 }
 
-/* 
-  auth.ts
-*/
-
 export interface UserCredentials {
   user_id: string;
   username: string;
@@ -303,14 +251,6 @@ export interface UserCredentials {
   user_email: string;
   user_phone_number: string;
 }
-
-/* 
-  collections.ts
-  Global Entity
-  Global SheetContent
-  Global ImageContent
-  Global VideoContent
-*/
 
 export interface Collection {
   collection_id: string;
@@ -331,10 +271,6 @@ export interface CollectionsContent {
   };
 }
 
-/*
-  references.ts
-*/
-
 export interface EntityReferences {
   reference_id: string;
   entity_id: string;
@@ -342,10 +278,6 @@ export interface EntityReferences {
   author: string;
   url: string;
 }
-
-/*
-  tables.ts
-*/
 
 export interface Table {
   animate?: boolean;

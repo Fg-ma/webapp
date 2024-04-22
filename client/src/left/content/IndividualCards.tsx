@@ -194,5 +194,7 @@ export default function IndividualCards({
     );
   });
 
-  return <div className="h-max">{indCards}</div>;
+  return (
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{indCards}</div>
+  );
 }

@@ -19,7 +19,7 @@ export function NewsCard({
 
   return (
     <div
-      className="bg-white my-4 ml-9 h-36 flex items-center rounded-md cursor-pointer"
+      className="bg-white h-36 flex items-center rounded-md cursor-pointer"
       onClick={handleClick}
     >
       {sheet_id && (

@@ -8,6 +8,7 @@ import {
   MessagesState,
   RightNavProps,
   MainSecondaryState,
+  TablesState,
 } from "@FgTypes/rightTypes";
 
 const navButtonsVar: Variants = {
@@ -52,6 +53,9 @@ export default function RightNav({ mainPageState }: RightNavProps) {
   const messagesPage = useSelector(
     (state: MessagesState) => state.page.messages.pagePayload.pageState,
   );
+  const tablesPage = useSelector(
+    (state: TablesState) => state.page.tables.pagePayload.pageState,
+  );
   const mainSecondaryPageState = useSelector(
     (state: MainSecondaryState) =>
       state.page.main.pagePayload.secondaryPageState,
@@ -80,12 +84,11 @@ export default function RightNav({ mainPageState }: RightNavProps) {
 
   let navItems: string[] = [];
 
-  if (mainPageState === "tables") {
-    navItems = ["tables", "conversation", "members"];
-  } else if (
+  if (
     mainPageState !== "messages" &&
     mainPageState !== "tables" &&
-    mainSecondaryPageState !== "messages"
+    mainSecondaryPageState !== "messages" &&
+    mainSecondaryPageState !== "tables"
   ) {
     styles[rightPage] = { ...activeStyles };
     navItems = ["papers", "news", "explore", "dogEars"];
@@ -95,10 +98,21 @@ export default function RightNav({ mainPageState }: RightNavProps) {
   ) {
     styles[messagesPage] = { ...activeStyles };
     navItems = ["conversations", "contacts"];
+  } else if (
+    mainPageState === "tables" ||
+    mainSecondaryPageState === "tables"
+  ) {
+    styles[tablesPage] = { ...activeStyles };
+    navItems = ["tables", "conversation", "members"];
   }
 
   function swapState(state: string) {
-    if (mainPageState !== "messages" && mainSecondaryPageState !== "messages") {
+    if (
+      mainPageState !== "messages" &&
+      mainSecondaryPageState !== "messages" &&
+      mainPageState !== "tables" &&
+      mainSecondaryPageState !== "tables"
+    ) {
       dispatch(closeDrop(state, "isDropFilter"));
       dispatch(setPageState("right", state));
     } else if (
@@ -106,6 +120,11 @@ export default function RightNav({ mainPageState }: RightNavProps) {
       mainSecondaryPageState === "messages"
     ) {
       dispatch(setPageState("messages", state));
+    } else if (
+      mainPageState === "tables" ||
+      mainSecondaryPageState === "tables"
+    ) {
+      dispatch(setPageState("tables", state));
     }
   }
 

@@ -45,8 +45,6 @@ export default function News() {
   });
 
   return (
-    <div id="newsCards" className="h-full">
-      {newsCards}
-    </div>
+    <div className="h-full my-4 ml-9 flex flex-col space-y-4">{newsCards}</div>
   );
 }

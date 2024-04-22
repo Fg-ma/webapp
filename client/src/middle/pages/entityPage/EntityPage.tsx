@@ -9,7 +9,6 @@ import {
   EntityReferences,
   Entity,
   ContentMap,
-  CollectionsContentMap,
 } from "@FgTypes/middleTypes";
 import Sheets from "./content/Sheets";
 import Videos from "./content/Videos";

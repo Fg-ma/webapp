@@ -1,11 +1,5 @@
 import { ReactNode } from "react";
 
-// Global
-
-/*
-  IDBContext.tsx
-*/
-
 interface ConversationMember {
   conversation_id: string;
   individual_data?: {
@@ -156,10 +150,6 @@ export interface IDBService {
   deleteStoredTables: () => Promise<void>;
 }
 
-/*
-  AffiliateContext.tsx
-*/
-
 export interface AffiliateContextProviderProps {
   children: ReactNode;
 }
@@ -184,10 +174,6 @@ export interface AffiliateContextType {
     }>
   >;
 }
-
-/*
-  LastMessageContext.tsx
-*/
 
 export interface LastMessageContextProviderProps {
   children: ReactNode;
@@ -218,17 +204,9 @@ export interface LastMessageContextType {
   >;
 }
 
-/*
-  LiveUpdatesContext.tsx
-*/
-
 export interface LiveUpdatesSocketProviderProps {
   children: ReactNode;
 }
-
-/*
-  PinnedContext.tsx
-*/
 
 export interface PinnedProviderProps {
   children: ReactNode;
@@ -243,10 +221,6 @@ export interface PinnedContextType {
     }>
   >;
 }
-
-/*
-  ContactContext.tsx
-*/
 
 export interface ContactContextProviderProps {
   children: ReactNode;
@@ -265,10 +239,6 @@ export interface ContactContextType {
   >;
 }
 
-/*
-  ConversationContext.tsx
-*/
-
 export interface ConversationContextProviderProps {
   children: ReactNode;
 }
@@ -285,10 +255,6 @@ export interface ConversationContextType {
     }>
   >;
 }
-
-/*
-  TableContext.tsx
-*/
 
 export interface TableContextProviderProps {
   children: ReactNode;

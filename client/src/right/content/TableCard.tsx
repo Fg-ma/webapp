@@ -1,11 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  setIds,
-  setPageState,
-  setTable,
-} from "@redux/pageState/pageStateActions";
+import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import { TableMember, TableCardProps } from "@FgTypes/rightTypes";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
@@ -68,7 +64,6 @@ export function TableCard({
   table_name,
   last_message,
   members,
-  table_creation_date,
   tables_pictures_id,
   filter,
 }: TableCardProps) {
@@ -79,7 +74,6 @@ export function TableCard({
   const handleClick = () => {
     dispatch(setPageState("main", "tables"));
     dispatch(setIds("main", "table_id", table_id));
-    dispatch(setTable(table_name, membersNames, table_creation_date));
   };
 
   const lastMessage = last_message?.includes("\n")
@@ -97,7 +91,7 @@ export function TableCard({
         animate={animate && { opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.5 }}
-        className="bg-white my-4 ml-9 h-20 flex items-center rounded-md cursor-pointer"
+        className="bg-white h-20 flex items-center rounded-md cursor-pointer"
         onClick={handleClick}
       >
         {(members.length < 2 || tables_pictures_id) && (
@@ -143,7 +137,7 @@ export function TableCard({
           </div>
         )}
         <div
-          className={` my-2 space-y-1 ${
+          className={`my-2 space-y-1 ${
             members.length < 2 || tables_pictures_id ? "mr-4" : "mx-4"
           }`}
           style={{ width: "calc(100% - 2.5rem)" }}

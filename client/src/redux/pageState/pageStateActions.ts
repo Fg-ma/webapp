@@ -3,7 +3,6 @@ import {
   SET_IDS,
   SET_LOGGED_IN,
   SET_CONVERSATION,
-  SET_TABLE,
   SET_SECONDARY_PAGE_STATE,
   SET_USERNAME,
 } from "./pageStateTypes";
@@ -43,13 +42,4 @@ export const setConversation = (
 ) => ({
   type: SET_CONVERSATION,
   payload: { conversation_name, members, conversation_creation_date },
-});
-
-export const setTable = (
-  table_name: string | null,
-  members: string[],
-  table_creation_date: string,
-) => ({
-  type: SET_TABLE,
-  payload: { table_name, members, table_creation_date },
 });

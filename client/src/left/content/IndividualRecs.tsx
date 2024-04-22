@@ -45,8 +45,6 @@ export default function IndividualRecs() {
   });
 
   return (
-    <div id="individualRecs" className="h-max">
-      {indRecs}
-    </div>
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{indRecs}</div>
   );
 }

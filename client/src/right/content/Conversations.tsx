@@ -424,7 +424,7 @@ export default function Conversations() {
   });
 
   return (
-    <div>
+    <div className="my-4 ml-9 flex flex-col space-y-4">
       {filteredConversationsCards}
       {!noFilteredMatchesFound &&
         filteredConversationsCards.length === 0 &&

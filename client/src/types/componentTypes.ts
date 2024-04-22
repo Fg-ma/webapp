@@ -32,10 +32,9 @@ export interface AdvancedFilterDropdownProps {
 */
 
 export interface FilterCardProps {
-  entity_id: string;
+  entity_username: string;
+  entity_name: string;
   filter: string;
-  identify: string;
-  name: string;
   subcategory: string;
   popupRef: React.RefObject<HTMLDivElement>;
 }
@@ -45,7 +44,8 @@ export interface FilterCardProps {
 */
 
 export interface PopupProps {
-  name: string;
+  entity_username: string;
+  entity_name: string;
   position: {
     top: number;
     left: number;

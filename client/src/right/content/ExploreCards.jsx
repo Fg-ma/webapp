@@ -57,7 +57,7 @@ export default function ExploreCards() {
   });
 
   return (
-    <div id="exploreCards" className="h-full">
+    <div className="h-full my-4 ml-9 flex flex-col space-y-4">
       {exploreCards}
     </div>
   );

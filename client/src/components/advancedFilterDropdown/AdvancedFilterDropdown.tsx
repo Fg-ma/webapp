@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import Axios from "axios";
+import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import config from "@config";
 import FilterCard from "./FilterCard";
 import {
@@ -159,29 +159,82 @@ export default function AdvancedFilterDropdown({
     return (
       <FilterCard
         key={
-          filterInfo[
-            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
-          ] as string
+          subcategory === "ind"
+            ? (filterInfo[
+                "individual_username" as keyof (
+                  | Individual
+                  | Group
+                  | Organization
+                )
+              ] as string)
+            : subcategory === "grp"
+              ? (filterInfo[
+                  "group_handle" as keyof (Individual | Group | Organization)
+                ] as string)
+              : (filterInfo[
+                  "organization_handle" as keyof (
+                    | Individual
+                    | Group
+                    | Organization
+                  )
+                ] as string)
         }
-        entity_id={
-          filterInfo[
-            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
-          ] as string
+        entity_username={
+          subcategory === "ind"
+            ? (filterInfo[
+                "individual_username" as keyof (
+                  | Individual
+                  | Group
+                  | Organization
+                )
+              ] as string)
+            : subcategory === "grp"
+              ? (filterInfo[
+                  "group_handle" as keyof (Individual | Group | Organization)
+                ] as string)
+              : (filterInfo[
+                  "organization_handle" as keyof (
+                    | Individual
+                    | Group
+                    | Organization
+                  )
+                ] as string)
         }
         filter={filter}
-        identify={
-          filterInfo[
-            `${expandedFilter}_id` as keyof (Individual | Group | Organization)
-          ] as string
-        }
-        name={
-          filterInfo[
+        entity_name={
+          (filterInfo[
             `${expandedFilter}_name` as keyof (
               | Individual
               | Group
               | Organization
             )
-          ] as string
+          ] as string)
+            ? (filterInfo[
+                `${expandedFilter}_name` as keyof (
+                  | Individual
+                  | Group
+                  | Organization
+                )
+              ] as string)
+            : subcategory === "ind"
+              ? (filterInfo[
+                  "individual_username" as keyof (
+                    | Individual
+                    | Group
+                    | Organization
+                  )
+                ] as string)
+              : subcategory === "grp"
+                ? (filterInfo[
+                    "group_handle" as keyof (Individual | Group | Organization)
+                  ] as string)
+                : (filterInfo[
+                    "organization_handle" as keyof (
+                      | Individual
+                      | Group
+                      | Organization
+                    )
+                  ] as string)
         }
         subcategory={subcategory}
         popupRef={popupRef}

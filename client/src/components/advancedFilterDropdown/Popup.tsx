@@ -1,9 +1,11 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { PopupProps } from "@FgTypes/componentTypes";
+import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 export default function Popup({
-  name,
+  entity_username,
+  entity_name,
   position,
   onMouseEnter,
   onMouseLeave,
@@ -23,17 +25,27 @@ export default function Popup({
 
   return createPortal(
     <div
-      id={`${subcategory}Popup_${name}`}
-      className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max absolute z-10 overflow-visible cursor-pointer flex items-center rounded-md shadow-md"
+      id={`${subcategory}Popup_${entity_name}`}
+      className="bg-white my-1 ml-2 mr-3 h-14 py-1 px-2 w-max absolute z-50 overflow-visible cursor-pointer flex items-center rounded-md shadow-md"
       style={{ top: `${position.top}px`, left: `${position.left}px` }}
       onMouseEnter={onMouseEnter as any}
       onMouseLeave={onMouseLeave}
       onClick={handleFilterClick}
       ref={popupRef}
     >
-      <div className="w-12 aspect-square bg-fg-white-85 mr-2 rounded-md grid place-items-center flex-shrink-0">
-        <p className="select-none">pic</p>
-      </div>
+      <ProfilePicture
+        size={{ w: 3, h: 3 }}
+        entity_username={entity_username}
+        entity_type={subcategory === "ind" ? 1 : subcategory === "grp" ? 2 : 3}
+        styles={
+          subcategory === "ind"
+            ? "rounded-full"
+            : subcategory === "grp"
+              ? "rounded-md"
+              : "rounded-sm"
+        }
+        clickable={false}
+      />
       <span
         className={`m-2 font-Josefin text-lg select-none
                     ${
@@ -43,7 +55,7 @@ export default function Popup({
                     }
                 `}
       >
-        {name}
+        {entity_name}
       </span>
     </div>,
     document.body,

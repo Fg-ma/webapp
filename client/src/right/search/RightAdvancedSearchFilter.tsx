@@ -296,7 +296,13 @@ export default function RightAdvancedSearchFilter({
     >
       {page !== "messages" && (
         <div>
-          <div className="flex items-center h-7 bg-fg-primary rounded-t-lg">
+          <div className="flex items-center justify-between h-7 bg-fg-primary rounded-t-lg drop-shadow-md">
+            <input
+              type="button"
+              className="text-base cursor-pointer text-white pl-2"
+              value="Advanced Search"
+              onClick={handleAdvancedFilter}
+            />
             <input
               type="button"
               name="isAdvancedSearch"
@@ -304,12 +310,6 @@ export default function RightAdvancedSearchFilter({
               style={{
                 backgroundImage: `url("assets/icons/whiteClose.svg")`,
               }}
-              onClick={handleAdvancedFilter}
-            />
-            <input
-              type="button"
-              className="text-base cursor-pointer text-white"
-              value="Remove Advanced Search"
               onClick={handleAdvancedFilter}
             />
           </div>
@@ -393,7 +393,7 @@ export default function RightAdvancedSearchFilter({
                 placeholder="Author..."
                 name="author"
                 id="rightAuthor"
-                className="grow bg-white h-8 rounded-md text-sm px-1 font-K2d focus:outline-none focus:border-2 focus:border-fg-secondary border border-fg-white-85"
+                className="grow bg-white h-8 rounded-md text-sm px-1 font-K2D focus:outline-none focus:border-2 focus:border-fg-secondary border border-fg-white-85"
                 onChange={handleFilterFormChange}
                 value={formAuthor}
               ></input>

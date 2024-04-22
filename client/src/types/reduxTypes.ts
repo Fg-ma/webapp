@@ -19,14 +19,7 @@ import {
   SET_CONVERSATION,
   SET_SECONDARY_PAGE_STATE,
   SET_USERNAME,
-  SET_TABLE,
 } from "@redux/pageState/pageStateTypes";
-
-// Global
-
-/*
-  filterReducer.ts
-*/
 
 export interface FilterPayload {
   value: string;
@@ -111,10 +104,6 @@ export type FilterAction =
       payload: { filter: string; from: string; to: string };
     };
 
-/*
-  pageStateReducer.ts
-*/
-
 export interface PageState {
   [key: string]: {
     pagePayload: {
@@ -123,25 +112,18 @@ export interface PageState {
       username?: string;
       isLoggedIn?: boolean;
       ids?: {
-        individual_id?: string | null;
-        group_id?: string | null;
-        organization_id?: string | null;
         paper_id?: string | null;
         sheet_id?: string | null;
         video_id?: string | null;
         image_id?: string | null;
         collection_id?: string | null;
         conversation_id?: string | null;
+        table_id?: string | null;
       };
       conversation?: {
         conversation_name: string | null;
         members: string[] | null;
         conversation_creation_date: string | null;
-      };
-      table?: {
-        table_name: string | null;
-        members: string[] | null;
-        table_creation_date: string | null;
       };
     };
   };
@@ -161,14 +143,6 @@ export type PageStateAction =
         conversation_name: string;
         members: string[];
         conversation_creation_date: string;
-      };
-    }
-  | {
-      type: typeof SET_TABLE;
-      payload: {
-        table_name: string;
-        members: string[];
-        table_creation_date: string;
       };
     }
   | {

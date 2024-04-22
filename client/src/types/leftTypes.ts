@@ -1,4 +1,3 @@
-// Global
 export interface LeftState {
   page: {
     left: {
@@ -39,51 +38,17 @@ export interface Organization {
   animate?: boolean;
 }
 
-/*
-  LeftNav.tsx
-  Global LeftState 
-*/
-
-/* 
-  LeftVerticalSplitPane.tsx
-  Global LeftState 
-*/
-
 export interface LeftVerticalSplitPaneProps {
   leftSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
 }
-
-/* 
-  GroupCards.tsx
-  Global Group
-*/
 
 export interface GroupCardsProps {
   leftTopPaneRef: React.RefObject<HTMLDivElement>;
 }
 
-/* 
-  GroupRecs.tsx
-  Global Group
-*/
-
-/* 
-  IndividualCards.tsx
-  Global Individual
-*/
-
 export interface IndividualCardsProps {
   leftTopPaneRef: React.RefObject<HTMLDivElement>;
 }
-
-/* 
-  IndividualRecs.tsx
-  Global Individual
-*/
-
-/* 
-  IndividualCard.tsx
-*/
 
 export interface IndividualCardProps {
   name: string | null;
@@ -91,10 +56,6 @@ export interface IndividualCardProps {
   current_issue: string | null;
   animate?: boolean;
 }
-
-/* 
-  GroupCard.tsx
-*/
 
 export interface GroupCardProps {
   name: string | null;
@@ -104,10 +65,6 @@ export interface GroupCardProps {
   animate?: boolean;
 }
 
-/* 
-  OrganizationCard.tsx
-*/
-
 export interface OrganizationCardProps {
   name: string | null;
   handle: string;
@@ -116,23 +73,9 @@ export interface OrganizationCardProps {
   animate?: boolean;
 }
 
-/* 
-  OrganizationCards.tsx
-  Global Organization
-*/
-
 export interface OrganizationCardsProps {
   leftTopPaneRef: React.RefObject<HTMLDivElement>;
 }
-
-/* 
-  OrganizationRecs.tsx
-  Global Organization
-*/
-
-/* 
-  RecHeader.tsx
-*/
 
 export interface RecHeaderProps {
   lightness: number;

@@ -45,7 +45,7 @@ export default function DogEars() {
   });
 
   return (
-    <div id="dogEarCards" className="h-full">
+    <div className="h-full my-4 ml-9 flex flex-col space-y-4">
       {dogEarCards}
     </div>
   );

@@ -45,5 +45,7 @@ export default function OrganizationRecs() {
     );
   });
 
-  return <div className="h-max">{orgRecs}</div>;
+  return (
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{orgRecs}</div>
+  );
 }

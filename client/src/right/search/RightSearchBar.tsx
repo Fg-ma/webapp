@@ -190,7 +190,6 @@ export default function RightSearchBar({
           }}
         />
         <input
-          id="rightSearchArea"
           type="text"
           placeholder="Search..."
           className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1 mt-0.5"
@@ -200,9 +199,8 @@ export default function RightSearchBar({
           value={inputValue}
         />
         {isFilter && (
-          <div className="w-16 h-full bg-fg-white-95 flex justify-center items-center">
+          <div className="w-16 h-full bg-fg-white-95 flex justify-center items-center border-l border-fg-white-85">
             <input
-              id="rightFilterButton"
               type="button"
               className="h-8 aspect-square bg-cover bg-no-repeat cursor-pointer"
               style={{

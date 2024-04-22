@@ -10,10 +10,9 @@ import Popup from "./Popup";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 
 export default function FilterCard({
-  entity_id,
+  entity_username,
   filter,
-  identify,
-  name,
+  entity_name,
   subcategory,
   popupRef,
 }: FilterCardProps) {
@@ -29,7 +28,7 @@ export default function FilterCard({
     (state: FilterState) =>
       state.filters[filter].filterPayload.affiliatedFilters[subcategory],
   );
-  const isFilterSelected = advFilters.includes(name);
+  const isFilterSelected = advFilters.includes(entity_name);
   const [popupState, setPopupState] = useState({
     visible: false,
     position: { top: 0, left: 0 },
@@ -99,7 +98,9 @@ export default function FilterCard({
   }, [isMouseInsidePopup]);
 
   useEffect(() => {
-    const element = document.getElementById(`${subcategory}_${identify}`);
+    const element = document.getElementById(
+      `${subcategory}_${entity_username}`,
+    );
 
     if (element) {
       element.addEventListener("mouseenter", handleMouseEnter);
@@ -113,19 +114,19 @@ export default function FilterCard({
     }
 
     return () => {};
-  }, [identify, name]);
+  }, [entity_username, name]);
 
   const handleFilterClick = () => {
     if (!isFilterSelected) {
-      dispatch(addAdvancedAffiliateFilter(filter, name, subcategory));
+      dispatch(addAdvancedAffiliateFilter(filter, entity_name, subcategory));
     } else {
-      dispatch(removeAdvancedAffiliateFilter(filter, name, subcategory));
+      dispatch(removeAdvancedAffiliateFilter(filter, entity_name, subcategory));
     }
   };
 
   return (
     <motion.div
-      id={`${subcategory}_${identify}`}
+      id={`${subcategory}_${entity_username}`}
       className="bg-white my-1 h-14 py-1 px-2 cursor-pointer flex items-center rounded-md"
       onMouseEnter={handleMouseEnter as any}
       onMouseLeave={handleMouseLeave}
@@ -135,7 +136,7 @@ export default function FilterCard({
     >
       <ProfilePicture
         size={{ w: 3, h: 3 }}
-        entity_id={entity_id}
+        entity_username={entity_username}
         entity_type={subcategory === "ind" ? 1 : subcategory === "grp" ? 2 : 3}
         styles={
           subcategory === "ind"
@@ -157,11 +158,12 @@ export default function FilterCard({
                     }
                 `}
       >
-        {name}
+        {entity_name}
       </span>
       {popupState.visible && (
         <Popup
-          name={name}
+          entity_username={entity_username}
+          entity_name={entity_name}
           position={popupState.position}
           onMouseEnter={handlePopupMouseEnter}
           onMouseLeave={handlePopupMouseLeave}

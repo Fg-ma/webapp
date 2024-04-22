@@ -154,6 +154,11 @@ const initialState: FilterState = {
     },
     appliedFilterOptions: null,
   },
+  makeTable: {
+    filterPayload: {
+      value: "",
+    },
+  },
 };
 
 export default function filterReducer(

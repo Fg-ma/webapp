@@ -196,5 +196,7 @@ export default function OrganizationCards({
     );
   });
 
-  return <div className="h-max">{orgCards}</div>;
+  return (
+    <div className="h-max my-4 ml-9 flex flex-col space-y-4">{orgCards}</div>
+  );
 }

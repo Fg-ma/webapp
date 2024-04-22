@@ -5,7 +5,6 @@ import {
   SET_CONVERSATION,
   SET_SECONDARY_PAGE_STATE,
   SET_USERNAME,
-  SET_TABLE,
 } from "./pageStateTypes";
 import { PageState, PageStateAction } from "@FgTypes/reduxTypes";
 
@@ -22,24 +21,17 @@ const initialState: PageState = {
       pageState: "home",
       secondaryPageState: null,
       ids: {
-        individual_id: null,
-        group_id: null,
-        organization_id: null,
         paper_id: null,
         sheet_id: null,
         video_id: null,
         image_id: null,
         conversation_id: null,
+        table_id: null,
       },
       conversation: {
         conversation_name: null,
         members: null,
         conversation_creation_date: null,
-      },
-      table: {
-        table_name: null,
-        members: null,
-        table_creation_date: null,
       },
     },
   },
@@ -61,6 +53,11 @@ const initialState: PageState = {
   tables: {
     pagePayload: {
       pageState: "tables",
+    },
+  },
+  makeTable: {
+    pagePayload: {
+      pageState: "individual",
     },
   },
   individuals: {
@@ -201,26 +198,6 @@ export default function pageStateReducer(
               conversation_name: conversation_name,
               members: members,
               conversation_creation_date: conversation_creation_date,
-            },
-          },
-        },
-      };
-    }
-
-    case SET_TABLE: {
-      const { table_name, members, table_creation_date } = action.payload;
-
-      return {
-        ...state,
-        main: {
-          ...state.main,
-          pagePayload: {
-            ...state.main.pagePayload,
-            table: {
-              ...initialState.main.pagePayload.table,
-              table_name: table_name,
-              members: members,
-              table_creation_date: table_creation_date,
             },
           },
         },

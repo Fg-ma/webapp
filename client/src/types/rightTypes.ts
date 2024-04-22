@@ -1,7 +1,5 @@
 import { ChangeEvent } from "react";
 
-// Global
-
 export interface IncomingMessage {
   conversation: { content: string | null; conversation_id: string | null };
   table: { content: string | null; table_id: string | null };
@@ -60,11 +58,6 @@ export interface RightFilterState {
   };
 }
 
-/* 
-  RightNav.tsx
-  Global RightState
-*/
-
 export interface RightNavProps {
   mainPageState: string;
 }
@@ -89,10 +82,15 @@ export interface TablesState {
   };
 }
 
-/* 
-RightSpace.tsx
-Global RightState
-*/
+export interface TablesState {
+  page: {
+    tables: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
 
 export interface MainState {
   page: {
@@ -114,10 +112,6 @@ export interface MainSecondaryState {
   };
 }
 
-/* 
-  DogEarCards.tsx
-*/
-
 export interface CoverSheet {
   sheet_id: string;
   sheet_data_id: string;
@@ -127,29 +121,11 @@ export interface CoverSheet {
   sheet_subject: string;
 }
 
-/* 
-  NewsCards.tsx
-  Global Sheet
-*/
-
-/* 
-  PapersCards.tsx
-  Global Sheet
-*/
-
-/* 
-  PapersCard.tsx
-*/
-
 export interface PapersCardProps {
   paper_id: string;
   title: string;
   subject: string;
 }
-
-/* 
-  NewsCard.tsx
-*/
 
 export interface NewsCardProps {
   sheet_id: string;
@@ -158,20 +134,12 @@ export interface NewsCardProps {
   affResponses?: string | null;
 }
 
-/* 
-  DogEarCard.tsx
-*/
-
 export interface DogEarCardProps {
   sheet_id: string;
   title: string;
   subject: string;
   affResponses?: string | null;
 }
-
-/* 
-  ConversationCard.tsx
-*/
 
 export interface ConversationCardProps {
   animate?: boolean;
@@ -183,10 +151,6 @@ export interface ConversationCardProps {
   conversations_pictures_id: string | null;
   filter?: string;
 }
-
-/* 
-  ContactCard.tsx
-*/
 
 export interface ContactCardProps {
   entity_username: string;
@@ -201,19 +165,10 @@ export interface ContactCardProps {
   filter?: string;
 }
 
-/* 
-  RightAddAdvancedSearchFilter.tsx
-*/
-
 export interface RightAddAdvancedSearchFilterProps {
   page: string;
   rightAddAdvancedSearchFilterRef: React.RefObject<HTMLDivElement>;
 }
-
-/* 
-  RightAdvancedSearchFilter.tsx
-  Global RightFilterState
-*/
 
 export interface RightAdvancedSearchFilterProps {
   page: string;
@@ -228,10 +183,6 @@ export interface RightAdvancedSearchFilterProps {
   };
 }
 
-/* 
-  RightSearchBar.tsx
-*/
-
 export interface RightSearchBarProps {
   page: string;
   isFilter: boolean;
@@ -244,11 +195,6 @@ export interface RightPageState {
     };
   };
 }
-
-/* 
-  RightSearchFilter.tsx
-  Global RightFilterState
-*/
 
 export interface RightSearchFilterProps {
   page: string;
@@ -270,9 +216,6 @@ export interface RightSearchFilterProps {
   };
 }
 
-/* 
-  Conversations.tsx
-*/
 export interface ConversationMember {
   conversation_id: string;
   individual_data?: {
@@ -300,10 +243,6 @@ export interface Conversation {
   members: ConversationMember[];
 }
 
-/*
-  Contacts.tsx
-*/
-
 export interface Contact {
   animate?: boolean;
   contact_id: string;
@@ -318,10 +257,6 @@ export interface Contact {
   contacts_pictures_id: string | null;
   entity_type: number;
 }
-
-/* 
-  Tables.tsx
-*/
 
 export interface Table {
   animate?: boolean;
@@ -368,17 +303,57 @@ export interface TableTabletop {
   content_rotation: number;
 }
 
-/* 
-  TableCard.tsx
-*/
-
 export interface TableCardProps {
   animate?: boolean;
   table_id: string;
   table_name: string | null;
   last_message: string | null;
   members: TableMember[];
-  table_creation_date: string;
   tables_pictures_id: string | null;
   filter?: string;
+}
+
+export interface MakeTablePageState {
+  page: {
+    makeTable: {
+      pagePayload: {
+        pageState: string;
+      };
+    };
+  };
+}
+
+export interface MakeTableEntitiesSpaceProps {
+  category: string;
+  newTableInvites: {
+    entity_type: number;
+    entity_username: string;
+  }[];
+  setNewTableInvites: React.Dispatch<
+    React.SetStateAction<
+      {
+        entity_type: number;
+        entity_username: string;
+      }[]
+    >
+  >;
+}
+
+export interface MakeTableEntitiesNavProps {
+  makeTablePageState: string;
+}
+
+export interface MakeTableEntitiesCardProps {
+  invited: boolean;
+  category: string;
+  entity_username: string;
+  entity_name: string;
+  setNewTableInvites: React.Dispatch<
+    React.SetStateAction<
+      {
+        entity_type: number;
+        entity_username: string;
+      }[]
+    >
+  >;
 }

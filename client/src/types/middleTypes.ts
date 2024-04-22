@@ -1,7 +1,6 @@
 import { MutableRefObject, ChangeEvent } from "react";
 import { Socket } from "socket.io-client";
 
-// Global
 export interface MainState {
   page: {
     main: {
@@ -82,28 +81,25 @@ export interface ConverationId {
   };
 }
 
-/*
-  MiddleSpace.tsx
-  Global Mainstate
-*/
+export interface TableId {
+  page: {
+    main: {
+      pagePayload: {
+        ids: {
+          table_id: string | null;
+        };
+      };
+    };
+  };
+}
 
 export interface MiddleSpaceProps {
   middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
 }
 
-/*
-  MiddleVerticalSplitPane.tsx
-*/
-
 export interface MiddleVerticalSplitPaneProps {
   middleSpaceContentContainerRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  PageNav.tsx
-  Global MainState
-  Global ConversationId
-*/
 
 export interface MainSecondaryState {
   page: {
@@ -127,10 +123,6 @@ export interface LoginState {
   };
 }
 
-/*
-  RelatedIssues.tsx
-*/
-
 export interface CoverSheet {
   sheet_id: number;
   sheet_data_id: number;
@@ -145,18 +137,10 @@ export interface RelatedIssuesCardProps {
   affResponses: string | null;
 }
 
-/*
-  RelatedIssuesHeader.tsx
-*/
-
 export interface RelatedIssuesHeaderProps {
   lightness: number;
   togglePaneHeight: () => void;
 }
-
-/*
-  ContentPage.tsx
-*/
 
 export interface ContentPageProps {
   contentType: string;
@@ -175,10 +159,6 @@ export interface ContentIDState {
     };
   };
 }
-
-/*
-  Cards.tsx
-*/
 
 export interface SheetCardProps {
   type: string;
@@ -209,7 +189,7 @@ export interface VideoProps {
 export interface VideoData {
   video_id: string;
   video_data_id: string;
-  video_creator_id: string;
+  video_creator_username: string;
   video_filename: string;
   video_title: string;
   video_description: string;
@@ -226,7 +206,7 @@ export interface ImageProps {
 export interface ImageData {
   image_id: string;
   image_data_id: string;
-  image_creator_id: string;
+  image_creator_username: string;
   image_filename: string;
   image_title: string;
   image_description: string;
@@ -246,10 +226,6 @@ export interface ImageThumbnailData {
   image_url: string;
   image_description: string;
 }
-
-/*
-  Collections.tsx
-*/
 
 export interface CollectionsProps {
   entity_username: string;
@@ -301,10 +277,6 @@ export interface CollectionItem {
   date_pinned: string | null;
 }
 
-/*
-  Images.tsx
-*/
-
 export interface ImagesProps {
   entity_username: string;
   isEditablePage: MutableRefObject<boolean>;
@@ -319,10 +291,6 @@ export interface ImagesData {
   date_pinned: string | null;
   images: ImageData[];
 }
-
-/*
-  Sheets.tsx
-*/
 
 export interface SheetsProps {
   entity_username: string;
@@ -339,10 +307,6 @@ export interface SheetsData {
   sheets: SheetData[];
 }
 
-/*
-  Videos.tsx
-*/
-
 export interface VideosProps {
   entity_username: string;
   isEditablePage: MutableRefObject<boolean>;
@@ -357,10 +321,6 @@ export interface VideosData {
   date_pinned: string | null;
   videos: VideoData[];
 }
-
-/*
-  CollectionButton.tsx
-*/
 
 export interface CollectionButtonProps {
   entityType: number;
@@ -380,10 +340,6 @@ export interface CollectionPageState {
   };
 }
 
-/*
-  CollectionButtons.tsx
-*/
-
 export interface CollectionButtonsProps {
   entityType: number;
   entity_username?: string;
@@ -397,11 +353,6 @@ export interface CollectionNames {
   group_id: string | null;
   organization_id: string | null;
 }
-
-/*
-  EntityContentNav.tsx
-  Global EntityData
-*/
 
 export interface EntityContentNavProps {
   entity_username?: string;
@@ -419,12 +370,6 @@ export interface PageState {
     };
   };
 }
-
-/*
-  EntityPage.tsx
-  Global EntityData
-  Global EntityReferences
-*/
 
 export interface EntityPageProps {
   entityType: number;
@@ -465,20 +410,10 @@ export interface CollectionsContentMap {
   organizations: JSX.Element | null;
 }
 
-/*
-  EntityPageFooter.tsx
-*/
-
 export interface EntityPageFooterProps {
   entityType: number;
   entity: EntityData | null;
 }
-
-/*
-  EntityPageHeader.tsx
-  Global EntityData
-  Global EntityReferences
-*/
 
 export interface EntityPageHeaderProps {
   entity_username: string;
@@ -512,27 +447,14 @@ export interface Afiliate {
   profile_picture_id: string;
 }
 
-/*
-  HomePage.tsx
-*/
-
 export interface HomePageProps {
   middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
   middleSpaceRef: React.RefObject<HTMLDivElement>;
 }
 
-/*
-  MiddleAddAdvancedSearchFilter.tsx
-*/
-
 export interface MiddleAddAdvancedSearchFilterProps {
   middleAddAdvancedSearchFilterRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  MiddleAdvancedSearchFilter.tsx
-  Global MiddleFilterState
-*/
 
 export interface MiddleAdvancedSearchFilterProps {
   handleFilterFormChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -546,30 +468,15 @@ export interface MiddleAdvancedSearchFilterProps {
   };
 }
 
-/*
-  MiddleDrop.tsx
-  Global MiddleFilterState
-*/
-
 export interface MiddleDropProps {
   middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
   middleSpaceRef: React.RefObject<HTMLDivElement>;
 }
 
-/*
-  MiddleSearchBar.tsx
-  Global MiddleFilterState
-*/
-
 export interface MiddleSearchBarProps {
   middleSpaceContainerRef: React.RefObject<HTMLDivElement>;
   middleSpaceRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  MiddleSearchFilter.tsx
-  Global MiddleFilterState
-*/
 
 export interface MiddleSearchFilterProps {
   refs: {
@@ -583,28 +490,15 @@ export interface MiddleSearchFilterProps {
   };
 }
 
-/* 
-  AffiliatedEntitiesScroll.tsx
-*/
-
 export interface AffiliatedEntitiesScrollProps {
   affiliatesProfilePictures: React.JSX.Element[] | null;
   affiliateProfilePicturesRef: React.RefObject<HTMLDivElement>;
   topHeaderRef: React.RefObject<HTMLDivElement>;
 }
 
-/* 
-  AffiliateWithButton.tsx
-*/
-
 export interface AffiliateWithButtonProps {
   entity_username: string;
 }
-
-/*
-  MessagePage.tsx
-  Global ConversationId
-*/
 
 export interface MessagePageProps {
   middleSpaceRef: React.RefObject<HTMLDivElement>;
@@ -622,19 +516,11 @@ export interface Typing {
   sender: string;
 }
 
-/*
-  MessagesConversationBody.tsx
-*/
-
 export interface MessagesConversationBodyProps {
   conversation: Message[];
   conversationSize: number;
   typing: Typing[];
 }
-
-/*
-  MessagesTextField.tsx
-*/
 
 export interface MessagesTextFieldProps {
   conversation_id: string | null;
@@ -643,27 +529,15 @@ export interface MessagesTextFieldProps {
   textFieldSnap: boolean;
 }
 
-/*
-  UserBubble.tsx
-*/
-
 export interface UserBubbleProps {
   message: string;
 }
-
-/*
-  RecipientsBubbles.tsx
-*/
 
 export interface RecipientsBubblesProps {
   message: string;
   conversationSize: number;
   sender: string;
 }
-
-/*
-  MessagesConversationHeader.tsx
-*/
 
 export interface ConversationMeta {
   page: {
@@ -679,17 +553,9 @@ export interface ConversationMeta {
   };
 }
 
-/*
-  MessageButton.tsx
-*/
-
 export interface MessageButtonProps {
   entity_username: string;
 }
-
-/*
-  ContactDropdown.tsx
-*/
 
 export interface ContactDropdownProps {
   entity_username: string;
@@ -703,10 +569,6 @@ export interface ContactDropdownPortalProps {
   scrollingEntityContainer: React.RefObject<HTMLDivElement>;
   contactDropdownRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  CreateContactButton.tsx
-*/
 
 export interface CreateContactButtonProps {
   entity_username: string;
