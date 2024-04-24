@@ -343,9 +343,11 @@ model tables_members {
   tables_members_id String   @id @unique(map: "tables_members_id_UNIQUE") @db.Char(36)
   table_id          String   @db.Char(36)
   member_id         String   @db.Char(36)
+  table_position    Int
   entities          entities @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_member_id_fk")
   tables            tables   @relation(fields: [table_id], references: [table_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_table_id_fk")
 
+  @@unique([table_id, member_id], map: "UNIQUE_COMBO")
   @@index([member_id], map: "tables_members_member_id_fk_idx")
   @@index([table_id], map: "tables_members_table_id_fk_idx")
 }

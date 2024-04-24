@@ -5,7 +5,7 @@ import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
 import PageNav from "./middle/PageNav";
-import Tables from "./tables/TablesPage";
+import TablesPage from "./middle/pages/tables/TablesPage";
 import LoginScreen from "./LoginScreen";
 import CreateAccountScreen from "./CreateAccountScreen";
 import "./app.css";
@@ -98,7 +98,7 @@ export default function App() {
               <TableContextProvider>
                 <div className="h-screen w-screen overflow-clip">
                   <div className="flex justify-between px-12 pt-16 h-full">
-                    {mainPageState === "tables" && <Tables />}
+                    {mainPageState === "tables" && <TablesPage />}
 
                     {mainPageState !== "tables" && <LeftSpace />}
 

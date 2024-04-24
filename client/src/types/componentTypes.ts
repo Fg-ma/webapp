@@ -1,4 +1,3 @@
-// Global
 export interface FilterState {
   filters: {
     [filter: string]: {
@@ -14,22 +13,12 @@ export interface FilterState {
   };
 }
 
-/*
-  AdvancedFilterDropdown.tsx
-  Global FilterState
-*/
-
 export interface AdvancedFilterDropdownProps {
   filter: string;
   subcategory: string;
   advancedFilterDropdownDropRef: React.RefObject<HTMLDivElement>;
   searchFilterRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  FilterCard.tsx
-  Global FilterState
-*/
 
 export interface FilterCardProps {
   entity_username: string;
@@ -38,10 +27,6 @@ export interface FilterCardProps {
   subcategory: string;
   popupRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  Popup.tsx
-*/
 
 export interface PopupProps {
   entity_username: string;
@@ -58,18 +43,10 @@ export interface PopupProps {
   subcategory: string;
 }
 
-/*
-  Checkbox.tsx
-*/
-
 export interface CheckboxProps {
   checked: boolean;
   hovering: boolean;
 }
-
-/*
-  CaptionDropdown.tsx
-*/
 
 export interface CaptionDropdownProps {
   options: number[] | string[];
@@ -81,10 +58,6 @@ export interface CaptionDropdownProps {
   dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
 }
 
-/*
-  DateCenterCaption.tsx
-*/
-
 export interface DateCenteredCaptionProps {
   id?: string | undefined;
   displayMonth: Date;
@@ -92,10 +65,6 @@ export interface DateCenteredCaptionProps {
   updateRangeStyles: () => void;
   dateRangeCaptionDropdownRef: React.RefObject<HTMLDivElement>;
 }
-
-/*
-  DateRangePicker.tsx
-*/
 
 export interface DateRangePickerProps {
   filter: string;
@@ -121,9 +90,11 @@ export interface DateRangePickerProps {
   };
 }
 
-/*
-  ProfilePicture.tsx
-*/
+export interface ProfilePictureEntity {
+  entity_name?: string | null;
+  entity_username?: string | null;
+  entity_current_Issue?: string | null;
+}
 
 export interface ProfilePictureProps {
   size: {
@@ -133,11 +104,7 @@ export interface ProfilePictureProps {
   entity_username: string;
   entity_type: number;
   styles: string;
-  entity?: {
-    entity_name?: string;
-    entity_username?: string;
-    entity_current_Issue?: string;
-  };
+  entity?: ProfilePictureEntity;
   clickable: boolean;
   conversations_pictures_id?: string;
   contacts_pictures_id?: string;
@@ -163,10 +130,6 @@ export interface Entity {
   organization_description?: string;
 }
 
-/*
-  ReferenceLinks.tsx
-*/
-
 export interface Reference {
   reference_id: string;
   individual_username: string | null;
@@ -181,10 +144,6 @@ export interface ReferenceLinksProps {
   references: Reference[];
 }
 
-/*
-  ImageViewer.tsx
-*/
-
 export interface ImageViewerProps {
   image_id: string;
 }
@@ -196,10 +155,6 @@ export interface ImageData {
   entity_type: number;
   image_creator_username: string;
 }
-
-/*
-  SheetActionLikeDislikeButtons.tsx
-*/
 
 export interface SheetActionLikeDislikeButtonsProps {
   sheet_id: string;
@@ -214,10 +169,6 @@ export interface SheetActionLikeDislikeButtonsProps {
   };
 }
 
-/*
-  SheetActionSection.tsx
-*/
-
 export interface SheetActionSectionProps {
   sheet_id: string;
   sheetData: {
@@ -231,10 +182,6 @@ export interface SheetActionSectionProps {
   };
 }
 
-/*
-  SheetHeader.tsx
-*/
-
 export interface SheetHeaderProps {
   sheet_id: string;
   sheetData: {
@@ -247,10 +194,6 @@ export interface SheetHeaderProps {
     sheet_dislikes: number;
   };
 }
-
-/*
-  SheetViewer.tsx
-*/
 
 export interface SheetViewerProps {
   sheet_id: string;
@@ -266,10 +209,6 @@ export interface SheetData {
   sheet_dislikes: number;
 }
 
-/*
-  VideoViewer.tsx
-*/
-
 export interface VideoViewerProps {
   video_id: string;
 }
@@ -281,10 +220,6 @@ export interface VideoData {
   entity_type: number;
   video_creator_username: string;
 }
-
-/* 
-  SheetThumbnail.tsx
-*/
 
 export interface SheetThumbnailProps {
   sheet_id: string;

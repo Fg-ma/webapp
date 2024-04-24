@@ -1,6 +1,5 @@
 import express from "express";
 const router = express.Router();
-import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
 import {
   Entity,
@@ -174,6 +173,19 @@ router.get("/get_table_by_table_id", verifyToken, async (req, res) => {
   const { table_id } = req.query;
 
   try {
+    const isUserInTable = await req.db.tables_members.findUnique({
+      where: {
+        table_id_member_id: {
+          table_id: table_id,
+          member_id: req.user.user_id,
+        },
+      },
+    });
+
+    if (!isUserInTable) {
+      res.send("Not in table");
+    }
+
     const table: Table = await req.db.tables.findUnique({
       where: {
         table_id: table_id,

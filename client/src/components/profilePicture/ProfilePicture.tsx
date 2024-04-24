@@ -4,7 +4,11 @@ import Axios from "axios";
 import { Transition, Variants, motion } from "framer-motion";
 import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
-import { ProfilePictureProps, Entity } from "@FgTypes/componentTypes";
+import {
+  ProfilePictureProps,
+  Entity,
+  ProfilePictureEntity,
+} from "@FgTypes/componentTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -238,21 +242,25 @@ export default function ProfilePicture({
     }
   };
 
-  const showPopup = (entity: Entity) => {
+  const showPopup = (entity: ProfilePictureEntity) => {
     setPopupContent(
       <div className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md z-50">
-        <p className="text-xl font-bold">{entity.entity_name}</p>
+        {entity.entity_name && (
+          <p className="text-xl font-bold">{entity.entity_name}</p>
+        )}
         <p className="text-base font-K2D">{entity.entity_username}</p>
-        <p className="text-base font-K2D overflow-hidden overflow-ellipsis line-clamp-2">
-          {entity.entity_current_Issue}
-        </p>
+        {entity.entity_current_Issue && (
+          <p className="text-base font-K2D overflow-hidden overflow-ellipsis line-clamp-2">
+            {entity.entity_current_Issue}
+          </p>
+        )}
       </div>,
     );
   };
 
   const startHoverTimer = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    entity?: Entity,
+    entity?: ProfilePictureEntity,
   ) => {
     if (entity) {
       mousePosition.current = {

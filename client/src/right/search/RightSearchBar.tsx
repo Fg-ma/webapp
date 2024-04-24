@@ -190,6 +190,7 @@ export default function RightSearchBar({
           }}
         />
         <input
+          id="rightSearchBarInput"
           type="text"
           placeholder="Search..."
           className="grow h-full outline-none bg-white placeholder-fg-black-25 text-lg mx-1 mt-0.5"

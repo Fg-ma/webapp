@@ -319,7 +319,8 @@ exports.Prisma.TablesScalarFieldEnum = {
 exports.Prisma.Tables_membersScalarFieldEnum = {
   tables_members_id: 'tables_members_id',
   table_id: 'table_id',
-  member_id: 'member_id'
+  member_id: 'member_id',
+  table_position: 'table_position'
 };
 
 exports.Prisma.Tables_messages_logsScalarFieldEnum = {

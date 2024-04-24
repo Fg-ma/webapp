@@ -573,3 +573,44 @@ export interface ContactDropdownPortalProps {
 export interface CreateContactButtonProps {
   entity_username: string;
 }
+
+export interface TablesPageState {
+  page: {
+    main: {
+      pagePayload: {
+        ids: {
+          paper_id: null;
+          sheet_id: null;
+          video_id: null;
+          image_id: null;
+          conversation_id: null;
+          table_id: null;
+        };
+      };
+    };
+  };
+}
+
+export interface Table {
+  last_message: string | null;
+  last_message_date: string | null;
+  members: {
+    individual_data?: {
+      individual_name: string | null;
+      individual_username: string;
+    };
+    group_data?: {
+      group_handle: string;
+      group_name: string | null;
+    };
+    organization_data?: {
+      organization_handle: string;
+      organization_name: string | null;
+    };
+    table_position: number;
+  }[];
+  table_creation_date: string;
+  table_id: string;
+  table_name: string | null;
+  tables_pictures_id: string | null;
+}
