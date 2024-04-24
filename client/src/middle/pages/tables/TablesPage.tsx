@@ -100,6 +100,7 @@ export default function TablesPage() {
       seatingPosition?.top +
       seatingPosition?.right,
   );
+
   const bottomMembersElements = bottomMembers?.map((member) => (
     <ProfilePicture
       key={String(
@@ -144,19 +145,231 @@ export default function TablesPage() {
           ? {
               entity_name: member.individual_data.individual_name,
               entity_username: member.individual_data.individual_username,
-              entity_current_Issue: undefined,
+              entity_current_Issue:
+                member.individual_data.individual_current_issue,
             }
           : member.group_data
             ? {
                 entity_name: member.group_data.group_name,
                 entity_username: member.group_data.group_handle,
-                entity_current_Issue: undefined,
+                entity_current_Issue: member.group_data.group_current_issue,
               }
             : member.organization_data
               ? {
                   entity_name: member.organization_data.organization_name,
                   entity_username: member.organization_data.organization_handle,
+                  entity_current_Issue:
+                    member.organization_data.organization_current_issue,
+                }
+              : {
+                  entity_name: undefined,
+                  entity_username: undefined,
                   entity_current_Issue: undefined,
+                }
+      }
+      clickable={true}
+    />
+  ));
+
+  const topMembersElements = topMembers?.map((member) => (
+    <ProfilePicture
+      key={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      size={{ w: 5, h: 5 }}
+      entity_username={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      entity_type={
+        member.individual_data
+          ? 1
+          : member.group_data
+            ? 2
+            : member.organization_data
+              ? 3
+              : 0
+      }
+      styles={
+        member.individual_data
+          ? "rounded-full"
+          : member.group_data
+            ? "rounded-md"
+            : member.organization_data
+              ? "rounded-sm"
+              : ""
+      }
+      entity={
+        member.individual_data
+          ? {
+              entity_name: member.individual_data.individual_name,
+              entity_username: member.individual_data.individual_username,
+              entity_current_Issue:
+                member.individual_data.individual_current_issue,
+            }
+          : member.group_data
+            ? {
+                entity_name: member.group_data.group_name,
+                entity_username: member.group_data.group_handle,
+                entity_current_Issue: member.group_data.group_current_issue,
+              }
+            : member.organization_data
+              ? {
+                  entity_name: member.organization_data.organization_name,
+                  entity_username: member.organization_data.organization_handle,
+                  entity_current_Issue:
+                    member.organization_data.organization_current_issue,
+                }
+              : {
+                  entity_name: undefined,
+                  entity_username: undefined,
+                  entity_current_Issue: undefined,
+                }
+      }
+      clickable={true}
+    />
+  ));
+
+  const leftMembersElements = leftMembers?.map((member) => (
+    <ProfilePicture
+      key={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      size={{ w: 5, h: 5 }}
+      entity_username={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      entity_type={
+        member.individual_data
+          ? 1
+          : member.group_data
+            ? 2
+            : member.organization_data
+              ? 3
+              : 0
+      }
+      styles={
+        member.individual_data
+          ? "rounded-full"
+          : member.group_data
+            ? "rounded-md"
+            : member.organization_data
+              ? "rounded-sm"
+              : ""
+      }
+      entity={
+        member.individual_data
+          ? {
+              entity_name: member.individual_data.individual_name,
+              entity_username: member.individual_data.individual_username,
+              entity_current_Issue:
+                member.individual_data.individual_current_issue,
+            }
+          : member.group_data
+            ? {
+                entity_name: member.group_data.group_name,
+                entity_username: member.group_data.group_handle,
+                entity_current_Issue: member.group_data.group_current_issue,
+              }
+            : member.organization_data
+              ? {
+                  entity_name: member.organization_data.organization_name,
+                  entity_username: member.organization_data.organization_handle,
+                  entity_current_Issue:
+                    member.organization_data.organization_current_issue,
+                }
+              : {
+                  entity_name: undefined,
+                  entity_username: undefined,
+                  entity_current_Issue: undefined,
+                }
+      }
+      clickable={true}
+    />
+  ));
+
+  const rightMembersElements = rightMembers?.map((member) => (
+    <ProfilePicture
+      key={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      size={{ w: 5, h: 5 }}
+      entity_username={String(
+        member.individual_data
+          ? member.individual_data.individual_username
+          : member.group_data
+            ? member.group_data.group_handle
+            : member.organization_data
+              ? member.organization_data.organization_handle
+              : null,
+      )}
+      entity_type={
+        member.individual_data
+          ? 1
+          : member.group_data
+            ? 2
+            : member.organization_data
+              ? 3
+              : 0
+      }
+      styles={
+        member.individual_data
+          ? "rounded-full"
+          : member.group_data
+            ? "rounded-md"
+            : member.organization_data
+              ? "rounded-sm"
+              : ""
+      }
+      entity={
+        member.individual_data
+          ? {
+              entity_name: member.individual_data.individual_name,
+              entity_username: member.individual_data.individual_username,
+              entity_current_Issue:
+                member.individual_data.individual_current_issue,
+            }
+          : member.group_data
+            ? {
+                entity_name: member.group_data.group_name,
+                entity_username: member.group_data.group_handle,
+                entity_current_Issue: member.group_data.group_current_issue,
+              }
+            : member.organization_data
+              ? {
+                  entity_name: member.organization_data.organization_name,
+                  entity_username: member.organization_data.organization_handle,
+                  entity_current_Issue:
+                    member.organization_data.organization_current_issue,
                 }
               : {
                   entity_name: undefined,
@@ -174,29 +387,52 @@ export default function TablesPage() {
         className="overflow-hidden w-full flex flex-col items-center justify-center space-y-4 pr-12"
         style={{ height: "85%" }}
       >
-        <div className="flex flex-row w-full px-36 justify-between">
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-          <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
+        <div
+          className={`flex flex-row w-full px-24 ${
+            topMembersElements && topMembersElements.length > 1
+              ? "justify-between"
+              : "justify-center"
+          }`}
+        >
+          <div></div>
+          {topMembersElements}
+          <div></div>
         </div>
         <div className="w-full flex flex-row items-center justify-center grow space-x-4">
-          <div className="flex flex-col h-full py-12 justify-between">
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
+          <div
+            className={`flex flex-col h-full ${
+              leftMembersElements && leftMembersElements.length > 1
+                ? "justify-between"
+                : "justify-center"
+            }`}
+          >
+            <div></div>
+            {leftMembersElements}
+            <div></div>
           </div>
           <div className="bg-fg-white-95 w-full h-full rounded-3xl"></div>
-          <div className="flex flex-col h-full py-12 justify-between">
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
-            <div className="bg-fg-white-95 w-20 aspect-square rounded-full"></div>
+          <div
+            className={`flex flex-col h-full ${
+              rightMembersElements && rightMembersElements.length > 1
+                ? "justify-between"
+                : "justify-center"
+            }`}
+          >
+            <div></div>
+            {rightMembersElements}
+            <div></div>
           </div>
         </div>
-        <div className="flex flex-row w-full px-36 justify-between">
+        <div
+          className={`flex flex-row w-full px-24 ${
+            bottomMembersElements && bottomMembersElements.length > 1
+              ? "justify-between"
+              : "justify-center"
+          }`}
+        >
+          <div></div>
           {bottomMembersElements}
+          <div></div>
         </div>
       </div>
       <TablesUtilityBar />

@@ -598,14 +598,17 @@ export interface Table {
     individual_data?: {
       individual_name: string | null;
       individual_username: string;
+      individual_current_issue?: string | null;
     };
     group_data?: {
       group_handle: string;
       group_name: string | null;
+      group_current_issue?: string | null;
     };
     organization_data?: {
       organization_handle: string;
       organization_name: string | null;
+      organization_current_issue?: string | null;
     };
     table_position: number;
   }[];

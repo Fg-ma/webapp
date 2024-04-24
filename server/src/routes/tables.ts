@@ -267,6 +267,7 @@ router.get("/get_table_by_table_id", verifyToken, async (req, res) => {
             member.individual_data = {
               individual_username: individual.individual_username,
               individual_name: individual.individual_name,
+              individual_current_issue: individual.individual_current_issue,
             };
           }
         });
@@ -282,6 +283,7 @@ router.get("/get_table_by_table_id", verifyToken, async (req, res) => {
             member.group_data = {
               group_handle: group.group_handle,
               group_name: group.group_name,
+              group_current_issue: group.group_current_issue,
             };
           }
         });
@@ -299,6 +301,8 @@ router.get("/get_table_by_table_id", verifyToken, async (req, res) => {
             member.organization_data = {
               organization_handle: organization.organization_handle,
               organization_name: organization.organization_name,
+              organization_current_issue:
+                organization.organization_current_issue,
             };
           }
         });
