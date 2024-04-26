@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import { v4 as uuid } from "uuid";
 import verifyToken from "./verifyJWT";
 import {
   Entity,
@@ -10,6 +11,7 @@ import {
   Table,
   TablePicture,
 } from "@FgTypes/types";
+import { tables_messages_logs } from "prisma/generated";
 
 // Get a user's full tables
 router.get("/user_tables", verifyToken, async (req, res) => {
@@ -328,7 +330,7 @@ router.get("/get_table_by_table_id", verifyToken, async (req, res) => {
   }
 });
 
-// Gets the data needed for a conversation picture
+// Gets the data needed for a table picture
 router.get("/get_table_picture", async (req, res) => {
   const { tables_pictures_id } = req.query;
 
@@ -345,6 +347,248 @@ router.get("/get_table_picture", async (req, res) => {
     }
 
     res.send(tablePicture);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Insert a new row into tables_messages_logs table only if sender is in the table
+router.put("/new_table_message", verifyToken, async (req, res) => {
+  const { table_id, message } = req.body;
+
+  try {
+    if (!table_id) {
+      return;
+    }
+
+    const tableMembers: TableMember[] = await req.db.tables_members.findMany({
+      where: {
+        table_id: table_id,
+      },
+    });
+
+    const isInTable = tableMembers.some(
+      (member) => member.member_id === req.user.user_id
+    );
+
+    let result = "Authorization error";
+
+    if (isInTable) {
+      const currentTime = new Date().toISOString();
+
+      result = await req.db.tables_messages_logs.create({
+        data: {
+          tables_messages_logs_id: uuid(),
+          table_id: table_id,
+          entity_id: req.user.user_id,
+          message: message,
+          message_date: currentTime,
+        },
+      });
+
+      await req.db.tables.update({
+        where: {
+          table_id: table_id,
+        },
+        data: {
+          last_message: message,
+          last_message_date: currentTime,
+        },
+      });
+    }
+
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Gets if the user sent a message
+router.get("/isUser", verifyToken, async (req, res) => {
+  const { sender } = req.query;
+
+  try {
+    const isUser = sender === req.user.username;
+
+    if (req.user.entity_type === 1) {
+      const individual = await req.db.individuals.findUnique({
+        where: {
+          individual_username: sender,
+        },
+      });
+
+      if (individual.individual_name) {
+        res.send({
+          sender: individual.individual_name,
+          isUser: isUser,
+        });
+      } else {
+        res.send({
+          sender: individual.individual_username,
+          isUser: isUser,
+        });
+      }
+    } else if (req.user.entity_type === 2) {
+      const group = await req.db.groups.findUnique({
+        where: {
+          group_handle: sender,
+        },
+      });
+
+      if (group.group_name) {
+        res.send({
+          sender: group.group_name,
+          isUser: isUser,
+        });
+      } else {
+        res.send({
+          sender: group.group_handle,
+          isUser: isUser,
+        });
+      }
+    } else if (req.user.entity_type === 3) {
+      const organization = await req.db.organizations.findUnique({
+        where: {
+          organization_handle: sender,
+        },
+      });
+
+      if (organization.organization_name) {
+        res.send({
+          sender: organization.organization_name,
+          isUser: isUser,
+        });
+      } else {
+        res.send({
+          sender: organization.organization_handle,
+          isUser: isUser,
+        });
+      }
+    } else {
+      res.send({
+        sender: sender,
+        isUser: isUser,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Get a table conversation by id only if the user is in the table
+router.get("/table_conversation_by_table_id", verifyToken, async (req, res) => {
+  const { table_id } = req.query;
+
+  try {
+    const tableMembers: TableMember[] = await req.db.tables_members.findMany({
+      where: {
+        table_id: table_id,
+      },
+    });
+
+    const isInTable = tableMembers.some(
+      (member) => member.member_id === req.user.user_id
+    );
+
+    if (isInTable) {
+      const tableConversation: tables_messages_logs[] =
+        await req.db.tables_messages_logs.findMany({
+          where: {
+            table_id: table_id,
+          },
+        });
+
+      const entityIds = tableConversation.map((message) => message.entity_id);
+
+      const individuals: Entity[] = await req.db.entities.findMany({
+        where: {
+          entity_id: { in: entityIds },
+          entity_type: 1,
+        },
+      });
+
+      const individualsIds = individuals.map(
+        (individual) => individual.entity_id
+      );
+
+      const individualsData: Individual[] = await req.db.individuals.findMany({
+        where: {
+          individual_id: { in: individualsIds },
+        },
+      });
+
+      const groups: Entity[] = await req.db.entities.findMany({
+        where: {
+          entity_id: { in: entityIds },
+          entity_type: 2,
+        },
+      });
+
+      const groupsIds = groups.map((group) => group.entity_id);
+
+      const groupsData: Group[] = await req.db.groups.findMany({
+        where: {
+          group_id: { in: groupsIds },
+        },
+      });
+
+      const organizations: Entity[] = await req.db.entities.findMany({
+        where: {
+          entity_id: { in: entityIds },
+          entity_type: 3,
+        },
+      });
+
+      const organizationsIds = organizations.map(
+        (organization) => organization.entity_id
+      );
+
+      const organizationsData: Organization[] =
+        await req.db.organizations.findMany({
+          where: {
+            organization_id: { in: organizationsIds },
+          },
+        });
+
+      const returningTableConversation = tableConversation.map((message) => {
+        const currentEntityId = message.entity_id;
+
+        const individualMatch = individualsData.find(
+          (individual: Individual) =>
+            individual.individual_id === currentEntityId
+        );
+
+        const groupMatch = groupsData.find(
+          (group: Group) => group.group_id === currentEntityId
+        );
+
+        const organizationMatch = organizationsData.find(
+          (organization: Organization) =>
+            organization.organization_id === currentEntityId
+        );
+
+        return {
+          content: message.message,
+          sender: individualMatch
+            ? individualMatch.individual_username
+            : groupMatch
+            ? groupMatch.group_handle
+            : organizationMatch
+            ? organizationMatch.organization_handle
+            : "",
+          isUser: message.entity_id === req.user.user_id,
+          message_date: message.message_date,
+        };
+      });
+
+      res.send({
+        tableConversation: returningTableConversation,
+        tableSize: tableMembers.length,
+      });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

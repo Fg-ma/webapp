@@ -65,10 +65,10 @@ export default function TablesPage() {
       };
     } else if (remainderMembers === 3) {
       seatingPosition = {
-        top: Math.floor(totalMembers / 4) + 1,
-        bottom: Math.floor(totalMembers / 4),
-        left: Math.floor(totalMembers / 4) + 1,
-        right: Math.floor(totalMembers / 4) + 1,
+        top: Math.floor(totalMembers / 4) + 2,
+        bottom: Math.floor(totalMembers / 4) + 1,
+        left: Math.floor(totalMembers / 4),
+        right: Math.floor(totalMembers / 4),
       };
     } else {
       seatingPosition = {
@@ -435,7 +435,12 @@ export default function TablesPage() {
           <div></div>
         </div>
       </div>
-      <TablesUtilityBar />
+      {table_id && (
+        <TablesUtilityBar
+          table_id={table_id}
+          tables_pictures_id={table?.tables_pictures_id}
+        />
+      )}
     </div>
   );
 }

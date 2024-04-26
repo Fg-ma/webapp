@@ -74,6 +74,7 @@ export function TableCard({
   const handleClick = () => {
     dispatch(setPageState("main", "tables"));
     dispatch(setIds("main", "table_id", table_id));
+    dispatch(setPageState("tables", "conversation"));
   };
 
   const lastMessage = last_message?.includes("\n")

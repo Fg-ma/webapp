@@ -97,15 +97,15 @@ export interface ProfilePictureEntity {
 }
 
 export interface ProfilePictureProps {
-  size: {
+  size?: {
     w: number;
     h: number;
   };
-  entity_username: string;
-  entity_type: number;
-  styles: string;
+  entity_username?: string;
+  entity_type?: number;
+  styles?: string;
   entity?: ProfilePictureEntity;
-  clickable: boolean;
+  clickable?: boolean;
   conversations_pictures_id?: string;
   contacts_pictures_id?: string;
   tables_pictures_id?: string;

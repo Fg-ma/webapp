@@ -617,3 +617,8 @@ export interface Table {
   table_name: string | null;
   tables_pictures_id: string | null;
 }
+
+export interface TablesTextFieldProps {
+  table_id: string | null;
+  tableSocket: Socket;
+}

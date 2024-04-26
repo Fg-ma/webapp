@@ -338,14 +338,15 @@ router.put("/new_conversation_message", verifyToken, async (req, res) => {
       return;
     }
 
-    const conversationMembers = await req.db.conversations_members.findMany({
-      where: {
-        conversation_id: conversation_id,
-      },
-    });
+    const conversationMembers: ConversationMember[] =
+      await req.db.conversations_members.findMany({
+        where: {
+          conversation_id: conversation_id,
+        },
+      });
 
     const isInConversation = conversationMembers.some(
-      (member: ConversationMember) => member.member_id === req.user.user_id
+      (member) => member.member_id === req.user.user_id
     );
 
     let result = "Authorization error";
@@ -475,7 +476,6 @@ router.get(
           });
 
         const returningConversation = conversation.map((message) => {
-          let sender = "";
           const currentEntityId = message.entity_id;
 
           const individualMatch = individualsData.find(
@@ -492,17 +492,15 @@ router.get(
               organization.organization_id === currentEntityId
           );
 
-          if (individualMatch) {
-            sender = individualMatch.individual_username;
-          } else if (groupMatch) {
-            sender = groupMatch.group_handle;
-          } else if (organizationMatch) {
-            sender = organizationMatch.organization_handle;
-          }
-
           return {
             content: message.message,
-            sender: sender,
+            sender: individualMatch
+              ? individualMatch.individual_username
+              : groupMatch
+              ? groupMatch.group_handle
+              : organizationMatch
+              ? organizationMatch.organization_handle
+              : "",
             isUser: message.entity_id === req.user.user_id,
             message_date: message.message_date,
           };

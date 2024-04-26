@@ -3,9 +3,8 @@ import Axios from "axios";
 import config from "@config";
 import { MessagesConversationBodyProps } from "@FgTypes/middleTypes";
 import MessagesConversationHeader from "./MessagesConversationHeader";
-import UserBubble from "./UserBubble";
-import RecipientsBubbles from "./RecipientsBubbles";
-import { setConversation } from "@redux/pageState/pageStateActions";
+import UserBubble from "@components/messagingBubbles/UserBubble";
+import RecipientsBubbles from "@components/messagingBubbles/RecipientsBubbles";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment

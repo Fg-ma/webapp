@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactNode } from "react";
+import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
 import { Transition, Variants, motion } from "framer-motion";
@@ -6,7 +7,6 @@ import config from "@config";
 import { setIds, setPageState } from "@redux/pageState/pageStateActions";
 import {
   ProfilePictureProps,
-  Entity,
   ProfilePictureEntity,
 } from "@FgTypes/componentTypes";
 import { useIndexedDBContext } from "@context/IDBContext";
@@ -32,13 +32,17 @@ const transition: Transition = {
   },
 };
 
+const Popup = ({ children }: { children: ReactNode }) => {
+  return ReactDOM.createPortal(children, document.body);
+};
+
 export default function ProfilePicture({
   size,
-  entity_username,
-  entity_type,
+  entity_username = "",
+  entity_type = 0,
   styles,
   entity,
-  clickable,
+  clickable = false,
   conversations_pictures_id,
   contacts_pictures_id,
   tables_pictures_id,
@@ -53,15 +57,18 @@ export default function ProfilePicture({
   const [popupContent, setPopupContent] = useState<JSX.Element | null>(null);
   const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
   const mousePosition = useRef<{ x: string; y: string } | null>(null);
+  const profilePictureRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchProfilePictureData = async () => {
       const storedProfilePicture = await getStoredProfilePicture(
         conversations_pictures_id
-          ? conversations_pictures_id
+          ? "convo_id_" + conversations_pictures_id
           : contacts_pictures_id
-            ? contacts_pictures_id
-            : entity_username,
+            ? "cont_id_" + contacts_pictures_id
+            : tables_pictures_id
+              ? "tlb_id_" + tables_pictures_id
+              : entity_username,
       );
 
       if (storedProfilePicture) {
@@ -103,7 +110,10 @@ export default function ProfilePicture({
                 profilePictureUrl: url,
               });
 
-              await storeProfilePicture(conversations_pictures_id, blob);
+              await storeProfilePicture(
+                "convo_id_" + conversations_pictures_id,
+                blob,
+              );
             }
           } else {
             setProfilePictureData({
@@ -139,7 +149,10 @@ export default function ProfilePicture({
                 profilePictureUrl: url,
               });
 
-              await storeProfilePicture(contacts_pictures_id, blob);
+              await storeProfilePicture(
+                "cont_id_" + contacts_pictures_id,
+                blob,
+              );
             }
           } else {
             setProfilePictureData({
@@ -175,7 +188,7 @@ export default function ProfilePicture({
                 profilePictureUrl: url,
               });
 
-              await storeProfilePicture(tables_pictures_id, blob);
+              await storeProfilePicture("tbl_id_" + tables_pictures_id, blob);
             }
           } else {
             setProfilePictureData({
@@ -244,7 +257,10 @@ export default function ProfilePicture({
 
   const showPopup = (entity: ProfilePictureEntity) => {
     setPopupContent(
-      <div className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md z-50">
+      <div
+        className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md"
+        style={{ zIndex: 9999 }}
+      >
         {entity.entity_name && (
           <p className="text-xl font-bold">{entity.entity_name}</p>
         )}
@@ -264,8 +280,8 @@ export default function ProfilePicture({
   ) => {
     if (entity) {
       mousePosition.current = {
-        x: `${event.clientX - 535}px`,
-        y: `${event.clientY - 50}px`,
+        x: `${event.clientX + 12}px`,
+        y: `${event.clientY + 4}px`,
       };
       hoverTimeout.current = setTimeout(() => {
         showPopup(entity);
@@ -285,8 +301,8 @@ export default function ProfilePicture({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     mousePosition.current = {
-      x: `${event.clientX - 535}px`,
-      y: `${event.clientY - 50}px`,
+      x: `${event.clientX + 12}px`,
+      y: `${event.clientY + 4}px`,
     };
   };
 
@@ -295,10 +311,11 @@ export default function ProfilePicture({
       if (prevPopupContent) {
         return (
           <div
-            className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md z-50"
+            className="p-4 absolute bg-white drop-shadow-md rounded w-max max-w-md"
             style={{
               top: mousePosition.current?.y,
               left: mousePosition.current?.x,
+              zIndex: 9999,
             }}
           >
             {prevPopupContent.props.children}
@@ -331,34 +348,37 @@ export default function ProfilePicture({
   };
 
   return (
-    <div
-      className={`${styles} overflow-hidden ${clickable && "cursor-pointer"}`}
-      style={{
-        height: `${size.h}rem`,
-        minHeight: `${size.h}rem`,
-        width: `${size.w}rem`,
-        minWidth: `${size.w}rem`,
-      }}
-      onMouseEnter={(event) => startHoverTimer(event, entity)}
-      onMouseLeave={() => cancelHoverTimer()}
-      onMouseMove={(event) => {
-        updateMousePosition(event);
-        updatePopupPosition();
-      }}
-      onClick={handleClick}
-    >
-      <img
-        className="h-full w-full object-cover"
-        src={
-          profilePictureData.profilePictureUrl ||
-          "/assets/pictures/DefaultProfilePicture.png"
-        }
-        alt={
-          profilePictureData.profilePictureUrl
-            ? "Profile Picture"
-            : "Default Profile Picture"
-        }
-      />
+    <div className="relative">
+      <div
+        ref={profilePictureRef}
+        className={`${styles} overflow-hidden ${clickable && "cursor-pointer"}`}
+        style={{
+          height: `${size?.h}rem`,
+          minHeight: `${size?.h}rem`,
+          width: `${size?.w}rem`,
+          minWidth: `${size?.w}rem`,
+        }}
+        onMouseEnter={(event) => startHoverTimer(event, entity)}
+        onMouseLeave={() => cancelHoverTimer()}
+        onMouseMove={(event) => {
+          updateMousePosition(event);
+          updatePopupPosition();
+        }}
+        onClick={handleClick}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={
+            profilePictureData.profilePictureUrl ||
+            "/assets/pictures/DefaultProfilePicture.png"
+          }
+          alt={
+            profilePictureData.profilePictureUrl
+              ? "Profile Picture"
+              : "Default Profile Picture"
+          }
+        />
+      </div>
       {popupContent && (
         <motion.div
           variants={popupContentVar}
@@ -366,7 +386,7 @@ export default function ProfilePicture({
           animate="animate"
           transition={transition}
         >
-          {popupContent}
+          <Popup>{popupContent}</Popup>
         </motion.div>
       )}
     </div>
