@@ -17,6 +17,7 @@ import {
   SET_IDS,
   SET_LOGGED_IN,
   SET_CONVERSATION,
+  SET_TABLE,
   SET_SECONDARY_PAGE_STATE,
   SET_USERNAME,
 } from "@redux/pageState/pageStateTypes";
@@ -125,6 +126,11 @@ export interface PageState {
         members: string[] | null;
         conversation_creation_date: string | null;
       };
+      table?: {
+        table_name: string | null;
+        members: string[] | null;
+        table_creation_date: string | null;
+      };
     };
   };
 }
@@ -143,6 +149,14 @@ export type PageStateAction =
         conversation_name: string;
         members: string[];
         conversation_creation_date: string;
+      };
+    }
+  | {
+      type: typeof SET_TABLE;
+      payload: {
+        table_name: string;
+        members: string[];
+        table_creation_date: string;
       };
     }
   | {

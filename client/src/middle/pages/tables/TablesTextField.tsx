@@ -129,10 +129,6 @@ export default function TablesTextField({
       },
     }));
 
-    //if (tablesPageRef.current) {
-    //  tablesPageRef.current.scrollTop = tablesPageRef.current.scrollHeight;
-    //}
-
     setInputValue("");
     contentEditableRef.current.innerText = placeholder;
   };

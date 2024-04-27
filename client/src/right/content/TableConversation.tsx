@@ -59,6 +59,17 @@ export default function TableConversation() {
     return [...data];
   };
 
+  // Establish socket connection
+  useEffect(() => {
+    tableSocket.on("connection", () => {
+      return;
+    });
+
+    return () => {
+      tableSocket.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     if (previousTableId) {
       leaveTable(previousTableId);
@@ -73,6 +84,7 @@ export default function TableConversation() {
       if (!token) {
         return;
       }
+
       const response = await Axios.get(`${serverUrl}/tables/isUser`, {
         params: {
           sender: newMessage.sender,
@@ -84,7 +96,7 @@ export default function TableConversation() {
 
       const message = {
         content: newMessage.content,
-        sender: response.data.sender,
+        sender: newMessage.sender,
         isUser: response.data.isUser,
         message_date: newMessage.message_date,
       };
@@ -154,9 +166,9 @@ export default function TableConversation() {
         );
 
         tableSize.current = response.data.tableSize;
-        setTableConversation(sortData(response.data.TableConversation));
+        setTableConversation(sortData(response.data.tableConversation));
       } catch (error) {
-        console.error("Error fetching entity data:", error);
+        console.error("Error fetching table conversation data:", error);
       }
     };
 
@@ -243,7 +255,7 @@ export default function TableConversation() {
   }, [tableConversation]);
 
   return (
-    <div className="w-full grow flex flex-col items-center justify-start pt-10">
+    <div className="w-full grow flex flex-col items-center justify-start pt-10 pl-9">
       <TableConversationHeader />
       {tableConversationContent}
       {typingBubbles}

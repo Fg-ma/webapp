@@ -545,8 +545,8 @@ export interface ConversationMeta {
       pagePayload: {
         conversation: {
           conversation_name: string | null;
-          members: string[] | null;
-          conversation_creation_date: string | null;
+          members: string[];
+          conversation_creation_date: string;
         };
       };
     };

@@ -310,6 +310,7 @@ export interface TableCardProps {
   last_message: string | null;
   members: TableMember[];
   tables_pictures_id: string | null;
+  table_creation_date: string;
   filter?: string;
 }
 
@@ -356,4 +357,18 @@ export interface MakeTableEntitiesCardProps {
       }[]
     >
   >;
+}
+
+export interface TableMeta {
+  page: {
+    main: {
+      pagePayload: {
+        table: {
+          table_name: string | null;
+          members: string[];
+          table_creation_date: string;
+        };
+      };
+    };
+  };
 }

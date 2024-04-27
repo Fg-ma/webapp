@@ -345,6 +345,7 @@ export default function Tables() {
           last_message={newTable.last_message}
           members={newTable.members}
           tables_pictures_id={newTable.tables_pictures_id}
+          table_creation_date={newTable.table_creation_date}
         />
       );
     }
@@ -359,6 +360,7 @@ export default function Tables() {
         last_message={table.last_message}
         members={table.members}
         tables_pictures_id={table.tables_pictures_id}
+        table_creation_date={table.table_creation_date}
         filter={filter}
       />
     );
@@ -373,6 +375,7 @@ export default function Tables() {
         last_message={table.last_message}
         members={table.members}
         tables_pictures_id={table.tables_pictures_id}
+        table_creation_date={table.table_creation_date}
       />
     );
   });

@@ -17,6 +17,7 @@ import {
 import Conversations from "./content/Conversations";
 import Contacts from "./content/Contacts";
 import Tables from "./content/Tables";
+import TableConversation from "./content/TableConversation";
 
 export default function RightSpace() {
   /* 
@@ -64,8 +65,8 @@ export default function RightSpace() {
           return <News />;
       }
     } else if (
-      mainPageState === "messages" ||
-      mainSecondaryPageState === "messages"
+      (mainPageState === "messages" || mainSecondaryPageState === "messages") &&
+      mainSecondaryPageState !== "tables"
     ) {
       switch (messagesPage) {
         case "conversations":
@@ -74,12 +75,14 @@ export default function RightSpace() {
           return <Contacts />;
       }
     } else if (
-      mainPageState === "tables" ||
-      mainSecondaryPageState === "tables"
+      (mainPageState === "tables" || mainSecondaryPageState === "tables") &&
+      mainSecondaryPageState !== "messages"
     ) {
       switch (tablesPage) {
         case "tables":
           return <Tables />;
+        case "conversation":
+          return <TableConversation />;
       }
     }
   };

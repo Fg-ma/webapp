@@ -8,6 +8,7 @@ import { createServer } from "http";
 import prismaMiddleware from "./prismaMiddleware";
 import messageSocket from "./messageSocket";
 import liveUpdatesSocket from "./liveUpdatesSocket";
+import tableSocket from "./tableSocket";
 import individualsRouter from "./routes/individuals";
 import groupsRouter from "./routes/groups";
 import organizationsRouter from "./routes/organizations";
@@ -30,6 +31,7 @@ app.use(prismaMiddleware);
 const server = createServer(app);
 liveUpdatesSocket(server);
 messageSocket(server);
+tableSocket(server);
 
 app.use("/individuals", individualsRouter);
 app.use("/groups", groupsRouter);

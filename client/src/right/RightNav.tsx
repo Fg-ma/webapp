@@ -93,14 +93,14 @@ export default function RightNav({ mainPageState }: RightNavProps) {
     styles[rightPage] = { ...activeStyles };
     navItems = ["papers", "news", "explore", "dogEars"];
   } else if (
-    mainPageState === "messages" ||
-    mainSecondaryPageState === "messages"
+    (mainPageState === "messages" || mainSecondaryPageState === "messages") &&
+    mainSecondaryPageState !== "tables"
   ) {
     styles[messagesPage] = { ...activeStyles };
     navItems = ["conversations", "contacts"];
   } else if (
-    mainPageState === "tables" ||
-    mainSecondaryPageState === "tables"
+    (mainPageState === "tables" || mainSecondaryPageState === "tables") &&
+    mainSecondaryPageState !== "messages"
   ) {
     styles[tablesPage] = { ...activeStyles };
     navItems = ["tables", "conversation", "members"];
@@ -116,13 +116,13 @@ export default function RightNav({ mainPageState }: RightNavProps) {
       dispatch(closeDrop(state, "isDropFilter"));
       dispatch(setPageState("right", state));
     } else if (
-      mainPageState === "messages" ||
-      mainSecondaryPageState === "messages"
+      (mainPageState === "messages" || mainSecondaryPageState === "messages") &&
+      mainSecondaryPageState !== "tables"
     ) {
       dispatch(setPageState("messages", state));
     } else if (
-      mainPageState === "tables" ||
-      mainSecondaryPageState === "tables"
+      (mainPageState === "tables" || mainSecondaryPageState === "tables") &&
+      mainSecondaryPageState !== "messages"
     ) {
       dispatch(setPageState("tables", state));
     }

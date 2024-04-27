@@ -17,7 +17,7 @@ export default function TablesUtilityBar({
   tables_pictures_id: string | undefined | null;
 }) {
   const tableSocket = io(serverUrl, {
-    path: "/message-socket",
+    path: "/table-socket",
   });
   const [isUtilities, setIsUtilities] = useState(false);
 

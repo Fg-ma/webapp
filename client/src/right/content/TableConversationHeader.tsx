@@ -1,10 +1,10 @@
-import { ConversationMeta } from "@FgTypes/middleTypes";
+import { TableMeta } from "@FgTypes/rightTypes";
 import React from "react";
 import { useSelector } from "react-redux";
 
 export default function TableConversationHeader() {
-  const conversationMeta = useSelector(
-    (state: ConversationMeta) => state.page.main.pagePayload.conversation,
+  const tableMeta = useSelector(
+    (state: TableMeta) => state.page.main.pagePayload.table,
   );
 
   function formatDate(dateString: string) {
@@ -28,22 +28,22 @@ export default function TableConversationHeader() {
   }
 
   return (
-    <div className="mb-5 flex flex-col items-center justify-center">
-      {conversationMeta.conversation_name && (
+    <div className="mb-5 flex flex-col items-center justify-center w-full">
+      {tableMeta.table_name && (
         <div className="font-K2D text-fg-black-25 text-xl">
-          {conversationMeta.conversation_name}
+          {tableMeta.table_name}
         </div>
       )}
-      {conversationMeta.members && (
-        <div className="font-K2D text-fg-black-30 text-lg">
-          {conversationMeta.members.length >= 1
-            ? conversationMeta.members.join(", ")
-            : conversationMeta.members.join(" and ")}
+      {tableMeta.members && (
+        <div className="font-K2D text-fg-black-30 text-base text-center">
+          {tableMeta.members.length >= 1
+            ? tableMeta.members.join(", ")
+            : tableMeta.members.join(" and ")}
         </div>
       )}
-      {conversationMeta.conversation_creation_date && (
-        <div className="font-K2D text-fg-black-40 text-sm">
-          {formatDate(conversationMeta.conversation_creation_date)}
+      {tableMeta.table_creation_date && (
+        <div className="font-K2D text-fg-black-40 text-xs text-center">
+          {formatDate(tableMeta.table_creation_date)}
         </div>
       )}
     </div>

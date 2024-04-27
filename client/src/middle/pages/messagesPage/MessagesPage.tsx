@@ -97,7 +97,7 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
 
       const message = {
         content: newMessage.content,
-        sender: response.data.sender,
+        sender: newMessage.sender,
         isUser: response.data.isUser,
         message_date: newMessage.message_date,
       };
