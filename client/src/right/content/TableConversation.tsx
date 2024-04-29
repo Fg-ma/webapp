@@ -22,7 +22,6 @@ export default function TableConversation() {
   );
   const [tableConversation, setTableConversation] = useState<Message[]>([]);
   const [typing, setTyping] = useState<Typing[]>([]);
-  const [previousTableId, setPreviousTableId] = useState<string | null>(null);
   const [tableConversationContent, setTableConversationContent] = useState<
     React.JSX.Element[]
   >([]);
@@ -71,9 +70,10 @@ export default function TableConversation() {
   }, []);
 
   useEffect(() => {
-    if (previousTableId) {
-      leaveTable(previousTableId);
-    }
+    setTyping([]);
+    setTypingBubbles([]);
+    setTableConversation([]);
+    setTableConversationContent([]);
 
     if (table_id) {
       joinTable(table_id);
@@ -176,8 +176,6 @@ export default function TableConversation() {
       fetchTableConversationData();
     }
 
-    setPreviousTableId(table_id);
-
     return () => {
       if (table_id) {
         leaveTable(table_id);
@@ -255,7 +253,7 @@ export default function TableConversation() {
   }, [tableConversation]);
 
   return (
-    <div className="w-full grow flex flex-col items-center justify-start pt-10 pl-9">
+    <div className="w-full grow flex flex-col items-center justify-start pt-10 pl-9 pb-8">
       <TableConversationHeader />
       {tableConversationContent}
       {typingBubbles}

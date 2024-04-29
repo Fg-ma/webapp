@@ -60,37 +60,11 @@ export default function tableSocket(server: HttpServer) {
         const message_date = new Date().toISOString();
 
         if (isInTable) {
-          const recipients: TableMember[] =
-            await prisma.tables_members.findMany({
-              where: {
-                table_id: table_id,
-              },
-            });
-
-          const recipientIds = recipients.map(
-            (recipient) => recipient.member_id
-          );
-
-          const entities: Entity[] = await prisma.entities.findMany({
-            where: {
-              entity_id: { in: recipientIds },
-            },
+          io.to(table_id).emit("newMessage", {
+            content: message,
+            sender: user.username,
+            message_date: message_date,
           });
-
-          const entityUsernames = entities.map(
-            (entity) => entity.entity_username
-          );
-
-          for (const username in entityUsernames) {
-            io.to(`${table_id}_${entityUsernames[username]}`).emit(
-              "newMessage",
-              {
-                content: message,
-                sender: user.username,
-                message_date: message_date,
-              }
-            );
-          }
         }
       }
     );
@@ -110,36 +84,44 @@ export default function tableSocket(server: HttpServer) {
         }
 
         if (isInTable) {
-          const recipients: TableMember[] =
-            await prisma.tables_members.findMany({
-              where: {
-                table_id: table_id,
-              },
-            });
-
-          const recipientIds = recipients.map(
-            (recipient) => recipient.member_id
-          );
-
-          const entities: Entity[] = await prisma.entities.findMany({
-            where: {
-              entity_id: { in: recipientIds },
-            },
+          io.to(table_id).emit("typingStatusChange", {
+            typing: typing,
+            sender: user.username,
           });
+        }
+      }
+    );
 
-          const entityUsernames = entities.map(
-            (entity) => entity.entity_username
-          );
+    socket.on(
+      "offerLiveVideoChat",
+      async (
+        token: string,
+        table_id: string,
+        sizeLocationRotation: {
+          w: number;
+          h: number;
+          x: number;
+          y: number;
+          r: number;
+        },
+        offer: RTCSessionDescriptionInit
+      ) => {
+        const isInTable = await verifyUser(token, table_id);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
 
-          for (const username in entityUsernames) {
-            io.to(`${table_id}_${entityUsernames[username]}`).emit(
-              "typingStatusChange",
-              {
-                typing: typing,
-                sender: user.username,
-              }
-            );
-          }
+        if (isInTable) {
+          io.to(table_id).emit("incomingLiveVideoChat", {
+            sizeLocationRotation: sizeLocationRotation,
+            offer: offer,
+          });
         }
       }
     );
@@ -157,7 +139,7 @@ export default function tableSocket(server: HttpServer) {
       }
 
       if (isInTable) {
-        socket.join(`${table_id}_${user.username}`);
+        socket.join(table_id);
       }
     });
 
@@ -174,7 +156,7 @@ export default function tableSocket(server: HttpServer) {
       }
 
       if (isInTable) {
-        socket.leave(`${table_id}_${user.username}`);
+        socket.leave(table_id);
       }
     });
 

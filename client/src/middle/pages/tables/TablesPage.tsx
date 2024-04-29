@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TablesUtilityBar from "./TablesUtilityBar";
 import { useSelector } from "react-redux";
+import io from "socket.io-client";
 import { Table, TablesPageState } from "@FgTypes/middleTypes";
 import Axios from "axios";
 import config from "@config";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
+import TablesLive from "./TablesLive";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -12,10 +14,53 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function TablesPage() {
+  const tableSocket = io(serverUrl, {
+    path: "/table-socket",
+  });
   const table_id = useSelector(
     (state: TablesPageState) => state.page.main.pagePayload.ids.table_id,
   );
   const [table, setTable] = useState<Table>();
+  const token = localStorage.getItem("token");
+
+  const joinTable = (table_id: string) => {
+    if (!token) {
+      return;
+    }
+
+    tableSocket.emit("joinTable", token, table_id);
+  };
+
+  const leaveTable = (table_id: string) => {
+    if (!token) {
+      return;
+    }
+
+    tableSocket.emit("leaveTable", token, table_id);
+  };
+
+  // Establish socket connection
+  useEffect(() => {
+    tableSocket.on("connection", () => {
+      return;
+    });
+
+    return () => {
+      tableSocket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (table_id) {
+      joinTable(table_id);
+    }
+
+    return () => {
+      if (table_id) {
+        leaveTable(table_id);
+      }
+    };
+  }, [table_id]);
 
   useEffect(() => {
     const fetchTable = async () => {
@@ -381,6 +426,64 @@ export default function TablesPage() {
     />
   ));
 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const sizeLocationRotation = { w: 30, h: 40, x: 10, y: 10, r: 45 };
+  useEffect(() => {
+    const constraints = { video: true };
+
+    async function enableWebcam() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error("Error accessing webcam:", err);
+      }
+    }
+
+    enableWebcam();
+
+    return () => {
+      if (videoRef.current) {
+        const stream = videoRef.current.srcObject as MediaStream;
+        if (stream) {
+          const tracks = stream.getTracks();
+          tracks.forEach((track) => {
+            track.stop();
+          });
+        }
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const sendOffer = async () => {
+      if (!videoRef.current) return;
+
+      const peerConnection = new RTCPeerConnection();
+
+      videoRef.current.srcObject?.getTracks().forEach((track) => {
+        peerConnection.addTrack(
+          track,
+          videoRef.current!.srcObject as MediaStream,
+        );
+      });
+
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
+
+      tableSocket.emit(
+        "offerLiveVideoChat",
+        table_id,
+        sizeLocationRotation,
+        offer,
+      );
+    };
+
+    sendOffer();
+  }, []);
+
   return (
     <div className="w-full h-full flex flex-col">
       <div
@@ -410,7 +513,14 @@ export default function TablesPage() {
             {leftMembersElements}
             <div></div>
           </div>
-          <div className="bg-fg-white-95 w-full h-full rounded-3xl"></div>
+          <div className="bg-fg-white-95 w-full h-full rounded-3xl overflow-hidden relative">
+            {table_id && (
+              <TablesLive
+                sizeLocationRotation={sizeLocationRotation}
+                videoRef={videoRef}
+              />
+            )}
+          </div>
           <div
             className={`flex flex-col h-full ${
               rightMembersElements && rightMembersElements.length > 1

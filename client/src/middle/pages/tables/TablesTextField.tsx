@@ -142,7 +142,7 @@ export default function TablesTextField({
       }}
     >
       <form
-        className="h-max rounded-md flex items-end bg-white border border-fg-white-85 absolute bottom-2 left-1/2 -translate-x-1/2"
+        className="h-max rounded-md flex items-end bg-white border border-fg-white-85 absolute bottom-1/2 translate-y-1/2 left-1/2 -translate-x-1/2"
         style={{ width: "90%" }}
         onSubmit={handleSubmit}
       >

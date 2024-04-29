@@ -73,9 +73,8 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
   };
 
   useEffect(() => {
-    if (previousConversationId) {
-      leaveConversation(previousConversationId);
-    }
+    setTyping([]);
+    setConversation([]);
 
     if (conversation_id) {
       joinConversation(conversation_id);
@@ -173,8 +172,6 @@ export default function MessagesPage({ middleSpaceRef }: MessagePageProps) {
     if (conversation_id) {
       fetchConversationData();
     }
-
-    setPreviousConversationId(conversation_id);
 
     return () => {
       if (conversation_id) {

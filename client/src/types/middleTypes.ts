@@ -622,3 +622,14 @@ export interface TablesTextFieldProps {
   table_id: string | null;
   tableSocket: Socket;
 }
+
+export interface TablesLiveProps {
+  sizeLocationRotation: {
+    w: number;
+    h: number;
+    x: number;
+    y: number;
+    r: number;
+  };
+  videoRef: React.MutableRefObject<HTMLVideoElement | null>;
+}

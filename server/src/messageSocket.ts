@@ -60,37 +60,11 @@ export default function messageSocket(server: HttpServer) {
         const message_date = new Date().toISOString();
 
         if (isInConversation) {
-          const recipients: ConversationMember[] =
-            await prisma.conversations_members.findMany({
-              where: {
-                conversation_id: conversation_id,
-              },
-            });
-
-          const recipientIds = recipients.map(
-            (recipient) => recipient.member_id
-          );
-
-          const entities: Entity[] = await prisma.entities.findMany({
-            where: {
-              entity_id: { in: recipientIds },
-            },
+          io.to(conversation_id).emit("newMessage", {
+            content: message,
+            sender: user.username,
+            message_date: message_date,
           });
-
-          const entityUsernames = entities.map(
-            (entity) => entity.entity_username
-          );
-
-          for (const username in entityUsernames) {
-            io.to(`${conversation_id}_${entityUsernames[username]}`).emit(
-              "newMessage",
-              {
-                content: message,
-                sender: user.username,
-                message_date: message_date,
-              }
-            );
-          }
         }
       }
     );
@@ -110,36 +84,10 @@ export default function messageSocket(server: HttpServer) {
         }
 
         if (isInConversation) {
-          const recipients: ConversationMember[] =
-            await prisma.conversations_members.findMany({
-              where: {
-                conversation_id: conversation_id,
-              },
-            });
-
-          const recipientIds = recipients.map(
-            (recipient) => recipient.member_id
-          );
-
-          const entities: Entity[] = await prisma.entities.findMany({
-            where: {
-              entity_id: { in: recipientIds },
-            },
+          io.to(conversation_id).emit("typingStatusChange", {
+            typing: typing,
+            sender: user.username,
           });
-
-          const entityUsernames = entities.map(
-            (entity) => entity.entity_username
-          );
-
-          for (const username in entityUsernames) {
-            io.to(`${conversation_id}_${entityUsernames[username]}`).emit(
-              "typingStatusChange",
-              {
-                typing: typing,
-                sender: user.username,
-              }
-            );
-          }
         }
       }
     );
@@ -157,7 +105,7 @@ export default function messageSocket(server: HttpServer) {
       }
 
       if (isInConversation) {
-        socket.join(`${conversation_id}_${user.username}`);
+        socket.join(conversation_id);
       }
     });
 
@@ -174,7 +122,7 @@ export default function messageSocket(server: HttpServer) {
       }
 
       if (isInConversation) {
-        socket.leave(`${conversation_id}_${user.username}`);
+        socket.leave(conversation_id);
       }
     });
 
