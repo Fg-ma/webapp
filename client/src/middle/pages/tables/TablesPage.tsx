@@ -6,7 +6,7 @@ import { Table, TablesPageState } from "@FgTypes/middleTypes";
 import Axios from "axios";
 import config from "@config";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
-import TablesLive from "./TablesLive";
+import TablesLiveVideoChatOverlay from "./TablesLiveVideoChatOverlay";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -426,63 +426,8 @@ export default function TablesPage() {
     />
   ));
 
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const sizeLocationRotation = { w: 30, h: 40, x: 10, y: 10, r: 45 };
-  useEffect(() => {
-    const constraints = { video: true };
-
-    async function enableWebcam() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      } catch (err) {
-        console.error("Error accessing webcam:", err);
-      }
-    }
-
-    enableWebcam();
-
-    return () => {
-      if (videoRef.current) {
-        const stream = videoRef.current.srcObject as MediaStream;
-        if (stream) {
-          const tracks = stream.getTracks();
-          tracks.forEach((track) => {
-            track.stop();
-          });
-        }
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const sendOffer = async () => {
-      if (!videoRef.current) return;
-
-      const peerConnection = new RTCPeerConnection();
-
-      videoRef.current.srcObject?.getTracks().forEach((track) => {
-        peerConnection.addTrack(
-          track,
-          videoRef.current!.srcObject as MediaStream,
-        );
-      });
-
-      const offer = await peerConnection.createOffer();
-      await peerConnection.setLocalDescription(offer);
-
-      tableSocket.emit(
-        "offerLiveVideoChat",
-        table_id,
-        sizeLocationRotation,
-        offer,
-      );
-    };
-
-    sendOffer();
-  }, []);
+  const sizeLocationRotation1 = { w: 30, h: 40, x: 10, y: 10, r: 45 };
+  const sizeLocationRotation2 = { w: 30, h: 40, x: 100, y: 100, r: 125 };
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -514,12 +459,7 @@ export default function TablesPage() {
             <div></div>
           </div>
           <div className="bg-fg-white-95 w-full h-full rounded-3xl overflow-hidden relative">
-            {table_id && (
-              <TablesLive
-                sizeLocationRotation={sizeLocationRotation}
-                videoRef={videoRef}
-              />
-            )}
+            {table_id && <TablesLiveVideoChatOverlay table_id={table_id} />}
           </div>
           <div
             className={`flex flex-col h-full ${
