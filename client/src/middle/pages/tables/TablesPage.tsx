@@ -459,7 +459,12 @@ export default function TablesPage() {
             <div></div>
           </div>
           <div className="bg-fg-white-95 w-full h-full rounded-3xl overflow-hidden relative">
-            {table_id && <TablesLiveVideoChatOverlay table_id={table_id} />}
+            {table_id && (
+              <TablesLiveVideoChatOverlay
+                table_id={table_id}
+                tableSocket={tableSocket}
+              />
+            )}
           </div>
           <div
             className={`flex flex-col h-full ${

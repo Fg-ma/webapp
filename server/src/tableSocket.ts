@@ -125,13 +125,18 @@ export default function tableSocket(server: HttpServer) {
       }
     });
 
-    socket.on("join-room", (table_id, member_table_id) => {
-      socket.to(table_id).broadcast.emit("user-connected", member_table_id);
+    socket.on("stream", (data) => {
+      console.log(data);
+    });
+
+    socket.on("user-connected", (table_id, stream, member_table_id) => {
+      console.log(table_id, stream, member_table_id);
+      socket
+        .to(table_id)
+        .emit("incoming-new-user", table_id, stream, member_table_id);
 
       socket.on("disconnect", () => {
-        socket
-          .to(table_id)
-          .broadcast.emit("user-disconnected", member_table_id);
+        socket.to(table_id).emit("user-disconnected", member_table_id);
       });
     });
   });

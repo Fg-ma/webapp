@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import io from "socket.io-client";
+import React, { useEffect, useRef, useState } from "react";
+import io, { Socket } from "socket.io-client";
 import config from "@config";
 import { v4 as uuid } from "uuid";
 
@@ -10,63 +10,57 @@ const serverUrl = isDevelopment
 
 export default function TablesLiveVideoChatOverlay({
   table_id,
+  tableSocket,
 }: {
   table_id: string;
+  tableSocket: Socket;
 }) {
-  const tableSocket = io(serverUrl, {
-    path: "/table-socket",
-  });
-  const [videos, setVideos] = useState<any[]>([]);
+  const userVideoRef = useRef<HTMLVideoElement>(null);
 
-  const user_table_id = uuid();
-  tableSocket.emit("join-room", table_id, user_table_id);
+  useEffect(() => {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          if (userVideoRef.current) {
+            userVideoRef.current.srcObject = stream;
 
-  const myVideo = document.createElement("video");
-  myVideo.muted = true;
-
-  navigator.mediaDevices
-    .getUserMedia({
-      video: true,
-      audio: true,
-    })
-    .then((stream) => {
-      addVideoStream(myVideo, stream, user_table_id);
-
-      tableSocket.on("user-connected", (member_table_id) => {
-        connectToNewUser(member_table_id, stream);
-      });
-    });
-
-  tableSocket.on("user-disconnected", (member_table_id) => {
-    setVideos((prev) =>
-      prev.filter((video) => {
-        if (video.member_table_id !== member_table_id) {
-          return video;
-        }
-      }),
-    );
-    const videoElement = document.getElementById(member_table_id);
-    if (videoElement) {
-      videoElement.remove();
+            const videoTrack = stream.getVideoTracks()[0];
+            const sender = tableSocket.id;
+            tableSocket.emit("user-connected", table_id, stream, sender);
+          }
+        })
+        .catch((error) => console.error("Error accessing the webcam: ", error));
     }
-  });
 
-  function connectToNewUser(member_table_id, stream) {
-    const call = stream;
-    const video = document.createElement("video");
-    addVideoStream(video, call, member_table_id);
-  }
+    tableSocket.on(
+      "incoming-new-user",
+      (tableId: string, stream: MediaStream, member_table_id: string) => {
+        console.log("weasd");
+        if (tableId === table_id) {
+          console.log(tableId, stream, member_table_id);
+          const remoteVideo = document.createElement("video");
+          remoteVideo.srcObject = stream;
+          remoteVideo.autoplay = true;
+          remoteVideo.playsInline = true;
+          console.log(remoteVideo);
+          document.getElementById("remoteVideos")?.appendChild(remoteVideo);
+        }
+      },
+    );
+  }, [table_id]);
 
-  function addVideoStream(video, stream, member_table_id) {
-    video.srcObject = stream;
-    video.addEventListener("loadedmetadata", () => {
-      video.play();
-    });
-    setVideos((prev) => [
-      ...prev,
-      { member_table_id: member_table_id, video: video },
-    ]);
-  }
-  console.log(videos);
-  return <div>hia</div>;
+  return (
+    <div>
+      <h2>Webcam Component</h2>
+      <video
+        ref={userVideoRef}
+        autoPlay
+        playsInline
+        muted
+        style={{ maxWidth: "100%" }}
+      />
+      <div id="remoteVideos"></div>
+    </div>
+  );
 }
