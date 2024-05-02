@@ -16,6 +16,7 @@ export default function TablesLiveVideoChatOverlay({
   tableSocket: Socket;
 }) {
   const userVideoRef = useRef<HTMLVideoElement>(null);
+  const remoteVideosRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -25,30 +26,39 @@ export default function TablesLiveVideoChatOverlay({
           if (userVideoRef.current) {
             userVideoRef.current.srcObject = stream;
 
-            const videoTrack = stream.getVideoTracks()[0];
             const sender = tableSocket.id;
-            tableSocket.emit("user-connected", table_id, stream, sender);
+
+            tableSocket.emit("userConnected", table_id, sender);
+
+            // Listen for incoming stream from server
+            tableSocket.on("incomingStream", (incomingStream: MediaStream) => {
+              console.log("Received incoming stream");
+              displayRemoteStream(incomingStream);
+            });
           }
         })
-        .catch((error) => console.error("Error accessing the webcam: ", error));
+        .catch((error) =>
+          console.error("Error accessing the webcam or streaming: ", error),
+        );
     }
 
-    tableSocket.on(
-      "incoming-new-user",
-      (tableId: string, stream: MediaStream, member_table_id: string) => {
-        console.log("weasd");
-        if (tableId === table_id) {
-          console.log(tableId, stream, member_table_id);
-          const remoteVideo = document.createElement("video");
-          remoteVideo.srcObject = stream;
-          remoteVideo.autoplay = true;
-          remoteVideo.playsInline = true;
-          console.log(remoteVideo);
-          document.getElementById("remoteVideos")?.appendChild(remoteVideo);
-        }
-      },
-    );
+    return () => {
+      tableSocket.off("incomingStream");
+    };
   }, [table_id]);
+
+  // Function to display remote stream in a video element
+  const displayRemoteStream = (stream: MediaStream) => {
+    const remoteVideo = document.createElement("video");
+    remoteVideo.srcObject = stream;
+    remoteVideo.autoplay = true;
+    remoteVideo.playsInline = true;
+
+    // Append the video element to the remoteVideos div
+    if (remoteVideosRef.current) {
+      remoteVideosRef.current.appendChild(remoteVideo);
+    }
+  };
 
   return (
     <div>

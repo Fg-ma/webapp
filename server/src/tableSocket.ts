@@ -1,7 +1,10 @@
 import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
+import ss from "socket.io-stream";
+import { v4 as uuid } from "uuid";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
+import { Readable } from "stream";
 
 const verifyUser = async (token: string, table_id: string) => {
   try {
@@ -125,19 +128,40 @@ export default function tableSocket(server: HttpServer) {
       }
     });
 
-    socket.on("stream", (data) => {
-      console.log(data);
+    socket.on("stream", (stream, data) => {
+      console.log("Received stream:", stream, data);
+      // Broadcast the incoming stream to all clients in the same table
+      io.to(data.tableId).emit("incomingStream", stream);
     });
 
-    socket.on("user-connected", (table_id, stream, member_table_id) => {
-      console.log(table_id, stream, member_table_id);
+    socket.on("userConnected", (table_id, stream, member_table_id) => {
+      console.log(stream);
       socket
         .to(table_id)
-        .emit("incoming-new-user", table_id, stream, member_table_id);
+        .emit("incomingNewUser", table_id, stream, member_table_id);
 
       socket.on("disconnect", () => {
         socket.to(table_id).emit("user-disconnected", member_table_id);
       });
+    });
+
+    socket.on("userConnected", async (token, table_id, member_table_id) => {
+      const isInTable = await verifyUser(token, table_id);
+      if (isInTable) {
+        // Generate a unique identifier for the stream
+        const streamId = uuid();
+        // Create a stream and send it using socket.io-stream
+        const streamSocket = ss.createStream();
+        // Emit the stream event to the client with the streamId
+        socket.emit("stream", streamSocket, { table_id });
+        // Pipe the incoming stream to the streamSocket
+        ss(socket).on(streamId, (incomingStream: Readable) => {
+          // Broadcast the incoming stream to all clients in the same table
+          socket
+            .to(table_id)
+            .emit("incomingStream", incomingStream, member_table_id);
+        });
+      }
     });
   });
 }
