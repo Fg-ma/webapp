@@ -446,7 +446,7 @@ export default function TablesPage() {
           {topMembersElements}
           <div></div>
         </div>
-        <div className="w-full flex flex-row items-center justify-center grow space-x-4">
+        <div className="w-full flex flex-row items-center justify-center grow overflow-hidden space-x-4">
           <div
             className={`flex flex-col h-full ${
               leftMembersElements && leftMembersElements.length > 1

@@ -344,6 +344,7 @@ model tables_members {
   table_id          String   @db.Char(36)
   member_id         String   @db.Char(36)
   table_position    Int
+  live              Int      @default(0) @db.TinyInt
   entities          entities @relation(fields: [member_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_member_id_fk")
   tables            tables   @relation(fields: [table_id], references: [table_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_members_table_id_fk")
 

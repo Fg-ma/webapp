@@ -16,6 +16,7 @@
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@types/simple-peer": "^9.11.8",
     "@types/socket.io-client": "^3.0.0",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.16",
@@ -53,8 +54,8 @@
     "react-style-proptype": "^3.2.2",
     "redux": "^5.0.1",
     "redux-logger": "^3.0.6",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.7.3",
-    "socket.io-stream": "^0.9.1",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3"

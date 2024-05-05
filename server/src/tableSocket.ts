@@ -1,10 +1,8 @@
 import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
-import ss from "socket.io-stream";
-import { v4 as uuid } from "uuid";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
-import { Readable } from "stream";
+import { Entity, TableMember } from "@FgTypes/types";
 
 const verifyUser = async (token: string, table_id: string) => {
   try {
@@ -18,7 +16,7 @@ const verifyUser = async (token: string, table_id: string) => {
       return false;
     }
 
-    const tableMembers = await prisma.tables_members.findMany({
+    const tableMembers: TableMember[] = await prisma.tables_members.findMany({
       where: {
         table_id: table_id,
       },
@@ -108,6 +106,7 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.join(table_id);
+        socket.join(`${table_id}_${user.username}`);
       }
     });
 
@@ -125,42 +124,119 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.leave(table_id);
+        socket.leave(`${table_id}_${user.username}`);
       }
     });
 
-    socket.on("stream", (stream, data) => {
-      console.log("Received stream:", stream, data);
-      // Broadcast the incoming stream to all clients in the same table
-      io.to(data.tableId).emit("incomingStream", stream);
-    });
-
-    socket.on("userConnected", (table_id, stream, member_table_id) => {
-      console.log(stream);
-      socket
-        .to(table_id)
-        .emit("incomingNewUser", table_id, stream, member_table_id);
-
-      socket.on("disconnect", () => {
-        socket.to(table_id).emit("user-disconnected", member_table_id);
-      });
-    });
-
-    socket.on("userConnected", async (token, table_id, member_table_id) => {
+    socket.on("joinRoom", async (token, table_id) => {
       const isInTable = await verifyUser(token, table_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
       if (isInTable) {
-        // Generate a unique identifier for the stream
-        const streamId = uuid();
-        // Create a stream and send it using socket.io-stream
-        const streamSocket = ss.createStream();
-        // Emit the stream event to the client with the streamId
-        socket.emit("stream", streamSocket, { table_id });
-        // Pipe the incoming stream to the streamSocket
-        ss(socket).on(streamId, (incomingStream: Readable) => {
-          // Broadcast the incoming stream to all clients in the same table
-          socket
-            .to(table_id)
-            .emit("incomingStream", incomingStream, member_table_id);
+        await prisma.tables_members.update({
+          where: {
+            table_id_member_id: {
+              table_id: table_id,
+              member_id: user.user_id,
+            },
+          },
+          data: {
+            live: 1,
+          },
         });
+
+        const tableMembers: TableMember[] =
+          await prisma.tables_members.findMany({
+            where: {
+              table_id: table_id,
+            },
+          });
+
+        const liveTableMembers = tableMembers.filter(
+          (member) => member.live === 1
+        );
+
+        const nonuserMembers = liveTableMembers.filter(
+          (member) => member.member_id !== user.user_id
+        );
+
+        const nonuserMembersIds = nonuserMembers.map(
+          (member) => member.member_id
+        );
+
+        const entities: Entity[] = await prisma.entities.findMany({
+          where: {
+            entity_id: {
+              in: nonuserMembersIds,
+            },
+          },
+        });
+
+        const members = entities.map((entity) => entity.entity_username);
+
+        socket.emit("allLiveMembers", members, user.username);
+      }
+    });
+
+    socket.on("sendingSignal", (table_id, userToSignal, callerID, signal) => {
+      io.to(`${table_id}_${userToSignal}`).emit("userJoined", signal, callerID);
+    });
+
+    socket.on("returningSignal", async (token, table_id, signal, callerID) => {
+      const isInTable = await verifyUser(token, table_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
+      if (isInTable) {
+        io.to(`${table_id}_${callerID}`).emit(
+          "receivingReturnedSignal",
+          signal,
+          user.username
+        );
+      }
+    });
+
+    socket.on("userDisconnect", async (token, table_id) => {
+      const isInTable = await verifyUser(token, table_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
+      if (isInTable) {
+        await prisma.tables_members.update({
+          where: {
+            table_id_member_id: {
+              table_id: table_id,
+              member_id: user.user_id,
+            },
+          },
+          data: {
+            live: 0,
+          },
+        });
+
+        io.to(table_id).emit("userDisconnected", user.username);
       }
     });
   });

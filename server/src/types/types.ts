@@ -294,6 +294,7 @@ export interface TableMember {
   tables_members_id: string;
   table_id: string;
   member_id: string;
+  live: number;
   individual_data?: {
     individual_username: string;
     individual_name: string | null;

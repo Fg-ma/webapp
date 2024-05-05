@@ -1,12 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-import io, { Socket } from "socket.io-client";
-import config from "@config";
-import { v4 as uuid } from "uuid";
+import { Socket } from "socket.io-client";
+import Peer from "simple-peer";
 
-const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment
-  ? config.development.serverUrl
-  : config.production.serverUrl;
+const Video = (props: any) => {
+  const ref: any = useRef();
+
+  useEffect(() => {
+    props.peer.on("stream", (stream: any) => {
+      ref.current.srcObject = stream;
+    });
+  }, []);
+
+  return (
+    <video className="w-80 aspect-square" playsInline autoPlay ref={ref} />
+  );
+};
+
+const videoConstraints = {
+  height: window.innerHeight / 2,
+  width: window.innerWidth / 2,
+};
 
 export default function TablesLiveVideoChatOverlay({
   table_id,
@@ -15,62 +28,146 @@ export default function TablesLiveVideoChatOverlay({
   table_id: string;
   tableSocket: Socket;
 }) {
-  const userVideoRef = useRef<HTMLVideoElement>(null);
-  const remoteVideosRef = useRef<HTMLDivElement>(null);
-
+  const [peers, setPeers] = useState<{ peerUsername: string; peer: any }[]>([]);
+  const userVideo: any = useRef();
+  const peersRef: any = useRef([]);
+  const token = localStorage.getItem("token");
+  console.log("peer", peers);
   useEffect(() => {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          if (userVideoRef.current) {
-            userVideoRef.current.srcObject = stream;
+    navigator.mediaDevices
+      .getUserMedia({ video: videoConstraints, audio: true })
+      .then((stream) => {
+        userVideo.current.srcObject = stream;
+        tableSocket.emit("joinRoom", token, table_id);
+        tableSocket.on("allLiveMembers", (members: string[], user: string) => {
+          const initialPeers: any = [];
+          members.forEach((member: any) => {
+            const peer = createPeer(member, user, stream);
+            if (peer) {
+              peersRef.current.push({
+                peerID: member,
+                peer,
+              });
+              initialPeers.push({ peerUsername: member, peer: peer });
+            }
+          });
 
-            const sender = tableSocket.id;
+          console.log("setpeers initial", initialPeers);
+          setPeers(initialPeers);
+        });
 
-            tableSocket.emit("userConnected", table_id, sender);
-
-            // Listen for incoming stream from server
-            tableSocket.on("incomingStream", (incomingStream: MediaStream) => {
-              console.log("Received incoming stream");
-              displayRemoteStream(incomingStream);
+        tableSocket.on("userJoined", (signal, callerID) => {
+          const peer = addPeer(signal, callerID, stream);
+          if (peer) {
+            const duplicatePeer = peers.find((peer) => {
+              console.log(peer.peerUsername, callerID);
+              return peer.peerUsername === callerID;
             });
+
+            console.log(duplicatePeer);
+            if (!duplicatePeer) {
+              peersRef.current.push({
+                peerID: callerID,
+                peer: peer,
+              });
+
+              console.log("setpeers userjoined", callerID);
+              setPeers((peers) => [
+                ...peers,
+                { peerUsername: callerID, peer: peer },
+              ]);
+            }
           }
-        })
-        .catch((error) =>
-          console.error("Error accessing the webcam or streaming: ", error),
-        );
-    }
+        });
+
+        tableSocket.on("userDisconnected", (disconnectedUser) => {
+          const updatedPeers = peersRef.current.filter(
+            (peer: any) => peer.peerID !== disconnectedUser,
+          );
+          peersRef.current = updatedPeers;
+
+          console.log(
+            "setpeers disconnect",
+            peers.filter((peer) => peer.peerUsername !== disconnectedUser),
+          );
+          setPeers((peers) =>
+            peers.filter((peer) => peer.peerUsername !== disconnectedUser),
+          );
+        });
+
+        tableSocket.on("receivingReturnedSignal", (signal, username) => {
+          const item = peersRef.current.find((p: any) => p.peerID === username);
+          if (item) {
+            item.peer.signal(signal);
+          }
+        });
+      });
 
     return () => {
-      tableSocket.off("incomingStream");
+      tableSocket.off("receivingReturnedSignal");
+      tableSocket.off("userDisconnected");
+      tableSocket.off("userJoined");
+      tableSocket.off("allLiveMembers");
+      tableSocket.emit("userDisconnect", token, table_id);
     };
   }, [table_id]);
 
-  // Function to display remote stream in a video element
-  const displayRemoteStream = (stream: MediaStream) => {
-    const remoteVideo = document.createElement("video");
-    remoteVideo.srcObject = stream;
-    remoteVideo.autoplay = true;
-    remoteVideo.playsInline = true;
+  function createPeer(userToSignal: string, callerID: string, stream: any) {
+    try {
+      const peer = new Peer({
+        initiator: true,
+        trickle: false,
+        stream,
+      });
 
-    // Append the video element to the remoteVideos div
-    if (remoteVideosRef.current) {
-      remoteVideosRef.current.appendChild(remoteVideo);
+      peer.on("signal", (signal: any) => {
+        tableSocket.emit(
+          "sendingSignal",
+          table_id,
+          userToSignal,
+          callerID,
+          signal,
+        );
+      });
+
+      return peer;
+    } catch {
+      return;
     }
-  };
+  }
+
+  function addPeer(incomingSignal: any, callerID: any, stream: any) {
+    try {
+      const peer = new Peer({
+        initiator: false,
+        trickle: false,
+        stream,
+      });
+
+      peer.on("signal", (signal: any) => {
+        tableSocket.emit("returningSignal", token, table_id, signal, callerID);
+      });
+
+      peer.signal(incomingSignal);
+
+      return peer;
+    } catch {
+      return;
+    }
+  }
 
   return (
-    <div>
-      <h2>Webcam Component</h2>
+    <div className="overflow-hidden h-full w-full flex">
       <video
-        ref={userVideoRef}
+        className="w-80 aspect-square"
+        muted
+        ref={userVideo}
         autoPlay
         playsInline
-        muted
-        style={{ maxWidth: "100%" }}
       />
-      <div id="remoteVideos"></div>
+      {peers.map((peer, index: any) => {
+        return <Video key={index} peer={peer.peer} />;
+      })}
     </div>
   );
 }

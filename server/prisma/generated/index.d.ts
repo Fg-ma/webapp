@@ -30322,10 +30322,12 @@ export namespace Prisma {
 
   export type Tables_membersAvgAggregateOutputType = {
     table_position: number | null
+    live: number | null
   }
 
   export type Tables_membersSumAggregateOutputType = {
     table_position: number | null
+    live: number | null
   }
 
   export type Tables_membersMinAggregateOutputType = {
@@ -30333,6 +30335,7 @@ export namespace Prisma {
     table_id: string | null
     member_id: string | null
     table_position: number | null
+    live: number | null
   }
 
   export type Tables_membersMaxAggregateOutputType = {
@@ -30340,6 +30343,7 @@ export namespace Prisma {
     table_id: string | null
     member_id: string | null
     table_position: number | null
+    live: number | null
   }
 
   export type Tables_membersCountAggregateOutputType = {
@@ -30347,16 +30351,19 @@ export namespace Prisma {
     table_id: number
     member_id: number
     table_position: number
+    live: number
     _all: number
   }
 
 
   export type Tables_membersAvgAggregateInputType = {
     table_position?: true
+    live?: true
   }
 
   export type Tables_membersSumAggregateInputType = {
     table_position?: true
+    live?: true
   }
 
   export type Tables_membersMinAggregateInputType = {
@@ -30364,6 +30371,7 @@ export namespace Prisma {
     table_id?: true
     member_id?: true
     table_position?: true
+    live?: true
   }
 
   export type Tables_membersMaxAggregateInputType = {
@@ -30371,6 +30379,7 @@ export namespace Prisma {
     table_id?: true
     member_id?: true
     table_position?: true
+    live?: true
   }
 
   export type Tables_membersCountAggregateInputType = {
@@ -30378,6 +30387,7 @@ export namespace Prisma {
     table_id?: true
     member_id?: true
     table_position?: true
+    live?: true
     _all?: true
   }
 
@@ -30472,6 +30482,7 @@ export namespace Prisma {
     table_id: string
     member_id: string
     table_position: number
+    live: number
     _count: Tables_membersCountAggregateOutputType | null
     _avg: Tables_membersAvgAggregateOutputType | null
     _sum: Tables_membersSumAggregateOutputType | null
@@ -30498,6 +30509,7 @@ export namespace Prisma {
     table_id?: boolean
     member_id?: boolean
     table_position?: boolean
+    live?: boolean
     entities?: boolean | entitiesDefaultArgs<ExtArgs>
     tables?: boolean | tablesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tables_members"]>
@@ -30507,6 +30519,7 @@ export namespace Prisma {
     table_id?: boolean
     member_id?: boolean
     table_position?: boolean
+    live?: boolean
   }
 
   export type tables_membersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30526,6 +30539,7 @@ export namespace Prisma {
       table_id: string
       member_id: string
       table_position: number
+      live: number
     }, ExtArgs["result"]["tables_members"]>
     composites: {}
   }
@@ -30927,6 +30941,7 @@ export namespace Prisma {
     readonly table_id: FieldRef<"tables_members", 'String'>
     readonly member_id: FieldRef<"tables_members", 'String'>
     readonly table_position: FieldRef<"tables_members", 'Int'>
+    readonly live: FieldRef<"tables_members", 'Int'>
   }
     
 
@@ -38184,7 +38199,8 @@ export namespace Prisma {
     tables_members_id: 'tables_members_id',
     table_id: 'table_id',
     member_id: 'member_id',
-    table_position: 'table_position'
+    table_position: 'table_position',
+    live: 'live'
   };
 
   export type Tables_membersScalarFieldEnum = (typeof Tables_membersScalarFieldEnum)[keyof typeof Tables_membersScalarFieldEnum]
@@ -39930,6 +39946,7 @@ export namespace Prisma {
     table_id?: StringFilter<"tables_members"> | string
     member_id?: StringFilter<"tables_members"> | string
     table_position?: IntFilter<"tables_members"> | number
+    live?: IntFilter<"tables_members"> | number
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     tables?: XOR<TablesRelationFilter, tablesWhereInput>
   }
@@ -39939,6 +39956,7 @@ export namespace Prisma {
     table_id?: SortOrder
     member_id?: SortOrder
     table_position?: SortOrder
+    live?: SortOrder
     entities?: entitiesOrderByWithRelationInput
     tables?: tablesOrderByWithRelationInput
   }
@@ -39952,6 +39970,7 @@ export namespace Prisma {
     table_id?: StringFilter<"tables_members"> | string
     member_id?: StringFilter<"tables_members"> | string
     table_position?: IntFilter<"tables_members"> | number
+    live?: IntFilter<"tables_members"> | number
     entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
     tables?: XOR<TablesRelationFilter, tablesWhereInput>
   }, "tables_members_id" | "tables_members_id" | "table_id_member_id">
@@ -39961,6 +39980,7 @@ export namespace Prisma {
     table_id?: SortOrder
     member_id?: SortOrder
     table_position?: SortOrder
+    live?: SortOrder
     _count?: tables_membersCountOrderByAggregateInput
     _avg?: tables_membersAvgOrderByAggregateInput
     _max?: tables_membersMaxOrderByAggregateInput
@@ -39976,6 +39996,7 @@ export namespace Prisma {
     table_id?: StringWithAggregatesFilter<"tables_members"> | string
     member_id?: StringWithAggregatesFilter<"tables_members"> | string
     table_position?: IntWithAggregatesFilter<"tables_members"> | number
+    live?: IntWithAggregatesFilter<"tables_members"> | number
   }
 
   export type tables_messages_logsWhereInput = {
@@ -41967,6 +41988,7 @@ export namespace Prisma {
   export type tables_membersCreateInput = {
     tables_members_id: string
     table_position: number
+    live?: number
     entities: entitiesCreateNestedOneWithoutTables_membersInput
     tables: tablesCreateNestedOneWithoutTables_membersInput
   }
@@ -41976,11 +41998,13 @@ export namespace Prisma {
     table_id: string
     member_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_membersUpdateInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
     entities?: entitiesUpdateOneRequiredWithoutTables_membersNestedInput
     tables?: tablesUpdateOneRequiredWithoutTables_membersNestedInput
   }
@@ -41990,6 +42014,7 @@ export namespace Prisma {
     table_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_membersCreateManyInput = {
@@ -41997,11 +42022,13 @@ export namespace Prisma {
     table_id: string
     member_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_membersUpdateManyMutationInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_membersUncheckedUpdateManyInput = {
@@ -42009,6 +42036,7 @@ export namespace Prisma {
     table_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_messages_logsCreateInput = {
@@ -43630,10 +43658,12 @@ export namespace Prisma {
     table_id?: SortOrder
     member_id?: SortOrder
     table_position?: SortOrder
+    live?: SortOrder
   }
 
   export type tables_membersAvgOrderByAggregateInput = {
     table_position?: SortOrder
+    live?: SortOrder
   }
 
   export type tables_membersMaxOrderByAggregateInput = {
@@ -43641,6 +43671,7 @@ export namespace Prisma {
     table_id?: SortOrder
     member_id?: SortOrder
     table_position?: SortOrder
+    live?: SortOrder
   }
 
   export type tables_membersMinOrderByAggregateInput = {
@@ -43648,10 +43679,12 @@ export namespace Prisma {
     table_id?: SortOrder
     member_id?: SortOrder
     table_position?: SortOrder
+    live?: SortOrder
   }
 
   export type tables_membersSumOrderByAggregateInput = {
     table_position?: SortOrder
+    live?: SortOrder
   }
 
   export type tables_messages_logsCountOrderByAggregateInput = {
@@ -47894,6 +47927,7 @@ export namespace Prisma {
   export type tables_membersCreateWithoutEntitiesInput = {
     tables_members_id: string
     table_position: number
+    live?: number
     tables: tablesCreateNestedOneWithoutTables_membersInput
   }
 
@@ -47901,6 +47935,7 @@ export namespace Prisma {
     tables_members_id: string
     table_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_membersCreateOrConnectWithoutEntitiesInput = {
@@ -48276,6 +48311,7 @@ export namespace Prisma {
     table_id?: StringFilter<"tables_members"> | string
     member_id?: StringFilter<"tables_members"> | string
     table_position?: IntFilter<"tables_members"> | number
+    live?: IntFilter<"tables_members"> | number
   }
 
   export type tables_messages_logsUpsertWithWhereUniqueWithoutEntitiesInput = {
@@ -50131,6 +50167,7 @@ export namespace Prisma {
   export type tables_membersCreateWithoutTablesInput = {
     tables_members_id: string
     table_position: number
+    live?: number
     entities: entitiesCreateNestedOneWithoutTables_membersInput
   }
 
@@ -50138,6 +50175,7 @@ export namespace Prisma {
     tables_members_id: string
     member_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_membersCreateOrConnectWithoutTablesInput = {
@@ -51296,6 +51334,7 @@ export namespace Prisma {
     tables_members_id: string
     table_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_messages_logsCreateManyEntitiesInput = {
@@ -51614,6 +51653,7 @@ export namespace Prisma {
   export type tables_membersUpdateWithoutEntitiesInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
     tables?: tablesUpdateOneRequiredWithoutTables_membersNestedInput
   }
 
@@ -51621,12 +51661,14 @@ export namespace Prisma {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_membersUncheckedUpdateManyWithoutEntitiesInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_messages_logsUpdateWithoutEntitiesInput = {
@@ -51997,6 +52039,7 @@ export namespace Prisma {
     tables_members_id: string
     member_id: string
     table_position: number
+    live?: number
   }
 
   export type tables_messages_logsCreateManyTablesInput = {
@@ -52009,6 +52052,7 @@ export namespace Prisma {
   export type tables_membersUpdateWithoutTablesInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
     entities?: entitiesUpdateOneRequiredWithoutTables_membersNestedInput
   }
 
@@ -52016,12 +52060,14 @@ export namespace Prisma {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_membersUncheckedUpdateManyWithoutTablesInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     member_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
+    live?: IntFieldUpdateOperationsInput | number
   }
 
   export type tables_messages_logsUpdateWithoutTablesInput = {
