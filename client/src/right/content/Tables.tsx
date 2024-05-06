@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
-import { useSocketContext } from "@context/LiveUpdatesContext";
+import { useLiveUpdatesSocketContext } from "@context/LiveUpdatesSocketContext";
 import { useLastMessageContext } from "@context/LastMessageContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 import { useTableContext } from "@context/TableContext";
@@ -16,7 +16,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Tables() {
-  const { liveUpdatesSocket } = useSocketContext();
+  const { liveUpdatesSocket } = useLiveUpdatesSocketContext();
   const { lastMessage } = useLastMessageContext();
   const { fluxTable, setFluxTable } = useTableContext();
   const { storeTable, storeTables, getStoredTables, deleteStoredTables } =

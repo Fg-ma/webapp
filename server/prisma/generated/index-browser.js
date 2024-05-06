@@ -340,12 +340,20 @@ exports.Prisma.Tables_picturesScalarFieldEnum = {
 
 exports.Prisma.Tables_tabletopsScalarFieldEnum = {
   tables_tabletops_id: 'tables_tabletops_id',
-  content_data: 'content_data',
-  content_filename: 'content_filename',
+  table_id: 'table_id',
+  creator_id: 'creator_id',
+  tables_tabletops_data_id: 'tables_tabletops_data_id',
+  type: 'type',
   content_date_posted: 'content_date_posted',
   content_x_position: 'content_x_position',
   content_y_position: 'content_y_position',
-  content_rotation: 'content_rotation'
+  content_rotation: 'content_rotation',
+  content_filename: 'content_filename'
+};
+
+exports.Prisma.Tables_tabletops_dataScalarFieldEnum = {
+  tables_tabletops_data_id: 'tables_tabletops_data_id',
+  tables_tabletops_data: 'tables_tabletops_data'
 };
 
 exports.Prisma.User_credentialsScalarFieldEnum = {
@@ -427,6 +435,7 @@ exports.Prisma.ModelName = {
   tables_messages_logs: 'tables_messages_logs',
   tables_pictures: 'tables_pictures',
   tables_tabletops: 'tables_tabletops',
+  tables_tabletops_data: 'tables_tabletops_data',
   user_credentials: 'user_credentials',
   videos: 'videos',
   videos_data: 'videos_data',

@@ -10,6 +10,7 @@ import {
   TableMember,
   Table,
   TablePicture,
+  TableTop,
 } from "@FgTypes/types";
 import { tables_messages_logs } from "prisma/generated";
 
@@ -589,6 +590,197 @@ router.get("/table_conversation_by_table_id", verifyToken, async (req, res) => {
         tableSize: tableMembers.length,
       });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Get a table by table_id
+router.get("/get_table_top_by_table_id", verifyToken, async (req, res) => {
+  const { table_id } = req.query;
+
+  try {
+    const isUserInTable = await req.db.tables_members.findUnique({
+      where: {
+        table_id_member_id: {
+          table_id: table_id,
+          member_id: req.user.user_id,
+        },
+      },
+    });
+
+    if (!isUserInTable) {
+      res.send("Not in table");
+    }
+
+    const tableTops: TableTop[] = await req.db.tables_tabletops.findMany({
+      where: {
+        table_id: table_id,
+      },
+    });
+
+    const creatorsIds = tableTops.map((tableTop) => tableTop.creator_id);
+
+    const individuals: Entity[] = await req.db.entities.findMany({
+      where: {
+        entity_id: { in: creatorsIds },
+        entity_type: 1,
+      },
+    });
+
+    const individualsIds = individuals.map(
+      (individual) => individual.entity_id
+    );
+
+    const individualsData: Individual[] = await req.db.individuals.findMany({
+      where: {
+        individual_id: { in: individualsIds },
+      },
+    });
+
+    const groups: Entity[] = await req.db.entities.findMany({
+      where: {
+        entity_id: { in: creatorsIds },
+        entity_type: 2,
+      },
+    });
+
+    const groupsIds = groups.map((group) => group.entity_id);
+
+    const groupsData: Group[] = await req.db.groups.findMany({
+      where: {
+        group_id: { in: groupsIds },
+      },
+    });
+
+    const organizations: Entity[] = await req.db.entities.findMany({
+      where: {
+        entity_id: { in: creatorsIds },
+        entity_type: 3,
+      },
+    });
+
+    const organizationsIds = organizations.map(
+      (organization) => organization.entity_id
+    );
+
+    const organizationsData: Organization[] =
+      await req.db.organizations.findMany({
+        where: {
+          organization_id: { in: organizationsIds },
+        },
+      });
+
+    individualsData.forEach((individual) => {
+      if (
+        tableTops.some(
+          (tableTop) => tableTop.creator_id === individual.individual_id
+        )
+      ) {
+        tableTops.forEach((tableTop) => {
+          if (tableTop.creator_id === individual.individual_id) {
+            tableTop.individual_data = {
+              individual_username: individual.individual_username,
+              individual_name: individual.individual_name,
+              individual_current_issue: individual.individual_current_issue,
+            };
+          }
+        });
+      }
+    });
+
+    groupsData.forEach((group) => {
+      if (
+        tableTops.some((tableTop) => tableTop.creator_id === group.group_id)
+      ) {
+        tableTops.forEach((tableTop) => {
+          if (tableTop.creator_id === group.group_id) {
+            tableTop.group_data = {
+              group_handle: group.group_handle,
+              group_name: group.group_name,
+              group_current_issue: group.group_current_issue,
+            };
+          }
+        });
+      }
+    });
+
+    organizationsData.forEach((organization) => {
+      if (
+        tableTops.some(
+          (tableTop) => tableTop.creator_id === organization.organization_id
+        )
+      ) {
+        tableTops.forEach((tableTop) => {
+          if (tableTop.creator_id === organization.organization_id) {
+            tableTop.organization_data = {
+              organization_handle: organization.organization_handle,
+              organization_name: organization.organization_name,
+              organization_current_issue:
+                organization.organization_current_issue,
+            };
+          }
+        });
+      }
+    });
+
+    const returningTableTops = tableTops.map((tableTop) => {
+      if (tableTop.individual_data) {
+        return {
+          tables_tabletops_id: tableTop.tables_tabletops_id,
+          table_id: tableTop.table_id,
+          type: tableTop.type,
+          tables_tabletops_data_id: tableTop.tables_tabletops_data_id,
+          content_date_posted: tableTop.content_date_posted,
+          content_x_position: tableTop.content_x_position,
+          content_y_position: tableTop.content_y_position,
+          content_rotation: tableTop.content_rotation,
+          content_filename: tableTop.content_filename,
+          individual_data: tableTop.individual_data,
+        };
+      } else if (tableTop.group_data) {
+        return {
+          tables_tabletops_id: tableTop.tables_tabletops_id,
+          table_id: tableTop.table_id,
+          type: tableTop.type,
+          tables_tabletops_data_id: tableTop.tables_tabletops_data_id,
+          content_date_posted: tableTop.content_date_posted,
+          content_x_position: tableTop.content_x_position,
+          content_y_position: tableTop.content_y_position,
+          content_rotation: tableTop.content_rotation,
+          content_filename: tableTop.content_filename,
+          group_data: tableTop.group_data,
+        };
+      } else if (tableTop.organization_data) {
+        return {
+          tables_tabletops_id: tableTop.tables_tabletops_id,
+          table_id: tableTop.table_id,
+          type: tableTop.type,
+          tables_tabletops_data_id: tableTop.tables_tabletops_data_id,
+          content_date_posted: tableTop.content_date_posted,
+          content_x_position: tableTop.content_x_position,
+          content_y_position: tableTop.content_y_position,
+          content_rotation: tableTop.content_rotation,
+          content_filename: tableTop.content_filename,
+          organization_data: tableTop.organization_data,
+        };
+      } else {
+        return {
+          tables_tabletops_id: tableTop.tables_tabletops_id,
+          table_id: tableTop.table_id,
+          type: tableTop.type,
+          tables_tabletops_data_id: tableTop.tables_tabletops_data_id,
+          content_date_posted: tableTop.content_date_posted,
+          content_x_position: tableTop.content_x_position,
+          content_y_position: tableTop.content_y_position,
+          content_rotation: tableTop.content_rotation,
+          content_filename: tableTop.content_filename,
+        };
+      }
+    });
+
+    res.send(returningTableTops);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

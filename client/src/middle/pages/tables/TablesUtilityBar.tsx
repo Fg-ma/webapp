@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import io from "socket.io-client";
-import config from "@config";
+import React, { useRef, useState } from "react";
 import TablesTextField from "./TablesTextField";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
-
-const isDevelopment = process.env.NODE_ENV === "development";
-const serverUrl = isDevelopment
-  ? config.development.serverUrl
-  : config.production.serverUrl;
+import { useTableSocketContext } from "@context/TableSocketContext";
 
 export default function TablesUtilityBar({
   table_id,
@@ -16,13 +10,23 @@ export default function TablesUtilityBar({
   table_id: string;
   tables_pictures_id: string | undefined | null;
 }) {
-  const tableSocket = io(serverUrl, {
-    path: "/table-socket",
-  });
+  const { tableSocket } = useTableSocketContext();
   const [isUtilities, setIsUtilities] = useState(false);
+  const live = useRef(false);
+  const token = localStorage.getItem("token");
 
   const handleClick = () => {
     setIsUtilities((prev) => !prev);
+  };
+
+  const handleAddLiveTableTop = () => {
+    if (live.current) {
+      live.current = false;
+      tableSocket.emit("endLive", token, table_id);
+    } else if (!live.current) {
+      live.current = true;
+      tableSocket.emit("goLive", token, table_id);
+    }
   };
 
   return (
@@ -44,7 +48,7 @@ export default function TablesUtilityBar({
           />
         )}
       </div>
-      <TablesTextField table_id={table_id} tableSocket={tableSocket} />
+      <TablesTextField table_id={table_id} />
       {!isUtilities && (
         <div
           className="bg-fg-white-95 h-16 w-max rounded-xl flex items-center justify-center p-2.5"
@@ -104,7 +108,7 @@ export default function TablesUtilityBar({
           </div>
           <div
             className="bg-fg-white-90 h-11 aspect-square rounded-xl flex items-center justify-center"
-            onClick={handleClick}
+            onClick={handleAddLiveTableTop}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

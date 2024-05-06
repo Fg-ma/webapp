@@ -14,10 +14,12 @@ const LiveUpdatesSocketContext = createContext<{
   liveUpdatesSocket: null,
 });
 
-export const useSocketContext = () => {
+export const useLiveUpdatesSocketContext = () => {
   const context = useContext(LiveUpdatesSocketContext);
   if (!context) {
-    throw new Error("usePinned must be used within a PinnedProvider");
+    throw new Error(
+      "useLiveUpdatesSocketContext must be used within a LiveUpdatesSocketProvider",
+    );
   }
   return context;
 };
@@ -45,3 +47,5 @@ export function LiveUpdatesSocketProvider({
     </LiveUpdatesSocketContext.Provider>
   );
 }
+
+export default LiveUpdatesSocketContext;

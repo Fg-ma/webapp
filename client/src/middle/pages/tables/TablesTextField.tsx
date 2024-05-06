@@ -3,19 +3,18 @@ import Axios from "axios";
 import config from "@config";
 import { TablesTextFieldProps } from "@FgTypes/middleTypes";
 import { useLastMessageContext } from "@context/LastMessageContext";
-import { useSocketContext } from "@context/LiveUpdatesContext";
+import { useLiveUpdatesSocketContext } from "@context/LiveUpdatesSocketContext";
+import { useTableSocketContext } from "@context/TableSocketContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
   ? config.development.serverUrl
   : config.production.serverUrl;
 
-export default function TablesTextField({
-  table_id,
-  tableSocket,
-}: TablesTextFieldProps) {
+export default function TablesTextField({ table_id }: TablesTextFieldProps) {
   const placeholder = "Send message...";
-  const { liveUpdatesSocket } = useSocketContext();
+  const { tableSocket } = useTableSocketContext();
+  const { liveUpdatesSocket } = useLiveUpdatesSocketContext();
   const { setLastMessage } = useLastMessageContext();
   const [inputValue, setInputValue] = useState("");
   const contentEditableRef = useRef<HTMLDivElement>(null);

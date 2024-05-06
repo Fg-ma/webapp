@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import TablesUtilityBar from "./TablesUtilityBar";
 import { useSelector } from "react-redux";
-import io from "socket.io-client";
-import { Table, TablesPageState } from "@FgTypes/middleTypes";
+import { Table, TableTop, TablesPageState } from "@FgTypes/middleTypes";
 import Axios from "axios";
 import config from "@config";
 import ProfilePicture from "@components/profilePicture/ProfilePicture";
 import TablesLiveVideoChatOverlay from "./TablesLiveVideoChatOverlay";
+import { useTableSocketContext } from "@context/TableSocketContext";
+import VideoChat from "./VideoChat";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -14,13 +15,12 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function TablesPage() {
-  const tableSocket = io(serverUrl, {
-    path: "/table-socket",
-  });
+  const { tableSocket } = useTableSocketContext();
   const table_id = useSelector(
     (state: TablesPageState) => state.page.main.pagePayload.ids.table_id,
   );
   const [table, setTable] = useState<Table>();
+  const [liveTableTops, setLiveTableTops] = useState<TableTop[]>();
   const token = localStorage.getItem("token");
 
   const joinTable = (table_id: string) => {
@@ -38,17 +38,6 @@ export default function TablesPage() {
 
     tableSocket.emit("leaveTable", token, table_id);
   };
-
-  // Establish socket connection
-  useEffect(() => {
-    tableSocket.on("connection", () => {
-      return;
-    });
-
-    return () => {
-      tableSocket.disconnect();
-    };
-  }, []);
 
   useEffect(() => {
     if (table_id) {
@@ -87,7 +76,34 @@ export default function TablesPage() {
       }
     };
 
+    const fetchTableTops = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await Axios.get(
+          `${serverUrl}/tables/get_table_top_by_table_id`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: { table_id: table_id },
+          },
+        );
+
+        setLiveTableTops(
+          response.data.filter((tableTop: TableTop) => tableTop.type === 1),
+        );
+      } catch (error) {
+        console.error("Error fetching tables data:", error);
+      }
+    };
+
     fetchTable();
+    fetchTableTops();
   }, [table_id]);
 
   const totalMembers = table?.members.length;
@@ -426,9 +442,6 @@ export default function TablesPage() {
     />
   ));
 
-  const sizeLocationRotation1 = { w: 30, h: 40, x: 10, y: 10, r: 45 };
-  const sizeLocationRotation2 = { w: 30, h: 40, x: 100, y: 100, r: 125 };
-
   return (
     <div className="w-full h-full flex flex-col">
       <div
@@ -459,12 +472,7 @@ export default function TablesPage() {
             <div></div>
           </div>
           <div className="bg-fg-white-95 w-full h-full rounded-3xl overflow-hidden relative">
-            {table_id && (
-              <TablesLiveVideoChatOverlay
-                table_id={table_id}
-                tableSocket={tableSocket}
-              />
-            )}
+            {table_id && <VideoChat table_id={table_id} />}
           </div>
           <div
             className={`flex flex-col h-full ${

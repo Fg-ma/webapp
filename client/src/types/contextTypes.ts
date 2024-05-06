@@ -208,6 +208,10 @@ export interface LiveUpdatesSocketProviderProps {
   children: ReactNode;
 }
 
+export interface TableSocketProviderProps {
+  children: ReactNode;
+}
+
 export interface PinnedProviderProps {
   children: ReactNode;
 }

@@ -3,7 +3,7 @@ import Axios from "axios";
 import config from "@config";
 import { MessagesTextFieldProps } from "@FgTypes/middleTypes";
 import { useLastMessageContext } from "@context/LastMessageContext";
-import { useSocketContext } from "@context/LiveUpdatesContext";
+import { useLiveUpdatesSocketContext } from "@context/LiveUpdatesSocketContext";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -17,7 +17,7 @@ export default function MessagesTextField({
   textFieldSnap,
 }: MessagesTextFieldProps) {
   const placeholder = "Send message...";
-  const { liveUpdatesSocket } = useSocketContext();
+  const { liveUpdatesSocket } = useLiveUpdatesSocketContext();
   const { setLastMessage } = useLastMessageContext();
   const [inputValue, setInputValue] = useState("");
   const contentEditableRef = useRef<HTMLDivElement>(null);

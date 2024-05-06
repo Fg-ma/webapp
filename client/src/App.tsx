@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useSocketContext } from "./context/LiveUpdatesContext";
+import { useLiveUpdatesSocketContext } from "./context/LiveUpdatesSocketContext";
 import LeftSpace from "./left/LeftSpace";
 import MiddleSpace from "./middle/MiddleSpace";
 import RightSpace from "./right/RightSpace";
@@ -19,6 +19,7 @@ import { ContactContextProvider } from "@context/ContactContext";
 import { ConversationContextProvider } from "@context/ConversationContext";
 import { useIndexedDBContext } from "@context/IDBContext";
 import { TableContextProvider } from "@context/TableContext";
+import { TableSocketProvider } from "@context/TableSocketContext";
 
 interface LoginState {
   page: {
@@ -51,7 +52,7 @@ export default function App() {
   */
 
   const { clearAllIndexedDBData } = useIndexedDBContext();
-  const { liveUpdatesSocket } = useSocketContext();
+  const { liveUpdatesSocket } = useLiveUpdatesSocketContext();
   const mainPageState = useSelector(
     (state: MainState) => state.page.main.pagePayload.pageState,
   );
@@ -96,44 +97,46 @@ export default function App() {
           <ContactContextProvider>
             <ConversationContextProvider>
               <TableContextProvider>
-                <div className="h-screen w-screen overflow-clip">
-                  <div className="flex justify-between px-12 pt-16 h-full">
-                    {mainPageState === "tables" && <TablesPage />}
+                <TableSocketProvider>
+                  <div className="h-screen w-screen overflow-clip">
+                    <div className="flex justify-between px-12 pt-16 h-full">
+                      {mainPageState === "tables" && <TablesPage />}
 
-                    {mainPageState !== "tables" && <LeftSpace />}
+                      {mainPageState !== "tables" && <LeftSpace />}
 
-                    {mainPageState !== "tables" && (
+                      {mainPageState !== "tables" && (
+                        <div
+                          ref={middleSpaceContainerRef}
+                          className="h-full flex flex-col"
+                          style={{
+                            width: "45%",
+                            minWidth: "45%",
+                            maxWidth: "45%",
+                          }}
+                        >
+                          <>
+                            <MiddleSpace
+                              middleSpaceContainerRef={middleSpaceContainerRef}
+                            />
+                            <PageNav />
+                          </>
+                        </div>
+                      )}
+
                       <div
-                        ref={middleSpaceContainerRef}
                         className="h-full flex flex-col"
                         style={{
-                          width: "45%",
-                          minWidth: "45%",
-                          maxWidth: "45%",
+                          width: "24.5%",
+                          minWidth: "24.5%",
+                          maxWidth: "24.5%",
                         }}
                       >
-                        <>
-                          <MiddleSpace
-                            middleSpaceContainerRef={middleSpaceContainerRef}
-                          />
-                          <PageNav />
-                        </>
+                        <RightSpace />
+                        {mainPageState === "tables" && <PageNav />}
                       </div>
-                    )}
-
-                    <div
-                      className="h-full flex flex-col"
-                      style={{
-                        width: "24.5%",
-                        minWidth: "24.5%",
-                        maxWidth: "24.5%",
-                      }}
-                    >
-                      <RightSpace />
-                      {mainPageState === "tables" && <PageNav />}
                     </div>
                   </div>
-                </div>
+                </TableSocketProvider>
               </TableContextProvider>
             </ConversationContextProvider>
           </ContactContextProvider>

@@ -4,7 +4,7 @@ import App from "./src/App";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import { IndexedDBProvider } from "./src/context/IDBContext";
-import { LiveUpdatesSocketProvider } from "./src/context/LiveUpdatesContext";
+import { LiveUpdatesSocketProvider } from "./src/context/LiveUpdatesSocketContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container as HTMLElement);

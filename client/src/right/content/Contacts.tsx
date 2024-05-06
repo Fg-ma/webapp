@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import config from "@config";
-import { useSocketContext } from "@context/LiveUpdatesContext";
+import { useLiveUpdatesSocketContext } from "@context/LiveUpdatesSocketContext";
 import {
   Contact,
   IncomingMessage,
@@ -19,7 +19,7 @@ const serverUrl = isDevelopment
   : config.production.serverUrl;
 
 export default function Contacts() {
-  const { liveUpdatesSocket } = useSocketContext();
+  const { liveUpdatesSocket } = useLiveUpdatesSocketContext();
   const { lastMessage } = useLastMessageContext();
   const { fluxContact, setFluxContact } = useContactContext();
   const {

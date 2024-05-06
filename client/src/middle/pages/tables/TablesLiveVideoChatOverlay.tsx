@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Socket } from "socket.io-client";
+import React, { useState, useEffect, useRef } from "react";
 import Peer from "simple-peer";
+import { TableTop } from "@FgTypes/middleTypes";
+import { useTableSocketContext } from "@context/TableSocketContext";
 
 const Video = (props: any) => {
   const ref: any = useRef();
@@ -23,85 +24,120 @@ const videoConstraints = {
 
 export default function TablesLiveVideoChatOverlay({
   table_id,
-  tableSocket,
+  liveTableTops,
 }: {
   table_id: string;
-  tableSocket: Socket;
+  liveTableTops: TableTop[] | undefined;
 }) {
+  const { tableSocket } = useTableSocketContext();
   const [peers, setPeers] = useState<{ peerUsername: string; peer: any }[]>([]);
+  const live = useRef(false);
   const userVideo: any = useRef();
-  const peersRef: any = useRef([]);
+  const peersRef = useRef<{ peerUsername: string; peer: any }[]>([]);
   const token = localStorage.getItem("token");
-  console.log("peer", peers);
+  const stream = useRef<MediaStream>();
+
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
-      .then((stream) => {
-        userVideo.current.srcObject = stream;
-        tableSocket.emit("joinRoom", token, table_id);
-        tableSocket.on("allLiveMembers", (members: string[], user: string) => {
-          const initialPeers: any = [];
-          members.forEach((member: any) => {
-            const peer = createPeer(member, user, stream);
-            if (peer) {
-              peersRef.current.push({
-                peerID: member,
-                peer,
-              });
-              initialPeers.push({ peerUsername: member, peer: peer });
-            }
-          });
-
-          console.log("setpeers initial", initialPeers);
-          setPeers(initialPeers);
-        });
-
-        tableSocket.on("userJoined", (signal, callerID) => {
-          const peer = addPeer(signal, callerID, stream);
-          if (peer) {
-            const duplicatePeer = peers.find((peer) => {
-              console.log(peer.peerUsername, callerID);
-              return peer.peerUsername === callerID;
-            });
-
-            console.log(duplicatePeer);
-            if (!duplicatePeer) {
-              peersRef.current.push({
-                peerID: callerID,
-                peer: peer,
-              });
-
-              console.log("setpeers userjoined", callerID);
-              setPeers((peers) => [
-                ...peers,
-                { peerUsername: callerID, peer: peer },
-              ]);
-            }
-          }
-        });
-
-        tableSocket.on("userDisconnected", (disconnectedUser) => {
-          const updatedPeers = peersRef.current.filter(
-            (peer: any) => peer.peerID !== disconnectedUser,
-          );
-          peersRef.current = updatedPeers;
-
-          console.log(
-            "setpeers disconnect",
-            peers.filter((peer) => peer.peerUsername !== disconnectedUser),
-          );
-          setPeers((peers) =>
-            peers.filter((peer) => peer.peerUsername !== disconnectedUser),
-          );
-        });
-
-        tableSocket.on("receivingReturnedSignal", (signal, username) => {
-          const item = peersRef.current.find((p: any) => p.peerID === username);
-          if (item) {
-            item.peer.signal(signal);
-          }
-        });
+      .then((userStream) => {
+        stream.current = userStream;
+        userVideo.current.srcObject = userStream;
       });
+    const videoTrack = stream.current?.getVideoTracks()[0];
+    if (videoTrack) {
+      videoTrack.enabled = false;
+    }
+
+    tableSocket.emit("initializeLiveChat", token, table_id);
+
+    tableSocket.on("userWentLive", (tables_tabletops_id) => {
+      live.current = true;
+      userVideo.current.srcObject = stream.current;
+    });
+
+    tableSocket.on("peerWentLive", (member, targetUsername) => {
+      const peer = createPeer(targetUsername, member, stream.current);
+      peersRef.current.push({
+        peerUsername: targetUsername,
+        peer: peer,
+      });
+      console.log("peerwentlive", peer);
+      setPeers((prev) => [
+        ...prev,
+        {
+          peerUsername: targetUsername,
+          peer: peer,
+        },
+      ]);
+    });
+
+    tableSocket.on("userEndedLive", (tables_tabletops_id) => {
+      live.current = false;
+      userVideo.current.srcObject = null;
+    });
+
+    tableSocket.on("peerIsLive", (targetUsername, callerUsername) => {
+      const peer = createPeer(targetUsername, callerUsername, stream.current);
+      peersRef.current.push({
+        peerUsername: targetUsername,
+        peer: peer,
+      });
+
+      setPeers((prev) => [
+        ...prev,
+        {
+          peerUsername: targetUsername,
+          peer: peer,
+        },
+      ]);
+    });
+
+    tableSocket.on("requestLive", (targetUsername, callerUsername) => {
+      tableSocket.emit(
+        "responseToLiveRequest",
+        token,
+        table_id,
+        live.current,
+        targetUsername,
+        callerUsername,
+      );
+    });
+
+    tableSocket.on("userJoined", (signal, callerUsername) => {
+      const peer = addPeer(signal, callerUsername, stream.current);
+      if (peer) {
+        peersRef.current.push({
+          peerUsername: callerUsername,
+          peer: peer,
+        });
+
+        setPeers((peers) => [
+          ...peers,
+          { peerUsername: callerUsername, peer: peer },
+        ]);
+      }
+    });
+
+    tableSocket.on("userDisconnected", (disconnectedUser) => {
+      const updatedPeers = peersRef.current.filter(
+        (peer: any) => peer.peerUsername !== disconnectedUser,
+      );
+      peersRef.current = updatedPeers;
+
+      setPeers((peers) =>
+        peers.filter((peer) => peer.peerUsername !== disconnectedUser),
+      );
+    });
+
+    tableSocket.on("receivingReturnedSignal", (signal, username) => {
+      const item = peersRef.current.find(
+        (p: any) => p.peerUsername === username,
+      );
+      if (item) {
+        item.peer.signal(signal);
+      }
+    });
 
     return () => {
       tableSocket.off("receivingReturnedSignal");
@@ -109,23 +145,30 @@ export default function TablesLiveVideoChatOverlay({
       tableSocket.off("userJoined");
       tableSocket.off("allLiveMembers");
       tableSocket.emit("userDisconnect", token, table_id);
+      setPeers([]);
+      peersRef.current = [];
     };
   }, [table_id]);
 
-  function createPeer(userToSignal: string, callerID: string, stream: any) {
+  function createPeer(
+    userToSignal: string,
+    callerUsername: string,
+    stream: any,
+  ) {
     try {
       const peer = new Peer({
         initiator: true,
         trickle: false,
-        stream,
+        stream: stream,
       });
 
       peer.on("signal", (signal: any) => {
         tableSocket.emit(
           "sendingSignal",
+          token,
           table_id,
           userToSignal,
-          callerID,
+          callerUsername,
           signal,
         );
       });
@@ -136,16 +179,22 @@ export default function TablesLiveVideoChatOverlay({
     }
   }
 
-  function addPeer(incomingSignal: any, callerID: any, stream: any) {
+  function addPeer(incomingSignal: any, callerUsername: any, stream: any) {
     try {
       const peer = new Peer({
         initiator: false,
         trickle: false,
-        stream,
+        stream: stream,
       });
 
       peer.on("signal", (signal: any) => {
-        tableSocket.emit("returningSignal", token, table_id, signal, callerID);
+        tableSocket.emit(
+          "returningSignal",
+          token,
+          table_id,
+          signal,
+          callerUsername,
+        );
       });
 
       peer.signal(incomingSignal);

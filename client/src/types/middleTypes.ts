@@ -620,7 +620,6 @@ export interface Table {
 
 export interface TablesTextFieldProps {
   table_id: string | null;
-  tableSocket: Socket;
 }
 
 export interface TablesLiveProps {
@@ -632,4 +631,31 @@ export interface TablesLiveProps {
     r: number;
   };
   videoRef: React.MutableRefObject<HTMLVideoElement | null>;
+}
+
+export interface TableTop {
+  tables_tabletops_id: string;
+  table_id: string;
+  type: number;
+  tables_tabletops_data_id: string | null;
+  content_date_posted: Date;
+  content_x_position: number;
+  content_y_position: number;
+  content_rotation: number;
+  content_filename: string | null;
+  individual_data?: {
+    individual_username: string;
+    individual_name: string | null;
+    individual_current_issue?: string | null;
+  };
+  group_data?: {
+    group_handle: string;
+    group_name: string | null;
+    group_current_issue?: string | null;
+  };
+  organization_data?: {
+    organization_handle: string;
+    organization_name: string | null;
+    organization_current_issue?: string | null;
+  };
 }

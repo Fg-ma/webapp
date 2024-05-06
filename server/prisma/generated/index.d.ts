@@ -65,7 +65,7 @@ export type conversations_messages_logs = $Result.DefaultSelection<Prisma.$conve
 export type conversations_pictures = $Result.DefaultSelection<Prisma.$conversations_picturesPayload>
 /**
  * Model entities
- * 
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
 export type entities = $Result.DefaultSelection<Prisma.$entitiesPayload>
 /**
@@ -165,9 +165,14 @@ export type tables_messages_logs = $Result.DefaultSelection<Prisma.$tables_messa
 export type tables_pictures = $Result.DefaultSelection<Prisma.$tables_picturesPayload>
 /**
  * Model tables_tabletops
- * 
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
 export type tables_tabletops = $Result.DefaultSelection<Prisma.$tables_tabletopsPayload>
+/**
+ * Model tables_tabletops_data
+ * 
+ */
+export type tables_tabletops_data = $Result.DefaultSelection<Prisma.$tables_tabletops_dataPayload>
 /**
  * Model user_credentials
  * 
@@ -620,6 +625,16 @@ export class PrismaClient<
     * ```
     */
   get tables_tabletops(): Prisma.tables_tabletopsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tables_tabletops_data`: Exposes CRUD operations for the **tables_tabletops_data** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tables_tabletops_data
+    * const tables_tabletops_data = await prisma.tables_tabletops_data.findMany()
+    * ```
+    */
+  get tables_tabletops_data(): Prisma.tables_tabletops_dataDelegate<ExtArgs>;
 
   /**
    * `prisma.user_credentials`: Exposes CRUD operations for the **user_credentials** model.
@@ -1161,6 +1176,7 @@ export namespace Prisma {
     tables_messages_logs: 'tables_messages_logs',
     tables_pictures: 'tables_pictures',
     tables_tabletops: 'tables_tabletops',
+    tables_tabletops_data: 'tables_tabletops_data',
     user_credentials: 'user_credentials',
     videos: 'videos',
     videos_data: 'videos_data',
@@ -1181,7 +1197,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'contacts_pictures' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'tables' | 'tables_members' | 'tables_messages_logs' | 'tables_pictures' | 'tables_tabletops' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
+      modelProps: 'affiliates_relations' | 'collections' | 'collections_content' | 'contacts' | 'contacts_pictures' | 'content' | 'conversations' | 'conversations_members' | 'conversations_messages_logs' | 'conversations_pictures' | 'entities' | 'entities_content' | 'entities_dislikes' | 'entities_likes' | 'entities_references' | 'groups' | 'groups_members' | 'images' | 'images_data' | 'individuals' | 'organizations' | 'organizations_members' | 'profile_pictures' | 'sheets' | 'sheets_data' | 'sheets_thumbnails' | 'tables' | 'tables_members' | 'tables_messages_logs' | 'tables_pictures' | 'tables_tabletops' | 'tables_tabletops_data' | 'user_credentials' | 'videos' | 'videos_data' | 'videos_thumbnails'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -3231,6 +3247,72 @@ export namespace Prisma {
           }
         }
       }
+      tables_tabletops_data: {
+        payload: Prisma.$tables_tabletops_dataPayload<ExtArgs>
+        fields: Prisma.tables_tabletops_dataFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tables_tabletops_dataFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tables_tabletops_dataFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          findFirst: {
+            args: Prisma.tables_tabletops_dataFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tables_tabletops_dataFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          findMany: {
+            args: Prisma.tables_tabletops_dataFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>[]
+          }
+          create: {
+            args: Prisma.tables_tabletops_dataCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          createMany: {
+            args: Prisma.tables_tabletops_dataCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tables_tabletops_dataDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          update: {
+            args: Prisma.tables_tabletops_dataUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          deleteMany: {
+            args: Prisma.tables_tabletops_dataDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tables_tabletops_dataUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tables_tabletops_dataUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tables_tabletops_dataPayload>
+          }
+          aggregate: {
+            args: Prisma.Tables_tabletops_dataAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTables_tabletops_data>
+          }
+          groupBy: {
+            args: Prisma.tables_tabletops_dataGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_tabletops_dataGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tables_tabletops_dataCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tables_tabletops_dataCountAggregateOutputType> | number
+          }
+        }
+      }
       user_credentials: {
         payload: Prisma.$user_credentialsPayload<ExtArgs>
         fields: Prisma.user_credentialsFieldRefs
@@ -3879,6 +3961,7 @@ export namespace Prisma {
     sheets: number
     tables_members: number
     tables_messages_logs: number
+    tables_tabletops: number
     videos: number
   }
 
@@ -3898,6 +3981,7 @@ export namespace Prisma {
     sheets?: boolean | EntitiesCountOutputTypeCountSheetsArgs
     tables_members?: boolean | EntitiesCountOutputTypeCountTables_membersArgs
     tables_messages_logs?: boolean | EntitiesCountOutputTypeCountTables_messages_logsArgs
+    tables_tabletops?: boolean | EntitiesCountOutputTypeCountTables_tabletopsArgs
     videos?: boolean | EntitiesCountOutputTypeCountVideosArgs
   }
 
@@ -4031,6 +4115,14 @@ export namespace Prisma {
    */
   export type EntitiesCountOutputTypeCountTables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: tables_messages_logsWhereInput
+  }
+
+
+  /**
+   * EntitiesCountOutputType without action
+   */
+  export type EntitiesCountOutputTypeCountTables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_tabletopsWhereInput
   }
 
 
@@ -4274,11 +4366,13 @@ export namespace Prisma {
   export type TablesCountOutputType = {
     tables_members: number
     tables_messages_logs: number
+    tables_tabletops: number
   }
 
   export type TablesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tables_members?: boolean | TablesCountOutputTypeCountTables_membersArgs
     tables_messages_logs?: boolean | TablesCountOutputTypeCountTables_messages_logsArgs
+    tables_tabletops?: boolean | TablesCountOutputTypeCountTables_tabletopsArgs
   }
 
   // Custom InputTypes
@@ -4307,6 +4401,14 @@ export namespace Prisma {
    */
   export type TablesCountOutputTypeCountTables_messages_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: tables_messages_logsWhereInput
+  }
+
+
+  /**
+   * TablesCountOutputType without action
+   */
+  export type TablesCountOutputTypeCountTables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_tabletopsWhereInput
   }
 
 
@@ -4341,6 +4443,40 @@ export namespace Prisma {
    */
   export type Tables_picturesCountOutputTypeCountTablesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: tablesWhereInput
+  }
+
+
+
+  /**
+   * Count Type Tables_tabletops_dataCountOutputType
+   */
+
+  export type Tables_tabletops_dataCountOutputType = {
+    tables_tabletops: number
+  }
+
+  export type Tables_tabletops_dataCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables_tabletops?: boolean | Tables_tabletops_dataCountOutputTypeCountTables_tabletopsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Tables_tabletops_dataCountOutputType without action
+   */
+  export type Tables_tabletops_dataCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tables_tabletops_dataCountOutputType
+     */
+    select?: Tables_tabletops_dataCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Tables_tabletops_dataCountOutputType without action
+   */
+  export type Tables_tabletops_dataCountOutputTypeCountTables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_tabletopsWhereInput
   }
 
 
@@ -13989,6 +14125,7 @@ export namespace Prisma {
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
     tables_members?: boolean | entities$tables_membersArgs<ExtArgs>
     tables_messages_logs?: boolean | entities$tables_messages_logsArgs<ExtArgs>
+    tables_tabletops?: boolean | entities$tables_tabletopsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entities"]>
@@ -14015,6 +14152,7 @@ export namespace Prisma {
     sheets?: boolean | entities$sheetsArgs<ExtArgs>
     tables_members?: boolean | entities$tables_membersArgs<ExtArgs>
     tables_messages_logs?: boolean | entities$tables_messages_logsArgs<ExtArgs>
+    tables_tabletops?: boolean | entities$tables_tabletopsArgs<ExtArgs>
     videos?: boolean | entities$videosArgs<ExtArgs>
     _count?: boolean | EntitiesCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -14038,6 +14176,7 @@ export namespace Prisma {
       sheets: Prisma.$sheetsPayload<ExtArgs>[]
       tables_members: Prisma.$tables_membersPayload<ExtArgs>[]
       tables_messages_logs: Prisma.$tables_messages_logsPayload<ExtArgs>[]
+      tables_tabletops: Prisma.$tables_tabletopsPayload<ExtArgs>[]
       videos: Prisma.$videosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -14438,6 +14577,8 @@ export namespace Prisma {
     tables_members<T extends entities$tables_membersArgs<ExtArgs> = {}>(args?: Subset<T, entities$tables_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     tables_messages_logs<T extends entities$tables_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, entities$tables_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tables_tabletops<T extends entities$tables_tabletopsArgs<ExtArgs> = {}>(args?: Subset<T, entities$tables_tabletopsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     videos<T extends entities$videosArgs<ExtArgs> = {}>(args?: Subset<T, entities$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videosPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -15095,6 +15236,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * entities.tables_tabletops
+   */
+  export type entities$tables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    where?: tables_tabletopsWhereInput
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    cursor?: tables_tabletopsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
   }
 
 
@@ -29484,6 +29646,7 @@ export namespace Prisma {
     tables_pictures?: boolean | tables$tables_picturesArgs<ExtArgs>
     tables_members?: boolean | tables$tables_membersArgs<ExtArgs>
     tables_messages_logs?: boolean | tables$tables_messages_logsArgs<ExtArgs>
+    tables_tabletops?: boolean | tables$tables_tabletopsArgs<ExtArgs>
     _count?: boolean | TablesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tables"]>
 
@@ -29500,6 +29663,7 @@ export namespace Prisma {
     tables_pictures?: boolean | tables$tables_picturesArgs<ExtArgs>
     tables_members?: boolean | tables$tables_membersArgs<ExtArgs>
     tables_messages_logs?: boolean | tables$tables_messages_logsArgs<ExtArgs>
+    tables_tabletops?: boolean | tables$tables_tabletopsArgs<ExtArgs>
     _count?: boolean | TablesCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -29510,6 +29674,7 @@ export namespace Prisma {
       tables_pictures: Prisma.$tables_picturesPayload<ExtArgs> | null
       tables_members: Prisma.$tables_membersPayload<ExtArgs>[]
       tables_messages_logs: Prisma.$tables_messages_logsPayload<ExtArgs>[]
+      tables_tabletops: Prisma.$tables_tabletopsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       table_id: string
@@ -29888,6 +30053,8 @@ export namespace Prisma {
     tables_members<T extends tables$tables_membersArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_membersPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     tables_messages_logs<T extends tables$tables_messages_logsArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_messages_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_messages_logsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tables_tabletops<T extends tables$tables_tabletopsArgs<ExtArgs> = {}>(args?: Subset<T, tables$tables_tabletopsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -30289,6 +30456,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Tables_messages_logsScalarFieldEnum | Tables_messages_logsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables.tables_tabletops
+   */
+  export type tables$tables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    where?: tables_tabletopsWhereInput
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    cursor?: tables_tabletopsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
   }
 
 
@@ -33124,12 +33312,14 @@ export namespace Prisma {
   }
 
   export type Tables_tabletopsAvgAggregateOutputType = {
+    type: number | null
     content_x_position: number | null
     content_y_position: number | null
     content_rotation: number | null
   }
 
   export type Tables_tabletopsSumAggregateOutputType = {
+    type: number | null
     content_x_position: number | null
     content_y_position: number | null
     content_rotation: number | null
@@ -33137,43 +33327,54 @@ export namespace Prisma {
 
   export type Tables_tabletopsMinAggregateOutputType = {
     tables_tabletops_id: string | null
-    content_data: Buffer | null
-    content_filename: string | null
+    table_id: string | null
+    creator_id: string | null
+    tables_tabletops_data_id: string | null
+    type: number | null
     content_date_posted: Date | null
     content_x_position: number | null
     content_y_position: number | null
     content_rotation: number | null
+    content_filename: string | null
   }
 
   export type Tables_tabletopsMaxAggregateOutputType = {
     tables_tabletops_id: string | null
-    content_data: Buffer | null
-    content_filename: string | null
+    table_id: string | null
+    creator_id: string | null
+    tables_tabletops_data_id: string | null
+    type: number | null
     content_date_posted: Date | null
     content_x_position: number | null
     content_y_position: number | null
     content_rotation: number | null
+    content_filename: string | null
   }
 
   export type Tables_tabletopsCountAggregateOutputType = {
     tables_tabletops_id: number
-    content_data: number
-    content_filename: number
+    table_id: number
+    creator_id: number
+    tables_tabletops_data_id: number
+    type: number
     content_date_posted: number
     content_x_position: number
     content_y_position: number
     content_rotation: number
+    content_filename: number
     _all: number
   }
 
 
   export type Tables_tabletopsAvgAggregateInputType = {
+    type?: true
     content_x_position?: true
     content_y_position?: true
     content_rotation?: true
   }
 
   export type Tables_tabletopsSumAggregateInputType = {
+    type?: true
     content_x_position?: true
     content_y_position?: true
     content_rotation?: true
@@ -33181,32 +33382,41 @@ export namespace Prisma {
 
   export type Tables_tabletopsMinAggregateInputType = {
     tables_tabletops_id?: true
-    content_data?: true
-    content_filename?: true
+    table_id?: true
+    creator_id?: true
+    tables_tabletops_data_id?: true
+    type?: true
     content_date_posted?: true
     content_x_position?: true
     content_y_position?: true
     content_rotation?: true
+    content_filename?: true
   }
 
   export type Tables_tabletopsMaxAggregateInputType = {
     tables_tabletops_id?: true
-    content_data?: true
-    content_filename?: true
+    table_id?: true
+    creator_id?: true
+    tables_tabletops_data_id?: true
+    type?: true
     content_date_posted?: true
     content_x_position?: true
     content_y_position?: true
     content_rotation?: true
+    content_filename?: true
   }
 
   export type Tables_tabletopsCountAggregateInputType = {
     tables_tabletops_id?: true
-    content_data?: true
-    content_filename?: true
+    table_id?: true
+    creator_id?: true
+    tables_tabletops_data_id?: true
+    type?: true
     content_date_posted?: true
     content_x_position?: true
     content_y_position?: true
     content_rotation?: true
+    content_filename?: true
     _all?: true
   }
 
@@ -33298,12 +33508,15 @@ export namespace Prisma {
 
   export type Tables_tabletopsGroupByOutputType = {
     tables_tabletops_id: string
-    content_data: Buffer
-    content_filename: string
+    table_id: string
+    creator_id: string
+    tables_tabletops_data_id: string | null
+    type: number
     content_date_posted: Date
     content_x_position: number
     content_y_position: number
     content_rotation: number
+    content_filename: string | null
     _count: Tables_tabletopsCountAggregateOutputType | null
     _avg: Tables_tabletopsAvgAggregateOutputType | null
     _sum: Tables_tabletopsSumAggregateOutputType | null
@@ -33327,36 +33540,58 @@ export namespace Prisma {
 
   export type tables_tabletopsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     tables_tabletops_id?: boolean
-    content_data?: boolean
-    content_filename?: boolean
+    table_id?: boolean
+    creator_id?: boolean
+    tables_tabletops_data_id?: boolean
+    type?: boolean
     content_date_posted?: boolean
     content_x_position?: boolean
     content_y_position?: boolean
     content_rotation?: boolean
+    content_filename?: boolean
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+    tables_tabletops_data?: boolean | tables_tabletops$tables_tabletops_dataArgs<ExtArgs>
   }, ExtArgs["result"]["tables_tabletops"]>
 
   export type tables_tabletopsSelectScalar = {
     tables_tabletops_id?: boolean
-    content_data?: boolean
-    content_filename?: boolean
+    table_id?: boolean
+    creator_id?: boolean
+    tables_tabletops_data_id?: boolean
+    type?: boolean
     content_date_posted?: boolean
     content_x_position?: boolean
     content_y_position?: boolean
     content_rotation?: boolean
+    content_filename?: boolean
+  }
+
+  export type tables_tabletopsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entities?: boolean | entitiesDefaultArgs<ExtArgs>
+    tables?: boolean | tablesDefaultArgs<ExtArgs>
+    tables_tabletops_data?: boolean | tables_tabletops$tables_tabletops_dataArgs<ExtArgs>
   }
 
 
   export type $tables_tabletopsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "tables_tabletops"
-    objects: {}
+    objects: {
+      entities: Prisma.$entitiesPayload<ExtArgs>
+      tables: Prisma.$tablesPayload<ExtArgs>
+      tables_tabletops_data: Prisma.$tables_tabletops_dataPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       tables_tabletops_id: string
-      content_data: Buffer
-      content_filename: string
+      table_id: string
+      creator_id: string
+      tables_tabletops_data_id: string | null
+      type: number
       content_date_posted: Date
       content_x_position: number
       content_y_position: number
       content_rotation: number
+      content_filename: string | null
     }, ExtArgs["result"]["tables_tabletops"]>
     composites: {}
   }
@@ -33722,6 +33957,11 @@ export namespace Prisma {
   export interface Prisma__tables_tabletopsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    entities<T extends entitiesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, entitiesDefaultArgs<ExtArgs>>): Prisma__entitiesClient<$Result.GetResult<Prisma.$entitiesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    tables<T extends tablesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, tablesDefaultArgs<ExtArgs>>): Prisma__tablesClient<$Result.GetResult<Prisma.$tablesPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    tables_tabletops_data<T extends tables_tabletops$tables_tabletops_dataArgs<ExtArgs> = {}>(args?: Subset<T, tables_tabletops$tables_tabletops_dataArgs<ExtArgs>>): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -33752,12 +33992,15 @@ export namespace Prisma {
    */ 
   interface tables_tabletopsFieldRefs {
     readonly tables_tabletops_id: FieldRef<"tables_tabletops", 'String'>
-    readonly content_data: FieldRef<"tables_tabletops", 'Bytes'>
-    readonly content_filename: FieldRef<"tables_tabletops", 'String'>
+    readonly table_id: FieldRef<"tables_tabletops", 'String'>
+    readonly creator_id: FieldRef<"tables_tabletops", 'String'>
+    readonly tables_tabletops_data_id: FieldRef<"tables_tabletops", 'String'>
+    readonly type: FieldRef<"tables_tabletops", 'Int'>
     readonly content_date_posted: FieldRef<"tables_tabletops", 'DateTime'>
     readonly content_x_position: FieldRef<"tables_tabletops", 'Int'>
     readonly content_y_position: FieldRef<"tables_tabletops", 'Int'>
     readonly content_rotation: FieldRef<"tables_tabletops", 'Int'>
+    readonly content_filename: FieldRef<"tables_tabletops", 'String'>
   }
     
 
@@ -33771,6 +34014,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the tables_tabletops
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
     /**
      * Filter, which tables_tabletops to fetch.
      */
@@ -33787,6 +34034,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * Filter, which tables_tabletops to fetch.
      */
     where: tables_tabletopsWhereUniqueInput
@@ -33801,6 +34052,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the tables_tabletops
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
     /**
      * Filter, which tables_tabletops to fetch.
      */
@@ -33847,6 +34102,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * Filter, which tables_tabletops to fetch.
      */
     where?: tables_tabletopsWhereInput
@@ -33892,6 +34151,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * Filter, which tables_tabletops to fetch.
      */
     where?: tables_tabletopsWhereInput
@@ -33932,6 +34195,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * The data needed to create a tables_tabletops.
      */
     data: XOR<tables_tabletopsCreateInput, tables_tabletopsUncheckedCreateInput>
@@ -33958,6 +34225,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the tables_tabletops
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
     /**
      * The data needed to update a tables_tabletops.
      */
@@ -33993,6 +34264,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * The filter to search for the tables_tabletops to update in case it exists.
      */
     where: tables_tabletopsWhereUniqueInput
@@ -34016,6 +34291,10 @@ export namespace Prisma {
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    /**
      * Filter which tables_tabletops to delete.
      */
     where: tables_tabletopsWhereUniqueInput
@@ -34034,6 +34313,22 @@ export namespace Prisma {
 
 
   /**
+   * tables_tabletops.tables_tabletops_data
+   */
+  export type tables_tabletops$tables_tabletops_dataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    where?: tables_tabletops_dataWhereInput
+  }
+
+
+  /**
    * tables_tabletops without action
    */
   export type tables_tabletopsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -34041,6 +34336,918 @@ export namespace Prisma {
      * Select specific fields to fetch from the tables_tabletops
      */
     select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model tables_tabletops_data
+   */
+
+  export type AggregateTables_tabletops_data = {
+    _count: Tables_tabletops_dataCountAggregateOutputType | null
+    _min: Tables_tabletops_dataMinAggregateOutputType | null
+    _max: Tables_tabletops_dataMaxAggregateOutputType | null
+  }
+
+  export type Tables_tabletops_dataMinAggregateOutputType = {
+    tables_tabletops_data_id: string | null
+    tables_tabletops_data: Buffer | null
+  }
+
+  export type Tables_tabletops_dataMaxAggregateOutputType = {
+    tables_tabletops_data_id: string | null
+    tables_tabletops_data: Buffer | null
+  }
+
+  export type Tables_tabletops_dataCountAggregateOutputType = {
+    tables_tabletops_data_id: number
+    tables_tabletops_data: number
+    _all: number
+  }
+
+
+  export type Tables_tabletops_dataMinAggregateInputType = {
+    tables_tabletops_data_id?: true
+    tables_tabletops_data?: true
+  }
+
+  export type Tables_tabletops_dataMaxAggregateInputType = {
+    tables_tabletops_data_id?: true
+    tables_tabletops_data?: true
+  }
+
+  export type Tables_tabletops_dataCountAggregateInputType = {
+    tables_tabletops_data_id?: true
+    tables_tabletops_data?: true
+    _all?: true
+  }
+
+  export type Tables_tabletops_dataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_tabletops_data to aggregate.
+     */
+    where?: tables_tabletops_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops_data to fetch.
+     */
+    orderBy?: tables_tabletops_dataOrderByWithRelationInput | tables_tabletops_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tables_tabletops_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tables_tabletops_data
+    **/
+    _count?: true | Tables_tabletops_dataCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tables_tabletops_dataMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tables_tabletops_dataMaxAggregateInputType
+  }
+
+  export type GetTables_tabletops_dataAggregateType<T extends Tables_tabletops_dataAggregateArgs> = {
+        [P in keyof T & keyof AggregateTables_tabletops_data]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTables_tabletops_data[P]>
+      : GetScalarType<T[P], AggregateTables_tabletops_data[P]>
+  }
+
+
+
+
+  export type tables_tabletops_dataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tables_tabletops_dataWhereInput
+    orderBy?: tables_tabletops_dataOrderByWithAggregationInput | tables_tabletops_dataOrderByWithAggregationInput[]
+    by: Tables_tabletops_dataScalarFieldEnum[] | Tables_tabletops_dataScalarFieldEnum
+    having?: tables_tabletops_dataScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tables_tabletops_dataCountAggregateInputType | true
+    _min?: Tables_tabletops_dataMinAggregateInputType
+    _max?: Tables_tabletops_dataMaxAggregateInputType
+  }
+
+  export type Tables_tabletops_dataGroupByOutputType = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+    _count: Tables_tabletops_dataCountAggregateOutputType | null
+    _min: Tables_tabletops_dataMinAggregateOutputType | null
+    _max: Tables_tabletops_dataMaxAggregateOutputType | null
+  }
+
+  type GetTables_tabletops_dataGroupByPayload<T extends tables_tabletops_dataGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tables_tabletops_dataGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tables_tabletops_dataGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tables_tabletops_dataGroupByOutputType[P]>
+            : GetScalarType<T[P], Tables_tabletops_dataGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tables_tabletops_dataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tables_tabletops_data_id?: boolean
+    tables_tabletops_data?: boolean
+    tables_tabletops?: boolean | tables_tabletops_data$tables_tabletopsArgs<ExtArgs>
+    _count?: boolean | Tables_tabletops_dataCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tables_tabletops_data"]>
+
+  export type tables_tabletops_dataSelectScalar = {
+    tables_tabletops_data_id?: boolean
+    tables_tabletops_data?: boolean
+  }
+
+  export type tables_tabletops_dataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tables_tabletops?: boolean | tables_tabletops_data$tables_tabletopsArgs<ExtArgs>
+    _count?: boolean | Tables_tabletops_dataCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tables_tabletops_dataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tables_tabletops_data"
+    objects: {
+      tables_tabletops: Prisma.$tables_tabletopsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tables_tabletops_data_id: string
+      tables_tabletops_data: Buffer
+    }, ExtArgs["result"]["tables_tabletops_data"]>
+    composites: {}
+  }
+
+
+  type tables_tabletops_dataGetPayload<S extends boolean | null | undefined | tables_tabletops_dataDefaultArgs> = $Result.GetResult<Prisma.$tables_tabletops_dataPayload, S>
+
+  type tables_tabletops_dataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tables_tabletops_dataFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tables_tabletops_dataCountAggregateInputType | true
+    }
+
+  export interface tables_tabletops_dataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tables_tabletops_data'], meta: { name: 'tables_tabletops_data' } }
+    /**
+     * Find zero or one Tables_tabletops_data that matches the filter.
+     * @param {tables_tabletops_dataFindUniqueArgs} args - Arguments to find a Tables_tabletops_data
+     * @example
+     * // Get one Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tables_tabletops_dataFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataFindUniqueArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tables_tabletops_data that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tables_tabletops_dataFindUniqueOrThrowArgs} args - Arguments to find a Tables_tabletops_data
+     * @example
+     * // Get one Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tables_tabletops_dataFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tables_tabletops_data that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataFindFirstArgs} args - Arguments to find a Tables_tabletops_data
+     * @example
+     * // Get one Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tables_tabletops_dataFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataFindFirstArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tables_tabletops_data that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataFindFirstOrThrowArgs} args - Arguments to find a Tables_tabletops_data
+     * @example
+     * // Get one Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tables_tabletops_dataFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tables_tabletops_data that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findMany()
+     * 
+     * // Get first 10 Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.findMany({ take: 10 })
+     * 
+     * // Only select the `tables_tabletops_data_id`
+     * const tables_tabletops_dataWithTables_tabletops_data_idOnly = await prisma.tables_tabletops_data.findMany({ select: { tables_tabletops_data_id: true } })
+     * 
+    **/
+    findMany<T extends tables_tabletops_dataFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tables_tabletops_data.
+     * @param {tables_tabletops_dataCreateArgs} args - Arguments to create a Tables_tabletops_data.
+     * @example
+     * // Create one Tables_tabletops_data
+     * const Tables_tabletops_data = await prisma.tables_tabletops_data.create({
+     *   data: {
+     *     // ... data to create a Tables_tabletops_data
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tables_tabletops_dataCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataCreateArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tables_tabletops_data.
+     *     @param {tables_tabletops_dataCreateManyArgs} args - Arguments to create many Tables_tabletops_data.
+     *     @example
+     *     // Create many Tables_tabletops_data
+     *     const tables_tabletops_data = await prisma.tables_tabletops_data.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tables_tabletops_dataCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tables_tabletops_data.
+     * @param {tables_tabletops_dataDeleteArgs} args - Arguments to delete one Tables_tabletops_data.
+     * @example
+     * // Delete one Tables_tabletops_data
+     * const Tables_tabletops_data = await prisma.tables_tabletops_data.delete({
+     *   where: {
+     *     // ... filter to delete one Tables_tabletops_data
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tables_tabletops_dataDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataDeleteArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tables_tabletops_data.
+     * @param {tables_tabletops_dataUpdateArgs} args - Arguments to update one Tables_tabletops_data.
+     * @example
+     * // Update one Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tables_tabletops_dataUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataUpdateArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tables_tabletops_data.
+     * @param {tables_tabletops_dataDeleteManyArgs} args - Arguments to filter Tables_tabletops_data to delete.
+     * @example
+     * // Delete a few Tables_tabletops_data
+     * const { count } = await prisma.tables_tabletops_data.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tables_tabletops_dataDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tables_tabletops_dataDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tables_tabletops_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tables_tabletops_dataUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tables_tabletops_data.
+     * @param {tables_tabletops_dataUpsertArgs} args - Arguments to update or create a Tables_tabletops_data.
+     * @example
+     * // Update or create a Tables_tabletops_data
+     * const tables_tabletops_data = await prisma.tables_tabletops_data.upsert({
+     *   create: {
+     *     // ... data to create a Tables_tabletops_data
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tables_tabletops_data we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tables_tabletops_dataUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tables_tabletops_dataUpsertArgs<ExtArgs>>
+    ): Prisma__tables_tabletops_dataClient<$Result.GetResult<Prisma.$tables_tabletops_dataPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tables_tabletops_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataCountArgs} args - Arguments to filter Tables_tabletops_data to count.
+     * @example
+     * // Count the number of Tables_tabletops_data
+     * const count = await prisma.tables_tabletops_data.count({
+     *   where: {
+     *     // ... the filter for the Tables_tabletops_data we want to count
+     *   }
+     * })
+    **/
+    count<T extends tables_tabletops_dataCountArgs>(
+      args?: Subset<T, tables_tabletops_dataCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tables_tabletops_dataCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tables_tabletops_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tables_tabletops_dataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tables_tabletops_dataAggregateArgs>(args: Subset<T, Tables_tabletops_dataAggregateArgs>): Prisma.PrismaPromise<GetTables_tabletops_dataAggregateType<T>>
+
+    /**
+     * Group by Tables_tabletops_data.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tables_tabletops_dataGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tables_tabletops_dataGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tables_tabletops_dataGroupByArgs['orderBy'] }
+        : { orderBy?: tables_tabletops_dataGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tables_tabletops_dataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTables_tabletops_dataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tables_tabletops_data model
+   */
+  readonly fields: tables_tabletops_dataFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tables_tabletops_data.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tables_tabletops_dataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    tables_tabletops<T extends tables_tabletops_data$tables_tabletopsArgs<ExtArgs> = {}>(args?: Subset<T, tables_tabletops_data$tables_tabletopsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tables_tabletopsPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tables_tabletops_data model
+   */ 
+  interface tables_tabletops_dataFieldRefs {
+    readonly tables_tabletops_data_id: FieldRef<"tables_tabletops_data", 'String'>
+    readonly tables_tabletops_data: FieldRef<"tables_tabletops_data", 'Bytes'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * tables_tabletops_data findUnique
+   */
+  export type tables_tabletops_dataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops_data to fetch.
+     */
+    where: tables_tabletops_dataWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops_data findUniqueOrThrow
+   */
+  export type tables_tabletops_dataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops_data to fetch.
+     */
+    where: tables_tabletops_dataWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops_data findFirst
+   */
+  export type tables_tabletops_dataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops_data to fetch.
+     */
+    where?: tables_tabletops_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops_data to fetch.
+     */
+    orderBy?: tables_tabletops_dataOrderByWithRelationInput | tables_tabletops_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_tabletops_data.
+     */
+    cursor?: tables_tabletops_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_tabletops_data.
+     */
+    distinct?: Tables_tabletops_dataScalarFieldEnum | Tables_tabletops_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops_data findFirstOrThrow
+   */
+  export type tables_tabletops_dataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops_data to fetch.
+     */
+    where?: tables_tabletops_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops_data to fetch.
+     */
+    orderBy?: tables_tabletops_dataOrderByWithRelationInput | tables_tabletops_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tables_tabletops_data.
+     */
+    cursor?: tables_tabletops_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops_data.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tables_tabletops_data.
+     */
+    distinct?: Tables_tabletops_dataScalarFieldEnum | Tables_tabletops_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops_data findMany
+   */
+  export type tables_tabletops_dataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter, which tables_tabletops_data to fetch.
+     */
+    where?: tables_tabletops_dataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tables_tabletops_data to fetch.
+     */
+    orderBy?: tables_tabletops_dataOrderByWithRelationInput | tables_tabletops_dataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tables_tabletops_data.
+     */
+    cursor?: tables_tabletops_dataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tables_tabletops_data from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tables_tabletops_data.
+     */
+    skip?: number
+    distinct?: Tables_tabletops_dataScalarFieldEnum | Tables_tabletops_dataScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops_data create
+   */
+  export type tables_tabletops_dataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tables_tabletops_data.
+     */
+    data: XOR<tables_tabletops_dataCreateInput, tables_tabletops_dataUncheckedCreateInput>
+  }
+
+
+  /**
+   * tables_tabletops_data createMany
+   */
+  export type tables_tabletops_dataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tables_tabletops_data.
+     */
+    data: tables_tabletops_dataCreateManyInput | tables_tabletops_dataCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * tables_tabletops_data update
+   */
+  export type tables_tabletops_dataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tables_tabletops_data.
+     */
+    data: XOR<tables_tabletops_dataUpdateInput, tables_tabletops_dataUncheckedUpdateInput>
+    /**
+     * Choose, which tables_tabletops_data to update.
+     */
+    where: tables_tabletops_dataWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops_data updateMany
+   */
+  export type tables_tabletops_dataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tables_tabletops_data.
+     */
+    data: XOR<tables_tabletops_dataUpdateManyMutationInput, tables_tabletops_dataUncheckedUpdateManyInput>
+    /**
+     * Filter which tables_tabletops_data to update
+     */
+    where?: tables_tabletops_dataWhereInput
+  }
+
+
+  /**
+   * tables_tabletops_data upsert
+   */
+  export type tables_tabletops_dataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tables_tabletops_data to update in case it exists.
+     */
+    where: tables_tabletops_dataWhereUniqueInput
+    /**
+     * In case the tables_tabletops_data found by the `where` argument doesn't exist, create a new tables_tabletops_data with this data.
+     */
+    create: XOR<tables_tabletops_dataCreateInput, tables_tabletops_dataUncheckedCreateInput>
+    /**
+     * In case the tables_tabletops_data was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tables_tabletops_dataUpdateInput, tables_tabletops_dataUncheckedUpdateInput>
+  }
+
+
+  /**
+   * tables_tabletops_data delete
+   */
+  export type tables_tabletops_dataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
+    /**
+     * Filter which tables_tabletops_data to delete.
+     */
+    where: tables_tabletops_dataWhereUniqueInput
+  }
+
+
+  /**
+   * tables_tabletops_data deleteMany
+   */
+  export type tables_tabletops_dataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tables_tabletops_data to delete
+     */
+    where?: tables_tabletops_dataWhereInput
+  }
+
+
+  /**
+   * tables_tabletops_data.tables_tabletops
+   */
+  export type tables_tabletops_data$tables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops
+     */
+    select?: tables_tabletopsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletopsInclude<ExtArgs> | null
+    where?: tables_tabletopsWhereInput
+    orderBy?: tables_tabletopsOrderByWithRelationInput | tables_tabletopsOrderByWithRelationInput[]
+    cursor?: tables_tabletopsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tables_tabletopsScalarFieldEnum | Tables_tabletopsScalarFieldEnum[]
+  }
+
+
+  /**
+   * tables_tabletops_data without action
+   */
+  export type tables_tabletops_dataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tables_tabletops_data
+     */
+    select?: tables_tabletops_dataSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: tables_tabletops_dataInclude<ExtArgs> | null
   }
 
 
@@ -38228,15 +39435,26 @@ export namespace Prisma {
 
   export const Tables_tabletopsScalarFieldEnum: {
     tables_tabletops_id: 'tables_tabletops_id',
-    content_data: 'content_data',
-    content_filename: 'content_filename',
+    table_id: 'table_id',
+    creator_id: 'creator_id',
+    tables_tabletops_data_id: 'tables_tabletops_data_id',
+    type: 'type',
     content_date_posted: 'content_date_posted',
     content_x_position: 'content_x_position',
     content_y_position: 'content_y_position',
-    content_rotation: 'content_rotation'
+    content_rotation: 'content_rotation',
+    content_filename: 'content_filename'
   };
 
   export type Tables_tabletopsScalarFieldEnum = (typeof Tables_tabletopsScalarFieldEnum)[keyof typeof Tables_tabletopsScalarFieldEnum]
+
+
+  export const Tables_tabletops_dataScalarFieldEnum: {
+    tables_tabletops_data_id: 'tables_tabletops_data_id',
+    tables_tabletops_data: 'tables_tabletops_data'
+  };
+
+  export type Tables_tabletops_dataScalarFieldEnum = (typeof Tables_tabletops_dataScalarFieldEnum)[keyof typeof Tables_tabletops_dataScalarFieldEnum]
 
 
   export const User_credentialsScalarFieldEnum: {
@@ -38926,6 +40144,7 @@ export namespace Prisma {
     sheets?: SheetsListRelationFilter
     tables_members?: Tables_membersListRelationFilter
     tables_messages_logs?: Tables_messages_logsListRelationFilter
+    tables_tabletops?: Tables_tabletopsListRelationFilter
     videos?: VideosListRelationFilter
   }
 
@@ -38948,6 +40167,7 @@ export namespace Prisma {
     sheets?: sheetsOrderByRelationAggregateInput
     tables_members?: tables_membersOrderByRelationAggregateInput
     tables_messages_logs?: tables_messages_logsOrderByRelationAggregateInput
+    tables_tabletops?: tables_tabletopsOrderByRelationAggregateInput
     videos?: videosOrderByRelationAggregateInput
   }
 
@@ -38973,6 +40193,7 @@ export namespace Prisma {
     sheets?: SheetsListRelationFilter
     tables_members?: Tables_membersListRelationFilter
     tables_messages_logs?: Tables_messages_logsListRelationFilter
+    tables_tabletops?: Tables_tabletopsListRelationFilter
     videos?: VideosListRelationFilter
   }, "entity_id" | "entity_id" | "entity_username">
 
@@ -39885,6 +41106,7 @@ export namespace Prisma {
     tables_pictures?: XOR<Tables_picturesNullableRelationFilter, tables_picturesWhereInput> | null
     tables_members?: Tables_membersListRelationFilter
     tables_messages_logs?: Tables_messages_logsListRelationFilter
+    tables_tabletops?: Tables_tabletopsListRelationFilter
   }
 
   export type tablesOrderByWithRelationInput = {
@@ -39897,6 +41119,7 @@ export namespace Prisma {
     tables_pictures?: tables_picturesOrderByWithRelationInput
     tables_members?: tables_membersOrderByRelationAggregateInput
     tables_messages_logs?: tables_messages_logsOrderByRelationAggregateInput
+    tables_tabletops?: tables_tabletopsOrderByRelationAggregateInput
   }
 
   export type tablesWhereUniqueInput = Prisma.AtLeast<{
@@ -39912,6 +41135,7 @@ export namespace Prisma {
     tables_pictures?: XOR<Tables_picturesNullableRelationFilter, tables_picturesWhereInput> | null
     tables_members?: Tables_membersListRelationFilter
     tables_messages_logs?: Tables_messages_logsListRelationFilter
+    tables_tabletops?: Tables_tabletopsListRelationFilter
   }, "table_id" | "table_id">
 
   export type tablesOrderByWithAggregationInput = {
@@ -40107,22 +41331,34 @@ export namespace Prisma {
     OR?: tables_tabletopsWhereInput[]
     NOT?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
     tables_tabletops_id?: StringFilter<"tables_tabletops"> | string
-    content_data?: BytesFilter<"tables_tabletops"> | Buffer
-    content_filename?: StringFilter<"tables_tabletops"> | string
+    table_id?: StringFilter<"tables_tabletops"> | string
+    creator_id?: StringFilter<"tables_tabletops"> | string
+    tables_tabletops_data_id?: StringNullableFilter<"tables_tabletops"> | string | null
+    type?: IntFilter<"tables_tabletops"> | number
     content_date_posted?: DateTimeFilter<"tables_tabletops"> | Date | string
     content_x_position?: IntFilter<"tables_tabletops"> | number
     content_y_position?: IntFilter<"tables_tabletops"> | number
     content_rotation?: IntFilter<"tables_tabletops"> | number
+    content_filename?: StringNullableFilter<"tables_tabletops"> | string | null
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+    tables_tabletops_data?: XOR<Tables_tabletops_dataNullableRelationFilter, tables_tabletops_dataWhereInput> | null
   }
 
   export type tables_tabletopsOrderByWithRelationInput = {
     tables_tabletops_id?: SortOrder
-    content_data?: SortOrder
-    content_filename?: SortOrder
+    table_id?: SortOrder
+    creator_id?: SortOrder
+    tables_tabletops_data_id?: SortOrderInput | SortOrder
+    type?: SortOrder
     content_date_posted?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
+    content_filename?: SortOrderInput | SortOrder
+    entities?: entitiesOrderByWithRelationInput
+    tables?: tablesOrderByWithRelationInput
+    tables_tabletops_data?: tables_tabletops_dataOrderByWithRelationInput
   }
 
   export type tables_tabletopsWhereUniqueInput = Prisma.AtLeast<{
@@ -40130,22 +41366,31 @@ export namespace Prisma {
     AND?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
     OR?: tables_tabletopsWhereInput[]
     NOT?: tables_tabletopsWhereInput | tables_tabletopsWhereInput[]
-    content_data?: BytesFilter<"tables_tabletops"> | Buffer
-    content_filename?: StringFilter<"tables_tabletops"> | string
+    table_id?: StringFilter<"tables_tabletops"> | string
+    creator_id?: StringFilter<"tables_tabletops"> | string
+    tables_tabletops_data_id?: StringNullableFilter<"tables_tabletops"> | string | null
+    type?: IntFilter<"tables_tabletops"> | number
     content_date_posted?: DateTimeFilter<"tables_tabletops"> | Date | string
     content_x_position?: IntFilter<"tables_tabletops"> | number
     content_y_position?: IntFilter<"tables_tabletops"> | number
     content_rotation?: IntFilter<"tables_tabletops"> | number
+    content_filename?: StringNullableFilter<"tables_tabletops"> | string | null
+    entities?: XOR<EntitiesRelationFilter, entitiesWhereInput>
+    tables?: XOR<TablesRelationFilter, tablesWhereInput>
+    tables_tabletops_data?: XOR<Tables_tabletops_dataNullableRelationFilter, tables_tabletops_dataWhereInput> | null
   }, "tables_tabletops_id" | "tables_tabletops_id">
 
   export type tables_tabletopsOrderByWithAggregationInput = {
     tables_tabletops_id?: SortOrder
-    content_data?: SortOrder
-    content_filename?: SortOrder
+    table_id?: SortOrder
+    creator_id?: SortOrder
+    tables_tabletops_data_id?: SortOrderInput | SortOrder
+    type?: SortOrder
     content_date_posted?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
+    content_filename?: SortOrderInput | SortOrder
     _count?: tables_tabletopsCountOrderByAggregateInput
     _avg?: tables_tabletopsAvgOrderByAggregateInput
     _max?: tables_tabletopsMaxOrderByAggregateInput
@@ -40158,12 +41403,55 @@ export namespace Prisma {
     OR?: tables_tabletopsScalarWhereWithAggregatesInput[]
     NOT?: tables_tabletopsScalarWhereWithAggregatesInput | tables_tabletopsScalarWhereWithAggregatesInput[]
     tables_tabletops_id?: StringWithAggregatesFilter<"tables_tabletops"> | string
-    content_data?: BytesWithAggregatesFilter<"tables_tabletops"> | Buffer
-    content_filename?: StringWithAggregatesFilter<"tables_tabletops"> | string
+    table_id?: StringWithAggregatesFilter<"tables_tabletops"> | string
+    creator_id?: StringWithAggregatesFilter<"tables_tabletops"> | string
+    tables_tabletops_data_id?: StringNullableWithAggregatesFilter<"tables_tabletops"> | string | null
+    type?: IntWithAggregatesFilter<"tables_tabletops"> | number
     content_date_posted?: DateTimeWithAggregatesFilter<"tables_tabletops"> | Date | string
     content_x_position?: IntWithAggregatesFilter<"tables_tabletops"> | number
     content_y_position?: IntWithAggregatesFilter<"tables_tabletops"> | number
     content_rotation?: IntWithAggregatesFilter<"tables_tabletops"> | number
+    content_filename?: StringNullableWithAggregatesFilter<"tables_tabletops"> | string | null
+  }
+
+  export type tables_tabletops_dataWhereInput = {
+    AND?: tables_tabletops_dataWhereInput | tables_tabletops_dataWhereInput[]
+    OR?: tables_tabletops_dataWhereInput[]
+    NOT?: tables_tabletops_dataWhereInput | tables_tabletops_dataWhereInput[]
+    tables_tabletops_data_id?: StringFilter<"tables_tabletops_data"> | string
+    tables_tabletops_data?: BytesFilter<"tables_tabletops_data"> | Buffer
+    tables_tabletops?: Tables_tabletopsListRelationFilter
+  }
+
+  export type tables_tabletops_dataOrderByWithRelationInput = {
+    tables_tabletops_data_id?: SortOrder
+    tables_tabletops_data?: SortOrder
+    tables_tabletops?: tables_tabletopsOrderByRelationAggregateInput
+  }
+
+  export type tables_tabletops_dataWhereUniqueInput = Prisma.AtLeast<{
+    tables_tabletops_data_id?: string
+    AND?: tables_tabletops_dataWhereInput | tables_tabletops_dataWhereInput[]
+    OR?: tables_tabletops_dataWhereInput[]
+    NOT?: tables_tabletops_dataWhereInput | tables_tabletops_dataWhereInput[]
+    tables_tabletops_data?: BytesFilter<"tables_tabletops_data"> | Buffer
+    tables_tabletops?: Tables_tabletopsListRelationFilter
+  }, "tables_tabletops_data_id" | "tables_tabletops_data_id">
+
+  export type tables_tabletops_dataOrderByWithAggregationInput = {
+    tables_tabletops_data_id?: SortOrder
+    tables_tabletops_data?: SortOrder
+    _count?: tables_tabletops_dataCountOrderByAggregateInput
+    _max?: tables_tabletops_dataMaxOrderByAggregateInput
+    _min?: tables_tabletops_dataMinOrderByAggregateInput
+  }
+
+  export type tables_tabletops_dataScalarWhereWithAggregatesInput = {
+    AND?: tables_tabletops_dataScalarWhereWithAggregatesInput | tables_tabletops_dataScalarWhereWithAggregatesInput[]
+    OR?: tables_tabletops_dataScalarWhereWithAggregatesInput[]
+    NOT?: tables_tabletops_dataScalarWhereWithAggregatesInput | tables_tabletops_dataScalarWhereWithAggregatesInput[]
+    tables_tabletops_data_id?: StringWithAggregatesFilter<"tables_tabletops_data"> | string
+    tables_tabletops_data?: BytesWithAggregatesFilter<"tables_tabletops_data"> | Buffer
   }
 
   export type user_credentialsWhereInput = {
@@ -40969,6 +42257,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -40991,6 +42280,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -41013,6 +42303,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41035,6 +42326,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -41924,6 +43216,7 @@ export namespace Prisma {
     tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
     tables_members?: tables_membersCreateNestedManyWithoutTablesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutTablesInput
   }
 
   export type tablesUncheckedCreateInput = {
@@ -41935,6 +43228,7 @@ export namespace Prisma {
     tables_pictures_id?: string | null
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutTablesInput
   }
 
   export type tablesUpdateInput = {
@@ -41946,6 +43240,7 @@ export namespace Prisma {
     tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
     tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesUncheckedUpdateInput = {
@@ -41957,6 +43252,7 @@ export namespace Prisma {
     tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesCreateManyInput = {
@@ -42141,72 +43437,129 @@ export namespace Prisma {
 
   export type tables_tabletopsCreateInput = {
     tables_tabletops_id: string
-    content_data: Buffer
-    content_filename: string
+    type: number
     content_date_posted: Date | string
     content_x_position: number
     content_y_position: number
     content_rotation: number
+    content_filename?: string | null
+    entities: entitiesCreateNestedOneWithoutTables_tabletopsInput
+    tables: tablesCreateNestedOneWithoutTables_tabletopsInput
+    tables_tabletops_data?: tables_tabletops_dataCreateNestedOneWithoutTables_tabletopsInput
   }
 
   export type tables_tabletopsUncheckedCreateInput = {
     tables_tabletops_id: string
-    content_data: Buffer
-    content_filename: string
+    table_id: string
+    creator_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
     content_date_posted: Date | string
     content_x_position: number
     content_y_position: number
     content_rotation: number
+    content_filename?: string | null
   }
 
   export type tables_tabletopsUpdateInput = {
     tables_tabletops_id?: StringFieldUpdateOperationsInput | string
-    content_data?: BytesFieldUpdateOperationsInput | Buffer
-    content_filename?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
     content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     content_x_position?: IntFieldUpdateOperationsInput | number
     content_y_position?: IntFieldUpdateOperationsInput | number
     content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: entitiesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+    tables?: tablesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+    tables_tabletops_data?: tables_tabletops_dataUpdateOneWithoutTables_tabletopsNestedInput
   }
 
   export type tables_tabletopsUncheckedUpdateInput = {
     tables_tabletops_id?: StringFieldUpdateOperationsInput | string
-    content_data?: BytesFieldUpdateOperationsInput | Buffer
-    content_filename?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
     content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     content_x_position?: IntFieldUpdateOperationsInput | number
     content_y_position?: IntFieldUpdateOperationsInput | number
     content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type tables_tabletopsCreateManyInput = {
     tables_tabletops_id: string
-    content_data: Buffer
-    content_filename: string
+    table_id: string
+    creator_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
     content_date_posted: Date | string
     content_x_position: number
     content_y_position: number
     content_rotation: number
+    content_filename?: string | null
   }
 
   export type tables_tabletopsUpdateManyMutationInput = {
     tables_tabletops_id?: StringFieldUpdateOperationsInput | string
-    content_data?: BytesFieldUpdateOperationsInput | Buffer
-    content_filename?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
     content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     content_x_position?: IntFieldUpdateOperationsInput | number
     content_y_position?: IntFieldUpdateOperationsInput | number
     content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type tables_tabletopsUncheckedUpdateManyInput = {
     tables_tabletops_id?: StringFieldUpdateOperationsInput | string
-    content_data?: BytesFieldUpdateOperationsInput | Buffer
-    content_filename?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
     content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
     content_x_position?: IntFieldUpdateOperationsInput | number
     content_y_position?: IntFieldUpdateOperationsInput | number
     content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type tables_tabletops_dataCreateInput = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutTables_tabletops_dataInput
+  }
+
+  export type tables_tabletops_dataUncheckedCreateInput = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutTables_tabletops_dataInput
+  }
+
+  export type tables_tabletops_dataUpdateInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutTables_tabletops_dataNestedInput
+  }
+
+  export type tables_tabletops_dataUncheckedUpdateInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutTables_tabletops_dataNestedInput
+  }
+
+  export type tables_tabletops_dataCreateManyInput = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+  }
+
+  export type tables_tabletops_dataUpdateManyMutationInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type tables_tabletops_dataUncheckedUpdateManyInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
   }
 
   export type user_credentialsCreateInput = {
@@ -43060,6 +44413,12 @@ export namespace Prisma {
     none?: tables_messages_logsWhereInput
   }
 
+  export type Tables_tabletopsListRelationFilter = {
+    every?: tables_tabletopsWhereInput
+    some?: tables_tabletopsWhereInput
+    none?: tables_tabletopsWhereInput
+  }
+
   export type VideosListRelationFilter = {
     every?: videosWhereInput
     some?: videosWhereInput
@@ -43095,6 +44454,10 @@ export namespace Prisma {
   }
 
   export type tables_messages_logsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tables_tabletopsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43739,17 +45102,26 @@ export namespace Prisma {
     table_picture_filename?: SortOrder
   }
 
+  export type Tables_tabletops_dataNullableRelationFilter = {
+    is?: tables_tabletops_dataWhereInput | null
+    isNot?: tables_tabletops_dataWhereInput | null
+  }
+
   export type tables_tabletopsCountOrderByAggregateInput = {
     tables_tabletops_id?: SortOrder
-    content_data?: SortOrder
-    content_filename?: SortOrder
+    table_id?: SortOrder
+    creator_id?: SortOrder
+    tables_tabletops_data_id?: SortOrder
+    type?: SortOrder
     content_date_posted?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
+    content_filename?: SortOrder
   }
 
   export type tables_tabletopsAvgOrderByAggregateInput = {
+    type?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
@@ -43757,28 +45129,50 @@ export namespace Prisma {
 
   export type tables_tabletopsMaxOrderByAggregateInput = {
     tables_tabletops_id?: SortOrder
-    content_data?: SortOrder
-    content_filename?: SortOrder
+    table_id?: SortOrder
+    creator_id?: SortOrder
+    tables_tabletops_data_id?: SortOrder
+    type?: SortOrder
     content_date_posted?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
+    content_filename?: SortOrder
   }
 
   export type tables_tabletopsMinOrderByAggregateInput = {
     tables_tabletops_id?: SortOrder
-    content_data?: SortOrder
-    content_filename?: SortOrder
+    table_id?: SortOrder
+    creator_id?: SortOrder
+    tables_tabletops_data_id?: SortOrder
+    type?: SortOrder
     content_date_posted?: SortOrder
+    content_x_position?: SortOrder
+    content_y_position?: SortOrder
+    content_rotation?: SortOrder
+    content_filename?: SortOrder
+  }
+
+  export type tables_tabletopsSumOrderByAggregateInput = {
+    type?: SortOrder
     content_x_position?: SortOrder
     content_y_position?: SortOrder
     content_rotation?: SortOrder
   }
 
-  export type tables_tabletopsSumOrderByAggregateInput = {
-    content_x_position?: SortOrder
-    content_y_position?: SortOrder
-    content_rotation?: SortOrder
+  export type tables_tabletops_dataCountOrderByAggregateInput = {
+    tables_tabletops_data_id?: SortOrder
+    tables_tabletops_data?: SortOrder
+  }
+
+  export type tables_tabletops_dataMaxOrderByAggregateInput = {
+    tables_tabletops_data_id?: SortOrder
+    tables_tabletops_data?: SortOrder
+  }
+
+  export type tables_tabletops_dataMinOrderByAggregateInput = {
+    tables_tabletops_data_id?: SortOrder
+    tables_tabletops_data?: SortOrder
   }
 
   export type IndividualsNullableRelationFilter = {
@@ -44589,6 +45983,13 @@ export namespace Prisma {
     connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
   }
 
+  export type tables_tabletopsCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput> | tables_tabletopsCreateWithoutEntitiesInput[] | tables_tabletopsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutEntitiesInput | tables_tabletopsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_tabletopsCreateManyEntitiesInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+  }
+
   export type videosCreateNestedManyWithoutEntitiesInput = {
     create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
@@ -44699,6 +46100,13 @@ export namespace Prisma {
     connectOrCreate?: tables_messages_logsCreateOrConnectWithoutEntitiesInput | tables_messages_logsCreateOrConnectWithoutEntitiesInput[]
     createMany?: tables_messages_logsCreateManyEntitiesInputEnvelope
     connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+  }
+
+  export type tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput = {
+    create?: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput> | tables_tabletopsCreateWithoutEntitiesInput[] | tables_tabletopsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutEntitiesInput | tables_tabletopsCreateOrConnectWithoutEntitiesInput[]
+    createMany?: tables_tabletopsCreateManyEntitiesInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
   }
 
   export type videosUncheckedCreateNestedManyWithoutEntitiesInput = {
@@ -44926,6 +46334,20 @@ export namespace Prisma {
     deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
   }
 
+  export type tables_tabletopsUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput> | tables_tabletopsCreateWithoutEntitiesInput[] | tables_tabletopsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutEntitiesInput | tables_tabletopsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutEntitiesInput | tables_tabletopsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_tabletopsCreateManyEntitiesInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutEntitiesInput | tables_tabletopsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutEntitiesInput | tables_tabletopsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
+  }
+
   export type videosUpdateManyWithoutEntitiesNestedInput = {
     create?: XOR<videosCreateWithoutEntitiesInput, videosUncheckedCreateWithoutEntitiesInput> | videosCreateWithoutEntitiesInput[] | videosUncheckedCreateWithoutEntitiesInput[]
     connectOrCreate?: videosCreateOrConnectWithoutEntitiesInput | videosCreateOrConnectWithoutEntitiesInput[]
@@ -45148,6 +46570,20 @@ export namespace Prisma {
     update?: tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput | tables_messages_logsUpdateWithWhereUniqueWithoutEntitiesInput[]
     updateMany?: tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput | tables_messages_logsUpdateManyWithWhereWithoutEntitiesInput[]
     deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput> | tables_tabletopsCreateWithoutEntitiesInput[] | tables_tabletopsUncheckedCreateWithoutEntitiesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutEntitiesInput | tables_tabletopsCreateOrConnectWithoutEntitiesInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutEntitiesInput | tables_tabletopsUpsertWithWhereUniqueWithoutEntitiesInput[]
+    createMany?: tables_tabletopsCreateManyEntitiesInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutEntitiesInput | tables_tabletopsUpdateWithWhereUniqueWithoutEntitiesInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutEntitiesInput | tables_tabletopsUpdateManyWithWhereWithoutEntitiesInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
   }
 
   export type videosUncheckedUpdateManyWithoutEntitiesNestedInput = {
@@ -45808,6 +47244,13 @@ export namespace Prisma {
     connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
   }
 
+  export type tables_tabletopsCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput> | tables_tabletopsCreateWithoutTablesInput[] | tables_tabletopsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTablesInput | tables_tabletopsCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_tabletopsCreateManyTablesInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+  }
+
   export type tables_membersUncheckedCreateNestedManyWithoutTablesInput = {
     create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
     connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
@@ -45820,6 +47263,13 @@ export namespace Prisma {
     connectOrCreate?: tables_messages_logsCreateOrConnectWithoutTablesInput | tables_messages_logsCreateOrConnectWithoutTablesInput[]
     createMany?: tables_messages_logsCreateManyTablesInputEnvelope
     connect?: tables_messages_logsWhereUniqueInput | tables_messages_logsWhereUniqueInput[]
+  }
+
+  export type tables_tabletopsUncheckedCreateNestedManyWithoutTablesInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput> | tables_tabletopsCreateWithoutTablesInput[] | tables_tabletopsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTablesInput | tables_tabletopsCreateOrConnectWithoutTablesInput[]
+    createMany?: tables_tabletopsCreateManyTablesInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
   }
 
   export type tables_picturesUpdateOneWithoutTablesNestedInput = {
@@ -45860,6 +47310,20 @@ export namespace Prisma {
     deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
   }
 
+  export type tables_tabletopsUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput> | tables_tabletopsCreateWithoutTablesInput[] | tables_tabletopsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTablesInput | tables_tabletopsCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutTablesInput | tables_tabletopsUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_tabletopsCreateManyTablesInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutTablesInput | tables_tabletopsUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutTablesInput | tables_tabletopsUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
+  }
+
   export type tables_membersUncheckedUpdateManyWithoutTablesNestedInput = {
     create?: XOR<tables_membersCreateWithoutTablesInput, tables_membersUncheckedCreateWithoutTablesInput> | tables_membersCreateWithoutTablesInput[] | tables_membersUncheckedCreateWithoutTablesInput[]
     connectOrCreate?: tables_membersCreateOrConnectWithoutTablesInput | tables_membersCreateOrConnectWithoutTablesInput[]
@@ -45886,6 +47350,20 @@ export namespace Prisma {
     update?: tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput | tables_messages_logsUpdateWithWhereUniqueWithoutTablesInput[]
     updateMany?: tables_messages_logsUpdateManyWithWhereWithoutTablesInput | tables_messages_logsUpdateManyWithWhereWithoutTablesInput[]
     deleteMany?: tables_messages_logsScalarWhereInput | tables_messages_logsScalarWhereInput[]
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutTablesNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput> | tables_tabletopsCreateWithoutTablesInput[] | tables_tabletopsUncheckedCreateWithoutTablesInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTablesInput | tables_tabletopsCreateOrConnectWithoutTablesInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutTablesInput | tables_tabletopsUpsertWithWhereUniqueWithoutTablesInput[]
+    createMany?: tables_tabletopsCreateManyTablesInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutTablesInput | tables_tabletopsUpdateWithWhereUniqueWithoutTablesInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutTablesInput | tables_tabletopsUpdateManyWithWhereWithoutTablesInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
   }
 
   export type entitiesCreateNestedOneWithoutTables_membersInput = {
@@ -45984,6 +47462,92 @@ export namespace Prisma {
     update?: tablesUpdateWithWhereUniqueWithoutTables_picturesInput | tablesUpdateWithWhereUniqueWithoutTables_picturesInput[]
     updateMany?: tablesUpdateManyWithWhereWithoutTables_picturesInput | tablesUpdateManyWithWhereWithoutTables_picturesInput[]
     deleteMany?: tablesScalarWhereInput | tablesScalarWhereInput[]
+  }
+
+  export type entitiesCreateNestedOneWithoutTables_tabletopsInput = {
+    create?: XOR<entitiesCreateWithoutTables_tabletopsInput, entitiesUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_tabletopsInput
+    connect?: entitiesWhereUniqueInput
+  }
+
+  export type tablesCreateNestedOneWithoutTables_tabletopsInput = {
+    create?: XOR<tablesCreateWithoutTables_tabletopsInput, tablesUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_tabletopsInput
+    connect?: tablesWhereUniqueInput
+  }
+
+  export type tables_tabletops_dataCreateNestedOneWithoutTables_tabletopsInput = {
+    create?: XOR<tables_tabletops_dataCreateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: tables_tabletops_dataCreateOrConnectWithoutTables_tabletopsInput
+    connect?: tables_tabletops_dataWhereUniqueInput
+  }
+
+  export type entitiesUpdateOneRequiredWithoutTables_tabletopsNestedInput = {
+    create?: XOR<entitiesCreateWithoutTables_tabletopsInput, entitiesUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: entitiesCreateOrConnectWithoutTables_tabletopsInput
+    upsert?: entitiesUpsertWithoutTables_tabletopsInput
+    connect?: entitiesWhereUniqueInput
+    update?: XOR<XOR<entitiesUpdateToOneWithWhereWithoutTables_tabletopsInput, entitiesUpdateWithoutTables_tabletopsInput>, entitiesUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type tablesUpdateOneRequiredWithoutTables_tabletopsNestedInput = {
+    create?: XOR<tablesCreateWithoutTables_tabletopsInput, tablesUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: tablesCreateOrConnectWithoutTables_tabletopsInput
+    upsert?: tablesUpsertWithoutTables_tabletopsInput
+    connect?: tablesWhereUniqueInput
+    update?: XOR<XOR<tablesUpdateToOneWithWhereWithoutTables_tabletopsInput, tablesUpdateWithoutTables_tabletopsInput>, tablesUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type tables_tabletops_dataUpdateOneWithoutTables_tabletopsNestedInput = {
+    create?: XOR<tables_tabletops_dataCreateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedCreateWithoutTables_tabletopsInput>
+    connectOrCreate?: tables_tabletops_dataCreateOrConnectWithoutTables_tabletopsInput
+    upsert?: tables_tabletops_dataUpsertWithoutTables_tabletopsInput
+    disconnect?: tables_tabletops_dataWhereInput | boolean
+    delete?: tables_tabletops_dataWhereInput | boolean
+    connect?: tables_tabletops_dataWhereUniqueInput
+    update?: XOR<XOR<tables_tabletops_dataUpdateToOneWithWhereWithoutTables_tabletopsInput, tables_tabletops_dataUpdateWithoutTables_tabletopsInput>, tables_tabletops_dataUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type tables_tabletopsCreateNestedManyWithoutTables_tabletops_dataInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput> | tables_tabletopsCreateWithoutTables_tabletops_dataInput[] | tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput | tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput[]
+    createMany?: tables_tabletopsCreateManyTables_tabletops_dataInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+  }
+
+  export type tables_tabletopsUncheckedCreateNestedManyWithoutTables_tabletops_dataInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput> | tables_tabletopsCreateWithoutTables_tabletops_dataInput[] | tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput | tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput[]
+    createMany?: tables_tabletopsCreateManyTables_tabletops_dataInputEnvelope
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+  }
+
+  export type tables_tabletopsUpdateManyWithoutTables_tabletops_dataNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput> | tables_tabletopsCreateWithoutTables_tabletops_dataInput[] | tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput | tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutTables_tabletops_dataInput | tables_tabletopsUpsertWithWhereUniqueWithoutTables_tabletops_dataInput[]
+    createMany?: tables_tabletopsCreateManyTables_tabletops_dataInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutTables_tabletops_dataInput | tables_tabletopsUpdateWithWhereUniqueWithoutTables_tabletops_dataInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutTables_tabletops_dataInput | tables_tabletopsUpdateManyWithWhereWithoutTables_tabletops_dataInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutTables_tabletops_dataNestedInput = {
+    create?: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput> | tables_tabletopsCreateWithoutTables_tabletops_dataInput[] | tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput[]
+    connectOrCreate?: tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput | tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput[]
+    upsert?: tables_tabletopsUpsertWithWhereUniqueWithoutTables_tabletops_dataInput | tables_tabletopsUpsertWithWhereUniqueWithoutTables_tabletops_dataInput[]
+    createMany?: tables_tabletopsCreateManyTables_tabletops_dataInputEnvelope
+    set?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    disconnect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    delete?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    connect?: tables_tabletopsWhereUniqueInput | tables_tabletopsWhereUniqueInput[]
+    update?: tables_tabletopsUpdateWithWhereUniqueWithoutTables_tabletops_dataInput | tables_tabletopsUpdateWithWhereUniqueWithoutTables_tabletops_dataInput[]
+    updateMany?: tables_tabletopsUpdateManyWithWhereWithoutTables_tabletops_dataInput | tables_tabletopsUpdateManyWithWhereWithoutTables_tabletops_dataInput[]
+    deleteMany?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
   }
 
   export type individualsCreateNestedOneWithoutUser_credentialsInput = {
@@ -46382,6 +47946,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46403,6 +47968,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46466,6 +48032,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -46487,6 +48054,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -46624,6 +48192,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46645,6 +48214,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46671,6 +48241,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46692,6 +48263,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -46746,6 +48318,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -46767,6 +48340,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -46799,6 +48373,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -46820,6 +48395,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -47271,6 +48847,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -47292,6 +48869,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -47360,6 +48938,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -47381,6 +48960,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -47427,6 +49007,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -47448,6 +49029,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -47516,6 +49098,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -47537,6 +49120,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -47972,6 +49556,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type tables_tabletopsCreateWithoutEntitiesInput = {
+    tables_tabletops_id: string
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+    tables: tablesCreateNestedOneWithoutTables_tabletopsInput
+    tables_tabletops_data?: tables_tabletops_dataCreateNestedOneWithoutTables_tabletopsInput
+  }
+
+  export type tables_tabletopsUncheckedCreateWithoutEntitiesInput = {
+    tables_tabletops_id: string
+    table_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
+  export type tables_tabletopsCreateOrConnectWithoutEntitiesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    create: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_tabletopsCreateManyEntitiesInputEnvelope = {
+    data: tables_tabletopsCreateManyEntitiesInput | tables_tabletopsCreateManyEntitiesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type videosCreateWithoutEntitiesInput = {
     video_id: string
     video_title: string
@@ -48341,6 +49959,38 @@ export namespace Prisma {
     message_date?: DateTimeFilter<"tables_messages_logs"> | Date | string
   }
 
+  export type tables_tabletopsUpsertWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    update: XOR<tables_tabletopsUpdateWithoutEntitiesInput, tables_tabletopsUncheckedUpdateWithoutEntitiesInput>
+    create: XOR<tables_tabletopsCreateWithoutEntitiesInput, tables_tabletopsUncheckedCreateWithoutEntitiesInput>
+  }
+
+  export type tables_tabletopsUpdateWithWhereUniqueWithoutEntitiesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    data: XOR<tables_tabletopsUpdateWithoutEntitiesInput, tables_tabletopsUncheckedUpdateWithoutEntitiesInput>
+  }
+
+  export type tables_tabletopsUpdateManyWithWhereWithoutEntitiesInput = {
+    where: tables_tabletopsScalarWhereInput
+    data: XOR<tables_tabletopsUpdateManyMutationInput, tables_tabletopsUncheckedUpdateManyWithoutEntitiesInput>
+  }
+
+  export type tables_tabletopsScalarWhereInput = {
+    AND?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
+    OR?: tables_tabletopsScalarWhereInput[]
+    NOT?: tables_tabletopsScalarWhereInput | tables_tabletopsScalarWhereInput[]
+    tables_tabletops_id?: StringFilter<"tables_tabletops"> | string
+    table_id?: StringFilter<"tables_tabletops"> | string
+    creator_id?: StringFilter<"tables_tabletops"> | string
+    tables_tabletops_data_id?: StringNullableFilter<"tables_tabletops"> | string | null
+    type?: IntFilter<"tables_tabletops"> | number
+    content_date_posted?: DateTimeFilter<"tables_tabletops"> | Date | string
+    content_x_position?: IntFilter<"tables_tabletops"> | number
+    content_y_position?: IntFilter<"tables_tabletops"> | number
+    content_rotation?: IntFilter<"tables_tabletops"> | number
+    content_filename?: StringNullableFilter<"tables_tabletops"> | string | null
+  }
+
   export type videosUpsertWithWhereUniqueWithoutEntitiesInput = {
     where: videosWhereUniqueInput
     update: XOR<videosUpdateWithoutEntitiesInput, videosUncheckedUpdateWithoutEntitiesInput>
@@ -48413,6 +50063,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48434,6 +50085,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48498,6 +50150,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48519,6 +50172,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48561,6 +50215,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48582,6 +50237,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48646,6 +50302,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48667,6 +50324,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48709,6 +50367,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48730,6 +50389,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48794,6 +50454,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48815,6 +50476,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48836,6 +50498,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48857,6 +50520,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -48894,6 +50558,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -48915,6 +50580,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49020,6 +50686,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49041,6 +50708,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49103,6 +50771,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49124,6 +50793,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49176,6 +50846,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49197,6 +50868,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49249,6 +50921,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49270,6 +50943,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49550,6 +51224,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49571,6 +51246,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49633,6 +51309,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49654,6 +51331,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49881,6 +51559,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49902,6 +51581,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -49973,6 +51653,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -49994,6 +51675,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -50212,6 +51894,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type tables_tabletopsCreateWithoutTablesInput = {
+    tables_tabletops_id: string
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+    entities: entitiesCreateNestedOneWithoutTables_tabletopsInput
+    tables_tabletops_data?: tables_tabletops_dataCreateNestedOneWithoutTables_tabletopsInput
+  }
+
+  export type tables_tabletopsUncheckedCreateWithoutTablesInput = {
+    tables_tabletops_id: string
+    creator_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
+  export type tables_tabletopsCreateOrConnectWithoutTablesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    create: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_tabletopsCreateManyTablesInputEnvelope = {
+    data: tables_tabletopsCreateManyTablesInput | tables_tabletopsCreateManyTablesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type tables_picturesUpsertWithoutTablesInput = {
     update: XOR<tables_picturesUpdateWithoutTablesInput, tables_picturesUncheckedUpdateWithoutTablesInput>
     create: XOR<tables_picturesCreateWithoutTablesInput, tables_picturesUncheckedCreateWithoutTablesInput>
@@ -50267,6 +51983,22 @@ export namespace Prisma {
     data: XOR<tables_messages_logsUpdateManyMutationInput, tables_messages_logsUncheckedUpdateManyWithoutTablesInput>
   }
 
+  export type tables_tabletopsUpsertWithWhereUniqueWithoutTablesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    update: XOR<tables_tabletopsUpdateWithoutTablesInput, tables_tabletopsUncheckedUpdateWithoutTablesInput>
+    create: XOR<tables_tabletopsCreateWithoutTablesInput, tables_tabletopsUncheckedCreateWithoutTablesInput>
+  }
+
+  export type tables_tabletopsUpdateWithWhereUniqueWithoutTablesInput = {
+    where: tables_tabletopsWhereUniqueInput
+    data: XOR<tables_tabletopsUpdateWithoutTablesInput, tables_tabletopsUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type tables_tabletopsUpdateManyWithWhereWithoutTablesInput = {
+    where: tables_tabletopsScalarWhereInput
+    data: XOR<tables_tabletopsUpdateManyMutationInput, tables_tabletopsUncheckedUpdateManyWithoutTablesInput>
+  }
+
   export type entitiesCreateWithoutTables_membersInput = {
     entity_id: string
     entity_username: string
@@ -50285,6 +52017,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -50306,6 +52039,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -50322,6 +52056,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutTablesInput
   }
 
   export type tablesUncheckedCreateWithoutTables_membersInput = {
@@ -50332,6 +52067,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_pictures_id?: string | null
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutTablesInput
   }
 
   export type tablesCreateOrConnectWithoutTables_membersInput = {
@@ -50368,6 +52104,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -50389,6 +52126,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -50411,6 +52149,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesUncheckedUpdateWithoutTables_membersInput = {
@@ -50421,6 +52160,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutTablesNestedInput
   }
 
   export type entitiesCreateWithoutTables_messages_logsInput = {
@@ -50441,6 +52181,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
     videos?: videosCreateNestedManyWithoutEntitiesInput
   }
 
@@ -50462,6 +52203,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
     videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
@@ -50478,6 +52220,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
     tables_members?: tables_membersCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutTablesInput
   }
 
   export type tablesUncheckedCreateWithoutTables_messages_logsInput = {
@@ -50488,6 +52231,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_pictures_id?: string | null
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutTablesInput
   }
 
   export type tablesCreateOrConnectWithoutTables_messages_logsInput = {
@@ -50524,6 +52268,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
     videos?: videosUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -50545,6 +52290,7 @@ export namespace Prisma {
     organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
     videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
@@ -50567,6 +52313,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
     tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesUncheckedUpdateWithoutTables_messages_logsInput = {
@@ -50577,6 +52324,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
     tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesCreateWithoutTables_picturesInput = {
@@ -50587,6 +52335,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_members?: tables_membersCreateNestedManyWithoutTablesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutTablesInput
   }
 
   export type tablesUncheckedCreateWithoutTables_picturesInput = {
@@ -50597,6 +52346,7 @@ export namespace Prisma {
     last_message_date?: Date | string | null
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutTablesInput
   }
 
   export type tablesCreateOrConnectWithoutTables_picturesInput = {
@@ -50635,6 +52385,256 @@ export namespace Prisma {
     last_message?: StringNullableFilter<"tables"> | string | null
     last_message_date?: DateTimeNullableFilter<"tables"> | Date | string | null
     tables_pictures_id?: StringNullableFilter<"tables"> | string | null
+  }
+
+  export type entitiesCreateWithoutTables_tabletopsInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersCreateNestedManyWithoutEntitiesInput
+    images?: imagesCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    videos?: videosCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesUncheckedCreateWithoutTables_tabletopsInput = {
+    entity_id: string
+    entity_username: string
+    entity_type?: number
+    collections?: collectionsUncheckedCreateNestedManyWithoutEntitiesInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_rootToentitiesInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedCreateNestedManyWithoutEntities_contacts_contact_id_targetToentitiesInput
+    conversations_members?: conversations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_content?: entities_contentUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_dislikes?: entities_dislikesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_likes?: entities_likesUncheckedCreateNestedManyWithoutEntitiesInput
+    entities_references?: entities_referencesUncheckedCreateNestedManyWithoutEntitiesInput
+    groups_members?: groups_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    images?: imagesUncheckedCreateNestedManyWithoutEntitiesInput
+    organizations_members?: organizations_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    videos?: videosUncheckedCreateNestedManyWithoutEntitiesInput
+  }
+
+  export type entitiesCreateOrConnectWithoutTables_tabletopsInput = {
+    where: entitiesWhereUniqueInput
+    create: XOR<entitiesCreateWithoutTables_tabletopsInput, entitiesUncheckedCreateWithoutTables_tabletopsInput>
+  }
+
+  export type tablesCreateWithoutTables_tabletopsInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures?: tables_picturesCreateNestedOneWithoutTablesInput
+    tables_members?: tables_membersCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesUncheckedCreateWithoutTables_tabletopsInput = {
+    table_id: string
+    table_name?: string | null
+    table_creation_date: Date | string
+    last_message?: string | null
+    last_message_date?: Date | string | null
+    tables_pictures_id?: string | null
+    tables_members?: tables_membersUncheckedCreateNestedManyWithoutTablesInput
+    tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutTablesInput
+  }
+
+  export type tablesCreateOrConnectWithoutTables_tabletopsInput = {
+    where: tablesWhereUniqueInput
+    create: XOR<tablesCreateWithoutTables_tabletopsInput, tablesUncheckedCreateWithoutTables_tabletopsInput>
+  }
+
+  export type tables_tabletops_dataCreateWithoutTables_tabletopsInput = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+  }
+
+  export type tables_tabletops_dataUncheckedCreateWithoutTables_tabletopsInput = {
+    tables_tabletops_data_id: string
+    tables_tabletops_data: Buffer
+  }
+
+  export type tables_tabletops_dataCreateOrConnectWithoutTables_tabletopsInput = {
+    where: tables_tabletops_dataWhereUniqueInput
+    create: XOR<tables_tabletops_dataCreateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedCreateWithoutTables_tabletopsInput>
+  }
+
+  export type entitiesUpsertWithoutTables_tabletopsInput = {
+    update: XOR<entitiesUpdateWithoutTables_tabletopsInput, entitiesUncheckedUpdateWithoutTables_tabletopsInput>
+    create: XOR<entitiesCreateWithoutTables_tabletopsInput, entitiesUncheckedCreateWithoutTables_tabletopsInput>
+    where?: entitiesWhereInput
+  }
+
+  export type entitiesUpdateToOneWithWhereWithoutTables_tabletopsInput = {
+    where?: entitiesWhereInput
+    data: XOR<entitiesUpdateWithoutTables_tabletopsInput, entitiesUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type entitiesUpdateWithoutTables_tabletopsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type entitiesUncheckedUpdateWithoutTables_tabletopsInput = {
+    entity_id?: StringFieldUpdateOperationsInput | string
+    entity_username?: StringFieldUpdateOperationsInput | string
+    entity_type?: IntFieldUpdateOperationsInput | number
+    collections?: collectionsUncheckedUpdateManyWithoutEntitiesNestedInput
+    contacts_contacts_contact_id_rootToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_rootToentitiesNestedInput
+    contacts_contacts_contact_id_targetToentities?: contactsUncheckedUpdateManyWithoutEntities_contacts_contact_id_targetToentitiesNestedInput
+    conversations_members?: conversations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    conversations_messages_logs?: conversations_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_content?: entities_contentUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_dislikes?: entities_dislikesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_likes?: entities_likesUncheckedUpdateManyWithoutEntitiesNestedInput
+    entities_references?: entities_referencesUncheckedUpdateManyWithoutEntitiesNestedInput
+    groups_members?: groups_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    images?: imagesUncheckedUpdateManyWithoutEntitiesNestedInput
+    organizations_members?: organizations_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    videos?: videosUncheckedUpdateManyWithoutEntitiesNestedInput
+  }
+
+  export type tablesUpsertWithoutTables_tabletopsInput = {
+    update: XOR<tablesUpdateWithoutTables_tabletopsInput, tablesUncheckedUpdateWithoutTables_tabletopsInput>
+    create: XOR<tablesCreateWithoutTables_tabletopsInput, tablesUncheckedCreateWithoutTables_tabletopsInput>
+    where?: tablesWhereInput
+  }
+
+  export type tablesUpdateToOneWithWhereWithoutTables_tabletopsInput = {
+    where?: tablesWhereInput
+    data: XOR<tablesUpdateWithoutTables_tabletopsInput, tablesUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type tablesUpdateWithoutTables_tabletopsInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures?: tables_picturesUpdateOneWithoutTablesNestedInput
+    tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tablesUncheckedUpdateWithoutTables_tabletopsInput = {
+    table_id?: StringFieldUpdateOperationsInput | string
+    table_name?: NullableStringFieldUpdateOperationsInput | string | null
+    table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_message?: NullableStringFieldUpdateOperationsInput | string | null
+    last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tables_pictures_id?: NullableStringFieldUpdateOperationsInput | string | null
+    tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
+    tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+  }
+
+  export type tables_tabletops_dataUpsertWithoutTables_tabletopsInput = {
+    update: XOR<tables_tabletops_dataUpdateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedUpdateWithoutTables_tabletopsInput>
+    create: XOR<tables_tabletops_dataCreateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedCreateWithoutTables_tabletopsInput>
+    where?: tables_tabletops_dataWhereInput
+  }
+
+  export type tables_tabletops_dataUpdateToOneWithWhereWithoutTables_tabletopsInput = {
+    where?: tables_tabletops_dataWhereInput
+    data: XOR<tables_tabletops_dataUpdateWithoutTables_tabletopsInput, tables_tabletops_dataUncheckedUpdateWithoutTables_tabletopsInput>
+  }
+
+  export type tables_tabletops_dataUpdateWithoutTables_tabletopsInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type tables_tabletops_dataUncheckedUpdateWithoutTables_tabletopsInput = {
+    tables_tabletops_data_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data?: BytesFieldUpdateOperationsInput | Buffer
+  }
+
+  export type tables_tabletopsCreateWithoutTables_tabletops_dataInput = {
+    tables_tabletops_id: string
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+    entities: entitiesCreateNestedOneWithoutTables_tabletopsInput
+    tables: tablesCreateNestedOneWithoutTables_tabletopsInput
+  }
+
+  export type tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput = {
+    tables_tabletops_id: string
+    table_id: string
+    creator_id: string
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
+  export type tables_tabletopsCreateOrConnectWithoutTables_tabletops_dataInput = {
+    where: tables_tabletopsWhereUniqueInput
+    create: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput>
+  }
+
+  export type tables_tabletopsCreateManyTables_tabletops_dataInputEnvelope = {
+    data: tables_tabletopsCreateManyTables_tabletops_dataInput | tables_tabletopsCreateManyTables_tabletops_dataInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tables_tabletopsUpsertWithWhereUniqueWithoutTables_tabletops_dataInput = {
+    where: tables_tabletopsWhereUniqueInput
+    update: XOR<tables_tabletopsUpdateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedUpdateWithoutTables_tabletops_dataInput>
+    create: XOR<tables_tabletopsCreateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedCreateWithoutTables_tabletops_dataInput>
+  }
+
+  export type tables_tabletopsUpdateWithWhereUniqueWithoutTables_tabletops_dataInput = {
+    where: tables_tabletopsWhereUniqueInput
+    data: XOR<tables_tabletopsUpdateWithoutTables_tabletops_dataInput, tables_tabletopsUncheckedUpdateWithoutTables_tabletops_dataInput>
+  }
+
+  export type tables_tabletopsUpdateManyWithWhereWithoutTables_tabletops_dataInput = {
+    where: tables_tabletopsScalarWhereInput
+    data: XOR<tables_tabletopsUpdateManyMutationInput, tables_tabletopsUncheckedUpdateManyWithoutTables_tabletops_dataInput>
   }
 
   export type individualsCreateWithoutUser_credentialsInput = {
@@ -50708,6 +52708,7 @@ export namespace Prisma {
     sheets?: sheetsCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesUncheckedCreateWithoutVideosInput = {
@@ -50729,6 +52730,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedCreateNestedManyWithoutEntitiesInput
     tables_members?: tables_membersUncheckedCreateNestedManyWithoutEntitiesInput
     tables_messages_logs?: tables_messages_logsUncheckedCreateNestedManyWithoutEntitiesInput
+    tables_tabletops?: tables_tabletopsUncheckedCreateNestedManyWithoutEntitiesInput
   }
 
   export type entitiesCreateOrConnectWithoutVideosInput = {
@@ -50800,6 +52802,7 @@ export namespace Prisma {
     sheets?: sheetsUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutEntitiesNestedInput
   }
 
   export type entitiesUncheckedUpdateWithoutVideosInput = {
@@ -50821,6 +52824,7 @@ export namespace Prisma {
     sheets?: sheetsUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_members?: tables_membersUncheckedUpdateManyWithoutEntitiesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutEntitiesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutEntitiesNestedInput
   }
 
   export type videos_dataUpsertWithoutVideosInput = {
@@ -51344,6 +53348,18 @@ export namespace Prisma {
     message_date: Date | string
   }
 
+  export type tables_tabletopsCreateManyEntitiesInput = {
+    tables_tabletops_id: string
+    table_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
   export type videosCreateManyEntitiesInput = {
     video_id: string
     video_title: string
@@ -51690,6 +53706,42 @@ export namespace Prisma {
     table_id?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     message_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tables_tabletopsUpdateWithoutEntitiesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    tables?: tablesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+    tables_tabletops_data?: tables_tabletops_dataUpdateOneWithoutTables_tabletopsNestedInput
+  }
+
+  export type tables_tabletopsUncheckedUpdateWithoutEntitiesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutEntitiesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videosUpdateWithoutEntitiesInput = {
@@ -52049,6 +54101,18 @@ export namespace Prisma {
     message_date: Date | string
   }
 
+  export type tables_tabletopsCreateManyTablesInput = {
+    tables_tabletops_id: string
+    creator_id: string
+    tables_tabletops_data_id?: string | null
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
   export type tables_membersUpdateWithoutTablesInput = {
     tables_members_id?: StringFieldUpdateOperationsInput | string
     table_position?: IntFieldUpdateOperationsInput | number
@@ -52091,6 +54155,42 @@ export namespace Prisma {
     message_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type tables_tabletopsUpdateWithoutTablesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: entitiesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+    tables_tabletops_data?: tables_tabletops_dataUpdateOneWithoutTables_tabletopsNestedInput
+  }
+
+  export type tables_tabletopsUncheckedUpdateWithoutTablesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutTablesInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    tables_tabletops_data_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type tablesCreateManyTables_picturesInput = {
     table_id: string
     table_name?: string | null
@@ -52107,6 +54207,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_members?: tables_membersUpdateManyWithoutTablesNestedInput
     tables_messages_logs?: tables_messages_logsUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesUncheckedUpdateWithoutTables_picturesInput = {
@@ -52117,6 +54218,7 @@ export namespace Prisma {
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tables_members?: tables_membersUncheckedUpdateManyWithoutTablesNestedInput
     tables_messages_logs?: tables_messages_logsUncheckedUpdateManyWithoutTablesNestedInput
+    tables_tabletops?: tables_tabletopsUncheckedUpdateManyWithoutTablesNestedInput
   }
 
   export type tablesUncheckedUpdateManyWithoutTables_picturesInput = {
@@ -52125,6 +54227,54 @@ export namespace Prisma {
     table_creation_date?: DateTimeFieldUpdateOperationsInput | Date | string
     last_message?: NullableStringFieldUpdateOperationsInput | string | null
     last_message_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type tables_tabletopsCreateManyTables_tabletops_dataInput = {
+    tables_tabletops_id: string
+    table_id: string
+    creator_id: string
+    type: number
+    content_date_posted: Date | string
+    content_x_position: number
+    content_y_position: number
+    content_rotation: number
+    content_filename?: string | null
+  }
+
+  export type tables_tabletopsUpdateWithoutTables_tabletops_dataInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: entitiesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+    tables?: tablesUpdateOneRequiredWithoutTables_tabletopsNestedInput
+  }
+
+  export type tables_tabletopsUncheckedUpdateWithoutTables_tabletops_dataInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type tables_tabletopsUncheckedUpdateManyWithoutTables_tabletops_dataInput = {
+    tables_tabletops_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    content_date_posted?: DateTimeFieldUpdateOperationsInput | Date | string
+    content_x_position?: IntFieldUpdateOperationsInput | number
+    content_y_position?: IntFieldUpdateOperationsInput | number
+    content_rotation?: IntFieldUpdateOperationsInput | number
+    content_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videosCreateManyVideos_dataInput = {
@@ -52293,6 +54443,10 @@ export namespace Prisma {
      */
     export type Tables_picturesCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Tables_picturesCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use Tables_tabletops_dataCountOutputTypeDefaultArgs instead
+     */
+    export type Tables_tabletops_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Tables_tabletops_dataCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use Videos_dataCountOutputTypeDefaultArgs instead
      */
     export type Videos_dataCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Videos_dataCountOutputTypeDefaultArgs<ExtArgs>
@@ -52424,6 +54578,10 @@ export namespace Prisma {
      * @deprecated Use tables_tabletopsDefaultArgs instead
      */
     export type tables_tabletopsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_tabletopsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tables_tabletops_dataDefaultArgs instead
+     */
+    export type tables_tabletops_dataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tables_tabletops_dataDefaultArgs<ExtArgs>
     /**
      * @deprecated Use user_credentialsDefaultArgs instead
      */

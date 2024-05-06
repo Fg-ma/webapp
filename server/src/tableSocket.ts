@@ -2,7 +2,8 @@ import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { prisma } from "./prismaMiddleware";
 import jwt, { Secret } from "jsonwebtoken";
-import { Entity, TableMember } from "@FgTypes/types";
+import { v4 as uuid } from "uuid";
+import { Entity, TableMember, TableTop } from "@FgTypes/types";
 
 const verifyUser = async (token: string, table_id: string) => {
   try {
@@ -106,7 +107,6 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.join(table_id);
-        socket.join(`${table_id}_${user.username}`);
       }
     });
 
@@ -124,120 +124,100 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.leave(table_id);
-        socket.leave(`${table_id}_${user.username}`);
       }
     });
 
-    socket.on("joinRoom", async (token, table_id) => {
-      const isInTable = await verifyUser(token, table_id);
-      let user: jwt.JwtPayload;
-      try {
-        user = jwt.verify(
-          token,
-          process.env.TOKEN_KEY as Secret
-        ) as jwt.JwtPayload;
-      } catch {
-        return;
-      }
-
-      if (isInTable) {
-        await prisma.tables_members.update({
-          where: {
-            table_id_member_id: {
-              table_id: table_id,
-              member_id: user.user_id,
-            },
-          },
-          data: {
-            live: 1,
-          },
-        });
-
-        const tableMembers: TableMember[] =
-          await prisma.tables_members.findMany({
-            where: {
-              table_id: table_id,
-            },
+    socket.on(
+      "call-offer",
+      async (token: string, table_id: string, offer: any) => {
+        const isInTable = await verifyUser(token, table_id);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
+        if (isInTable) {
+          io.to(table_id).emit("call-offer", {
+            from: user.username,
+            offer: offer,
           });
-
-        const liveTableMembers = tableMembers.filter(
-          (member) => member.live === 1
-        );
-
-        const nonuserMembers = liveTableMembers.filter(
-          (member) => member.member_id !== user.user_id
-        );
-
-        const nonuserMembersIds = nonuserMembers.map(
-          (member) => member.member_id
-        );
-
-        const entities: Entity[] = await prisma.entities.findMany({
-          where: {
-            entity_id: {
-              in: nonuserMembersIds,
-            },
-          },
-        });
-
-        const members = entities.map((entity) => entity.entity_username);
-
-        socket.emit("allLiveMembers", members, user.username);
+        }
       }
-    });
+    );
 
-    socket.on("sendingSignal", (table_id, userToSignal, callerID, signal) => {
-      io.to(`${table_id}_${userToSignal}`).emit("userJoined", signal, callerID);
-    });
-
-    socket.on("returningSignal", async (token, table_id, signal, callerID) => {
-      const isInTable = await verifyUser(token, table_id);
-      let user: jwt.JwtPayload;
-      try {
-        user = jwt.verify(
-          token,
-          process.env.TOKEN_KEY as Secret
-        ) as jwt.JwtPayload;
-      } catch {
-        return;
+    socket.on(
+      "call-answer",
+      async (token: string, table_id: string, from: string, answer: any) => {
+        const isInTable = await verifyUser(token, table_id);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
+        if (isInTable) {
+          io.to(table_id).emit("call-answer", { from: from, answer });
+        }
       }
+    );
 
-      if (isInTable) {
-        io.to(`${table_id}_${callerID}`).emit(
-          "receivingReturnedSignal",
-          signal,
-          user.username
-        );
+    socket.on(
+      "ice-candidate",
+      async (token: string, table_id: string, candidate: any) => {
+        const isInTable = await verifyUser(token, table_id);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
+        if (isInTable) {
+          io.to(table_id).emit("ice-candidate", {
+            from: user.username,
+            candidate: candidate,
+          });
+        }
       }
-    });
+    );
 
-    socket.on("userDisconnect", async (token, table_id) => {
-      const isInTable = await verifyUser(token, table_id);
-      let user: jwt.JwtPayload;
-      try {
-        user = jwt.verify(
-          token,
-          process.env.TOKEN_KEY as Secret
-        ) as jwt.JwtPayload;
-      } catch {
-        return;
+    socket.on(
+      "offer-to-all",
+      async (token: string, table_id: string, offer: any) => {
+        const isInTable = await verifyUser(token, table_id);
+        let user: jwt.JwtPayload;
+        try {
+          user = jwt.verify(
+            token,
+            process.env.TOKEN_KEY as Secret
+          ) as jwt.JwtPayload;
+        } catch {
+          return;
+        }
+        if (isInTable) {
+          // Get all users in the room except the current user
+          const roomClients = io.sockets.adapter.rooms.get(table_id);
+          const clients = roomClients ? [...roomClients] : [];
+          const usersToOffer = clients.filter((client) => client !== socket.id);
+
+          // Send call offer to each user
+          usersToOffer.forEach((peer) => {
+            io.to(peer).emit("call-offer", {
+              from: user.username,
+              offer: offer,
+            });
+          });
+        }
       }
-
-      if (isInTable) {
-        await prisma.tables_members.update({
-          where: {
-            table_id_member_id: {
-              table_id: table_id,
-              member_id: user.user_id,
-            },
-          },
-          data: {
-            live: 0,
-          },
-        });
-
-        io.to(table_id).emit("userDisconnected", user.username);
-      }
-    });
+    );
   });
 }

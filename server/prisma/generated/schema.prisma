@@ -122,6 +122,7 @@ model conversations_pictures {
   conversations                 conversations[]
 }
 
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model entities {
   entity_id                                     String                        @id @unique(map: "entity_id_UNIQUE") @db.Char(36)
   entity_username                               String                        @unique(map: "entity_username_UNIQUE") @db.VarChar(256)
@@ -141,6 +142,7 @@ model entities {
   sheets                                        sheets[]
   tables_members                                tables_members[]
   tables_messages_logs                          tables_messages_logs[]
+  tables_tabletops                              tables_tabletops[]
   videos                                        videos[]
 }
 
@@ -335,6 +337,7 @@ model tables {
   tables_pictures      tables_pictures?       @relation(fields: [tables_pictures_id], references: [tables_pictures_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_tables_pictures_id_fk")
   tables_members       tables_members[]
   tables_messages_logs tables_messages_logs[]
+  tables_tabletops     tables_tabletops[]
 
   @@index([tables_pictures_id], map: "tables_tables_pictures_id_fk_idx")
 }
@@ -373,14 +376,31 @@ model tables_pictures {
   tables                 tables[]
 }
 
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model tables_tabletops {
-  tables_tabletops_id String   @id @unique(map: "tables_tabletops_id_UNIQUE") @db.Char(36)
-  content_data        Bytes
-  content_filename    String   @db.VarChar(256)
-  content_date_posted DateTime @db.Timestamp(0)
-  content_x_position  Int
-  content_y_position  Int
-  content_rotation    Int
+  tables_tabletops_id      String                 @id @unique(map: "tables_tabletops_id_UNIQUE") @db.Char(36)
+  table_id                 String                 @db.Char(36)
+  creator_id               String                 @db.Char(36)
+  tables_tabletops_data_id String?                @db.Char(36)
+  type                     Int                    @db.SmallInt
+  content_date_posted      DateTime               @db.Timestamp(0)
+  content_x_position       Int
+  content_y_position       Int
+  content_rotation         Int
+  content_filename         String?                @db.VarChar(256)
+  entities                 entities               @relation(fields: [creator_id], references: [entity_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_tabletops_creator_id_fk")
+  tables                   tables                 @relation(fields: [table_id], references: [table_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_tabletops_table_id_fk")
+  tables_tabletops_data    tables_tabletops_data? @relation(fields: [tables_tabletops_data_id], references: [tables_tabletops_data_id], onDelete: NoAction, onUpdate: NoAction, map: "tables_tabletops_tables_tabletops_data_id_fk")
+
+  @@index([creator_id], map: "tables_tabletops_creator_id_fk_idx")
+  @@index([table_id], map: "tables_tabletops_table_id_fk_idx")
+  @@index([tables_tabletops_data_id], map: "tables_tabletops_tables_tabletops_data_id_fk_idx")
+}
+
+model tables_tabletops_data {
+  tables_tabletops_data_id String             @id @unique(map: "tables_tabletops_data_id_UNIQUE") @db.Char(36)
+  tables_tabletops_data    Bytes
+  tables_tabletops         tables_tabletops[]
 }
 
 model user_credentials {
