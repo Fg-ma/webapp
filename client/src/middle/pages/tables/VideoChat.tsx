@@ -10,65 +10,59 @@ interface VideoChatProps {
   table_id: string;
 }
 
+let peerConfiguration = {
+  iceServers: [
+    {
+      urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"],
+    },
+  ],
+};
+
 export default function VideoChat({ table_id }: VideoChatProps) {
   const { tableSocket } = useTableSocketContext();
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+  const localStreamRef = useRef<MediaStream | null>(null);
   const [remoteStreams, setRemoteStreams] = useState<RemoteStream[]>([]);
   const [isVideoOn, setIsVideoOn] = useState(true);
   const peerConnections = useRef<{ [key: string]: RTCPeerConnection }>({});
   const token = localStorage.getItem("token");
-  console.log(peerConnections);
+
   useEffect(() => {
-    // Get local media stream
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         setLocalStream(stream);
+        localStreamRef.current = stream;
 
-        // Handle incoming calls
         tableSocket.on("call-offer", handleCallOffer);
         tableSocket.on("call-answer", handleCallAnswer);
         tableSocket.on("ice-candidate", handleIceCandidate);
+        tableSocket.on("call-initiated", handleCallInitiated);
+        tableSocket.on("initiationAccepted", handleInitiationAccepted);
 
-        createOffer();
+        tableSocket.emit("userJoined", token, table_id);
       })
       .catch((error) => {
         console.error("Error accessing media devices:", error);
       });
+
+    return () => {
+      tableSocket.off("call-offer", handleCallOffer);
+      tableSocket.off("call-answer", handleCallAnswer);
+      tableSocket.off("ice-candidate", handleIceCandidate);
+      tableSocket.off("call-initiated", handleCallInitiated);
+      tableSocket.off("initiationAccepted", handleInitiationAccepted);
+    };
   }, []);
 
-  async function createOffer() {
-    const peerConnection = new RTCPeerConnection();
-    const offer = await peerConnection.createOffer();
-    await peerConnection.setLocalDescription(offer);
-    tableSocket.emit("offer-to-all", token, table_id, offer);
-  }
-
-  const handleCallOffer = async (offerData: any) => {
-    const { from, offer } = offerData;
-    const peerConnection = new RTCPeerConnection();
-
-    // Add local stream to peer connection if video is on
-    if (isVideoOn && localStream) {
-      localStream.getTracks().forEach((track) => {
-        peerConnection.addTrack(track, localStream);
-      });
-    }
-
-    // Set remote description
-    await peerConnection.setRemoteDescription(offer);
-
-    // Create answer
-    const answer = await peerConnection.createAnswer();
-    await peerConnection.setLocalDescription(answer);
-
-    // Send answer to caller
-    tableSocket.emit("call-answer", token, table_id, from, answer);
-
-    // Listen for ICE candidates
+  const handleInitiationAccepted = async (from: string) => {
+    const peerConnection = new RTCPeerConnection(peerConfiguration);
+    console.log(peerConnection);
+    console.log("ICE connection state:", peerConnection.iceConnectionState);
+    console.log("ICE gathering state:", peerConnection.iceGatheringState);
     peerConnection.onicecandidate = (event) => {
+      console.log("offer1 ice");
       if (event.candidate) {
-        // Send ICE candidate to caller
         tableSocket.emit("ice-candidate", token, table_id, {
           from,
           candidate: event.candidate,
@@ -76,7 +70,6 @@ export default function VideoChat({ table_id }: VideoChatProps) {
       }
     };
 
-    // Set remote video stream for dynamically added tracks
     peerConnection.ontrack = (event) => {
       setRemoteStreams((prevStreams) => [
         ...prevStreams,
@@ -84,19 +77,72 @@ export default function VideoChat({ table_id }: VideoChatProps) {
       ]);
     };
 
-    // Store the peer connection
+    const offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(offer);
+    tableSocket.emit("offering-call", token, table_id, from, offer);
     peerConnections.current[from] = peerConnection;
+  };
+
+  const handleCallInitiated = async (from: string) => {
+    tableSocket.emit("acceptInitiation", token, table_id, from);
+  };
+
+  const handleCallOffer = async (offerData: any) => {
+    const { from, offer } = offerData;
+    const peerConnection = new RTCPeerConnection(peerConfiguration);
+
+    peerConnection.onicecandidate = (event) => {
+      console.log("offer ice");
+      if (event.candidate) {
+        tableSocket.emit("ice-candidate", token, table_id, {
+          from,
+          candidate: event.candidate,
+        });
+      }
+    };
+
+    peerConnection.ontrack = (event) => {
+      setRemoteStreams((prevStreams) => [
+        ...prevStreams,
+        { stream: event.streams[0], id: from },
+      ]);
+    };
+
+    if (isVideoOn && localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => {
+        peerConnection.addTrack(track, localStreamRef.current!);
+      });
+    }
+
+    try {
+      await peerConnection.setRemoteDescription(offer);
+      const answer = await peerConnection.createAnswer();
+      await peerConnection.setLocalDescription(answer);
+
+      tableSocket.emit("answering-call", token, table_id, from, answer);
+
+      peerConnections.current[from] = peerConnection;
+    } catch (error) {
+      console.error("Error handling call offer:", error);
+    }
   };
 
   const handleCallAnswer = async (answerData: any) => {
     const { from, answer } = answerData;
     const peerConnection = peerConnections.current[from];
-    if (peerConnection) {
+    if (!peerConnection) return;
+
+    try {
       await peerConnection.setRemoteDescription(answer);
+    } catch (error) {
+      console.error("Error handling call answer:", error);
     }
+
+    peerConnections.current[from] = peerConnection;
   };
 
   const handleIceCandidate = async (candidateData: any) => {
+    console.log("ice");
     const { from, candidate } = candidateData;
     const peerConnection = peerConnections.current[from];
     if (peerConnection) {

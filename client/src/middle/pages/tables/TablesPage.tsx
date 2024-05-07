@@ -8,6 +8,8 @@ import ProfilePicture from "@components/profilePicture/ProfilePicture";
 import TablesLiveVideoChatOverlay from "./TablesLiveVideoChatOverlay";
 import { useTableSocketContext } from "@context/TableSocketContext";
 import VideoChat from "./VideoChat";
+import Broadcaster from "./Broadcaster2";
+import Receiver from "./Receiver2";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const serverUrl = isDevelopment
@@ -472,7 +474,8 @@ export default function TablesPage() {
             <div></div>
           </div>
           <div className="bg-fg-white-95 w-full h-full rounded-3xl overflow-hidden relative">
-            {table_id && <VideoChat table_id={table_id} />}
+            {table_id && <Broadcaster table_id={table_id} />}
+            {table_id && <Receiver table_id={table_id} />}
           </div>
           <div
             className={`flex flex-col h-full ${

@@ -107,6 +107,7 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.join(table_id);
+        socket.join(`${table_id}_${user.username}`);
       }
     });
 
@@ -124,12 +125,55 @@ export default function tableSocket(server: HttpServer) {
 
       if (isInTable) {
         socket.leave(table_id);
+        socket.leave(`${table_id}_${user.username}`);
+      }
+    });
+
+    socket.on("broadcasting", async (token, table_id) => {
+      const isInTable = await verifyUser(token, table_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
+      if (isInTable) {
+        io.to(table_id).emit("broadcast", user.username);
+      }
+    });
+
+    socket.on("receivedBroadcast", async (token, table_id, broadcaster) => {
+      const isInTable = await verifyUser(token, table_id);
+      let user: jwt.JwtPayload;
+      try {
+        user = jwt.verify(
+          token,
+          process.env.TOKEN_KEY as Secret
+        ) as jwt.JwtPayload;
+      } catch {
+        return;
+      }
+
+      if (isInTable) {
+        if (broadcaster !== user.username) {
+          console.log(table_id, broadcaster, user.username);
+          io.to(`${table_id}_${broadcaster}`).emit("receivers", user.username);
+        }
       }
     });
 
     socket.on(
-      "call-offer",
-      async (token: string, table_id: string, offer: any) => {
+      "offering",
+      async (
+        token,
+        table_id,
+        offer: RTCSessionDescriptionInit,
+        receiver: string
+      ) => {
         const isInTable = await verifyUser(token, table_id);
         let user: jwt.JwtPayload;
         try {
@@ -140,18 +184,21 @@ export default function tableSocket(server: HttpServer) {
         } catch {
           return;
         }
+
         if (isInTable) {
-          io.to(table_id).emit("call-offer", {
-            from: user.username,
-            offer: offer,
-          });
+          io.to(`${table_id}_${receiver}`).emit("offer", offer, user.username);
         }
       }
     );
 
     socket.on(
-      "call-answer",
-      async (token: string, table_id: string, from: string, answer: any) => {
+      "answering",
+      async (
+        token,
+        table_id,
+        answer: RTCSessionDescriptionInit,
+        userOffering: string
+      ) => {
         const isInTable = await verifyUser(token, table_id);
         let user: jwt.JwtPayload;
         try {
@@ -162,15 +209,25 @@ export default function tableSocket(server: HttpServer) {
         } catch {
           return;
         }
+
         if (isInTable) {
-          io.to(table_id).emit("call-answer", { from: from, answer });
+          io.to(`${table_id}_${userOffering}`).emit(
+            "answer",
+            answer,
+            user.username
+          );
         }
       }
     );
 
     socket.on(
-      "ice-candidate",
-      async (token: string, table_id: string, candidate: any) => {
+      "sendingCandidate",
+      async (
+        token,
+        table_id,
+        candidate: RTCIceCandidateInit,
+        senderId: string
+      ) => {
         const isInTable = await verifyUser(token, table_id);
         let user: jwt.JwtPayload;
         try {
@@ -181,43 +238,16 @@ export default function tableSocket(server: HttpServer) {
         } catch {
           return;
         }
+
         if (isInTable) {
-          io.to(table_id).emit("ice-candidate", {
-            from: user.username,
-            candidate: candidate,
-          });
+          io.to(senderId).emit("candidate", candidate, socket.id);
         }
       }
     );
 
-    socket.on(
-      "offer-to-all",
-      async (token: string, table_id: string, offer: any) => {
-        const isInTable = await verifyUser(token, table_id);
-        let user: jwt.JwtPayload;
-        try {
-          user = jwt.verify(
-            token,
-            process.env.TOKEN_KEY as Secret
-          ) as jwt.JwtPayload;
-        } catch {
-          return;
-        }
-        if (isInTable) {
-          // Get all users in the room except the current user
-          const roomClients = io.sockets.adapter.rooms.get(table_id);
-          const clients = roomClients ? [...roomClients] : [];
-          const usersToOffer = clients.filter((client) => client !== socket.id);
-
-          // Send call offer to each user
-          usersToOffer.forEach((peer) => {
-            io.to(peer).emit("call-offer", {
-              from: user.username,
-              offer: offer,
-            });
-          });
-        }
-      }
-    );
+    socket.on("broadcasterOffer", (data) => {
+      const { table_id, offer } = data;
+      socket.to(table_id).emit("broadcasterOffer", offer);
+    });
   });
 }
